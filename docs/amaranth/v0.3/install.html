@@ -1,0 +1,423 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Installation &mdash; Amaranth HDL toolchain 0.3 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/platformpicker.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Getting started" href="start.html" />
+    <link rel="prev" title="Introduction" href="intro.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="cover.html" class="icon icon-home"> Amaranth HDL toolchain
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Language &amp; toolchain</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#system-requirements">System requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installing-prerequisites">Installing prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installing-amaranth">Installing Amaranth</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#latest-release">Latest release</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#development-snapshot">Development snapshot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#editable-development-snapshot">Editable development snapshot</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#installing-board-definitions">Installing board definitions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="start.html">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lang.html">Language guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stdlib.html">Standard library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="platform.html">Platform integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changes.html">Changelog</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="https://amaranth-lang.org/docs/amaranth-boards/latest/">Board definitions</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="cover.html">Amaranth HDL toolchain</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="cover.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Language &amp; toolchain</a> &raquo;</li>
+        
+      <li>Installation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/install.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="system-requirements">
+<h2>System requirements<a class="headerlink" href="#system-requirements" title="Permalink to this headline">¶</a></h2>
+<p>Amaranth HDL requires Python 3.6; it works on <a class="reference external" href="https://www.python.org/">CPython</a> 3.6 (or newer), and works faster on <a class="reference external" href="https://www.pypy.org/">PyPy3.6</a> 7.2 (or newer).</p>
+<p>For most workflows, Amaranth requires <a class="reference external" href="https://yosyshq.net/yosys/">Yosys</a> 0.10 (or newer). A compatible version of Yosys is distributed via <a class="reference external" href="https://pypi.org/">PyPI</a> for most popular platforms.</p>
+<p>Simulating Amaranth code requires no additional software. However, a waveform viewer like <a class="reference external" href="http://gtkwave.sourceforge.net/">GTKWave</a> is invaluable for debugging.</p>
+<p>Synthesizing, placing and routing an Amaranth design for an FPGA requires the FPGA family specific toolchain.</p>
+</div>
+<div class="section" id="installing-prerequisites">
+<span id="install-deps"></span><h2>Installing prerequisites<a class="headerlink" href="#installing-prerequisites" title="Permalink to this headline">¶</a></h2>
+<div class="platform-picker docutils container">
+<div class="platform-choice platform--windows platform-noaltname docutils container">
+<p class="platform-title">Windows</p>
+<p><a class="reference external" href="https://docs.python.org/3/using/windows.html#using-on-windows" title="(in Python v3.10)"><span class="xref std std-ref">Install Python</span></a>, either from Windows Store or using the full installer. If using the full installer, make sure to install a 64-bit version of Python.</p>
+<p><a class="reference external" href="https://sourceforge.net/projects/gtkwave/files/">Download GTKWave</a>, either win32 or win64 binaries. GTKWave does not need to be installed; it can be unpacked to any convenient location and run from there.</p>
+</div>
+<div class="platform-choice platform--macos platform-noaltname docutils container">
+<p class="platform-title">macOS</p>
+<p>Install <a class="reference external" href="https://brew.sh">Homebrew</a>. Then, install Python and GTKWave by running:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>brew install python gtkwave
+</pre></div>
+</div>
+</div>
+<div class="platform-choice platform--debian platform--linux docutils container">
+<p class="platform-title">Debian</p>
+<p>Install Python and GTKWave by running:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo apt-get install python3-pip gtkwave
+</pre></div>
+</div>
+<p>On architectures other than x86_64 and AArch64, install Yosys by running:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo apt-get install yosys
+</pre></div>
+</div>
+<p>If Yosys 0.10 (or newer) is not available, <a class="reference external" href="https://github.com/YosysHQ/yosys/#setup">build Yosys from source</a>.</p>
+</div>
+<div class="platform-choice platform--arch platform--linux docutils container">
+<p class="platform-title">Arch Linux</p>
+<p>Install Python, pip, GTKWave and Yosys by running:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo pacman -S python python-pip gtkwave yosys
+</pre></div>
+</div>
+</div>
+<div class="platform-choice platform--linux platform-noaltname docutils container">
+<p class="platform-title">Other Linux</p>
+<p>Install Python and GTKWave from the package repository of your distribution.</p>
+<p>On architectures other than x86_64 and AArch64, install Yosys from the package repository of your distribution.</p>
+<p>If Yosys 0.10 (or newer) is not available, <a class="reference external" href="https://github.com/YosysHQ/yosys/#setup">build Yosys from source</a>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="installing-amaranth">
+<span id="install"></span><h2>Installing Amaranth<a class="headerlink" href="#installing-amaranth" title="Permalink to this headline">¶</a></h2>
+<p>The latest release of Amaranth should work well for most applications. A development snapshot—any commit from the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch of Amaranth—should be similarly reliable, but is likely to include experimental API changes that will be in flux until the next release. With that in mind, development snapshots can be used to try out new functionality or to avoid bugs fixed since the last release.</p>
+<div class="section" id="latest-release">
+<span id="install-release"></span><h3>Latest release<a class="headerlink" href="#latest-release" title="Permalink to this headline">¶</a></h3>
+<div class="platform-picker docutils container">
+<div class="platform-choice platform--windows platform-noaltname docutils container">
+<p class="platform-title">Windows</p>
+<p>To install the latest release of Amaranth, run:</p>
+<div class="highlight-doscon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;</span> pip install --upgrade amaranth[builtin-yosys]
+</pre></div>
+</div>
+</div>
+<div class="platform-choice platform--macos platform-noaltname docutils container">
+<p class="platform-title">macOS</p>
+<p>To install the latest release of Amaranth, run:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip install --user --upgrade <span class="s1">&#39;amaranth[builtin-yosys]&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="platform-choice platform--linux platform-noaltname docutils container">
+<p class="platform-title">Linux</p>
+<p>If you <strong>did not</strong> install Yosys manually in the <a class="reference internal" href="#install-deps"><span class="std std-ref">previous step</span></a>, to install the latest release of Amaranth, run:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip3 install --user --upgrade <span class="s1">&#39;amaranth[builtin-yosys]&#39;</span>
+</pre></div>
+</div>
+<p>If you <strong>did</strong> install Yosys manually in the previous step, run:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip3 install --user --upgrade amaranth
+</pre></div>
+</div>
+</div>
+<div class="platform-choice platform--arch platform--linux docutils container">
+<p class="platform-title">Arch Linux</p>
+<p>To install the latest release of Amaranth, run:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo pacman -S python-amaranth
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="development-snapshot">
+<span id="install-snapshot"></span><h3>Development snapshot<a class="headerlink" href="#development-snapshot" title="Permalink to this headline">¶</a></h3>
+<div class="platform-picker docutils container">
+<div class="platform-choice platform--windows platform-noaltname docutils container">
+<p class="platform-title">Windows</p>
+<p>To install the latest development snapshot of Amaranth, run:</p>
+<div class="highlight-doscon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;</span> pip install git+https://github.com/amaranth-lang/amaranth.git#egg=amaranth[builtin-yosys]
+</pre></div>
+</div>
+</div>
+<div class="platform-choice platform--macos platform-noaltname docutils container">
+<p class="platform-title">macOS</p>
+<p>To install the latest development snapshot of Amaranth, run:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip install --user <span class="s1">&#39;git+https://github.com/amaranth-lang/amaranth.git#egg=amaranth[builtin-yosys]&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="platform-choice platform--linux platform-noaltname docutils container">
+<p class="platform-title">Linux</p>
+<p>If you <strong>did not</strong> install Yosys manually in the <a class="reference internal" href="#install-deps"><span class="std std-ref">previous step</span></a>, to install the latest release of Amaranth, run:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip3 install --user <span class="s1">&#39;git+https://github.com/amaranth-lang/amaranth.git#egg=amaranth[builtin-yosys]&#39;</span>
+</pre></div>
+</div>
+<p>If you <strong>did</strong> install Yosys manually in the previous step, run:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip3 install --user <span class="s1">&#39;git+https://github.com/amaranth-lang/amaranth.git#egg=amaranth&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="editable-development-snapshot">
+<span id="install-develop"></span><h3>Editable development snapshot<a class="headerlink" href="#editable-development-snapshot" title="Permalink to this headline">¶</a></h3>
+<div class="platform-picker docutils container">
+<div class="platform-choice platform--windows platform-noaltname docutils container">
+<p class="platform-title">Windows</p>
+<p>To install an editable development snapshot of Amaranth for the first time, run:</p>
+<div class="highlight-doscon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;</span> git clone https://github.com/amaranth-lang/amaranth
+<span class="gp">&gt;</span> <span class="k">cd</span> amaranth
+<span class="gp">&gt;</span> pip install --editable .[builtin-yosys]
+</pre></div>
+</div>
+<p>Any changes made to the <code class="docutils literal notranslate"><span class="pre">amaranth</span></code> directory will immediately affect any code that uses Amaranth. To update the snapshot, run:</p>
+<div class="highlight-doscon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;</span> <span class="k">cd</span> amaranth
+<span class="gp">&gt;</span> git pull --ff-only origin main
+<span class="gp">&gt;</span> pip install --editable .[builtin-yosys]
+</pre></div>
+</div>
+<p>Run the <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--editable</span> <span class="pre">.[builtin-yosys]</span></code> command each time the editable development snapshot is updated in case package dependencies have been added or changed. Otherwise, code using Amaranth may misbehave or crash with an <code class="docutils literal notranslate"><span class="pre">ImportError</span></code>.</p>
+</div>
+<div class="platform-choice platform--macos platform-noaltname docutils container">
+<p class="platform-title">macOS</p>
+<p>To install an editable development snapshot of Amaranth for the first time, run:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git clone https://github.com/amaranth-lang/amaranth
+<span class="gp">$ </span><span class="nb">cd</span> amaranth
+<span class="gp">$ </span>pip install --user --editable <span class="s1">&#39;.[builtin-yosys]&#39;</span>
+</pre></div>
+</div>
+<p>Any changes made to the <code class="docutils literal notranslate"><span class="pre">amaranth</span></code> directory will immediately affect any code that uses Amaranth. To update the snapshot, run:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span> amaranth
+<span class="gp">$ </span>git pull --ff-only origin main
+<span class="gp">$ </span>pip install --user --editable <span class="s1">&#39;.[builtin-yosys]&#39;</span>
+</pre></div>
+</div>
+<p>Run the <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--editable</span> <span class="pre">.[builtin-yosys]</span></code> command each time the editable development snapshot is updated in case package dependencies have been added or changed. Otherwise, code using Amaranth may misbehave or crash with an <code class="docutils literal notranslate"><span class="pre">ImportError</span></code>.</p>
+</div>
+<div class="platform-choice platform--linux platform-noaltname docutils container">
+<p class="platform-title">Linux</p>
+<p>If you <strong>did</strong> install Yosys manually in the <a class="reference internal" href="#install-deps"><span class="std std-ref">previous step</span></a>, omit <code class="docutils literal notranslate"><span class="pre">[builtin-yosys]</span></code> from the following commands.</p>
+<p>To install an editable development snapshot of Amaranth for the first time, run:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git clone https://github.com/amaranth-lang/amaranth
+<span class="gp">$ </span><span class="nb">cd</span> amaranth
+<span class="gp">$ </span>pip3 install --user --editable <span class="s1">&#39;.[builtin-yosys]&#39;</span>
+</pre></div>
+</div>
+<p>Any changes made to the <code class="docutils literal notranslate"><span class="pre">amaranth</span></code> directory will immediately affect any code that uses Amaranth. To update the snapshot, run:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span> amaranth
+<span class="gp">$ </span>git pull --ff-only origin main
+<span class="gp">$ </span>pip3 install --user --editable <span class="s1">&#39;.[builtin-yosys]&#39;</span>
+</pre></div>
+</div>
+<p>Run the <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">install</span> <span class="pre">--editable</span> <span class="pre">.[builtin-yosys]</span></code> command each time the editable development snapshot is updated in case package dependencies have been added or changed. Otherwise, code using Amaranth may misbehave or crash with an <code class="docutils literal notranslate"><span class="pre">ImportError</span></code>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="installing-board-definitions">
+<h2>Installing board definitions<a class="headerlink" href="#installing-board-definitions" title="Permalink to this headline">¶</a></h2>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>Explain how to install <a class="reference external" href="https://github.com/amaranth-lang/amaranth-boards">https://github.com/amaranth-lang/amaranth-boards</a>.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="start.html" class="btn btn-neutral float-right" title="Getting started" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="intro.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020—2021, Amaranth HDL developers.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
