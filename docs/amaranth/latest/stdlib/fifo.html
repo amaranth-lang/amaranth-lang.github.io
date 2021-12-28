@@ -1,80 +1,40 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>First-in first-out queues &mdash; Amaranth HDL toolchain 0.3.dev318 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/platformpicker.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+  <title>First-in first-out queues &mdash; Amaranth HDL toolchain 0.4.dev1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/platformpicker.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/platformpicker.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Platform integration" href="../platform.html" />
     <link rel="prev" title="Clock domain crossing" href="cdc.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../cover.html" class="icon icon-home"> Amaranth HDL toolchain
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
-                0.3.dev318+g39a83f4
+                0.4.dev1+gaa74956
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -82,18 +42,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Language &amp; toolchain</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../intro.html">Introduction</a></li>
@@ -114,81 +63,38 @@
 <li class="toctree-l1"><a class="reference external" href="https://amaranth-lang.org/docs/amaranth-boards/latest/">Board definitions</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../cover.html">Amaranth HDL toolchain</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../cover.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="../index.html">Language &amp; toolchain</a> &raquo;</li>
-        
           <li><a href="../stdlib.html">Standard library</a> &raquo;</li>
-        
       <li>First-in first-out queues</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/stdlib/fifo.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="module-amaranth.lib.fifo">
-<span id="first-in-first-out-queues"></span><h1>First-in first-out queues<a class="headerlink" href="#module-amaranth.lib.fifo" title="Permalink to this headline">¶</a></h1>
+             
+  <section id="module-amaranth.lib.fifo">
+<span id="first-in-first-out-queues"></span><h1>First-in first-out queues<a class="headerlink" href="#module-amaranth.lib.fifo" title="Permalink to this headline"></a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">amaranth.lib.fifo</span></code> module provides building blocks for first-in, first-out queues.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.lib.fifo.FIFOInterface">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.fifo.</span></span><span class="sig-name descname"><span class="pre">FIFOInterface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fwft</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.fifo.FIFOInterface" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.fifo.</span></span><span class="sig-name descname"><span class="pre">FIFOInterface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fwft</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.fifo.FIFOInterface" title="Permalink to this definition"></a></dt>
 <dd><p>Data written to the input interface (<code class="docutils literal notranslate"><span class="pre">w_data</span></code>, <code class="docutils literal notranslate"><span class="pre">w_rdy</span></code>, <code class="docutils literal notranslate"><span class="pre">w_en</span></code>) is buffered and can be
 read at the output interface (<code class="docutils literal notranslate"><span class="pre">r_data</span></code>, <code class="docutils literal notranslate"><span class="pre">r_rdy</span></code>, <code class="docutils literal notranslate"><span class="pre">r_en</span></code>). The data entry written first
 to the input also appears first on the output.</p>
@@ -226,7 +132,7 @@ Does nothing if <code class="docutils literal notranslate"><span class="pre">r_r
 
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.lib.fifo.SyncFIFO">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.fifo.</span></span><span class="sig-name descname"><span class="pre">SyncFIFO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fwft</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.fifo.SyncFIFO" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.fifo.</span></span><span class="sig-name descname"><span class="pre">SyncFIFO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fwft</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.fifo.SyncFIFO" title="Permalink to this definition"></a></dt>
 <dd><p>Synchronous first in, first out queue.</p>
 <p>Read and write interfaces are accessed from the same clock domain. If different clock domains
 are needed, use <a class="reference internal" href="#amaranth.lib.fifo.AsyncFIFO" title="amaranth.lib.fifo.AsyncFIFO"><code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncFIFO</span></code></a>.</p>
@@ -261,7 +167,7 @@ Does nothing if <code class="docutils literal notranslate"><span class="pre">r_r
 
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.lib.fifo.SyncFIFOBuffered">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.fifo.</span></span><span class="sig-name descname"><span class="pre">SyncFIFOBuffered</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.fifo.SyncFIFOBuffered" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.fifo.</span></span><span class="sig-name descname"><span class="pre">SyncFIFOBuffered</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.fifo.SyncFIFOBuffered" title="Permalink to this definition"></a></dt>
 <dd><p>Buffered synchronous first in, first out queue.</p>
 <p>This queue’s interface is identical to <a class="reference internal" href="#amaranth.lib.fifo.SyncFIFO" title="amaranth.lib.fifo.SyncFIFO"><code class="xref py py-class docutils literal notranslate"><span class="pre">SyncFIFO</span></code></a> configured as <code class="docutils literal notranslate"><span class="pre">fwft=True</span></code>, but it
 does not use asynchronous memory reads, which are incompatible with FPGA block RAMs.</p>
@@ -296,7 +202,7 @@ Does nothing if <code class="docutils literal notranslate"><span class="pre">r_r
 
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.lib.fifo.AsyncFIFO">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.fifo.</span></span><span class="sig-name descname"><span class="pre">AsyncFIFO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'read'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w_domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'write'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exact_depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.fifo.AsyncFIFO" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.fifo.</span></span><span class="sig-name descname"><span class="pre">AsyncFIFO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'read'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w_domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'write'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exact_depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.fifo.AsyncFIFO" title="Permalink to this definition"></a></dt>
 <dd><p>Asynchronous first in, first out queue.</p>
 <p>Read and write interfaces are accessed from different clock domains, which can be set when
 constructing the FIFO.</p>
@@ -337,7 +243,7 @@ the write-domain reset.</p></li>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.lib.fifo.AsyncFIFOBuffered">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.fifo.</span></span><span class="sig-name descname"><span class="pre">AsyncFIFOBuffered</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'read'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w_domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'write'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exact_depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.fifo.AsyncFIFOBuffered" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.fifo.</span></span><span class="sig-name descname"><span class="pre">AsyncFIFOBuffered</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'read'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w_domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'write'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exact_depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.fifo.AsyncFIFOBuffered" title="Permalink to this definition"></a></dt>
 <dd><p>Buffered asynchronous first in, first out queue.</p>
 <p>Read and write interfaces are accessed from different clock domains, which can be set when
 constructing the FIFO.</p>
@@ -378,54 +284,37 @@ the write-domain reset.</p></li>
 </dl>
 </dd></dl>
 
-</div>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../platform.html" class="btn btn-neutral float-right" title="Platform integration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="cdc.html" class="btn btn-neutral float-left" title="Clock domain crossing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../platform.html" class="btn btn-neutral float-right" title="Platform integration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2020—2021, Amaranth HDL developers.
-
-    </p>
+    <p>&#169; Copyright 2020—2021, Amaranth HDL developers.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
