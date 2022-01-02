@@ -24,13 +24,15 @@
     -khtml-border-radius: 5px;
 }
 .rst-content .section .platform-selector,
+.rst-content section .platform-selector,
 .rst-content .toctree-wrapper .platform-selector,
 article .platform-selector {
     line-height: normal;
-    margin: 0 0 10px;
+    margin: -15px 0 10px;
 }
 .rst-content .section .platform-selector li,
-.rst-content .section .platform-selector ul li,
+.rst-content section .platform-selector li,
+.rst-content section .platform-selector ul li,
 .rst-content .toctree-wrapper .platform-selector li,
 article .platform-selector li {
     margin-left: 0;
