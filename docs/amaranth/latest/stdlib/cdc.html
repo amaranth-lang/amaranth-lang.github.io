@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Clock domain crossing &mdash; Amaranth HDL toolchain 0.4.dev4 documentation</title>
+  <title>Clock domain crossing &mdash; Amaranth HDL toolchain 0.4.dev5 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/platformpicker.css" type="text/css" />
@@ -33,7 +33,7 @@
             <a href="../cover.html" class="icon icon-home"> Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev4+g7d611b8
+                0.4.dev5+gc6dc08c
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -110,7 +110,7 @@ the <a class="reference internal" href="#amaranth.lib.cdc.FFSynchronizer" title=
 reset. See the note below for details.</p></li>
 <li><p><strong>stages</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em>, </em><em>&gt;=2</em>) – Number of synchronization stages between input and output. The lowest safe number is 2,
 with higher numbers reducing MTBF further, at the cost of increased latency.</p></li>
-<li><p><strong>max_input_delay</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Maximum delay from the input signal’s clock to the first synchronization stage, in seconds.
+<li><p><strong>max_input_delay</strong> (<em>None</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Maximum delay from the input signal’s clock to the first synchronization stage, in seconds.
 If specified and the platform does not support it, elaboration will fail.</p></li>
 </ul>
 </dd>
@@ -152,7 +152,7 @@ synchronously, eliminating metastability during deassertion.</p>
 <li><p><strong>stages</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em>, </em><em>&gt;=2</em>) – Number of synchronization stages between input and output. The lowest safe number is 2,
 with higher numbers reducing MTBF further, at the cost of increased deassertion latency.</p></li>
 <li><p><strong>async_edge</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The edge of the input signal which causes the output to be set. Must be one of “pos” or “neg”.</p></li>
-<li><p><strong>max_input_delay</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Maximum delay from the input signal’s clock to the first synchronization stage, in seconds.
+<li><p><strong>max_input_delay</strong> (<em>None</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Maximum delay from the input signal’s clock to the first synchronization stage, in seconds.
 If specified and the platform does not support it, elaboration will fail.</p></li>
 </ul>
 </dd>
@@ -180,7 +180,7 @@ be used.</p>
 <li><p><strong>domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Name of clock domain to reset.</p></li>
 <li><p><strong>stages</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em>, </em><em>&gt;=2</em>) – Number of synchronization stages between input and output. The lowest safe number is 2,
 with higher numbers reducing MTBF further, at the cost of increased deassertion latency.</p></li>
-<li><p><strong>max_input_delay</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Maximum delay from the input signal’s clock to the first synchronization stage, in seconds.
+<li><p><strong>max_input_delay</strong> (<em>None</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Maximum delay from the input signal’s clock to the first synchronization stage, in seconds.
 If specified and the platform does not support it, elaboration will fail.</p></li>
 </ul>
 </dd>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>First-in first-out queues &mdash; Amaranth HDL toolchain 0.4.dev4 documentation</title>
+  <title>First-in first-out queues &mdash; Amaranth HDL toolchain 0.4.dev5 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/platformpicker.css" type="text/css" />
@@ -33,7 +33,7 @@
             <a href="../cover.html" class="icon icon-home"> Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev4+g7d611b8
+                0.4.dev5+gc6dc08c
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -110,17 +110,17 @@ to strobe <code class="docutils literal notranslate"><span class="pre">r_en</spa
 </dd>
 <dt class="field-even">Variables</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>w_data</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>in</em>) – Input data.</p></li>
-<li><p><strong>w_rdy</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted if there is space in the queue, i.e. <code class="docutils literal notranslate"><span class="pre">w_en</span></code> can be asserted to write
+<li><p><strong>~FIFOInterface.w_data</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>in</em>) – Input data.</p></li>
+<li><p><strong>~FIFOInterface.w_rdy</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted if there is space in the queue, i.e. <code class="docutils literal notranslate"><span class="pre">w_en</span></code> can be asserted to write
 a new entry.</p></li>
-<li><p><strong>w_en</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Write strobe. Latches <code class="docutils literal notranslate"><span class="pre">w_data</span></code> into the queue. Does nothing if <code class="docutils literal notranslate"><span class="pre">w_rdy</span></code> is not asserted.</p></li>
-<li><p><strong>w_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
-<li><p><strong>r_data</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>out</em>) – Output data. The conditions in which <code class="docutils literal notranslate"><span class="pre">r_data</span></code> is valid depends on the type of the queue.</p></li>
-<li><p><strong>r_rdy</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted if there is an entry in the queue, i.e. <code class="docutils literal notranslate"><span class="pre">r_en</span></code> can be asserted to read
+<li><p><strong>~FIFOInterface.w_en</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Write strobe. Latches <code class="docutils literal notranslate"><span class="pre">w_data</span></code> into the queue. Does nothing if <code class="docutils literal notranslate"><span class="pre">w_rdy</span></code> is not asserted.</p></li>
+<li><p><strong>~FIFOInterface.w_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
+<li><p><strong>~FIFOInterface.r_data</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>out</em>) – Output data. The conditions in which <code class="docutils literal notranslate"><span class="pre">r_data</span></code> is valid depends on the type of the queue.</p></li>
+<li><p><strong>~FIFOInterface.r_rdy</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted if there is an entry in the queue, i.e. <code class="docutils literal notranslate"><span class="pre">r_en</span></code> can be asserted to read
 an existing entry.</p></li>
-<li><p><strong>r_en</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Read strobe. Makes the next entry (if any) available on <code class="docutils literal notranslate"><span class="pre">r_data</span></code> at the next cycle.
+<li><p><strong>~FIFOInterface.r_en</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Read strobe. Makes the next entry (if any) available on <code class="docutils literal notranslate"><span class="pre">r_data</span></code> at the next cycle.
 Does nothing if <code class="docutils literal notranslate"><span class="pre">r_rdy</span></code> is not asserted.</p></li>
-<li><p><strong>r_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
+<li><p><strong>~FIFOInterface.r_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
 </ul>
 </dd>
 </dl>
@@ -148,18 +148,18 @@ necessary to assert <code class="docutils literal notranslate"><span class="pre"
 </dd>
 <dt class="field-even">Variables</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries. This level is the same between read and write for synchronous FIFOs.</p></li>
-<li><p><strong>w_data</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>in</em>) – Input data.</p></li>
-<li><p><strong>w_rdy</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted if there is space in the queue, i.e. <code class="docutils literal notranslate"><span class="pre">w_en</span></code> can be asserted to write
+<li><p><strong>~SyncFIFO.level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries. This level is the same between read and write for synchronous FIFOs.</p></li>
+<li><p><strong>~SyncFIFO.w_data</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>in</em>) – Input data.</p></li>
+<li><p><strong>~SyncFIFO.w_rdy</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted if there is space in the queue, i.e. <code class="docutils literal notranslate"><span class="pre">w_en</span></code> can be asserted to write
 a new entry.</p></li>
-<li><p><strong>w_en</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Write strobe. Latches <code class="docutils literal notranslate"><span class="pre">w_data</span></code> into the queue. Does nothing if <code class="docutils literal notranslate"><span class="pre">w_rdy</span></code> is not asserted.</p></li>
-<li><p><strong>w_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
-<li><p><strong>r_data</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>out</em>) – Output data. For FWFT queues, valid if <code class="docutils literal notranslate"><span class="pre">r_rdy</span></code> is asserted. For non-FWFT queues, valid on the next cycle after <code class="docutils literal notranslate"><span class="pre">r_rdy</span></code> and <code class="docutils literal notranslate"><span class="pre">r_en</span></code> have been asserted.</p></li>
-<li><p><strong>r_rdy</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted if there is an entry in the queue, i.e. <code class="docutils literal notranslate"><span class="pre">r_en</span></code> can be asserted to read
+<li><p><strong>~SyncFIFO.w_en</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Write strobe. Latches <code class="docutils literal notranslate"><span class="pre">w_data</span></code> into the queue. Does nothing if <code class="docutils literal notranslate"><span class="pre">w_rdy</span></code> is not asserted.</p></li>
+<li><p><strong>~SyncFIFO.w_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
+<li><p><strong>~SyncFIFO.r_data</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>out</em>) – Output data. For FWFT queues, valid if <code class="docutils literal notranslate"><span class="pre">r_rdy</span></code> is asserted. For non-FWFT queues, valid on the next cycle after <code class="docutils literal notranslate"><span class="pre">r_rdy</span></code> and <code class="docutils literal notranslate"><span class="pre">r_en</span></code> have been asserted.</p></li>
+<li><p><strong>~SyncFIFO.r_rdy</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted if there is an entry in the queue, i.e. <code class="docutils literal notranslate"><span class="pre">r_en</span></code> can be asserted to read
 an existing entry.</p></li>
-<li><p><strong>r_en</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Read strobe. Makes the next entry (if any) available on <code class="docutils literal notranslate"><span class="pre">r_data</span></code> at the next cycle.
+<li><p><strong>~SyncFIFO.r_en</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Read strobe. Makes the next entry (if any) available on <code class="docutils literal notranslate"><span class="pre">r_data</span></code> at the next cycle.
 Does nothing if <code class="docutils literal notranslate"><span class="pre">r_rdy</span></code> is not asserted.</p></li>
-<li><p><strong>r_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
+<li><p><strong>~SyncFIFO.r_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
 </ul>
 </dd>
 </dl>
@@ -183,18 +183,18 @@ becoming available on the output is increased by one cycle compared to <a class=
 </dd>
 <dt class="field-even">Variables</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries. This level is the same between read and write for synchronous FIFOs.</p></li>
-<li><p><strong>w_data</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>in</em>) – Input data.</p></li>
-<li><p><strong>w_rdy</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted if there is space in the queue, i.e. <code class="docutils literal notranslate"><span class="pre">w_en</span></code> can be asserted to write
+<li><p><strong>~SyncFIFOBuffered.level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries. This level is the same between read and write for synchronous FIFOs.</p></li>
+<li><p><strong>~SyncFIFOBuffered.w_data</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>in</em>) – Input data.</p></li>
+<li><p><strong>~SyncFIFOBuffered.w_rdy</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted if there is space in the queue, i.e. <code class="docutils literal notranslate"><span class="pre">w_en</span></code> can be asserted to write
 a new entry.</p></li>
-<li><p><strong>w_en</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Write strobe. Latches <code class="docutils literal notranslate"><span class="pre">w_data</span></code> into the queue. Does nothing if <code class="docutils literal notranslate"><span class="pre">w_rdy</span></code> is not asserted.</p></li>
-<li><p><strong>w_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
-<li><p><strong>r_data</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>out</em>) – Output data. Valid if <code class="docutils literal notranslate"><span class="pre">r_rdy</span></code> is asserted.</p></li>
-<li><p><strong>r_rdy</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted if there is an entry in the queue, i.e. <code class="docutils literal notranslate"><span class="pre">r_en</span></code> can be asserted to read
+<li><p><strong>~SyncFIFOBuffered.w_en</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Write strobe. Latches <code class="docutils literal notranslate"><span class="pre">w_data</span></code> into the queue. Does nothing if <code class="docutils literal notranslate"><span class="pre">w_rdy</span></code> is not asserted.</p></li>
+<li><p><strong>~SyncFIFOBuffered.w_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
+<li><p><strong>~SyncFIFOBuffered.r_data</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>out</em>) – Output data. Valid if <code class="docutils literal notranslate"><span class="pre">r_rdy</span></code> is asserted.</p></li>
+<li><p><strong>~SyncFIFOBuffered.r_rdy</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted if there is an entry in the queue, i.e. <code class="docutils literal notranslate"><span class="pre">r_en</span></code> can be asserted to read
 an existing entry.</p></li>
-<li><p><strong>r_en</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Read strobe. Makes the next entry (if any) available on <code class="docutils literal notranslate"><span class="pre">r_data</span></code> at the next cycle.
+<li><p><strong>~SyncFIFOBuffered.r_en</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Read strobe. Makes the next entry (if any) available on <code class="docutils literal notranslate"><span class="pre">r_data</span></code> at the next cycle.
 Does nothing if <code class="docutils literal notranslate"><span class="pre">r_rdy</span></code> is not asserted.</p></li>
-<li><p><strong>r_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
+<li><p><strong>~SyncFIFOBuffered.r_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
 </ul>
 </dd>
 </dl>
@@ -223,18 +223,18 @@ the <code class="docutils literal notranslate"><span class="pre">depth</span></c
 </dd>
 <dt class="field-even">Variables</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>w_data</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>in</em>) – Input data.</p></li>
-<li><p><strong>w_rdy</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted if there is space in the queue, i.e. <code class="docutils literal notranslate"><span class="pre">w_en</span></code> can be asserted to write
+<li><p><strong>~AsyncFIFO.w_data</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>in</em>) – Input data.</p></li>
+<li><p><strong>~AsyncFIFO.w_rdy</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted if there is space in the queue, i.e. <code class="docutils literal notranslate"><span class="pre">w_en</span></code> can be asserted to write
 a new entry.</p></li>
-<li><p><strong>w_en</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Write strobe. Latches <code class="docutils literal notranslate"><span class="pre">w_data</span></code> into the queue. Does nothing if <code class="docutils literal notranslate"><span class="pre">w_rdy</span></code> is not asserted.</p></li>
-<li><p><strong>w_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
-<li><p><strong>r_data</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>out</em>) – Output data. Valid if <code class="docutils literal notranslate"><span class="pre">r_rdy</span></code> is asserted.</p></li>
-<li><p><strong>r_rdy</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted if there is an entry in the queue, i.e. <code class="docutils literal notranslate"><span class="pre">r_en</span></code> can be asserted to read
+<li><p><strong>~AsyncFIFO.w_en</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Write strobe. Latches <code class="docutils literal notranslate"><span class="pre">w_data</span></code> into the queue. Does nothing if <code class="docutils literal notranslate"><span class="pre">w_rdy</span></code> is not asserted.</p></li>
+<li><p><strong>~AsyncFIFO.w_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
+<li><p><strong>~AsyncFIFO.r_data</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>out</em>) – Output data. Valid if <code class="docutils literal notranslate"><span class="pre">r_rdy</span></code> is asserted.</p></li>
+<li><p><strong>~AsyncFIFO.r_rdy</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted if there is an entry in the queue, i.e. <code class="docutils literal notranslate"><span class="pre">r_en</span></code> can be asserted to read
 an existing entry.</p></li>
-<li><p><strong>r_en</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Read strobe. Makes the next entry (if any) available on <code class="docutils literal notranslate"><span class="pre">r_data</span></code> at the next cycle.
+<li><p><strong>~AsyncFIFO.r_en</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Read strobe. Makes the next entry (if any) available on <code class="docutils literal notranslate"><span class="pre">r_data</span></code> at the next cycle.
 Does nothing if <code class="docutils literal notranslate"><span class="pre">r_rdy</span></code> is not asserted.</p></li>
-<li><p><strong>r_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
-<li><p><strong>r_rst</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted, for at least one read-domain clock cycle, after the FIFO has been reset by
+<li><p><strong>~AsyncFIFO.r_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
+<li><p><strong>~AsyncFIFO.r_rst</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted, for at least one read-domain clock cycle, after the FIFO has been reset by
 the write-domain reset.</p></li>
 </ul>
 </dd>
@@ -266,18 +266,18 @@ becoming available on the output is increased by one cycle compared to <a class=
 </dd>
 <dt class="field-even">Variables</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>w_data</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>in</em>) – Input data.</p></li>
-<li><p><strong>w_rdy</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted if there is space in the queue, i.e. <code class="docutils literal notranslate"><span class="pre">w_en</span></code> can be asserted to write
+<li><p><strong>~AsyncFIFOBuffered.w_data</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>in</em>) – Input data.</p></li>
+<li><p><strong>~AsyncFIFOBuffered.w_rdy</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted if there is space in the queue, i.e. <code class="docutils literal notranslate"><span class="pre">w_en</span></code> can be asserted to write
 a new entry.</p></li>
-<li><p><strong>w_en</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Write strobe. Latches <code class="docutils literal notranslate"><span class="pre">w_data</span></code> into the queue. Does nothing if <code class="docutils literal notranslate"><span class="pre">w_rdy</span></code> is not asserted.</p></li>
-<li><p><strong>w_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
-<li><p><strong>r_data</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>out</em>) – Output data. Valid if <code class="docutils literal notranslate"><span class="pre">r_rdy</span></code> is asserted.</p></li>
-<li><p><strong>r_rdy</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted if there is an entry in the queue, i.e. <code class="docutils literal notranslate"><span class="pre">r_en</span></code> can be asserted to read
+<li><p><strong>~AsyncFIFOBuffered.w_en</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Write strobe. Latches <code class="docutils literal notranslate"><span class="pre">w_data</span></code> into the queue. Does nothing if <code class="docutils literal notranslate"><span class="pre">w_rdy</span></code> is not asserted.</p></li>
+<li><p><strong>~AsyncFIFOBuffered.w_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
+<li><p><strong>~AsyncFIFOBuffered.r_data</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>out</em>) – Output data. Valid if <code class="docutils literal notranslate"><span class="pre">r_rdy</span></code> is asserted.</p></li>
+<li><p><strong>~AsyncFIFOBuffered.r_rdy</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted if there is an entry in the queue, i.e. <code class="docutils literal notranslate"><span class="pre">r_en</span></code> can be asserted to read
 an existing entry.</p></li>
-<li><p><strong>r_en</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Read strobe. Makes the next entry (if any) available on <code class="docutils literal notranslate"><span class="pre">r_data</span></code> at the next cycle.
+<li><p><strong>~AsyncFIFOBuffered.r_en</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Read strobe. Makes the next entry (if any) available on <code class="docutils literal notranslate"><span class="pre">r_data</span></code> at the next cycle.
 Does nothing if <code class="docutils literal notranslate"><span class="pre">r_rdy</span></code> is not asserted.</p></li>
-<li><p><strong>r_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
-<li><p><strong>r_rst</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted, for at least one read-domain clock cycle, after the FIFO has been reset by
+<li><p><strong>~AsyncFIFOBuffered.r_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
+<li><p><strong>~AsyncFIFOBuffered.r_rst</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted, for at least one read-domain clock cycle, after the FIFO has been reset by
 the write-domain reset.</p></li>
 </ul>
 </dd>
