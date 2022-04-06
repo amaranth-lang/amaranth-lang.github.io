@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Changelog &mdash; Amaranth HDL toolchain 0.4.dev16 documentation</title>
+  <title>Changelog &mdash; Amaranth HDL toolchain 0.4.dev17 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -32,7 +32,7 @@
             <a href="cover.html" class="icon icon-home"> Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev16+gee9da63
+                0.4.dev17+gf39ee6e
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -52,12 +52,15 @@
 <li class="toctree-l2"><a class="reference internal" href="stdlib.html">Standard library</a></li>
 <li class="toctree-l2"><a class="reference internal" href="platform.html">Platform integration</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Changelog</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#next-version">Next version</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#next-version">Next version</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#toolchain-changes">Toolchain changes</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#version-0-3">Version 0.3</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#migrating-from-version-0-2">Migrating from version 0.2</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#language-changes">Language changes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#standard-library-changes">Standard library changes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#toolchain-changes">Toolchain changes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Toolchain changes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#platform-integration-changes">Platform integration changes</a></li>
 </ul>
 </li>
@@ -100,6 +103,12 @@
 <section id="next-version">
 <h2>Next version<a class="headerlink" href="#next-version" title="Permalink to this headline"></a></h2>
 <p>Support for Python 3.6 has been dropped.</p>
+<section id="toolchain-changes">
+<h3>Toolchain changes<a class="headerlink" href="#toolchain-changes" title="Permalink to this headline"></a></h3>
+<ul class="simple">
+<li><p>Added: <code class="docutils literal notranslate"><span class="pre">debug_verilog</span></code> override in <code class="xref py py-class docutils literal notranslate"><span class="pre">build.TemplatedPlatform</span></code>.</p></li>
+</ul>
+</section>
 </section>
 <section id="version-0-3">
 <h2>Version 0.3<a class="headerlink" href="#version-0-3" title="Permalink to this headline"></a></h2>
@@ -142,8 +151,8 @@
 <li><p>Added: <code class="xref py py-attr docutils literal notranslate"><span class="pre">fifo.FIFOInterface.r_level</span></code> and <code class="xref py py-attr docutils literal notranslate"><span class="pre">fifo.FIFOInterface.w_level</span></code>.</p></li>
 </ul>
 </section>
-<section id="toolchain-changes">
-<h3>Toolchain changes<a class="headerlink" href="#toolchain-changes" title="Permalink to this headline"></a></h3>
+<section id="id1">
+<h3>Toolchain changes<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Changed: Backend and simulator reject wires larger than 65536 bits.</p></li>
 <li><p>Added: Backend emits Yosys enumeration attributes for <a class="reference internal" href="lang.html#lang-shapeenum"><span class="std std-ref">enumeration-shaped</span></a> signals.</p></li>
