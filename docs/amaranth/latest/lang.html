@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Language guide &mdash; Amaranth HDL toolchain 0.4.dev29 documentation</title>
+  <title>Language guide &mdash; Amaranth HDL toolchain 0.4.dev30 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -33,7 +33,7 @@
             <a href="cover.html" class="icon icon-home"> Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev29+g9857039
+                0.4.dev30+ga9f1c35
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -144,7 +144,7 @@
 <p>This guide introduces the Amaranth language in depth. It assumes familiarity with synchronous digital logic and the Python programming language, but does not require prior experience with any hardware description language. See the <a class="reference internal" href="tutorial.html"><span class="doc">tutorial</span></a> for a step-by-step introduction to the language.</p>
 <section id="the-prelude">
 <span id="lang-prelude"></span><h2>The prelude<a class="headerlink" href="#the-prelude" title="Permalink to this headline"></a></h2>
-<p>Because Amaranth is a regular Python library, it needs to be imported before use. The root <code class="docutils literal notranslate"><span class="pre">amaranth</span></code> module, called <em>the prelude</em>, is carefully curated to export a small amount of the most essential names, useful in nearly every design. In source files dedicated to Amaranth code, it is a good practice to use a <a class="reference external" href="https://docs.python.org/3/tutorial/modules.html#tut-pkg-import-star" title="(in Python v3.10)"><span class="xref std std-ref">glob import</span></a> for readability:</p>
+<p>Because Amaranth is a regular Python library, it needs to be imported before use. The root <code class="docutils literal notranslate"><span class="pre">amaranth</span></code> module, called <em>the prelude</em>, is carefully curated to export a small amount of the most essential names, useful in nearly every design. In source files dedicated to Amaranth code, it is a good practice to use a <a class="reference external" href="https://docs.python.org/3/tutorial/modules.html#tut-pkg-import-star" title="(in Python v3.11)"><span class="xref std std-ref">glob import</span></a> for readability:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">amaranth</span> <span class="kn">import</span> <span class="o">*</span>
 </pre></div>
 </div>
@@ -227,7 +227,7 @@
 </section>
 <section id="shapes-from-ranges">
 <span id="lang-shaperange"></span><h3>Shapes from ranges<a class="headerlink" href="#shapes-from-ranges" title="Permalink to this headline"></a></h3>
-<p>Casting a shape from a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">range</span></code></a> <code class="docutils literal notranslate"><span class="pre">r</span></code> produces a shape that:</p>
+<p>Casting a shape from a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">range</span></code></a> <code class="docutils literal notranslate"><span class="pre">r</span></code> produces a shape that:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>has a width large enough to represent both <code class="docutils literal notranslate"><span class="pre">min(r)</span></code> and <code class="docutils literal notranslate"><span class="pre">max(r)</span></code>, and</p></li>
@@ -257,7 +257,7 @@
 </section>
 <section id="shapes-from-enumerations">
 <span id="lang-shapeenum"></span><h3>Shapes from enumerations<a class="headerlink" href="#shapes-from-enumerations" title="Permalink to this headline"></a></h3>
-<p>Casting a shape from an <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a> subclass <code class="docutils literal notranslate"><span class="pre">E</span></code>:</p>
+<p>Casting a shape from an <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a> subclass <code class="docutils literal notranslate"><span class="pre">E</span></code>:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>fails if any of the enumeration members have non-integer values,</p></li>
@@ -279,7 +279,7 @@
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The enumeration does not have to subclass <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></a>; it only needs to have integers as values of every member. Using enumerations based on <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a> rather than <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></a> prevents unwanted implicit conversion of enum members to integers.</p>
+<p>The enumeration does not have to subclass <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></a>; it only needs to have integers as values of every member. Using enumerations based on <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a> rather than <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></a> prevents unwanted implicit conversion of enum members to integers.</p>
 </div>
 </section>
 </section>
@@ -492,7 +492,7 @@
 <span id="lang-bitops"></span><h3>Bitwise, shift, and rotate operators<a class="headerlink" href="#bitwise-shift-and-rotate-operators" title="Permalink to this headline"></a></h3>
 <p>All bitwise and shift operations on integers provided by Python can be used on Amaranth values as well.</p>
 <p>Similar to arithmetic operations, if any operand of a bitwise expression is signed, the expression itself is signed as well. A shift expression is signed if the shifted value is signed. A rotate expression is always unsigned.</p>
-<p>Rotate operations with variable rotate amounts cannot be efficiently synthesized for non-power-of-2 widths of the rotated value. Because of that, the rotate operations are only provided for constant rotate amounts, specified as Python <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>s.</p>
+<p>Rotate operations with variable rotate amounts cannot be efficiently synthesized for non-power-of-2 widths of the rotated value. Because of that, the rotate operations are only provided for constant rotate amounts, specified as Python <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>s.</p>
 <p>The following table lists the bitwise and shift operations provided by Amaranth:</p>
 <table class="docutils align-default">
 <colgroup>
@@ -612,7 +612,7 @@
 </table>
 <dl class="footnote brackets">
 <dt class="label" id="opr1"><span class="brackets">4</span><span class="fn-backref">(<a href="#id8">1</a>,<a href="#id9">2</a>)</span></dt>
-<dd><p>Conceptually the same as applying the Python <a class="reference external" href="https://docs.python.org/3/library/functions.html#all" title="(in Python v3.10)"><code class="xref py py-func docutils literal notranslate"><span class="pre">all()</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/functions.html#any" title="(in Python v3.10)"><code class="xref py py-func docutils literal notranslate"><span class="pre">any()</span></code></a> function to the value viewed as a collection of bits.</p>
+<dd><p>Conceptually the same as applying the Python <a class="reference external" href="https://docs.python.org/3/library/functions.html#all" title="(in Python v3.11)"><code class="xref py py-func docutils literal notranslate"><span class="pre">all()</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/functions.html#any" title="(in Python v3.11)"><code class="xref py py-func docutils literal notranslate"><span class="pre">any()</span></code></a> function to the value viewed as a collection of bits.</p>
 </dd>
 <dt class="label" id="opr2"><span class="brackets"><a class="fn-backref" href="#id10">5</a></span></dt>
 <dd><p>Conceptually the same as applying the Python <code class="xref py py-func docutils literal notranslate"><span class="pre">bool()</span></code> function to the value viewed as an integer.</p>
@@ -670,7 +670,7 @@
 </table>
 <div class="admonition warning" id="lang-logicprecedence">
 <p class="admonition-title">Warning</p>
-<p>Because of Python <a class="reference external" href="https://docs.python.org/3/reference/expressions.html#operator-summary" title="(in Python v3.10)"><span class="xref std std-ref">operator precedence</span></a>, logical operators bind less tightly than comparison operators whereas bitwise operators bind more tightly than comparison operators. As a result, all logical expressions in Amaranth <strong>must</strong> have parenthesized operands.</p>
+<p>Because of Python <a class="reference external" href="https://docs.python.org/3/reference/expressions.html#operator-summary" title="(in Python v3.11)"><span class="xref std std-ref">operator precedence</span></a>, logical operators bind less tightly than comparison operators whereas bitwise operators bind more tightly than comparison operators. As a result, all logical expressions in Amaranth <strong>must</strong> have parenthesized operands.</p>
 <p>Omitting parentheses around operands in an Amaranth a logical expression is likely to introduce a subtle bug:</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">en</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">addr</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
@@ -704,8 +704,8 @@
 </section>
 <section id="bit-sequence-operators">
 <span id="lang-seqops"></span><h3>Bit sequence operators<a class="headerlink" href="#bit-sequence-operators" title="Permalink to this headline"></a></h3>
-<p>Apart from acting as numbers, Amaranth values can also be treated as bit <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#typesseq" title="(in Python v3.10)"><span class="xref std std-ref">sequences</span></a>, supporting slicing, concatenation, replication, and other sequence operations. Since some of the operators Python defines for sequences clash with the operators it defines for numbers, Amaranth gives these operators a different name. Except for the names, Amaranth values follow Python sequence semantics, with the least significant bit at index 0.</p>
-<p>Because every Amaranth value has a single fixed width, bit slicing and replication operations require the subscripts and count to be constant, specified as Python <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>s. It is often useful to slice a value with a constant width and variable offset, but this cannot be expressed with the Python slice notation. To solve this problem, Amaranth provides additional <em>part select</em> operations with the necessary semantics.</p>
+<p>Apart from acting as numbers, Amaranth values can also be treated as bit <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#typesseq" title="(in Python v3.11)"><span class="xref std std-ref">sequences</span></a>, supporting slicing, concatenation, replication, and other sequence operations. Since some of the operators Python defines for sequences clash with the operators it defines for numbers, Amaranth gives these operators a different name. Except for the names, Amaranth values follow Python sequence semantics, with the least significant bit at index 0.</p>
+<p>Because every Amaranth value has a single fixed width, bit slicing and replication operations require the subscripts and count to be constant, specified as Python <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>s. It is often useful to slice a value with a constant width and variable offset, but this cannot be expressed with the Python slice notation. To solve this problem, Amaranth provides additional <em>part select</em> operations with the necessary semantics.</p>
 <p>The result of any bit sequence operation is an unsigned value.</p>
 <p>The following table lists the bit sequence operations provided by Amaranth:</p>
 <table class="docutils align-default">
@@ -804,7 +804,7 @@
 </section>
 <section id="choice-operator">
 <span id="lang-muxop"></span><h3>Choice operator<a class="headerlink" href="#choice-operator" title="Permalink to this headline"></a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">Mux(sel,</span> <span class="pre">val1,</span> <span class="pre">val0)</span></code> choice expression (similar to the <a class="reference external" href="https://docs.python.org/3/reference/expressions.html#if-expr" title="(in Python v3.10)"><span class="xref std std-ref">conditional expression</span></a> in Python) is equal to the operand <code class="docutils literal notranslate"><span class="pre">val1</span></code> if <code class="docutils literal notranslate"><span class="pre">sel</span></code> is non-zero, and to the other operand <code class="docutils literal notranslate"><span class="pre">val0</span></code> otherwise. If any of <code class="docutils literal notranslate"><span class="pre">val1</span></code> or <code class="docutils literal notranslate"><span class="pre">val0</span></code> are signed, the expression itself is signed as well.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Mux(sel,</span> <span class="pre">val1,</span> <span class="pre">val0)</span></code> choice expression (similar to the <a class="reference external" href="https://docs.python.org/3/reference/expressions.html#if-expr" title="(in Python v3.11)"><span class="xref std std-ref">conditional expression</span></a> in Python) is equal to the operand <code class="docutils literal notranslate"><span class="pre">val1</span></code> if <code class="docutils literal notranslate"><span class="pre">sel</span></code> is non-zero, and to the other operand <code class="docutils literal notranslate"><span class="pre">val0</span></code> otherwise. If any of <code class="docutils literal notranslate"><span class="pre">val1</span></code> or <code class="docutils literal notranslate"><span class="pre">val0</span></code> are signed, the expression itself is signed as well.</p>
 </section>
 </section>
 <section id="modules">
@@ -917,7 +917,7 @@
 </section>
 <section id="control-structures">
 <span id="lang-control"></span><h3>Control structures<a class="headerlink" href="#control-structures" title="Permalink to this headline"></a></h3>
-<p>Although it is possible to write any decision tree as a combination of <a class="reference internal" href="#lang-assigns"><span class="std std-ref">assignments</span></a> and <a class="reference internal" href="#lang-muxop"><span class="std std-ref">choice expressions</span></a>, Amaranth provides <em>control structures</em> tailored for this task: If, Switch, and FSM. The syntax of all control structures is based on <a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#context-managers" title="(in Python v3.10)"><span class="xref std std-ref">context managers</span></a> and uses <code class="docutils literal notranslate"><span class="pre">with</span></code> blocks, for example:</p>
+<p>Although it is possible to write any decision tree as a combination of <a class="reference internal" href="#lang-assigns"><span class="std std-ref">assignments</span></a> and <a class="reference internal" href="#lang-muxop"><span class="std std-ref">choice expressions</span></a>, Amaranth provides <em>control structures</em> tailored for this task: If, Switch, and FSM. The syntax of all control structures is based on <a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#context-managers" title="(in Python v3.11)"><span class="xref std std-ref">context managers</span></a> and uses <code class="docutils literal notranslate"><span class="pre">with</span></code> blocks, for example:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">timer</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
 <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">If</span><span class="p">(</span><span class="n">timer</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
     <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">timer</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>

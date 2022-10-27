@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>First-in first-out queues &mdash; Amaranth HDL toolchain 0.4.dev29 documentation</title>
+  <title>First-in first-out queues &mdash; Amaranth HDL toolchain 0.4.dev30 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/platformpicker.css" type="text/css" />
@@ -33,7 +33,7 @@
             <a href="../cover.html" class="icon icon-home"> Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev29+g9857039
+                0.4.dev30+ga9f1c35
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -101,9 +101,9 @@ to the input also appears first on the output.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Bit width of data entries.</p></li>
-<li><p><strong>depth</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Depth of the queue. If zero, the FIFO cannot be read from or written to.</p></li>
-<li><p><strong>fwft</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – First-word fallthrough. If set, when <code class="docutils literal notranslate"><span class="pre">r_rdy</span></code> rises, the first entry is already
+<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Bit width of data entries.</p></li>
+<li><p><strong>depth</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Depth of the queue. If zero, the FIFO cannot be read from or written to.</p></li>
+<li><p><strong>fwft</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – First-word fallthrough. If set, when <code class="docutils literal notranslate"><span class="pre">r_rdy</span></code> rises, the first entry is already
 available, i.e. <code class="docutils literal notranslate"><span class="pre">r_data</span></code> is valid. Otherwise, after <code class="docutils literal notranslate"><span class="pre">r_rdy</span></code> rises, it is necessary
 to strobe <code class="docutils literal notranslate"><span class="pre">r_en</span></code> for <code class="docutils literal notranslate"><span class="pre">r_data</span></code> to become valid.</p></li>
 </ul>
@@ -114,13 +114,13 @@ to strobe <code class="docutils literal notranslate"><span class="pre">r_en</spa
 <li><p><strong>w_rdy</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted if there is space in the queue, i.e. <code class="docutils literal notranslate"><span class="pre">w_en</span></code> can be asserted to write
 a new entry.</p></li>
 <li><p><strong>w_en</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Write strobe. Latches <code class="docutils literal notranslate"><span class="pre">w_data</span></code> into the queue. Does nothing if <code class="docutils literal notranslate"><span class="pre">w_rdy</span></code> is not asserted.</p></li>
-<li><p><strong>w_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
+<li><p><strong>w_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.11)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
 <li><p><strong>r_data</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>out</em>) – Output data. The conditions in which <code class="docutils literal notranslate"><span class="pre">r_data</span></code> is valid depends on the type of the queue.</p></li>
 <li><p><strong>r_rdy</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted if there is an entry in the queue, i.e. <code class="docutils literal notranslate"><span class="pre">r_en</span></code> can be asserted to read
 an existing entry.</p></li>
 <li><p><strong>r_en</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Read strobe. Makes the next entry (if any) available on <code class="docutils literal notranslate"><span class="pre">r_data</span></code> at the next cycle.
 Does nothing if <code class="docutils literal notranslate"><span class="pre">r_rdy</span></code> is not asserted.</p></li>
-<li><p><strong>r_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
+<li><p><strong>r_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.11)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
 </ul>
 </dd>
 </dl>
@@ -139,27 +139,27 @@ are needed, use <a class="reference internal" href="#amaranth.lib.fifo.AsyncFIFO
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Bit width of data entries.</p></li>
-<li><p><strong>depth</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Depth of the queue. If zero, the FIFO cannot be read from or written to.</p></li>
-<li><p><strong>fwft</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – First-word fallthrough. If set, when the queue is empty and an entry is written into it,
+<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Bit width of data entries.</p></li>
+<li><p><strong>depth</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Depth of the queue. If zero, the FIFO cannot be read from or written to.</p></li>
+<li><p><strong>fwft</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – First-word fallthrough. If set, when the queue is empty and an entry is written into it,
 that entry becomes available on the output on the same clock cycle. Otherwise, it is
 necessary to assert <code class="docutils literal notranslate"><span class="pre">r_en</span></code> for <code class="docutils literal notranslate"><span class="pre">r_data</span></code> to become valid.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Variables</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries. This level is the same between read and write for synchronous FIFOs.</p></li>
+<li><p><strong>level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.11)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries. This level is the same between read and write for synchronous FIFOs.</p></li>
 <li><p><strong>w_data</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>in</em>) – Input data.</p></li>
 <li><p><strong>w_rdy</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted if there is space in the queue, i.e. <code class="docutils literal notranslate"><span class="pre">w_en</span></code> can be asserted to write
 a new entry.</p></li>
 <li><p><strong>w_en</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Write strobe. Latches <code class="docutils literal notranslate"><span class="pre">w_data</span></code> into the queue. Does nothing if <code class="docutils literal notranslate"><span class="pre">w_rdy</span></code> is not asserted.</p></li>
-<li><p><strong>w_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
+<li><p><strong>w_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.11)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
 <li><p><strong>r_data</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>out</em>) – Output data. For FWFT queues, valid if <code class="docutils literal notranslate"><span class="pre">r_rdy</span></code> is asserted. For non-FWFT queues, valid on the next cycle after <code class="docutils literal notranslate"><span class="pre">r_rdy</span></code> and <code class="docutils literal notranslate"><span class="pre">r_en</span></code> have been asserted.</p></li>
 <li><p><strong>r_rdy</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted if there is an entry in the queue, i.e. <code class="docutils literal notranslate"><span class="pre">r_en</span></code> can be asserted to read
 an existing entry.</p></li>
 <li><p><strong>r_en</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Read strobe. Makes the next entry (if any) available on <code class="docutils literal notranslate"><span class="pre">r_data</span></code> at the next cycle.
 Does nothing if <code class="docutils literal notranslate"><span class="pre">r_rdy</span></code> is not asserted.</p></li>
-<li><p><strong>r_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
+<li><p><strong>r_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.11)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
 </ul>
 </dd>
 </dl>
@@ -176,25 +176,25 @@ becoming available on the output is increased by one cycle compared to <a class=
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Bit width of data entries.</p></li>
-<li><p><strong>depth</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Depth of the queue. If zero, the FIFO cannot be read from or written to.</p></li>
-<li><p><strong>fwft</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Always set.</p></li>
+<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Bit width of data entries.</p></li>
+<li><p><strong>depth</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Depth of the queue. If zero, the FIFO cannot be read from or written to.</p></li>
+<li><p><strong>fwft</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – Always set.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Variables</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries. This level is the same between read and write for synchronous FIFOs.</p></li>
+<li><p><strong>level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.11)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries. This level is the same between read and write for synchronous FIFOs.</p></li>
 <li><p><strong>w_data</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>in</em>) – Input data.</p></li>
 <li><p><strong>w_rdy</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted if there is space in the queue, i.e. <code class="docutils literal notranslate"><span class="pre">w_en</span></code> can be asserted to write
 a new entry.</p></li>
 <li><p><strong>w_en</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Write strobe. Latches <code class="docutils literal notranslate"><span class="pre">w_data</span></code> into the queue. Does nothing if <code class="docutils literal notranslate"><span class="pre">w_rdy</span></code> is not asserted.</p></li>
-<li><p><strong>w_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
+<li><p><strong>w_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.11)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
 <li><p><strong>r_data</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>out</em>) – Output data. Valid if <code class="docutils literal notranslate"><span class="pre">r_rdy</span></code> is asserted.</p></li>
 <li><p><strong>r_rdy</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted if there is an entry in the queue, i.e. <code class="docutils literal notranslate"><span class="pre">r_en</span></code> can be asserted to read
 an existing entry.</p></li>
 <li><p><strong>r_en</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Read strobe. Makes the next entry (if any) available on <code class="docutils literal notranslate"><span class="pre">r_data</span></code> at the next cycle.
 Does nothing if <code class="docutils literal notranslate"><span class="pre">r_rdy</span></code> is not asserted.</p></li>
-<li><p><strong>r_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
+<li><p><strong>r_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.11)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
 </ul>
 </dd>
 </dl>
@@ -214,11 +214,11 @@ the <code class="docutils literal notranslate"><span class="pre">depth</span></c
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Bit width of data entries.</p></li>
-<li><p><strong>depth</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Depth of the queue. If zero, the FIFO cannot be read from or written to.</p></li>
-<li><p><strong>r_domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Read clock domain.</p></li>
-<li><p><strong>w_domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Write clock domain.</p></li>
-<li><p><strong>fwft</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Always set.</p></li>
+<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Bit width of data entries.</p></li>
+<li><p><strong>depth</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Depth of the queue. If zero, the FIFO cannot be read from or written to.</p></li>
+<li><p><strong>r_domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Read clock domain.</p></li>
+<li><p><strong>w_domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Write clock domain.</p></li>
+<li><p><strong>fwft</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – Always set.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Variables</dt>
@@ -227,13 +227,13 @@ the <code class="docutils literal notranslate"><span class="pre">depth</span></c
 <li><p><strong>w_rdy</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted if there is space in the queue, i.e. <code class="docutils literal notranslate"><span class="pre">w_en</span></code> can be asserted to write
 a new entry.</p></li>
 <li><p><strong>w_en</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Write strobe. Latches <code class="docutils literal notranslate"><span class="pre">w_data</span></code> into the queue. Does nothing if <code class="docutils literal notranslate"><span class="pre">w_rdy</span></code> is not asserted.</p></li>
-<li><p><strong>w_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
+<li><p><strong>w_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.11)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
 <li><p><strong>r_data</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>out</em>) – Output data. Valid if <code class="docutils literal notranslate"><span class="pre">r_rdy</span></code> is asserted.</p></li>
 <li><p><strong>r_rdy</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted if there is an entry in the queue, i.e. <code class="docutils literal notranslate"><span class="pre">r_en</span></code> can be asserted to read
 an existing entry.</p></li>
 <li><p><strong>r_en</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Read strobe. Makes the next entry (if any) available on <code class="docutils literal notranslate"><span class="pre">r_data</span></code> at the next cycle.
 Does nothing if <code class="docutils literal notranslate"><span class="pre">r_rdy</span></code> is not asserted.</p></li>
-<li><p><strong>r_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
+<li><p><strong>r_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.11)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
 <li><p><strong>r_rst</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted, for at least one read-domain clock cycle, after the FIFO has been reset by
 the write-domain reset.</p></li>
 </ul>
@@ -257,11 +257,11 @@ becoming available on the output is increased by one cycle compared to <a class=
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Bit width of data entries.</p></li>
-<li><p><strong>depth</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Depth of the queue. If zero, the FIFO cannot be read from or written to.</p></li>
-<li><p><strong>r_domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Read clock domain.</p></li>
-<li><p><strong>w_domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Write clock domain.</p></li>
-<li><p><strong>fwft</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Always set.</p></li>
+<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Bit width of data entries.</p></li>
+<li><p><strong>depth</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Depth of the queue. If zero, the FIFO cannot be read from or written to.</p></li>
+<li><p><strong>r_domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Read clock domain.</p></li>
+<li><p><strong>w_domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Write clock domain.</p></li>
+<li><p><strong>fwft</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – Always set.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Variables</dt>
@@ -270,13 +270,13 @@ becoming available on the output is increased by one cycle compared to <a class=
 <li><p><strong>w_rdy</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted if there is space in the queue, i.e. <code class="docutils literal notranslate"><span class="pre">w_en</span></code> can be asserted to write
 a new entry.</p></li>
 <li><p><strong>w_en</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Write strobe. Latches <code class="docutils literal notranslate"><span class="pre">w_data</span></code> into the queue. Does nothing if <code class="docutils literal notranslate"><span class="pre">w_rdy</span></code> is not asserted.</p></li>
-<li><p><strong>w_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
+<li><p><strong>w_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.11)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
 <li><p><strong>r_data</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>out</em>) – Output data. Valid if <code class="docutils literal notranslate"><span class="pre">r_rdy</span></code> is asserted.</p></li>
 <li><p><strong>r_rdy</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted if there is an entry in the queue, i.e. <code class="docutils literal notranslate"><span class="pre">r_en</span></code> can be asserted to read
 an existing entry.</p></li>
 <li><p><strong>r_en</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Read strobe. Makes the next entry (if any) available on <code class="docutils literal notranslate"><span class="pre">r_data</span></code> at the next cycle.
 Does nothing if <code class="docutils literal notranslate"><span class="pre">r_rdy</span></code> is not asserted.</p></li>
-<li><p><strong>r_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.10)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
+<li><p><strong>r_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.11)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
 <li><p><strong>r_rst</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted, for at least one read-domain clock cycle, after the FIFO has been reset by
 the write-domain reset.</p></li>
 </ul>
