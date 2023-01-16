@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Installation &mdash; Amaranth HDL toolchain 0.4.dev36 documentation</title>
+  <title>Installation &mdash; Amaranth HDL toolchain 0.4.dev37 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -33,7 +33,7 @@
             <a href="cover.html" class="icon icon-home"> Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev36+ge3b2ba4
+                0.4.dev37+g427c82f
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -114,18 +114,18 @@
 <div class="platform-choice platform--macos platform-noaltname docutils container">
 <p class="platform-title">macOS</p>
 <p>Install <a class="reference external" href="https://brew.sh">Homebrew</a>. Then, install Python and GTKWave by running:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>brew install python gtkwave
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>brew<span class="w"> </span>install<span class="w"> </span>python<span class="w"> </span>gtkwave
 </pre></div>
 </div>
 </div>
 <div class="platform-choice platform--debian platform--linux docutils container">
 <p class="platform-title">Debian</p>
 <p>Install Python and GTKWave by running:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo apt-get install python3-pip gtkwave
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>python3-pip<span class="w"> </span>gtkwave
 </pre></div>
 </div>
 <p>On architectures other than x86_64 and AArch64, install Yosys by running:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo apt-get install yosys
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>yosys
 </pre></div>
 </div>
 <p>If Yosys 0.10 (or newer) is not available, <a class="reference external" href="https://github.com/YosysHQ/yosys/#setup">build Yosys from source</a>.</p>
@@ -133,7 +133,7 @@
 <div class="platform-choice platform--arch platform--linux docutils container">
 <p class="platform-title">Arch Linux</p>
 <p>Install Python, pip, GTKWave and Yosys by running:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo pacman -S python python-pip gtkwave yosys
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>python<span class="w"> </span>python-pip<span class="w"> </span>gtkwave<span class="w"> </span>yosys
 </pre></div>
 </div>
 </div>
@@ -161,25 +161,25 @@
 <div class="platform-choice platform--macos platform-noaltname docutils container">
 <p class="platform-title">macOS</p>
 <p>To install the latest release of Amaranth, run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip install --user --upgrade <span class="s1">&#39;amaranth[builtin-yosys]&#39;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--upgrade<span class="w"> </span><span class="s1">&#39;amaranth[builtin-yosys]&#39;</span>
 </pre></div>
 </div>
 </div>
 <div class="platform-choice platform--linux platform-noaltname docutils container">
 <p class="platform-title">Linux</p>
 <p>If you <strong>did not</strong> install Yosys manually in the <a class="reference internal" href="#install-deps"><span class="std std-ref">previous step</span></a>, to install the latest release of Amaranth, run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip3 install --user --upgrade <span class="s1">&#39;amaranth[builtin-yosys]&#39;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip3<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--upgrade<span class="w"> </span><span class="s1">&#39;amaranth[builtin-yosys]&#39;</span>
 </pre></div>
 </div>
 <p>If you <strong>did</strong> install Yosys manually in the previous step, run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip3 install --user --upgrade amaranth
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip3<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--upgrade<span class="w"> </span>amaranth
 </pre></div>
 </div>
 </div>
 <div class="platform-choice platform--arch platform--linux docutils container">
 <p class="platform-title">Arch Linux</p>
 <p>To install the latest release of Amaranth, run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo pacman -S python-amaranth
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>python-amaranth
 </pre></div>
 </div>
 </div>
@@ -198,18 +198,18 @@
 <div class="platform-choice platform--macos platform-noaltname docutils container">
 <p class="platform-title">macOS</p>
 <p>To install the latest development snapshot of Amaranth, run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip install --user <span class="s1">&#39;git+https://github.com/amaranth-lang/amaranth.git#egg=amaranth[builtin-yosys]&#39;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span><span class="s1">&#39;git+https://github.com/amaranth-lang/amaranth.git#egg=amaranth[builtin-yosys]&#39;</span>
 </pre></div>
 </div>
 </div>
 <div class="platform-choice platform--linux platform-noaltname docutils container">
 <p class="platform-title">Linux</p>
 <p>If you <strong>did not</strong> install Yosys manually in the <a class="reference internal" href="#install-deps"><span class="std std-ref">previous step</span></a>, to install the latest release of Amaranth, run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip3 install --user <span class="s1">&#39;git+https://github.com/amaranth-lang/amaranth.git#egg=amaranth[builtin-yosys]&#39;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip3<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span><span class="s1">&#39;git+https://github.com/amaranth-lang/amaranth.git#egg=amaranth[builtin-yosys]&#39;</span>
 </pre></div>
 </div>
 <p>If you <strong>did</strong> install Yosys manually in the previous step, run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip3 install --user <span class="s1">&#39;git+https://github.com/amaranth-lang/amaranth.git#egg=amaranth&#39;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip3<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span><span class="s1">&#39;git+https://github.com/amaranth-lang/amaranth.git#egg=amaranth&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -237,15 +237,15 @@
 <div class="platform-choice platform--macos platform-noaltname docutils container">
 <p class="platform-title">macOS</p>
 <p>To install an editable development snapshot of Amaranth for the first time, run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git clone https://github.com/amaranth-lang/amaranth
-<span class="gp">$ </span><span class="nb">cd</span> amaranth
-<span class="gp">$ </span>pip install --user --editable <span class="s1">&#39;.[builtin-yosys]&#39;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/amaranth-lang/amaranth
+<span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>amaranth
+<span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--editable<span class="w"> </span><span class="s1">&#39;.[builtin-yosys]&#39;</span>
 </pre></div>
 </div>
 <p>Any changes made to the <code class="docutils literal notranslate"><span class="pre">amaranth</span></code> directory will immediately affect any code that uses Amaranth. To update the snapshot, run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span> amaranth
-<span class="gp">$ </span>git pull --ff-only origin main
-<span class="gp">$ </span>pip install --user --editable <span class="s1">&#39;.[builtin-yosys]&#39;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>amaranth
+<span class="gp">$ </span>git<span class="w"> </span>pull<span class="w"> </span>--ff-only<span class="w"> </span>origin<span class="w"> </span>main
+<span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--editable<span class="w"> </span><span class="s1">&#39;.[builtin-yosys]&#39;</span>
 </pre></div>
 </div>
 <p>Run the <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--editable</span> <span class="pre">.[builtin-yosys]</span></code> command each time the editable development snapshot is updated in case package dependencies have been added or changed. Otherwise, code using Amaranth may misbehave or crash with an <code class="docutils literal notranslate"><span class="pre">ImportError</span></code>.</p>
@@ -254,15 +254,15 @@
 <p class="platform-title">Linux</p>
 <p>If you <strong>did</strong> install Yosys manually in the <a class="reference internal" href="#install-deps"><span class="std std-ref">previous step</span></a>, omit <code class="docutils literal notranslate"><span class="pre">[builtin-yosys]</span></code> from the following commands.</p>
 <p>To install an editable development snapshot of Amaranth for the first time, run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git clone https://github.com/amaranth-lang/amaranth
-<span class="gp">$ </span><span class="nb">cd</span> amaranth
-<span class="gp">$ </span>pip3 install --user --editable <span class="s1">&#39;.[builtin-yosys]&#39;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/amaranth-lang/amaranth
+<span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>amaranth
+<span class="gp">$ </span>pip3<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--editable<span class="w"> </span><span class="s1">&#39;.[builtin-yosys]&#39;</span>
 </pre></div>
 </div>
 <p>Any changes made to the <code class="docutils literal notranslate"><span class="pre">amaranth</span></code> directory will immediately affect any code that uses Amaranth. To update the snapshot, run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span> amaranth
-<span class="gp">$ </span>git pull --ff-only origin main
-<span class="gp">$ </span>pip3 install --user --editable <span class="s1">&#39;.[builtin-yosys]&#39;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>amaranth
+<span class="gp">$ </span>git<span class="w"> </span>pull<span class="w"> </span>--ff-only<span class="w"> </span>origin<span class="w"> </span>main
+<span class="gp">$ </span>pip3<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--editable<span class="w"> </span><span class="s1">&#39;.[builtin-yosys]&#39;</span>
 </pre></div>
 </div>
 <p>Run the <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">install</span> <span class="pre">--editable</span> <span class="pre">.[builtin-yosys]</span></code> command each time the editable development snapshot is updated in case package dependencies have been added or changed. Otherwise, code using Amaranth may misbehave or crash with an <code class="docutils literal notranslate"><span class="pre">ImportError</span></code>.</p>
