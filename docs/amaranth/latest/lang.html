@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Language guide &mdash; Amaranth HDL toolchain 0.4.dev38 documentation</title>
+  <title>Language guide &mdash; Amaranth HDL toolchain 0.4.dev40 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -33,7 +33,7 @@
             <a href="cover.html" class="icon icon-home"> Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev38+g91d4513
+                0.4.dev40+gde6b693
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -294,6 +294,10 @@
 <span class="go">(const 3&#39;d5)</span>
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If a value subclasses <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></a> or its class otherwise inherits from both <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> and <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code>, it is treated as an enumeration.</p>
+</div>
 </section>
 <section id="values-from-enumeration-members">
 <h3>Values from enumeration members<a class="headerlink" href="#values-from-enumeration-members" title="Permalink to this headline"></a></h3>
@@ -301,6 +305,10 @@
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Value</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">Direction</span><span class="o">.</span><span class="n">LEFT</span><span class="p">)</span>
 <span class="go">(const 2&#39;d1)</span>
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If a value subclasses <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></a> or its class otherwise inherits from both <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> and <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code>, it is treated as an enumeration.</p>
 </div>
 </section>
 </section>
