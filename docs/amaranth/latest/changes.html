@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Changelog &mdash; Amaranth HDL toolchain 0.4.dev45 documentation</title>
+  <title>Changelog &mdash; Amaranth HDL toolchain 0.4.dev46 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -32,7 +32,7 @@
             <a href="cover.html" class="icon icon-home"> Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev45+g2950244
+                0.4.dev46+gf133646
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -106,13 +106,15 @@
 <section id="next-version">
 <h2>Next version<a class="headerlink" href="#next-version" title="Permalink to this headline"></a></h2>
 <p>Support for Python 3.6 has been dropped, and support for Python 3.11 has been added.</p>
-<p>Features deprecated in version 0.3 have been removed.</p>
+<p>Features deprecated in version 0.3 have been removed. In particular, the <code class="docutils literal notranslate"><span class="pre">nmigen.*</span></code> namespace is not provided, <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">nmigen:</span></code> annotations are not recognized, and <code class="docutils literal notranslate"><span class="pre">NMIGEN_*</span></code> envronment variables are not used.</p>
 <section id="migrating-from-version-0-3">
 <h3>Migrating from version 0.3<a class="headerlink" href="#migrating-from-version-0-3" title="Permalink to this headline"></a></h3>
 <p>Apply the following changes to code written against Amaranth 0.2 to migrate it to version 0.3:</p>
 <ul class="simple">
+<li><p>Update shell environment to use <code class="docutils literal notranslate"><span class="pre">AMARANTH_*</span></code> environment variables instead of <code class="docutils literal notranslate"><span class="pre">NMIGEN_*</span></code> environment variables.</p></li>
 <li><p>Update shell environment to use <code class="docutils literal notranslate"><span class="pre">AMARANTH_ENV_&lt;TOOLCHAIN&gt;</span></code> (with all-uppercase <code class="docutils literal notranslate"><span class="pre">&lt;TOOLCHAIN&gt;``name)</span> <span class="pre">environment</span> <span class="pre">variable</span> <span class="pre">names</span> <span class="pre">instead</span> <span class="pre">of</span> <span class="pre">``AMARANTH_ENV_&lt;Toolchain&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">NMIGEN_ENV_&lt;Toolchain&gt;</span></code> (with mixed-case <code class="docutils literal notranslate"><span class="pre">&lt;Toolchain&gt;</span></code> name).</p></li>
 </ul>
+<p>While code that uses the features listed as deprecated below will work in Amaranth 0.3, they will be removed in the next version.</p>
 </section>
 <section id="language-changes">
 <h3>Language changes<a class="headerlink" href="#language-changes" title="Permalink to this headline"></a></h3>
@@ -169,6 +171,7 @@
 <li><p>Added: <code class="xref py py-class docutils literal notranslate"><span class="pre">ValueCastable</span></code>.</p></li>
 <li><p>Deprecated: <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.UserValue</span></code>; use <code class="xref py py-class docutils literal notranslate"><span class="pre">ValueCastable</span></code> instead.</p></li>
 <li><p>Added: Division and modulo operators can be used with a negative divisor.</p></li>
+<li><p>Deprecated: <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">nmigen:</span></code> linter instructions at the beginning of file; use <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">amaranth:</span></code> instead.</p></li>
 </ul>
 </section>
 <section id="standard-library-changes">
@@ -197,6 +200,7 @@
 <li><p>Deprecated: <code class="xref py py-class docutils literal notranslate"><span class="pre">test.utils.FHDLTestCase</span></code>, with no replacement.</p></li>
 <li><p>Deprecated: <code class="xref py py-func docutils literal notranslate"><span class="pre">back.rtlil.convert()</span></code> and <code class="xref py py-func docutils literal notranslate"><span class="pre">back.verilog.convert()</span></code> without an explicit <cite>ports=</cite> argument.</p></li>
 <li><p>Changed: VCD output now uses a top-level “bench” module that contains testbench only signals.</p></li>
+<li><p>Deprecated: <code class="docutils literal notranslate"><span class="pre">NMIGEN_*</span></code> environment variables; use <code class="docutils literal notranslate"><span class="pre">AMARANTH_*</span></code> environment variables instead.</p></li>
 </ul>
 </section>
 <section id="id3">
