@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Installation &mdash; Amaranth HDL toolchain 0.4.dev63 documentation</title>
+  <title>Installation &mdash; Amaranth HDL toolchain 0.4.dev64 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -37,7 +37,7 @@
             Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev63+gca77de5
+                0.4.dev64+g12a81f2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -102,7 +102,7 @@
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline"></a></h1>
 <section id="system-requirements">
 <h2>System requirements<a class="headerlink" href="#system-requirements" title="Permalink to this headline"></a></h2>
-<p>Amaranth HDL requires Python 3.7; it works on <a class="reference external" href="https://www.python.org/">CPython</a> 3.7 (or newer), and works faster on <a class="reference external" href="https://www.pypy.org/">PyPy3.7</a> 7.3.3 (or newer).</p>
+<p>Amaranth HDL requires Python 3.7; it works on <a class="reference external" href="https://www.python.org/">CPython</a> 3.7 (or newer), and works faster on <a class="reference external" href="https://www.pypy.org/">PyPy3.7</a> 7.3.3 (or newer). Installation requires <a class="reference external" href="https://pip.pypa.io/">pip</a> 23.0 (or newer).</p>
 <p>For most workflows, Amaranth requires <a class="reference external" href="https://yosyshq.net/yosys/">Yosys</a> 0.10 (or newer). A compatible version of Yosys is distributed via <a class="reference external" href="https://pypi.org/">PyPI</a> for most popular platforms.</p>
 <p>Simulating Amaranth code requires no additional software. However, a waveform viewer like <a class="reference external" href="http://gtkwave.sourceforge.net/">GTKWave</a> is invaluable for debugging.</p>
 <p>Synthesizing, placing and routing an Amaranth design for an FPGA requires the FPGA family specific toolchain.</p>
@@ -114,11 +114,19 @@
 <p class="platform-title">Windows</p>
 <p><a class="reference external" href="https://docs.python.org/3/using/windows.html#using-on-windows" title="(in Python v3.11)"><span class="xref std std-ref">Install Python</span></a>, either from Windows Store or using the full installer. If using the full installer, make sure to install a 64-bit version of Python.</p>
 <p><a class="reference external" href="https://sourceforge.net/projects/gtkwave/files/">Download GTKWave</a>, either win32 or win64 binaries. GTKWave does not need to be installed; it can be unpacked to any convenient location and run from there.</p>
+<p>Before continuing, make sure you have the latest version of <a class="reference external" href="https://pip.pypa.io/">pip</a> installed by running:</p>
+<div class="highlight-doscon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;</span> pip install --upgrade pip
+</pre></div>
+</div>
 </div>
 <div class="platform-choice platform--macos platform-noaltname docutils container">
 <p class="platform-title">macOS</p>
 <p>Install <a class="reference external" href="https://brew.sh">Homebrew</a>. Then, install Python and GTKWave by running:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>brew<span class="w"> </span>install<span class="w"> </span>python<span class="w"> </span>gtkwave
+</pre></div>
+</div>
+<p>Before continuing, make sure you have the latest version of <a class="reference external" href="https://pip.pypa.io/">pip</a> installed by running:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
 </pre></div>
 </div>
 </div>
@@ -133,6 +141,10 @@
 </pre></div>
 </div>
 <p>If Yosys 0.10 (or newer) is not available, <a class="reference external" href="https://github.com/YosysHQ/yosys/#setup">build Yosys from source</a>.</p>
+<p>Before continuing, make sure you have the latest version of <a class="reference external" href="https://pip.pypa.io/">pip</a> installed by running:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip3<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--upgrade<span class="w"> </span>pip
+</pre></div>
+</div>
 </div>
 <div class="platform-choice platform--arch platform--linux docutils container">
 <p class="platform-title">Arch Linux</p>
@@ -146,6 +158,10 @@
 <p>Install Python and GTKWave from the package repository of your distribution.</p>
 <p>On architectures other than x86_64 and AArch64, install Yosys from the package repository of your distribution.</p>
 <p>If Yosys 0.10 (or newer) is not available, <a class="reference external" href="https://github.com/YosysHQ/yosys/#setup">build Yosys from source</a>.</p>
+<p>Before continuing, make sure you have the latest version of <a class="reference external" href="https://pip.pypa.io/">pip</a> installed by running:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip3<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--upgrade<span class="w"> </span>pip
+</pre></div>
+</div>
 </div>
 </div>
 </section>
