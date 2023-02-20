@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Code conversion &mdash; Amaranth HDL toolchain 0.4.dev64 documentation</title>
+  <title>Code conversion &mdash; Amaranth HDL toolchain 0.4.dev65 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/platformpicker.css" type="text/css" />
@@ -13,10 +13,10 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
         <script src="../_static/platformpicker.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -37,7 +37,7 @@
             Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev64+g12a81f2
+                0.4.dev65+ge2f0519
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -99,10 +99,10 @@
            <div itemprop="articleBody">
              
   <section id="module-amaranth.lib.coding">
-<span id="code-conversion"></span><h1>Code conversion<a class="headerlink" href="#module-amaranth.lib.coding" title="Permalink to this headline"></a></h1>
+<span id="code-conversion"></span><h1>Code conversion<a class="headerlink" href="#module-amaranth.lib.coding" title="Permalink to this heading"></a></h1>
 <p>The <a class="reference internal" href="#module-amaranth.lib.coding" title="amaranth.lib.coding"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.coding</span></code></a> module provides building blocks for conversion between different encodings of binary numbers.</p>
 <section id="one-hot-coding">
-<h2>One-hot coding<a class="headerlink" href="#one-hot-coding" title="Permalink to this headline"></a></h2>
+<h2>One-hot coding<a class="headerlink" href="#one-hot-coding" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.lib.coding.Encoder">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.coding.</span></span><span class="sig-name descname"><span class="pre">Encoder</span></span><a class="headerlink" href="#amaranth.lib.coding.Encoder" title="Permalink to this definition"></a></dt>
@@ -110,10 +110,10 @@
 <p>If one bit in <code class="docutils literal notranslate"><span class="pre">i</span></code> is asserted, <code class="docutils literal notranslate"><span class="pre">n</span></code> is low and <code class="docutils literal notranslate"><span class="pre">o</span></code> indicates the asserted bit.
 Otherwise, <code class="docutils literal notranslate"><span class="pre">n</span></code> is high and <code class="docutils literal notranslate"><span class="pre">o</span></code> is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Bit width of the input</p>
 </dd>
-<dt class="field-even">Variables</dt>
+<dt class="field-even">Variables<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>i</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>in</em>) – One-hot input.</p></li>
 <li><p><strong>o</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.11)"><em>range</em></a><em>(</em><em>width</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Encoded natural binary.</p></li>
@@ -130,10 +130,10 @@ Otherwise, <code class="docutils literal notranslate"><span class="pre">n</span>
 <p>If <code class="docutils literal notranslate"><span class="pre">n</span></code> is low, only the <code class="docutils literal notranslate"><span class="pre">i</span></code>-th bit in <code class="docutils literal notranslate"><span class="pre">o</span></code> is asserted.
 If <code class="docutils literal notranslate"><span class="pre">n</span></code> is high, <code class="docutils literal notranslate"><span class="pre">o</span></code> is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Bit width of the output.</p>
 </dd>
-<dt class="field-even">Variables</dt>
+<dt class="field-even">Variables<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>i</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.11)"><em>range</em></a><em>(</em><em>width</em><em>)</em><em>)</em><em>, </em><em>in</em>) – Input binary.</p></li>
 <li><p><strong>o</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>out</em>) – Decoded one-hot.</p></li>
@@ -145,7 +145,7 @@ If <code class="docutils literal notranslate"><span class="pre">n</span></code> 
 
 </section>
 <section id="priority-coding">
-<h2>Priority coding<a class="headerlink" href="#priority-coding" title="Permalink to this headline"></a></h2>
+<h2>Priority coding<a class="headerlink" href="#priority-coding" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.lib.coding.PriorityEncoder">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.coding.</span></span><span class="sig-name descname"><span class="pre">PriorityEncoder</span></span><a class="headerlink" href="#amaranth.lib.coding.PriorityEncoder" title="Permalink to this definition"></a></dt>
@@ -154,10 +154,10 @@ If <code class="docutils literal notranslate"><span class="pre">n</span></code> 
 asserted bit.
 Otherwise, <code class="docutils literal notranslate"><span class="pre">n</span></code> is high and <code class="docutils literal notranslate"><span class="pre">o</span></code> is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Bit width of the input.</p>
 </dd>
-<dt class="field-even">Variables</dt>
+<dt class="field-even">Variables<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>i</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>in</em>) – Input requests.</p></li>
 <li><p><strong>o</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.11)"><em>range</em></a><em>(</em><em>width</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Encoded natural binary.</p></li>
@@ -176,16 +176,16 @@ Otherwise, <code class="docutils literal notranslate"><span class="pre">n</span>
 
 </section>
 <section id="gray-coding">
-<h2>Gray coding<a class="headerlink" href="#gray-coding" title="Permalink to this headline"></a></h2>
+<h2>Gray coding<a class="headerlink" href="#gray-coding" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.lib.coding.GrayEncoder">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.coding.</span></span><span class="sig-name descname"><span class="pre">GrayEncoder</span></span><a class="headerlink" href="#amaranth.lib.coding.GrayEncoder" title="Permalink to this definition"></a></dt>
 <dd><p>Encode binary to Gray code.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Bit width.</p>
 </dd>
-<dt class="field-even">Variables</dt>
+<dt class="field-even">Variables<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>i</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>in</em>) – Natural binary input.</p></li>
 <li><p><strong>o</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>out</em>) – Encoded Gray code.</p></li>
@@ -199,10 +199,10 @@ Otherwise, <code class="docutils literal notranslate"><span class="pre">n</span>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.coding.</span></span><span class="sig-name descname"><span class="pre">GrayDecoder</span></span><a class="headerlink" href="#amaranth.lib.coding.GrayDecoder" title="Permalink to this definition"></a></dt>
 <dd><p>Decode Gray code to binary.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Bit width.</p>
 </dd>
-<dt class="field-even">Variables</dt>
+<dt class="field-even">Variables<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>i</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>in</em>) – Gray code input.</p></li>
 <li><p><strong>o</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>out</em>) – Decoded natural binary.</p></li>
@@ -225,7 +225,7 @@ Otherwise, <code class="docutils literal notranslate"><span class="pre">n</span>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2020—2021, Amaranth HDL developers.</p>
+    <p>&#169; Copyright 2020—2023, Amaranth HDL developers.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

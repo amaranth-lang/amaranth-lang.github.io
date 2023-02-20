@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Getting started &mdash; Amaranth HDL toolchain 0.4.dev64 documentation</title>
+  <title>Getting started &mdash; Amaranth HDL toolchain 0.4.dev65 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -13,10 +13,10 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/platformpicker.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -37,7 +37,7 @@
             Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev64+g12a81f2
+                0.4.dev65+ge2f0519
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -97,16 +97,16 @@
            <div itemprop="articleBody">
              
   <section id="getting-started">
-<h1>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline"></a></h1>
+<h1>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this heading"></a></h1>
 <p>This section demonstrates the basic Amaranth workflow to provide a cursory overview of the language and the toolchain. See the <a class="reference internal" href="tutorial.html"><span class="doc">tutorial</span></a> for a step-by-step introduction to the language, and the <a class="reference internal" href="lang.html"><span class="doc">language guide</span></a> for a detailed explanation of every language construct.</p>
 <section id="a-counter">
-<h2>A counter<a class="headerlink" href="#a-counter" title="Permalink to this headline"></a></h2>
+<h2>A counter<a class="headerlink" href="#a-counter" title="Permalink to this heading"></a></h2>
 <p>As a first example, consider a counter with a fixed limit, enable, and overflow. The code for this example is shown below. <a class="reference download internal" download="" href="_downloads/9916e1f0618daa91d3860f1bdac16820/up_counter.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span></code></a> and run it:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>python3<span class="w"> </span>up_counter.py
 </pre></div>
 </div>
 <section id="implementing-a-counter">
-<h3>Implementing a counter<a class="headerlink" href="#implementing-a-counter" title="Permalink to this headline"></a></h3>
+<h3>Implementing a counter<a class="headerlink" href="#implementing-a-counter" title="Permalink to this heading"></a></h3>
 <p>A 16-bit up counter with enable input, overflow output, and a limit fixed at design time can be implemented in Amaranth as follows:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">amaranth</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="linenos"> 2</span>
@@ -156,7 +156,7 @@
 <p>Most <code class="docutils literal notranslate"><span class="pre">elaborate</span></code> implementations use a <code class="docutils literal notranslate"><span class="pre">Module</span></code> helper to describe combinatorial (<code class="docutils literal notranslate"><span class="pre">m.d.comb</span></code>) and synchronous (<code class="docutils literal notranslate"><span class="pre">m.d.sync</span></code>) logic controlled with conditional syntax (<code class="docutils literal notranslate"><span class="pre">m.If</span></code>, <code class="docutils literal notranslate"><span class="pre">m.Elif</span></code>, <code class="docutils literal notranslate"><span class="pre">m.Else</span></code>) similar to Python’s. They can also instantiate vendor-defined black boxes or modules written in other HDLs.</p>
 </section>
 <section id="testing-a-counter">
-<h3>Testing a counter<a class="headerlink" href="#testing-a-counter" title="Permalink to this headline"></a></h3>
+<h3>Testing a counter<a class="headerlink" href="#testing-a-counter" title="Permalink to this heading"></a></h3>
 <p>To verify its functionality, the counter can be simulated for a small amount of time, with a test bench driving it and checking a few simple conditions:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">44</span><span class="kn">from</span> <span class="nn">amaranth.sim</span> <span class="kn">import</span> <span class="n">Simulator</span>
 <span class="linenos">45</span>
@@ -194,7 +194,7 @@
 <img alt="A screenshot of GTKWave displaying waveforms near the clock cycle where the counter overflows." src="_images/up_counter_gtkwave.png" />
 </section>
 <section id="converting-a-counter">
-<h3>Converting a counter<a class="headerlink" href="#converting-a-counter" title="Permalink to this headline"></a></h3>
+<h3>Converting a counter<a class="headerlink" href="#converting-a-counter" title="Permalink to this heading"></a></h3>
 <p>Although some Amaranth workflows do not include Verilog at all, it is still the de facto standard for HDL interoperability. Any Amaranth design can be converted to synthesizable Verilog using the corresponding backend:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">74</span><span class="kn">from</span> <span class="nn">amaranth.back</span> <span class="kn">import</span> <span class="n">verilog</span>
 <span class="linenos">75</span>
@@ -264,7 +264,7 @@
 </section>
 </section>
 <section id="a-blinking-led">
-<h2>A blinking LED<a class="headerlink" href="#a-blinking-led" title="Permalink to this headline"></a></h2>
+<h2>A blinking LED<a class="headerlink" href="#a-blinking-led" title="Permalink to this heading"></a></h2>
 <p>Although Amaranth works well as a standalone HDL, it also includes a build system that integrates with FPGA toolchains, and many board definition files for common developer boards that include pinouts and programming adapter invocations. The following code will blink a LED with a frequency of 1 Hz on any board that has a LED and an oscillator:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">amaranth</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="linenos"> 2</span>
@@ -321,7 +321,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2020—2021, Amaranth HDL developers.</p>
+    <p>&#169; Copyright 2020—2023, Amaranth HDL developers.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

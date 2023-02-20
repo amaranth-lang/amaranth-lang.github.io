@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Clock domain crossing &mdash; Amaranth HDL toolchain 0.4.dev64 documentation</title>
+  <title>Clock domain crossing &mdash; Amaranth HDL toolchain 0.4.dev65 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/platformpicker.css" type="text/css" />
@@ -13,10 +13,10 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
         <script src="../_static/platformpicker.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -37,7 +37,7 @@
             Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev64+g12a81f2
+                0.4.dev65+ge2f0519
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -56,7 +56,13 @@
 <li class="toctree-l2"><a class="reference internal" href="../lang.html">Language guide</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../stdlib.html">Standard library</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="coding.html">Code conversion</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Clock domain crossing</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Clock domain crossing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#amaranth.lib.cdc.FFSynchronizer"><code class="docutils literal notranslate"><span class="pre">FFSynchronizer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#amaranth.lib.cdc.AsyncFFSynchronizer"><code class="docutils literal notranslate"><span class="pre">AsyncFFSynchronizer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#amaranth.lib.cdc.ResetSynchronizer"><code class="docutils literal notranslate"><span class="pre">ResetSynchronizer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#amaranth.lib.cdc.PulseSynchronizer"><code class="docutils literal notranslate"><span class="pre">PulseSynchronizer</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="fifo.html">First-in first-out queues</a></li>
 </ul>
 </li>
@@ -94,7 +100,7 @@
            <div itemprop="articleBody">
              
   <section id="module-amaranth.lib.cdc">
-<span id="clock-domain-crossing"></span><h1>Clock domain crossing<a class="headerlink" href="#module-amaranth.lib.cdc" title="Permalink to this headline"></a></h1>
+<span id="clock-domain-crossing"></span><h1>Clock domain crossing<a class="headerlink" href="#module-amaranth.lib.cdc" title="Permalink to this heading"></a></h1>
 <p>The <a class="reference internal" href="#module-amaranth.lib.cdc" title="amaranth.lib.cdc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.cdc</span></code></a> module provides building blocks for transferring data between clock domains.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.lib.cdc.FFSynchronizer">
@@ -103,7 +109,7 @@
 <p>Consists of a chain of flip-flops. Eliminates metastabilities at the output, but provides
 no other guarantee as to the safe domain-crossing of a signal.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>i</strong> (<em>Signal</em><em>(</em><em>n</em><em>)</em><em>, </em><em>in</em>) – Signal to be resynchronised.</p></li>
 <li><p><strong>o</strong> (<em>Signal</em><em>(</em><em>n</em><em>)</em><em>, </em><em>out</em>) – Signal connected to synchroniser output.</p></li>
@@ -148,7 +154,7 @@ its reset value until <code class="docutils literal notranslate"><span class="pr
 synchronously, eliminating metastability during deassertion.</p>
 <p>This synchronizer is primarily useful for resets and reset-like signals.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>i</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Asynchronous input signal, to be synchronized.</p></li>
 <li><p><strong>o</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Synchronously released output signal.</p></li>
@@ -178,7 +184,7 @@ asserted reset is useful if the clock of the domain may be gated, yet the domain
 needs to be reset promptly; otherwise, synchronously asserted reset (the default) should
 be used.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>arst</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Asynchronous reset signal, to be synchronized.</p></li>
 <li><p><strong>domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Name of clock domain to reset.</p></li>
@@ -203,7 +209,7 @@ If specified and the platform does not support it, elaboration will fail.</p></l
 once in every <code class="docutils literal notranslate"><span class="pre">n</span></code> input clocks, else pulses may be dropped. Other than this there is
 no constraint on the ratio of input and output clock frequency.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>i_domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Name of input clock domain.</p></li>
 <li><p><strong>o_domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Name of output clock domain.</p></li>
@@ -227,7 +233,7 @@ with higher numbers reducing MTBF further, at the cost of increased deassertion 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2020—2021, Amaranth HDL developers.</p>
+    <p>&#169; Copyright 2020—2023, Amaranth HDL developers.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

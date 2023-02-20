@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Introduction &mdash; Amaranth HDL toolchain 0.4.dev64 documentation</title>
+  <title>Introduction &mdash; Amaranth HDL toolchain 0.4.dev65 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -13,10 +13,10 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/platformpicker.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -37,7 +37,7 @@
             Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev64+g12a81f2
+                0.4.dev65+ge2f0519
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -98,17 +98,17 @@
            <div itemprop="articleBody">
              
   <section id="introduction">
-<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline"></a></h1>
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h1>
 <p>The Amaranth project provides an open-source toolchain for developing hardware based on synchronous digital logic using the Python programming language. It aims to be easy to learn and use, reduce or eliminate common coding mistakes, and simplify the design of complex hardware with reusable components.</p>
 <p>The Amaranth toolchain consists of the <a class="reference internal" href="#intro-lang"><span class="std std-ref">Amaranth language</span></a>, the <a class="reference internal" href="#intro-stdlib"><span class="std std-ref">standard library</span></a>, the <a class="reference internal" href="#intro-sim"><span class="std std-ref">simulator</span></a>, and the <a class="reference internal" href="#intro-build"><span class="std std-ref">build system</span></a>, covering all steps of a typical FPGA development workflow. At the same time, it does not restrict the designer’s choice of tools: existing industry-standard (System)Verilog or VHDL code can be integrated into an Amaranth-based design flow, or, conversely, Amaranth code can be integrated into an existing Verilog-based design flow.</p>
 <section id="the-amaranth-language">
-<span id="intro-lang"></span><h2>The Amaranth language<a class="headerlink" href="#the-amaranth-language" title="Permalink to this headline"></a></h2>
+<span id="intro-lang"></span><h2>The Amaranth language<a class="headerlink" href="#the-amaranth-language" title="Permalink to this heading"></a></h2>
 <p>The <a class="reference internal" href="lang.html"><span class="doc">Amaranth hardware description language</span></a> is a Python library for register transfer level modeling of synchronous logic. Ordinary Python code is used to construct a netlist of a digital circuit, which can be simulated, directly synthesized via <a class="reference external" href="https://yosyshq.net/yosys/">Yosys</a>, or converted to human-readable Verilog code for use with industry-standard toolchains.</p>
 <p>By relying on the flexibility, rich functionality and widespread adoption of the Python language, the Amaranth language is focused on a single task: modeling digital logic well. It has first-class support for building blocks like clock domains and finite state machines, and uses simple rules for arithmetic operations that closely match the Python semantics. Python classes, functions, loops and conditionals can be used to build organized and flexible designs; Python libraries can be seamlessly used with Amaranth during design or verification; and Python development tools can process Amaranth code.</p>
 <p>A core design principle of the Amaranth language is to be not only easy to use, but also hard to accidentally misuse. Some HDLs provide functionality that has unexpected and undesirable behavior in synthesis, often with expensive consequences, and require a significant effort in learning a “safe” coding style and adopting third-party linting tools. Amaranth lacks non-synthesizable constructs and avoids error-prone inference in favor of explicit instantiation. It has many diagnostics (and regularly adds new ones) highlighting potential design issues. Most importantly, all usability issues are considered <a class="reference external" href="https://github.com/amaranth-lang/amaranth/issues">reportable bugs</a>.</p>
 </section>
 <section id="the-amaranth-standard-library">
-<span id="intro-stdlib"></span><h2>The Amaranth standard library<a class="headerlink" href="#the-amaranth-standard-library" title="Permalink to this headline"></a></h2>
+<span id="intro-stdlib"></span><h2>The Amaranth standard library<a class="headerlink" href="#the-amaranth-standard-library" title="Permalink to this heading"></a></h2>
 <p>The Amaranth language comes with a standard library—a collection of essential digital design components and interfaces. It includes clock domain crossing primitives, synchronous and asynchronous FIFOs, a flexible I/O buffer interface, and more. By providing reliable building blocks out of the box, Amaranth allows the designer to focus on their application and avoids subtle differences in behavior between different designs.</p>
 <p>Clock domain crossing often requires special treatment, such as using vendor-defined attributes or instantiating device-specific primitives. The CDC primitives in the Amaranth standard library can be overridden by the platform integration, and every platform integration included with Amaranth follows the vendor recommendations for CDC.</p>
 <p>High-speed designs usually require the use of registered (and sometimes, geared) I/O buffers. The Amaranth standard library provides a common interface to be used between I/O buffers and peripheral implementations. The Amaranth build system, if used, can instantiate I/O buffers for every platform integration included with Amaranth.</p>
@@ -116,22 +116,22 @@
 <p>The Amaranth standard library is optional: the Amaranth language can be used without it. Conversely, it is possible to use the Amaranth standard library components in Verilog or VHDL code, with some limitations.</p>
 </section>
 <section id="the-amaranth-simulator">
-<span id="intro-sim"></span><h2>The Amaranth simulator<a class="headerlink" href="#the-amaranth-simulator" title="Permalink to this headline"></a></h2>
+<span id="intro-sim"></span><h2>The Amaranth simulator<a class="headerlink" href="#the-amaranth-simulator" title="Permalink to this heading"></a></h2>
 <p>The Amaranth project includes an advanced simulator for Amaranth code implemented in Python with no system dependencies; in this simulator, test benches are written as Python generator functions. Of course, it is always possible to convert an Amaranth design to Verilog for use with well-known tool like <a class="reference external" href="http://iverilog.icarus.com/">Icarus Verilog</a> or <a class="reference external" href="https://www.veripool.org/wiki/verilator">Verilator</a>.</p>
 <p>The Amaranth simulator is event-driven and can simulate designs with multiple clocks or asynchronous resets. Although it is slower than <a class="reference external" href="http://iverilog.icarus.com/">Icarus Verilog</a>, it compiles the netlist to Python code ahead of time, achieving remarkably high performance for a pure Python implementation—especially when running on <a class="reference external" href="https://www.pypy.org/">PyPy</a>.</p>
 <p>Although Amaranth does not support native code simulation or co-simulation at the moment, such support will be added in near future.</p>
 </section>
 <section id="the-amaranth-build-system">
-<span id="intro-build"></span><h2>The Amaranth build system<a class="headerlink" href="#the-amaranth-build-system" title="Permalink to this headline"></a></h2>
+<span id="intro-build"></span><h2>The Amaranth build system<a class="headerlink" href="#the-amaranth-build-system" title="Permalink to this heading"></a></h2>
 <p>To achieve an end-to-end FPGA development workflow, the Amaranth project integrates with all major FPGA toolchains and provides definitions for many common development boards.</p>
 <section id="fpga-toolchain-integration">
-<h3>FPGA toolchain integration<a class="headerlink" href="#fpga-toolchain-integration" title="Permalink to this headline"></a></h3>
+<h3>FPGA toolchain integration<a class="headerlink" href="#fpga-toolchain-integration" title="Permalink to this heading"></a></h3>
 <p>Each FPGA family requires the use of synthesis and place &amp; route tools specific for that device family. The Amaranth build system directly integrates with every major open-source and commercial FPGA toolchain, and can be easily extended to cover others.</p>
 <p>Through this integration, Amaranth can specialize the CDC primitives and I/O buffers for a particular device and toolchain; generate I/O and clock constraints from board definition files; synchronize the power-on reset in single-clock designs; include (System)Verilog and VHDL files in the design (if supported by the toolchain); and finally, generate a script running synthesis, placement, routing, and timing analysis. The generated code can be customized to insert additional options, commands, constraints, and so on.</p>
 <p>The Amaranth build system produces self-contained, portable build trees that require only the toolchain to be present in the environment. This makes builds easier to reproduce, or to run on a remote machine. The generated build scripts are always provided for both *nix and Windows.</p>
 </section>
 <section id="development-board-definitions">
-<h3>Development board definitions<a class="headerlink" href="#development-board-definitions" title="Permalink to this headline"></a></h3>
+<h3>Development board definitions<a class="headerlink" href="#development-board-definitions" title="Permalink to this heading"></a></h3>
 <p>Getting started with a new FPGA development board often requires going through a laborous and error-prone process of deriving toolchain configuration and constraint files from the supplied documentation. The Amaranth project includes a community-maintained repository of definitions for many open-source and commercial FPGA development boards.</p>
 <p>These board definitions contain everything that is necessary to start using the board: FPGA family and model, clocks and resets, descriptions of on-board peripherals (including pin direction and attributes such as I/O standard), connector pinouts, and for boards with a built-in debug probe, the steps required to program the board. It takes a single Python invocation to generate, build, and download a test design that shows whether the board, toolchain, and programmer are working correctly.</p>
 <p>Amaranth establishes a pin naming convention for many common peripherals (such as 7-segment displays, SPI flashes and SDRAM memories), enabling the reuse of unmodified interface code with many different boards. Further, the polarity of all control signals is unified to be active high, eliminating accidental polarity inversions and making simulation traces easier to follow; active low signals are inverted during I/O buffer instantiation.</p>
@@ -150,7 +150,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2020—2021, Amaranth HDL developers.</p>
+    <p>&#169; Copyright 2020—2023, Amaranth HDL developers.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
