@@ -1,0 +1,543 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>The Amaranth RFC Book</title>
+        <meta name="robots" content="noindex" />
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Amaranth RFC Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/amaranth-lang/rfcs" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="amaranth-rfcs"><a class="header" href="#amaranth-rfcs">Amaranth RFCs</a></h1>
+<p>The &quot;RFC&quot; (request for comments) process is intended to provide a consistent and controlled path for changes to Amaranth (such as new features) so that all stakeholders can be confident about the direction of the project.</p>
+<p>Many changes, including bug fixes and documentation improvements can be implemented and reviewed via the normal GitHub pull request workflow.</p>
+<p>Some changes though are &quot;substantial&quot;, and we ask that these be put through a bit of a design process and produce a consensus among the Amaranth community.</p>
+<h2 id="table-of-contents"><a class="header" href="#table-of-contents">Table of Contents</a></h2>
+<ul>
+<li><a href="introduction.html#amaranth-rfcs">Opening</a></li>
+<li><a href="introduction.html#table-of-contents">Table of Contents</a></li>
+<li><a href="introduction.html#when-you-need-to-follow-this-process">When you need to follow this process</a></li>
+<li><a href="introduction.html#before-creating-an-rfc">Before creating an RFC</a></li>
+<li><a href="introduction.html#what-the-process-is">What the process is</a></li>
+<li><a href="introduction.html#the-rfc-life-cycle">The RFC life-cycle</a></li>
+<li><a href="introduction.html#reviewing-rfcs">Reviewing RFCs</a></li>
+<li><a href="introduction.html#implementing-an-rfc">Implementing an RFC</a></li>
+<li><a href="introduction.html#acknowledgements">Acknowledgements</a></li>
+<li><a href="introduction.html#license">License</a></li>
+</ul>
+<h2 id="when-you-need-to-follow-this-process"><a class="header" href="#when-you-need-to-follow-this-process">When you need to follow this process</a></h2>
+<p>You need to follow this process if you intend to make &quot;substantial&quot; changes to <a href="https://github.com/amaranth-lang/amaranth">core Amaranth language</a>. In the future you will need to follow this process for the <a href="https://github.com/amaranth-lang/amaranth-stdio">standard I/O library</a> and the <a href="https://github.com/amaranth-lang/amaranth-soc">System-on-Chip library</a> as well, but at the moment they are not covered.</p>
+<p>What constitutes a &quot;substantial&quot; change is evolving based on community norms and varies depending on what part of the ecosystem you are proposing to change, but may include the following:</p>
+<ul>
+<li>Any semantic or syntactic change to the language (<code>amaranth.hdl</code>) that is not a bugfix.</li>
+<li>Behavioral changes to the standard library (<code>amaranth.lib</code>).</li>
+<li>Behavioral changes to the toolchain interface (<code>amaranth.vendor</code>).</li>
+</ul>
+<p>Some changes do not require an RFC:</p>
+<ul>
+<li>Rephrasing, reorganizing, refactoring, or otherwise &quot;changing shape does not change meaning&quot;.</li>
+<li>Additions that strictly improve objective, numerical quality criteria (warning removal, speedup, better platform coverage, handling more errors, etc.)</li>
+</ul>
+<p>If you submit a pull request to implement a new feature without going through the RFC process, it may be closed with a polite request to submit an RFC first. When in doubt, please open an issue to discuss the feature first and one of the core maintainers will say if the change requires an RFC or not.</p>
+<h2 id="before-creating-an-rfc"><a class="header" href="#before-creating-an-rfc">Before creating an RFC</a></h2>
+<p>A hastily-proposed RFC can hurt its chances of acceptance. Low quality proposals, proposals for previously-rejected features, or those that don't fit into the near-term roadmap, may be quickly rejected, which can be demotivating for the unprepared contributor. Laying some groundwork ahead of the RFC can make the process smoother.</p>
+<p>Although there is no single way to prepare for submitting an RFC, it is generally a good idea to pursue feedback from other project developers beforehand, to ascertain that the RFC may be desirable; having a consistent impact on the project requires concerted effort toward consensus-building.</p>
+<p>The most common preparations for writing and submitting an RFC include talking the idea over on our IRC channel, <a href="https://web.libera.chat/#amaranth-lang">#amaranth-lang at libera.chat</a>, or opening an issue on the corresponding repository to gather feedback.</p>
+<h2 id="what-the-process-is"><a class="header" href="#what-the-process-is">What the process is</a></h2>
+<p>In short, to get a major feature added to Amaranth, one must first get the RFC merged into the RFC repository as a markdown file. At that point the RFC is &quot;active&quot; and may be implemented with the goal of eventual inclusion into Amaranth.</p>
+<ul>
+<li>Fork the RFC repository.</li>
+<li>Copy 0000-template.md to text/0000-my-feature.md (where &quot;my-feature&quot; is descriptive). Don't assign an RFC number yet; This is going to be the PR number and we'll rename the file accordingly if the RFC is accepted.</li>
+<li>Fill in the RFC. Put care into the details: RFCs that do not present convincing motivation, demonstrate lack of understanding of the design's impact, or are disingenuous about the drawbacks or alternatives tend to be poorly-received.</li>
+<li>Submit a pull request. As a pull request the RFC will receive design feedback from the larger community, and the author should be prepared to revise it in response.</li>
+<li>Now that your RFC has an open pull request, use the issue number of the PR to update your 0000- prefix to that number.</li>
+<li>Build consensus and integrate feedback. RFCs that have broad support are much more likely to make progress than those that don't receive any comments. Feel free to reach out to the RFC assignee in particular to get help identifying stakeholders and obstacles.</li>
+<li>RFCs rarely go through this process unchanged, especially as alternatives and drawbacks are shown. You can make edits, big and small, to the RFC to clarify or change the design, but make changes as new commits to the pull request, and leave a comment on the pull request explaining your changes. Specifically, do not squash or rebase commits after they are visible on the pull request.</li>
+<li>At some point, a core maintainer will make a decision on the disposition for the RFC (merge or close).
+<ul>
+<li>This step is taken when enough of the tradeoffs have been discussed that the core maintainer is in a position to make a decision. That does not require consensus amongst all participants in the RFC thread (which is usually impossible). However, the argument supporting the disposition on the RFC needs to have already been clearly articulated, and there should not be a strong consensus against that position.</li>
+</ul>
+</li>
+</ul>
+<h2 id="the-rfc-life-cycle"><a class="header" href="#the-rfc-life-cycle">The RFC life-cycle</a></h2>
+<p>Once an RFC becomes &quot;active&quot; then authors may implement it and submit the feature as a pull request to the corresponding repository. Being &quot;active&quot; is not a rubber stamp, and in particular still does not mean the feature will ultimately be merged; it does mean that in principle all the major stakeholders have agreed to the feature and are amenable to merging it.</p>
+<p>Furthermore, the fact that a given RFC has been accepted and is &quot;active&quot; implies nothing about what priority is assigned to its implementation, nor does it imply anything about whether a developer has been assigned the task of implementing the feature. While it is not necessary that the author of the RFC also write the implementation, it is by far the most effective way to see an RFC through to completion: authors should not expect that other project developers will take on responsibility for implementing their accepted feature.</p>
+<p>Modifications to &quot;active&quot; RFCs can be done in follow-up pull requests. We strive to write each RFC in a manner that it will reflect the final design of the feature; but the nature of the process means that we cannot expect every merged RFC to actually reflect what the end result will be at the time of the next major release.</p>
+<p>In general, once accepted, RFCs should not be substantially changed. Only very minor changes should be submitted as amendments. More substantial changes should be new RFCs, with a note added to the original RFC. Exactly what counts as a &quot;very minor change&quot; is up to the core maintainers to decide.</p>
+<h2 id="reviewing-rfcs"><a class="header" href="#reviewing-rfcs">Reviewing RFCs</a></h2>
+<p>While the RFC pull request is up, the core maintainers may schedule meetings with the author and/or relevant stakeholders to discuss the issues in greater detail, and the topic may be discussed at weekly meetings. In either case a summary from the meeting will be posted back to the RFC pull request.</p>
+<p>A core maintainer makes final decisions about RFCs after the benefits and drawbacks are well understood. These decisions can be made at any time, but the core maintainer will regularly issue decisions. When a decision is made, the RFC pull request will either be merged or closed. In either case, if the reasoning is not clear from the discussion in thread, the core maintainer will add a comment describing the rationale for the decision.</p>
+<h2 id="implementing-an-rfc"><a class="header" href="#implementing-an-rfc">Implementing an RFC</a></h2>
+<p>Some accepted RFCs represent vital features that need to be implemented right away. Other accepted RFCs can represent features that can wait until some arbitrary developer feels like doing the work. Every accepted RFC has an associated issue tracking its implementation in the corresponding repository.</p>
+<p>The author of an RFC is not obligated to implement it. Of course, the RFC author (like any other developer) is welcome to post an implementation for review after the RFC has been accepted.</p>
+<p>If you are interested in working on the implementation for an &quot;active&quot; RFC, but cannot determine if someone else is already working on it, feel free to ask (e.g. by leaving a comment on the associated issue).</p>
+<h2 id="acknowledgements"><a class="header" href="#acknowledgements">Acknowledgements</a></h2>
+<p>The process described in this document is based on the <a href="https://github.com/rust-lang/rfcs">Rust RFC process</a>. It has been simplified to match the needs of the much smaller Amaranth community; in particular, policy (including the RFC process itself) is not currently defined through the RFC process.</p>
+<h2 id="license"><a class="header" href="#license">License</a></h2>
+<p>This repository is licensed under the <a href="LICENSE.txt">MIT license</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><ul>
+<li>Start Date: 2023-02-14</li>
+<li>RFC PR: <a href="https://github.com/amaranth-lang/rfcs/pull/0001">amaranth-lang/rfcs#0001</a></li>
+<li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/748">amaranth-lang/amaranth#748</a></li>
+</ul>
+<h1 id="aggregate-data-structure-library-rfc"><a class="header" href="#aggregate-data-structure-library-rfc">Aggregate data structure library RFC</a></h1>
+<h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
+<p>Add a rich set of standard library classes for accessing hierarchical aggregate data an idiomatic way, to fill one of the two major use cases of <code>Record</code> while avoiding its downsides.</p>
+<p>See also #???.</p>
+<h2 id="motivation"><a class="header" href="#motivation">Motivation</a></h2>
+<p>Amaranth has a single data storage primitive: <code>Signal</code>. A <code>Signal</code> can be referenced on the left hand and the right hand side of an assignment, and so can be its slices. Although a signal serves the role of a numeric and bit container type fine, designs often include signals used as bit containers whose individual bits are named and have unique meanings. A mechanism that allows referring to such bit fields by name is essential.</p>
+<p>Currently, the role of this mechanism is served by <code>Record</code>. However, <code>Record</code> has multiple major drawbacks:</p>
+<ol>
+<li>
+<p><code>Record</code> attempts to do too much: it is both a mechanism for <em>controlling representation</em> (including implicitly casting a record to a value) and a mechanism for <em>defining interfaces</em> (specifying signal directions and facilitating connections between records).</p>
+<p>These mechanisms should be defined separately, since the only aspect they have in common is using a container class that consists of multiple named fields. Conflating the two mechanisms constraints the design space, making addressing the other drawbacks impossible, and the ill-defined scope encourages bugs in downstream code.</p>
+</li>
+<li>
+<p><code>Record</code> has limited composability: records can only be nested within each other. Practical designs (in particular, implementations of protocols) use data with complex representation beyond nested sequences of fields: these include overlaid sequences of fields (where interpretation alternates based on some discriminant) and arrays of fields (where a field can be indexed by a non-constant), where any individual field can have a complex representation itself.</p>
+<p><code>Record</code> is structured as a sequence of <code>Signal</code>s, which is a part of its API. As such, it cannot support overlaid fields, and implementing support for arrays of fields is challenging.</p>
+</li>
+<li>
+<p><code>Record</code> has limited introspectability: while its <code>layout</code> member can be accessed to enumerate its fields, the results do not include field boundaries, and the types of the returned shape-castable objects are preserved only as an implementation detail. <code>Layout</code> objects themselves are also not shape-castable.</p>
+<p><code>Record</code> and <code>Layout</code> are structured as a sequence of <code>Signal</code>s rather than a view into an underlying bit container, which is reflected in its API. Thus, <code>Layout</code> does not fit into Amaranth's data model, which concerns individual values.</p>
+</li>
+<li>
+<p><code>Record</code> comes with its own storage: while its <code>fields</code> argument can be used to substitute the signals that individual fields are pointing to (in an awkward and error-prone way), it is still a collection of <code>Signal</code>s. Using <code>Record</code> to impose structure on an existing <code>Value</code> requires a <code>Module</code> and a combinatorial assignment. This is an unnecessary complication, especially in helper functions.</p>
+</li>
+<li>
+<p><code>Record</code> does not play well with Python's type annotations. Amaranth developers often inherit from <code>Record</code> as well as <code>Layout</code>, but in both cases the class definition syntax is usually little more than a way to define a callable returning a <code>Record</code> with a specific layout, and provides no benefits for IDE users.</p>
+</li>
+<li>
+<p><code>Record</code> reserves a lot of names, including commonly used names like <code>connect</code>, <code>any</code>, <code>all</code>, and <code>matches</code>. Conversely, it defines a lot of arithmetic methods that are rarely if ever used on field containers.</p>
+</li>
+<li>
+<p><code>Layout</code>'s DSL is very amorphous. It passes around variable length tuples. The second element of these tuples (the shape) can be another <code>Layout</code>, which is neither a shape nor a shape-castable object.</p>
+</li>
+<li>
+<p>Neither <code>Record</code> nor <code>Layout</code> allow defining fields whose shapes are arbitrary <code>ShapeCastable</code> classes.</p>
+</li>
+</ol>
+<p>Since these drawbacks are entrenched in the public API and heavily restrict usefulness of <code>Record</code> as a mechanism for specifying data representation, a new mechanism must replace it.</p>
+<h2 id="overview-and-examples"><a class="header" href="#overview-and-examples">Overview and examples</a></h2>
+<p>This section shows a bird's eye view of the new syntax and behavior proposed in this RFC. The detailed design is described afterwards.</p>
+<pre><code class="language-python">from amaranth import *
+from amaranth.lib import data
+
+
+# Declaring a simple structure:
+class Float32(data.Struct):
+    fraction: unsigned(23)
+    exponent: unsigned(8)
+    sign: unsigned(1)
+
+
+# Defining a signal with the structure above:
+flt_a = Float32()
+
+# Reinterpreting an existing value with the same structure:
+flt_b = Float32(Const(0b00111110001000000000000000000000, 32))
+
+# Referencing and updating structure fields by name:
+with m.If(flt_b.fraction &gt; 0):
+    m.d.comb += [
+        flt_a.sign.eq(1),
+        flt_a.exponent.eq(127)
+    ]
+
+
+# Declaring a simple union, referencing an existing structure:
+class FloatOrInt32(data.Union):
+    float: Float32
+    int: signed(32)
+
+
+# Using the union to bitcast an IEEE754 value from an integer:
+f_or_i = FloatOrInt32()
+is_sub_1 = Signal()
+m.d.comb += [
+    f_or_i.int.eq(0x41C80000),
+    is_sub_1.eq(f_or_i.float.exponent &lt; 127) # =&gt; 1
+]
+
+
+class Op(enum.Enum):
+  ADD = 0
+  SUB = 1
+
+
+# Programmatically declaring a structure layout:
+adder_op_layout = data.StructLayout({
+    &quot;op&quot;: Op,
+    &quot;a&quot;: Float32,
+    &quot;b&quot;: Float32
+})
+
+# Using the layout defined above to define appropriately sized storage...
+adder_op_storage = Signal(adder_op_layout)
+len(adder_op_storage) # =&gt; 65
+
+# ... and wrap it for the fields to be accessible.
+adder_op = data.View(adder_op_layout, adder_op_storage)
+m.d.comb += [
+    adder_op.op.eq(Op.SUB),
+    adder_op.a.eq(flt_a),
+    adder_op.b.eq(flt_b)
+]
+</code></pre>
+<h2 id="detailed-design"><a class="header" href="#detailed-design">Detailed design</a></h2>
+<p>This RFC proposes a number of language and library additions:</p>
+<ul>
+<li>Adding a <code>ShapeCastable</code> interface, similar to <code>ValueCastable</code>;</li>
+<li>Adding classes that hierarchically describe representation of aggregate values: named field containers with non-overlapping fields (structs), named field containers with overlapping fields (unions), and indexed field containers (arrays);</li>
+<li>Adding a wrapper class that accepts a <code>Value</code> (or a <code>ValueCastable</code> object) and provides accessors that slice it according to the corresponding aggregate representation;</li>
+<li>Adding an ergonomic and IDE-compatible interface for building descriptions of non-parametric layouts of aggregate values.</li>
+</ul>
+<h3 id="user-defined-shape-castable-objects"><a class="header" href="#user-defined-shape-castable-objects">User-defined shape-castable objects</a></h3>
+<p><code>ShapeCastable</code> is an interface for defining <code>Shape</code>-like values outside of the core Amaranth language. It is functionally identical to <code>ValueCastable</code>, and could be used like:</p>
+<pre><code class="language-python">from amaranth import *
+
+
+class Layout(ShapeCastable):
+    def __init__(self, fields):
+        self.fields = fields
+
+    def as_shape(self):
+        return unsigned(sum(len(field) for field in self.fields))
+</code></pre>
+<h3 id="value-layout-descriptions"><a class="header" href="#value-layout-descriptions">Value layout descriptions</a></h3>
+<p>Aggregate value layouts are represented using two classes: <code>amaranth.lib.data.Field</code> and <code>amaranth.lib.data.Layout</code>:</p>
+<ul>
+<li>A <code>Field(shape_castable, offset=0)</code> object describes a field of the given shape starting at bit number <code>offset</code> of the aggregate value.</li>
+<li>A <code>Layout()</code> object describes an abstract aggregate value. It can be iterated, returning <code>(name, field)</code> or <code>(index, field)</code> pairs; or indexed (<code>__getitem__</code>) by the name or index of the field. It has a <code>.size</code> in bits, determined by the type of the layout, and is shape-castable, being converted to <code>unsigned(layout.size())</code>.
+<ul>
+<li>A <code>StructLayout(members={&quot;name&quot;: shape_castable})</code> object describes an aggregate value with non-overlapping named fields (struct). The fields are placed at offsets such that they immediately follow one another, from least significant to most significant.</li>
+<li>A <code>UnionLayout(members={&quot;name&quot;: shape_castable})</code> object describes an aggregate value with overlapping named fields (union). The fields are placed at offset 0.</li>
+<li>An <code>ArrayLayout(element=shape_castable, length=1)</code> object describes an aggregate value with indexed fields (array). The fields all have identical shape and are placed at offsets such that they immediately follow one another, from least significant to most significant.</li>
+<li>A <code>FlexibleLayout(fields={&quot;name&quot;: field, 0: field}, size=16)</code> object describes a aggregate value with fields arbitrarily placed within its bounds.</li>
+</ul>
+</li>
+</ul>
+<p>The representation of a discriminated union could be programmatically constructed as follows:</p>
+<pre><code class="language-python">import enum
+from amaranth.lib import data
+
+
+class Kind(enum.Enum):
+    ONE_SIGNED = 0
+    TWO_UNSIGNED = 1
+
+
+layout = data.StructLayout({
+    &quot;kind&quot;: Kind,
+    &quot;value&quot;: data.UnionLayout({
+        &quot;one_signed&quot;: signed(2),
+        &quot;two_unsigned&quot;: data.ArrayLayout(unsigned(1), 2)
+    })
+})
+</code></pre>
+<h3 id="aggregate-value-access"><a class="header" href="#aggregate-value-access">Aggregate value access</a></h3>
+<p>Aggregate values are manipulated through the <code>amaranth.lib.data.View</code> class. A <code>View(layout, value_castable)</code> object wraps a value-castable object (which may be a valid assignment target) and provides access to fields according to the layout. A view is itself value-castable, being converted to the object it's wrapping. If the view is wrapping a valid assignment target, then the accessors also return a valid assignment target.</p>
+<p>Fields can be accessed using either <code>__getitem__</code> (for both named and indexed fields) or <code>__getattr__</code> (for named fields). To avoid name collisions when using <code>__getattr__</code> to access fields, views do not define any non-reserved attributes of their own except for the <code>.as_value()</code> casting method. Field names starting with <code>_</code> are reserved as attribute names and and can only be accessed using the <code>view[&quot;name&quot;]</code> indexing syntax.</p>
+<p>When a view is used to access a field whose shape is an ordinary <code>Shape</code> object, the accessor returns a <code>Value</code> of the corresponding shape that slices the viewed object.</p>
+<p>When a view is used to access a field whose shape is an aggregate value layout, the accessor returns another <code>View</code> with this layout, wrapping the slice of the viewed object. For fields that have any other shape-castable object set as their shape, the behavior is the same as for the <code>Shape</code> case.</p>
+<p>Views that have an <code>ArrayLayout</code> as their layout can be indexed with a <code>Value</code>. In this case, the viewed object is sliced with <code>Value.word_select</code>.</p>
+<p>A signal can be manipulated with its structure viewed as the discriminated union defined above as follows:</p>
+<pre><code class="language-python"># creates an unsigned(3) signal by shape-casting `layout`
+sig = Signal(layout)
+view = data.View(layout, sig)
+
+# if the second argument is omitted, a signal with the right shape is created internally;
+# the line below is equivlent to the two lines above
+view = data.View(layout)
+
+m = Module()
+m.d.comb += [
+    view.kind.eq(Kind.TWO_UNSIGNED),
+    view.value.two_unsigned[0].eq(1),
+]
+</code></pre>
+<h3 id="ergonomic-layout-definition"><a class="header" href="#ergonomic-layout-definition">Ergonomic layout definition</a></h3>
+<p>Rather than using the underlying <code>StructLayout</code> and <code>UnionLayout</code> classes, struct and union layouts can be defined using the Python class definition syntax, with the shapes of the members specified using the <a href="https://peps.python.org/pep-0526/">PEP 526</a> variable annotations:</p>
+<pre><code class="language-python">class SomeVariant(data.Struct):
+    class Value(data.Union):
+        one_signed: signed(2)
+        two_unsigned: data.ArrayLayout(unsigned(1), 2)
+
+    kind: Kind
+    value: Value
+
+
+# this class can be used in the same way as a `data.View` without needing to specify the layout:
+view2 = SomeVariant()
+m.d.comb += [
+    view2.kind.eq(Kind.ONE_SIGNED),
+    view2.value.eq(view.value)
+]
+</code></pre>
+<p>When they refer to other structures or unions defined in the same way, the variable annotations are also valid <a href="https://peps.python.org/pep-0484/">PEP 484</a> type hints, and will be used by IDEs to derive types of properties and expressions. Otherwise, the annotations will be opaque to IDEs or type checkers, but are still useful for a human reader.</p>
+<p>The classes defined in this way are shape-castable and can be used anywhere a shape or a aggregate value layout is accepted:</p>
+<pre><code class="language-python">sig2 = Signal(SomeVariant)
+layout2 = data.StructLayout({
+    &quot;ready&quot;: unsigned(1),
+    &quot;payload&quot;: SomeVariant
+})
+</code></pre>
+<p><strong>Implementation note:</strong> This can be achieved by using a custom metaclass for <code>Struct</code> and <code>Union</code> that inherits from <code>ShapeCastable</code>.</p>
+<p>If an explicit <code>Layout</code> object is nevertheless needed (e.g. for introspection), it can be extracted from the class using <code>Layout.cast</code>:</p>
+<pre><code class="language-python">layout == data.Layout.cast(SomeVariant) # =&gt; True
+</code></pre>
+<p>Conversely, the shape-castable object defining the layout of a <code>View</code> (which might be a <code>Layout</code> subclass or a <code>Struct</code>/<code>Union</code> subclass) can be extracted from the view using <code>Layout.of</code>:</p>
+<pre><code class="language-python">SomeVariant is data.Layout.of(view2) # =&gt; True
+</code></pre>
+<h3 id="advanced-usage-parametric-layouts"><a class="header" href="#advanced-usage-parametric-layouts">Advanced usage: Parametric layouts</a></h3>
+<p>The ergonomic definitions using the <code>Struct</code> and <code>Union</code> base classes are concise and integrated with Python type annotations. However, they cannot be used if the layout of an aggregate value is parameterized. In this case, a class with similar functionality can be defined in a more explicit way:</p>
+<pre><code class="language-python">class Stream8b10b(data.View):
+    data: Signal
+    ctrl: Signal
+
+    def __init__(self, value=None, *, width: int):
+        super().__init__(data.StructLayout({
+            &quot;data&quot;: unsigned(8 * width),
+            &quot;ctrl&quot;: unsigned(width)
+        }), value)
+
+
+len(Stream8b10b(width=1).data) # =&gt; 8
+len(Stream8b10b(width=4).data) # =&gt; 32
+</code></pre>
+<p>Since the parametric class name itself does not have a fixed layout, it cannot be used with <code>Layout.cast</code>. Similarly, the type annotations cannot include specific field widths; they are included only to indicate the presence of a corresponding attribute to IDEs and type checkers.</p>
+<h3 id="structure-field-ordering"><a class="header" href="#structure-field-ordering">Structure field ordering</a></h3>
+<p>The fields of a structure layout object are ordered from least significant to most significant:</p>
+<pre><code class="language-python">float32_layout = data.StructLayout({
+    &quot;fraction&quot;: unsigned(23),   # bits  0..22
+    &quot;exponent&quot;: unsigned(8),    # bits 23..30
+    &quot;sign&quot;: unsigned(1)         # bit  31
+})
+
+class Float32(data.Struct):
+    fraction: unsigned(23)      # bits  0..22
+    exponent: unsigned(8)       # bits 23..30
+    sign: unsigned(1)           # bit  31
+</code></pre>
+<p>In other words, the following identity holds:</p>
+<pre><code class="language-python">float32_storage = Signal(float32_layout)
+float32 = data.View(float32_layout, float32_storage)
+
+float32_storage == Cat(float32.fraction, float32_layout.exponent, float32.sign)
+</code></pre>
+<h3 id="customizing-the-automatically-created-signal"><a class="header" href="#customizing-the-automatically-created-signal">Customizing the automatically created <code>Signal</code></a></h3>
+<p>When a view is instantiated without an explicit view target, it creates a <code>Signal</code> with a shape matching the view layout. The <code>View</code> constructor accepts all of the <code>Signal</code> constructor keyword arguments and passes them along; the <code>reset=</code> argument accepts a struct or an array (according to the type of the layout):</p>
+<pre><code class="language-python">flt_neg_reset = data.View(float32_layout, reset={&quot;sign&quot;: 1})
+
+flt_reset_less = Float32(reset_less=True)
+</code></pre>
+<h2 id="drawbacks"><a class="header" href="#drawbacks">Drawbacks</a></h2>
+<p>This feature introduces a language-level concept, shape-castable objects, increasing language complexity.</p>
+<p>This feature introduces a finely grained hierarchy of 5 similar and related classes for describing layouts.</p>
+<h2 id="alternatives"><a class="header" href="#alternatives">Alternatives</a></h2>
+<p>Do nothing. <code>Record</code> will continue to be used alongside the continued proliferation of ad-hoc implementations of similar functionality.</p>
+<p>Remove <code>ArrayLayout</code> from this proposal. The array functionality is niche and introduces the complexity of handling by-index accessors alongside by-name ones.</p>
+<p>Remove <code>ArrayLayout</code>, <code>UnionLayout</code>, and <code>FlexibleLayout</code> from this proposal. Their functionality is less commonly used than that of <code>StructLayout</code> and introduces the substantial complexity of handling fields at arbitrary offsets. (This would make <code>amaranth.lib.data</code> useless for slicing CSRs in Amaranth SoC.) This change would bring this proposal close to the original <code>PackedStruct</code> proposal discussed in https://github.com/amaranth-lang/amaranth/issues/342.</p>
+<p>Combine the <code>Layout</code> and all of its derivative classes into a single <code>Layout(fields={&quot;name&quot;: Field(...), 0: Field(...)})</code> class that provides a superset of the functionality. This simplifies the API, but makes introspection of aggregate layouts very difficult and can be inefficient if large arrays are used. In this case, factory methods of the <code>Layout</code> class would be provided for more convenient construction of regular struct, union, and array layouts.</p>
+<p>Remove <code>Struct</code> and <code>Union</code> annotation-driven definition syntax. This makes the API simpler, less redundant, and with fewer corner cases, also avoiding the use of variable annotations that are not valid PEP 484 type hints, at the cost of a continued jarring experience for IDE users.</p>
+<p>Include a more concise and less visually noisy way to build <code>StructLayout</code> and <code>UnionLayout</code> objects (or their equivalents) using a builder pattern. This may make the syntax slightly nicer, though the RFC author could not come up with anything that would actually be such.</p>
+<h2 id="bikeshedding"><a class="header" href="#bikeshedding">Bikeshedding</a></h2>
+<p>The names of the <code>Field</code>, <code>*Layout</code>, and <code>View</code> classes could be changed to something better.</p>
+<ul>
+<li><code>IrregularLayout</code> was renamed to <code>FlexibleLayout</code>.</li>
+</ul>
+<h2 id="future-work"><a class="header" href="#future-work">Future work</a></h2>
+<p>This feature could be improved in several ways that are not in scope of this RFC:</p>
+<ul>
+<li><code>StructLayout</code>, <code>UnionLayout</code>, and <code>ArrayLayout</code> could be extended to generate layouts with padding at the end (for structs and unions) or between elements (for arrays). Currently this requires the use of a <code>FlexibleLayout</code>.</li>
+<li><code>StructLayout</code> could be extended to accept a list of fields in addition to a map of field names to values. In this case, it would represent an aggregate value with non-overlapping indexed fields (tuple).</li>
+<li><code>Struct</code> and/or <code>StructLayout</code> could be extended to treat certain reserved field names (e.g. <code>&quot;_1&quot;</code>, <code>&quot;_2&quot;</code>, ...) as designating padding bits. In this case, the offset of the following fields would be adjusted, and the fields with such names would not appear in the layout.</li>
+<li><code>Struct</code> and/or <code>StructLayout</code> could be extended to treat certain reserved field names (e.g. <code>&quot;_&quot;</code> for <code>Struct</code> and <code>None</code> for <code>StructLayout</code>) as designating an anonymous inner aggregate. In this case, the members of the anonymous inner aggregate would be possible to access as if they were the members of the outer aggregate.</li>
+<li>The automatic wrapping of accessed aggregate fields done by <code>View</code> could be extended to call a user-specified cast function rather than hard-coding a check for whether the shape is a <code>Layout</code>. This would allow seamless inclusion of user-defined value-castable types in aggregates.</li>
+<li>The <a href="https://peps.python.org/pep-0484/">PEP 484</a> generics could be used to define layouts parametric over field shapes, using type annotations alone. Since Python does not have type-level integers, layouts parametric over field sizes would still need to be defined explicitly.</li>
+<li>The struct, union, and enum support could be used as the building blocks to implement first-class discriminated unions. Discriminated unions will also benefit from tuples, described above. (<a href="https://github.com/amaranth-lang/amaranth/issues/693#issuecomment-1089322514">Suggestion</a> by @lachlansneff.)</li>
+</ul>
+<h2 id="acknowledgements-1"><a class="header" href="#acknowledgements-1">Acknowledgements</a></h2>
+<p>@modwizcode, @Kaucasus, and @lachlansneff provided valuable feedback while this RFC was being drafted.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>
