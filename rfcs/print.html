@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li><li class="chapter-item expanded "><a href="0005-remove-const-normalize.html">0005-remove-const-normalize</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -496,6 +496,30 @@ flt_reset_less = Float32(reset_less=True)
 </ul>
 <h2 id="acknowledgements-1"><a class="header" href="#acknowledgements-1">Acknowledgements</a></h2>
 <p>@modwizcode, @Kaucasus, and @lachlansneff provided valuable feedback while this RFC was being drafted.</p>
+<div style="break-before: page; page-break-before: always;"></div><ul>
+<li>Start Date: (fill me in with today's date, YYYY-MM-DD)</li>
+<li>RFC PR: <a href="https://github.com/amaranth-lang/rfcs/pull/5">amaranth-lang/rfcs#5</a></li>
+<li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/754">amaranth-lang/amaranth#754</a></li>
+</ul>
+<h1 id="summary-1"><a class="header" href="#summary-1">Summary</a></h1>
+<p>Remove <code>Const.normalize(value, shape)</code>.</p>
+<h1 id="motivation-1"><a class="header" href="#motivation-1">Motivation</a></h1>
+<p>From the name it is not clear what it is supposed to achieve (it's truncation and inversion according to the shape) and it does not check types of arguments.</p>
+<p>We already have <code>Const(value, shape).value</code> and most developers should be aware of it. Having <code>Const.normalize(value, shape)</code> as well provides no benefit over the former. It's also longer.</p>
+<h1 id="explanation"><a class="header" href="#explanation">Explanation</a></h1>
+<p>The <code>Const.normalize</code> method is deprecated (with the suggestion to use <code>Const().value</code>) and removed.</p>
+<h1 id="drawbacks-1"><a class="header" href="#drawbacks-1">Drawbacks</a></h1>
+<ul>
+<li>Churn.</li>
+</ul>
+<h1 id="rationale-and-alternatives"><a class="header" href="#rationale-and-alternatives">Rationale and alternatives</a></h1>
+<p>We could keep it. Removing it reduces the API surface and makes the language a bit more elegant.</p>
+<h1 id="prior-art"><a class="header" href="#prior-art">Prior art</a></h1>
+<p>None.</p>
+<h1 id="unresolved-questions"><a class="header" href="#unresolved-questions">Unresolved questions</a></h1>
+<p>None.</p>
+<h1 id="future-possibilities"><a class="header" href="#future-possibilities">Future possibilities</a></h1>
+<p>None.</p>
 
                     </main>
 
