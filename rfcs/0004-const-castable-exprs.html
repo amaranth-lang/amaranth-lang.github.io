@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li><li class="chapter-item expanded "><a href="0004-const-castable-exprs.html" class="active">0004-const-castable-exprs</a></li><li class="chapter-item expanded "><a href="0005-remove-const-normalize.html">0005-remove-const-normalize</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li><li class="chapter-item expanded "><a href="0003-enumeration-shapes.html">0003-enumeration-shapes</a></li><li class="chapter-item expanded "><a href="0004-const-castable-exprs.html" class="active">0004-const-castable-exprs</a></li><li class="chapter-item expanded "><a href="0005-remove-const-normalize.html">0005-remove-const-normalize</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -146,13 +146,14 @@
                 <div id="content" class="content">
                     <main>
                         <ul>
-<li>Start Date: (fill me in with today's date, YYYY-MM-DD)</li>
+<li>Start Date: 2023-02-07</li>
 <li>RFC PR: <a href="https://github.com/amaranth-lang/rfcs/pull/4">amaranth-lang/rfcs#4</a></li>
 <li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/755">amaranth-lang/amaranth#755</a></li>
 </ul>
-<h1 id="summary"><a class="header" href="#summary">Summary</a></h1>
+<h1 id="const-castable-expressions"><a class="header" href="#const-castable-expressions">Const-castable expressions</a></h1>
+<h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
 <p>Define a subset of expressions that are &quot;const-castable&quot; and accept them in contexts where currently only integers and enumerations with integer values are accepted.</p>
-<h1 id="motivation"><a class="header" href="#motivation">Motivation</a></h1>
+<h2 id="motivation"><a class="header" href="#motivation">Motivation</a></h2>
 <p>In certain contexts, Amaranth requires a constant to be used. These contexts are: <code>with m.Case(...):</code>, <code>Value.matches(...)</code>, and the value of an enumeration member that is being cast to a value.</p>
 <p>Currently, only integers and enumeration members with integer values are considered constants. However, this is too limiting. For example, when developing a CPU, one might want to define control signals for several functional units and combine them into instructions, or conversely, match an instruction against a combination of control signals:</p>
 <pre><code class="language-python">class Func(Enum):
@@ -174,7 +175,7 @@ with m.Switch(instr):
 </code></pre>
 <p>Currently, all of these cases would produce syntax errors.</p>
 <p>There is a private <code>Value._as_const</code> method. It is not used internally, however Amaranth developers have started using it due to unmet needs. Removing it without providing a replacement would be disruptive, and will result in downstream codebases defining their own equivalent.</p>
-<h1 id="guide-level-explanation"><a class="header" href="#guide-level-explanation">Guide-level explanation</a></h1>
+<h2 id="guide-level-explanation"><a class="header" href="#guide-level-explanation">Guide-level explanation</a></h2>
 <p>In any context where a constant is accepted (<code>with m.Case(...):</code>, <code>Value.matches(...)</code>, and the value of an enumeration member), a &quot;const-castable&quot; expression can be used. The following expressions are const-castable:</p>
 <ul>
 <li><code>int</code>;</li>
@@ -190,7 +191,7 @@ with m.Switch(instr):
 &gt;&gt;&gt; Const.cast(Cat(Func.ADD, Src.REG))
 (const 2'd2)
 </code></pre>
-<h1 id="reference-level-explanation"><a class="header" href="#reference-level-explanation">Reference-level explanation</a></h1>
+<h2 id="reference-level-explanation"><a class="header" href="#reference-level-explanation">Reference-level explanation</a></h2>
 <p>The <code>Const.cast</code> static method casts its argument to a value and examines it. If it is a <code>Const</code>, it is returned. If it is a const-castable expression, the operands are recursively cast to constants, and the expression is evaluated.</p>
 <p>The list of const-castable expressions is:</p>
 <ul>
@@ -198,8 +199,8 @@ with m.Switch(instr):
 </ul>
 <p>The <code>m.Case(...)</code> (through the <code>Switch()</code> constructor) and <code>Value.matches(...)</code> methods accept two kinds of operands: const-castable expressions, or a string containing a bit pattern (a sequence of <code>0</code>, <code>1</code>, or <code>-</code> meaning a wildcard).</p>
 <p>The <code>Shape.cast</code> method accepts enumerations where all members have const-castable expressions as their values. The shape of an enumeration is a shape with the smallest width that can represent the value of any enumeration member.</p>
-<p><a href="https://github.com/amaranth-lang/rfcs/pull/3">RFC 3</a>: The <code>EnumMeta.__new__</code> method accepts enumerations where all members have const-castable expressions as their values. The values of members are the user-provided const-castable expressions, and not the result of casting them to a constant.</p>
-<h1 id="drawbacks"><a class="header" href="#drawbacks">Drawbacks</a></h1>
+<p><a href="enumeration-shapes.html">RFC 3</a>: The <code>EnumMeta.__new__</code> method accepts enumerations where all members have const-castable expressions as their values. The values of members are the user-provided const-castable expressions, and not the result of casting them to a constant.</p>
+<h2 id="drawbacks"><a class="header" href="#drawbacks">Drawbacks</a></h2>
 <ul>
 <li>A new language-level concept makes it harder to learn the language.
 <ul>
@@ -213,7 +214,7 @@ with m.Switch(instr):
 </ul>
 </li>
 </ul>
-<h1 id="rationale-and-alternatives"><a class="header" href="#rationale-and-alternatives">Rationale and alternatives</a></h1>
+<h2 id="rationale-and-alternatives"><a class="header" href="#rationale-and-alternatives">Rationale and alternatives</a></h2>
 <p>Alternatives:</p>
 <ol>
 <li>Do not add this functionality. Developers will define their own const-casting functions, continue to rely on the undocumented and private <code>._as_const()</code> method, or use other workarounds.</li>
@@ -222,19 +223,19 @@ with m.Switch(instr):
 </ol>
 <p>Alternatives (2) and (3) both introduce a new language-level concept, the only difference is in the interface that is used to access it.</p>
 <p>Alternative (3) fits the language better: <code>Value.cast</code> takes something value-castable and returns a <code>Value</code>, <code>Shape.cast</code> takes something shape-castable and returns a <code>Shape</code>, so <code>Const.cast</code> is a logical addition in that it takes something const-castable and returns a <code>Const</code>.</p>
-<h1 id="prior-art"><a class="header" href="#prior-art">Prior art</a></h1>
+<h2 id="prior-art"><a class="header" href="#prior-art">Prior art</a></h2>
 <p>Rust and C++ provide functionality (<code>const fn</code> and <code>constexpr</code> respectively) for performing computation at compile time, restricted to a strict subset of the full language. In particular, it can be used to initialize constants, which makes it similar to the functionality proposed here.</p>
 <p>One challenge these languages face is the question of how large the subset should be. Rust in particular started off heavily restricting <code>const fn</code>, where it did not have any control flow. The functionality was gradually introduced later as needed.</p>
-<h1 id="unresolved-questions"><a class="header" href="#unresolved-questions">Unresolved questions</a></h1>
+<h2 id="unresolved-questions"><a class="header" href="#unresolved-questions">Unresolved questions</a></h2>
 <p>None.</p>
-<h1 id="future-possibilities"><a class="header" href="#future-possibilities">Future possibilities</a></h1>
+<h2 id="future-possibilities"><a class="header" href="#future-possibilities">Future possibilities</a></h2>
 <p>Expanding the set of const-castable expressions to include arbitrary arithmetic operations. This RFC limits it to the most requested expression, <code>Cat</code>. This simplifies implementation and reduces the likelihood of introducing bugs in the constant evaluation code, most of which would be almost never used.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="0001-aggregate-data-structures.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="0003-enumeration-shapes.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
@@ -248,7 +249,7 @@ with m.Switch(instr):
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="0001-aggregate-data-structures.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="0003-enumeration-shapes.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 

@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li><li class="chapter-item expanded "><a href="0004-const-castable-exprs.html">0004-const-castable-exprs</a></li><li class="chapter-item expanded "><a href="0005-remove-const-normalize.html" class="active">0005-remove-const-normalize</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li><li class="chapter-item expanded "><a href="0003-enumeration-shapes.html">0003-enumeration-shapes</a></li><li class="chapter-item expanded "><a href="0004-const-castable-exprs.html">0004-const-castable-exprs</a></li><li class="chapter-item expanded "><a href="0005-remove-const-normalize.html" class="active">0005-remove-const-normalize</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -146,28 +146,29 @@
                 <div id="content" class="content">
                     <main>
                         <ul>
-<li>Start Date: (fill me in with today's date, YYYY-MM-DD)</li>
+<li>Start Date: 2023-02-07</li>
 <li>RFC PR: <a href="https://github.com/amaranth-lang/rfcs/pull/5">amaranth-lang/rfcs#5</a></li>
 <li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/754">amaranth-lang/amaranth#754</a></li>
 </ul>
-<h1 id="summary"><a class="header" href="#summary">Summary</a></h1>
+<h1 id="remove-constnormalize"><a class="header" href="#remove-constnormalize">Remove <code>Const.normalize</code></a></h1>
+<h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
 <p>Remove <code>Const.normalize(value, shape)</code>.</p>
-<h1 id="motivation"><a class="header" href="#motivation">Motivation</a></h1>
+<h2 id="motivation"><a class="header" href="#motivation">Motivation</a></h2>
 <p>From the name it is not clear what it is supposed to achieve (it's truncation and inversion according to the shape) and it does not check types of arguments.</p>
 <p>We already have <code>Const(value, shape).value</code> and most developers should be aware of it. Having <code>Const.normalize(value, shape)</code> as well provides no benefit over the former. It's also longer.</p>
-<h1 id="explanation"><a class="header" href="#explanation">Explanation</a></h1>
+<h2 id="explanation"><a class="header" href="#explanation">Explanation</a></h2>
 <p>The <code>Const.normalize</code> method is deprecated (with the suggestion to use <code>Const().value</code>) and removed.</p>
-<h1 id="drawbacks"><a class="header" href="#drawbacks">Drawbacks</a></h1>
+<h2 id="drawbacks"><a class="header" href="#drawbacks">Drawbacks</a></h2>
 <ul>
 <li>Churn.</li>
 </ul>
-<h1 id="rationale-and-alternatives"><a class="header" href="#rationale-and-alternatives">Rationale and alternatives</a></h1>
+<h2 id="rationale-and-alternatives"><a class="header" href="#rationale-and-alternatives">Rationale and alternatives</a></h2>
 <p>We could keep it. Removing it reduces the API surface and makes the language a bit more elegant.</p>
-<h1 id="prior-art"><a class="header" href="#prior-art">Prior art</a></h1>
+<h2 id="prior-art"><a class="header" href="#prior-art">Prior art</a></h2>
 <p>None.</p>
-<h1 id="unresolved-questions"><a class="header" href="#unresolved-questions">Unresolved questions</a></h1>
+<h2 id="unresolved-questions"><a class="header" href="#unresolved-questions">Unresolved questions</a></h2>
 <p>None.</p>
-<h1 id="future-possibilities"><a class="header" href="#future-possibilities">Future possibilities</a></h1>
+<h2 id="future-possibilities"><a class="header" href="#future-possibilities">Future possibilities</a></h2>
 <p>None.</p>
 
                     </main>
