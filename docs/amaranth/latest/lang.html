@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Language guide &mdash; Amaranth HDL toolchain 0.4.dev70 documentation</title>
+  <title>Language guide &mdash; Amaranth HDL toolchain 0.4.dev71 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -39,7 +39,7 @@
             Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev70+gbef2052
+                0.4.dev71+g58721ee
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -57,12 +57,12 @@
 <li class="toctree-l2"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Language guide</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#the-prelude">The prelude</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#values">Values</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#constants">Constants</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#shapes">Shapes</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#shapes-of-values">Shapes of values</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#values">Values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#constants">Constants</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#shape-casting">Shape casting</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#shapes-from-integers">Shapes from integers</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#shapes-from-ranges">Shapes from ranges</a></li>
@@ -74,6 +74,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#values-from-enumeration-members">Values from enumeration members</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#constant-casting">Constant casting</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#signals">Signals</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#signal-shapes">Signal shapes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#signal-names">Signal names</a></li>
@@ -160,6 +161,33 @@
 </div>
 <p>All of the examples below assume that a glob import is used.</p>
 </section>
+<section id="shapes">
+<span id="lang-shapes"></span><h2>Shapes<a class="headerlink" href="#shapes" title="Permalink to this heading"></a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">Shape</span></code> is an object with two attributes, <code class="docutils literal notranslate"><span class="pre">.width</span></code> and <code class="docutils literal notranslate"><span class="pre">.signed</span></code>. It can be constructed directly:</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Shape</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">signed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">unsigned(5)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Shape</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">signed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">signed(12)</span>
+</pre></div>
+</div>
+<p>However, in most cases, the shape is always constructed with the same signedness, and the aliases <code class="docutils literal notranslate"><span class="pre">signed</span></code> and <code class="docutils literal notranslate"><span class="pre">unsigned</span></code> are more convenient:</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">unsigned</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">==</span> <span class="n">Shape</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">signed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">signed</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span> <span class="o">==</span> <span class="n">Shape</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">signed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<section id="shapes-of-values">
+<h3>Shapes of values<a class="headerlink" href="#shapes-of-values" title="Permalink to this heading"></a></h3>
+<p>All values have a <code class="docutils literal notranslate"><span class="pre">.shape()</span></code> method that computes their shape. The width of a value <code class="docutils literal notranslate"><span class="pre">v</span></code>, <code class="docutils literal notranslate"><span class="pre">v.shape().width</span></code>, can also be retrieved with <code class="docutils literal notranslate"><span class="pre">len(v)</span></code>.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Const</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">()</span>
+<span class="go">unsigned(3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">Const</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+</section>
+</section>
 <section id="values">
 <span id="lang-values"></span><h2>Values<a class="headerlink" href="#values" title="Permalink to this heading"></a></h2>
 <p>The basic building block of the Amaranth language is a <em>value</em>, which is a term for a binary number that is computed or stored anywhere in the design. Each value has a <em>width</em>—the amount of bits used to represent the value—and a <em>signedness</em>—the interpretation of the value by arithmetic operations—collectively called its <em>shape</em>. Signed values always use <a class="reference external" href="https://en.wikipedia.org/wiki/Two's_complement">two’s complement</a> representation.</p>
@@ -189,33 +217,6 @@
 <span class="go">0</span>
 </pre></div>
 </div>
-</section>
-<section id="shapes">
-<span id="lang-shapes"></span><h2>Shapes<a class="headerlink" href="#shapes" title="Permalink to this heading"></a></h2>
-<p>A <code class="docutils literal notranslate"><span class="pre">Shape</span></code> is an object with two attributes, <code class="docutils literal notranslate"><span class="pre">.width</span></code> and <code class="docutils literal notranslate"><span class="pre">.signed</span></code>. It can be constructed directly:</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Shape</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">signed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="go">unsigned(5)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Shape</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">signed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="go">signed(12)</span>
-</pre></div>
-</div>
-<p>However, in most cases, the shape is always constructed with the same signedness, and the aliases <code class="docutils literal notranslate"><span class="pre">signed</span></code> and <code class="docutils literal notranslate"><span class="pre">unsigned</span></code> are more convenient:</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">unsigned</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">==</span> <span class="n">Shape</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">signed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">signed</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span> <span class="o">==</span> <span class="n">Shape</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">signed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="go">True</span>
-</pre></div>
-</div>
-<section id="shapes-of-values">
-<h3>Shapes of values<a class="headerlink" href="#shapes-of-values" title="Permalink to this heading"></a></h3>
-<p>All values have a <code class="docutils literal notranslate"><span class="pre">.shape()</span></code> method that computes their shape. The width of a value <code class="docutils literal notranslate"><span class="pre">v</span></code>, <code class="docutils literal notranslate"><span class="pre">v.shape().width</span></code>, can also be retrieved with <code class="docutils literal notranslate"><span class="pre">len(v)</span></code>.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Const</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">()</span>
-<span class="go">unsigned(3)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">Const</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
-<span class="go">3</span>
-</pre></div>
-</div>
-</section>
 </section>
 <section id="shape-casting">
 <span id="lang-shapecasting"></span><h2>Shape casting<a class="headerlink" href="#shape-casting" title="Permalink to this heading"></a></h2>
@@ -291,11 +292,11 @@
 </section>
 <section id="value-casting">
 <span id="lang-valuecasting"></span><h2>Value casting<a class="headerlink" href="#value-casting" title="Permalink to this heading"></a></h2>
-<p>Like shapes, values may be <em>cast</em> from other objects, which are called <em>value-castable</em>. Casting allows objects that are not provided by Amaranth, such as integers or enumeration members, to be used in Amaranth expressions directly.</p>
+<p>Like shapes, values may be <em>cast</em> from other objects, which are called <em>value-castable</em>. Casting to values allows objects that are not provided by Amaranth, such as integers or enumeration members, to be used in Amaranth expressions directly.</p>
 <p>Casting to a value can be done explicitly with <code class="docutils literal notranslate"><span class="pre">Value.cast</span></code>, but is usually implicit, since value-castable objects are accepted anywhere values are.</p>
 <section id="values-from-integers">
 <h3>Values from integers<a class="headerlink" href="#values-from-integers" title="Permalink to this heading"></a></h3>
-<p>Casting a value from an integer <code class="docutils literal notranslate"><span class="pre">i</span></code> is a shorthand for <code class="docutils literal notranslate"><span class="pre">Const(i)</span></code>:</p>
+<p>Casting a value from an integer <code class="docutils literal notranslate"><span class="pre">i</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">Const(i)</span></code>:</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Value</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 <span class="go">(const 3&#39;d5)</span>
 </pre></div>
@@ -307,7 +308,7 @@
 </section>
 <section id="values-from-enumeration-members">
 <h3>Values from enumeration members<a class="headerlink" href="#values-from-enumeration-members" title="Permalink to this heading"></a></h3>
-<p>Casting a value from an enumeration member <code class="docutils literal notranslate"><span class="pre">m</span></code> is a shorthand for <code class="docutils literal notranslate"><span class="pre">Const(m.value,</span> <span class="pre">type(m))</span></code>:</p>
+<p>Casting a value from an enumeration member <code class="docutils literal notranslate"><span class="pre">m</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">Const(m.value,</span> <span class="pre">type(m))</span></code>:</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Value</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">Direction</span><span class="o">.</span><span class="n">LEFT</span><span class="p">)</span>
 <span class="go">(const 2&#39;d1)</span>
 </pre></div>
@@ -317,6 +318,24 @@
 <p>If a value subclasses <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></a> or its class otherwise inherits from both <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> and <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code>, it is treated as an enumeration.</p>
 </div>
 </section>
+</section>
+<section id="constant-casting">
+<span id="lang-constcasting"></span><h2>Constant casting<a class="headerlink" href="#constant-casting" title="Permalink to this heading"></a></h2>
+<p>A subset of <a class="reference internal" href="#lang-values"><span class="std std-ref">values</span></a> are <em>constant-castable</em>. If a value is constant-castable and all of its operands are also constant-castable, it can be converted to a <code class="xref py py-class docutils literal notranslate"><span class="pre">Const</span></code>, the numeric value of which can then be read by Python code. This provides a way to perform computation on Amaranth values while constructing the design.</p>
+<p>Constant-castable objects are accepted anywhere a constant integer is accepted. Casting to a constant can also be done explicitly with <code class="xref py py-meth docutils literal notranslate"><span class="pre">Const.cast()</span></code>:</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Const</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">Cat</span><span class="p">(</span><span class="n">Direction</span><span class="o">.</span><span class="n">TOP</span><span class="p">,</span> <span class="n">Direction</span><span class="o">.</span><span class="n">LEFT</span><span class="p">))</span>
+<span class="go">(const 4&#39;d4)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>At the moment, only the following expressions are constant-castable:</p>
+<ul class="simple">
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Const</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Cat</span></code></p></li>
+</ul>
+<p>This list will be expanded in the future.</p>
+</div>
 </section>
 <section id="signals">
 <span id="lang-signals"></span><h2>Signals<a class="headerlink" href="#signals" title="Permalink to this heading"></a></h2>
