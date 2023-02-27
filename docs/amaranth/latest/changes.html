@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Changelog &mdash; Amaranth HDL toolchain 0.4.dev66 documentation</title>
+  <title>Changelog &mdash; Amaranth HDL toolchain 0.4.dev67 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -36,7 +36,7 @@
             Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev66+gfcc4f54
+                0.4.dev67+gf602ce1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -128,6 +128,7 @@
 <li><p>Changed: <code class="xref py py-meth docutils literal notranslate"><span class="pre">Value.cast()</span></code> casts <code class="xref py py-class docutils literal notranslate"><span class="pre">ValueCastable</span></code> objects recursively.</p></li>
 <li><p>Changed: <code class="xref py py-meth docutils literal notranslate"><span class="pre">Value.cast()</span></code> treats instances of classes derived from both <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a> and <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> (including <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></a>) as enumerations rather than integers.</p></li>
 <li><p>Changed: <code class="xref py py-class docutils literal notranslate"><span class="pre">Cat</span></code> accepts instances of classes derived from both <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a> and <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> (including <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></a>) without warning.</p></li>
+<li><p>Deprecated: <code class="xref py py-meth docutils literal notranslate"><span class="pre">Const.normalize()</span></code>.</p></li>
 <li><p>Removed: (deprecated in 0.1) casting of <code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code> to and from a <code class="docutils literal notranslate"><span class="pre">(width,</span> <span class="pre">signed)</span></code> tuple.</p></li>
 <li><p>Removed: (deprecated in 0.3) <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.UserValue</span></code>.</p></li>
 <li><p>Removed: (deprecated in 0.3) support for <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">nmigen:</span></code> linter instructions at the beginning of file.</p></li>
