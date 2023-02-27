@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li><li class="chapter-item expanded "><a href="0005-remove-const-normalize.html">0005-remove-const-normalize</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li><li class="chapter-item expanded "><a href="0004-const-castable-exprs.html">0004-const-castable-exprs</a></li><li class="chapter-item expanded "><a href="0005-remove-const-normalize.html">0005-remove-const-normalize</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -498,27 +498,111 @@ flt_reset_less = Float32(reset_less=True)
 <p>@modwizcode, @Kaucasus, and @lachlansneff provided valuable feedback while this RFC was being drafted.</p>
 <div style="break-before: page; page-break-before: always;"></div><ul>
 <li>Start Date: (fill me in with today's date, YYYY-MM-DD)</li>
+<li>RFC PR: <a href="https://github.com/amaranth-lang/rfcs/pull/4">amaranth-lang/rfcs#4</a></li>
+<li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/755">amaranth-lang/amaranth#755</a></li>
+</ul>
+<h1 id="summary-1"><a class="header" href="#summary-1">Summary</a></h1>
+<p>Define a subset of expressions that are &quot;const-castable&quot; and accept them in contexts where currently only integers and enumerations with integer values are accepted.</p>
+<h1 id="motivation-1"><a class="header" href="#motivation-1">Motivation</a></h1>
+<p>In certain contexts, Amaranth requires a constant to be used. These contexts are: <code>with m.Case(...):</code>, <code>Value.matches(...)</code>, and the value of an enumeration member that is being cast to a value.</p>
+<p>Currently, only integers and enumeration members with integer values are considered constants. However, this is too limiting. For example, when developing a CPU, one might want to define control signals for several functional units and combine them into instructions, or conversely, match an instruction against a combination of control signals:</p>
+<pre><code class="language-python">class Func(Enum):
+    ADD = 0
+    SUB = 1
+
+class Src(Enum):
+    MEM = 0
+    REG = 1
+
+class Instr(Enum):
+    ADD  = Cat(Func.ADD, Src.MEM)
+    ADDI = Cat(Func.ADD, Src.REG)
+    ...
+
+with m.Switch(instr):
+    with m.Case(Cat(Func.ADD, Src.MEM)):
+        ...
+</code></pre>
+<p>Currently, all of these cases would produce syntax errors.</p>
+<p>There is a private <code>Value._as_const</code> method. It is not used internally, however Amaranth developers have started using it due to unmet needs. Removing it without providing a replacement would be disruptive, and will result in downstream codebases defining their own equivalent.</p>
+<h1 id="guide-level-explanation"><a class="header" href="#guide-level-explanation">Guide-level explanation</a></h1>
+<p>In any context where a constant is accepted (<code>with m.Case(...):</code>, <code>Value.matches(...)</code>, and the value of an enumeration member), a &quot;const-castable&quot; expression can be used. The following expressions are const-castable:</p>
+<ul>
+<li><code>int</code>;</li>
+<li><code>Const</code>;</li>
+<li><code>Cat</code> where all operands are const-castable;</li>
+<li>instance of a <code>Enum</code> subclass where the value is const-castable.</li>
+</ul>
+<p>A const-castable expression can be converted to a <code>Const</code> using <code>Const.cast</code>:</p>
+<pre><code class="language-python">&gt;&gt;&gt; Const.cast(1)
+(const 1'd1)
+&gt;&gt;&gt; Const.cast(Cat(1, 0, 1))
+(const 3'd5)
+&gt;&gt;&gt; Const.cast(Cat(Func.ADD, Src.REG))
+(const 2'd2)
+</code></pre>
+<h1 id="reference-level-explanation"><a class="header" href="#reference-level-explanation">Reference-level explanation</a></h1>
+<p>The <code>Const.cast</code> static method casts its argument to a value and examines it. If it is a <code>Const</code>, it is returned. If it is a const-castable expression, the operands are recursively cast to constants, and the expression is evaluated.</p>
+<p>The list of const-castable expressions is:</p>
+<ul>
+<li><code>Cat</code></li>
+</ul>
+<p>The <code>m.Case(...)</code> (through the <code>Switch()</code> constructor) and <code>Value.matches(...)</code> methods accept two kinds of operands: const-castable expressions, or a string containing a bit pattern (a sequence of <code>0</code>, <code>1</code>, or <code>-</code> meaning a wildcard).</p>
+<p>The <code>Shape.cast</code> method accepts enumerations where all members have const-castable expressions as their values. The shape of an enumeration is a shape with the smallest width that can represent the value of any enumeration member.</p>
+<p><a href="https://github.com/amaranth-lang/rfcs/pull/3">RFC 3</a>: The <code>EnumMeta.__new__</code> method accepts enumerations where all members have const-castable expressions as their values. The values of members are the user-provided const-castable expressions, and not the result of casting them to a constant.</p>
+<h1 id="drawbacks-1"><a class="header" href="#drawbacks-1">Drawbacks</a></h1>
+<ul>
+<li>A new language-level concept makes it harder to learn the language.
+<ul>
+<li>Most developers already have an intuitive understanding of which expressions are const-castable.</li>
+</ul>
+</li>
+<li><code>Const.cast</code> shadows an existing <code>Value.cast</code> method since <code>Const</code> inherits from <code>Value</code>.
+<ul>
+<li>No one is calling <code>Value.cast</code> through the <code>Const.cast</code> binding.</li>
+<li><code>Const.cast</code> has a compatible interface (it returns a <code>Value</code>) and performs a similar function (it calls <code>Value.cast</code> first). However, it's not Liskov-compatible.</li>
+</ul>
+</li>
+</ul>
+<h1 id="rationale-and-alternatives"><a class="header" href="#rationale-and-alternatives">Rationale and alternatives</a></h1>
+<p>Alternatives:</p>
+<ol>
+<li>Do not add this functionality. Developers will define their own const-casting functions, continue to rely on the undocumented and private <code>._as_const()</code> method, or use other workarounds.</li>
+<li>Make <code>._as_const()</code> public (i.e. rename it to <code>.as_const()</code>).</li>
+<li>Add a new <code>Const.cast</code> method (this option).</li>
+</ol>
+<p>Alternatives (2) and (3) both introduce a new language-level concept, the only difference is in the interface that is used to access it.</p>
+<p>Alternative (3) fits the language better: <code>Value.cast</code> takes something value-castable and returns a <code>Value</code>, <code>Shape.cast</code> takes something shape-castable and returns a <code>Shape</code>, so <code>Const.cast</code> is a logical addition in that it takes something const-castable and returns a <code>Const</code>.</p>
+<h1 id="prior-art"><a class="header" href="#prior-art">Prior art</a></h1>
+<p>Rust and C++ provide functionality (<code>const fn</code> and <code>constexpr</code> respectively) for performing computation at compile time, restricted to a strict subset of the full language. In particular, it can be used to initialize constants, which makes it similar to the functionality proposed here.</p>
+<p>One challenge these languages face is the question of how large the subset should be. Rust in particular started off heavily restricting <code>const fn</code>, where it did not have any control flow. The functionality was gradually introduced later as needed.</p>
+<h1 id="unresolved-questions"><a class="header" href="#unresolved-questions">Unresolved questions</a></h1>
+<p>None.</p>
+<h1 id="future-possibilities"><a class="header" href="#future-possibilities">Future possibilities</a></h1>
+<p>Expanding the set of const-castable expressions to include arbitrary arithmetic operations. This RFC limits it to the most requested expression, <code>Cat</code>. This simplifies implementation and reduces the likelihood of introducing bugs in the constant evaluation code, most of which would be almost never used.</p>
+<div style="break-before: page; page-break-before: always;"></div><ul>
+<li>Start Date: (fill me in with today's date, YYYY-MM-DD)</li>
 <li>RFC PR: <a href="https://github.com/amaranth-lang/rfcs/pull/5">amaranth-lang/rfcs#5</a></li>
 <li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/754">amaranth-lang/amaranth#754</a></li>
 </ul>
-<h1 id="summary-1"><a class="header" href="#summary-1">Summary</a></h1>
+<h1 id="summary-2"><a class="header" href="#summary-2">Summary</a></h1>
 <p>Remove <code>Const.normalize(value, shape)</code>.</p>
-<h1 id="motivation-1"><a class="header" href="#motivation-1">Motivation</a></h1>
+<h1 id="motivation-2"><a class="header" href="#motivation-2">Motivation</a></h1>
 <p>From the name it is not clear what it is supposed to achieve (it's truncation and inversion according to the shape) and it does not check types of arguments.</p>
 <p>We already have <code>Const(value, shape).value</code> and most developers should be aware of it. Having <code>Const.normalize(value, shape)</code> as well provides no benefit over the former. It's also longer.</p>
 <h1 id="explanation"><a class="header" href="#explanation">Explanation</a></h1>
 <p>The <code>Const.normalize</code> method is deprecated (with the suggestion to use <code>Const().value</code>) and removed.</p>
-<h1 id="drawbacks-1"><a class="header" href="#drawbacks-1">Drawbacks</a></h1>
+<h1 id="drawbacks-2"><a class="header" href="#drawbacks-2">Drawbacks</a></h1>
 <ul>
 <li>Churn.</li>
 </ul>
-<h1 id="rationale-and-alternatives"><a class="header" href="#rationale-and-alternatives">Rationale and alternatives</a></h1>
+<h1 id="rationale-and-alternatives-1"><a class="header" href="#rationale-and-alternatives-1">Rationale and alternatives</a></h1>
 <p>We could keep it. Removing it reduces the API surface and makes the language a bit more elegant.</p>
-<h1 id="prior-art"><a class="header" href="#prior-art">Prior art</a></h1>
+<h1 id="prior-art-1"><a class="header" href="#prior-art-1">Prior art</a></h1>
 <p>None.</p>
-<h1 id="unresolved-questions"><a class="header" href="#unresolved-questions">Unresolved questions</a></h1>
+<h1 id="unresolved-questions-1"><a class="header" href="#unresolved-questions-1">Unresolved questions</a></h1>
 <p>None.</p>
-<h1 id="future-possibilities"><a class="header" href="#future-possibilities">Future possibilities</a></h1>
+<h1 id="future-possibilities-1"><a class="header" href="#future-possibilities-1">Future possibilities</a></h1>
 <p>None.</p>
 
                     </main>
