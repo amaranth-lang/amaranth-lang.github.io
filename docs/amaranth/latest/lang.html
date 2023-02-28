@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Language guide &mdash; Amaranth HDL toolchain 0.4.dev73 documentation</title>
+  <title>Language guide &mdash; Amaranth HDL toolchain 0.4.dev74 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -39,7 +39,7 @@
             Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev73+gef2e9fa
+                0.4.dev74+g57612f1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -264,14 +264,7 @@
 </section>
 <section id="shapes-from-enumerations">
 <span id="lang-shapeenum"></span><h3>Shapes from enumerations<a class="headerlink" href="#shapes-from-enumerations" title="Permalink to this heading"></a></h3>
-<p>Casting a shape from an <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a> subclass <code class="docutils literal notranslate"><span class="pre">E</span></code>:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>fails if any of the enumeration members have non-integer values,</p></li>
-<li><p>has a width large enough to represent both <code class="docutils literal notranslate"><span class="pre">min(m.value</span> <span class="pre">for</span> <span class="pre">m</span> <span class="pre">in</span> <span class="pre">E)</span></code> and <code class="docutils literal notranslate"><span class="pre">max(m.value</span> <span class="pre">for</span> <span class="pre">m</span> <span class="pre">in</span> <span class="pre">E)</span></code>, and</p></li>
-<li><p>is signed if either <code class="docutils literal notranslate"><span class="pre">min(m.value</span> <span class="pre">for</span> <span class="pre">m</span> <span class="pre">in</span> <span class="pre">E)</span></code> or <code class="docutils literal notranslate"><span class="pre">max(m.value</span> <span class="pre">for</span> <span class="pre">m</span> <span class="pre">in</span> <span class="pre">E)</span></code> are negative, unsigned otherwise.</p></li>
-</ul>
-</div></blockquote>
+<p>Casting a shape from an <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a> subclass requires all of the enumeration members to have <a class="reference internal" href="#lang-constcasting"><span class="std std-ref">constant-castable</span></a> values. The shape has a width large enough to represent the value of every member, and is signed only if there is a member with a negative value.</p>
 <p>Specifying a shape with an enumeration is convenient for finite state machines, multiplexers, complex control signals, and all other values whose width is derived from a few distinct choices they must be able to fit:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Direction</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
     <span class="n">TOP</span>    <span class="o">=</span> <span class="mi">0</span>
@@ -284,9 +277,20 @@
 <span class="go">unsigned(2)</span>
 </pre></div>
 </div>
+<p>The <a class="reference internal" href="stdlib/enum.html#module-amaranth.lib.enum" title="amaranth.lib.enum"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.enum</span></code></a> module extends the standard enumerations such that their shape can be specified explicitly when they are defined:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Funct4</span><span class="p">(</span><span class="n">amaranth</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">unsigned</span><span class="p">(</span><span class="mi">4</span><span class="p">)):</span>
+    <span class="n">ADD</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">SUB</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">MUL</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Shape</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">Funct4</span><span class="p">)</span>
+<span class="go">unsigned(4)</span>
+</pre></div>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The enumeration does not have to subclass <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></a>; it only needs to have integers as values of every member. Using enumerations based on <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a> rather than <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></a> prevents unwanted implicit conversion of enum members to integers.</p>
+<p>The enumeration does not have to subclass <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></a> or have <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> as one of its base classes; it only needs to have integers as values of every member. Using enumerations based on <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a> rather than <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></a> prevents unwanted implicit conversion of enum members to integers.</p>
 </div>
 </section>
 </section>

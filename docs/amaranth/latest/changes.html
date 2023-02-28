@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Changelog &mdash; Amaranth HDL toolchain 0.4.dev73 documentation</title>
+  <title>Changelog &mdash; Amaranth HDL toolchain 0.4.dev74 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -38,7 +38,7 @@
             Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev73+gef2e9fa
+                0.4.dev74+g57612f1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -60,7 +60,9 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Changelog</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#version-0-4-unreleased">Version 0.4 (unreleased)</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#migrating-from-version-0-3">Migrating from version 0.3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#implemented-rfcs">Implemented RFCs</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#language-changes">Language changes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#standard-library-changes">Standard library changes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#toolchain-changes">Toolchain changes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#platform-integration-changes">Platform integration changes</a></li>
 </ul>
@@ -68,9 +70,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#version-0-3">Version 0.3</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#migrating-from-version-0-2">Migrating from version 0.2</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id1">Language changes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#standard-library-changes">Standard library changes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id2">Toolchain changes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id3">Platform integration changes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Standard library changes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">Toolchain changes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">Platform integration changes</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#versions-0-1-0-2">Versions 0.1, 0.2</a></li>
@@ -122,21 +124,35 @@
 </ul>
 <p>While code that uses the features listed as deprecated below will work in Amaranth 0.4, they will be removed in the next version.</p>
 </section>
+<section id="implemented-rfcs">
+<h3>Implemented RFCs<a class="headerlink" href="#implemented-rfcs" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://amaranth-lang.org/rfcs/0003-enumeration-shapes.html">RFC 3</a>: Enumeration shapes</p></li>
+<li><p><a class="reference external" href="https://amaranth-lang.org/rfcs/0004-const-castable-exprs.html">RFC 4</a>: Constant-castable expressions</p></li>
+<li><p><a class="reference external" href="https://amaranth-lang.org/rfcs/0005-remove-const-normalize.html">RFC 5</a>: Remove Const.normalize</p></li>
+</ul>
+</section>
 <section id="language-changes">
 <h3>Language changes<a class="headerlink" href="#language-changes" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p>Added: <code class="xref py py-class docutils literal notranslate"><span class="pre">ShapeCastable</span></code>, similar to <code class="xref py py-class docutils literal notranslate"><span class="pre">ValueCastable</span></code>.</p></li>
 <li><p>Added: <code class="xref py py-meth docutils literal notranslate"><span class="pre">Value.as_signed()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">Value.as_unsigned()</span></code> can be used on left-hand side of assignment (with no difference in behavior).</p></li>
-<li><p>Added: <code class="xref py py-meth docutils literal notranslate"><span class="pre">Const.cast()</span></code>, evaluating constant-castable values and returning a <code class="xref py py-class docutils literal notranslate"><span class="pre">Const</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0004-const-castable-exprs.html">RFC 4</a>)</p></li>
+<li><p>Added: <code class="xref py py-meth docutils literal notranslate"><span class="pre">Const.cast()</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0004-const-castable-exprs.html">RFC 4</a>)</p></li>
 <li><p>Added: <code class="xref py py-meth docutils literal notranslate"><span class="pre">Value.matches()</span></code> and <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">m.Case():</span></code> accept any constant-castable objects. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0004-const-castable-exprs.html">RFC 4</a>)</p></li>
 <li><p>Changed: <code class="xref py py-meth docutils literal notranslate"><span class="pre">Value.cast()</span></code> casts <code class="xref py py-class docutils literal notranslate"><span class="pre">ValueCastable</span></code> objects recursively.</p></li>
 <li><p>Changed: <code class="xref py py-meth docutils literal notranslate"><span class="pre">Value.cast()</span></code> treats instances of classes derived from both <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a> and <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> (including <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></a>) as enumerations rather than integers.</p></li>
-<li><p>Changed: <code class="docutils literal notranslate"><span class="pre">Value.matches()</span></code> with an empty list of patterns returns <code class="docutils literal notranslate"><span class="pre">Const(1)</span></code> rather than <code class="docutils literal notranslate"><span class="pre">Const(0)</span></code>, to match <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">m.Case():</span></code>.</p></li>
-<li><p>Changed: <code class="xref py py-class docutils literal notranslate"><span class="pre">Cat</span></code> accepts instances of classes derived from both <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a> and <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> (including <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></a>) without warning.</p></li>
+<li><p>Changed: <code class="xref py py-meth docutils literal notranslate"><span class="pre">Value.matches()</span></code> with an empty list of patterns returns <code class="docutils literal notranslate"><span class="pre">Const(1)</span></code> rather than <code class="docutils literal notranslate"><span class="pre">Const(0)</span></code>, to match the behavior of <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">m.Case():</span></code>.</p></li>
+<li><p>Changed: <code class="xref py py-class docutils literal notranslate"><span class="pre">Cat</span></code> warns if an enumeration without an explicitly specified shape is used.</p></li>
 <li><p>Deprecated: <code class="xref py py-meth docutils literal notranslate"><span class="pre">Const.normalize()</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0005-remove-const-normalize.html">RFC 5</a>)</p></li>
 <li><p>Removed: (deprecated in 0.1) casting of <code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code> to and from a <code class="docutils literal notranslate"><span class="pre">(width,</span> <span class="pre">signed)</span></code> tuple.</p></li>
 <li><p>Removed: (deprecated in 0.3) <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.UserValue</span></code>.</p></li>
 <li><p>Removed: (deprecated in 0.3) support for <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">nmigen:</span></code> linter instructions at the beginning of file.</p></li>
+</ul>
+</section>
+<section id="standard-library-changes">
+<h3>Standard library changes<a class="headerlink" href="#standard-library-changes" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Added: <a class="reference internal" href="stdlib/enum.html#module-amaranth.lib.enum" title="amaranth.lib.enum"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.enum</span></code></a>.</p></li>
 </ul>
 </section>
 <section id="toolchain-changes">
@@ -194,8 +210,8 @@
 <li><p>Deprecated: <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">nmigen:</span></code> linter instructions at the beginning of file; use <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">amaranth:</span></code> instead.</p></li>
 </ul>
 </section>
-<section id="standard-library-changes">
-<h3>Standard library changes<a class="headerlink" href="#standard-library-changes" title="Permalink to this heading"></a></h3>
+<section id="id2">
+<h3>Standard library changes<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p>Added: <a class="reference internal" href="stdlib/cdc.html#amaranth.lib.cdc.PulseSynchronizer" title="amaranth.lib.cdc.PulseSynchronizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">cdc.PulseSynchronizer</span></code></a>.</p></li>
 <li><p>Added: <a class="reference internal" href="stdlib/cdc.html#amaranth.lib.cdc.AsyncFFSynchronizer" title="amaranth.lib.cdc.AsyncFFSynchronizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">cdc.AsyncFFSynchronizer</span></code></a>.</p></li>
@@ -204,8 +220,8 @@
 <li><p>Added: <code class="xref py py-attr docutils literal notranslate"><span class="pre">fifo.FIFOInterface.r_level</span></code> and <code class="xref py py-attr docutils literal notranslate"><span class="pre">fifo.FIFOInterface.w_level</span></code>.</p></li>
 </ul>
 </section>
-<section id="id2">
-<h3>Toolchain changes<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<section id="id3">
+<h3>Toolchain changes<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p>Changed: Backend and simulator reject wires larger than 65536 bits.</p></li>
 <li><p>Added: Backend emits Yosys enumeration attributes for <a class="reference internal" href="lang.html#lang-shapeenum"><span class="std std-ref">enumeration-shaped</span></a> signals.</p></li>
@@ -223,8 +239,8 @@
 <li><p>Deprecated: <code class="docutils literal notranslate"><span class="pre">NMIGEN_*</span></code> environment variables; use <code class="docutils literal notranslate"><span class="pre">AMARANTH_*</span></code> environment variables instead.</p></li>
 </ul>
 </section>
-<section id="id3">
-<h3>Platform integration changes<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<section id="id4">
+<h3>Platform integration changes<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p>Added: <code class="docutils literal notranslate"><span class="pre">SB_LFOSC</span></code> and <code class="docutils literal notranslate"><span class="pre">SB_HFOSC</span></code> as <code class="docutils literal notranslate"><span class="pre">default_clk</span></code> clock sources in <a class="reference internal" href="platform/lattice-ice40.html#amaranth.vendor.lattice_ice40.LatticeICE40Platform" title="amaranth.vendor.lattice_ice40.LatticeICE40Platform"><code class="xref py py-class docutils literal notranslate"><span class="pre">lattice_ice40.LatticeICE40Platform</span></code></a>.</p></li>
 <li><p>Added: <code class="xref py py-class docutils literal notranslate"><span class="pre">lattice_machxo2.LatticeMachXO2Platform</span></code> generates binary (<code class="docutils literal notranslate"><span class="pre">.bit</span></code>) bitstreams.</p></li>
