@@ -681,7 +681,7 @@ with m.Switch(instr):
 </ul>
 <p>The <code>m.Case(...)</code> (through the <code>Switch()</code> constructor) and <code>Value.matches(...)</code> methods accept two kinds of operands: const-castable expressions, or a string containing a bit pattern (a sequence of <code>0</code>, <code>1</code>, or <code>-</code> meaning a wildcard).</p>
 <p>The <code>Shape.cast</code> method accepts enumerations where all members have const-castable expressions as their values. The shape of an enumeration is a shape with the smallest width that can represent the value of any enumeration member.</p>
-<p><a href="enumeration-shapes.html">RFC 3</a>: The <code>EnumMeta.__new__</code> method accepts enumerations where all members have const-castable expressions as their values. The values of members are the user-provided const-castable expressions, and not the result of casting them to a constant.</p>
+<p><a href="0003-enumeration-shapes.html">RFC 3</a>: The <code>EnumMeta.__new__</code> method accepts enumerations where all members have const-castable expressions as their values. The values of members are the user-provided const-castable expressions, and not the result of casting them to a constant.</p>
 <h2 id="drawbacks-2"><a class="header" href="#drawbacks-2">Drawbacks</a></h2>
 <ul>
 <li>A new language-level concept makes it harder to learn the language.
