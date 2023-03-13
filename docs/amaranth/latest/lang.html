@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Language guide &mdash; Amaranth HDL toolchain 0.4.dev91 documentation</title>
+  <title>Language guide &mdash; Amaranth HDL toolchain 0.4.dev92 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -39,7 +39,7 @@
             Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev91+g32eabd9
+                0.4.dev92+g80343d1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -249,8 +249,8 @@
 <span class="go">unsigned(2)</span>
 </pre></div>
 </div>
-<div class="admonition warning" id="lang-exclrange">
-<p class="admonition-title">Warning</p>
+<div class="admonition note" id="lang-exclrange">
+<p class="admonition-title">Note</p>
 <p>Python ranges are <em>exclusive</em> or <em>half-open</em>, meaning they do not contain their <code class="docutils literal notranslate"><span class="pre">.stop</span></code> element. Because of this, values with shapes cast from a <code class="docutils literal notranslate"><span class="pre">range(stop)</span></code> where <code class="docutils literal notranslate"><span class="pre">stop</span></code> is a power of 2 are not wide enough to represent <code class="docutils literal notranslate"><span class="pre">stop</span></code> itself:</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fencepost</span> <span class="o">=</span> <span class="n">C</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">256</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fencepost</span><span class="o">.</span><span class="n">shape</span><span class="p">()</span>
@@ -259,7 +259,7 @@
 <span class="go">0</span>
 </pre></div>
 </div>
-<p>Be mindful of this edge case!</p>
+<p>Amaranth detects uses of <code class="xref py py-class docutils literal notranslate"><span class="pre">Const</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code> that invoke such an off-by-one error, and emits a diagnostic message.</p>
 </div>
 </section>
 <section id="shapes-from-enumerations">
