@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li><li class="chapter-item expanded "><a href="0003-enumeration-shapes.html">0003-enumeration-shapes</a></li><li class="chapter-item expanded "><a href="0004-const-castable-exprs.html">0004-const-castable-exprs</a></li><li class="chapter-item expanded "><a href="0005-remove-const-normalize.html">0005-remove-const-normalize</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li><li class="chapter-item expanded "><a href="0003-enumeration-shapes.html">0003-enumeration-shapes</a></li><li class="chapter-item expanded "><a href="0004-const-castable-exprs.html">0004-const-castable-exprs</a></li><li class="chapter-item expanded "><a href="0005-remove-const-normalize.html">0005-remove-const-normalize</a></li><li class="chapter-item expanded "><a href="0010-move-repl-to-value.html">0010-move-repl-to-value</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -737,6 +737,49 @@ with m.Switch(instr):
 <p>None.</p>
 <h2 id="future-possibilities-2"><a class="header" href="#future-possibilities-2">Future possibilities</a></h2>
 <p>None.</p>
+<div style="break-before: page; page-break-before: always;"></div><ul>
+<li>Start Date: 2023-05-11</li>
+<li>RFC PR: <a href="https://github.com/amaranth-lang/rfcs/pull/10">amaranth-lang/rfcs#10</a></li>
+<li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/770">amaranth-lang/amaranth#770</a></li>
+</ul>
+<h1 id="move-repl-to-valuereplicate"><a class="header" href="#move-repl-to-valuereplicate">Move <code>Repl</code> to <code>Value.replicate</code></a></h1>
+<h2 id="summary-4"><a class="header" href="#summary-4">Summary</a></h2>
+<p>Replace the standalone <code>Repl(value, count)</code> node with <code>value.replicate(count)</code>.</p>
+<h2 id="motivation-4"><a class="header" href="#motivation-4">Motivation</a></h2>
+<p><code>Repl</code> is a <a href="https://github.com/search?q=%2F%5CbRepl%5Cb%2F+amaranth+language%3Apython&amp;type=code">rarely used</a> construct (it's mostly useful for manual sign extension).</p>
+<p>It is currently a first-class entity that has its own AST node and a name in the prelude, mostly for historical reasons (<code>Repl(v, n)</code> is analogous to Verilog's <code>{x{n}}</code>).</p>
+<p><code>Repl</code> does not need to be a first-class entity; <code>Repl(x, n)</code> is almost exactly equivalent to <code>Cat(x for x in range(n))</code>. It especially does not need a name in the prelude.</p>
+<h2 id="guide-level-explanation-2"><a class="header" href="#guide-level-explanation-2">Guide-level explanation</a></h2>
+<p>Use of <code>Repl</code> is deprecated. To replicate a value multiple times, use <code>value.replicate()</code>.</p>
+<h2 id="reference-level-explanation-2"><a class="header" href="#reference-level-explanation-2">Reference-level explanation</a></h2>
+<p>Direct use of <code>Repl</code> is deprecated. Its implementation is replaced with <code>def Repl(value, count): return Value.cast(value).replicate(count)</code>.</p>
+<p>A function <code>Value.replicate(count)</code> is added. It is implemented as <code>Cat(value for _ in range(count))</code>. The <code>Repl</code> AST node is removed.</p>
+<h2 id="drawbacks-4"><a class="header" href="#drawbacks-4">Drawbacks</a></h2>
+<ul>
+<li>Churn.</li>
+<li>The proposed implementation makes <code>Value.replicate</code> valid on left-hand side of assignment, with potentially surprising behavior. However, this can be handled by prohibiting multiple assignment to the same bit of a signal in general.</li>
+</ul>
+<h2 id="rationale-and-alternatives-3"><a class="header" href="#rationale-and-alternatives-3">Rationale and alternatives</a></h2>
+<p>Rationale:</p>
+<ul>
+<li>Fewer names in the prelude is always good.</li>
+<li>Unlike with <code>Cat</code> (where <code>Cat()</code> makes sense), <code>Repl</code> does not make sense as a standalone node any more than <code>Part</code> does (and we do not currently export <code>Part</code>).</li>
+<li>Despite existing by analogy with <code>{x{n}}</code>, it is currently turned into a concatenation before it reaches the Verilog backend <em>anyway</em>, and any future work will have to reconstruct replication from concatenation in any case.</li>
+<li><code>Repl</code> being a dedicated node complicates AST processing for no reason.</li>
+</ul>
+<p>Alternatives:</p>
+<ul>
+<li>Do not do this.</li>
+</ul>
+<h2 id="prior-art-3"><a class="header" href="#prior-art-3">Prior art</a></h2>
+<p>None.</p>
+<h2 id="unresolved-questions-3"><a class="header" href="#unresolved-questions-3">Unresolved questions</a></h2>
+<p>None.</p>
+<h2 id="future-possibilities-3"><a class="header" href="#future-possibilities-3">Future possibilities</a></h2>
+<ul>
+<li>The Verilog backend currently bitblasts what could be a replication. We could detect these and convert them to replications proper.</li>
+<li>We could detect code like <code>Cat(x, x).eq(0b11)</code> and warn or reject it.</li>
+</ul>
 
                     </main>
 
