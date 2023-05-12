@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Data structures &mdash; Amaranth HDL toolchain 0.4.dev103 documentation</title>
+  <title>Data structures &mdash; Amaranth HDL toolchain 0.4.dev104 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/platformpicker.css" type="text/css" />
@@ -39,7 +39,7 @@
             Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev103+g68e292c
+                0.4.dev104+g7166455
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -405,6 +405,23 @@ recursively call <code class="docutils literal notranslate"><span class="pre">.a
 The order of the fields is not considered.</p>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="amaranth.lib.data.Layout.__call__">
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.data.Layout.__call__" title="Permalink to this definition"></a></dt>
+<dd><p>Create a view into a target.</p>
+<p>When a <a class="reference internal" href="#amaranth.lib.data.Layout" title="amaranth.lib.data.Layout"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layout</span></code></a> is used as the shape of a <a class="reference internal" href="#amaranth.lib.data.Field" title="amaranth.lib.data.Field"><code class="xref py py-class docutils literal notranslate"><span class="pre">Field</span></code></a> and accessed through
+a <a class="reference internal" href="#amaranth.lib.data.View" title="amaranth.lib.data.View"><code class="xref py py-class docutils literal notranslate"><span class="pre">View</span></code></a>, this method is used to wrap the slice of the underlying value into
+another view with this layout.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">View(self,</span> <span class="pre">target)</span></code></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#amaranth.lib.data.View" title="amaranth.lib.data.View">View</a></p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -578,10 +595,12 @@ of the arguments are passed to its constructor.</p>
 <section id="accessing-a-view">
 <h3>Accessing a view<a class="headerlink" href="#accessing-a-view" title="Permalink to this heading"></a></h3>
 <p>Slicing a view or accessing its attributes returns a part of the underlying value
-corresponding to the field with that index or name, which is always an Amaranth value, but
-it could also be a <a class="reference internal" href="#amaranth.lib.data.View" title="amaranth.lib.data.View"><code class="xref py py-class docutils literal notranslate"><span class="pre">View</span></code></a> if the shape of the field is a <a class="reference internal" href="#amaranth.lib.data.Layout" title="amaranth.lib.data.Layout"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layout</span></code></a>, or
-an instance of the data class if the shape of the field is a class deriving from
-<a class="reference internal" href="#amaranth.lib.data.Struct" title="amaranth.lib.data.Struct"><code class="xref py py-class docutils literal notranslate"><span class="pre">Struct</span></code></a> or <a class="reference internal" href="#amaranth.lib.data.Union" title="amaranth.lib.data.Union"><code class="xref py py-class docutils literal notranslate"><span class="pre">Union</span></code></a>.</p>
+corresponding to the field with that index or name, which is itself either a value or
+a value-castable object. If the shape of the field is a <a class="reference internal" href="#amaranth.lib.data.Layout" title="amaranth.lib.data.Layout"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layout</span></code></a>, it will be
+a <a class="reference internal" href="#amaranth.lib.data.View" title="amaranth.lib.data.View"><code class="xref py py-class docutils literal notranslate"><span class="pre">View</span></code></a>; if it is a class deriving from <a class="reference internal" href="#amaranth.lib.data.Struct" title="amaranth.lib.data.Struct"><code class="xref py py-class docutils literal notranslate"><span class="pre">Struct</span></code></a> or <a class="reference internal" href="#amaranth.lib.data.Union" title="amaranth.lib.data.Union"><code class="xref py py-class docutils literal notranslate"><span class="pre">Union</span></code></a>, it
+will be an instance of that data class; if it is another
+<a class="reference internal" href="../lang.html#lang-shapecasting"><span class="std std-ref">shape-castable</span></a> object implementing <code class="docutils literal notranslate"><span class="pre">__call__</span></code>, it will be
+the result of calling that method.</p>
 <p>Slicing a view whose layout is an <a class="reference internal" href="#amaranth.lib.data.ArrayLayout" title="amaranth.lib.data.ArrayLayout"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayLayout</span></code></a> can be done with an index that is
 an Amaranth value instead of a constant integer. The returned element is chosen dynamically
 in that case.</p>
@@ -627,9 +646,10 @@ was created.</p>
 <span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.data.View.__getitem__" title="Permalink to this definition"></a></dt>
 <dd><p>Slice the underlying value.</p>
 <p>A field corresponding to <code class="docutils literal notranslate"><span class="pre">key</span></code> is looked up in the layout. If the field’s shape is
-a <a class="reference internal" href="#amaranth.lib.data.Layout" title="amaranth.lib.data.Layout"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layout</span></code></a>, returns a <a class="reference internal" href="#amaranth.lib.data.View" title="amaranth.lib.data.View"><code class="xref py py-class docutils literal notranslate"><span class="pre">View</span></code></a>. If it is a subclass of <a class="reference internal" href="#amaranth.lib.data.Struct" title="amaranth.lib.data.Struct"><code class="xref py py-class docutils literal notranslate"><span class="pre">Struct</span></code></a> or
-<a class="reference internal" href="#amaranth.lib.data.Union" title="amaranth.lib.data.Union"><code class="xref py py-class docutils literal notranslate"><span class="pre">Union</span></code></a>, returns an instance of that class. Otherwise, returns an unspecified
-Amaranth expression with the right shape.</p>
+a shape-castable object that has a <code class="docutils literal notranslate"><span class="pre">__call__</span></code> method, it is called and the result is
+returned. Otherwise, <code class="docutils literal notranslate"><span class="pre">as_shape</span></code> is called repeatedly on the shape until either an object
+with a <code class="docutils literal notranslate"><span class="pre">__call__</span></code> method is reached, or a <code class="docutils literal notranslate"><span class="pre">Shape</span></code> is returned. In the latter case,
+returns an unspecified Amaranth expression with the right shape.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> or <code class="xref py py-class docutils literal notranslate"><span class="pre">ValueCastable</span></code>) – Name or index of a field.</p>
@@ -638,13 +658,14 @@ Amaranth expression with the right shape.</p>
 <dd class="field-even"><p>A slice of the underlying value defined by the field.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code>, inout</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">ValueCastable</span></code>, inout</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.11)"><strong>KeyError</strong></a> – If the layout does not define a field corresponding to <code class="docutils literal notranslate"><span class="pre">key</span></code>.</p></li>
 <li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.11)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">key</span></code> is a value-castable object, but the layout of the view is not
     a <a class="reference internal" href="#amaranth.lib.data.ArrayLayout" title="amaranth.lib.data.ArrayLayout"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayLayout</span></code></a>.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.11)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">ShapeCastable.__call__</span></code> does not return a value or a value-castable object.</p></li>
 </ul>
 </dd>
 </dl>
