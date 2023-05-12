@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Language guide &mdash; Amaranth HDL toolchain 0.4.dev96 documentation</title>
+  <title>Language guide &mdash; Amaranth HDL toolchain 0.4.dev98 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -39,7 +39,7 @@
             Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev96+g5f6b36e
+                0.4.dev98+g4398575
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -327,8 +327,23 @@
 <span id="lang-constcasting"></span><h2>Constant casting<a class="headerlink" href="#constant-casting" title="Permalink to this heading"></a></h2>
 <p>A subset of <a class="reference internal" href="#lang-values"><span class="std std-ref">values</span></a> are <em>constant-castable</em>. If a value is constant-castable and all of its operands are also constant-castable, it can be converted to a <code class="xref py py-class docutils literal notranslate"><span class="pre">Const</span></code>, the numeric value of which can then be read by Python code. This provides a way to perform computation on Amaranth values while constructing the design.</p>
 <p>Constant-castable objects are accepted anywhere a constant integer is accepted. Casting to a constant can also be done explicitly with <code class="xref py py-meth docutils literal notranslate"><span class="pre">Const.cast()</span></code>:</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Const</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">Cat</span><span class="p">(</span><span class="n">Direction</span><span class="o">.</span><span class="n">TOP</span><span class="p">,</span> <span class="n">Direction</span><span class="o">.</span><span class="n">LEFT</span><span class="p">))</span>
-<span class="go">(const 4&#39;d4)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Const</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">Cat</span><span class="p">(</span><span class="n">C</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">C</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+<span class="go">(const 6&#39;d26)</span>
+</pre></div>
+</div>
+<p>They may be used in enumeration members, provided the enumeration inherits from <a class="reference internal" href="stdlib/enum.html#amaranth.lib.enum.Enum" title="amaranth.lib.enum.Enum"><code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.lib.enum.Enum</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Funct</span><span class="p">(</span><span class="n">amaranth</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">ADD</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="o">...</span>
+
+<span class="k">class</span> <span class="nc">Op</span><span class="p">(</span><span class="n">amaranth</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">REG</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">IMM</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="k">class</span> <span class="nc">Instr</span><span class="p">(</span><span class="n">amaranth</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">ADD</span>  <span class="o">=</span> <span class="n">Cat</span><span class="p">(</span><span class="n">Funct</span><span class="o">.</span><span class="n">ADD</span><span class="p">,</span> <span class="n">Op</span><span class="o">.</span><span class="n">REG</span><span class="p">)</span>
+    <span class="n">ADDI</span> <span class="o">=</span> <span class="n">Cat</span><span class="p">(</span><span class="n">Funct</span><span class="o">.</span><span class="n">ADD</span><span class="p">,</span> <span class="n">Op</span><span class="o">.</span><span class="n">IMM</span><span class="p">)</span>
+    <span class="o">...</span>
 </pre></div>
 </div>
 <div class="admonition note">

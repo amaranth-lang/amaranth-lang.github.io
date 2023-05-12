@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Enumerations &mdash; Amaranth HDL toolchain 0.4.dev96 documentation</title>
+  <title>Enumerations &mdash; Amaranth HDL toolchain 0.4.dev98 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/platformpicker.css" type="text/css" />
@@ -39,7 +39,7 @@
             Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev96+g5f6b36e
+                0.4.dev98+g4398575
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -106,14 +106,31 @@
 <p>A shape can be specified for an enumeration with the <code class="docutils literal notranslate"><span class="pre">shape=</span></code> keyword argument:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">amaranth.lib</span> <span class="kn">import</span> <span class="n">enum</span>
 
-<span class="k">class</span> <span class="nc">Funct4</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">Funct</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
     <span class="n">ADD</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">SUB</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">MUL</span> <span class="o">=</span> <span class="mi">2</span>
 </pre></div>
 </div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Shape</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">Funct4</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Shape</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">Funct</span><span class="p">)</span>
 <span class="go">unsigned(4)</span>
+</pre></div>
+</div>
+<p>Any <a class="reference internal" href="../lang.html#lang-constcasting"><span class="std std-ref">constant-castable</span></a> expression can be used as the value of a member:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Op</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">REG</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">IMM</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="k">class</span> <span class="nc">Instr</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">ADD</span>  <span class="o">=</span> <span class="n">Cat</span><span class="p">(</span><span class="n">Funct</span><span class="o">.</span><span class="n">ADD</span><span class="p">,</span> <span class="n">Op</span><span class="o">.</span><span class="n">REG</span><span class="p">)</span>
+    <span class="n">ADDI</span> <span class="o">=</span> <span class="n">Cat</span><span class="p">(</span><span class="n">Funct</span><span class="o">.</span><span class="n">ADD</span><span class="p">,</span> <span class="n">Op</span><span class="o">.</span><span class="n">IMM</span><span class="p">)</span>
+    <span class="n">SUB</span>  <span class="o">=</span> <span class="n">Cat</span><span class="p">(</span><span class="n">Funct</span><span class="o">.</span><span class="n">SUB</span><span class="p">,</span> <span class="n">Op</span><span class="o">.</span><span class="n">REG</span><span class="p">)</span>
+    <span class="n">SUBI</span> <span class="o">=</span> <span class="n">Cat</span><span class="p">(</span><span class="n">Funct</span><span class="o">.</span><span class="n">SUB</span><span class="p">,</span> <span class="n">Op</span><span class="o">.</span><span class="n">IMM</span><span class="p">)</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Instr</span><span class="o">.</span><span class="n">SUBI</span>
+<span class="go">&lt;Instr.SUBI: 17&gt;</span>
 </pre></div>
 </div>
 <p>This module is a drop-in replacement for the standard <a class="reference external" href="https://docs.python.org/3/library/enum.html#module-enum" title="(in Python v3.11)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">enum</span></code></a> module, and re-exports all of its members (not just the ones described below). In an Amaranth project, all <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">enum</span></code> statements may be replaced with <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">amaranth.lib</span> <span class="pre">import</span> <span class="pre">enum</span></code>.</p>
