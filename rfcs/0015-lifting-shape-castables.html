@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>0004-const-castable-exprs - The Amaranth RFC Book</title>
+        <title>0015-lifting-shape-castables - The Amaranth RFC Book</title>
 
 
         <!-- Custom HTML head -->
@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li><li class="chapter-item expanded "><a href="0003-enumeration-shapes.html">0003-enumeration-shapes</a></li><li class="chapter-item expanded "><a href="0004-const-castable-exprs.html" class="active">0004-const-castable-exprs</a></li><li class="chapter-item expanded "><a href="0005-remove-const-normalize.html">0005-remove-const-normalize</a></li><li class="chapter-item expanded "><a href="0008-aggregate-extensibility.html">0008-aggregate-extensibility</a></li><li class="chapter-item expanded "><a href="0009-const-init-shape-castable.html">0009-const-init-shape-castable</a></li><li class="chapter-item expanded "><a href="0010-move-repl-to-value.html">0010-move-repl-to-value</a></li><li class="chapter-item expanded "><a href="0015-lifting-shape-castables.html">0015-lifting-shape-castables</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li><li class="chapter-item expanded "><a href="0003-enumeration-shapes.html">0003-enumeration-shapes</a></li><li class="chapter-item expanded "><a href="0004-const-castable-exprs.html">0004-const-castable-exprs</a></li><li class="chapter-item expanded "><a href="0005-remove-const-normalize.html">0005-remove-const-normalize</a></li><li class="chapter-item expanded "><a href="0008-aggregate-extensibility.html">0008-aggregate-extensibility</a></li><li class="chapter-item expanded "><a href="0009-const-init-shape-castable.html">0009-const-init-shape-castable</a></li><li class="chapter-item expanded "><a href="0010-move-repl-to-value.html">0010-move-repl-to-value</a></li><li class="chapter-item expanded "><a href="0015-lifting-shape-castables.html" class="active">0015-lifting-shape-castables</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -146,102 +146,75 @@
                 <div id="content" class="content">
                     <main>
                         <ul>
-<li>Start Date: 2023-02-07</li>
-<li>RFC PR: <a href="https://github.com/amaranth-lang/rfcs/pull/4">amaranth-lang/rfcs#4</a></li>
-<li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/755">amaranth-lang/amaranth#755</a></li>
+<li>Start Date: 2023-05-15</li>
+<li>RFC PR: <a href="https://github.com/amaranth-lang/rfcs/pull/15">amaranth-lang/rfcs#15</a></li>
+<li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/784">amaranth-lang/amaranth#784</a></li>
 </ul>
-<h1 id="const-castable-expressions"><a class="header" href="#const-castable-expressions">Const-castable expressions</a></h1>
+<h1 id="lifting-shape-castable-objects"><a class="header" href="#lifting-shape-castable-objects">Lifting shape-castable objects</a></h1>
 <h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
-<p>Define a subset of expressions that are &quot;const-castable&quot; and accept them in contexts where currently only integers and enumerations with integer values are accepted.</p>
+<p>Make <code>Signal(shape_castable, ...)</code> return <code>shape_castable(Signal(shape_castable.as_shape(), ...))</code>.</p>
 <h2 id="motivation"><a class="header" href="#motivation">Motivation</a></h2>
-<p>In certain contexts, Amaranth requires a constant to be used. These contexts are: <code>with m.Case(...):</code>, <code>Value.matches(...)</code>, and the value of an enumeration member that is being cast to a value.</p>
-<p>Currently, only integers and enumeration members with integer values are considered constants. However, this is too limiting. For example, when developing a CPU, one might want to define control signals for several functional units and combine them into instructions, or conversely, match an instruction against a combination of control signals:</p>
-<pre><code class="language-python">class Func(Enum):
-    ADD = 0
-    SUB = 1
-
-class Src(Enum):
-    MEM = 0
-    REG = 1
-
-class Instr(Enum):
-    ADD  = Cat(Func.ADD, Src.MEM)
-    ADDI = Cat(Func.ADD, Src.REG)
-    ...
-
-with m.Switch(instr):
-    with m.Case(Cat(Func.ADD, Src.MEM)):
-        ...
-</code></pre>
-<p>Currently, all of these cases would produce syntax errors.</p>
-<p>There is a private <code>Value._as_const</code> method. It is not used internally, however Amaranth developers have started using it due to unmet needs. Removing it without providing a replacement would be disruptive, and will result in downstream codebases defining their own equivalent.</p>
+<p>When Amaranth was a very new language, it did not have any facilities for ascribing type information to data. It had shapes (width and signedness), and it had special handling for <code>range()</code> in the shape position, as well as enumerations. Back then it made sense to have <code>Signal</code>, the single way to define new storage of any kind, to only operate on values (numbers / bit containers).</p>
+<p>Today the situation is completely different. Amaranth has first-class support for enumerations in the standard library as well as the standard range of data structures (structs, unions, arrays) via <a href="0001-aggregate-data-structures.html">RFC 1</a> and <a href="0003-enumeration-shapes.html">RFC 3</a>. It provides extensibility through <a href="0008-aggregate-extensibility.html">RFC 8</a> and <a href="0009-const-init-shape-castable.html">RFC 9</a>. Using the existing hooks alone it is possible to extend Amaranth with rich numeric types (fixed-point, complex, potentially even floating-point), and some of these are very likely to end up in the standard library.</p>
+<p>All of this new functionality internally wraps a <code>Value</code>. It is so common and useful to initialize e.g. a struct view with a fresh <code>Signal</code> that <code>data.View</code> reexports all of the arguments of the <code>Signal</code> constructors and automatically constructs a <code>Signal</code> if no view target is provided. This works, but ties the two together more than would be ideal, and requires every similar facility to reimplement the functionality itself. What is worse is that it seems to be quite confusing to programmers, since it's not apparent that calling <code>data.View(foo_layout)</code> internally creates a <code>Signal</code>. Furthermore, people want to call <code>Signal(foo_layout)</code> to construct some storage for <code>foo_layout</code>, and that works (<code>foo_layout</code> is shape-castable), but does the wrong thing: the returned object is a <code>Signal</code>, not a <code>data.View</code>.</p>
+<p>It would make teaching a lot easier if we could draw an equivalence between a <code>Signal</code> and a variable in a general purpose programming language, and between its shape and a type in a general purpose programming language. Then, no matter what shape-castable object it is, the way to make some storage is <code>Signal(x)</code>. It will also simplify the internals a fair bit.</p>
+<p>This change wasn't practical before <a href="0008-aggregate-extensibility.html">RFC 8</a> and <a href="0009-const-init-shape-castable.html">RFC 9</a> laid the groundwork for it, but now it is an obvious extension.</p>
 <h2 id="guide-level-explanation"><a class="header" href="#guide-level-explanation">Guide-level explanation</a></h2>
-<p>In any context where a constant is accepted (<code>with m.Case(...):</code>, <code>Value.matches(...)</code>, and the value of an enumeration member), a &quot;const-castable&quot; expression can be used. The following expressions are const-castable:</p>
-<ul>
-<li><code>int</code>;</li>
-<li><code>Const</code>;</li>
-<li><code>Cat</code> where all operands are const-castable;</li>
-<li>instance of a <code>Enum</code> subclass where the value is const-castable.</li>
-</ul>
-<p>A const-castable expression can be converted to a <code>Const</code> using <code>Const.cast</code>:</p>
-<pre><code class="language-python">&gt;&gt;&gt; Const.cast(1)
-(const 1'd1)
-&gt;&gt;&gt; Const.cast(Cat(1, 0, 1))
-(const 3'd5)
-&gt;&gt;&gt; Const.cast(Cat(Func.ADD, Src.REG))
-(const 2'd2)
-</code></pre>
+<p>To include state in a design, use the <code>Signal(shape)</code> constructor, where <code>shape</code> describes the bit layout and possible operations on that state. The <code>reset=</code> argument and the returned value depend on the <code>shape</code> that is provided. If it is <code>signed(N)</code> or <code>unsigned(N)</code> or a built-in enumeration or a <code>range</code>, then a plain <code>Value</code> is returned, and the <code>reset=</code> argument accepts a number, an enumeration member, or a constant. If it is a <code>data.Layout</code>, then a <code>data.View</code> is returned, and the <code>reset=</code> argument accepts a sequence or a mapping, potentially nested for nested layouts. Other shape-castable classes will have their own behavior.</p>
+<blockquote>
+<p><strong>Warning</strong>
+The existing syntax for creating a <code>View</code> with a new <code>Signal</code> underlying it will be removed immediately (it has never been in a release) to resolve an ambiguity over the semantics of <code>__call__</code>.</p>
+</blockquote>
 <h2 id="reference-level-explanation"><a class="header" href="#reference-level-explanation">Reference-level explanation</a></h2>
-<p>The <code>Const.cast</code> static method casts its argument to a value and examines it. If it is a <code>Const</code>, it is returned. If it is a const-castable expression, the operands are recursively cast to constants, and the expression is evaluated.</p>
-<p>The list of const-castable expressions is:</p>
-<ul>
-<li><code>Cat</code></li>
-</ul>
-<p>The <code>m.Case(...)</code> (through the <code>Switch()</code> constructor) and <code>Value.matches(...)</code> methods accept two kinds of operands: const-castable expressions, or a string containing a bit pattern (a sequence of <code>0</code>, <code>1</code>, or <code>-</code> meaning a wildcard).</p>
-<p>The <code>Shape.cast</code> method accepts enumerations where all members have const-castable expressions as their values. The shape of an enumeration is a shape with the smallest width that can represent the value of any enumeration member.</p>
-<p><a href="0003-enumeration-shapes.html">RFC 3</a>: The <code>EnumMeta.__new__</code> method accepts enumerations where all members have const-castable expressions as their values. The value of each member is the value of the constant resulting from casting the user-provided expression.</p>
+<p>A method <code>def __call__(self, value):</code> is added on <code>ShapeCastable</code>. It must return <code>Value</code> or a <code>ValueCastable</code> instance with the right shape. (Such a method is opportunistically used by <code>data.View</code> for nested views since <a href="0008-aggregate-extensibility.html">RFC 8</a>, however this RFC makes it mandatory for all shape-castable objects.)</p>
+<p>The <code>Signal.__call__(shape, ...)</code> method is overridden (on the metaclass) to consider <code>shape</code>. First, a <code>signal</code> is constructed normally with all of the arguments. Afterwards, if <code>shape</code> is a <code>ShapeCastable</code> instance, then <code>shape(signal)</code> is returned. Otherwise <code>signal</code> is returned.</p>
 <h2 id="drawbacks"><a class="header" href="#drawbacks">Drawbacks</a></h2>
 <ul>
-<li>A new language-level concept makes it harder to learn the language.
+<li>Increase in language complexity.</li>
+<li>More metaclasses.
 <ul>
-<li>Most developers already have an intuitive understanding of which expressions are const-castable.</li>
+<li><code>Signal</code> is a final class so this is unlikely to go wrong.</li>
 </ul>
 </li>
-<li><code>Const.cast</code> shadows an existing <code>Value.cast</code> method since <code>Const</code> inherits from <code>Value</code>.
-<ul>
-<li>No one is calling <code>Value.cast</code> through the <code>Const.cast</code> binding.</li>
-<li><code>Const.cast</code> has a compatible interface (it returns a <code>Value</code>) and performs a similar function (it calls <code>Value.cast</code> first). However, it's not Liskov-compatible.</li>
-</ul>
-</li>
+<li>A <code>Signal()</code> constructor sometimes returning non-<code>Signal</code> objects can be confusing.</li>
 </ul>
 <h2 id="rationale-and-alternatives"><a class="header" href="#rationale-and-alternatives">Rationale and alternatives</a></h2>
+<p>There are several arguments in favor of the design:</p>
+<ul>
+<li>It does not de facto introduce any new methods on protocols, since <code>ShapeCastable.__call__</code> is expected to be implemented by essentially everyone after <a href="0008-aggregate-extensibility.html">RFC 8</a>.</li>
+<li>It does not introduce new complexity to <code>Signal.__init__</code>; the logic for handling non-integer reset exists since <a href="0009-const-init-shape-castable.html">RFC 9</a>.</li>
+<li>It eliminates unnecessary coupling between <code>data.View</code> (and other similar facilities) and <code>Signal()</code>.</li>
+<li>It is a natural extension of the language and has clear parallels to the notion of variables in other languages.</li>
+<li>It has been repeatedly requested by users, almost every time someone became familiar with the aggregate data structure design.</li>
+</ul>
+<p>All of these points are compelling but the last one perhaps the most. The author did not find it a stark enough necessity to introduce themselves but it does seem to be one.</p>
 <p>Alternatives:</p>
-<ol>
-<li>Do not add this functionality. Developers will define their own const-casting functions, continue to rely on the undocumented and private <code>._as_const()</code> method, or use other workarounds.</li>
-<li>Make <code>._as_const()</code> public (i.e. rename it to <code>.as_const()</code>).</li>
-<li>Add a new <code>Const.cast</code> method (this option).</li>
-</ol>
-<p>Alternatives (2) and (3) both introduce a new language-level concept, the only difference is in the interface that is used to access it.</p>
-<p>Alternative (3) fits the language better: <code>Value.cast</code> takes something value-castable and returns a <code>Value</code>, <code>Shape.cast</code> takes something shape-castable and returns a <code>Shape</code>, so <code>Const.cast</code> is a logical addition in that it takes something const-castable and returns a <code>Const</code>.</p>
+<ul>
+<li>Do not do this. The status quo is acceptable.</li>
+</ul>
 <h2 id="prior-art"><a class="header" href="#prior-art">Prior art</a></h2>
-<p>Rust and C++ provide functionality (<code>const fn</code> and <code>constexpr</code> respectively) for performing computation at compile time, restricted to a strict subset of the full language. In particular, it can be used to initialize constants, which makes it similar to the functionality proposed here.</p>
-<p>One challenge these languages face is the question of how large the subset should be. Rust in particular started off heavily restricting <code>const fn</code>, where it did not have any control flow. The functionality was gradually introduced later as needed.</p>
+<p>This RFC brings the semantics of <code>Signal</code> to be very close to semantics of typed variables in other languages.</p>
+<p>&quot;Lifting&quot; in the title of this RFC refers to a <a href="https://wiki.haskell.org/Lifting">concept in functional programming</a> of the same name where a higher order function (<code>Signal</code>, here) is used to generalize an operation over a set of other functions (<code>data.View</code> and other shape-castable objects that implement the <code>__call__</code> protocol, here).</p>
 <h2 id="unresolved-questions"><a class="header" href="#unresolved-questions">Unresolved questions</a></h2>
-<p>None.</p>
+<ul>
+<li>How does this interact with typechecking?
+<ul>
+<li>This is a straightforward higher order function so it's probably fine.</li>
+</ul>
+</li>
+</ul>
 <h2 id="future-possibilities"><a class="header" href="#future-possibilities">Future possibilities</a></h2>
-<p>Expanding the set of const-castable expressions to include arbitrary arithmetic operations. This RFC limits it to the most requested expression, <code>Cat</code>. This simplifies implementation and reduces the likelihood of introducing bugs in the constant evaluation code, most of which would be almost never used.</p>
+<p>This RFC is the final one in a chain that started with <a href="0001-aggregate-data-structures.html">RFC 1</a>.</p>
+<p>Enumerations and ranges could be adjusted such that something other than <code>Value</code> is returned. This creates backwards compatibility concerns though.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="0003-enumeration-shapes.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="0010-move-repl-to-value.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="0005-remove-const-normalize.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -249,13 +222,10 @@ with m.Switch(instr):
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="0003-enumeration-shapes.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="0010-move-repl-to-value.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="0005-remove-const-normalize.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
             </nav>
 
         </div>
