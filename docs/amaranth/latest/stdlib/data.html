@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Data structures &mdash; Amaranth HDL toolchain 0.4.dev111 documentation</title>
+  <title>Data structures &mdash; Amaranth HDL toolchain 0.4.dev112 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/platformpicker.css" type="text/css" />
@@ -39,7 +39,7 @@
             Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev111+g52b9d3f
+                0.4.dev112+gf96604f
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -322,6 +322,8 @@ an Amaranth value.</p>
 <p>It is an abstract base class; <a class="reference internal" href="#amaranth.lib.data.StructLayout" title="amaranth.lib.data.StructLayout"><code class="xref py py-class docutils literal notranslate"><span class="pre">StructLayout</span></code></a>, <a class="reference internal" href="#amaranth.lib.data.UnionLayout" title="amaranth.lib.data.UnionLayout"><code class="xref py py-class docutils literal notranslate"><span class="pre">UnionLayout</span></code></a>,
 <a class="reference internal" href="#amaranth.lib.data.ArrayLayout" title="amaranth.lib.data.ArrayLayout"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayLayout</span></code></a>, and <a class="reference internal" href="#amaranth.lib.data.FlexibleLayout" title="amaranth.lib.data.FlexibleLayout"><code class="xref py py-class docutils literal notranslate"><span class="pre">FlexibleLayout</span></code></a> implement concrete layout rules.
 New layout rules can be defined by inheriting from this class.</p>
+<p>Like all other shape-castable objects, all layouts are immutable. New classes deriving from
+<a class="reference internal" href="#amaranth.lib.data.Layout" title="amaranth.lib.data.Layout"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layout</span></code></a> must preserve this invariant.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.lib.data.Layout.cast">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cast</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.data.Layout.cast" title="Permalink to this definition"></a></dt>
