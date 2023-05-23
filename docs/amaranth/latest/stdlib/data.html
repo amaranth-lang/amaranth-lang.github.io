@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Data structures &mdash; Amaranth HDL toolchain 0.4.dev110 documentation</title>
+  <title>Data structures &mdash; Amaranth HDL toolchain 0.4.dev111 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/platformpicker.css" type="text/css" />
@@ -39,7 +39,7 @@
             Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev110+g8af9062
+                0.4.dev111+g52b9d3f
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -629,10 +629,7 @@ can be used to describe structures and arrays with arbitrary padding.</p>
 of an underlying Amaranth value via the names or indexes defined in the provided layout.</p>
 <section id="creating-a-view">
 <h3>Creating a view<a class="headerlink" href="#creating-a-view" title="Permalink to this heading"></a></h3>
-<p>When creating a view, either only the <code class="docutils literal notranslate"><span class="pre">target</span></code> argument, or any of the <code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">reset</span></code>,
-<code class="docutils literal notranslate"><span class="pre">reset_less</span></code>, <code class="docutils literal notranslate"><span class="pre">attrs</span></code>, or <code class="docutils literal notranslate"><span class="pre">decoder</span></code> arguments may be provided. If a target is provided,
-it is used as the underlying value. Otherwise, a new <code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code> is created, and the rest
-of the arguments are passed to its constructor.</p>
+<p>A view must be created using an explicitly provided layout and target. To create a new <code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code> that is wrapped in a <a class="reference internal" href="#amaranth.lib.data.View" title="amaranth.lib.data.View"><code class="xref py py-class docutils literal notranslate"><span class="pre">View</span></code></a> with a given <code class="docutils literal notranslate"><span class="pre">layout</span></code>, use <code class="docutils literal notranslate"><span class="pre">Signal(layout,</span> <span class="pre">...)</span></code>, which for a <a class="reference internal" href="#amaranth.lib.data.Layout" title="amaranth.lib.data.Layout"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layout</span></code></a> is equivalent to <code class="docutils literal notranslate"><span class="pre">View(layout,</span> <span class="pre">Signal(...))</span></code>.</p>
 </section>
 <section id="accessing-a-view">
 <h3>Accessing a view<a class="headerlink" href="#accessing-a-view" title="Permalink to this heading"></a></h3>
