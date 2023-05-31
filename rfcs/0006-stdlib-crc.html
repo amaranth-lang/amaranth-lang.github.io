@@ -1,0 +1,410 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>0006-stdlib-crc - The Amaranth RFC Book</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li><li class="chapter-item expanded "><a href="0003-enumeration-shapes.html">0003-enumeration-shapes</a></li><li class="chapter-item expanded "><a href="0004-const-castable-exprs.html">0004-const-castable-exprs</a></li><li class="chapter-item expanded "><a href="0005-remove-const-normalize.html">0005-remove-const-normalize</a></li><li class="chapter-item expanded "><a href="0006-stdlib-crc.html" class="active">0006-stdlib-crc</a></li><li class="chapter-item expanded "><a href="0008-aggregate-extensibility.html">0008-aggregate-extensibility</a></li><li class="chapter-item expanded "><a href="0009-const-init-shape-castable.html">0009-const-init-shape-castable</a></li><li class="chapter-item expanded "><a href="0010-move-repl-to-value.html">0010-move-repl-to-value</a></li><li class="chapter-item expanded "><a href="0015-lifting-shape-castables.html">0015-lifting-shape-castables</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Amaranth RFC Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/amaranth-lang/rfcs" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <ul>
+<li>Start Date: 2023-05-21</li>
+<li>RFC PR: <a href="https://github.com/amaranth-lang/rfcs/pull/0006">amaranth-lang/rfcs#0006</a></li>
+<li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/681">amaranth-lang/amaranth#681</a></li>
+</ul>
+<h1 id="summary"><a class="header" href="#summary">Summary</a></h1>
+<p>Add a cyclic redundancy check (CRC) generator to the Amaranth standard library.</p>
+<h1 id="motivation"><a class="header" href="#motivation">Motivation</a></h1>
+<p>Computing CRCs is a common requirement in hardware designs as they are used
+by a range of communication and storage protocols to detect errors and thereby
+ensure data integrity. Because of the standard structure and typical set of
+variations used by CRCs, it is readily possible to provide a general-purpose
+CRC generator in the standard library which should cover the majority of use
+cases efficiently.</p>
+<p>See the <a href="https://en.wikipedia.org/wiki/Cyclic_redundancy_check">Wikipedia page on CRCs</a> for more background and use cases.</p>
+<h1 id="guide-level-explanation"><a class="header" href="#guide-level-explanation">Guide-level explanation</a></h1>
+<p>The Amaranth standard library includes a generator for a cyclic redundancy
+check (CRC) module, which can be used to compute and/or validate most common
+CRCs used by transmission and storage protocols.</p>
+<p>There are many different CRC algorithms in use, but they can almost all be
+described by the following parameters:</p>
+<ul>
+<li>The bit width of the CRC, commonly (but not always) a power of 2,</li>
+<li>The generator polynomial, represented as an integer where each bit is a 0 or
+1 term in a binary-valued polynomial with as many terms as the CRC width,</li>
+<li>The initial value of the CRC register, commonly non-zero to allow detection
+of additional 0-valued data words at the start of a message,</li>
+<li>Whether to process input words least- or most-significant-bit first,
+allowing the CRC processing order to match the transmission or storage order
+of the data bits,</li>
+<li>Whether to flip the final output so that its least-significant-bit becomes
+the most-significant bit, set for the same reason as reflecting the input
+when the CRC value will also be transmitted or stored with a certain bit
+order,</li>
+<li>What value, if any, to XOR the output bits with before using the CRC value,
+often used to invert all bits of the output.</li>
+</ul>
+<p>This set of parameters is commonly known as the Williams or Rocksoft model. For
+more information, refer to <a href="http://www.ross.net/crc/download/crc_v3.txt">&quot;A Painless Guide to CRC Error Detection Algorithms&quot;</a>.</p>
+<p>For a list of parameters to use for standard CRCs, refer to:</p>
+<ul>
+<li><a href="https://reveng.sourceforge.io/crc-catalogue/all.htm">reveng</a>'s catalogue, which uses the same parameterisation</li>
+<li><a href="http://crcmod.sourceforge.net/crcmod.predefined.html">crcmod</a>'s predefined list, but remove the leading <code>1</code> from the
+polynomials, XOR the &quot;Init-value&quot; with &quot;XOR-out&quot; to obtain <code>initial_crc</code>,
+and where <code>Reversed</code> is <code>True</code>, set both <code>ref_in</code> <strong>and</strong>
+<code>ref_out</code> to <code>True</code>.</li>
+<li><a href="https://users.ece.cmu.edu/~koopman/crc/">CRC Zoo</a>, which only lists polynomials; use the &quot;explicit +1&quot; form but
+remove the leading <code>1</code>.</li>
+</ul>
+<p>The CRC algorithms described in the <a href="https://reveng.sourceforge.io/crc-catalogue/all.htm">reveng</a> catalogue are also available
+in the Amaranth standard library in the <code>crc.catalog</code> module.</p>
+<p>In Amaranth, the <code>crc.Algorithm</code> class holds the parameters that describe a
+CRC algorithm:</p>
+<ul>
+<li><code>crc_width</code>: the bit width of the CRC</li>
+<li><code>polynomial</code>: the generator polynomial of the CRC, excluding an implicit
+leading 1 for the &quot;x^n&quot; term</li>
+<li><code>initial_crc</code>: the initial value of the CRC, loaded when computation of a
+new CRC begins</li>
+<li><code>reflect_input</code>: if True, input words are bit-reversed so that the least
+significant bit is processed first</li>
+<li><code>reflect_output</code>: if True, the final output is bit-reversed so that its
+least-significant bit becomes the most-significant bit of output</li>
+<li><code>xor_output</code>: a value to XOR the output with</li>
+</ul>
+<p>The <code>crc.Algorithm</code> class may be constructed manually, but for many
+commonly used CRC algorithms a predefined instance is available in
+the <code>crc.catalog</code> module.</p>
+<p>To fully define a CRC computation, the width of input data words to the CRC
+must also be specified. This is commonly 8 for processing byte-wise data,
+but can be any length greater than 0. The combination of a <code>crc.Algorithm</code>
+and the <code>data_width</code> makes a <code>crc.Parameters</code> instance, for example:</p>
+<pre><code class="language-python">from amaranth.lib import crc
+algo = crc.Algorithm(crc_width=8, polynomial=0x2f, initial_crc=0xff,
+                     reflect_input=False, reflect_output=False,
+                     xor_output=0xff)
+params1 = algo(data_width=8)
+params2 = crc.catalog.CRC8_AUTOSAR(data_width=8)
+</code></pre>
+<p>If not specified, the data width defaults to 8 bits.</p>
+<p>The <code>crc.Parameters</code> class can be used to compute CRCs in software with its
+<code>compute()</code> method, which is passed an iterable of integer data words and
+returns the resulting CRC value.</p>
+<pre><code class="language-python">from amaranth.lib import crc
+params = crc.catalog.CRC8_AUTOSAR()
+assert params.compute(b&quot;123456789&quot;) == 0xdf
+</code></pre>
+<p>To generate a hardware CRC module, either call <code>create()</code> on <code>crc.Parameters</code>
+or manually construct a <code>crc.Processor</code>:</p>
+<pre><code class="language-python">from amaranth.lib import crc
+algo = crc.Algorithm(crc_width=8, polynomial=0x2f, initial_crc=0xff,
+                     reflect_input=False, reflect_output=False,
+                     xor_output=0xff)
+params = algo(data_width=8)
+crc1 = m.submodules.crc1 = crc.Processor(params)
+crc2 = m.submodules.crc2 = crc.Catalog.CRC8_AUTOSAR().create()
+</code></pre>
+<p>The <code>crc.Processor</code> module begins computation of a new CRC whenever its <code>start</code>
+input is asserted. Input on <code>data</code> is processed whenever <code>valid</code> is asserted,
+which may occur in the same clock cycle as <code>start</code>. The updated CRC value is
+available on the <code>crc</code> output on the clock cycle after <code>valid</code>.</p>
+<p>With the data width set to 1, a traditional bit-serial CRC is implemented
+for the given polynomial in a Galois-type shift register. For larger values
+of data width, a similar architecture computes every new bit of the CRC in
+parallel.</p>
+<p>The <code>match_detected</code> output signal may be used to validate data that contains a
+trailing CRC. If the most recently processed word(s) form a valid CRC for all
+the data processed since <code>start</code>, the CRC register will always contain a fixed
+value which can be computed in advance, and the <code>match_detected</code> output
+indicates whether the CRC register currently contains this value.</p>
+<h1 id="reference-level-explanation"><a class="header" href="#reference-level-explanation">Reference-level explanation</a></h1>
+<p>The proposed new interface is:</p>
+<ul>
+<li>A <code>crc.Algorithm</code> class which holds the parameters for a CRC algorithm,
+all of which are passed to the constructor:
+<ul>
+<li><code>crc_width</code>: bit width of the CRC register</li>
+<li><code>polynomial</code>: generator polynomial for CRC algorithm</li>
+<li><code>initial_crc</code>: initial value of CRC at start of computation</li>
+<li><code>reflect_input</code>: if True, input words are bit-reversed</li>
+<li><code>reflect_output</code>: if True, output values are bit-reversed</li>
+<li><code>xor_output</code>: value to XOR the CRC value with at output</li>
+</ul>
+</li>
+<li><code>crc.Algorithm</code> implements <code>__call__(data_width=)</code> which is used to create
+a <code>crc.Parameters</code> instance with the specified data width.</li>
+<li>A <code>crc.Parameters</code> class which is constructed using a <code>crc.Algorithm</code> and
+a <code>data_width</code>.</li>
+<li><code>crc.Parameters</code> has the following methods:
+<ul>
+<li><code>compute(data)</code> performs a software CRC computation on <code>data</code>, an
+iterable of input data words, and returns the CRC value</li>
+<li><code>create()</code> returns a <code>crc.Processor</code> instance preconfigured to use
+these parameters</li>
+<li><code>residue()</code> returns the residue value for these parameters, which is
+the value left in the CRC register after processing an entire valid
+codeword (data followed by its own valid CRC)</li>
+<li><code>algorithm()</code> returns an <code>crc.Algorithm</code> with the same settings as
+this <code>crc.Parameters</code> instance</li>
+</ul>
+</li>
+<li>A <code>crc.Processor</code> class which inherits from <code>Elaboratable</code> and implements
+the hardware generator</li>
+<li>A <code>crc.catalog</code> module which contains instances of <code>crc.Algorithm</code></li>
+</ul>
+<p>The hardware implementation uses the property that CRCs are linear, and so the
+new value of any bit of the CRC register can be found as a linear combination
+of the current state and all the input bits. By expressing the CRC computation
+as a linear system like this, we can then determine the boolean equation used
+to update each bit of the CRC in parallel. A software CRC calculator is
+implemented in Python in order to find these logic equations.</p>
+<p>The proposed CRC generator is already implemented and available in <a href="https://github.com/amaranth-lang/amaranth/pull/681">PR 681</a>.
+The docstrings and comments in it should explain its operation to a suitably
+technical level of detail.</p>
+<h1 id="drawbacks"><a class="header" href="#drawbacks">Drawbacks</a></h1>
+<p>Users could always write their own CRC or use an external library; Amaranth
+does not need to provide one for them. However, since it's a very common
+requirement that we can satisfy efficiently for a lot of users, it seems
+reasonable to include in the standard library.</p>
+<h1 id="rationale-and-alternatives"><a class="header" href="#rationale-and-alternatives">Rationale and alternatives</a></h1>
+<p>As far as I'm aware, the method here is the optimal technique for generating
+the logic equations required for this combinatorial CRC generation.</p>
+<p>One alternative to the combinatorial logic equations is to store intermediate
+values in a lookup table; the table needs to contain a CRC-sized value for
+every possible input value, and then the computation required is reduced to a
+table lookup, an XOR, and some bit shifts. For single-byte words this approach
+may be practical, but it is unlikely to be worthwhile with 16- or 32-bit words.
+Additionally, the table approach generally requires a latency of 2 cycles (one
+extra to perform the table lookup). It's possible this would give better timing
+in some circumstances, but at the cost of block RAM resources and latency.</p>
+<h1 id="prior-art"><a class="header" href="#prior-art">Prior art</a></h1>
+<p>The specification chosen for the CRC parameters is a popular de-facto standard,
+and importantly the <a href="https://reveng.sourceforge.io/crc-catalogue/all.htm">reveng</a> catalogue lists suitable parameters for a wide
+range of standard CRCs.</p>
+<p>This particular implementation was written in 2020 and is extracted (with
+permission) from a proprietary codebase, where it is used to generate a
+variety of CRCs on FPGAs.</p>
+<p>One early public example of using Amaranth to generate CRCs is from
+<a href="https://gitlab.com/harmoninstruments/harmon-instruments-open-hdl/-/blob/master/Ethernet/CRC.py">Harmon Instruments</a>, also in 2020, which has a similar construction
+but does not support the full set of CRC parameters.</p>
+<p>In general, I found many examples of implementations of <em>specific</em> CRCs in
+other HDLs, but few for generic generators. There are many software libraries
+for generating CRCs in most programming languages, but as they are not
+generating hardware their implementation details are not as relevant - small
+table lookups are popular as the tradeoffs there tend to favour word-at-a-time
+computations.</p>
+<h1 id="unresolved-questions"><a class="header" href="#unresolved-questions">Unresolved questions</a></h1>
+<ul>
+<li>No outstanding unresolved questions.</li>
+</ul>
+<h1 id="future-possibilities"><a class="header" href="#future-possibilities">Future possibilities</a></h1>
+<ul>
+<li>
+<p>The data interface uses <code>start</code>, <code>data</code>, and <code>valid</code> signals.
+Eventually, this could be replaced with a Stream, once they are finalised.</p>
+</li>
+<li>
+<p>Currently the entire input data word must be valid together; there is no
+support for masking some bits off. In particular, such a feature could be
+useful for wide data paths where the underlying CRC computation is byte-wise,
+for example a 128-bit-wide data stream from a 10GbE MAC where the Ethernet
+FCS must be computed over individual bytes. However, the implementation
+complexity is high, the use cases seem more niche, and such a feature could
+be added in a backwards-compatible later revision.</p>
+</li>
+<li>
+<p>The software CRC computation only supports computing over an entire
+set of data. It would be possible to offer an API to permit incremental
+updates and finalisation.</p>
+</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="0005-remove-const-normalize.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="0008-aggregate-extensibility.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="0005-remove-const-normalize.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="0008-aggregate-extensibility.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

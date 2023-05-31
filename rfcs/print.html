@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li><li class="chapter-item expanded "><a href="0003-enumeration-shapes.html">0003-enumeration-shapes</a></li><li class="chapter-item expanded "><a href="0004-const-castable-exprs.html">0004-const-castable-exprs</a></li><li class="chapter-item expanded "><a href="0005-remove-const-normalize.html">0005-remove-const-normalize</a></li><li class="chapter-item expanded "><a href="0008-aggregate-extensibility.html">0008-aggregate-extensibility</a></li><li class="chapter-item expanded "><a href="0009-const-init-shape-castable.html">0009-const-init-shape-castable</a></li><li class="chapter-item expanded "><a href="0010-move-repl-to-value.html">0010-move-repl-to-value</a></li><li class="chapter-item expanded "><a href="0015-lifting-shape-castables.html">0015-lifting-shape-castables</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li><li class="chapter-item expanded "><a href="0003-enumeration-shapes.html">0003-enumeration-shapes</a></li><li class="chapter-item expanded "><a href="0004-const-castable-exprs.html">0004-const-castable-exprs</a></li><li class="chapter-item expanded "><a href="0005-remove-const-normalize.html">0005-remove-const-normalize</a></li><li class="chapter-item expanded "><a href="0006-stdlib-crc.html">0006-stdlib-crc</a></li><li class="chapter-item expanded "><a href="0008-aggregate-extensibility.html">0008-aggregate-extensibility</a></li><li class="chapter-item expanded "><a href="0009-const-init-shape-castable.html">0009-const-init-shape-castable</a></li><li class="chapter-item expanded "><a href="0010-move-repl-to-value.html">0010-move-repl-to-value</a></li><li class="chapter-item expanded "><a href="0015-lifting-shape-castables.html">0015-lifting-shape-castables</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -741,14 +741,225 @@ with m.Switch(instr):
 <h2 id="future-possibilities-2"><a class="header" href="#future-possibilities-2">Future possibilities</a></h2>
 <p>None.</p>
 <div style="break-before: page; page-break-before: always;"></div><ul>
+<li>Start Date: 2023-05-21</li>
+<li>RFC PR: <a href="https://github.com/amaranth-lang/rfcs/pull/0006">amaranth-lang/rfcs#0006</a></li>
+<li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/681">amaranth-lang/amaranth#681</a></li>
+</ul>
+<h1 id="summary-4"><a class="header" href="#summary-4">Summary</a></h1>
+<p>Add a cyclic redundancy check (CRC) generator to the Amaranth standard library.</p>
+<h1 id="motivation-4"><a class="header" href="#motivation-4">Motivation</a></h1>
+<p>Computing CRCs is a common requirement in hardware designs as they are used
+by a range of communication and storage protocols to detect errors and thereby
+ensure data integrity. Because of the standard structure and typical set of
+variations used by CRCs, it is readily possible to provide a general-purpose
+CRC generator in the standard library which should cover the majority of use
+cases efficiently.</p>
+<p>See the <a href="https://en.wikipedia.org/wiki/Cyclic_redundancy_check">Wikipedia page on CRCs</a> for more background and use cases.</p>
+<h1 id="guide-level-explanation-2"><a class="header" href="#guide-level-explanation-2">Guide-level explanation</a></h1>
+<p>The Amaranth standard library includes a generator for a cyclic redundancy
+check (CRC) module, which can be used to compute and/or validate most common
+CRCs used by transmission and storage protocols.</p>
+<p>There are many different CRC algorithms in use, but they can almost all be
+described by the following parameters:</p>
+<ul>
+<li>The bit width of the CRC, commonly (but not always) a power of 2,</li>
+<li>The generator polynomial, represented as an integer where each bit is a 0 or
+1 term in a binary-valued polynomial with as many terms as the CRC width,</li>
+<li>The initial value of the CRC register, commonly non-zero to allow detection
+of additional 0-valued data words at the start of a message,</li>
+<li>Whether to process input words least- or most-significant-bit first,
+allowing the CRC processing order to match the transmission or storage order
+of the data bits,</li>
+<li>Whether to flip the final output so that its least-significant-bit becomes
+the most-significant bit, set for the same reason as reflecting the input
+when the CRC value will also be transmitted or stored with a certain bit
+order,</li>
+<li>What value, if any, to XOR the output bits with before using the CRC value,
+often used to invert all bits of the output.</li>
+</ul>
+<p>This set of parameters is commonly known as the Williams or Rocksoft model. For
+more information, refer to <a href="http://www.ross.net/crc/download/crc_v3.txt">&quot;A Painless Guide to CRC Error Detection Algorithms&quot;</a>.</p>
+<p>For a list of parameters to use for standard CRCs, refer to:</p>
+<ul>
+<li><a href="https://reveng.sourceforge.io/crc-catalogue/all.htm">reveng</a>'s catalogue, which uses the same parameterisation</li>
+<li><a href="http://crcmod.sourceforge.net/crcmod.predefined.html">crcmod</a>'s predefined list, but remove the leading <code>1</code> from the
+polynomials, XOR the &quot;Init-value&quot; with &quot;XOR-out&quot; to obtain <code>initial_crc</code>,
+and where <code>Reversed</code> is <code>True</code>, set both <code>ref_in</code> <strong>and</strong>
+<code>ref_out</code> to <code>True</code>.</li>
+<li><a href="https://users.ece.cmu.edu/~koopman/crc/">CRC Zoo</a>, which only lists polynomials; use the &quot;explicit +1&quot; form but
+remove the leading <code>1</code>.</li>
+</ul>
+<p>The CRC algorithms described in the <a href="https://reveng.sourceforge.io/crc-catalogue/all.htm">reveng</a> catalogue are also available
+in the Amaranth standard library in the <code>crc.catalog</code> module.</p>
+<p>In Amaranth, the <code>crc.Algorithm</code> class holds the parameters that describe a
+CRC algorithm:</p>
+<ul>
+<li><code>crc_width</code>: the bit width of the CRC</li>
+<li><code>polynomial</code>: the generator polynomial of the CRC, excluding an implicit
+leading 1 for the &quot;x^n&quot; term</li>
+<li><code>initial_crc</code>: the initial value of the CRC, loaded when computation of a
+new CRC begins</li>
+<li><code>reflect_input</code>: if True, input words are bit-reversed so that the least
+significant bit is processed first</li>
+<li><code>reflect_output</code>: if True, the final output is bit-reversed so that its
+least-significant bit becomes the most-significant bit of output</li>
+<li><code>xor_output</code>: a value to XOR the output with</li>
+</ul>
+<p>The <code>crc.Algorithm</code> class may be constructed manually, but for many
+commonly used CRC algorithms a predefined instance is available in
+the <code>crc.catalog</code> module.</p>
+<p>To fully define a CRC computation, the width of input data words to the CRC
+must also be specified. This is commonly 8 for processing byte-wise data,
+but can be any length greater than 0. The combination of a <code>crc.Algorithm</code>
+and the <code>data_width</code> makes a <code>crc.Parameters</code> instance, for example:</p>
+<pre><code class="language-python">from amaranth.lib import crc
+algo = crc.Algorithm(crc_width=8, polynomial=0x2f, initial_crc=0xff,
+                     reflect_input=False, reflect_output=False,
+                     xor_output=0xff)
+params1 = algo(data_width=8)
+params2 = crc.catalog.CRC8_AUTOSAR(data_width=8)
+</code></pre>
+<p>If not specified, the data width defaults to 8 bits.</p>
+<p>The <code>crc.Parameters</code> class can be used to compute CRCs in software with its
+<code>compute()</code> method, which is passed an iterable of integer data words and
+returns the resulting CRC value.</p>
+<pre><code class="language-python">from amaranth.lib import crc
+params = crc.catalog.CRC8_AUTOSAR()
+assert params.compute(b&quot;123456789&quot;) == 0xdf
+</code></pre>
+<p>To generate a hardware CRC module, either call <code>create()</code> on <code>crc.Parameters</code>
+or manually construct a <code>crc.Processor</code>:</p>
+<pre><code class="language-python">from amaranth.lib import crc
+algo = crc.Algorithm(crc_width=8, polynomial=0x2f, initial_crc=0xff,
+                     reflect_input=False, reflect_output=False,
+                     xor_output=0xff)
+params = algo(data_width=8)
+crc1 = m.submodules.crc1 = crc.Processor(params)
+crc2 = m.submodules.crc2 = crc.Catalog.CRC8_AUTOSAR().create()
+</code></pre>
+<p>The <code>crc.Processor</code> module begins computation of a new CRC whenever its <code>start</code>
+input is asserted. Input on <code>data</code> is processed whenever <code>valid</code> is asserted,
+which may occur in the same clock cycle as <code>start</code>. The updated CRC value is
+available on the <code>crc</code> output on the clock cycle after <code>valid</code>.</p>
+<p>With the data width set to 1, a traditional bit-serial CRC is implemented
+for the given polynomial in a Galois-type shift register. For larger values
+of data width, a similar architecture computes every new bit of the CRC in
+parallel.</p>
+<p>The <code>match_detected</code> output signal may be used to validate data that contains a
+trailing CRC. If the most recently processed word(s) form a valid CRC for all
+the data processed since <code>start</code>, the CRC register will always contain a fixed
+value which can be computed in advance, and the <code>match_detected</code> output
+indicates whether the CRC register currently contains this value.</p>
+<h1 id="reference-level-explanation-2"><a class="header" href="#reference-level-explanation-2">Reference-level explanation</a></h1>
+<p>The proposed new interface is:</p>
+<ul>
+<li>A <code>crc.Algorithm</code> class which holds the parameters for a CRC algorithm,
+all of which are passed to the constructor:
+<ul>
+<li><code>crc_width</code>: bit width of the CRC register</li>
+<li><code>polynomial</code>: generator polynomial for CRC algorithm</li>
+<li><code>initial_crc</code>: initial value of CRC at start of computation</li>
+<li><code>reflect_input</code>: if True, input words are bit-reversed</li>
+<li><code>reflect_output</code>: if True, output values are bit-reversed</li>
+<li><code>xor_output</code>: value to XOR the CRC value with at output</li>
+</ul>
+</li>
+<li><code>crc.Algorithm</code> implements <code>__call__(data_width=)</code> which is used to create
+a <code>crc.Parameters</code> instance with the specified data width.</li>
+<li>A <code>crc.Parameters</code> class which is constructed using a <code>crc.Algorithm</code> and
+a <code>data_width</code>.</li>
+<li><code>crc.Parameters</code> has the following methods:
+<ul>
+<li><code>compute(data)</code> performs a software CRC computation on <code>data</code>, an
+iterable of input data words, and returns the CRC value</li>
+<li><code>create()</code> returns a <code>crc.Processor</code> instance preconfigured to use
+these parameters</li>
+<li><code>residue()</code> returns the residue value for these parameters, which is
+the value left in the CRC register after processing an entire valid
+codeword (data followed by its own valid CRC)</li>
+<li><code>algorithm()</code> returns an <code>crc.Algorithm</code> with the same settings as
+this <code>crc.Parameters</code> instance</li>
+</ul>
+</li>
+<li>A <code>crc.Processor</code> class which inherits from <code>Elaboratable</code> and implements
+the hardware generator</li>
+<li>A <code>crc.catalog</code> module which contains instances of <code>crc.Algorithm</code></li>
+</ul>
+<p>The hardware implementation uses the property that CRCs are linear, and so the
+new value of any bit of the CRC register can be found as a linear combination
+of the current state and all the input bits. By expressing the CRC computation
+as a linear system like this, we can then determine the boolean equation used
+to update each bit of the CRC in parallel. A software CRC calculator is
+implemented in Python in order to find these logic equations.</p>
+<p>The proposed CRC generator is already implemented and available in <a href="https://github.com/amaranth-lang/amaranth/pull/681">PR 681</a>.
+The docstrings and comments in it should explain its operation to a suitably
+technical level of detail.</p>
+<h1 id="drawbacks-4"><a class="header" href="#drawbacks-4">Drawbacks</a></h1>
+<p>Users could always write their own CRC or use an external library; Amaranth
+does not need to provide one for them. However, since it's a very common
+requirement that we can satisfy efficiently for a lot of users, it seems
+reasonable to include in the standard library.</p>
+<h1 id="rationale-and-alternatives-3"><a class="header" href="#rationale-and-alternatives-3">Rationale and alternatives</a></h1>
+<p>As far as I'm aware, the method here is the optimal technique for generating
+the logic equations required for this combinatorial CRC generation.</p>
+<p>One alternative to the combinatorial logic equations is to store intermediate
+values in a lookup table; the table needs to contain a CRC-sized value for
+every possible input value, and then the computation required is reduced to a
+table lookup, an XOR, and some bit shifts. For single-byte words this approach
+may be practical, but it is unlikely to be worthwhile with 16- or 32-bit words.
+Additionally, the table approach generally requires a latency of 2 cycles (one
+extra to perform the table lookup). It's possible this would give better timing
+in some circumstances, but at the cost of block RAM resources and latency.</p>
+<h1 id="prior-art-3"><a class="header" href="#prior-art-3">Prior art</a></h1>
+<p>The specification chosen for the CRC parameters is a popular de-facto standard,
+and importantly the <a href="https://reveng.sourceforge.io/crc-catalogue/all.htm">reveng</a> catalogue lists suitable parameters for a wide
+range of standard CRCs.</p>
+<p>This particular implementation was written in 2020 and is extracted (with
+permission) from a proprietary codebase, where it is used to generate a
+variety of CRCs on FPGAs.</p>
+<p>One early public example of using Amaranth to generate CRCs is from
+<a href="https://gitlab.com/harmoninstruments/harmon-instruments-open-hdl/-/blob/master/Ethernet/CRC.py">Harmon Instruments</a>, also in 2020, which has a similar construction
+but does not support the full set of CRC parameters.</p>
+<p>In general, I found many examples of implementations of <em>specific</em> CRCs in
+other HDLs, but few for generic generators. There are many software libraries
+for generating CRCs in most programming languages, but as they are not
+generating hardware their implementation details are not as relevant - small
+table lookups are popular as the tradeoffs there tend to favour word-at-a-time
+computations.</p>
+<h1 id="unresolved-questions-3"><a class="header" href="#unresolved-questions-3">Unresolved questions</a></h1>
+<ul>
+<li>No outstanding unresolved questions.</li>
+</ul>
+<h1 id="future-possibilities-3"><a class="header" href="#future-possibilities-3">Future possibilities</a></h1>
+<ul>
+<li>
+<p>The data interface uses <code>start</code>, <code>data</code>, and <code>valid</code> signals.
+Eventually, this could be replaced with a Stream, once they are finalised.</p>
+</li>
+<li>
+<p>Currently the entire input data word must be valid together; there is no
+support for masking some bits off. In particular, such a feature could be
+useful for wide data paths where the underlying CRC computation is byte-wise,
+for example a 128-bit-wide data stream from a 10GbE MAC where the Ethernet
+FCS must be computed over individual bytes. However, the implementation
+complexity is high, the use cases seem more niche, and such a feature could
+be added in a backwards-compatible later revision.</p>
+</li>
+<li>
+<p>The software CRC computation only supports computing over an entire
+set of data. It would be possible to offer an API to permit incremental
+updates and finalisation.</p>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><ul>
 <li>Start Date: 2023-05-11</li>
 <li>RFC PR: <a href="https://github.com/amaranth-lang/rfcs/pull/8">amaranth-lang/rfcs#8</a></li>
 <li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/772">amaranth-lang/amaranth#772</a></li>
 </ul>
 <h1 id="aggregate-data-structure-extensibility"><a class="header" href="#aggregate-data-structure-extensibility">Aggregate data structure extensibility</a></h1>
-<h2 id="summary-4"><a class="header" href="#summary-4">Summary</a></h2>
+<h2 id="summary-5"><a class="header" href="#summary-5">Summary</a></h2>
 <p>Provide well-defined extension points for the aggregate data structure library.</p>
-<h2 id="motivation-4"><a class="header" href="#motivation-4">Motivation</a></h2>
+<h2 id="motivation-5"><a class="header" href="#motivation-5">Motivation</a></h2>
 <p><a href="0001-aggregate-data-structures.html">RFC 1</a> introduces the aggregate data structure library, which allows using any shape-castable object as the shape of a field. Layouts do not consider the specific type of the shape-castable object. However, views do, and depending on whether it's a layout, a subclass of an aggregate class (<code>Struct</code> or <code>Union</code>), or any other shape-castable object, behavior differs:</p>
 <pre><code class="language-python">&gt;&gt;&gt; from amaranth import *
 &gt;&gt;&gt; from amaranth.lib.data import *
@@ -769,12 +980,12 @@ with m.Switch(instr):
 &lt;__main__.S object at 0x7f53e4693a30&gt;
 </code></pre>
 <p>At the moment this behavior is not well-defined and it special-cases the aggregate classes defined in <code>amaranth.lib.data</code>.</p>
-<h2 id="guide-level-explanation-2"><a class="header" href="#guide-level-explanation-2">Guide-level explanation</a></h2>
+<h2 id="guide-level-explanation-3"><a class="header" href="#guide-level-explanation-3">Guide-level explanation</a></h2>
 <p>Any shape-castable object can be used as the shape of a field in a layout. This includes another layout. If the object is a callable (provides a <code>__call__</code> method), then when a view is accessed, the <code>__call__</code> method will be called with a single argument, the slice of the underlying value, which will be returned by the view. A <code>Layout</code> is a callable that constructs a <code>View</code> from itself and the value.</p>
-<h2 id="reference-level-explanation-2"><a class="header" href="#reference-level-explanation-2">Reference-level explanation</a></h2>
+<h2 id="reference-level-explanation-3"><a class="header" href="#reference-level-explanation-3">Reference-level explanation</a></h2>
 <p>The <code>Layout</code> class has a method <code>__call__</code>. <code>layout(value)</code> is equivalent to <code>View(layout, value)</code>.</p>
 <p>The <code>View.__getitem__</code> method (and by extension <code>View.__getattr__</code>), after extracting a <code>field</code> from the layout, attempts to call <code>field.shape.__call__(value_slice)</code>, where <code>value_slice</code> is the slice of the underlying value corresponding to the field. If there is no such method, it iteratively calls <code>as_shape()</code> on <code>field.shape</code> or the result of the previous call to <code>as_shape()</code> until an object is returned that has a <code>__call__</code> method, or until an instance of <code>Shape</code> is returned.</p>
-<h2 id="drawbacks-4"><a class="header" href="#drawbacks-4">Drawbacks</a></h2>
+<h2 id="drawbacks-5"><a class="header" href="#drawbacks-5">Drawbacks</a></h2>
 <ul>
 <li>The syntax may be confusing.
 <ul>
@@ -782,17 +993,17 @@ with m.Switch(instr):
 </ul>
 </li>
 </ul>
-<h2 id="rationale-and-alternatives-3"><a class="header" href="#rationale-and-alternatives-3">Rationale and alternatives</a></h2>
+<h2 id="rationale-and-alternatives-4"><a class="header" href="#rationale-and-alternatives-4">Rationale and alternatives</a></h2>
 <p>This design is, as far as the author knows, the smallest possible addition that provides the largest possible extensibility and removes all special casing of aggregate base classes. That it requires no additional functionality to be implemented on the aggregate base classes indicates that it fits well into the existing design.</p>
 <p>Alternatives:</p>
 <ul>
 <li>Do not do this.</li>
 </ul>
-<h2 id="prior-art-3"><a class="header" href="#prior-art-3">Prior art</a></h2>
+<h2 id="prior-art-4"><a class="header" href="#prior-art-4">Prior art</a></h2>
 <p>None.</p>
-<h2 id="unresolved-questions-3"><a class="header" href="#unresolved-questions-3">Unresolved questions</a></h2>
+<h2 id="unresolved-questions-4"><a class="header" href="#unresolved-questions-4">Unresolved questions</a></h2>
 <p>None.</p>
-<h2 id="future-possibilities-3"><a class="header" href="#future-possibilities-3">Future possibilities</a></h2>
+<h2 id="future-possibilities-4"><a class="header" href="#future-possibilities-4">Future possibilities</a></h2>
 <p>None.</p>
 <div style="break-before: page; page-break-before: always;"></div><ul>
 <li>Start Date: 2023-05-11</li>
@@ -800,9 +1011,9 @@ with m.Switch(instr):
 <li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/771">amaranth-lang/amaranth#771</a></li>
 </ul>
 <h1 id="constant-initialization-for-shape-castable-objects"><a class="header" href="#constant-initialization-for-shape-castable-objects">Constant initialization for shape-castable objects</a></h1>
-<h2 id="summary-5"><a class="header" href="#summary-5">Summary</a></h2>
+<h2 id="summary-6"><a class="header" href="#summary-6">Summary</a></h2>
 <p>Add an extension point to shape-castable objects, for converting constant initializers (typically Python literals) to Amaranth constant expressions.</p>
-<h2 id="motivation-5"><a class="header" href="#motivation-5">Motivation</a></h2>
+<h2 id="motivation-6"><a class="header" href="#motivation-6">Motivation</a></h2>
 <p><a href="0001-aggregate-data-structures.html">RFC 1</a> specifies that the <code>reset=</code> argument of a <code>View</code> accepts structured data:</p>
 <pre><code class="language-python">flt_neg_reset = data.View(float32_layout, reset={&quot;sign&quot;: 1})
 </code></pre>
@@ -810,17 +1021,17 @@ with m.Switch(instr):
 <p>For example, if a signal is created manually and not through the <code>View</code>, this will not work despite looking reasonable (the layout is shape-castable and can be supplied to <code>Signal</code>):</p>
 <pre><code class="language-python">flt_neg_reset_signal = Signal(float32_layout, reset={&quot;sign&quot;: 1})
 </code></pre>
-<h2 id="guide-level-explanation-3"><a class="header" href="#guide-level-explanation-3">Guide-level explanation</a></h2>
+<h2 id="guide-level-explanation-4"><a class="header" href="#guide-level-explanation-4">Guide-level explanation</a></h2>
 <p>Shape-castable objects must, in addition to the mandatory <code>.as_shape()</code> method, implement a mandatory <code>.const(value)</code> method to define how a constant initializer (the reset value of a <code>Signal</code> or <code>View</code>) is converted to an Amaranth constant.</p>
 <p>This method is defined by shape-castable objects to convert arbitrary Python objects into Amaranth constants. For example, if a shape-castable object has complex internal structure, it can accept a dictionary with the values to be filled into various bits of this structure. If <code>Shape</code> implemented <code>ShapeCastable</code>, the method would be defined as <code>def const(self, value): return Const(value, self)</code>.</p>
 <p>This method can also be directly called by the developer to construct a constant using a given shape-castable object.</p>
-<h2 id="reference-level-explanation-3"><a class="header" href="#reference-level-explanation-3">Reference-level explanation</a></h2>
+<h2 id="reference-level-explanation-4"><a class="header" href="#reference-level-explanation-4">Reference-level explanation</a></h2>
 <p>A method <code>def const(self, obj):</code> is added on <code>ShapeCastable</code>.</p>
 <p>The <code>Signal(shape, reset=)</code> constructor is changed so that if <code>isinstance(shape, ShapeCastable)</code>, then <code>shape.const(reset)</code> is used instead of <code>reset</code>.</p>
 <p>The <code>.const()</code> instance method is implemented on <code>Layout</code> to accept a <code>Sequence</code> or <code>Mapping</code> instance and returns a <code>Const</code> with a bit pattern that has the fields set to the given values. Overlapping fields are written in the order of iteration of the input. If the field shape is a shape-castable object, then the value for that field is computed using <code>Const.cast(value, field.shape)</code>.</p>
 <p>The <code>.const()</code> method is implemented on the metaclass of <code>Struct</code> and <code>Union</code> as <code>return self.as_shape().const(obj)</code>.</p>
 <p>The <code>View(..., reset=)</code> constructor is changed to pass <code>reset</code> through to the <code>Signal()</code> constructor.</p>
-<h2 id="drawbacks-5"><a class="header" href="#drawbacks-5">Drawbacks</a></h2>
+<h2 id="drawbacks-6"><a class="header" href="#drawbacks-6">Drawbacks</a></h2>
 <ul>
 <li>Additional method on <code>ShapeCastable</code>.
 <ul>
@@ -829,7 +1040,7 @@ with m.Switch(instr):
 </li>
 <li>The <code>reset=</code> argument becomes dependently typed.</li>
 </ul>
-<h2 id="rationale-and-alternatives-4"><a class="header" href="#rationale-and-alternatives-4">Rationale and alternatives</a></h2>
+<h2 id="rationale-and-alternatives-5"><a class="header" href="#rationale-and-alternatives-5">Rationale and alternatives</a></h2>
 <p>Given:</p>
 <pre><code class="language-python">class Point(Struct):
     x: 16
@@ -844,11 +1055,11 @@ with m.Switch(instr):
 <p>Option (1) has the benefit of making it clear when downstream code is creating a constant (and expects an argument where the nested data must all be constant), and of minimizing useless wrapping/unwrapping of views that would otherwise happen. It is an explicit type conversion (from a literal to <code>Const</code>).</p>
 <p>Option (2) avoids introducing new names. It is an implicit type conversion (from a literal to a view, which in this case is <code>Point</code>).</p>
 <p>In the end, option (1) seems preferable here since implicit type conversions are easy to unintentionally misuse. It also avoids any clashes with proposed RFC 8.</p>
-<h2 id="prior-art-4"><a class="header" href="#prior-art-4">Prior art</a></h2>
+<h2 id="prior-art-5"><a class="header" href="#prior-art-5">Prior art</a></h2>
 <p>None.</p>
-<h2 id="unresolved-questions-4"><a class="header" href="#unresolved-questions-4">Unresolved questions</a></h2>
+<h2 id="unresolved-questions-5"><a class="header" href="#unresolved-questions-5">Unresolved questions</a></h2>
 <p>None.</p>
-<h2 id="future-possibilities-4"><a class="header" href="#future-possibilities-4">Future possibilities</a></h2>
+<h2 id="future-possibilities-5"><a class="header" href="#future-possibilities-5">Future possibilities</a></h2>
 <p>None.</p>
 <div style="break-before: page; page-break-before: always;"></div><ul>
 <li>Start Date: 2023-05-11</li>
@@ -856,23 +1067,23 @@ with m.Switch(instr):
 <li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/770">amaranth-lang/amaranth#770</a></li>
 </ul>
 <h1 id="move-repl-to-valuereplicate"><a class="header" href="#move-repl-to-valuereplicate">Move <code>Repl</code> to <code>Value.replicate</code></a></h1>
-<h2 id="summary-6"><a class="header" href="#summary-6">Summary</a></h2>
+<h2 id="summary-7"><a class="header" href="#summary-7">Summary</a></h2>
 <p>Replace the standalone <code>Repl(value, count)</code> node with <code>value.replicate(count)</code>.</p>
-<h2 id="motivation-6"><a class="header" href="#motivation-6">Motivation</a></h2>
+<h2 id="motivation-7"><a class="header" href="#motivation-7">Motivation</a></h2>
 <p><code>Repl</code> is a <a href="https://github.com/search?q=%2F%5CbRepl%5Cb%2F+amaranth+language%3Apython&amp;type=code">rarely used</a> construct (it's mostly useful for manual sign extension).</p>
 <p>It is currently a first-class entity that has its own AST node and a name in the prelude, mostly for historical reasons (<code>Repl(v, n)</code> is analogous to Verilog's <code>{x{n}}</code>).</p>
 <p><code>Repl</code> does not need to be a first-class entity; <code>Repl(x, n)</code> is almost exactly equivalent to <code>Cat(x for x in range(n))</code>. It especially does not need a name in the prelude.</p>
-<h2 id="guide-level-explanation-4"><a class="header" href="#guide-level-explanation-4">Guide-level explanation</a></h2>
+<h2 id="guide-level-explanation-5"><a class="header" href="#guide-level-explanation-5">Guide-level explanation</a></h2>
 <p>Use of <code>Repl</code> is deprecated. To replicate a value multiple times, use <code>value.replicate()</code>.</p>
-<h2 id="reference-level-explanation-4"><a class="header" href="#reference-level-explanation-4">Reference-level explanation</a></h2>
+<h2 id="reference-level-explanation-5"><a class="header" href="#reference-level-explanation-5">Reference-level explanation</a></h2>
 <p>Direct use of <code>Repl</code> is deprecated. Its implementation is replaced with <code>def Repl(value, count): return Value.cast(value).replicate(count)</code>.</p>
 <p>A function <code>Value.replicate(count)</code> is added. It is implemented as <code>Cat(value for _ in range(count))</code>. The <code>Repl</code> AST node is removed.</p>
-<h2 id="drawbacks-6"><a class="header" href="#drawbacks-6">Drawbacks</a></h2>
+<h2 id="drawbacks-7"><a class="header" href="#drawbacks-7">Drawbacks</a></h2>
 <ul>
 <li>Churn.</li>
 <li>The proposed implementation makes <code>Value.replicate</code> valid on left-hand side of assignment, with potentially surprising behavior. However, this can be handled by prohibiting multiple assignment to the same bit of a signal in general.</li>
 </ul>
-<h2 id="rationale-and-alternatives-5"><a class="header" href="#rationale-and-alternatives-5">Rationale and alternatives</a></h2>
+<h2 id="rationale-and-alternatives-6"><a class="header" href="#rationale-and-alternatives-6">Rationale and alternatives</a></h2>
 <p>Rationale:</p>
 <ul>
 <li>Fewer names in the prelude is always good.</li>
@@ -884,11 +1095,11 @@ with m.Switch(instr):
 <ul>
 <li>Do not do this.</li>
 </ul>
-<h2 id="prior-art-5"><a class="header" href="#prior-art-5">Prior art</a></h2>
+<h2 id="prior-art-6"><a class="header" href="#prior-art-6">Prior art</a></h2>
 <p>None.</p>
-<h2 id="unresolved-questions-5"><a class="header" href="#unresolved-questions-5">Unresolved questions</a></h2>
+<h2 id="unresolved-questions-6"><a class="header" href="#unresolved-questions-6">Unresolved questions</a></h2>
 <p>None.</p>
-<h2 id="future-possibilities-5"><a class="header" href="#future-possibilities-5">Future possibilities</a></h2>
+<h2 id="future-possibilities-6"><a class="header" href="#future-possibilities-6">Future possibilities</a></h2>
 <ul>
 <li>The Verilog backend currently bitblasts what could be a replication. We could detect these and convert them to replications proper.</li>
 <li>We could detect code like <code>Cat(x, x).eq(0b11)</code> and warn or reject it.</li>
@@ -899,24 +1110,24 @@ with m.Switch(instr):
 <li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/784">amaranth-lang/amaranth#784</a></li>
 </ul>
 <h1 id="lifting-shape-castable-objects"><a class="header" href="#lifting-shape-castable-objects">Lifting shape-castable objects</a></h1>
-<h2 id="summary-7"><a class="header" href="#summary-7">Summary</a></h2>
+<h2 id="summary-8"><a class="header" href="#summary-8">Summary</a></h2>
 <p>Make <code>Signal(shape_castable, ...)</code> return <code>shape_castable(Signal(shape_castable.as_shape(), ...))</code>.</p>
-<h2 id="motivation-7"><a class="header" href="#motivation-7">Motivation</a></h2>
+<h2 id="motivation-8"><a class="header" href="#motivation-8">Motivation</a></h2>
 <p>When Amaranth was a very new language, it did not have any facilities for ascribing type information to data. It had shapes (width and signedness), and it had special handling for <code>range()</code> in the shape position, as well as enumerations. Back then it made sense to have <code>Signal</code>, the single way to define new storage of any kind, to only operate on values (numbers / bit containers).</p>
 <p>Today the situation is completely different. Amaranth has first-class support for enumerations in the standard library as well as the standard range of data structures (structs, unions, arrays) via <a href="0001-aggregate-data-structures.html">RFC 1</a> and <a href="0003-enumeration-shapes.html">RFC 3</a>. It provides extensibility through <a href="0008-aggregate-extensibility.html">RFC 8</a> and <a href="0009-const-init-shape-castable.html">RFC 9</a>. Using the existing hooks alone it is possible to extend Amaranth with rich numeric types (fixed-point, complex, potentially even floating-point), and some of these are very likely to end up in the standard library.</p>
 <p>All of this new functionality internally wraps a <code>Value</code>. It is so common and useful to initialize e.g. a struct view with a fresh <code>Signal</code> that <code>data.View</code> reexports all of the arguments of the <code>Signal</code> constructors and automatically constructs a <code>Signal</code> if no view target is provided. This works, but ties the two together more than would be ideal, and requires every similar facility to reimplement the functionality itself. What is worse is that it seems to be quite confusing to programmers, since it's not apparent that calling <code>data.View(foo_layout)</code> internally creates a <code>Signal</code>. Furthermore, people want to call <code>Signal(foo_layout)</code> to construct some storage for <code>foo_layout</code>, and that works (<code>foo_layout</code> is shape-castable), but does the wrong thing: the returned object is a <code>Signal</code>, not a <code>data.View</code>.</p>
 <p>It would make teaching a lot easier if we could draw an equivalence between a <code>Signal</code> and a variable in a general purpose programming language, and between its shape and a type in a general purpose programming language. Then, no matter what shape-castable object it is, the way to make some storage is <code>Signal(x)</code>. It will also simplify the internals a fair bit.</p>
 <p>This change wasn't practical before <a href="0008-aggregate-extensibility.html">RFC 8</a> and <a href="0009-const-init-shape-castable.html">RFC 9</a> laid the groundwork for it, but now it is an obvious extension.</p>
-<h2 id="guide-level-explanation-5"><a class="header" href="#guide-level-explanation-5">Guide-level explanation</a></h2>
+<h2 id="guide-level-explanation-6"><a class="header" href="#guide-level-explanation-6">Guide-level explanation</a></h2>
 <p>To include state in a design, use the <code>Signal(shape)</code> constructor, where <code>shape</code> describes the bit layout and possible operations on that state. The <code>reset=</code> argument and the returned value depend on the <code>shape</code> that is provided. If it is <code>signed(N)</code> or <code>unsigned(N)</code> or a built-in enumeration or a <code>range</code>, then a plain <code>Value</code> is returned, and the <code>reset=</code> argument accepts a number, an enumeration member, or a constant. If it is a <code>data.Layout</code>, then a <code>data.View</code> is returned, and the <code>reset=</code> argument accepts a sequence or a mapping, potentially nested for nested layouts. Other shape-castable classes will have their own behavior.</p>
 <blockquote>
 <p><strong>Warning</strong>
 The existing syntax for creating a <code>View</code> with a new <code>Signal</code> underlying it will be removed immediately (it has never been in a release) to resolve an ambiguity over the semantics of <code>__call__</code>.</p>
 </blockquote>
-<h2 id="reference-level-explanation-5"><a class="header" href="#reference-level-explanation-5">Reference-level explanation</a></h2>
+<h2 id="reference-level-explanation-6"><a class="header" href="#reference-level-explanation-6">Reference-level explanation</a></h2>
 <p>A method <code>def __call__(self, value):</code> is added on <code>ShapeCastable</code>. It must return <code>Value</code> or a <code>ValueCastable</code> instance with the right shape. (Such a method is opportunistically used by <code>data.View</code> for nested views since <a href="0008-aggregate-extensibility.html">RFC 8</a>, however this RFC makes it mandatory for all shape-castable objects.)</p>
 <p>The <code>Signal.__call__(shape, ...)</code> method is overridden (on the metaclass) to consider <code>shape</code>. First, a <code>signal</code> is constructed normally with all of the arguments. Afterwards, if <code>shape</code> is a <code>ShapeCastable</code> instance, then <code>shape(signal)</code> is returned. Otherwise <code>signal</code> is returned.</p>
-<h2 id="drawbacks-7"><a class="header" href="#drawbacks-7">Drawbacks</a></h2>
+<h2 id="drawbacks-8"><a class="header" href="#drawbacks-8">Drawbacks</a></h2>
 <ul>
 <li>Increase in language complexity.</li>
 <li>More metaclasses.
@@ -926,7 +1137,7 @@ The existing syntax for creating a <code>View</code> with a new <code>Signal</co
 </li>
 <li>A <code>Signal()</code> constructor sometimes returning non-<code>Signal</code> objects can be confusing.</li>
 </ul>
-<h2 id="rationale-and-alternatives-6"><a class="header" href="#rationale-and-alternatives-6">Rationale and alternatives</a></h2>
+<h2 id="rationale-and-alternatives-7"><a class="header" href="#rationale-and-alternatives-7">Rationale and alternatives</a></h2>
 <p>There are several arguments in favor of the design:</p>
 <ul>
 <li>It does not de facto introduce any new methods on protocols, since <code>ShapeCastable.__call__</code> is expected to be implemented by essentially everyone after <a href="0008-aggregate-extensibility.html">RFC 8</a>.</li>
@@ -940,10 +1151,10 @@ The existing syntax for creating a <code>View</code> with a new <code>Signal</co
 <ul>
 <li>Do not do this. The status quo is acceptable.</li>
 </ul>
-<h2 id="prior-art-6"><a class="header" href="#prior-art-6">Prior art</a></h2>
+<h2 id="prior-art-7"><a class="header" href="#prior-art-7">Prior art</a></h2>
 <p>This RFC brings the semantics of <code>Signal</code> to be very close to semantics of typed variables in other languages.</p>
 <p>&quot;Lifting&quot; in the title of this RFC refers to a <a href="https://wiki.haskell.org/Lifting">concept in functional programming</a> of the same name where a higher order function (<code>Signal</code>, here) is used to generalize an operation over a set of other functions (<code>data.View</code> and other shape-castable objects that implement the <code>__call__</code> protocol, here).</p>
-<h2 id="unresolved-questions-6"><a class="header" href="#unresolved-questions-6">Unresolved questions</a></h2>
+<h2 id="unresolved-questions-7"><a class="header" href="#unresolved-questions-7">Unresolved questions</a></h2>
 <ul>
 <li>How does this interact with typechecking?
 <ul>
@@ -951,7 +1162,7 @@ The existing syntax for creating a <code>View</code> with a new <code>Signal</co
 </ul>
 </li>
 </ul>
-<h2 id="future-possibilities-6"><a class="header" href="#future-possibilities-6">Future possibilities</a></h2>
+<h2 id="future-possibilities-7"><a class="header" href="#future-possibilities-7">Future possibilities</a></h2>
 <p>This RFC is the final one in a chain that started with <a href="0001-aggregate-data-structures.html">RFC 1</a>.</p>
 <p>Enumerations and ranges could be adjusted such that something other than <code>Value</code> is returned. This creates backwards compatibility concerns though.</p>
 
