@@ -222,6 +222,10 @@
 <li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/748">amaranth-lang/amaranth#748</a></li>
 </ul>
 <h1 id="aggregate-data-structure-library"><a class="header" href="#aggregate-data-structure-library">Aggregate data structure library</a></h1>
+<blockquote>
+<p><strong>Amendments</strong>
+The behavior described in this RFC was updated by <a href="0008-aggregate-extensibility.html">RFC #8</a>, <a href="0009-const-init-shape-castable.html">RFC #9</a>, and <a href="0015-lifting-shape-castables.html">RFC #15</a>.</p>
+</blockquote>
 <h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
 <p>Add a rich set of standard library classes for accessing hierarchical aggregate data an idiomatic way, to fill one of the two major use cases of <code>Record</code> while avoiding its downsides.</p>
 <p>See also #???.</p>
@@ -505,6 +509,10 @@ flt_reset_less = Float32(reset_less=True)
 <li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/756">amaranth-lang/amaranth#756</a></li>
 </ul>
 <h1 id="enumeration-shapes"><a class="header" href="#enumeration-shapes">Enumeration shapes</a></h1>
+<blockquote>
+<p><strong>Amendments</strong>
+The behavior described in this RFC was updated by <a href="0004-const-castable-exprs.html">RFC #4</a>.</p>
+</blockquote>
 <h2 id="summary-1"><a class="header" href="#summary-1">Summary</a></h2>
 <p>Allow explicitly specifying shape for enumerations as an alternative to implicitly inferring it.</p>
 <h2 id="motivation-1"><a class="header" href="#motivation-1">Motivation</a></h2>
@@ -745,9 +753,10 @@ with m.Switch(instr):
 <li>RFC PR: <a href="https://github.com/amaranth-lang/rfcs/pull/0006">amaranth-lang/rfcs#0006</a></li>
 <li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/681">amaranth-lang/amaranth#681</a></li>
 </ul>
-<h1 id="summary-4"><a class="header" href="#summary-4">Summary</a></h1>
+<h1 id="crc-generator"><a class="header" href="#crc-generator">CRC generator</a></h1>
+<h2 id="summary-4"><a class="header" href="#summary-4">Summary</a></h2>
 <p>Add a cyclic redundancy check (CRC) generator to the Amaranth standard library.</p>
-<h1 id="motivation-4"><a class="header" href="#motivation-4">Motivation</a></h1>
+<h2 id="motivation-4"><a class="header" href="#motivation-4">Motivation</a></h2>
 <p>Computing CRCs is a common requirement in hardware designs as they are used
 by a range of communication and storage protocols to detect errors and thereby
 ensure data integrity. Because of the standard structure and typical set of
@@ -755,7 +764,7 @@ variations used by CRCs, it is readily possible to provide a general-purpose
 CRC generator in the standard library which should cover the majority of use
 cases efficiently.</p>
 <p>See the <a href="https://en.wikipedia.org/wiki/Cyclic_redundancy_check">Wikipedia page on CRCs</a> for more background and use cases.</p>
-<h1 id="guide-level-explanation-2"><a class="header" href="#guide-level-explanation-2">Guide-level explanation</a></h1>
+<h2 id="guide-level-explanation-2"><a class="header" href="#guide-level-explanation-2">Guide-level explanation</a></h2>
 <p>The Amaranth standard library includes a generator for a cyclic redundancy
 check (CRC) module, which can be used to compute and/or validate most common
 CRCs used by transmission and storage protocols.</p>
@@ -850,7 +859,7 @@ trailing CRC. If the most recently processed word(s) form a valid CRC for all
 the data processed since <code>start</code>, the CRC register will always contain a fixed
 value which can be computed in advance, and the <code>match_detected</code> output
 indicates whether the CRC register currently contains this value.</p>
-<h1 id="reference-level-explanation-2"><a class="header" href="#reference-level-explanation-2">Reference-level explanation</a></h1>
+<h2 id="reference-level-explanation-2"><a class="header" href="#reference-level-explanation-2">Reference-level explanation</a></h2>
 <p>The proposed new interface is:</p>
 <ul>
 <li>A <code>crc.Algorithm</code> class which holds the parameters for a CRC algorithm,
@@ -894,12 +903,12 @@ implemented in Python in order to find these logic equations.</p>
 <p>The proposed CRC generator is already implemented and available in <a href="https://github.com/amaranth-lang/amaranth/pull/681">PR 681</a>.
 The docstrings and comments in it should explain its operation to a suitably
 technical level of detail.</p>
-<h1 id="drawbacks-4"><a class="header" href="#drawbacks-4">Drawbacks</a></h1>
+<h2 id="drawbacks-4"><a class="header" href="#drawbacks-4">Drawbacks</a></h2>
 <p>Users could always write their own CRC or use an external library; Amaranth
 does not need to provide one for them. However, since it's a very common
 requirement that we can satisfy efficiently for a lot of users, it seems
 reasonable to include in the standard library.</p>
-<h1 id="rationale-and-alternatives-3"><a class="header" href="#rationale-and-alternatives-3">Rationale and alternatives</a></h1>
+<h2 id="rationale-and-alternatives-3"><a class="header" href="#rationale-and-alternatives-3">Rationale and alternatives</a></h2>
 <p>As far as I'm aware, the method here is the optimal technique for generating
 the logic equations required for this combinatorial CRC generation.</p>
 <p>One alternative to the combinatorial logic equations is to store intermediate
@@ -910,7 +919,7 @@ may be practical, but it is unlikely to be worthwhile with 16- or 32-bit words.
 Additionally, the table approach generally requires a latency of 2 cycles (one
 extra to perform the table lookup). It's possible this would give better timing
 in some circumstances, but at the cost of block RAM resources and latency.</p>
-<h1 id="prior-art-3"><a class="header" href="#prior-art-3">Prior art</a></h1>
+<h2 id="prior-art-3"><a class="header" href="#prior-art-3">Prior art</a></h2>
 <p>The specification chosen for the CRC parameters is a popular de-facto standard,
 and importantly the <a href="https://reveng.sourceforge.io/crc-catalogue/all.htm">reveng</a> catalogue lists suitable parameters for a wide
 range of standard CRCs.</p>
@@ -926,11 +935,11 @@ for generating CRCs in most programming languages, but as they are not
 generating hardware their implementation details are not as relevant - small
 table lookups are popular as the tradeoffs there tend to favour word-at-a-time
 computations.</p>
-<h1 id="unresolved-questions-3"><a class="header" href="#unresolved-questions-3">Unresolved questions</a></h1>
+<h2 id="unresolved-questions-3"><a class="header" href="#unresolved-questions-3">Unresolved questions</a></h2>
 <ul>
 <li>No outstanding unresolved questions.</li>
 </ul>
-<h1 id="future-possibilities-3"><a class="header" href="#future-possibilities-3">Future possibilities</a></h1>
+<h2 id="future-possibilities-3"><a class="header" href="#future-possibilities-3">Future possibilities</a></h2>
 <ul>
 <li>
 <p>The data interface uses <code>start</code>, <code>data</code>, and <code>valid</code> signals.
