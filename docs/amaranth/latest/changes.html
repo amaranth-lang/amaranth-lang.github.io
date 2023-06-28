@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Changelog &mdash; Amaranth HDL toolchain 0.4.dev134 documentation</title>
+  <title>Changelog &mdash; Amaranth HDL toolchain 0.4.dev135 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -38,7 +38,7 @@
             Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev134+g99417d6
+                0.4.dev135+gb77e33f
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -116,7 +116,7 @@
 <p>Support for enumerations has been extended. A shape for enumeration members can be provided for an enumeration class, as defined in <a class="reference external" href="https://amaranth-lang.org/rfcs/0003-enumeration-shapes.html">RFC 3</a>.</p>
 <p>The language includes several new extension points for integration with <code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code> based data structures defined outside of the core language. In particular, <code class="docutils literal notranslate"><span class="pre">Signal(shape)</span></code> may now return a <code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code> object wrapped in another if <code class="docutils literal notranslate"><span class="pre">shape</span></code> implements the call protocol, as defined in <a class="reference external" href="https://amaranth-lang.org/rfcs/0015-lifting-shape-castables.html">RFC 15</a>.</p>
 <p>Several issues with shape inference have been resolved. Notably, <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">-</span> <span class="pre">b</span></code> where both <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> are unsigned now returns a signed value.</p>
-<p>Support for Python 3.6 has been removed, and support for Python 3.11 and 3.12 has been added.</p>
+<p>Support for Python 3.6 and 3.7 has been removed, and support for Python 3.11 and 3.12 has been added.</p>
 <p>Features deprecated in version 0.3 have been removed. In particular, the <code class="docutils literal notranslate"><span class="pre">nmigen.*</span></code> namespace is not provided, <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">nmigen:</span></code> annotations are not recognized, and <code class="docutils literal notranslate"><span class="pre">NMIGEN_*</span></code> envronment variables are not used.</p>
 <section id="migrating-from-version-0-3">
 <h3>Migrating from version 0.3<a class="headerlink" href="#migrating-from-version-0-3" title="Permalink to this heading"></a></h3>
