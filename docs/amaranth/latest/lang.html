@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Language guide &mdash; Amaranth HDL toolchain 0.4.dev155 documentation</title>
+  <title>Language guide &mdash; Amaranth HDL toolchain 0.4.dev159 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -39,7 +39,7 @@
             Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev155+g7f00f4b
+                0.4.dev159+ga127167
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -113,6 +113,7 @@
 <li class="toctree-l2"><a class="reference internal" href="stdlib.html">Standard library</a></li>
 <li class="toctree-l2"><a class="reference internal" href="platform.html">Platform integration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changes.html">Changelog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contrib.html">Contributing</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference external" href="https://amaranth-lang.org/docs/amaranth-boards/latest/">Board definitions</a></li>
@@ -254,6 +255,8 @@
 <p class="admonition-title">Note</p>
 <p>Python ranges are <em>exclusive</em> or <em>half-open</em>, meaning they do not contain their <code class="docutils literal notranslate"><span class="pre">.stop</span></code> element. Because of this, values with shapes cast from a <code class="docutils literal notranslate"><span class="pre">range(stop)</span></code> where <code class="docutils literal notranslate"><span class="pre">stop</span></code> is a power of 2 are not wide enough to represent <code class="docutils literal notranslate"><span class="pre">stop</span></code> itself:</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fencepost</span> <span class="o">=</span> <span class="n">C</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">256</span><span class="p">))</span>
+<span class="go">&lt;...&gt;:1: SyntaxWarning: Value 256 equals the non-inclusive end of the constant shape range(0, 256); this is likely an off-by-one error</span>
+<span class="go">  fencepost = C(256, range(256))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fencepost</span><span class="o">.</span><span class="n">shape</span><span class="p">()</span>
 <span class="go">unsigned(8)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fencepost</span><span class="o">.</span><span class="n">value</span>
