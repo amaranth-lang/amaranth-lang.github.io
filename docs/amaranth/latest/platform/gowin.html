@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Quicklogic &mdash; Amaranth HDL toolchain 0.4.dev162 documentation</title>
+  <title>Gowin &mdash; Amaranth HDL toolchain 0.4.dev162 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/platformpicker.css" type="text/css" />
@@ -23,8 +23,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Xilinx" href="xilinx.html" />
-    <link rel="prev" title="Lattice MachXO2 and MachXO3L" href="lattice-machxo-2-3l.html" /> 
+    <link rel="next" title="Intel" href="intel.html" />
+    <link rel="prev" title="Platform integration" href="../platform.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -58,15 +58,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../lang.html">Language guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib.html">Standard library</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../platform.html">Platform integration</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="gowin.html">Gowin</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Gowin</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#amaranth.vendor.gowin.GowinPlatform"><code class="docutils literal notranslate"><span class="pre">GowinPlatform</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="intel.html">Intel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="lattice-ecp5.html">Lattice ECP5</a></li>
 <li class="toctree-l3"><a class="reference internal" href="lattice-ice40.html">Lattice iCE40</a></li>
 <li class="toctree-l3"><a class="reference internal" href="lattice-machxo-2-3l.html">Lattice MachXO2 and MachXO3L</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Quicklogic</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#amaranth.vendor.quicklogic.QuicklogicPlatform"><code class="docutils literal notranslate"><span class="pre">QuicklogicPlatform</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="quicklogic.html">Quicklogic</a></li>
 <li class="toctree-l3"><a class="reference internal" href="xilinx.html">Xilinx</a></li>
 </ul>
 </li>
@@ -93,9 +93,9 @@
       <li><a href="../cover.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Language &amp; toolchain</a></li>
           <li class="breadcrumb-item"><a href="../platform.html">Platform integration</a></li>
-      <li class="breadcrumb-item active">Quicklogic</li>
+      <li class="breadcrumb-item active">Gowin</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/platform/quicklogic.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/platform/gowin.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -103,30 +103,42 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-amaranth.vendor.quicklogic">
-<span id="quicklogic"></span><h1>Quicklogic<a class="headerlink" href="#module-amaranth.vendor.quicklogic" title="Permalink to this heading"></a></h1>
-<p>The <a class="reference internal" href="#module-amaranth.vendor.quicklogic" title="amaranth.vendor.quicklogic"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.vendor.quicklogic</span></code></a> module provides a base platform to support Quicklogic toolchains.</p>
-<p>The Symbiflow toolchain is supported.</p>
+  <section id="module-amaranth.vendor.gowin">
+<span id="gowin"></span><h1>Gowin<a class="headerlink" href="#module-amaranth.vendor.gowin" title="Permalink to this heading"></a></h1>
+<p>The <a class="reference internal" href="#module-amaranth.vendor.gowin" title="amaranth.vendor.gowin"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.vendor.gowin</span></code></a> module provides a base platform to support Gowin toolchains.</p>
+<p>The Apicula and Gowin toolchains are supported.</p>
 <dl class="py class">
-<dt class="sig sig-object py" id="amaranth.vendor.quicklogic.QuicklogicPlatform">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.vendor.quicklogic.</span></span><span class="sig-name descname"><span class="pre">QuicklogicPlatform</span></span><a class="headerlink" href="#amaranth.vendor.quicklogic.QuicklogicPlatform" title="Permalink to this definition"></a></dt>
-<dd><p class="rubric">Symbiflow toolchain</p>
+<dt class="sig sig-object py" id="amaranth.vendor.gowin.GowinPlatform">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.vendor.gowin.</span></span><span class="sig-name descname"><span class="pre">GowinPlatform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toolchain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Apicula'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.vendor.gowin.GowinPlatform" title="Permalink to this definition"></a></dt>
+<dd><p class="rubric">Apicula toolchain</p>
 <dl class="simple">
 <dt>Required tools:</dt><dd><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">symbiflow_synth</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">symbiflow_pack</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">symbiflow_place</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">symbiflow_route</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">symbiflow_write_fasm</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">symbiflow_write_bitstream</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">yosys</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nextpnr-gowin</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gowin_pack</span></code></p></li>
 </ul>
 </dd>
 </dl>
 <p>The environment is populated by running the script specified in the environment variable
-<code class="docutils literal notranslate"><span class="pre">AMARANTH_ENV_QLSYMBIFLOW</span></code>, if present.</p>
+<code class="docutils literal notranslate"><span class="pre">AMARANTH_ENV_APICULA</span></code>, if present.</p>
 <dl class="simple">
-<dt>Available overrides:</dt><dd><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">add_constraints</span></code>: inserts commands in XDC file.</p></li>
+<dt>Build products:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">{{name}}.fs</span></code>: binary bitstream.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Gowin toolchain</p>
+<dl class="simple">
+<dt>Required tools:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">gw_sh</span></code></p></li>
+</ul>
+</dd>
+</dl>
+<p>The environment is populated by running the script specified in the environment variable
+<code class="docutils literal notranslate"><span class="pre">AMARANTH_ENV_GOWIN</span></code>, if present.</p>
+<dl class="simple">
+<dt>Build products:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">{{name}}.fs</span></code>: binary bitstream.</p></li>
 </ul>
 </dd>
 </dl>
@@ -138,8 +150,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="lattice-machxo-2-3l.html" class="btn btn-neutral float-left" title="Lattice MachXO2 and MachXO3L" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="xilinx.html" class="btn btn-neutral float-right" title="Xilinx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../platform.html" class="btn btn-neutral float-left" title="Platform integration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="intel.html" class="btn btn-neutral float-right" title="Intel" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
