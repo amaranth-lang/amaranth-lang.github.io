@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li><li class="chapter-item expanded "><a href="0002-interfaces.html">0002-interfaces</a></li><li class="chapter-item expanded "><a href="0003-enumeration-shapes.html">0003-enumeration-shapes</a></li><li class="chapter-item expanded "><a href="0004-const-castable-exprs.html">0004-const-castable-exprs</a></li><li class="chapter-item expanded "><a href="0005-remove-const-normalize.html">0005-remove-const-normalize</a></li><li class="chapter-item expanded "><a href="0006-stdlib-crc.html">0006-stdlib-crc</a></li><li class="chapter-item expanded "><a href="0008-aggregate-extensibility.html">0008-aggregate-extensibility</a></li><li class="chapter-item expanded "><a href="0009-const-init-shape-castable.html">0009-const-init-shape-castable</a></li><li class="chapter-item expanded "><a href="0010-move-repl-to-value.html">0010-move-repl-to-value</a></li><li class="chapter-item expanded "><a href="0015-lifting-shape-castables.html">0015-lifting-shape-castables</a></li><li class="chapter-item expanded "><a href="0018-reorganize-vendor-platforms.html">0018-reorganize-vendor-platforms</a></li><li class="chapter-item expanded "><a href="0019-remove-scheduler.html">0019-remove-scheduler</a></li><li class="chapter-item expanded "><a href="0020-deprecate-non-fwft-fifos.html">0020-deprecate-non-fwft-fifos</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li><li class="chapter-item expanded "><a href="0002-interfaces.html">0002-interfaces</a></li><li class="chapter-item expanded "><a href="0003-enumeration-shapes.html">0003-enumeration-shapes</a></li><li class="chapter-item expanded "><a href="0004-const-castable-exprs.html">0004-const-castable-exprs</a></li><li class="chapter-item expanded "><a href="0005-remove-const-normalize.html">0005-remove-const-normalize</a></li><li class="chapter-item expanded "><a href="0006-stdlib-crc.html">0006-stdlib-crc</a></li><li class="chapter-item expanded "><a href="0008-aggregate-extensibility.html">0008-aggregate-extensibility</a></li><li class="chapter-item expanded "><a href="0009-const-init-shape-castable.html">0009-const-init-shape-castable</a></li><li class="chapter-item expanded "><a href="0010-move-repl-to-value.html">0010-move-repl-to-value</a></li><li class="chapter-item expanded "><a href="0015-lifting-shape-castables.html">0015-lifting-shape-castables</a></li><li class="chapter-item expanded "><a href="0018-reorganize-vendor-platforms.html">0018-reorganize-vendor-platforms</a></li><li class="chapter-item expanded "><a href="0019-remove-scheduler.html">0019-remove-scheduler</a></li><li class="chapter-item expanded "><a href="0020-deprecate-non-fwft-fifos.html">0020-deprecate-non-fwft-fifos</a></li><li class="chapter-item expanded "><a href="0021-patch-releases.html">0021-patch-releases</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -1779,6 +1779,51 @@ $ python
 <p>None.</p>
 <h2 id="future-possibilities-10"><a class="header" href="#future-possibilities-10">Future possibilities</a></h2>
 <p>This RFC primarily exists to enable better stream interface integration.</p>
+<div style="break-before: page; page-break-before: always;"></div><ul>
+<li>Start Date: 2023-08-22</li>
+<li>RFC PR: <a href="https://github.com/amaranth-lang/rfcs/pull/21">amaranth-lang/rfcs#21</a></li>
+</ul>
+<h1 id="patch-releases"><a class="header" href="#patch-releases">Patch releases</a></h1>
+<h2 id="summary-13"><a class="header" href="#summary-13">Summary</a></h2>
+<p>Change Amaranth versioning from <code>major.minor</code> to <code>major.minor.patch</code> after version 0.4, and define the backport policy for patch releases.</p>
+<h2 id="motivation-13"><a class="header" href="#motivation-13">Motivation</a></h2>
+<p>Amaranth 0.3 was released on 2021-12-16; almost two years ago. Several important bugs have been fixed in <code>main</code> since, most notably depending on a version of <code>Jinja2</code> that is no longer installable. At the moment the policy is to issue only <code>major.minor</code> releases, which was OK in the early days but no longer fits the project.</p>
+<p>We should change the policy that is used for the next Amaranth release and later ones.</p>
+<h2 id="explanation-1"><a class="header" href="#explanation-1">Explanation</a></h2>
+<p>Amaranth feature releases all have the version of <code>major.minor.0</code>. The policy for these releases is unchanged and is tied to our two-step process for making breaking changes.</p>
+<p>In addition to these releases, Amaranth now has bug-fix releases with the <code>major.minor.patch</code> versions. These are intended to address the need of the community to have bugs fixed before a next feature release can be made, and the policy is designed to minimize developer time spent on them.</p>
+<p>Bug-fix releases are made when all of the following conditions are satisfied:</p>
+<ul>
+<li>There is an issue that is fixed in the <code>main</code> branch.</li>
+<li>A member of the community requests this issue to be fixed in a point release.</li>
+<li>It is possible to fix the issue such that there is a high degree of confidence that the change will not break existing code using Amaranth with a <code>~=major.minor</code> version constraint.</li>
+<li>A community member steps up to backport the fix to the release branch.
+<ul>
+<li>This could be one of the Amaranth maintainers, or anyone else. Amaranth maintainers have no obligation to back-port any fix.</li>
+</ul>
+</li>
+</ul>
+<h2 id="drawbacks-12"><a class="header" href="#drawbacks-12">Drawbacks</a></h2>
+<p>This creates additional work for maintainers.</p>
+<h2 id="rationale-and-alternatives-11"><a class="header" href="#rationale-and-alternatives-11">Rationale and alternatives</a></h2>
+<ul>
+<li>It would be possible to backport all feasible fixes as a policy.
+<ul>
+<li>This would significantly increase maintainer workload.</li>
+</ul>
+</li>
+<li>It is possible to keep the current policy.
+<ul>
+<li>Because we do not control all of the upstream dependencies (including Python), this seems untenable.</li>
+</ul>
+</li>
+</ul>
+<h2 id="prior-art-10"><a class="header" href="#prior-art-10">Prior art</a></h2>
+<p>Rust has an even stricter bug-fix release policy: the Rust project only issues patch releases in cases of security issues, widespread miscompilations, or unintentional breaking changes.</p>
+<h2 id="unresolved-questions-11"><a class="header" href="#unresolved-questions-11">Unresolved questions</a></h2>
+<p>Should Amaranth SoC adopt the same policy?</p>
+<h2 id="future-possibilities-11"><a class="header" href="#future-possibilities-11">Future possibilities</a></h2>
+<p>Eventually, Amaranth may gain release engineers who will maintain long-living release branches.</p>
 
                     </main>
 
