@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>0008-aggregate-extensibility - The Amaranth RFC Book</title>
+        <title>0020-deprecate-non-fwft-fifos - The Amaranth RFC Book</title>
 
 
         <!-- Custom HTML head -->
@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li><li class="chapter-item expanded "><a href="0002-interfaces.html">0002-interfaces</a></li><li class="chapter-item expanded "><a href="0003-enumeration-shapes.html">0003-enumeration-shapes</a></li><li class="chapter-item expanded "><a href="0004-const-castable-exprs.html">0004-const-castable-exprs</a></li><li class="chapter-item expanded "><a href="0005-remove-const-normalize.html">0005-remove-const-normalize</a></li><li class="chapter-item expanded "><a href="0006-stdlib-crc.html">0006-stdlib-crc</a></li><li class="chapter-item expanded "><a href="0008-aggregate-extensibility.html" class="active">0008-aggregate-extensibility</a></li><li class="chapter-item expanded "><a href="0009-const-init-shape-castable.html">0009-const-init-shape-castable</a></li><li class="chapter-item expanded "><a href="0010-move-repl-to-value.html">0010-move-repl-to-value</a></li><li class="chapter-item expanded "><a href="0015-lifting-shape-castables.html">0015-lifting-shape-castables</a></li><li class="chapter-item expanded "><a href="0018-reorganize-vendor-platforms.html">0018-reorganize-vendor-platforms</a></li><li class="chapter-item expanded "><a href="0019-remove-scheduler.html">0019-remove-scheduler</a></li><li class="chapter-item expanded "><a href="0020-deprecate-non-fwft-fifos.html">0020-deprecate-non-fwft-fifos</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li><li class="chapter-item expanded "><a href="0002-interfaces.html">0002-interfaces</a></li><li class="chapter-item expanded "><a href="0003-enumeration-shapes.html">0003-enumeration-shapes</a></li><li class="chapter-item expanded "><a href="0004-const-castable-exprs.html">0004-const-castable-exprs</a></li><li class="chapter-item expanded "><a href="0005-remove-const-normalize.html">0005-remove-const-normalize</a></li><li class="chapter-item expanded "><a href="0006-stdlib-crc.html">0006-stdlib-crc</a></li><li class="chapter-item expanded "><a href="0008-aggregate-extensibility.html">0008-aggregate-extensibility</a></li><li class="chapter-item expanded "><a href="0009-const-init-shape-castable.html">0009-const-init-shape-castable</a></li><li class="chapter-item expanded "><a href="0010-move-repl-to-value.html">0010-move-repl-to-value</a></li><li class="chapter-item expanded "><a href="0015-lifting-shape-castables.html">0015-lifting-shape-castables</a></li><li class="chapter-item expanded "><a href="0018-reorganize-vendor-platforms.html">0018-reorganize-vendor-platforms</a></li><li class="chapter-item expanded "><a href="0019-remove-scheduler.html">0019-remove-scheduler</a></li><li class="chapter-item expanded "><a href="0020-deprecate-non-fwft-fifos.html" class="active">0020-deprecate-non-fwft-fifos</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -146,71 +146,59 @@
                 <div id="content" class="content">
                     <main>
                         <ul>
-<li>Start Date: 2023-05-11</li>
-<li>RFC PR: <a href="https://github.com/amaranth-lang/rfcs/pull/8">amaranth-lang/rfcs#8</a></li>
-<li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/772">amaranth-lang/amaranth#772</a></li>
+<li>Start Date: 2023-08-22</li>
+<li>RFC PR: <a href="https://github.com/amaranth-lang/rfcs/pull/20">amaranth-lang/rfcs#20</a></li>
+<li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/875">amaranth-lang/amaranth#875</a></li>
 </ul>
-<h1 id="aggregate-data-structure-extensibility"><a class="header" href="#aggregate-data-structure-extensibility">Aggregate data structure extensibility</a></h1>
+<h1 id="deprecate-non-fwft-fifos"><a class="header" href="#deprecate-non-fwft-fifos">Deprecate non-FWFT FIFOs</a></h1>
 <h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
-<p>Provide well-defined extension points for the aggregate data structure library.</p>
+<p>Deprecate non-first-word-fall-through FIFOs.</p>
 <h2 id="motivation"><a class="header" href="#motivation">Motivation</a></h2>
-<p><a href="0001-aggregate-data-structures.html">RFC 1</a> introduces the aggregate data structure library, which allows using any shape-castable object as the shape of a field. Layouts do not consider the specific type of the shape-castable object. However, views do, and depending on whether it's a layout, a subclass of an aggregate class (<code>Struct</code> or <code>Union</code>), or any other shape-castable object, behavior differs:</p>
-<pre><code class="language-python">&gt;&gt;&gt; from amaranth import *
-&gt;&gt;&gt; from amaranth.lib.data import *
-&gt;&gt;&gt; class S(Struct):
-...     x: unsigned(1)
-...
-&gt;&gt;&gt; layout = StructLayout({
-...     &quot;a&quot;: unsigned(1),
-...     &quot;b&quot;: ArrayLayout(unsigned(2), 4),
-...     &quot;c&quot;: S
-... })
-...
-&gt;&gt;&gt; View(layout).a
-(slice (sig $signal) 0:1)
-&gt;&gt;&gt; View(layout).b
-&lt;amaranth.lib.data.View object at 0x7f53e46934c0&gt;
-&gt;&gt;&gt; View(layout).c
-&lt;__main__.S object at 0x7f53e4693a30&gt;
-</code></pre>
-<p>At the moment this behavior is not well-defined and it special-cases the aggregate classes defined in <code>amaranth.lib.data</code>.</p>
-<h2 id="guide-level-explanation"><a class="header" href="#guide-level-explanation">Guide-level explanation</a></h2>
-<p>Any shape-castable object can be used as the shape of a field in a layout. This includes another layout. If the object is a callable (provides a <code>__call__</code> method), then when a view is accessed, the <code>__call__</code> method will be called with a single argument, the slice of the underlying value, which will be returned by the view. A <code>Layout</code> is a callable that constructs a <code>View</code> from itself and the value.</p>
-<h2 id="reference-level-explanation"><a class="header" href="#reference-level-explanation">Reference-level explanation</a></h2>
-<p>The <code>Layout</code> class has a method <code>__call__</code>. <code>layout(value)</code> is equivalent to <code>View(layout, value)</code>.</p>
-<p>The <code>View.__getitem__</code> method (and by extension <code>View.__getattr__</code>), after extracting a <code>field</code> from the layout, attempts to call <code>field.shape.__call__(value_slice)</code>, where <code>value_slice</code> is the slice of the underlying value corresponding to the field. If there is no such method, it iteratively calls <code>as_shape()</code> on <code>field.shape</code> or the result of the previous call to <code>as_shape()</code> until an object is returned that has a <code>__call__</code> method, or until an instance of <code>Shape</code> is returned.</p>
+<p>Currently, FIFOs in <code>amaranth.lib.fifo</code> have two incompatible interfaces: FWFT (first word fallthrough) and non-FWFT. The incompatibility concerns only the read half. FWFT FIFOs have <code>r_data</code> valid when <code>r_rdy</code> is asserted. Non-FWFT FIFOs have <code>r_data</code> valid only after strobing <code>r_en</code>, if the FIFO was empty previously.</p>
+<p>Non-FWFT interface is awkward and is essentially never used. It is a holdover from Migen and its implementation details that was included for compatibility. There are three downsides to having it:</p>
+<ol>
+<li>Having non-FWFT FIFOs requires every consumer of the FIFO interface to check for <code>fwft</code> when interacting with the FIFO and either asserting that it is <code>True</code>, or adding a code path to handle it. No one does this.</li>
+<li>The FWFT interface is directly compatible with streams and allows us to add e.g. <code>r_stream</code> and <code>w_stream</code> to existing FIFOs without adding a wrapper such as <code>stream.FIFO</code>. It also makes any custom FIFOs defined downstream of Amaranth stream-enabled.</li>
+<li>The notion of FWFT vs non-FWFT FIFOs is confusing and difficult to understand. E.g. the author of this RFC wrote both <code>lib.fifo</code> and the Glasgow FIFO code, and she misused the <code>fwft</code> argument in the latter.</li>
+</ol>
+<h2 id="guide-level-and-reference-level-explanation"><a class="header" href="#guide-level-and-reference-level-explanation">Guide-level and reference-level explanation</a></h2>
+<p>In the next version, instantiating <code>SyncFIFO(fwft=False)</code> emits a deprecation warning. In addition, <code>FIFOInterface</code>'s <code>fwft</code> parameter now defaults to <code>True</code>. Other FIFOs have no non-FWFT variant in the first place.</p>
+<p>In the version after that, there is no way to instantiate <code>SyncFIFO(fwft=False)</code>. The feature and all references to it are removed in their entirety.</p>
+<h2 id="implementation-considerations"><a class="header" href="#implementation-considerations">Implementation considerations</a></h2>
+<p>At the moment, <code>SyncFIFOBuffered</code> is implemented as a register in the output of <code>SyncFIFO(fwft=False)</code>. The implementation will need to be rewritten.</p>
 <h2 id="drawbacks"><a class="header" href="#drawbacks">Drawbacks</a></h2>
 <ul>
-<li>The syntax may be confusing.
+<li>Churn.</li>
+<li>There will be no alternative to <code>SyncFIFO(fwft=False)</code>.</li>
+</ul>
+<h2 id="rationale-and-alternatives"><a class="header" href="#rationale-and-alternatives">Rationale and alternatives</a></h2>
 <ul>
-<li>Using <code>__call__</code> to implement construction is a widespread pattern in Python. Moreover, <code>Struct</code> and <code>Union</code> are classes, whose <code>__call__</code> method forwards to <code>__new__</code>, so implementing this behavior would remove the special case for aggregate base classes without additional code.</li>
+<li>It is feasible to extract <code>SyncFIFO(fwft=False)</code> into its own module that may be used by downstream code that needs non-FWFT FIFOs. It would not implement <code>FIFOInterface</code>.
+<ul>
+<li>There is no reason the <code>SyncFIFO</code> class could not be copied into downstream code as it is.</li>
+</ul>
+</li>
+<li>It is possible to wrap FIFOs in the stream library in a way that ensures only FWFT FIFOs are used.
+<ul>
+<li>Let's not create pointless wrappers.</li>
 </ul>
 </li>
 </ul>
-<h2 id="rationale-and-alternatives"><a class="header" href="#rationale-and-alternatives">Rationale and alternatives</a></h2>
-<p>This design is, as far as the author knows, the smallest possible addition that provides the largest possible extensibility and removes all special casing of aggregate base classes. That it requires no additional functionality to be implemented on the aggregate base classes indicates that it fits well into the existing design.</p>
-<p>Alternatives:</p>
-<ul>
-<li>Do not do this.</li>
-</ul>
 <h2 id="prior-art"><a class="header" href="#prior-art">Prior art</a></h2>
-<p>None.</p>
+<p>Not relevant.</p>
 <h2 id="unresolved-questions"><a class="header" href="#unresolved-questions">Unresolved questions</a></h2>
 <p>None.</p>
 <h2 id="future-possibilities"><a class="header" href="#future-possibilities">Future possibilities</a></h2>
-<p>None.</p>
+<p>This RFC primarily exists to enable better stream interface integration.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="0006-stdlib-crc.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="0019-remove-scheduler.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="0009-const-init-shape-castable.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -218,13 +206,10 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="0006-stdlib-crc.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="0019-remove-scheduler.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="0009-const-init-shape-castable.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
             </nav>
 
         </div>
