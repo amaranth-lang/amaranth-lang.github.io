@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Data structures &mdash; Amaranth HDL toolchain 0.4.dev172 documentation</title>
+  <title>Data structures &mdash; Amaranth HDL toolchain 0.4.dev173 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/platformpicker.css" type="text/css" />
@@ -39,7 +39,7 @@
             Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev172+g7714ce3
+                0.4.dev173+gf95fe45
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -338,17 +338,6 @@ recursively call <code class="docutils literal notranslate"><span class="pre">.a
 <li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.11)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">obj</span></code> cannot be converted to a <a class="reference internal" href="#amaranth.lib.data.Layout" title="amaranth.lib.data.Layout"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layout</span></code></a> instance.</p></li>
 <li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RecursionError" title="(in Python v3.11)"><strong>RecursionError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">obj.as_shape()</span></code> returns <code class="docutils literal notranslate"><span class="pre">obj</span></code>.</p></li>
 </ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="amaranth.lib.data.Layout.of">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">of</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.data.Layout.of" title="Permalink to this definition"></a></dt>
-<dd><p>Extract the layout that was used to create a view.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.11)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">obj</span></code> is not a <a class="reference internal" href="#amaranth.lib.data.View" title="amaranth.lib.data.View"><code class="xref py py-class docutils literal notranslate"><span class="pre">View</span></code></a> instance.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -655,6 +644,20 @@ a view. The only two names that are reserved on instances of <a class="reference
 and <a class="reference internal" href="#amaranth.lib.data.View.eq" title="amaranth.lib.data.View.eq"><code class="xref py py-meth docutils literal notranslate"><span class="pre">eq()</span></code></a>, leaving the rest to the developer. The <a class="reference internal" href="#amaranth.lib.data.Struct" title="amaranth.lib.data.Struct"><code class="xref py py-class docutils literal notranslate"><span class="pre">Struct</span></code></a> and <a class="reference internal" href="#amaranth.lib.data.Union" title="amaranth.lib.data.Union"><code class="xref py py-class docutils literal notranslate"><span class="pre">Union</span></code></a>
 classes provided in this module are subclasses of <a class="reference internal" href="#amaranth.lib.data.View" title="amaranth.lib.data.View"><code class="xref py py-class docutils literal notranslate"><span class="pre">View</span></code></a> that also provide a concise way
 to define a layout.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="amaranth.lib.data.View.shape">
+<span class="sig-name descname"><span class="pre">shape</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.data.View.shape" title="Permalink to this definition"></a></dt>
+<dd><p>Get layout of this view.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The <code class="docutils literal notranslate"><span class="pre">layout</span></code> provided when constructing the view.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#amaranth.lib.data.Layout" title="amaranth.lib.data.Layout"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layout</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.lib.data.View.as_value">
 <span class="sig-name descname"><span class="pre">as_value</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.data.View.as_value" title="Permalink to this definition"></a></dt>
