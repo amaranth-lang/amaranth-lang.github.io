@@ -896,7 +896,7 @@ class AbsoluteProcessor(Component):
 <h3 id="forwarding-interfaces"><a class="header" href="#forwarding-interfaces">Forwarding interfaces</a></h3>
 <p>In some cases, an outer elaboratable object creates an inner elaboratable object and exposes an interface of the inner object as its own:</p>
 <pre><code class="language-python">class Outer(Component):
-    bus: BusSignature()
+    bus: Out(BusSignature())
 
     def __init__(self):
         super().__init__()
@@ -915,14 +915,14 @@ class AbsoluteProcessor(Component):
 
 
 class Inner(Component):
-    bus: BusSignature()
+    bus: Out(BusSignature())
 
     ...
 </code></pre>
 <p>In this case, <code>amaranth.lib.wiring.connect(...)</code> won't help, since an output needs to be connected to an output, and an input to an input.</p>
 <p>An additional function <code>amaranth.lib.wiring.flipped(obj)</code> is added to assist in this case. It returns a proxy object <code>obj_flipped</code> where <code>obj_flipped.signature</code> equals <code>obj.signature.flip()</code>, and everything else is forwarded identically otherwise. So, the <code>Outer.elaborate</code> method can be rewritten as:</p>
 <pre><code class="language-python">class Outer(Component):
-    bus: BusSignature()
+    bus: Out(BusSignature())
 
     def __init__(self):
         super().__init__()
