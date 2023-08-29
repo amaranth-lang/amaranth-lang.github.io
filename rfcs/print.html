@@ -672,7 +672,7 @@ class NumberSink(Elaboratable):
 <p>Although some duplication was eliminated, some more remains: currently, it is necessary to define a stream signature for every kind of stream (a stream of 16-bit values, a stream of RGB colors, and so on). It is possible to define a reusable stream signature by inheriting from the <code>Signature</code> class:</p>
 <pre><code class="language-python">class StreamSignature(Signature):
     def __init__(self, payload_shape):
-        return super().__init__({
+        super().__init__({
             &quot;payload&quot;: Out(payload_shape),
             &quot;ready&quot;: In(1),
             &quot;valid&quot;: Out(1)
