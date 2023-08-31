@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Enumerations &mdash; Amaranth HDL toolchain 0.4.dev173 documentation</title>
+  <title>Enumerations &mdash; Amaranth HDL toolchain 0.4.dev174 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/platformpicker.css" type="text/css" />
@@ -39,7 +39,7 @@
             Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev173+gf95fe45
+                0.4.dev174+gcfd4f9c
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -136,7 +136,15 @@
 <span class="go">&lt;Instr.SUBI: 17&gt;</span>
 </pre></div>
 </div>
-<p>This module is a drop-in replacement for the standard <a class="reference external" href="https://docs.python.org/3/library/enum.html#module-enum" title="(in Python v3.11)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">enum</span></code></a> module, and re-exports all of its members (not just the ones described below). In an Amaranth project, all <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">enum</span></code> statements may be replaced with <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">amaranth.lib</span> <span class="pre">import</span> <span class="pre">enum</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">shape=</span></code> argument is optional. If not specified, classes from this module behave exactly the same as classes from the standard <a class="reference external" href="https://docs.python.org/3/library/enum.html#module-enum" title="(in Python v3.11)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">enum</span></code></a> module, and likewise, this module re-exports everything exported by the standard <a class="reference external" href="https://docs.python.org/3/library/enum.html#module-enum" title="(in Python v3.11)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">enum</span></code></a> module.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">amaranth.lib.enum</span>
+
+<span class="k">class</span> <span class="nc">NormalEnum</span><span class="p">(</span><span class="n">amaranth</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">SPAM</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">HAM</span>  <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>In this way, this module is a drop-in replacement for the standard <a class="reference external" href="https://docs.python.org/3/library/enum.html#module-enum" title="(in Python v3.11)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">enum</span></code></a> module, and in an Amaranth project, all <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">enum</span></code> statements may be replaced with <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">amaranth.lib</span> <span class="pre">import</span> <span class="pre">enum</span></code>.</p>
 <section id="metaclass">
 <h2>Metaclass<a class="headerlink" href="#metaclass" title="Permalink to this heading"></a></h2>
 <dl class="py class">
