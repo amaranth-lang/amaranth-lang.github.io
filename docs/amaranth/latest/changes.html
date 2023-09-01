@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Changelog &mdash; Amaranth HDL toolchain 0.4.dev178 documentation</title>
+  <title>Changelog &mdash; Amaranth HDL toolchain 0.4.dev179 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -39,7 +39,7 @@
             Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev178+gb172d63
+                0.4.dev179+gcd4ea96
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -129,6 +129,7 @@
 <li><p>Update imports of the form <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">amaranth.vendor.some_vendor</span> <span class="pre">import</span> <span class="pre">SomeVendorPlatform</span></code> to <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">amaranth.vendor</span> <span class="pre">import</span> <span class="pre">SomeVendorPlatform</span></code>. This change will reduce future churn.</p></li>
 <li><p>Replace uses of <code class="docutils literal notranslate"><span class="pre">Const.normalize(value,</span> <span class="pre">shape)</span></code> with <code class="docutils literal notranslate"><span class="pre">Const(value,</span> <span class="pre">shape).value</span></code>.</p></li>
 <li><p>Replace uses of <code class="docutils literal notranslate"><span class="pre">Repl(value,</span> <span class="pre">count)</span></code> with <code class="docutils literal notranslate"><span class="pre">value.replicate(count)</span></code>.</p></li>
+<li><p>Remove uses of <code class="docutils literal notranslate"><span class="pre">amaranth.lib.scheduler.RoundRobin</span></code> by inlining or copying the implementation of that class.</p></li>
 </ul>
 <p>While code that uses the features listed as deprecated below will work in Amaranth 0.4, they will be removed in the next version.</p>
 </section>
@@ -144,6 +145,7 @@
 <li><p><a class="reference external" href="https://amaranth-lang.org/rfcs/0009-const-init-shape-castable.html">RFC 9</a>: Constant initialization for shape-castable objects</p></li>
 <li><p><a class="reference external" href="https://amaranth-lang.org/rfcs/0010-move-repl-to-value.html">RFC 10</a>: Move <code class="docutils literal notranslate"><span class="pre">Repl</span></code> to <code class="docutils literal notranslate"><span class="pre">Value.replicate</span></code></p></li>
 <li><p><a class="reference external" href="https://amaranth-lang.org/rfcs/0018-reorganize-vendor-platforms.html">RFC 18</a>: Reorganize vendor platforms</p></li>
+<li><p><a class="reference external" href="https://amaranth-lang.org/rfcs/0019-remove-scheduler.html">RFC 19</a>: Remove <code class="docutils literal notranslate"><span class="pre">amaranth.lib.scheduler</span></code></p></li>
 <li><p><a class="reference external" href="https://amaranth-lang.org/rfcs/0015-lifting-shape-castables.html">RFC 15</a>: Lifting shape-castable objects</p></li>
 <li><p><a class="reference external" href="https://amaranth-lang.org/rfcs/0022-valuecastable-shape.html">RFC 22</a>: Define <code class="docutils literal notranslate"><span class="pre">ValueCastable.shape()</span></code></p></li>
 </ul>
@@ -174,6 +176,7 @@
 <li><p>Added: <a class="reference internal" href="stdlib/enum.html#module-amaranth.lib.enum" title="amaranth.lib.enum"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.enum</span></code></a>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0003-enumeration-shapes.html">RFC 3</a>)</p></li>
 <li><p>Added: <a class="reference internal" href="stdlib/data.html#module-amaranth.lib.data" title="amaranth.lib.data"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.data</span></code></a>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0001-aggregate-data-structures.html">RFC 1</a>)</p></li>
 <li><p>Added: <a class="reference internal" href="stdlib/crc.html#module-amaranth.lib.crc" title="amaranth.lib.crc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.crc</span></code></a>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0006-stdlib-crc.html">RFC 6</a>)</p></li>
+<li><p>Deprecated: <code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.scheduler</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0019-remove-scheduler.html">RFC 19</a>)</p></li>
 </ul>
 </section>
 <section id="toolchain-changes">
