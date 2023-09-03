@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Language guide &mdash; Amaranth HDL toolchain 0.4.dev185 documentation</title>
+  <title>Language guide &mdash; Amaranth HDL toolchain 0.4.dev186 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -39,7 +39,7 @@
             Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev185+g21b5451
+                0.4.dev186+gf135226
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -239,8 +239,8 @@
 <p>Casting a shape from a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">range</span></code></a> <code class="docutils literal notranslate"><span class="pre">r</span></code> produces a shape that:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>has a width large enough to represent both <code class="docutils literal notranslate"><span class="pre">min(r)</span></code> and <code class="docutils literal notranslate"><span class="pre">max(r)</span></code>, and</p></li>
-<li><p>is signed if either <code class="docutils literal notranslate"><span class="pre">min(r)</span></code> or <code class="docutils literal notranslate"><span class="pre">max(r)</span></code> are negative, unsigned otherwise.</p></li>
+<li><p>has a width large enough to represent both <code class="docutils literal notranslate"><span class="pre">min(r)</span></code> and <code class="docutils literal notranslate"><span class="pre">max(r)</span></code>, but not larger, and</p></li>
+<li><p>is signed if <code class="docutils literal notranslate"><span class="pre">r</span></code> contains any negative values, unsigned otherwise.</p></li>
 </ul>
 </div></blockquote>
 <p>Specifying a shape with a range is convenient for counters, indexes, and all other values whose width is derived from a set of numbers they must be able to fit:</p>
@@ -264,6 +264,15 @@
 </pre></div>
 </div>
 <p>Amaranth detects uses of <code class="xref py py-class docutils literal notranslate"><span class="pre">Const</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code> that invoke such an off-by-one error, and emits a diagnostic message.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>An empty range always casts to an <code class="docutils literal notranslate"><span class="pre">unsigned(0)</span></code>, even if both of its bounds are negative.
+This happens because, being empty, it does not contain any negative values.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Shape</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="go">unsigned(0)</span>
+</pre></div>
+</div>
 </div>
 </section>
 <section id="shapes-from-enumerations">
