@@ -497,6 +497,13 @@ class AbsoluteProcessor(Component):
 </ul>
 </li>
 <li><code>signature.flip()</code> returns a signature where every member is <code>member.flip()</code>ped. The exact object returned is a proxy object that overrides the methods and attributes defined here such that the flow is flipped, and otherwise forwards attribute accesses untouched. That is, <code>signature.x = &lt;value&gt;</code> and <code>signature.flip().x = &lt;value&gt;</code> both define an attribute on the original <code>signature</code> object, and never on the proxy object alone. When calling method <code>signature.f</code> as <code>signature.flip().f</code>, <code>self</code> is the flipped signature.</li>
+<li><code>signature.flatten(object)</code> returns an iterator yielding a <code>path, member, value</code> tuples for each of the ports recursively contained in the signature, where:
+<ul>
+<li><code>path</code> is a tuple of strings or integers indicating the sequence of attribute or index accesses that were used to retrieve <code>value</code> from <code>object</code></li>
+<li><code>member</code> is the port member corresponding to <code>value</code>, with the flow flipped as appropriate</li>
+<li><code>value</code> is a value-castable object corresponding to the port (usually but not always a <code>Signal</code>)</li>
+</ul>
+</li>
 <li><code>signature.is_compliant(object)</code> checks whether an arbitrary Python object is compliant with this signature. To be compliant with a signature:
 <ul>
 <li>for every member of the signature, the object must have a corresponding attribute</li>
