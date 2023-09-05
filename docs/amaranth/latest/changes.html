@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Changelog &mdash; Amaranth HDL toolchain 0.4.dev192 documentation</title>
+  <title>Changelog &mdash; Amaranth HDL toolchain 0.4.dev194 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -39,7 +39,7 @@
             Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev192+g6683c3a
+                0.4.dev194+ga9d0380
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -131,6 +131,7 @@
 <li><p>Replace uses of <code class="docutils literal notranslate"><span class="pre">Const.normalize(value,</span> <span class="pre">shape)</span></code> with <code class="docutils literal notranslate"><span class="pre">Const(value,</span> <span class="pre">shape).value</span></code>.</p></li>
 <li><p>Replace uses of <code class="docutils literal notranslate"><span class="pre">Repl(value,</span> <span class="pre">count)</span></code> with <code class="docutils literal notranslate"><span class="pre">value.replicate(count)</span></code>.</p></li>
 <li><p>Replace uses of <code class="docutils literal notranslate"><span class="pre">Record</span></code> with <a class="reference internal" href="stdlib/data.html#module-amaranth.lib.data" title="amaranth.lib.data"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.data</span></code></a> and <code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.wiring</span></code>. The appropriate replacement depends on the use case. If <code class="docutils literal notranslate"><span class="pre">Record</span></code> was being used for data storage and accessing the bit-level representation, use <a class="reference internal" href="stdlib/data.html#module-amaranth.lib.data" title="amaranth.lib.data"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.data</span></code></a>. If <code class="docutils literal notranslate"><span class="pre">Record</span></code> was being used for connecting design components together, use <code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.wiring</span></code>.</p></li>
+<li><p>Ensure the <code class="docutils literal notranslate"><span class="pre">Pin</span></code> instance returned by <code class="docutils literal notranslate"><span class="pre">platform.request</span></code> is not cast to value directly, but used for its fields. Replace code like <code class="docutils literal notranslate"><span class="pre">leds</span> <span class="pre">=</span> <span class="pre">Cat(platform.request(led,</span> <span class="pre">n)</span> <span class="pre">for</span> <span class="pre">n</span> <span class="pre">in</span> <span class="pre">range(4))</span></code> with <code class="docutils literal notranslate"><span class="pre">leds</span> <span class="pre">=</span> <span class="pre">Cat(platform.request(led,</span> <span class="pre">n).o</span> <span class="pre">for</span> <span class="pre">n</span> <span class="pre">in</span> <span class="pre">range(4))</span></code> (note the <code class="docutils literal notranslate"><span class="pre">.o</span></code>).</p></li>
 <li><p>Remove uses of <code class="docutils literal notranslate"><span class="pre">amaranth.lib.scheduler.RoundRobin</span></code> by inlining or copying the implementation of that class.</p></li>
 </ul>
 <p>While code that uses the features listed as deprecated below will work in Amaranth 0.4, they will be removed in the next version.</p>
