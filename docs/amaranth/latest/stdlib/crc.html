@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cyclic redundancy checks &mdash; Amaranth HDL toolchain 0.4.dev211 documentation</title>
+  <title>Cyclic redundancy checks &mdash; Amaranth HDL toolchain 0.4.dev212 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/platformpicker.css" type="text/css" />
@@ -39,7 +39,7 @@
             Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev211+gc941667.editable
+                0.4.dev212+gcce4e44.editable
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -158,24 +158,24 @@ object with the required data width, which defaults to 8 bits.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>crc_width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Bit width of CRC word. Also known as “width” in the Williams model.</p></li>
-<li><p><strong>polynomial</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – CRC polynomial to use, <code class="docutils literal notranslate"><span class="pre">crc_width</span></code> bits long, without the implicit
+<li><p><strong>crc_width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Bit width of CRC word. Also known as “width” in the Williams model.</p></li>
+<li><p><strong>polynomial</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – CRC polynomial to use, <code class="docutils literal notranslate"><span class="pre">crc_width</span></code> bits long, without the implicit
 <code class="docutils literal notranslate"><span class="pre">x**crc_width</span></code> term. Polynomial is always specified with the highest
 order terms in the most significant bit positions; use
 <code class="docutils literal notranslate"><span class="pre">reflect_input</span></code> and <code class="docutils literal notranslate"><span class="pre">reflect_output</span></code> to perform a least
 significant bit first computation.</p></li>
-<li><p><strong>initial_crc</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Initial value of CRC register at reset. Most significant bit always
+<li><p><strong>initial_crc</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Initial value of CRC register at reset. Most significant bit always
 corresponds to the highest order term in the CRC register.</p></li>
-<li><p><strong>reflect_input</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – If True, the input data words are bit-reflected, so that they are
+<li><p><strong>reflect_input</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – If True, the input data words are bit-reflected, so that they are
 processed least significant bit first.</p></li>
-<li><p><strong>reflect_output</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – If True, the output CRC is bit-reflected, so the least-significant bit
+<li><p><strong>reflect_output</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – If True, the output CRC is bit-reflected, so the least-significant bit
 of the output is the highest-order bit of the CRC register.
 Note that this reflection is performed over the entire CRC register;
 for transmission you may want to treat the output as a little-endian
 multi-word value, so for example the reflected 16-bit output 0x4E4C
 would be transmitted as the two octets 0x4C 0x4E, each transmitted
 least significant bit first.</p></li>
-<li><p><strong>xor_output</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The output CRC will be the CRC register XOR’d with this value, applied
+<li><p><strong>xor_output</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – The output CRC will be the CRC register XOR’d with this value, applied
 after any output bit-reflection.</p></li>
 </ul>
 </dd>
@@ -187,7 +187,7 @@ after any output bit-reflection.</p></li>
 <a class="reference internal" href="#amaranth.lib.crc.Algorithm" title="amaranth.lib.crc.Algorithm"><code class="xref py py-class docutils literal notranslate"><span class="pre">Algorithm</span></code></a> with the specified <code class="docutils literal notranslate"><span class="pre">data_width</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>data_width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Bit width of data words, default 8.</p>
+<dd class="field-odd"><p><strong>data_width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Bit width of data words, default 8.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -210,7 +210,7 @@ the <a class="reference internal" href="#amaranth.lib.crc.Parameters.create" tit
 <li><p><strong>algorithm</strong> (<a class="reference internal" href="#amaranth.lib.crc.Algorithm" title="amaranth.lib.crc.Algorithm"><em>Algorithm</em></a>) – CRC algorithm to use. Specifies the CRC width, polynomial,
 initial value, whether to reflect the input or output words,
 and any output XOR.</p></li>
-<li><p><strong>data_width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Bit width of data words.</p></li>
+<li><p><strong>data_width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Bit width of data words.</p></li>
 </ul>
 </dd>
 </dl>

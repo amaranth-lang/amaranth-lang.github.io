@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Clock domain crossing &mdash; Amaranth HDL toolchain 0.4.dev211 documentation</title>
+  <title>Clock domain crossing &mdash; Amaranth HDL toolchain 0.4.dev212 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/platformpicker.css" type="text/css" />
@@ -39,7 +39,7 @@
             Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev211+gc941667.editable
+                0.4.dev212+gcce4e44.editable
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -119,14 +119,14 @@ no other guarantee as to the safe domain-crossing of a signal.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>i</strong> (<em>Signal</em><em>(</em><em>n</em><em>)</em><em>, </em><em>in</em>) – Signal to be resynchronised.</p></li>
 <li><p><strong>o</strong> (<em>Signal</em><em>(</em><em>n</em><em>)</em><em>, </em><em>out</em>) – Signal connected to synchroniser output.</p></li>
-<li><p><strong>o_domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Name of output clock domain.</p></li>
-<li><p><strong>reset</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Reset value of the flip-flops. On FPGAs, even if <code class="docutils literal notranslate"><span class="pre">reset_less</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>,
+<li><p><strong>o_domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of output clock domain.</p></li>
+<li><p><strong>reset</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Reset value of the flip-flops. On FPGAs, even if <code class="docutils literal notranslate"><span class="pre">reset_less</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>,
 the <a class="reference internal" href="#amaranth.lib.cdc.FFSynchronizer" title="amaranth.lib.cdc.FFSynchronizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">FFSynchronizer</span></code></a> is still set to this value during initialization.</p></li>
-<li><p><strong>reset_less</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code> (the default), this <a class="reference internal" href="#amaranth.lib.cdc.FFSynchronizer" title="amaranth.lib.cdc.FFSynchronizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">FFSynchronizer</span></code></a> is unaffected by <code class="docutils literal notranslate"><span class="pre">o_domain</span></code>
+<li><p><strong>reset_less</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code> (the default), this <a class="reference internal" href="#amaranth.lib.cdc.FFSynchronizer" title="amaranth.lib.cdc.FFSynchronizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">FFSynchronizer</span></code></a> is unaffected by <code class="docutils literal notranslate"><span class="pre">o_domain</span></code>
 reset. See the note below for details.</p></li>
-<li><p><strong>stages</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>&gt;=2</em>) – Number of synchronization stages between input and output. The lowest safe number is 2,
+<li><p><strong>stages</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>&gt;=2</em>) – Number of synchronization stages between input and output. The lowest safe number is 2,
 with higher numbers reducing MTBF further, at the cost of increased latency.</p></li>
-<li><p><strong>max_input_delay</strong> (<em>None</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Maximum delay from the input signal’s clock to the first synchronization stage, in seconds.
+<li><p><strong>max_input_delay</strong> (<em>None</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Maximum delay from the input signal’s clock to the first synchronization stage, in seconds.
 If specified and the platform does not support it, elaboration will fail.</p></li>
 </ul>
 </dd>
@@ -164,11 +164,11 @@ synchronously, eliminating metastability during deassertion.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>i</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Asynchronous input signal, to be synchronized.</p></li>
 <li><p><strong>o</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Synchronously released output signal.</p></li>
-<li><p><strong>o_domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Name of clock domain to synchronize to.</p></li>
-<li><p><strong>stages</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>&gt;=2</em>) – Number of synchronization stages between input and output. The lowest safe number is 2,
+<li><p><strong>o_domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of clock domain to synchronize to.</p></li>
+<li><p><strong>stages</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>&gt;=2</em>) – Number of synchronization stages between input and output. The lowest safe number is 2,
 with higher numbers reducing MTBF further, at the cost of increased deassertion latency.</p></li>
-<li><p><strong>async_edge</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – The edge of the input signal which causes the output to be set. Must be one of “pos” or “neg”.</p></li>
-<li><p><strong>max_input_delay</strong> (<em>None</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Maximum delay from the input signal’s clock to the first synchronization stage, in seconds.
+<li><p><strong>async_edge</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The edge of the input signal which causes the output to be set. Must be one of “pos” or “neg”.</p></li>
+<li><p><strong>max_input_delay</strong> (<em>None</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Maximum delay from the input signal’s clock to the first synchronization stage, in seconds.
 If specified and the platform does not support it, elaboration will fail.</p></li>
 </ul>
 </dd>
@@ -193,10 +193,10 @@ be used.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>arst</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Asynchronous reset signal, to be synchronized.</p></li>
-<li><p><strong>domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Name of clock domain to reset.</p></li>
-<li><p><strong>stages</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>&gt;=2</em>) – Number of synchronization stages between input and output. The lowest safe number is 2,
+<li><p><strong>domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of clock domain to reset.</p></li>
+<li><p><strong>stages</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>&gt;=2</em>) – Number of synchronization stages between input and output. The lowest safe number is 2,
 with higher numbers reducing MTBF further, at the cost of increased deassertion latency.</p></li>
-<li><p><strong>max_input_delay</strong> (<em>None</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Maximum delay from the input signal’s clock to the first synchronization stage, in seconds.
+<li><p><strong>max_input_delay</strong> (<em>None</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Maximum delay from the input signal’s clock to the first synchronization stage, in seconds.
 If specified and the platform does not support it, elaboration will fail.</p></li>
 </ul>
 </dd>
@@ -217,9 +217,9 @@ no constraint on the ratio of input and output clock frequency.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>i_domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Name of input clock domain.</p></li>
-<li><p><strong>o_domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Name of output clock domain.</p></li>
-<li><p><strong>stages</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>&gt;=2</em>) – Number of synchronization stages between input and output. The lowest safe number is 2,
+<li><p><strong>i_domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of input clock domain.</p></li>
+<li><p><strong>o_domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of output clock domain.</p></li>
+<li><p><strong>stages</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>&gt;=2</em>) – Number of synchronization stages between input and output. The lowest safe number is 2,
 with higher numbers reducing MTBF further, at the cost of increased deassertion latency.</p></li>
 </ul>
 </dd>

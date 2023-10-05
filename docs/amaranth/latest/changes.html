@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Changelog &mdash; Amaranth HDL toolchain 0.4.dev211 documentation</title>
+  <title>Changelog &mdash; Amaranth HDL toolchain 0.4.dev212 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -39,7 +39,7 @@
             Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev211+gc941667.editable
+                0.4.dev212+gcce4e44.editable
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -165,7 +165,7 @@
 <li><p>Added: <code class="xref py py-class docutils literal notranslate"><span class="pre">Memory</span></code> supports transparent read ports with read enable.</p></li>
 <li><p>Changed: creating a <code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code> with a shape that is a <code class="xref py py-class docutils literal notranslate"><span class="pre">ShapeCastable</span></code> implementing <code class="xref py py-meth docutils literal notranslate"><span class="pre">ShapeCastable.__call__()</span></code> wraps the returned object using that method. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0015-lifting-shape-castables.html">RFC 15</a>)</p></li>
 <li><p>Changed: <code class="xref py py-meth docutils literal notranslate"><span class="pre">Value.cast()</span></code> casts <code class="xref py py-class docutils literal notranslate"><span class="pre">ValueCastable</span></code> objects recursively.</p></li>
-<li><p>Changed: <code class="xref py py-meth docutils literal notranslate"><span class="pre">Value.cast()</span></code> treats instances of classes derived from both <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a> and <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> (including <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></a>) as enumerations rather than integers.</p></li>
+<li><p>Changed: <code class="xref py py-meth docutils literal notranslate"><span class="pre">Value.cast()</span></code> treats instances of classes derived from both <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a> and <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> (including <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></a>) as enumerations rather than integers.</p></li>
 <li><p>Changed: <code class="xref py py-meth docutils literal notranslate"><span class="pre">Value.matches()</span></code> with an empty list of patterns returns <code class="docutils literal notranslate"><span class="pre">Const(1)</span></code> rather than <code class="docutils literal notranslate"><span class="pre">Const(0)</span></code>, to match the behavior of <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">m.Case():</span></code>.</p></li>
 <li><p>Changed: <code class="xref py py-class docutils literal notranslate"><span class="pre">Cat</span></code> warns if an enumeration without an explicitly specified shape is used. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0003-enumeration-shapes.html">RFC 3</a>)</p></li>
 <li><p>Deprecated: <code class="xref py py-meth docutils literal notranslate"><span class="pre">Const.normalize()</span></code>; use <code class="docutils literal notranslate"><span class="pre">Const(value,</span> <span class="pre">shape).value</span></code> instead of <code class="docutils literal notranslate"><span class="pre">Const.normalize(value,</span> <span class="pre">shape)</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0005-remove-const-normalize.html">RFC 5</a>)</p></li>
@@ -195,7 +195,7 @@
 <li><p>Removed: (deprecated in 0.3) <code class="xref py py-meth docutils literal notranslate"><span class="pre">sim.Simulator.step()</span></code>.</p></li>
 <li><p>Removed: (deprecated in 0.3) <code class="xref py py-mod docutils literal notranslate"><span class="pre">back.pysim</span></code>.</p></li>
 <li><p>Removed: (deprecated in 0.3) support for invoking <code class="xref py py-func docutils literal notranslate"><span class="pre">back.rtlil.convert()</span></code> and <code class="xref py py-func docutils literal notranslate"><span class="pre">back.verilog.convert()</span></code> without an explicit <cite>ports=</cite> argument.</p></li>
-<li><p>Removed: (deprecated in 0.3) <a class="reference external" href="https://docs.python.org/3/library/test.html#module-test" title="(in Python v3.11)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">test</span></code></a>.</p></li>
+<li><p>Removed: (deprecated in 0.3) <a class="reference external" href="https://docs.python.org/3/library/test.html#module-test" title="(in Python v3.12)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">test</span></code></a>.</p></li>
 </ul>
 </section>
 <section id="platform-integration-changes">
@@ -235,7 +235,7 @@
 <section id="id1">
 <h3>Language changes<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
 <ul class="simple">
-<li><p>Added: <code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code> can be used with <a class="reference external" href="https://docs.python.org/3/library/functions.html#abs" title="(in Python v3.11)"><code class="xref py py-func docutils literal notranslate"><span class="pre">abs()</span></code></a>.</p></li>
+<li><p>Added: <code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code> can be used with <a class="reference external" href="https://docs.python.org/3/library/functions.html#abs" title="(in Python v3.12)"><code class="xref py py-func docutils literal notranslate"><span class="pre">abs()</span></code></a>.</p></li>
 <li><p>Added: <code class="xref py py-meth docutils literal notranslate"><span class="pre">Value.rotate_left()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">Value.rotate_right()</span></code>.</p></li>
 <li><p>Added: <code class="xref py py-meth docutils literal notranslate"><span class="pre">Value.shift_left()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">Value.shift_right()</span></code>.</p></li>
 <li><p>Added: <code class="xref py py-class docutils literal notranslate"><span class="pre">ValueCastable</span></code>.</p></li>

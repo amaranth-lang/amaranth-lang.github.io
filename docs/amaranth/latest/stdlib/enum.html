@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Enumerations &mdash; Amaranth HDL toolchain 0.4.dev211 documentation</title>
+  <title>Enumerations &mdash; Amaranth HDL toolchain 0.4.dev212 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/platformpicker.css" type="text/css" />
@@ -39,7 +39,7 @@
             Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev211+gc941667.editable
+                0.4.dev212+gcce4e44.editable
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -105,7 +105,7 @@
              
   <section id="module-amaranth.lib.enum">
 <span id="enumerations"></span><h1>Enumerations<a class="headerlink" href="#module-amaranth.lib.enum" title="Permalink to this heading"></a></h1>
-<p>The <a class="reference internal" href="#module-amaranth.lib.enum" title="amaranth.lib.enum"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.enum</span></code></a> module is a drop-in replacement for the standard <a class="reference external" href="https://docs.python.org/3/library/enum.html#module-enum" title="(in Python v3.11)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">enum</span></code></a> module that provides extended <a class="reference internal" href="#amaranth.lib.enum.Enum" title="amaranth.lib.enum.Enum"><code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></a>, <a class="reference internal" href="#amaranth.lib.enum.IntEnum" title="amaranth.lib.enum.IntEnum"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></a>, <a class="reference internal" href="#amaranth.lib.enum.Flag" title="amaranth.lib.enum.Flag"><code class="xref py py-class docutils literal notranslate"><span class="pre">Flag</span></code></a>, and <a class="reference internal" href="#amaranth.lib.enum.IntFlag" title="amaranth.lib.enum.IntFlag"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntFlag</span></code></a> classes with the ability to specify a shape explicitly.</p>
+<p>The <a class="reference internal" href="#module-amaranth.lib.enum" title="amaranth.lib.enum"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.enum</span></code></a> module is a drop-in replacement for the standard <a class="reference external" href="https://docs.python.org/3/library/enum.html#module-enum" title="(in Python v3.12)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">enum</span></code></a> module that provides extended <a class="reference internal" href="#amaranth.lib.enum.Enum" title="amaranth.lib.enum.Enum"><code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></a>, <a class="reference internal" href="#amaranth.lib.enum.IntEnum" title="amaranth.lib.enum.IntEnum"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></a>, <a class="reference internal" href="#amaranth.lib.enum.Flag" title="amaranth.lib.enum.Flag"><code class="xref py py-class docutils literal notranslate"><span class="pre">Flag</span></code></a>, and <a class="reference internal" href="#amaranth.lib.enum.IntFlag" title="amaranth.lib.enum.IntFlag"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntFlag</span></code></a> classes with the ability to specify a shape explicitly.</p>
 <p>A shape can be specified for an enumeration with the <code class="docutils literal notranslate"><span class="pre">shape=</span></code> keyword argument:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">amaranth.lib</span> <span class="kn">import</span> <span class="n">enum</span>
 
@@ -136,7 +136,7 @@
 <span class="go">&lt;Instr.SUBI: 17&gt;</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">shape=</span></code> argument is optional. If not specified, classes from this module behave exactly the same as classes from the standard <a class="reference external" href="https://docs.python.org/3/library/enum.html#module-enum" title="(in Python v3.11)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">enum</span></code></a> module, and likewise, this module re-exports everything exported by the standard <a class="reference external" href="https://docs.python.org/3/library/enum.html#module-enum" title="(in Python v3.11)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">enum</span></code></a> module.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">shape=</span></code> argument is optional. If not specified, classes from this module behave exactly the same as classes from the standard <a class="reference external" href="https://docs.python.org/3/library/enum.html#module-enum" title="(in Python v3.12)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">enum</span></code></a> module, and likewise, this module re-exports everything exported by the standard <a class="reference external" href="https://docs.python.org/3/library/enum.html#module-enum" title="(in Python v3.12)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">enum</span></code></a> module.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">amaranth.lib.enum</span>
 
 <span class="k">class</span> <span class="nc">NormalEnum</span><span class="p">(</span><span class="n">amaranth</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
@@ -144,7 +144,7 @@
     <span class="n">HAM</span>  <span class="o">=</span> <span class="mi">1</span>
 </pre></div>
 </div>
-<p>In this way, this module is a drop-in replacement for the standard <a class="reference external" href="https://docs.python.org/3/library/enum.html#module-enum" title="(in Python v3.11)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">enum</span></code></a> module, and in an Amaranth project, all <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">enum</span></code> statements may be replaced with <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">amaranth.lib</span> <span class="pre">import</span> <span class="pre">enum</span></code>.</p>
+<p>In this way, this module is a drop-in replacement for the standard <a class="reference external" href="https://docs.python.org/3/library/enum.html#module-enum" title="(in Python v3.12)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">enum</span></code></a> module, and in an Amaranth project, all <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">enum</span></code> statements may be replaced with <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">amaranth.lib</span> <span class="pre">import</span> <span class="pre">enum</span></code>.</p>
 <section id="metaclass">
 <h2>Metaclass<a class="headerlink" href="#metaclass" title="Permalink to this heading"></a></h2>
 <dl class="py class">
@@ -171,7 +171,7 @@ this class <a class="reference internal" href="../lang.html#lang-shapeenum"><spa
 <dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code></p>
 </dd>
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.11)"><strong>TypeError</strong></a> – If the enumeration has neither an explicitly provided shape nor any members.</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.12)"><strong>TypeError</strong></a> – If the enumeration has neither an explicitly provided shape nor any members.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -184,28 +184,28 @@ this class <a class="reference internal" href="../lang.html#lang-shapeenum"><spa
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.lib.enum.Enum">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.enum.</span></span><span class="sig-name descname"><span class="pre">Enum</span></span><a class="headerlink" href="#amaranth.lib.enum.Enum" title="Permalink to this definition"></a></dt>
-<dd><p>Subclass of the standard <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a> that has <a class="reference internal" href="#amaranth.lib.enum.EnumMeta" title="amaranth.lib.enum.EnumMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">EnumMeta</span></code></a> as
+<dd><p>Subclass of the standard <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a> that has <a class="reference internal" href="#amaranth.lib.enum.EnumMeta" title="amaranth.lib.enum.EnumMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">EnumMeta</span></code></a> as
 its metaclass.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.lib.enum.IntEnum">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.enum.</span></span><span class="sig-name descname"><span class="pre">IntEnum</span></span><a class="headerlink" href="#amaranth.lib.enum.IntEnum" title="Permalink to this definition"></a></dt>
-<dd><p>Subclass of the standard <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></a> that has <a class="reference internal" href="#amaranth.lib.enum.EnumMeta" title="amaranth.lib.enum.EnumMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">EnumMeta</span></code></a> as
+<dd><p>Subclass of the standard <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></a> that has <a class="reference internal" href="#amaranth.lib.enum.EnumMeta" title="amaranth.lib.enum.EnumMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">EnumMeta</span></code></a> as
 its metaclass.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.lib.enum.Flag">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.enum.</span></span><span class="sig-name descname"><span class="pre">Flag</span></span><a class="headerlink" href="#amaranth.lib.enum.Flag" title="Permalink to this definition"></a></dt>
-<dd><p>Subclass of the standard <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Flag" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Flag</span></code></a> that has <a class="reference internal" href="#amaranth.lib.enum.EnumMeta" title="amaranth.lib.enum.EnumMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">EnumMeta</span></code></a> as
+<dd><p>Subclass of the standard <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Flag" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Flag</span></code></a> that has <a class="reference internal" href="#amaranth.lib.enum.EnumMeta" title="amaranth.lib.enum.EnumMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">EnumMeta</span></code></a> as
 its metaclass.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.lib.enum.IntFlag">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.enum.</span></span><span class="sig-name descname"><span class="pre">IntFlag</span></span><a class="headerlink" href="#amaranth.lib.enum.IntFlag" title="Permalink to this definition"></a></dt>
-<dd><p>Subclass of the standard <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a> that has <a class="reference internal" href="#amaranth.lib.enum.EnumMeta" title="amaranth.lib.enum.EnumMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">EnumMeta</span></code></a> as
+<dd><p>Subclass of the standard <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a> that has <a class="reference internal" href="#amaranth.lib.enum.EnumMeta" title="amaranth.lib.enum.EnumMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">EnumMeta</span></code></a> as
 its metaclass.</p>
 </dd></dl>
 
