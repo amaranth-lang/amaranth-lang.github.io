@@ -1525,12 +1525,13 @@ updates and finalisation.</p>
 <h2 id="guide-level-explanation-5"><a class="header" href="#guide-level-explanation-5">Guide-level explanation</a></h2>
 <p>Shape-castable objects must, in addition to the mandatory <code>.as_shape()</code> method, implement a mandatory <code>.const(value)</code> method to define how a constant initializer (the reset value of a <code>Signal</code> or <code>View</code>) is converted to an Amaranth constant.</p>
 <p>This method is defined by shape-castable objects to convert arbitrary Python objects into Amaranth constants. For example, if a shape-castable object has complex internal structure, it can accept a dictionary with the values to be filled into various bits of this structure. If <code>Shape</code> implemented <code>ShapeCastable</code>, the method would be defined as <code>def const(self, value): return Const(value, self)</code>.</p>
+<p>The value returned by this method can be a <code>Const</code> or a value-castable object whose <code>.as_value()</code> will return a <code>Const</code>.</p>
 <p>This method can also be directly called by the developer to construct a constant using a given shape-castable object.</p>
 <h2 id="reference-level-explanation-5"><a class="header" href="#reference-level-explanation-5">Reference-level explanation</a></h2>
 <p>A method <code>def const(self, obj):</code> is added on <code>ShapeCastable</code>.</p>
 <p>The <code>Signal(shape, reset=)</code> constructor is changed so that if <code>isinstance(shape, ShapeCastable)</code>, then <code>shape.const(reset)</code> is used instead of <code>reset</code>.</p>
-<p>The <code>.const()</code> instance method is implemented on <code>Layout</code> to accept a <code>Sequence</code> or <code>Mapping</code> instance and returns a <code>Const</code> with a bit pattern that has the fields set to the given values. Overlapping fields are written in the order of iteration of the input. If the field shape is a shape-castable object, then the value for that field is computed using <code>Const.cast(value, field.shape)</code>.</p>
-<p>The <code>.const()</code> method is implemented on the metaclass of <code>Struct</code> and <code>Union</code> as <code>return self.as_shape().const(obj)</code>.</p>
+<p>The <code>.const()</code> instance method is implemented on <code>Layout</code> to accept a <code>Sequence</code> or <code>Mapping</code> instance and returns a <code>View</code> over a <code>Const</code> with a bit pattern that has the fields set to the given values. Overlapping fields are written in the order of iteration of the input. If the field shape is a shape-castable object, then the value for that field is computed using <code>Const.cast(value, field.shape)</code>.</p>
+<p>The <code>.const()</code> method is implemented on the metaclass of <code>Struct</code> and <code>Union</code> as <code>return View(self, self.as_shape().const(obj))</code>.</p>
 <p>The <code>View(..., reset=)</code> constructor is changed to pass <code>reset</code> through to the <code>Signal()</code> constructor.</p>
 <h2 id="drawbacks-6"><a class="header" href="#drawbacks-6">Drawbacks</a></h2>
 <ul>
