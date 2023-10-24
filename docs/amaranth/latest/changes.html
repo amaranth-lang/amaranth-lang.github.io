@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Changelog &mdash; Amaranth HDL toolchain 0.4.dev224 documentation</title>
+  <title>Changelog &mdash; Amaranth HDL toolchain 0.4.dev227 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -15,7 +15,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=ba96d138"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=8d6e5b52"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/platformpicker.js"></script>
@@ -38,7 +38,7 @@
             Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev224+ge53d784.editable
+                0.4.dev227+g4e4085a.editable
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -132,6 +132,7 @@
 <li><p>Replace uses of <code class="docutils literal notranslate"><span class="pre">Record</span></code> with <a class="reference internal" href="stdlib/data.html#module-amaranth.lib.data" title="amaranth.lib.data"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.data</span></code></a> and <code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.wiring</span></code>. The appropriate replacement depends on the use case. If <code class="docutils literal notranslate"><span class="pre">Record</span></code> was being used for data storage and accessing the bit-level representation, use <a class="reference internal" href="stdlib/data.html#module-amaranth.lib.data" title="amaranth.lib.data"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.data</span></code></a>. If <code class="docutils literal notranslate"><span class="pre">Record</span></code> was being used for connecting design components together, use <code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.wiring</span></code>.</p></li>
 <li><p>Ensure the <code class="docutils literal notranslate"><span class="pre">Pin</span></code> instance returned by <code class="docutils literal notranslate"><span class="pre">platform.request</span></code> is not cast to value directly, but used for its fields. Replace code like <code class="docutils literal notranslate"><span class="pre">leds</span> <span class="pre">=</span> <span class="pre">Cat(platform.request(led,</span> <span class="pre">n)</span> <span class="pre">for</span> <span class="pre">n</span> <span class="pre">in</span> <span class="pre">range(4))</span></code> with <code class="docutils literal notranslate"><span class="pre">leds</span> <span class="pre">=</span> <span class="pre">Cat(platform.request(led,</span> <span class="pre">n).o</span> <span class="pre">for</span> <span class="pre">n</span> <span class="pre">in</span> <span class="pre">range(4))</span></code> (note the <code class="docutils literal notranslate"><span class="pre">.o</span></code>).</p></li>
 <li><p>Remove uses of <code class="docutils literal notranslate"><span class="pre">amaranth.lib.scheduler.RoundRobin</span></code> by inlining or copying the implementation of that class.</p></li>
+<li><p>Remove uses of <code class="docutils literal notranslate"><span class="pre">amaranth.lib.fifo.SyncFIFO(fwft=False)</span></code> and <code class="docutils literal notranslate"><span class="pre">amaranth.lib.fifo.FIFOInterface(fwft=False)</span></code> by converting code to use <code class="docutils literal notranslate"><span class="pre">fwft=True</span></code> FIFOs or copying the implementation of those classes.</p></li>
 </ul>
 <p>While code that uses the features listed as deprecated below will work in Amaranth 0.4, they will be removed in the next version.</p>
 </section>
@@ -150,6 +151,7 @@
 <li><p><a class="reference external" href="https://amaranth-lang.org/rfcs/0018-reorganize-vendor-platforms.html">RFC 18</a>: Reorganize vendor platforms</p></li>
 <li><p><a class="reference external" href="https://amaranth-lang.org/rfcs/0019-remove-scheduler.html">RFC 19</a>: Remove <code class="docutils literal notranslate"><span class="pre">amaranth.lib.scheduler</span></code></p></li>
 <li><p><a class="reference external" href="https://amaranth-lang.org/rfcs/0015-lifting-shape-castables.html">RFC 15</a>: Lifting shape-castable objects</p></li>
+<li><p><a class="reference external" href="https://amaranth-lang.org/rfcs/0020-deprecate-non-fwft-fifos.html">RFC 20</a>: Deprecate non-FWFT FIFOs</p></li>
 <li><p><a class="reference external" href="https://amaranth-lang.org/rfcs/0022-valuecastable-shape.html">RFC 22</a>: Define <code class="docutils literal notranslate"><span class="pre">ValueCastable.shape()</span></code></p></li>
 </ul>
 </section>
@@ -182,6 +184,8 @@
 <li><p>Added: <a class="reference internal" href="stdlib/data.html#module-amaranth.lib.data" title="amaranth.lib.data"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.data</span></code></a>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0001-aggregate-data-structures.html">RFC 1</a>)</p></li>
 <li><p>Added: <a class="reference internal" href="stdlib/crc.html#module-amaranth.lib.crc" title="amaranth.lib.crc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.crc</span></code></a>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0006-stdlib-crc.html">RFC 6</a>)</p></li>
 <li><p>Deprecated: <code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.scheduler</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0019-remove-scheduler.html">RFC 19</a>)</p></li>
+<li><p>Deprecated: <a class="reference internal" href="stdlib/fifo.html#amaranth.lib.fifo.FIFOInterface" title="amaranth.lib.fifo.FIFOInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.lib.fifo.FIFOInterface</span></code></a> with <code class="docutils literal notranslate"><span class="pre">fwft=False</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0020-deprecate-non-fwft-fifos.html">RFC 20</a>)</p></li>
+<li><p>Deprecated: <a class="reference internal" href="stdlib/fifo.html#amaranth.lib.fifo.SyncFIFO" title="amaranth.lib.fifo.SyncFIFO"><code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.lib.fifo.SyncFIFO</span></code></a> with <code class="docutils literal notranslate"><span class="pre">fwft=False</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0020-deprecate-non-fwft-fifos.html">RFC 20</a>)</p></li>
 </ul>
 </section>
 <section id="toolchain-changes">
