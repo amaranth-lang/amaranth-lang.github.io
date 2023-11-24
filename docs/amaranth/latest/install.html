@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Installation &mdash; Amaranth HDL toolchain 0.4.dev234 documentation</title>
+  <title>Installation &mdash; Amaranth HDL toolchain 0.4.dev235 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -15,7 +15,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=de59017c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=7a218565"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/platformpicker.js"></script>
@@ -38,7 +38,7 @@
             Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev234+gabd74ea.editable
+                0.4.dev235+g1b74c29.editable
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -105,7 +105,7 @@
 <section id="system-requirements">
 <h2>System requirements<a class="headerlink" href="#system-requirements" title="Permalink to this heading"></a></h2>
 <p>Amaranth HDL requires Python 3.8; it works on <a class="reference external" href="https://www.python.org/">CPython</a> 3.8 (or newer), and works faster on <a class="reference external" href="https://www.pypy.org/">PyPy3.8</a> 7.3.7 (or newer). Installation requires <a class="reference external" href="https://pip.pypa.io/">pip</a> 23.0 (or newer).</p>
-<p>For most workflows, Amaranth requires <a class="reference external" href="https://yosyshq.net/yosys/">Yosys</a> 0.10 (or newer). A compatible version of Yosys is distributed via <a class="reference external" href="https://pypi.org/">PyPI</a> for most popular platforms.</p>
+<p>For most workflows, Amaranth requires <a class="reference external" href="https://yosyshq.net/yosys/">Yosys</a> 0.35 (or newer). A compatible version of Yosys is distributed via <a class="reference external" href="https://pypi.org/">PyPI</a> for most popular platforms.</p>
 <p>Simulating Amaranth code requires no additional software. However, a waveform viewer like <a class="reference external" href="http://gtkwave.sourceforge.net/">GTKWave</a> is invaluable for debugging.</p>
 <p>Synthesizing, placing and routing an Amaranth design for an FPGA requires the FPGA family specific toolchain.</p>
 </section>
@@ -142,7 +142,7 @@
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>yosys
 </pre></div>
 </div>
-<p>If Yosys 0.10 (or newer) is not available, <a class="reference external" href="https://github.com/YosysHQ/yosys/#setup">build Yosys from source</a>.</p>
+<p>If Yosys 0.35 (or newer) is not available, <a class="reference external" href="https://github.com/YosysHQ/yosys/#setup">build Yosys from source</a>.</p>
 <p>Before continuing, make sure you have the latest version of <a class="reference external" href="https://pip.pypa.io/">pip</a> installed by running:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip3<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--upgrade<span class="w"> </span>pip
 </pre></div>
@@ -159,7 +159,7 @@
 <p class="platform-title">Other Linux</p>
 <p>Install Python and GTKWave from the package repository of your distribution.</p>
 <p>On architectures other than x86_64 and AArch64, install Yosys from the package repository of your distribution.</p>
-<p>If Yosys 0.10 (or newer) is not available, <a class="reference external" href="https://github.com/YosysHQ/yosys/#setup">build Yosys from source</a>.</p>
+<p>If Yosys 0.35 (or newer) is not available, <a class="reference external" href="https://github.com/YosysHQ/yosys/#setup">build Yosys from source</a>.</p>
 <p>Before continuing, make sure you have the latest version of <a class="reference external" href="https://pip.pypa.io/">pip</a> installed by running:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip3<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--upgrade<span class="w"> </span>pip
 </pre></div>
