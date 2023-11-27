@@ -1,0 +1,336 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>0031-enumeration-type-safety - The Amaranth RFC Book</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li><li class="chapter-item expanded "><a href="0002-interfaces.html">0002-interfaces</a></li><li class="chapter-item expanded "><a href="0003-enumeration-shapes.html">0003-enumeration-shapes</a></li><li class="chapter-item expanded "><a href="0004-const-castable-exprs.html">0004-const-castable-exprs</a></li><li class="chapter-item expanded "><a href="0005-remove-const-normalize.html">0005-remove-const-normalize</a></li><li class="chapter-item expanded "><a href="0006-stdlib-crc.html">0006-stdlib-crc</a></li><li class="chapter-item expanded "><a href="0008-aggregate-extensibility.html">0008-aggregate-extensibility</a></li><li class="chapter-item expanded "><a href="0009-const-init-shape-castable.html">0009-const-init-shape-castable</a></li><li class="chapter-item expanded "><a href="0010-move-repl-to-value.html">0010-move-repl-to-value</a></li><li class="chapter-item expanded "><a href="0015-lifting-shape-castables.html">0015-lifting-shape-castables</a></li><li class="chapter-item expanded "><a href="0018-reorganize-vendor-platforms.html">0018-reorganize-vendor-platforms</a></li><li class="chapter-item expanded "><a href="0019-remove-scheduler.html">0019-remove-scheduler</a></li><li class="chapter-item expanded "><a href="0020-deprecate-non-fwft-fifos.html">0020-deprecate-non-fwft-fifos</a></li><li class="chapter-item expanded "><a href="0021-patch-releases.html">0021-patch-releases</a></li><li class="chapter-item expanded "><a href="0022-valuecastable-shape.html">0022-valuecastable-shape</a></li><li class="chapter-item expanded "><a href="0028-override-value-operators.html">0028-override-value-operators</a></li><li class="chapter-item expanded "><a href="0031-enumeration-type-safety.html" class="active">0031-enumeration-type-safety</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Amaranth RFC Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/amaranth-lang/rfcs" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <ul>
+<li>Start Date: 2023-11-27</li>
+<li>RFC PR: <a href="https://github.com/amaranth-lang/rfcs/pull/31">amaranth-lang/rfcs#31</a></li>
+<li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/972">amaranth-lang/amaranth#972</a></li>
+</ul>
+<h1 id="enumeration-type-safety"><a class="header" href="#enumeration-type-safety">Enumeration type safety</a></h1>
+<h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
+<p>Make Amaranth <code>Enum</code> and <code>Flag</code> use a custom <code>ValueCastable</code> view class, enforcing type safety.</p>
+<h2 id="motivation"><a class="header" href="#motivation">Motivation</a></h2>
+<p>Python <code>Enum</code> provides an opaque wrapper over the underlying enum values,
+providing type safety and guarding against improper usage in arithmetic
+operations:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; from enum import Enum
+&gt;&gt;&gt; class EnumA(Enum):
+...     A = 0
+...     B = 1
+...
+&gt;&gt;&gt; EnumA.A + 1
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+TypeError: unsupported operand type(s) for +: 'EnumA' and 'int'
+</code></pre>
+<p>Likewise, <code>Flag</code> values can be used in bitwise operations, but only within
+their own type:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; from enum import Flag
+&gt;&gt;&gt; class FlagA(Flag):
+...     A = 1
+...     B = 2
+... 
+&gt;&gt;&gt; class FlagB(Flag):
+...     C = 1
+...     D = 2
+... 
+&gt;&gt;&gt; FlagA.A | FlagA.B
+&lt;FlagA.A|B: 3&gt;
+&gt;&gt;&gt; FlagA.A | FlagB.C
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+TypeError: unsupported operand type(s) for |: 'FlagA' and 'FlagB'
+</code></pre>
+<p>However, these safety properties are not currently enforced by Amaranth
+on enum-typed signals:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; from amaranth import *
+&gt;&gt;&gt; from amaranth.lib.enum import *
+&gt;&gt;&gt; class FlagA(Flag):
+...     A = 1
+...     B = 2
+... 
+&gt;&gt;&gt; class FlagB(Flag):
+...     C = 1
+...     D = 2
+... 
+&gt;&gt;&gt; a = Signal(FlagA)
+&gt;&gt;&gt; b = Signal(FlagB)
+&gt;&gt;&gt; a | b
+(| (sig a) (sig b))
+</code></pre>
+<h2 id="guide-level-explanation"><a class="header" href="#guide-level-explanation">Guide-level explanation</a></h2>
+<p>Like in Python, <code>Enum</code> and <code>Flag</code> subclasses are considered strongly-typed,
+while <code>IntEnum</code> and <code>IntFlag</code> are weakly-typed. Enum-typed Amaranth values
+with strong typing are manipulated through <code>amaranth.lib.enum.EnumView</code>
+and <code>amaranth.lib.enum.FlagView</code> classes, which wrap an underlying <code>Value</code>
+in a type-safe container that only allows a small subset of operations.
+For weakly-typed enums, <code>Value</code> is used directly, providing full
+interchangeability with other values.</p>
+<p>An <code>EnumView</code> or a <code>FlagView</code> can be obtained by:</p>
+<ul>
+<li>Creating an enum-typed signal (<code>a = Signal(MyEnum)</code>)</li>
+<li>Explicitly casting a value to the enum type (<code>MyEnum(value)</code>)</li>
+</ul>
+<p>The operations available on <code>EnumView</code> and <code>FlagView</code> include:</p>
+<ul>
+<li>Comparing for equality to another view of the same enum type (<code>a == b</code> and <code>a != b</code>)</li>
+<li>Assigning to or from a value</li>
+<li>Converting to a plain value via <code>Value.cast</code></li>
+</ul>
+<p>The operations additionally available on <code>FlagView</code> include:</p>
+<ul>
+<li>Binary bitwise operations with another <code>FlagView</code> of the same type
+(<code>a | b</code>, <code>a &amp; b</code>, <code>a ^ b</code>)</li>
+<li>Bitwise inversion (<code>~a</code>)</li>
+</ul>
+<p>A custom subclass of <code>EnumView</code> or <code>FlagView</code> can be used for a given enum
+type if so desired, by using the <code>view_class</code> keyword parameter on enum
+creation.</p>
+<h2 id="reference-level-explanation"><a class="header" href="#reference-level-explanation">Reference-level explanation</a></h2>
+<p><code>amaranth.lib.enum.EnumView</code> is a <code>ValueCastable</code> subclass.  The following
+operations are defined on it:</p>
+<ul>
+<li><code>EnumView(enum, value_castable)</code>: creates the view</li>
+<li><code>shape()</code>: returns the underlying enum</li>
+<li><code>as_value()</code>: returns the underlying value</li>
+<li><code>eq(value_castable)</code>: delegates to <code>eq</code> on the underlying value</li>
+<li><code>__eq__</code> and <code>__ne__</code>: if the other argument is an <code>EnumView</code> of the same
+enum type or a value of the enum type, delegates to the corresponding
+<code>Value</code> operator; otherwise, raises a <code>TypeError</code></li>
+<li>All binary arithmetic, bitwise, and remaining comparison operators: raise
+a <code>TypeError</code> (to override the implementation provided by <code>Value</code> in case
+of an operation between <code>EnumView</code> and <code>Value</code>)</li>
+</ul>
+<p><code>amaranth.lib.enum.FlagView</code> is a subclass of <code>EnumView</code>.  The following
+additional operations are defined on it:</p>
+<ul>
+<li><code>__and__</code>, <code>__or__</code>, <code>__xor__</code>: if the other argument is a <code>FlagView</code>
+of the same enum type or a value of the enum type, delegates to the
+corresponding <code>Value</code> operator and wraps the result in <code>FlagView</code>;
+otherwise, raises a <code>TypeError</code></li>
+<li><code>__invert__</code>: inverts all bits in this value corresponding to actually
+defined flags in the underlying enum type, then wraps the result in
+<code>FlagView</code></li>
+</ul>
+<p>The behavior of <code>EnumMeta.__call__</code> when called on a value-castable
+is changed as follows:</p>
+<ul>
+<li>If the enum has been created with a <code>view_class</code>, the value-castable
+is wrapped in the given class</li>
+<li>Otherwise, if the enum type is a subclass of <code>IntEnum</code> or <code>IntFlag</code>, the
+value-castable is returned as a plain <code>Value</code></li>
+<li>Otherwise, if the enum type is a subclass of <code>Flag</code>, the value-castable
+is wrapped in <code>FlagView</code></li>
+<li>Otherwise, the value-castable is wrapped in <code>EnumView</code></li>
+</ul>
+<p>The behavior of <code>EnumMeta.const</code> is modified to go through the same logic.</p>
+<h2 id="drawbacks"><a class="header" href="#drawbacks">Drawbacks</a></h2>
+<p>This proposal increases language complexity, and is not consistent with
+eg. how <code>amaranth.lib.data.View</code> operates (which has much more lax type
+checking).</p>
+<h2 id="rationale-and-alternatives"><a class="header" href="#rationale-and-alternatives">Rationale and alternatives</a></h2>
+<p>Do nothing. Operations on mismatched types will continue to be silently
+allowed.</p>
+<p>Equality could work more like Python equality (always returning false
+for mismatched types).</p>
+<p>Assignment could be made strongly-typed as well (with corresponding hook
+added to <code>Value</code>).</p>
+<h2 id="prior-art"><a class="header" href="#prior-art">Prior art</a></h2>
+<p>This feature directly parallels the differences between Python's
+<code>Enum</code>/<code>Flag</code> and <code>IntEnum</code>/<code>IntFlag</code>.</p>
+<h2 id="unresolved-questions"><a class="header" href="#unresolved-questions">Unresolved questions</a></h2>
+<p>Instead of having an extension point via <code>view_class</code>, we could instead
+automatically forward all otherwise unknown methods to the underlying enum
+class, providing it the <code>EnumView</code> as <code>self</code>.</p>
+<h2 id="future-possibilities"><a class="header" href="#future-possibilities">Future possibilities</a></h2>
+<p>None.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="0028-override-value-operators.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="0028-override-value-operators.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
