@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Index &mdash; Amaranth HDL toolchain 0.4.dev250 documentation</title>
+  <title>Index &mdash; Amaranth HDL toolchain 0.4.dev251 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -14,7 +14,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=a3f9fc02"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=0781781b"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/platformpicker.js"></script>
@@ -35,7 +35,7 @@
             Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev250+gb0b193f.editable
+                0.4.dev251+gef5cfa7.editable
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -100,10 +100,14 @@
 <h2 id="_">_</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="stdlib/enum.html#amaranth.lib.enum.FlagView.__and__">__and__() (amaranth.lib.enum.FlagView method)</a>
+</li>
       <li><a href="stdlib/crc.html#amaranth.lib.crc.Algorithm.__call__">__call__() (amaranth.lib.crc.Algorithm method)</a>
 
       <ul>
         <li><a href="stdlib/data.html#amaranth.lib.data.Layout.__call__">(amaranth.lib.data.Layout method)</a>
+</li>
+        <li><a href="stdlib/enum.html#amaranth.lib.enum.EnumMeta.__call__">(amaranth.lib.enum.EnumMeta method)</a>
 </li>
       </ul></li>
       <li><a href="stdlib/data.html#amaranth.lib.data.Field.__eq__">__eq__() (amaranth.lib.data.Field method)</a>
@@ -111,9 +115,9 @@
       <ul>
         <li><a href="stdlib/data.html#amaranth.lib.data.Layout.__eq__">(amaranth.lib.data.Layout method)</a>
 </li>
+        <li><a href="stdlib/enum.html#amaranth.lib.enum.EnumView.__eq__">(amaranth.lib.enum.EnumView method)</a>
+</li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="stdlib/data.html#amaranth.lib.data.View.__getattr__">__getattr__() (amaranth.lib.data.View method)</a>
 </li>
       <li><a href="stdlib/data.html#amaranth.lib.data.Layout.__getitem__">__getitem__() (amaranth.lib.data.Layout method)</a>
@@ -122,7 +126,23 @@
         <li><a href="stdlib/data.html#amaranth.lib.data.View.__getitem__">(amaranth.lib.data.View method)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="stdlib/enum.html#amaranth.lib.enum.EnumView.__init__">__init__() (amaranth.lib.enum.EnumView method)</a>
+</li>
+      <li><a href="stdlib/enum.html#amaranth.lib.enum.FlagView.__invert__">__invert__() (amaranth.lib.enum.FlagView method)</a>
+</li>
       <li><a href="stdlib/data.html#amaranth.lib.data.Layout.__iter__">__iter__() (amaranth.lib.data.Layout method)</a>
+</li>
+      <li><a href="stdlib/enum.html#amaranth.lib.enum.FlagView.__or__">__or__() (amaranth.lib.enum.FlagView method)</a>
+</li>
+      <li><a href="stdlib/enum.html#amaranth.lib.enum.FlagView.__rand__">__rand__() (amaranth.lib.enum.FlagView method)</a>
+</li>
+      <li><a href="stdlib/enum.html#amaranth.lib.enum.FlagView.__ror__">__ror__() (amaranth.lib.enum.FlagView method)</a>
+</li>
+      <li><a href="stdlib/enum.html#amaranth.lib.enum.FlagView.__rxor__">__rxor__() (amaranth.lib.enum.FlagView method)</a>
+</li>
+      <li><a href="stdlib/enum.html#amaranth.lib.enum.FlagView.__xor__">__xor__() (amaranth.lib.enum.FlagView method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -194,7 +214,11 @@
 </li>
       </ul></li>
       <li><a href="stdlib/data.html#amaranth.lib.data.View.as_value">as_value() (amaranth.lib.data.View method)</a>
+
+      <ul>
+        <li><a href="stdlib/enum.html#amaranth.lib.enum.EnumView.as_value">(amaranth.lib.enum.EnumView method)</a>
 </li>
+      </ul></li>
       <li><a href="stdlib/cdc.html#amaranth.lib.cdc.AsyncFFSynchronizer">AsyncFFSynchronizer (class in amaranth.lib.cdc)</a>
 </li>
       <li><a href="stdlib/fifo.html#amaranth.lib.fifo.AsyncFIFO">AsyncFIFO (class in amaranth.lib.fifo)</a>
@@ -553,12 +577,18 @@
 </li>
       <li><a href="stdlib/enum.html#amaranth.lib.enum.Enum">Enum (class in amaranth.lib.enum)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="stdlib/enum.html#amaranth.lib.enum.EnumMeta">EnumMeta (class in amaranth.lib.enum)</a>
 </li>
-      <li><a href="stdlib/data.html#amaranth.lib.data.View.eq">eq() (amaranth.lib.data.View method)</a>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="stdlib/enum.html#amaranth.lib.enum.EnumView">EnumView (class in amaranth.lib.enum)</a>
 </li>
+      <li><a href="stdlib/data.html#amaranth.lib.data.View.eq">eq() (amaranth.lib.data.View method)</a>
+
+      <ul>
+        <li><a href="stdlib/enum.html#amaranth.lib.enum.EnumView.eq">(amaranth.lib.enum.EnumView method)</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -569,11 +599,13 @@
 </li>
       <li><a href="stdlib/data.html#amaranth.lib.data.Field">Field (class in amaranth.lib.data)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="stdlib/fifo.html#amaranth.lib.fifo.FIFOInterface">FIFOInterface (class in amaranth.lib.fifo)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="stdlib/enum.html#amaranth.lib.enum.Flag">Flag (class in amaranth.lib.enum)</a>
+</li>
+      <li><a href="stdlib/enum.html#amaranth.lib.enum.FlagView">FlagView (class in amaranth.lib.enum)</a>
 </li>
       <li><a href="stdlib/data.html#amaranth.lib.data.FlexibleLayout">FlexibleLayout (class in amaranth.lib.data)</a>
 </li>
@@ -695,7 +727,11 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="stdlib/data.html#amaranth.lib.data.View.shape">shape() (amaranth.lib.data.View method)</a>
+
+      <ul>
+        <li><a href="stdlib/enum.html#amaranth.lib.enum.EnumView.shape">(amaranth.lib.enum.EnumView method)</a>
 </li>
+      </ul></li>
       <li><a href="stdlib/data.html#amaranth.lib.data.ArrayLayout.size">size (amaranth.lib.data.ArrayLayout property)</a>
 
       <ul>
