@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li><li class="chapter-item expanded "><a href="0002-interfaces.html">0002-interfaces</a></li><li class="chapter-item expanded "><a href="0003-enumeration-shapes.html">0003-enumeration-shapes</a></li><li class="chapter-item expanded "><a href="0004-const-castable-exprs.html">0004-const-castable-exprs</a></li><li class="chapter-item expanded "><a href="0005-remove-const-normalize.html">0005-remove-const-normalize</a></li><li class="chapter-item expanded "><a href="0006-stdlib-crc.html">0006-stdlib-crc</a></li><li class="chapter-item expanded "><a href="0008-aggregate-extensibility.html">0008-aggregate-extensibility</a></li><li class="chapter-item expanded "><a href="0009-const-init-shape-castable.html">0009-const-init-shape-castable</a></li><li class="chapter-item expanded "><a href="0010-move-repl-to-value.html">0010-move-repl-to-value</a></li><li class="chapter-item expanded "><a href="0015-lifting-shape-castables.html">0015-lifting-shape-castables</a></li><li class="chapter-item expanded "><a href="0018-reorganize-vendor-platforms.html">0018-reorganize-vendor-platforms</a></li><li class="chapter-item expanded "><a href="0019-remove-scheduler.html">0019-remove-scheduler</a></li><li class="chapter-item expanded "><a href="0020-deprecate-non-fwft-fifos.html">0020-deprecate-non-fwft-fifos</a></li><li class="chapter-item expanded "><a href="0021-patch-releases.html">0021-patch-releases</a></li><li class="chapter-item expanded "><a href="0022-valuecastable-shape.html">0022-valuecastable-shape</a></li><li class="chapter-item expanded "><a href="0028-override-value-operators.html">0028-override-value-operators</a></li><li class="chapter-item expanded "><a href="0031-enumeration-type-safety.html">0031-enumeration-type-safety</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li><li class="chapter-item expanded "><a href="0002-interfaces.html">0002-interfaces</a></li><li class="chapter-item expanded "><a href="0003-enumeration-shapes.html">0003-enumeration-shapes</a></li><li class="chapter-item expanded "><a href="0004-const-castable-exprs.html">0004-const-castable-exprs</a></li><li class="chapter-item expanded "><a href="0005-remove-const-normalize.html">0005-remove-const-normalize</a></li><li class="chapter-item expanded "><a href="0006-stdlib-crc.html">0006-stdlib-crc</a></li><li class="chapter-item expanded "><a href="0008-aggregate-extensibility.html">0008-aggregate-extensibility</a></li><li class="chapter-item expanded "><a href="0009-const-init-shape-castable.html">0009-const-init-shape-castable</a></li><li class="chapter-item expanded "><a href="0010-move-repl-to-value.html">0010-move-repl-to-value</a></li><li class="chapter-item expanded "><a href="0015-lifting-shape-castables.html">0015-lifting-shape-castables</a></li><li class="chapter-item expanded "><a href="0018-reorganize-vendor-platforms.html">0018-reorganize-vendor-platforms</a></li><li class="chapter-item expanded "><a href="0019-remove-scheduler.html">0019-remove-scheduler</a></li><li class="chapter-item expanded "><a href="0020-deprecate-non-fwft-fifos.html">0020-deprecate-non-fwft-fifos</a></li><li class="chapter-item expanded "><a href="0021-patch-releases.html">0021-patch-releases</a></li><li class="chapter-item expanded "><a href="0022-valuecastable-shape.html">0022-valuecastable-shape</a></li><li class="chapter-item expanded "><a href="0028-override-value-operators.html">0028-override-value-operators</a></li><li class="chapter-item expanded "><a href="0031-enumeration-type-safety.html">0031-enumeration-type-safety</a></li><li class="chapter-item expanded "><a href="0034-interface-rename.html">0034-interface-rename</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -2051,6 +2051,36 @@ automatically forward all otherwise unknown methods to the underlying enum
 class, providing it the <code>EnumView</code> as <code>self</code>.</p>
 <h2 id="future-possibilities-14"><a class="header" href="#future-possibilities-14">Future possibilities</a></h2>
 <p>None.</p>
+<div style="break-before: page; page-break-before: always;"></div><ul>
+<li>Start Date: 2023-12-04</li>
+<li>RFC PR: <a href="https://github.com/amaranth-lang/rfcs/pull/34">amaranth-lang/rfcs#34</a></li>
+<li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/985">amaranth-lang/amaranth#985</a></li>
+</ul>
+<h1 id="rename-amaranthlibwiringinterface-to-pureinterface"><a class="header" href="#rename-amaranthlibwiringinterface-to-pureinterface">Rename <code>amaranth.lib.wiring.Interface</code> to <code>PureInterface</code></a></h1>
+<h2 id="summary-17"><a class="header" href="#summary-17">Summary</a></h2>
+<p>The <code>Interface</code> class in <code>amaranth.lib.wiring</code> is renamed to <code>PureInterface</code>, to avoid the impression that it is used for <em>all</em> interfaces.</p>
+<h2 id="motivation-17"><a class="header" href="#motivation-17">Motivation</a></h2>
+<p>The current naming of the <code>Interface</code> class wrongly suggests that it is the base class to be used for all interfaces, and that <code>isinstance(foo, Interface)</code> is a valid check for an interface. However, this is in stark contrast to how <code>lib.wiring</code> works: any object can be an interface, as long as it has a <code>signature</code> property and compliant members. This misleads users (and, on at least two occasions, amaranth developers), making them write buggy code.</p>
+<p>Additionally, the naming makes spoken language ambiguous in a bad way, as it is impossible to tell apart &quot;an interface&quot; and &quot;an Interface&quot;.</p>
+<p>Therefore, this RFC proposes to rename <code>Interface</code> to something more specific and reflecting its function.</p>
+<h2 id="guide-level-explanation-11"><a class="header" href="#guide-level-explanation-11">Guide-level explanation</a></h2>
+<p>The <code>Interface</code> class in <code>amaranth.lib.wiring</code> is renamed to <code>PureInterface</code>.</p>
+<h2 id="reference-level-explanation-11"><a class="header" href="#reference-level-explanation-11">Reference-level explanation</a></h2>
+<p>The <code>Interface</code> class in <code>amaranth.lib.wiring</code> is renamed to <code>PureInterface</code>.</p>
+<h2 id="drawbacks-16"><a class="header" href="#drawbacks-16">Drawbacks</a></h2>
+<p>Minor churn.</p>
+<h2 id="rationale-and-alternatives-15"><a class="header" href="#rationale-and-alternatives-15">Rationale and alternatives</a></h2>
+<p>The new name is, of course, subject to bikeshedding. The names that have been proposed are:</p>
+<ul>
+<li><code>PureInterface</code></li>
+<li><code>BareInterface</code></li>
+</ul>
+<h2 id="prior-art-14"><a class="header" href="#prior-art-14">Prior art</a></h2>
+<p>None.</p>
+<h2 id="unresolved-questions-15"><a class="header" href="#unresolved-questions-15">Unresolved questions</a></h2>
+<p>None.</p>
+<h2 id="future-possibilities-15"><a class="header" href="#future-possibilities-15">Future possibilities</a></h2>
+<p>The name <code>Interface</code> that has just been freed up can be reused for an ABC-like class representing all valid interfaces.</p>
 
                     </main>
 
