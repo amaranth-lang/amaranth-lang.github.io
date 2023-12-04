@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>0019-remove-scheduler - The Amaranth RFC Book</title>
+        <title>0035-shapelike-valuelike - The Amaranth RFC Book</title>
 
 
         <!-- Custom HTML head -->
@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li><li class="chapter-item expanded "><a href="0002-interfaces.html">0002-interfaces</a></li><li class="chapter-item expanded "><a href="0003-enumeration-shapes.html">0003-enumeration-shapes</a></li><li class="chapter-item expanded "><a href="0004-const-castable-exprs.html">0004-const-castable-exprs</a></li><li class="chapter-item expanded "><a href="0005-remove-const-normalize.html">0005-remove-const-normalize</a></li><li class="chapter-item expanded "><a href="0006-stdlib-crc.html">0006-stdlib-crc</a></li><li class="chapter-item expanded "><a href="0008-aggregate-extensibility.html">0008-aggregate-extensibility</a></li><li class="chapter-item expanded "><a href="0009-const-init-shape-castable.html">0009-const-init-shape-castable</a></li><li class="chapter-item expanded "><a href="0010-move-repl-to-value.html">0010-move-repl-to-value</a></li><li class="chapter-item expanded "><a href="0015-lifting-shape-castables.html">0015-lifting-shape-castables</a></li><li class="chapter-item expanded "><a href="0018-reorganize-vendor-platforms.html">0018-reorganize-vendor-platforms</a></li><li class="chapter-item expanded "><a href="0019-remove-scheduler.html" class="active">0019-remove-scheduler</a></li><li class="chapter-item expanded "><a href="0020-deprecate-non-fwft-fifos.html">0020-deprecate-non-fwft-fifos</a></li><li class="chapter-item expanded "><a href="0021-patch-releases.html">0021-patch-releases</a></li><li class="chapter-item expanded "><a href="0022-valuecastable-shape.html">0022-valuecastable-shape</a></li><li class="chapter-item expanded "><a href="0028-override-value-operators.html">0028-override-value-operators</a></li><li class="chapter-item expanded "><a href="0031-enumeration-type-safety.html">0031-enumeration-type-safety</a></li><li class="chapter-item expanded "><a href="0034-interface-rename.html">0034-interface-rename</a></li><li class="chapter-item expanded "><a href="0035-shapelike-valuelike.html">0035-shapelike-valuelike</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li><li class="chapter-item expanded "><a href="0002-interfaces.html">0002-interfaces</a></li><li class="chapter-item expanded "><a href="0003-enumeration-shapes.html">0003-enumeration-shapes</a></li><li class="chapter-item expanded "><a href="0004-const-castable-exprs.html">0004-const-castable-exprs</a></li><li class="chapter-item expanded "><a href="0005-remove-const-normalize.html">0005-remove-const-normalize</a></li><li class="chapter-item expanded "><a href="0006-stdlib-crc.html">0006-stdlib-crc</a></li><li class="chapter-item expanded "><a href="0008-aggregate-extensibility.html">0008-aggregate-extensibility</a></li><li class="chapter-item expanded "><a href="0009-const-init-shape-castable.html">0009-const-init-shape-castable</a></li><li class="chapter-item expanded "><a href="0010-move-repl-to-value.html">0010-move-repl-to-value</a></li><li class="chapter-item expanded "><a href="0015-lifting-shape-castables.html">0015-lifting-shape-castables</a></li><li class="chapter-item expanded "><a href="0018-reorganize-vendor-platforms.html">0018-reorganize-vendor-platforms</a></li><li class="chapter-item expanded "><a href="0019-remove-scheduler.html">0019-remove-scheduler</a></li><li class="chapter-item expanded "><a href="0020-deprecate-non-fwft-fifos.html">0020-deprecate-non-fwft-fifos</a></li><li class="chapter-item expanded "><a href="0021-patch-releases.html">0021-patch-releases</a></li><li class="chapter-item expanded "><a href="0022-valuecastable-shape.html">0022-valuecastable-shape</a></li><li class="chapter-item expanded "><a href="0028-override-value-operators.html">0028-override-value-operators</a></li><li class="chapter-item expanded "><a href="0031-enumeration-type-safety.html">0031-enumeration-type-safety</a></li><li class="chapter-item expanded "><a href="0034-interface-rename.html">0034-interface-rename</a></li><li class="chapter-item expanded "><a href="0035-shapelike-valuelike.html" class="active">0035-shapelike-valuelike</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -146,46 +146,84 @@
                 <div id="content" class="content">
                     <main>
                         <ul>
-<li>Start Date: 2023-08-22</li>
-<li>RFC PR: <a href="https://github.com/amaranth-lang/rfcs/pull/19">amaranth-lang/rfcs#19</a></li>
-<li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/874">amaranth-lang/amaranth#874</a></li>
+<li>Start Date: 2023-12-04</li>
+<li>RFC PR: <a href="https://github.com/amaranth-lang/rfcs/pull/35">amaranth-lang/rfcs#35</a></li>
+<li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/986">amaranth-lang/amaranth#986</a></li>
 </ul>
-<h1 id="remove-amaranthlibscheduler"><a class="header" href="#remove-amaranthlibscheduler">Remove <code>amaranth.lib.scheduler</code></a></h1>
+<h1 id="add-shapelike-valuelike"><a class="header" href="#add-shapelike-valuelike">Add <code>ShapeLike</code>, <code>ValueLike</code></a></h1>
 <h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
-<p>Remove <code>amaranth.lib.scheduler</code> and the only class <code>RoundRobin</code> in it.</p>
+<p>Two special classes are added to the language: <code>ShapeLike</code> and <code>ValueLike</code>. They cannot be constructed, but can be used to determine with <code>isinstance</code> and <code>issubclass</code> to determine whether something can be cast to <code>Shape</code> or a <code>Value</code>, respectively.</p>
 <h2 id="motivation"><a class="header" href="#motivation">Motivation</a></h2>
-<p>This module is not used in the sole place for which it was added (Amaranth SoC), it is not especially useful, and it has not undergone proper community review when it was added.</p>
+<p>As it stands, we have multiple types of objects that can be used as shapes (<code>Shape</code>, <code>ShapeCastable</code>, <code>int</code>, <code>range</code>, <code>EnumMeta</code>) and values (<code>Value</code>, <code>ValueCastable</code>, <code>int</code>, <code>Enum</code>). These types have no common superclass, so there's no easy way to check if an object can be used as a shape or a value, save for actually calling <code>Shape.cast</code> or <code>Value.cast</code>. Introducing <code>ShapeLike</code> and <code>ValueLike</code> provides an idiomatic way to perform such a check.</p>
+<p>Additionally, when type annotations are in use, there is currently no simple type that can be used for an argument that takes an arbitrary shape- or value-castable object. These new classes provide such a simple type.</p>
 <h2 id="guide-level-explanation"><a class="header" href="#guide-level-explanation">Guide-level explanation</a></h2>
-<p>The module <code>amaranth.lib.scheduler</code> and the sole class <code>RoundRobin</code> in it is removed. To continue using it, copy the contents of the module into your own project.</p>
+<p>In Amaranth, multiple types of objects can be cast to shapes:</p>
+<ul>
+<li>actual <code>Shape</code> objects</li>
+<li><code>ShapeCastable</code> objects</li>
+<li>non-negative integers</li>
+<li><code>range</code> objects</li>
+<li><code>Enum</code> subclasses with const-castable values</li>
+</ul>
+<p>To check whether an object is of a type that can be cast to a shape, <code>isinstance(obj, ShapeLike)</code> can be used. To check whether a type can be, in general, cast to a shape, <code>issubclass(cls, ShapeLike)</code> can be used.</p>
+<p>Likewise, multiple types of objects can be cast to values:</p>
+<ul>
+<li>actual <code>Value</code> objects</li>
+<li><code>ValueCastable</code> objects</li>
+<li>integers</li>
+<li>values of <code>Enum</code> subclasses with const-castable values</li>
+</ul>
+<p>To check whether an object is of a type that can be cast to a value, <code>isinstance(obj, ValueLike)</code> can be used. To check whether a type can be, in general, cast to a value, <code>issubclass(cls, ValueLike)</code> can be used.</p>
 <h2 id="reference-level-explanation"><a class="header" href="#reference-level-explanation">Reference-level explanation</a></h2>
-<p>The class <code>amaranth.lib.scheduler.RoundRobin</code> is deprecated in Amaranth 0.4 and removed in Amaranth 0.5.</p>
+<p>A <code>ShapeLike</code> class is provided. It cannot be constructed, and can only be used with <code>isinstance</code> and <code>issubclass</code>, which are overriden by a custom metaclass.</p>
+<p><code>issubclass(cls, ShapeLike)</code> returns <code>True</code> for:</p>
+<ul>
+<li><code>Shape</code></li>
+<li><code>ShapeCastable</code> and its subclasses</li>
+<li><code>int</code> and its subclasses</li>
+<li><code>range</code> and its subclasses</li>
+<li><code>enum.EnumMeta</code> and its subclasses</li>
+</ul>
+<p><code>isinstance(obj, ShapeLike)</code> returns <code>True</code> for:</p>
+<ul>
+<li>instances of <code>Shape</code></li>
+<li>instances of <code>ShapeCastable</code> and its subclasses</li>
+<li>non-negative <code>int</code> values (and <code>int</code> subclasses)</li>
+<li><code>enum.Enum</code> subclasses where every value is a <code>ValueLike</code></li>
+</ul>
+<p>Similarly, a <code>ValueLike</code> class is provided.</p>
+<p><code>issubclass(cls, ValueLike)</code> returns <code>True</code> for:</p>
+<ul>
+<li><code>Value</code> and its subclasses</li>
+<li><code>ValueCastable</code> and its subclasses</li>
+<li><code>int</code> and its subclasses</li>
+<li><code>enum.Enum</code> subclasses where every value is a <code>ValueLike</code></li>
+</ul>
+<p><code>isinstance(obj, ValueLike)</code> returns <code>True</code> iff <code>issubclass(type(obj), ValueLike)</code> returns <code>True</code>.</p>
 <h2 id="drawbacks"><a class="header" href="#drawbacks">Drawbacks</a></h2>
-<ul>
-<li>Churn.</li>
-</ul>
+<p>More moving parts in the language.</p>
+<p><code>isinstance(obj, ShapeLike)</code> does not actually guarantee that <code>Shape.cast(obj)</code> will succeed — the instance check looks only at surface-level information, and an exception can still be thrown. <code>issubclass(cls, ShapeLike)</code> is, by necessity, even more inaccurate.</p>
 <h2 id="rationale-and-alternatives"><a class="header" href="#rationale-and-alternatives">Rationale and alternatives</a></h2>
-<ul>
-<li>This module is out of place in the standard library.</li>
-<li>It has not seen much use and is trivially implemented outside of it.</li>
-<li>Downstream consumers tend to inline the logic anyway.</li>
-<li>It does not seem like there would be any other uses for the <code>amaranth.lib.scheduler</code> module since any other scheduling algorithm would be more closely tied to the consumer.</li>
-</ul>
+<p>There are many ways to implement the instance and subclass checks, some more precise (and complex) than others. The semantics described above are a compromise.</p>
+<p>For <code>isinstance</code>, a simple variant would be to just try <code>Shape.cast</code> or <code>Value.cast</code> and see if it raises an exception. However, this will sometimes result in <code>isinstance(MyShapeCastable(), ShapeLike)</code> returning <code>False</code>, which may be very unintuitive and hide bugs.</p>
+<p>The check for a valid shape-castable enum described above is an approximation — the actual logic used requires all values of an enum to be <em>const</em>-castable, not just value-castable. However, there is no way to check this without actually invoking <code>Value.cast</code> on the enum members.</p>
+<h2 id="prior-art"><a class="header" href="#prior-art">Prior art</a></h2>
+<p>Python has the concept of abstract base classes, such as <code>collections.abc.Sequence</code>, which can be used for subclass checking even if they are not actual superclasses of the types involved. <code>ShapeLike</code> and <code>ValueLike</code> are effectively ABCs, though they do not use the actual ABC machinery (due to having custom logic in instance checking).</p>
 <h2 id="unresolved-questions"><a class="header" href="#unresolved-questions">Unresolved questions</a></h2>
-<p>None.</p>
+<ul>
+<li>Should the exact details of the instance and subclass checks be changed?</li>
+</ul>
 <h2 id="future-possibilities"><a class="header" href="#future-possibilities">Future possibilities</a></h2>
-<p>None.</p>
+<p>A similar ABC-like class has been proposed for <code>lib.wiring</code> interfaces.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="0018-reorganize-vendor-platforms.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="0034-interface-rename.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="0020-deprecate-non-fwft-fifos.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -193,13 +231,10 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="0018-reorganize-vendor-platforms.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="0034-interface-rename.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="0020-deprecate-non-fwft-fifos.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
             </nav>
 
         </div>
