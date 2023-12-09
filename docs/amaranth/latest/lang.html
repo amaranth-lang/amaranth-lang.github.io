@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Language guide &mdash; Amaranth HDL toolchain 0.4.dev259 documentation</title>
+  <title>Language guide &mdash; Amaranth HDL toolchain 0.4.dev260 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -15,7 +15,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=24124b14"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=0ea98cce"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/platformpicker.js"></script>
@@ -38,7 +38,7 @@
             Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev259+g422ba9e.editable
+                0.4.dev260+ge9545ef.editable
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -220,9 +220,9 @@
 </div>
 </section>
 <section id="shape-casting">
-<span id="lang-shapecasting"></span><h2>Shape casting<a class="headerlink" href="#shape-casting" title="Permalink to this heading"></a></h2>
-<p>Shapes can be <em>cast</em> from other objects, which are called <em>shape-castable</em>. Casting is a convenient way to specify a shape indirectly, for example, by a range of numbers representable by values with that shape.</p>
-<p>Casting to a shape can be done explicitly with <code class="docutils literal notranslate"><span class="pre">Shape.cast</span></code>, but is usually implicit, since shape-castable objects are accepted anywhere shapes are.</p>
+<span id="lang-shapelike"></span><h2>Shape casting<a class="headerlink" href="#shape-casting" title="Permalink to this heading"></a></h2>
+<p>Shapes can be <em>cast</em> from other objects, which are called <em>shape-like</em>. Casting is a convenient way to specify a shape indirectly, for example, by a range of numbers representable by values with that shape.</p>
+<p>Casting to a shape can be done explicitly with <code class="docutils literal notranslate"><span class="pre">Shape.cast</span></code>, but is usually implicit, since shape-like objects are accepted anywhere shapes are.</p>
 <section id="shapes-from-integers">
 <span id="lang-shapeint"></span><h3>Shapes from integers<a class="headerlink" href="#shapes-from-integers" title="Permalink to this heading"></a></h3>
 <p>Casting a shape from an integer <code class="docutils literal notranslate"><span class="pre">i</span></code> is a shorthand for constructing a shape with <code class="docutils literal notranslate"><span class="pre">unsigned(i)</span></code>:</p>
@@ -307,9 +307,9 @@ This happens because, being empty, it does not contain any negative values.</p>
 </section>
 </section>
 <section id="value-casting">
-<span id="lang-valuecasting"></span><h2>Value casting<a class="headerlink" href="#value-casting" title="Permalink to this heading"></a></h2>
-<p>Like shapes, values may be <em>cast</em> from other objects, which are called <em>value-castable</em>. Casting to values allows objects that are not provided by Amaranth, such as integers or enumeration members, to be used in Amaranth expressions directly.</p>
-<p>Casting to a value can be done explicitly with <code class="docutils literal notranslate"><span class="pre">Value.cast</span></code>, but is usually implicit, since value-castable objects are accepted anywhere values are.</p>
+<span id="lang-valuelike"></span><h2>Value casting<a class="headerlink" href="#value-casting" title="Permalink to this heading"></a></h2>
+<p>Like shapes, values may be <em>cast</em> from other objects, which are called <em>value-like</em>. Casting to values allows objects that are not provided by Amaranth, such as integers or enumeration members, to be used in Amaranth expressions directly.</p>
+<p>Casting to a value can be done explicitly with <code class="docutils literal notranslate"><span class="pre">Value.cast</span></code>, but is usually implicit, since value-like objects are accepted anywhere values are.</p>
 <section id="values-from-integers">
 <h3>Values from integers<a class="headerlink" href="#values-from-integers" title="Permalink to this heading"></a></h3>
 <p>Casting a value from an integer <code class="docutils literal notranslate"><span class="pre">i</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">Const(i)</span></code>:</p>
@@ -373,7 +373,7 @@ This happens because, being empty, it does not contain any negative values.</p>
 <p>A <em>signal</em> is a value representing a (potentially) varying number. Signals can be <a class="reference external" href="#lang-assigns"><em>assigned</em></a> in a <a class="reference internal" href="#lang-comb"><span class="std std-ref">combinatorial</span></a> or <a class="reference internal" href="#lang-sync"><span class="std std-ref">synchronous</span></a> domain, in which case they are generated as wires or registers, respectively. Signals always have a well-defined value; they cannot be uninitialized or undefined.</p>
 <section id="signal-shapes">
 <h3>Signal shapes<a class="headerlink" href="#signal-shapes" title="Permalink to this heading"></a></h3>
-<p>A signal can be created with an explicitly specified shape (any <a class="reference internal" href="#lang-shapecasting"><span class="std std-ref">shape-castable</span></a> object); if omitted, the shape defaults to <code class="docutils literal notranslate"><span class="pre">unsigned(1)</span></code>. Although rarely useful, 0-bit signals are permitted.</p>
+<p>A signal can be created with an explicitly specified shape (any <a class="reference internal" href="#lang-shapelike"><span class="std std-ref">shape-like</span></a> object); if omitted, the shape defaults to <code class="docutils literal notranslate"><span class="pre">unsigned(1)</span></code>. Although rarely useful, 0-bit signals are permitted.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Signal</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span><span class="p">()</span>
 <span class="go">unsigned(1)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Signal</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">()</span>
@@ -437,7 +437,7 @@ This happens because, being empty, it does not contain any negative values.</p>
 </section>
 <section id="operators">
 <span id="lang-operators"></span><h2>Operators<a class="headerlink" href="#operators" title="Permalink to this heading"></a></h2>
-<p>To describe computations, Amaranth values can be combined with each other or with <a class="reference internal" href="#lang-valuecasting"><span class="std std-ref">value-castable</span></a> objects using a rich array of arithmetic, bitwise, logical, bit sequence, and other <em>operators</em> to form <em>expressions</em>, which are themselves values.</p>
+<p>To describe computations, Amaranth values can be combined with each other or with <a class="reference internal" href="#lang-valuelike"><span class="std std-ref">value-like</span></a> objects using a rich array of arithmetic, bitwise, logical, bit sequence, and other <em>operators</em> to form <em>expressions</em>, which are themselves values.</p>
 <section id="performing-or-describing-computations">
 <span id="lang-abstractexpr"></span><h3>Performing or describing computations?<a class="headerlink" href="#performing-or-describing-computations" title="Permalink to this heading"></a></h3>
 <p>Code written in the Python language <em>performs</em> computations on concrete objects, like integers, with the goal of calculating a concrete result:</p>
