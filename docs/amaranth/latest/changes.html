@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Changelog &mdash; Amaranth HDL toolchain 0.4.dev260 documentation</title>
+  <title>Changelog &mdash; Amaranth HDL toolchain 0.4.dev261 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -15,7 +15,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=0ea98cce"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=aad108d7"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/platformpicker.js"></script>
@@ -38,7 +38,7 @@
             Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev260+ge9545ef.editable
+                0.4.dev261+g3d0c542.editable
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -158,12 +158,15 @@
 <li><p><a class="reference external" href="https://amaranth-lang.org/rfcs/0022-valuecastable-shape.html">RFC 22</a>: Define <code class="docutils literal notranslate"><span class="pre">ValueCastable.shape()</span></code></p></li>
 <li><p><a class="reference external" href="https://amaranth-lang.org/rfcs/0028-override-value-operators.html">RFC 28</a>: Allow overriding <code class="docutils literal notranslate"><span class="pre">Value</span></code> operators</p></li>
 <li><p><a class="reference external" href="https://amaranth-lang.org/rfcs/0031-enumeration-type-safety.html">RFC 31</a>: Enumeration type safety</p></li>
+<li><p><a class="reference external" href="https://amaranth-lang.org/rfcs/0034-interface-rename.html">RFC 34</a>: Rename <code class="docutils literal notranslate"><span class="pre">amaranth.lib.wiring.Interface</span></code> to <code class="docutils literal notranslate"><span class="pre">PureInterface</span></code></p></li>
+<li><p><a class="reference external" href="https://amaranth-lang.org/rfcs/0035-shapelike-valuelike.html">RFC 35</a>: Add <code class="docutils literal notranslate"><span class="pre">ShapeLike</span></code>, <code class="docutils literal notranslate"><span class="pre">ValueLike</span></code></p></li>
 </ul>
 </section>
 <section id="language-changes">
 <h3>Language changes<a class="headerlink" href="#language-changes" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p>Added: <code class="xref py py-class docutils literal notranslate"><span class="pre">ShapeCastable</span></code>, similar to <code class="xref py py-class docutils literal notranslate"><span class="pre">ValueCastable</span></code>.</p></li>
+<li><p>Added: <code class="xref py py-class docutils literal notranslate"><span class="pre">ShapeLike</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">ValueLike</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0035-shapelike-valuelike.html">RFC 35</a>)</p></li>
 <li><p>Added: <code class="xref py py-meth docutils literal notranslate"><span class="pre">Value.as_signed()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">Value.as_unsigned()</span></code> can be used on left-hand side of assignment (with no difference in behavior).</p></li>
 <li><p>Added: <code class="xref py py-meth docutils literal notranslate"><span class="pre">Const.cast()</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0004-const-castable-exprs.html">RFC 4</a>)</p></li>
 <li><p>Added: <code class="xref py py-meth docutils literal notranslate"><span class="pre">Value.matches()</span></code> and <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">m.Case():</span></code> accept any constant-castable objects. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0004-const-castable-exprs.html">RFC 4</a>)</p></li>
