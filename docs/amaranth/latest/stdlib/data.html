@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Data structures &mdash; Amaranth HDL toolchain 0.4.dev265 documentation</title>
+  <title>Data structures &mdash; Amaranth HDL toolchain 0.4.dev267 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/platformpicker.css" type="text/css" />
@@ -15,14 +15,14 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=56a01270"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c5201c03"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="../_static/platformpicker.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Code conversion" href="coding.html" />
+    <link rel="next" title="Interfaces and connections" href="wiring.html" />
     <link rel="prev" title="Enumerations" href="enum.html" /> 
 </head>
 
@@ -38,7 +38,7 @@
             Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev265+gd154bdd.editable
+                0.4.dev267+gfc4d704.editable
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -65,10 +65,11 @@
 <li class="toctree-l4"><a class="reference internal" href="#data-classes">Data classes</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="coding.html">Code conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wiring.html">Interfaces and connections</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cdc.html">Clock domain crossing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="crc.html">Cyclic redundancy checks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="coding.html">Code conversion</a></li>
 <li class="toctree-l3"><a class="reference internal" href="fifo.html">First-in first-out queues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="crc.html">Cyclic redundancy checks</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../platform.html">Platform integration</a></li>
@@ -119,6 +120,10 @@
 <li><p>Data views via <a class="reference internal" href="#amaranth.lib.data.View" title="amaranth.lib.data.View"><code class="xref py py-class docutils literal notranslate"><span class="pre">View</span></code></a> or its user-defined subclasses. This class is used to apply a layout description to a plain <code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code>, enabling structured access to its bits.</p></li>
 <li><p>Data classes <a class="reference internal" href="#amaranth.lib.data.Struct" title="amaranth.lib.data.Struct"><code class="xref py py-class docutils literal notranslate"><span class="pre">Struct</span></code></a> and <a class="reference internal" href="#amaranth.lib.data.Union" title="amaranth.lib.data.Union"><code class="xref py py-class docutils literal notranslate"><span class="pre">Union</span></code></a>. These classes are data views with a layout that is defined using Python <a class="reference external" href="https://docs.python.org/3/glossary.html#term-variable-annotation" title="(in Python v3.12)"><span class="xref std std-term">variable annotations</span></a> (also known as type annotations).</p></li>
 </ol>
+<p>To use this module, add the following imports to the beginning of the file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">amaranth.lib</span> <span class="kn">import</span> <span class="n">data</span>
+</pre></div>
+</div>
 </section>
 <section id="motivation">
 <h3>Motivation<a class="headerlink" href="#motivation" title="Permalink to this heading"></a></h3>
@@ -859,7 +864,7 @@ an annotation:</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="enum.html" class="btn btn-neutral float-left" title="Enumerations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="coding.html" class="btn btn-neutral float-right" title="Code conversion" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="wiring.html" class="btn btn-neutral float-right" title="Interfaces and connections" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
