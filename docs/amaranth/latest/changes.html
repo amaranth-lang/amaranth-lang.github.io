@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Changelog &mdash; Amaranth HDL toolchain 0.4.dev267 documentation</title>
+  <title>Changelog &mdash; Amaranth HDL toolchain 0.4.dev269 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -15,7 +15,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=c5201c03"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=89423bd8"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/platformpicker.js"></script>
@@ -38,7 +38,7 @@
             Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.dev267+gfc4d704.editable
+                0.4.dev269+ga2f3c54.editable
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -58,7 +58,7 @@
 <li class="toctree-l2"><a class="reference internal" href="stdlib.html">Standard library</a></li>
 <li class="toctree-l2"><a class="reference internal" href="platform.html">Platform integration</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Changelog</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#version-0-4-unreleased">Version 0.4 (unreleased)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#version-0-4">Version 0.4</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#migrating-from-version-0-3">Migrating from version 0.3</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#implemented-rfcs">Implemented RFCs</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#language-changes">Language changes</a></li>
@@ -112,8 +112,8 @@
   <section id="changelog">
 <h1>Changelog<a class="headerlink" href="#changelog" title="Permalink to this heading"></a></h1>
 <p>This document describes changes to the public interfaces in the Amaranth language and standard library. It does not include most bug fixes or implementation changes.</p>
-<section id="version-0-4-unreleased">
-<h2>Version 0.4 (unreleased)<a class="headerlink" href="#version-0-4-unreleased" title="Permalink to this heading"></a></h2>
+<section id="version-0-4">
+<h2>Version 0.4<a class="headerlink" href="#version-0-4" title="Permalink to this heading"></a></h2>
 <p>Support has been added for a new and improved way of defining data structures in <a class="reference internal" href="stdlib/data.html#module-amaranth.lib.data" title="amaranth.lib.data"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.data</span></code></a> and component interfaces in <a class="reference internal" href="stdlib/wiring.html#module-amaranth.lib.wiring" title="amaranth.lib.wiring"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.wiring</span></code></a>, as defined in <a class="reference external" href="https://amaranth-lang.org/rfcs/0001-aggregate-data-structures.html">RFC 1</a> and <a class="reference external" href="https://amaranth-lang.org/rfcs/0002-interfaces.html">RFC 2</a>. <code class="xref py py-class docutils literal notranslate"><span class="pre">Record</span></code> has been deprecated. In a departure from the usual policy, to give designers additional time to migrate, <code class="xref py py-class docutils literal notranslate"><span class="pre">Record</span></code> will be removed in Amaranth 0.6 (one release later than normal).</p>
 <p>Support for enumerations has been extended. A shape for enumeration members can be provided for an enumeration class, as defined in <a class="reference external" href="https://amaranth-lang.org/rfcs/0003-enumeration-shapes.html">RFC 3</a>.</p>
 <p>The language includes several new extension points for integration with <code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code> based data structures defined outside of the core language. In particular, <code class="docutils literal notranslate"><span class="pre">Signal(shape)</span></code> may now return a <code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code> object wrapped in another if <code class="docutils literal notranslate"><span class="pre">shape</span></code> implements the call protocol, as defined in <a class="reference external" href="https://amaranth-lang.org/rfcs/0015-lifting-shape-castables.html">RFC 15</a>.</p>
@@ -171,7 +171,7 @@
 <li><p>Added: <code class="xref py py-class docutils literal notranslate"><span class="pre">ShapeLike</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">ValueLike</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0035-shapelike-valuelike.html">RFC 35</a>)</p></li>
 <li><p>Added: <code class="xref py py-meth docutils literal notranslate"><span class="pre">Value.as_signed()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">Value.as_unsigned()</span></code> can be used on left-hand side of assignment (with no difference in behavior).</p></li>
 <li><p>Added: <code class="xref py py-meth docutils literal notranslate"><span class="pre">Const.cast()</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0004-const-castable-exprs.html">RFC 4</a>)</p></li>
-<li><p>Added: <code class="xref py py-meth docutils literal notranslate"><span class="pre">Value.matches()</span></code> and <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">m.Case():</span></code> accept any constant-castable objects. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0004-const-castable-exprs.html">RFC 4</a>)</p></li>
+<li><p>Added: <code class="docutils literal notranslate"><span class="pre">Signal(reset=)</span></code>, <code class="xref py py-meth docutils literal notranslate"><span class="pre">Value.matches()</span></code>, <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">m.Case():</span></code> accept any constant-castable objects. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0004-const-castable-exprs.html">RFC 4</a>)</p></li>
 <li><p>Added: <code class="xref py py-meth docutils literal notranslate"><span class="pre">Value.replicate()</span></code>, superseding <code class="xref py py-class docutils literal notranslate"><span class="pre">Repl</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0010-move-repl-to-value.html">RFC 10</a>)</p></li>
 <li><p>Added: <code class="xref py py-class docutils literal notranslate"><span class="pre">Memory</span></code> supports transparent read ports with read enable.</p></li>
 <li><p>Changed: creating a <code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code> with a shape that is a <code class="xref py py-class docutils literal notranslate"><span class="pre">ShapeCastable</span></code> implementing <code class="xref py py-meth docutils literal notranslate"><span class="pre">ShapeCastable.__call__()</span></code> wraps the returned object using that method. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0015-lifting-shape-castables.html">RFC 15</a>)</p></li>
@@ -179,6 +179,8 @@
 <li><p>Changed: <code class="xref py py-meth docutils literal notranslate"><span class="pre">Value.cast()</span></code> treats instances of classes derived from both <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a> and <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> (including <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></a>) as enumerations rather than integers.</p></li>
 <li><p>Changed: <code class="xref py py-meth docutils literal notranslate"><span class="pre">Value.matches()</span></code> with an empty list of patterns returns <code class="docutils literal notranslate"><span class="pre">Const(1)</span></code> rather than <code class="docutils literal notranslate"><span class="pre">Const(0)</span></code>, to match the behavior of <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">m.Case():</span></code>.</p></li>
 <li><p>Changed: <code class="xref py py-class docutils literal notranslate"><span class="pre">Cat</span></code> warns if an enumeration without an explicitly specified shape is used. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0003-enumeration-shapes.html">RFC 3</a>)</p></li>
+<li><p>Changed: <code class="docutils literal notranslate"><span class="pre">signed(0)</span></code> is no longer constructible. (The semantics of this shape were never defined.)</p></li>
+<li><p>Changed: <code class="xref py py-meth docutils literal notranslate"><span class="pre">Value.__abs__()</span></code> returns an unsigned value.</p></li>
 <li><p>Deprecated: <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.Sample</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.Past</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.Stable</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.Rose</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.Fell</span></code>. (Predating the RFC process.)</p></li>
 <li><p>Deprecated: <code class="xref py py-meth docutils literal notranslate"><span class="pre">Const.normalize()</span></code>; use <code class="docutils literal notranslate"><span class="pre">Const(value,</span> <span class="pre">shape).value</span></code> instead of <code class="docutils literal notranslate"><span class="pre">Const.normalize(value,</span> <span class="pre">shape)</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0005-remove-const-normalize.html">RFC 5</a>)</p></li>
 <li><p>Deprecated: <code class="xref py py-class docutils literal notranslate"><span class="pre">Repl</span></code>; use <code class="xref py py-meth docutils literal notranslate"><span class="pre">Value.replicate()</span></code> instead. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0010-move-repl-to-value.html">RFC 10</a>)</p></li>
@@ -193,6 +195,7 @@
 <ul class="simple">
 <li><p>Added: <a class="reference internal" href="stdlib/enum.html#module-amaranth.lib.enum" title="amaranth.lib.enum"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.enum</span></code></a>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0003-enumeration-shapes.html">RFC 3</a>)</p></li>
 <li><p>Added: <a class="reference internal" href="stdlib/data.html#module-amaranth.lib.data" title="amaranth.lib.data"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.data</span></code></a>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0001-aggregate-data-structures.html">RFC 1</a>)</p></li>
+<li><p>Added: <a class="reference internal" href="stdlib/wiring.html#module-amaranth.lib.wiring" title="amaranth.lib.wiring"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.wiring</span></code></a>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0002-interfaces.html">RFC 2</a>)</p></li>
 <li><p>Added: <a class="reference internal" href="stdlib/crc.html#module-amaranth.lib.crc" title="amaranth.lib.crc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.crc</span></code></a>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0006-stdlib-crc.html">RFC 6</a>)</p></li>
 <li><p>Deprecated: <code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.scheduler</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0019-remove-scheduler.html">RFC 19</a>)</p></li>
 <li><p>Deprecated: <a class="reference internal" href="stdlib/fifo.html#amaranth.lib.fifo.FIFOInterface" title="amaranth.lib.fifo.FIFOInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.lib.fifo.FIFOInterface</span></code></a> with <code class="docutils literal notranslate"><span class="pre">fwft=False</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0020-deprecate-non-fwft-fifos.html">RFC 20</a>)</p></li>
@@ -205,6 +208,7 @@
 <li><p>Changed: text files are written with LF line endings on Windows, like on other platforms.</p></li>
 <li><p>Added: <code class="docutils literal notranslate"><span class="pre">debug_verilog</span></code> override in <code class="xref py py-class docutils literal notranslate"><span class="pre">build.TemplatedPlatform</span></code>.</p></li>
 <li><p>Added: <code class="docutils literal notranslate"><span class="pre">env=</span></code> argument to <code class="xref py py-meth docutils literal notranslate"><span class="pre">build.run.BuildPlan.execute_local()</span></code>.</p></li>
+<li><p>Changed: <code class="xref py py-meth docutils literal notranslate"><span class="pre">build.run.BuildPlan.add_file()</span></code> rejects absolute paths.</p></li>
 <li><p>Deprecated: use of mixed-case toolchain environment variable names, such as <code class="docutils literal notranslate"><span class="pre">NMIGEN_ENV_Diamond</span></code> or <code class="docutils literal notranslate"><span class="pre">AMARANTH_ENV_Diamond</span></code>; use upper-case environment variable names, such as <code class="docutils literal notranslate"><span class="pre">AMARANTH_ENV_DIAMOND</span></code>.</p></li>
 <li><p>Removed: (deprecated in 0.3) <code class="xref py py-meth docutils literal notranslate"><span class="pre">sim.Simulator.step()</span></code>.</p></li>
 <li><p>Removed: (deprecated in 0.3) <code class="xref py py-mod docutils literal notranslate"><span class="pre">back.pysim</span></code>.</p></li>
@@ -218,6 +222,7 @@
 <li><p>Added: <code class="docutils literal notranslate"><span class="pre">icepack_opts</span></code> override in <code class="xref py py-class docutils literal notranslate"><span class="pre">vendor.LatticeICE40Platform</span></code>.</p></li>
 <li><p>Added: <code class="docutils literal notranslate"><span class="pre">OSCH</span></code> as <code class="docutils literal notranslate"><span class="pre">default_clk</span></code> clock source in <code class="xref py py-class docutils literal notranslate"><span class="pre">vendor.LatticeMachXO2Platform</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">vendor.LatticeMachXO3LPlatform</span></code>.</p></li>
 <li><p>Added: Xray toolchain support in <code class="xref py py-class docutils literal notranslate"><span class="pre">vendor.XilinxPlatform</span></code>.</p></li>
+<li><p>Added: Artix UltraScale+ part support in <code class="xref py py-class docutils literal notranslate"><span class="pre">vendor.XilinxPlatform</span></code>.</p></li>
 <li><p>Added: <code class="xref py py-class docutils literal notranslate"><span class="pre">vendor.GowinPlatform</span></code>.</p></li>
 <li><p>Deprecated: <code class="xref py py-mod docutils literal notranslate"><span class="pre">vendor.intel</span></code>, <code class="xref py py-mod docutils literal notranslate"><span class="pre">vendor.lattice_ecp5</span></code>, <code class="xref py py-mod docutils literal notranslate"><span class="pre">vendor.lattice_ice40</span></code>, <code class="xref py py-mod docutils literal notranslate"><span class="pre">vendor.lattice_machxo2_3l</span></code>, <code class="xref py py-mod docutils literal notranslate"><span class="pre">vendor.quicklogic</span></code>, <code class="xref py py-mod docutils literal notranslate"><span class="pre">vendor.xilinx</span></code>; import platforms directly from <code class="xref py py-mod docutils literal notranslate"><span class="pre">vendor</span></code> instead. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0018-reorganize-vendor-platforms.html">RFC 18</a>)</p></li>
 <li><p>Removed: (deprecated in 0.3) <code class="xref py py-mod docutils literal notranslate"><span class="pre">lattice_machxo2</span></code></p></li>
