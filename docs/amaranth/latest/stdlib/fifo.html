@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>First-in first-out queues &mdash; Amaranth HDL toolchain 0.4.1.dev5 documentation</title>
+  <title>First-in first-out queues &mdash; Amaranth HDL toolchain 0.4.1.dev6 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/platformpicker.css" type="text/css" />
@@ -15,7 +15,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=90f3fe8d"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=a70b74e7"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="../_static/platformpicker.js"></script>
@@ -38,7 +38,7 @@
             Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.1.dev5+g3ed78d9.editable
+                0.4.1.dev6+g8cd8cdd.editable
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -111,7 +111,7 @@
 <p>The <code class="docutils literal notranslate"><span class="pre">amaranth.lib.fifo</span></code> module provides building blocks for first-in, first-out queues.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.lib.fifo.FIFOInterface">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.fifo.</span></span><span class="sig-name descname"><span class="pre">FIFOInterface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fwft</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.fifo.FIFOInterface" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.fifo.</span></span><span class="sig-name descname"><span class="pre">FIFOInterface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.fifo.FIFOInterface" title="Permalink to this definition"></a></dt>
 <dd><p>Data written to the input interface (<code class="docutils literal notranslate"><span class="pre">w_data</span></code>, <code class="docutils literal notranslate"><span class="pre">w_rdy</span></code>, <code class="docutils literal notranslate"><span class="pre">w_en</span></code>) is buffered and can be
 read at the output interface (<code class="docutils literal notranslate"><span class="pre">r_data</span></code>, <code class="docutils literal notranslate"><span class="pre">r_rdy</span></code>, <code class="docutils literal notranslate"><span class="pre">r_en</span></code>). The data entry written first
 to the input also appears first on the output.</p>
@@ -120,9 +120,6 @@ to the input also appears first on the output.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Bit width of data entries.</p></li>
 <li><p><strong>depth</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Depth of the queue. If zero, the FIFO cannot be read from or written to.</p></li>
-<li><p><strong>fwft</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – First-word fallthrough. If set, when <code class="docutils literal notranslate"><span class="pre">r_rdy</span></code> rises, the first entry is already
-available, i.e. <code class="docutils literal notranslate"><span class="pre">r_data</span></code> is valid. Otherwise, after <code class="docutils literal notranslate"><span class="pre">r_rdy</span></code> rises, it is necessary
-to strobe <code class="docutils literal notranslate"><span class="pre">r_en</span></code> for <code class="docutils literal notranslate"><span class="pre">r_data</span></code> to become valid.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Variables<span class="colon">:</span></dt>
@@ -149,7 +146,7 @@ Does nothing if <code class="docutils literal notranslate"><span class="pre">r_r
 
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.lib.fifo.SyncFIFO">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.fifo.</span></span><span class="sig-name descname"><span class="pre">SyncFIFO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fwft</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.fifo.SyncFIFO" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.fifo.</span></span><span class="sig-name descname"><span class="pre">SyncFIFO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.fifo.SyncFIFO" title="Permalink to this definition"></a></dt>
 <dd><p>Synchronous first in, first out queue.</p>
 <p>Read and write interfaces are accessed from the same clock domain. If different clock domains
 are needed, use <a class="reference internal" href="#amaranth.lib.fifo.AsyncFIFO" title="amaranth.lib.fifo.AsyncFIFO"><code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncFIFO</span></code></a>.</p>
@@ -158,9 +155,6 @@ are needed, use <a class="reference internal" href="#amaranth.lib.fifo.AsyncFIFO
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Bit width of data entries.</p></li>
 <li><p><strong>depth</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Depth of the queue. If zero, the FIFO cannot be read from or written to.</p></li>
-<li><p><strong>fwft</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – First-word fallthrough. If set, when the queue is empty and an entry is written into it,
-that entry becomes available on the output on the same clock cycle. Otherwise, it is
-necessary to assert <code class="docutils literal notranslate"><span class="pre">r_en</span></code> for <code class="docutils literal notranslate"><span class="pre">r_data</span></code> to become valid.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Variables<span class="colon">:</span></dt>
@@ -171,7 +165,7 @@ necessary to assert <code class="docutils literal notranslate"><span class="pre"
 a new entry.</p></li>
 <li><p><strong>w_en</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Write strobe. Latches <code class="docutils literal notranslate"><span class="pre">w_data</span></code> into the queue. Does nothing if <code class="docutils literal notranslate"><span class="pre">w_rdy</span></code> is not asserted.</p></li>
 <li><p><strong>w_level</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.12)"><em>range</em></a><em>(</em><em>depth + 1</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Number of unread entries.</p></li>
-<li><p><strong>r_data</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>out</em>) – Output data. For FWFT queues, valid if <code class="docutils literal notranslate"><span class="pre">r_rdy</span></code> is asserted. For non-FWFT queues, valid on the next cycle after <code class="docutils literal notranslate"><span class="pre">r_rdy</span></code> and <code class="docutils literal notranslate"><span class="pre">r_en</span></code> have been asserted.</p></li>
+<li><p><strong>r_data</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>out</em>) – Output data. Valid if <code class="docutils literal notranslate"><span class="pre">r_rdy</span></code> is asserted.</p></li>
 <li><p><strong>r_rdy</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Asserted if there is an entry in the queue, i.e. <code class="docutils literal notranslate"><span class="pre">r_en</span></code> can be asserted to read
 an existing entry.</p></li>
 <li><p><strong>r_en</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Read strobe. Makes the next entry (if any) available on <code class="docutils literal notranslate"><span class="pre">r_data</span></code> at the next cycle.
@@ -186,7 +180,7 @@ Does nothing if <code class="docutils literal notranslate"><span class="pre">r_r
 <dt class="sig sig-object py" id="amaranth.lib.fifo.SyncFIFOBuffered">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.fifo.</span></span><span class="sig-name descname"><span class="pre">SyncFIFOBuffered</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.fifo.SyncFIFOBuffered" title="Permalink to this definition"></a></dt>
 <dd><p>Buffered synchronous first in, first out queue.</p>
-<p>This queue’s interface is identical to <a class="reference internal" href="#amaranth.lib.fifo.SyncFIFO" title="amaranth.lib.fifo.SyncFIFO"><code class="xref py py-class docutils literal notranslate"><span class="pre">SyncFIFO</span></code></a> configured as <code class="docutils literal notranslate"><span class="pre">fwft=True</span></code>, but it
+<p>This queue’s interface is identical to <a class="reference internal" href="#amaranth.lib.fifo.SyncFIFO" title="amaranth.lib.fifo.SyncFIFO"><code class="xref py py-class docutils literal notranslate"><span class="pre">SyncFIFO</span></code></a>, but it
 does not use asynchronous memory reads, which are incompatible with FPGA block RAMs.</p>
 <p>In exchange, the latency between an entry being written to an empty queue and that entry
 becoming available on the output is increased by one cycle compared to <a class="reference internal" href="#amaranth.lib.fifo.SyncFIFO" title="amaranth.lib.fifo.SyncFIFO"><code class="xref py py-class docutils literal notranslate"><span class="pre">SyncFIFO</span></code></a>.</p>
@@ -195,7 +189,6 @@ becoming available on the output is increased by one cycle compared to <a class=
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Bit width of data entries.</p></li>
 <li><p><strong>depth</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Depth of the queue. If zero, the FIFO cannot be read from or written to.</p></li>
-<li><p><strong>fwft</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Always set.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Variables<span class="colon">:</span></dt>
@@ -235,7 +228,6 @@ the <code class="docutils literal notranslate"><span class="pre">depth</span></c
 <li><p><strong>depth</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Depth of the queue. If zero, the FIFO cannot be read from or written to.</p></li>
 <li><p><strong>r_domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Read clock domain.</p></li>
 <li><p><strong>w_domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Write clock domain.</p></li>
-<li><p><strong>fwft</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Always set.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Variables<span class="colon">:</span></dt>
@@ -278,7 +270,6 @@ becoming available on the output is increased by one cycle compared to <a class=
 <li><p><strong>depth</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Depth of the queue. If zero, the FIFO cannot be read from or written to.</p></li>
 <li><p><strong>r_domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Read clock domain.</p></li>
 <li><p><strong>w_domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Write clock domain.</p></li>
-<li><p><strong>fwft</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Always set.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Variables<span class="colon">:</span></dt>
