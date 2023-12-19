@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Language guide &mdash; Amaranth HDL toolchain 0.4.1.dev6 documentation</title>
+  <title>Language guide &mdash; Amaranth HDL toolchain 0.4.1.dev8 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -15,7 +15,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=a70b74e7"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=eb69533c"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/platformpicker.js"></script>
@@ -38,7 +38,7 @@
             Amaranth HDL toolchain
           </a>
               <div class="version">
-                0.4.1.dev6+g8cd8cdd.editable
+                0.4.1.dev8+g82d35fb.editable
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -91,22 +91,39 @@
 <li class="toctree-l4"><a class="reference internal" href="#reduction-operators">Reduction operators</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#logical-operators">Logical operators</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#bit-sequence-operators">Bit sequence operators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#match-operator">Match operator</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#conversion-operators">Conversion operators</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#choice-operator">Choice operator</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#modules">Modules</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#control-domains">Control domains</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modules">Modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#control-domains">Control domains</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#assigning-to-signals">Assigning to signals</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#assignment-targets">Assignment targets</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#assignment-domains">Assignment domains</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#assignment-order">Assignment order</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#control-structures">Control structures</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#active-and-inactive-assignments">Active and inactive assignments</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#combinatorial-evaluation">Combinatorial evaluation</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#synchronous-evaluation">Synchronous evaluation</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#control-flow">Control flow</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#active-and-inactive-assignments">Active and inactive assignments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#if-elif-else-control-blocks"><code class="code highlight pc python docutils literal highlight-python"><span class="n">If</span></code>/<code class="code highlight pc python docutils literal highlight-python"><span class="n">Elif</span></code>/<code class="code highlight pc python docutils literal highlight-python"><span class="n">Else</span></code> control blocks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#switch-case-control-blocks"><code class="code highlight pc python docutils literal highlight-python"><span class="n">Switch</span></code>/<code class="code highlight pc python docutils literal highlight-python"><span class="n">Case</span></code> control blocks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fsm-state-control-blocks"><code class="code highlight pc python docutils literal highlight-python"><span class="n">FSM</span></code>/<code class="code highlight pc python docutils literal highlight-python"><span class="n">State</span></code> control blocks</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#combinatorial-evaluation">Combinatorial evaluation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#synchronous-evaluation">Synchronous evaluation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clock-domains">Clock domains</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#late-binding-of-clock-and-reset-signals">Late binding of clock and reset signals</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#elaboration">Elaboration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#renaming-domains">Renaming domains</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modifying-control-flow">Modifying control flow</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#memory-arrays">Memory arrays</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#instances">Instances</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="stdlib.html">Standard library</a></li>
@@ -358,6 +375,7 @@ This happens because, being empty, it does not contain any negative values.</p>
     <span class="o">...</span>
 </pre></div>
 </div>
+<p>They may also be provided as a pattern to the <a class="reference internal" href="#lang-matchop"><span class="std std-ref">match operator</span></a> and the <a class="reference internal" href="#lang-switch"><span class="std std-ref">Case block</span></a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>At the moment, only the following expressions are constant-castable:</p>
@@ -460,7 +478,7 @@ This happens because, being empty, it does not contain any negative values.</p>
 <span class="gr">TypeError</span>: <span class="n">Attempted to convert Amaranth value to Python boolean</span>
 </pre></div>
 </div>
-<p>Because the value of <code class="docutils literal notranslate"><span class="pre">a</span></code>, and therefore <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">==</span> <span class="pre">0</span></code>, is not known at the time when the <code class="docutils literal notranslate"><span class="pre">if</span></code> statement is executed, there is no way to decide whether the body of the statement should be executed—in fact, if the design is synthesized, by the time <code class="docutils literal notranslate"><span class="pre">a</span></code> has any concrete value, the Python program has long finished! To solve this problem, Amaranth provides its own <a class="reference internal" href="#lang-control"><span class="std std-ref">control structures</span></a> that, also, manipulate circuits.</p>
+<p>Because the value of <code class="docutils literal notranslate"><span class="pre">a</span></code>, and therefore <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">==</span> <span class="pre">0</span></code>, is not known at the time when the <code class="docutils literal notranslate"><span class="pre">if</span></code> statement is executed, there is no way to decide whether the body of the statement should be executed—in fact, if the design is synthesized, by the time <code class="docutils literal notranslate"><span class="pre">a</span></code> has any concrete value, the Python program has long finished! To solve this problem, Amaranth provides its own <a class="reference internal" href="#lang-control"><span class="std std-ref">control flow syntax</span></a> that, also, manipulates circuits.</p>
 </section>
 <section id="width-extension">
 <span id="lang-widthext"></span><h3>Width extension<a class="headerlink" href="#width-extension" title="Permalink to this heading"></a></h3>
@@ -635,7 +653,7 @@ This happens because, being empty, it does not contain any negative values.</p>
 </div>
 </section>
 <section id="reduction-operators">
-<span id="lang-reduceops"></span><h3>Reduction operators<a class="headerlink" href="#reduction-operators" title="Permalink to this heading"></a></h3>
+<span id="lang-bool"></span><span id="lang-reduceops"></span><h3>Reduction operators<a class="headerlink" href="#reduction-operators" title="Permalink to this heading"></a></h3>
 <p>Bitwise reduction operations on integers are not provided by Python, but are very useful for hardware. They are similar to bitwise operations applied “sideways”; for example, if bitwise AND is a binary operator that applies AND to each pair of bits between its two operands, then reduction AND is an unary operator that applies AND to all of the bits in its sole operand.</p>
 <p>The result of a reduction is a 1-bit unsigned value.</p>
 <p>The following table lists the reduction operations provided by Amaranth:</p>
@@ -842,9 +860,22 @@ This happens because, being empty, it does not contain any negative values.</p>
 <p>Could Amaranth have used a different indexing or iteration order for values? Yes, but it would be necessary to either place the most significant bit at index 0, or deliberately break the Python sequence type interface. Both of these options would cause more issues than using different iteration orders for numeric and sequence operations.</p>
 </div>
 </section>
+<section id="match-operator">
+<span id="lang-matchop"></span><h3>Match operator<a class="headerlink" href="#match-operator" title="Permalink to this heading"></a></h3>
+<p>The <code class="code highlight pc python docutils literal highlight-python"><span class="n">val</span><span class="o">.</span><span class="n">matches</span><span class="p">(</span><span class="o">*</span><span class="n">patterns</span><span class="p">)</span></code> operator examines a value against a set of patterns. It evaluates to <code class="code highlight pc python docutils literal highlight-python"><span class="n">Const</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></code> if the value <em>matches</em> any of the patterns, and to <code class="code highlight pc python docutils literal highlight-python"><span class="n">Const</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span></code> otherwise. What it means for a value to match a pattern depends on the type of the pattern.</p>
+<p>If the pattern is a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, it is treated as a bit mask with “don’t care” bits. After removing whitespace, each character of the pattern is compared to the bit of the value in the same position as the character. If the pattern character is <code class="docutils literal notranslate"><span class="pre">'0'</span></code> or <code class="docutils literal notranslate"><span class="pre">'1'</span></code>, the comparison succeeds if the bit equals <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code> correspondingly. If the pattern character is <code class="docutils literal notranslate"><span class="pre">'-'</span></code>, the comparison always succeeds. Aside from spaces and tabs, which are ignored, no other characters are accepted.</p>
+<p>Otherwise, the pattern is <a class="reference internal" href="#lang-constcasting"><span class="std std-ref">cast to a constant</span></a> and compared to <code class="code highlight pc python docutils literal highlight-python"><span class="n">val</span></code> using the <a class="reference internal" href="#lang-cmpops"><span class="std std-ref">equality operator</span></a>.</p>
+<p>For example, given a 8-bit value <code class="code highlight pc python docutils literal highlight-python"><span class="n">val</span></code>, <code class="code highlight pc python docutils literal highlight-python"><span class="n">val</span><span class="o">.</span><span class="n">matches</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;---- -01-&#39;</span><span class="p">)</span></code> is equivalent to <code class="code highlight pc python docutils literal highlight-python"><span class="p">(</span><span class="n">val</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="p">((</span><span class="n">val</span> <span class="o">&amp;</span> <span class="mb">0b0110_0000</span><span class="p">)</span> <span class="o">==</span> <span class="mb">0b0100_0000</span><span class="p">)</span></code>. Note that the direction in which bits are specified for the <code class="code highlight pc python docutils literal highlight-python"><span class="o">.</span><span class="n">match</span><span class="p">()</span></code> operator (least to most significant) is the opposite of the direction in which an integer literal is written (most to least significant). Bit patterns in this operator are treated similarly to <a class="reference internal" href="#lang-bitops"><span class="std std-ref">bit sequence operators</span></a>.</p>
+<p>The <a class="reference internal" href="#lang-switch"><span class="std std-ref">Case</span></a> control flow block accepts the same patterns, with the same meaning, as the match operator.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not rely on the behavior of <code class="code highlight pc python docutils literal highlight-python"><span class="n">val</span><span class="o">.</span><span class="n">matches</span><span class="p">()</span></code> with no patterns.</p>
+</div>
+</section>
 <section id="conversion-operators">
 <span id="lang-convops"></span><h3>Conversion operators<a class="headerlink" href="#conversion-operators" title="Permalink to this heading"></a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">.as_signed()</span></code> and <code class="docutils literal notranslate"><span class="pre">.as_unsigned()</span></code> conversion operators reinterpret the bits of a value with the requested signedness. This is useful when the same value is sometimes treated as signed and sometimes as unsigned, or when a signed value is constructed using slices or concatenations. For example, <code class="docutils literal notranslate"><span class="pre">(pc</span> <span class="pre">+</span> <span class="pre">imm[:7].as_signed()).as_unsigned()</span></code> sign-extends the 7 least significant bits of <code class="docutils literal notranslate"><span class="pre">imm</span></code> to the width of <code class="docutils literal notranslate"><span class="pre">pc</span></code>, performs the addition, and produces an unsigned result.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">.as_signed()</span></code> and <code class="docutils literal notranslate"><span class="pre">.as_unsigned()</span></code> conversion operators reinterpret the bits of a value with the requested signedness. This is useful when the same value is sometimes treated as signed and sometimes as unsigned, or when a signed value is constructed using slices or concatenations.</p>
+<p>For example, <code class="docutils literal notranslate"><span class="pre">(pc</span> <span class="pre">+</span> <span class="pre">imm[:7].as_signed()).as_unsigned()</span></code> sign-extends the 7 least significant bits of <code class="docutils literal notranslate"><span class="pre">imm</span></code> to the width of <code class="docutils literal notranslate"><span class="pre">pc</span></code>, performs the addition, and produces an unsigned result.</p>
 </section>
 <section id="choice-operator">
 <span id="lang-muxop"></span><h3>Choice operator<a class="headerlink" href="#choice-operator" title="Permalink to this heading"></a></h3>
@@ -853,18 +884,18 @@ This happens because, being empty, it does not contain any negative values.</p>
 </section>
 <section id="modules">
 <span id="lang-modules"></span><h2>Modules<a class="headerlink" href="#modules" title="Permalink to this heading"></a></h2>
-<p>A <em>module</em> is a unit of the Amaranth design hierarchy: the smallest collection of logic that can be independently simulated, synthesized, or otherwise processed. Modules associate signals with <a class="reference internal" href="#lang-domains"><span class="std std-ref">control domains</span></a>, provide <a class="reference internal" href="#lang-control"><span class="std std-ref">control structures</span></a>, manage clock domains, and aggregate submodules.</p>
+<p>A <em>module</em> is a unit of the Amaranth design hierarchy: the smallest collection of logic that can be independently simulated, synthesized, or otherwise processed. Modules associate signals with <a class="reference internal" href="#lang-domains"><span class="std std-ref">control domains</span></a>, provide <a class="reference internal" href="#lang-control"><span class="std std-ref">control flow syntax</span></a>, manage clock domains, and aggregate submodules.</p>
 <p>Every Amaranth design starts with a fresh module:</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">Module</span><span class="p">()</span>
 </pre></div>
 </div>
-<section id="control-domains">
-<span id="lang-domains"></span><h3>Control domains<a class="headerlink" href="#control-domains" title="Permalink to this heading"></a></h3>
-<p>A <em>control domain</em> is a named group of <a class="reference internal" href="#lang-signals"><span class="std std-ref">signals</span></a> that change their value in identical conditions.</p>
-<p>All designs have a single predefined <em>combinatorial domain</em>, containing all signals that change immediately when any value used to compute them changes. The name <code class="docutils literal notranslate"><span class="pre">comb</span></code> is reserved for the combinatorial domain.</p>
-<p>A design can also have any amount of user-defined <em>synchronous domains</em>, also called <em>clock domains</em>, containing signals that change when a specific edge occurs on the domain’s clock signal or, for domains with asynchronous reset, on the domain’s reset signal. Most modules only use a single synchronous domain, conventionally called <code class="docutils literal notranslate"><span class="pre">sync</span></code>, but the name <code class="docutils literal notranslate"><span class="pre">sync</span></code> does not have to be used, and lacks any special meaning beyond being the default.</p>
-<p>The behavior of assignments differs for signals in <a class="reference internal" href="#lang-comb"><span class="std std-ref">combinatorial</span></a> and <a class="reference internal" href="#lang-sync"><span class="std std-ref">synchronous</span></a> domains. Collectively, signals in synchronous domains contain the state of a design, whereas signals in the combinatorial domain cannot form feedback loops or hold state.</p>
 </section>
+<section id="control-domains">
+<span id="lang-domains"></span><h2>Control domains<a class="headerlink" href="#control-domains" title="Permalink to this heading"></a></h2>
+<p>A <em>control domain</em> is a named group of <a class="reference internal" href="#lang-signals"><span class="std std-ref">signals</span></a> that change their value in identical conditions.</p>
+<p>All designs have a single predefined <em>combinatorial domain</em>, containing all signals that change immediately when any value used to compute them changes. The name <code class="docutils literal notranslate"><span class="pre">comb</span></code> is reserved for the combinatorial domain, and refers to the same domain in all modules.</p>
+<p>A design can also have any amount of user-defined <em>synchronous domains</em>, also called <a class="reference internal" href="#lang-clockdomains"><span class="std std-ref">clock domains</span></a>, containing signals that change when a specific edge occurs on the domain’s clock signal or, for domains with asynchronous reset, on the domain’s reset signal. Most modules only use a single synchronous domain, conventionally called <code class="docutils literal notranslate"><span class="pre">sync</span></code>, but the name <code class="docutils literal notranslate"><span class="pre">sync</span></code> does not have to be used, and lacks any special meaning beyond being the default.</p>
+<p>The behavior of assignments differs for signals in <a class="reference internal" href="#lang-comb"><span class="std std-ref">combinatorial</span></a> and <a class="reference internal" href="#lang-sync"><span class="std std-ref">synchronous</span></a> domains. Collectively, signals in synchronous domains contain the state of a design, whereas signals in the combinatorial domain cannot form feedback loops or hold state.</p>
 <section id="assigning-to-signals">
 <span id="lang-assigns"></span><h3>Assigning to signals<a class="headerlink" href="#assigning-to-signals" title="Permalink to this heading"></a></h3>
 <p><em>Assignments</em> are used to change the values of signals. An assignment statement can be introduced with the <code class="docutils literal notranslate"><span class="pre">.eq(...)</span></code> syntax:</p>
@@ -959,9 +990,10 @@ This happens because, being empty, it does not contain any negative values.</p>
 </div>
 <p>Multiple assignments to the same signal bits are more useful when combined with control structures, which can make some of the assignments <a class="reference internal" href="#lang-active"><span class="std std-ref">active or inactive</span></a>. If all assignments to some signal bits are <a class="reference internal" href="#lang-active"><span class="std std-ref">inactive</span></a>, their final values are determined by the signal’s domain, <a class="reference internal" href="#lang-comb"><span class="std std-ref">combinatorial</span></a> or <a class="reference internal" href="#lang-sync"><span class="std std-ref">synchronous</span></a>.</p>
 </section>
-<section id="control-structures">
-<span id="lang-control"></span><h3>Control structures<a class="headerlink" href="#control-structures" title="Permalink to this heading"></a></h3>
-<p>Although it is possible to write any decision tree as a combination of <a class="reference internal" href="#lang-assigns"><span class="std std-ref">assignments</span></a> and <a class="reference internal" href="#lang-muxop"><span class="std std-ref">choice expressions</span></a>, Amaranth provides <em>control structures</em> tailored for this task: If, Switch, and FSM. The syntax of all control structures is based on <a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#context-managers" title="(in Python v3.12)"><span class="xref std std-ref">context managers</span></a> and uses <code class="docutils literal notranslate"><span class="pre">with</span></code> blocks, for example:</p>
+</section>
+<section id="control-flow">
+<span id="lang-control"></span><h2>Control flow<a class="headerlink" href="#control-flow" title="Permalink to this heading"></a></h2>
+<p>Although it is possible to write any decision tree as a combination of <a class="reference internal" href="#lang-assigns"><span class="std std-ref">assignments</span></a> and <a class="reference internal" href="#lang-muxop"><span class="std std-ref">choice expressions</span></a>, Amaranth provides <em>control flow syntax</em> tailored for this task: <a class="reference internal" href="#lang-if"><span class="std std-ref">If/Elif/Else</span></a>, <a class="reference internal" href="#lang-switch"><span class="std std-ref">Switch/Case</span></a>, and <a class="reference internal" href="#lang-fsm"><span class="std std-ref">FSM/State</span></a>. The control flow syntax uses <code class="code highlight pc python docutils literal highlight-python"><span class="k">with</span></code> blocks (it is implemented using <a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#context-managers" title="(in Python v3.12)"><span class="xref std std-ref">context managers</span></a>), for example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">timer</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
 <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">If</span><span class="p">(</span><span class="n">timer</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
     <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">timer</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -969,12 +1001,12 @@ This happens because, being empty, it does not contain any negative values.</p>
     <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">timer</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">timer</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>While some Amaranth control structures are superficially similar to imperative control flow statements (such as Python’s <code class="docutils literal notranslate"><span class="pre">if</span></code>), their function—together with <a class="reference internal" href="#lang-abstractexpr"><span class="std std-ref">expressions</span></a> and <a class="reference internal" href="#lang-assigns"><span class="std std-ref">assignments</span></a>—is to describe circuits. The code above is equivalent to:</p>
+<p>While some Amaranth control structures are superficially similar to imperative control flow statements (such as Python’s <code class="code highlight pc python docutils literal highlight-python"><span class="k">if</span></code>), their function—together with <a class="reference internal" href="#lang-abstractexpr"><span class="std std-ref">expressions</span></a> and <a class="reference internal" href="#lang-assigns"><span class="std std-ref">assignments</span></a>—is to describe circuits. The code above is equivalent to:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">timer</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
 <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">timer</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">Mux</span><span class="p">(</span><span class="n">timer</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">timer</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>Because all branches of a decision tree affect the generated circuit, all of the Python code inside Amaranth control structures is always evaluated in the order in which it appears in the program. This can be observed through Python code with side effects, such as <code class="docutils literal notranslate"><span class="pre">print()</span></code>:</p>
+<p>Because all branches of a decision tree affect the generated circuit, all of the Python code inside Amaranth control structures is always evaluated in the order in which it appears in the program. This can be observed through Python code with side effects, such as <code class="code highlight pc python docutils literal highlight-python"><span class="nb">print</span><span class="p">()</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">timer</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
 <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">If</span><span class="p">(</span><span class="n">timer</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;inside `If`&quot;</span><span class="p">)</span>
@@ -988,7 +1020,6 @@ This happens because, being empty, it does not contain any negative values.</p>
 inside `Else`
 </pre></div>
 </div>
-</section>
 <section id="active-and-inactive-assignments">
 <span id="lang-active"></span><h3>Active and inactive assignments<a class="headerlink" href="#active-and-inactive-assignments" title="Permalink to this heading"></a></h3>
 <p>An assignment added inside an Amaranth control structure, i.e. <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">m.&lt;...&gt;:</span></code> block, is <em>active</em> if the condition of the control structure is satisfied, and <em>inactive</em> otherwise. For any given set of conditions, the final value of every signal assigned in a module is the same as if the inactive assignments were removed and the active assignments were performed unconditionally, taking into account the <a class="reference internal" href="#lang-assignorder"><span class="std std-ref">assignment order</span></a>.</p>
@@ -1018,8 +1049,119 @@ inside `Else`
 </pre></div>
 </div>
 </section>
+<section id="if-elif-else-control-blocks">
+<span id="lang-if"></span><h3><code class="code highlight pc python docutils literal highlight-python"><span class="n">If</span></code>/<code class="code highlight pc python docutils literal highlight-python"><span class="n">Elif</span></code>/<code class="code highlight pc python docutils literal highlight-python"><span class="n">Else</span></code> control blocks<a class="headerlink" href="#if-elif-else-control-blocks" title="Permalink to this heading"></a></h3>
+<p>Conditional control flow is described using a <code class="code highlight pc python docutils literal highlight-python"><span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">If</span><span class="p">(</span><span class="n">cond1</span><span class="p">):</span></code> block, which may be followed by one or more <code class="code highlight pc python docutils literal highlight-python"><span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">Elif</span><span class="p">(</span><span class="n">cond2</span><span class="p">):</span></code> blocks, and optionally a final <code class="code highlight pc python docutils literal highlight-python"><span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">Else</span><span class="p">():</span></code> block. This structure parallels Python’s own <a class="reference external" href="https://docs.python.org/3/reference/compound_stmts.html#if" title="(in Python v3.12)"><span class="xref std std-ref">if/elif/else</span></a> control flow syntax. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">If</span><span class="p">(</span><span class="n">x_coord</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">):</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="n">is_bporch</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">x_coord</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">x_coord</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">Elif</span><span class="p">((</span><span class="n">x_coord</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">x_coord</span> <span class="o">&lt;</span> <span class="mi">364</span><span class="p">)):</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="n">is_active</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">x_coord</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">x_coord</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">Elif</span><span class="p">((</span><span class="n">x_coord</span> <span class="o">&gt;=</span> <span class="mi">364</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">x_coord</span> <span class="o">&lt;</span> <span class="mi">374</span><span class="p">)):</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="n">is_fporch</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">x_coord</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">x_coord</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">Else</span><span class="p">():</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">x_coord</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Within a single <code class="code highlight pc python docutils literal highlight-python"><span class="n">If</span></code>/<code class="code highlight pc python docutils literal highlight-python"><span class="n">Elif</span></code>/<code class="code highlight pc python docutils literal highlight-python"><span class="n">Else</span></code> sequence of blocks, the statements within at most one block will be active at any time. This will be the first block in the order of definition whose condition, <a class="reference internal" href="#lang-bool"><span class="std std-ref">converted to boolean</span></a>, is true.</p>
+<p>If an <code class="code highlight pc python docutils literal highlight-python"><span class="n">Else</span></code> block is present, then the statements within exactly one block will be active at any time, and the sequence as a whole is called a <em>full condition</em>.</p>
+</section>
+<section id="switch-case-control-blocks">
+<span id="lang-switch"></span><h3><code class="code highlight pc python docutils literal highlight-python"><span class="n">Switch</span></code>/<code class="code highlight pc python docutils literal highlight-python"><span class="n">Case</span></code> control blocks<a class="headerlink" href="#switch-case-control-blocks" title="Permalink to this heading"></a></h3>
+<p>Case comparison, where a single value is examined against several different <em>patterns</em>, is described using a <code class="code highlight pc python docutils literal highlight-python"><span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">Switch</span><span class="p">(</span><span class="n">value</span><span class="p">):</span></code> block. This block can contain any amount of <code class="code highlight pc python docutils literal highlight-python"><span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">Case</span><span class="p">(</span><span class="o">*</span><span class="n">patterns</span><span class="p">)</span></code> and <code class="code highlight pc python docutils literal highlight-python"><span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">Default</span><span class="p">():</span></code> blocks. This structure parallels Python’s own <a class="reference external" href="https://docs.python.org/3/reference/compound_stmts.html#match" title="(in Python v3.12)"><span class="xref std std-ref">match/case</span></a> control flow syntax. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">value</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">Switch</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">Case</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="n">is_even</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">Case</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="n">is_odd</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">Default</span><span class="p">():</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="n">too_big</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Within a single <code class="code highlight pc python docutils literal highlight-python"><span class="n">Switch</span></code> block, the statements within at most one block will be active at any time. This will be the first <code class="code highlight pc python docutils literal highlight-python"><span class="n">Case</span></code> block in the order of definition whose pattern <a class="reference internal" href="#lang-matchop"><span class="std std-ref">matches</span></a> the value, or the first <code class="code highlight pc python docutils literal highlight-python"><span class="n">Default</span></code> block, whichever is earlier.</p>
+<p>If a <code class="code highlight pc python docutils literal highlight-python"><span class="n">Default</span></code> block is present, or the patterns in the <code class="code highlight pc python docutils literal highlight-python"><span class="n">Case</span></code> blocks cover every possible <code class="code highlight pc python docutils literal highlight-python"><span class="n">Switch</span></code> value, then the statements within exactly one block will be active at any time, and the sequence as a whole is called a <em>full condition</em>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not rely on the behavior of a <code class="code highlight pc python docutils literal highlight-python"><span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">Case</span><span class="p">():</span></code> with no patterns.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>While all Amaranth control flow syntax can be generated programmatically, the <code class="code highlight pc python docutils literal highlight-python"><span class="n">Switch</span></code> control block is particularly easy to use in this way:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">length</span>  <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">squared</span> <span class="o">=</span> <span class="n">Signal</span><span class="o">.</span><span class="n">like</span><span class="p">(</span><span class="n">length</span> <span class="o">*</span> <span class="n">length</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">Switch</span><span class="p">(</span><span class="n">length</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="o">.</span><span class="n">shape</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">Case</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="n">squared</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">value</span> <span class="o">*</span> <span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="fsm-state-control-blocks">
+<span id="lang-fsm"></span><h3><code class="code highlight pc python docutils literal highlight-python"><span class="n">FSM</span></code>/<code class="code highlight pc python docutils literal highlight-python"><span class="n">State</span></code> control blocks<a class="headerlink" href="#fsm-state-control-blocks" title="Permalink to this heading"></a></h3>
+<p>Simple <a class="reference external" href="https://en.wikipedia.org/wiki/Finite-state_machine">finite state machines</a> are described using a <code class="code highlight pc python docutils literal highlight-python"><span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">FSM</span><span class="p">():</span></code> block. This block can contain one or more <code class="code highlight pc python docutils literal highlight-python"><span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">State</span><span class="p">(</span><span class="s2">&quot;Name&quot;</span><span class="p">)</span></code> blocks. In addition to these blocks, the <code class="code highlight pc python docutils literal highlight-python"><span class="n">m</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="s2">&quot;Name&quot;</span></code> syntax chooses which state the FSM enters on the next clock cycle. For example, this FSM performs a bus read transaction once after reset:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bus_addr</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">r_data</span>   <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">r_en</span>     <span class="o">=</span> <span class="n">Signal</span><span class="p">()</span>
+<span class="n">latched</span>  <span class="o">=</span> <span class="n">Signal</span><span class="o">.</span><span class="n">like</span><span class="p">(</span><span class="n">r_data</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">FSM</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">State</span><span class="p">(</span><span class="s2">&quot;Set Address&quot;</span><span class="p">):</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">addr</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mh">0x1234</span><span class="p">)</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="s2">&quot;Strobe Read Enable&quot;</span>
+
+    <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">State</span><span class="p">(</span><span class="s2">&quot;Strobe Read Enable&quot;</span><span class="p">):</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="n">r_en</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="s2">&quot;Sample Data&quot;</span>
+
+    <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">State</span><span class="p">(</span><span class="s2">&quot;Sample Data&quot;</span><span class="p">):</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">latched</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">r_data</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">If</span><span class="p">(</span><span class="n">r_data</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="s2">&quot;Set Address&quot;</span> <span class="c1"># try again</span>
+</pre></div>
+</div>
+<p>The reset state of the FSM can be provided when defining it using the <code class="code highlight pc python docutils literal highlight-python"><span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">FSM</span><span class="p">(</span><span class="n">reset</span><span class="o">=</span><span class="s2">&quot;Name&quot;</span><span class="p">):</span></code> argument. If not provided, it is the first state in the order of definition. For example, this definition is equivalent to the one at the beginning of this section:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">FSM</span><span class="p">(</span><span class="n">reset</span><span class="o">=</span><span class="s2">&quot;Set Address&quot;</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>The FSM belongs to a <a class="reference internal" href="#lang-domains"><span class="std std-ref">clock domain</span></a>, which is specified using the <code class="code highlight pc python docutils literal highlight-python"><span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">FSM</span><span class="p">(</span><span class="n">domain</span><span class="o">=</span><span class="s2">&quot;dom&quot;</span><span class="p">)</span></code> argument. If not specified, it is the <code class="docutils literal notranslate"><span class="pre">sync</span></code> domain. For example, this definition is equivalent to the one at the beginning of this section:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">FSM</span><span class="p">(</span><span class="n">domain</span><span class="o">=</span><span class="s2">&quot;sync&quot;</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>To determine (from code that is outside the FSM definition) whether it is currently in a particular state, the FSM can be captured; its <code class="code highlight pc python docutils literal highlight-python"><span class="o">.</span><span class="n">ongoing</span><span class="p">(</span><span class="s2">&quot;Name&quot;</span><span class="p">)</span></code> method returns a value that is true whenever the FSM is in the corresponding state. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">FSM</span><span class="p">()</span> <span class="k">as</span> <span class="n">fsm</span><span class="p">:</span>
+    <span class="o">...</span>
+
+<span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">If</span><span class="p">(</span><span class="n">fsm</span><span class="o">.</span><span class="n">ongoing</span><span class="p">(</span><span class="s2">&quot;Set Address&quot;</span><span class="p">)):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>Note that in Python, assignments made using <code class="code highlight pc python docutils literal highlight-python"><span class="k">with</span> <span class="n">x</span><span class="p">()</span> <span class="k">as</span> <span class="n">y</span><span class="p">:</span></code> syntax persist past the end of the block.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you make a typo in the state name provided to <code class="code highlight pc python docutils literal highlight-python"><span class="n">m</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="o">...</span></code> or <code class="code highlight pc python docutils literal highlight-python"><span class="n">fsm</span><span class="o">.</span><span class="n">ongoing</span><span class="p">(</span><span class="o">...</span><span class="p">)</span></code>, an empty and unreachable state with that name will be created with no diagnostic message.</p>
+<p>This hazard will be eliminated in the future.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If a non-string object is provided as a state name to <code class="code highlight pc python docutils literal highlight-python"><span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">State</span><span class="p">(</span><span class="o">...</span><span class="p">):</span></code>, it is cast to a string first, which may lead to surprising behavior. <code class="code highlight pc python docutils literal highlight-python"><span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">State</span><span class="p">(</span><span class="o">...</span><span class="p">):</span></code> <strong>does not</strong> treat an enumeration value specially; if one is provided, it is cast to a string, and its numeric value will have no correspondence to the numeric value of the generated state signal.</p>
+<p>This hazard will be eliminated in the future.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are nesting two state machines within each other, the <code class="code highlight pc python docutils literal highlight-python"><span class="n">m</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="o">...</span></code> syntax always refers to the innermost one. To change the state of the outer state machine from within the inner one, use an intermediate signal.</p>
+</div>
+</section>
+</section>
 <section id="combinatorial-evaluation">
-<span id="lang-comb"></span><h3>Combinatorial evaluation<a class="headerlink" href="#combinatorial-evaluation" title="Permalink to this heading"></a></h3>
+<span id="lang-comb"></span><h2>Combinatorial evaluation<a class="headerlink" href="#combinatorial-evaluation" title="Permalink to this heading"></a></h2>
 <p>Signals in the combinatorial <a class="reference internal" href="#lang-domains"><span class="std std-ref">control domain</span></a> change whenever any value used to compute them changes. The final value of a combinatorial signal is equal to its <a class="reference internal" href="#lang-initial"><span class="std std-ref">initial value</span></a> updated by the <a class="reference internal" href="#lang-active"><span class="std std-ref">active assignments</span></a> in the <a class="reference internal" href="#lang-assignorder"><span class="std std-ref">assignment order</span></a>. Combinatorial signals cannot hold any state.</p>
 <p>Consider the following code:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -1028,7 +1170,7 @@ inside `Else`
 </pre></div>
 </div>
 <p>Whenever the signals <code class="docutils literal notranslate"><span class="pre">en</span></code> or <code class="docutils literal notranslate"><span class="pre">b</span></code> change, the signal <code class="docutils literal notranslate"><span class="pre">a</span></code> changes as well. If <code class="docutils literal notranslate"><span class="pre">en</span></code> is false, the final value of <code class="docutils literal notranslate"><span class="pre">a</span></code> is its initial value, <code class="docutils literal notranslate"><span class="pre">1</span></code>. If <code class="docutils literal notranslate"><span class="pre">en</span></code> is true, the final value of <code class="docutils literal notranslate"><span class="pre">a</span></code> is equal to <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">+</span> <span class="pre">1</span></code>.</p>
-<p>A combinatorial signal that is computed directly or indirectly based on its own value is a part of a <em>combinatorial feedback loop</em>, sometimes shortened to just <em>feedback loop</em>. Combinatorial feedback loops can be stable (i.e. implement a constant driver or a transparent latch), or unstable (i.e. implement a ring oscillator). Amaranth prohibits using assignments to describe any kind of a combinatorial feedback loop, including transparent latches.</p>
+<p>A combinatorial signal that is computed directly or indirectly based on its own value is a part of a <em>combinatorial feedback loop</em>, sometimes shortened to just <em>feedback loop</em>. Combinatorial feedback loops can be stable (e.g. implement a constant driver or a transparent latch), or unstable (e.g. implement a ring oscillator). Amaranth prohibits using assignments to describe any kind of a combinatorial feedback loop, including transparent latches.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>The current version of Amaranth does not detect combinatorial feedback loops, but processes the design under the assumption that there aren’t any. If the design does in fact contain a combinatorial feedback loop, it will likely be <strong>silently miscompiled</strong>, though some cases will be detected during synthesis or place &amp; route.</p>
@@ -1040,9 +1182,114 @@ inside `Else`
 </div>
 </section>
 <section id="synchronous-evaluation">
-<span id="lang-sync"></span><h3>Synchronous evaluation<a class="headerlink" href="#synchronous-evaluation" title="Permalink to this heading"></a></h3>
-<p>Signals in synchronous <a class="reference internal" href="#lang-domains"><span class="std std-ref">control domains</span></a> change whenever a specific transition (positive or negative edge) occurs on the clock of the synchronous domain. In addition, the signals in clock domains with an asynchronous reset change when such a reset is asserted. The final value of a synchronous signal is equal to its <a class="reference internal" href="#lang-initial"><span class="std std-ref">initial value</span></a> if the reset (of any type) is asserted, or to its current value updated by the <a class="reference internal" href="#lang-active"><span class="std std-ref">active assignments</span></a> in the <a class="reference internal" href="#lang-assignorder"><span class="std std-ref">assignment order</span></a> otherwise. Synchronous signals always hold state.</p>
+<span id="lang-sync"></span><h2>Synchronous evaluation<a class="headerlink" href="#synchronous-evaluation" title="Permalink to this heading"></a></h2>
+<p>Signals in synchronous <a class="reference internal" href="#lang-domains"><span class="std std-ref">control domains</span></a> change whenever the <em>active edge</em> (a 0-to-1 or 1-to-0 transition, configured when <a class="reference internal" href="#lang-clockdomains"><span class="std std-ref">creating the domain</span></a>) occurs on the clock of the synchronous domain. In addition, the signals in clock domains with an asynchronous reset change when such a reset is asserted. The final value of a synchronous signal is equal to its <a class="reference internal" href="#lang-initial"><span class="std std-ref">initial value</span></a> if the reset (of any type) is asserted, or to its current value updated by the <a class="reference internal" href="#lang-active"><span class="std std-ref">active assignments</span></a> in the <a class="reference internal" href="#lang-assignorder"><span class="std std-ref">assignment order</span></a> otherwise. Synchronous signals always hold state.</p>
+<p>Consider the following code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">timer</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">If</span><span class="p">(</span><span class="n">up</span><span class="p">):</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">timer</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">timer</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">Elif</span><span class="p">(</span><span class="n">down</span><span class="p">):</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">timer</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">timer</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Whenever there is a transition on the clock of the <code class="docutils literal notranslate"><span class="pre">sync</span></code> domain, the <code class="code highlight pc python docutils literal highlight-python"><span class="n">timer</span></code> signal is incremented by one if <code class="code highlight pc python docutils literal highlight-python"><span class="n">up</span></code> is true, decremented by one if <code class="code highlight pc python docutils literal highlight-python"><span class="n">down</span></code> is true, and retains its value otherwise.</p>
 </section>
+<section id="clock-domains">
+<span id="lang-clockdomains"></span><h2>Clock domains<a class="headerlink" href="#clock-domains" title="Permalink to this heading"></a></h2>
+<p>A new synchronous <a class="reference internal" href="#lang-domains"><span class="std std-ref">control domain</span></a>, which is more often called a <em>clock domain</em>, can be defined in a design by creating a <code class="xref py py-class docutils literal notranslate"><span class="pre">ClockDomain</span></code> object and adding it to the <code class="code highlight pc python docutils literal highlight-python"><span class="n">m</span><span class="o">.</span><span class="n">domains</span></code> collection:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">video</span> <span class="o">=</span> <span class="n">cd_video</span> <span class="o">=</span> <span class="n">ClockDomain</span><span class="p">(</span><span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If the name of the domain is not known upfront, another, less concise, syntax can be used instead:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add_video_domain</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">cd</span> <span class="o">=</span> <span class="n">ClockDomain</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;video_</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">domains</span> <span class="o">+=</span> <span class="n">cd</span>
+    <span class="k">return</span> <span class="n">cd</span>
+
+<span class="n">add_video_domain</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Whenever the created <code class="xref py py-class docutils literal notranslate"><span class="pre">ClockDomain</span></code> object is immediately assigned using the <code class="code highlight pc python docutils literal highlight-python"><span class="n">domain_name</span> <span class="o">=</span> <span class="n">ClockDomain</span><span class="p">(</span><span class="o">...</span><span class="p">)</span></code> or <code class="code highlight pc python docutils literal highlight-python"><span class="n">m</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">domain_name</span> <span class="o">=</span> <span class="n">ClockDomain</span><span class="p">(</span><span class="o">...</span><span class="p">)</span></code> syntax, the name of the domain may be omitted from the <code class="code highlight pc python docutils literal highlight-python"><span class="n">ClockDomain</span><span class="p">()</span></code> invocation. In other cases, it must be provided as the first argument.</p>
+</div>
+<p>A clock domain always has a clock signal, which can be accessed through the <code class="xref py py-attr docutils literal notranslate"><span class="pre">cd.clk</span></code> attribute. By default, the <em>active edge</em> of the clock domain is positive; this means that the signals in the domain change when the clock signal transitions from 0 to 1. A clock domain can be configured to have a negative active edge so that signals in it change when the clock signal transitions from 1 to 0:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">jtag</span> <span class="o">=</span> <span class="n">ClockDomain</span><span class="p">(</span><span class="n">clk_edge</span><span class="o">=</span><span class="s2">&quot;neg&quot;</span><span class="p">,</span> <span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A clock domain also has a reset signal, which can be accessed through the <code class="xref py py-attr docutils literal notranslate"><span class="pre">cd.rst</span></code> attribute. The reset signal is always active-high: the signals in the clock domain are reset if the value of the reset signal is 1. The <a class="reference internal" href="#lang-initial"><span class="std std-ref">initial value</span></a> of this signal is 0, so if the reset signal is never assigned, the signals in the clock domain are never explicitly reset (they are still <a class="reference internal" href="#lang-initial"><span class="std std-ref">reset at power-on</span></a>). Nevertheless, if its existence is undesirable, the clock domain can be configured to omit it:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">startup</span> <span class="o">=</span> <span class="n">ClockDomain</span><span class="p">(</span><span class="n">reset_less</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If a clock domain is defined in a module, it is also available in all of its submodules.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Always provide the <code class="code highlight pc python docutils literal highlight-python"><span class="n">local</span><span class="o">=</span><span class="kc">True</span></code> keyword argument when defining a clock domain. The behavior of clock domains defined without this keyword argument is subject to change in near future, and is intentionally left undocumented.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Clock domains use synchronous reset unless otherwise specified. Clock domains with asynchronous reset are implemented, but their behavior is subject to change in near future, and is intentionally left undocumented.</p>
+</div>
+<section id="late-binding-of-clock-and-reset-signals">
+<span id="lang-latesignals"></span><h3>Late binding of clock and reset signals<a class="headerlink" href="#late-binding-of-clock-and-reset-signals" title="Permalink to this heading"></a></h3>
+<p>Clock domains are <em>late bound</em>, which means that their signals and properties can be referred to using the domain’s name before the <code class="xref py py-class docutils literal notranslate"><span class="pre">ClockDomain</span></code> object with that name is created and added to the design. This happens whenever <a class="reference internal" href="#lang-assigns"><span class="std std-ref">an assignment is added</span></a> to a domain. In some cases, it is necessary to refer to the domain’s clock or reset signal using only the domain’s name. The <code class="xref py py-class docutils literal notranslate"><span class="pre">ClockSignal</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">ResetSignal</span></code> values make this possible:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="p">[</span>
+    <span class="n">ClockSignal</span><span class="p">()</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">bus_clk</span><span class="p">),</span>
+    <span class="n">ResetSignal</span><span class="p">()</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="o">~</span><span class="n">bus_rstn</span><span class="p">),</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>In this example, once the design is processed, <code class="code highlight pc python docutils literal highlight-python"><span class="n">bus_clk</span></code> will be assigned to the clock signal of the clock domain <cite>sync</cite> found in this module or one of its containing modules. The <code class="code highlight pc python docutils literal highlight-python"><span class="n">bus_rstn</span></code> signal will be assigned to the inverted reset signal of the same clock domain. With the <cite>sync</cite> domain created in the same module, these statements become equivalent to:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">sync</span> <span class="o">=</span> <span class="n">cd_sync</span> <span class="o">=</span> <span class="n">ClockDomain</span><span class="p">()</span>
+<span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="p">[</span>
+    <span class="n">cd_sync</span><span class="o">.</span><span class="n">clk</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">bus_clk</span><span class="p">),</span>
+    <span class="n">cd_sync</span><span class="o">.</span><span class="n">rst</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="o">~</span><span class="n">bus_rstn</span><span class="p">),</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">ClockSignal</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">ResetSignal</span></code> values may also be assigned to other signals and used in expressions. They take a single argument, which is the name of the domain; if not specified, it defaults to <code class="code highlight pc python docutils literal highlight-python"><span class="s2">&quot;sync&quot;</span></code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Be especially careful when using <code class="xref py py-class docutils literal notranslate"><span class="pre">ClockSignal</span></code> or <code class="xref py py-attr docutils literal notranslate"><span class="pre">cd.clk</span></code> in expressions. Assigning to and from a clock signal is usually safe; any other operations may have unpredictable results. Consult the documentation for your synthesis toolchain and platform to understand which operations with a clock signal are permitted.</p>
+<p>FPGAs usually have dedicated clocking facilities that can be used to disable, divide, or multiplex clock signals. When targeting an FPGA, these facilities should be used if at all possible, and expressions like <code class="code highlight pc python docutils literal highlight-python"><span class="n">ClockSignal</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">en</span></code> or <code class="code highlight pc python docutils literal highlight-python"><span class="n">Mux</span><span class="p">(</span><span class="n">sel</span><span class="p">,</span> <span class="n">ClockSignal</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">),</span> <span class="n">ClockSignal</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">))</span></code> should be avoided.</p>
+</div>
+</section>
+</section>
+<section id="elaboration">
+<span id="lang-elaboration"></span><h2>Elaboration<a class="headerlink" href="#elaboration" title="Permalink to this heading"></a></h2>
+<div class="admonition-todo admonition" id="id14">
+<p class="admonition-title">Todo</p>
+<p>Write this section.</p>
+</div>
+<section id="renaming-domains">
+<span id="lang-domainrenamer"></span><h3>Renaming domains<a class="headerlink" href="#renaming-domains" title="Permalink to this heading"></a></h3>
+<div class="admonition-todo admonition" id="id15">
+<p class="admonition-title">Todo</p>
+<p>Write this section about <code class="xref py py-class docutils literal notranslate"><span class="pre">DomainRenamer</span></code></p>
+</div>
+</section>
+<section id="modifying-control-flow">
+<span id="lang-controlinserter"></span><h3>Modifying control flow<a class="headerlink" href="#modifying-control-flow" title="Permalink to this heading"></a></h3>
+<div class="admonition-todo admonition" id="id16">
+<p class="admonition-title">Todo</p>
+<p>Write this section about <code class="xref py py-class docutils literal notranslate"><span class="pre">ResetInserter</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">EnableInserter</span></code></p>
+</div>
+</section>
+</section>
+<section id="memory-arrays">
+<span id="lang-memory"></span><h2>Memory arrays<a class="headerlink" href="#memory-arrays" title="Permalink to this heading"></a></h2>
+<div class="admonition-todo admonition" id="id17">
+<p class="admonition-title">Todo</p>
+<p>Write this section.</p>
+</div>
+</section>
+<section id="instances">
+<h2>Instances<a class="headerlink" href="#instances" title="Permalink to this heading"></a></h2>
+<div class="admonition-todo admonition" id="id18">
+<p class="admonition-title">Todo</p>
+<p>Write this section.</p>
+</div>
 </section>
 </section>
 
