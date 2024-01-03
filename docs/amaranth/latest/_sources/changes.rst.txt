@@ -15,6 +15,7 @@ Language changes
 
 .. currentmodule:: amaranth.hdl
 
+* Deprecated: argument `run_script=` in :meth:`BuildPlan.execute_local`
 * Added: `class:ast.Slice` objects have been made const-castable.
 * Removed: (deprecated in 0.4) :meth:`Const.normalize`. (`RFC 5`_)
 * Removed: (deprecated in 0.4) :class:`ast.Sample`, :class:`ast.Past`, :class:`ast.Stable`, :class:`ast.Rose`, :class:`ast.Fell`.
@@ -35,6 +36,8 @@ Platform integration changes
 
 .. currentmodule:: amaranth.vendor
 
+* Added: :meth:`BuildPlan.execute_local_docker`.
+* Added: :meth:`BuildPlan.extract`.
 * Added: ``build.sh``  begins with ``#!/bin/sh``.
 * Removed: (deprecated in 0.4) :mod:`vendor.intel`, :mod:`vendor.lattice_ecp5`, :mod:`vendor.lattice_ice40`, :mod:`vendor.lattice_machxo2_3l`, :mod:`vendor.quicklogic`, :mod:`vendor.xilinx`. (`RFC 18`_)
 
