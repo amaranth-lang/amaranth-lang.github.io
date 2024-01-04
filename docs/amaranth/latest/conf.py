@@ -4,7 +4,7 @@ sys.path.insert(0, os.path.abspath("."))
 import amaranth
 
 project = "Amaranth HDL toolchain"
-version = amaranth.__version__
+version = amaranth.__version__.replace(".editable", "")
 release = version.split("+")[0]
 copyright = "2020—2023, Amaranth HDL developers"
 
@@ -43,6 +43,7 @@ napoleon_custom_sections = ["Platform overrides"]
 html_theme = "sphinx_rtd_theme"
 html_static_path = ["_static"]
 html_css_files = ["custom.css"]
+html_logo = "_static/logo.png"
 
 rst_prolog = """
 .. role:: pc(code)
