@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li><li class="chapter-item expanded "><a href="0002-interfaces.html">0002-interfaces</a></li><li class="chapter-item expanded "><a href="0003-enumeration-shapes.html">0003-enumeration-shapes</a></li><li class="chapter-item expanded "><a href="0004-const-castable-exprs.html">0004-const-castable-exprs</a></li><li class="chapter-item expanded "><a href="0005-remove-const-normalize.html">0005-remove-const-normalize</a></li><li class="chapter-item expanded "><a href="0006-stdlib-crc.html">0006-stdlib-crc</a></li><li class="chapter-item expanded "><a href="0008-aggregate-extensibility.html">0008-aggregate-extensibility</a></li><li class="chapter-item expanded "><a href="0009-const-init-shape-castable.html">0009-const-init-shape-castable</a></li><li class="chapter-item expanded "><a href="0010-move-repl-to-value.html">0010-move-repl-to-value</a></li><li class="chapter-item expanded "><a href="0015-lifting-shape-castables.html">0015-lifting-shape-castables</a></li><li class="chapter-item expanded "><a href="0018-reorganize-vendor-platforms.html">0018-reorganize-vendor-platforms</a></li><li class="chapter-item expanded "><a href="0019-remove-scheduler.html">0019-remove-scheduler</a></li><li class="chapter-item expanded "><a href="0020-deprecate-non-fwft-fifos.html">0020-deprecate-non-fwft-fifos</a></li><li class="chapter-item expanded "><a href="0021-patch-releases.html">0021-patch-releases</a></li><li class="chapter-item expanded "><a href="0022-valuecastable-shape.html">0022-valuecastable-shape</a></li><li class="chapter-item expanded "><a href="0028-override-value-operators.html">0028-override-value-operators</a></li><li class="chapter-item expanded "><a href="0031-enumeration-type-safety.html">0031-enumeration-type-safety</a></li><li class="chapter-item expanded "><a href="0034-interface-rename.html">0034-interface-rename</a></li><li class="chapter-item expanded "><a href="0035-shapelike-valuelike.html">0035-shapelike-valuelike</a></li><li class="chapter-item expanded "><a href="0037-make-signature-immutable.html">0037-make-signature-immutable</a></li><li class="chapter-item expanded "><a href="0038-component-signature-immutability.html">0038-component-signature-immutability</a></li><li class="chapter-item expanded "><a href="0039-empty-case.html">0039-empty-case</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li><li class="chapter-item expanded "><a href="0002-interfaces.html">0002-interfaces</a></li><li class="chapter-item expanded "><a href="0003-enumeration-shapes.html">0003-enumeration-shapes</a></li><li class="chapter-item expanded "><a href="0004-const-castable-exprs.html">0004-const-castable-exprs</a></li><li class="chapter-item expanded "><a href="0005-remove-const-normalize.html">0005-remove-const-normalize</a></li><li class="chapter-item expanded "><a href="0006-stdlib-crc.html">0006-stdlib-crc</a></li><li class="chapter-item expanded "><a href="0008-aggregate-extensibility.html">0008-aggregate-extensibility</a></li><li class="chapter-item expanded "><a href="0009-const-init-shape-castable.html">0009-const-init-shape-castable</a></li><li class="chapter-item expanded "><a href="0010-move-repl-to-value.html">0010-move-repl-to-value</a></li><li class="chapter-item expanded "><a href="0015-lifting-shape-castables.html">0015-lifting-shape-castables</a></li><li class="chapter-item expanded "><a href="0017-remove-log2-int.html">0017-remove-log2-int</a></li><li class="chapter-item expanded "><a href="0018-reorganize-vendor-platforms.html">0018-reorganize-vendor-platforms</a></li><li class="chapter-item expanded "><a href="0019-remove-scheduler.html">0019-remove-scheduler</a></li><li class="chapter-item expanded "><a href="0020-deprecate-non-fwft-fifos.html">0020-deprecate-non-fwft-fifos</a></li><li class="chapter-item expanded "><a href="0021-patch-releases.html">0021-patch-releases</a></li><li class="chapter-item expanded "><a href="0022-valuecastable-shape.html">0022-valuecastable-shape</a></li><li class="chapter-item expanded "><a href="0028-override-value-operators.html">0028-override-value-operators</a></li><li class="chapter-item expanded "><a href="0031-enumeration-type-safety.html">0031-enumeration-type-safety</a></li><li class="chapter-item expanded "><a href="0034-interface-rename.html">0034-interface-rename</a></li><li class="chapter-item expanded "><a href="0035-shapelike-valuelike.html">0035-shapelike-valuelike</a></li><li class="chapter-item expanded "><a href="0037-make-signature-immutable.html">0037-make-signature-immutable</a></li><li class="chapter-item expanded "><a href="0038-component-signature-immutability.html">0038-component-signature-immutability</a></li><li class="chapter-item expanded "><a href="0039-empty-case.html">0039-empty-case</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -1668,27 +1668,114 @@ The existing syntax for creating a <code>View</code> with a new <code>Signal</co
 <p>This RFC is the final one in a chain that started with <a href="0001-aggregate-data-structures.html">RFC 1</a>.</p>
 <p>Enumerations and ranges could be adjusted such that something other than <code>Value</code> is returned. This creates backwards compatibility concerns though.</p>
 <div style="break-before: page; page-break-before: always;"></div><ul>
+<li>Start Date: 2024-01-08</li>
+<li>RFC PR: <a href="https://github.com/amaranth-lang/rfcs/pull/17">amaranth-lang/rfcs#17</a></li>
+<li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/1025">amaranth-lang/amaranth#1025</a></li>
+</ul>
+<h1 id="remove-log2_int"><a class="header" href="#remove-log2_int">Remove <code>log2_int</code></a></h1>
+<h2 id="summary-10"><a class="header" href="#summary-10">Summary</a></h2>
+<p>Replace <code>log2_int</code> with two functions: <code>ceil_log2</code> and <code>exact_log2</code>.</p>
+<h2 id="motivation-10"><a class="header" href="#motivation-10">Motivation</a></h2>
+<p><code>log2_int</code> is a helper function that was copied from Migen in the early days of Amaranth.</p>
+<p>It behaves like so:</p>
+<ul>
+<li><code>n</code> must be an integer, and a power-of-2 unless <code>need_pow2</code> is <code>False</code>;</li>
+<li>if <code>n == 0</code>, it returns <code>0</code>;</li>
+<li>if <code>n != 0</code>, it returns <code>(n - 1).bit_length()</code>.</li>
+</ul>
+<h4 id="differences-with-mathlog2"><a class="header" href="#differences-with-mathlog2">Differences with <code>math.log2</code></a></h4>
+<p>In practice, <code>log2_int</code> differs from <code>math.log2</code> in the following ways:</p>
+<ol>
+<li>its implementation is restricted to integers only;</li>
+<li>if <code>need_pow2</code> is false, the result is rounded up to the nearest integer;</li>
+<li>it doesn't raise an exception for <code>n == 0</code>;</li>
+<li>if <code>need_pow2</code> is false, it doesn't raise an exception for <code>n &lt; 0</code>.</li>
+</ol>
+<h4 id="observations"><a class="header" href="#observations">Observations</a></h4>
+<ul>
+<li><em>1)</em> is a desirable property; coercing integers into floating-point numbers is fraught with peril, as the latter have limited precision.</li>
+<li><em>2)</em> has common use-cases in digital design, such as address decoders.</li>
+<li><em>3)</em> and <em>4)</em> are misleading at best. Despite being advertised as a logarithm, <code>log2_int</code> doesn't exclude 0 or negative integers from its domain.</li>
+</ul>
+<h2 id="guide-level-explanation-8"><a class="header" href="#guide-level-explanation-8">Guide-level explanation</a></h2>
+<p>Amaranth provides two log2 functions for integer arithmetic:</p>
+<ul>
+<li><code>ceil_log2(n)</code>, where <code>n</code> is assumed to be any non-negative integer</li>
+<li><code>exact_log2(n)</code>, where <code>n</code> is assumed to be an integer power-of-2</li>
+</ul>
+<p>For example:</p>
+<pre><code class="language-python3">ceil_log2(8) # 3
+ceil_log2(5) # 3
+ceil_log2(4) # 2
+
+exact_log2(8) # 3
+exact_log2(5) # raises a ValueError
+exact_log2(4) # 2
+</code></pre>
+<h2 id="reference-level-explanation-8"><a class="header" href="#reference-level-explanation-8">Reference-level explanation</a></h2>
+<p>Use of the <code>log2_int</code> function is deprecated.</p>
+<p>A <code>ceil_log2(n)</code> function is added, that:</p>
+<ul>
+<li>returns the integer log2 of the smallest power-of-2 greater than or equal to <code>n</code>;</li>
+<li>raises a <code>TypeError</code> if <code>n</code> is not an integer;</li>
+<li>raises a <code>ValueError</code> if <code>n</code> is lesser than 0.</li>
+</ul>
+<p>An <code>exact_log2(n)</code> function is added, that:</p>
+<ul>
+<li>returns the integer log2 of <code>n</code>;</li>
+<li>raises a <code>TypeError</code> if <code>n</code> is not an integer;</li>
+<li>raises a <code>ValueError</code> if <code>n</code> is not a power-of-two.</li>
+</ul>
+<h2 id="drawbacks-9"><a class="header" href="#drawbacks-9">Drawbacks</a></h2>
+<p>This is a breaking change.</p>
+<h2 id="rationale-and-alternatives-8"><a class="header" href="#rationale-and-alternatives-8">Rationale and alternatives</a></h2>
+<p>The following alternatives have been considered:</p>
+<ol>
+<li>Do nothing. Callers of <code>log2_int</code> may still need to restrict its domain to positive integers.</li>
+<li>Restrict <code>log2_int</code> to positive integers. Downstream code relying on the previous behavior may silently break.</li>
+<li>Remove <code>log2_int</code>, and use <code>math.log2</code> as replacement:
+<ul>
+<li><code>log2_int(n)</code> would be replaced with <code>math.log2(n)</code></li>
+<li><code>log2_int(n, need_pow2=False)</code> would be replaced with <code>math.ceil(math.log2(n))</code></li>
+</ul>
+</li>
+</ol>
+<p>Option <em>3)</em> will give incorrect results, as <code>n</code> is coerced from <code>int</code> to <code>float</code>:</p>
+<pre><code>&gt;&gt;&gt; log2_int((1 &lt;&lt; 64) + 1, need_pow2=False)
+65
+&gt;&gt;&gt; math.ceil(math.log2((1 &lt;&lt; 64) + 1))
+64
+</code></pre>
+<h2 id="prior-art-8"><a class="header" href="#prior-art-8">Prior art</a></h2>
+<p>None.</p>
+<h2 id="unresolved-questions-8"><a class="header" href="#unresolved-questions-8">Unresolved questions</a></h2>
+<p>None.</p>
+<h2 id="future-possibilities-8"><a class="header" href="#future-possibilities-8">Future possibilities</a></h2>
+<p>None.</p>
+<h2 id="acknowledgements-2"><a class="header" href="#acknowledgements-2">Acknowledgements</a></h2>
+<p><a href="https://github.com/wanda-phi">@wanda-phi</a> provided valuable feedback while this RFC was being drafted.</p>
+<div style="break-before: page; page-break-before: always;"></div><ul>
 <li>Start Date: 2023-08-22</li>
 <li>RFC PR: <a href="https://github.com/amaranth-lang/rfcs/pull/18">amaranth-lang/rfcs#18</a></li>
 <li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/873">amaranth-lang/amaranth#873</a></li>
 </ul>
 <h1 id="reorganize-vendor-platforms"><a class="header" href="#reorganize-vendor-platforms">Reorganize vendor platforms</a></h1>
-<h2 id="summary-10"><a class="header" href="#summary-10">Summary</a></h2>
+<h2 id="summary-11"><a class="header" href="#summary-11">Summary</a></h2>
 <p>Update <code>amaranth.vendor</code> namespace so that instead of:</p>
 <pre><code class="language-python">from amaranth.vendor.lattice_ecp5 import LatticeECP5Platform
 </code></pre>
 <p>you would write:</p>
 <pre><code class="language-python">from amaranth.vendor import LatticeECP5Platform
 </code></pre>
-<h2 id="motivation-10"><a class="header" href="#motivation-10">Motivation</a></h2>
+<h2 id="motivation-11"><a class="header" href="#motivation-11">Motivation</a></h2>
 <p>Vendor names are ever-changing. Xilinx was bought by AMD and the brand has been phased out. Altera was bought by Intel and the brand has been phased out. SiliconBlue has been bought by Lattice (a long time ago) and the brand has <em>long</em> been phased out but still remains as &quot;SB&quot; in <code>SB_LUT</code> primitive name.</p>
 <p>In addition, we attempt to group FPGA families into a single file, like <code>vendor.lattice_machxo2_3l</code> that has been renamed from <code>vendor.lattice_machxo2</code>. This will likely include another FPGA family as soon as it becomes available.</p>
 <p>By tying module (and file) names to brand names we create churn. Every Amaranth release so far has included renaming of both platform class names and module names. This causes additional downstream breakage and annoys designers using Amaranth.</p>
-<h2 id="guide-level-explanation-8"><a class="header" href="#guide-level-explanation-8">Guide-level explanation</a></h2>
+<h2 id="guide-level-explanation-9"><a class="header" href="#guide-level-explanation-9">Guide-level explanation</a></h2>
 <p>To target your FPGA-based project for a particular FPGA family, import the platform class corresponding to the FPGA family from <code>amaranth.vendor</code>, e.g.:</p>
 <pre><code class="language-python">from amaranth.vendor import LatticeECP5Platform
 </code></pre>
-<h2 id="reference-level-explanation-8"><a class="header" href="#reference-level-explanation-8">Reference-level explanation</a></h2>
+<h2 id="reference-level-explanation-9"><a class="header" href="#reference-level-explanation-9">Reference-level explanation</a></h2>
 <p>All of the <code>amaranth.vendor.name</code> modules are renamed to <code>amaranth.vendor._internal_name</code>.</p>
 <p>Python allows <code>__getattr__</code> to be present in modules:</p>
 <pre><code>$ cat &gt;x.py
@@ -1700,18 +1787,18 @@ $ python
 &quot;__getattr__('abc')&quot;
 </code></pre>
 <p>This allows us to make all the platform classes be present as-if they were defined in the <code>amaranth.vendor</code> modules, while retaining all of the benefits of having them in their own <code>amaranth.vendor._internal_name</code> module, such as lazy loading.</p>
-<h2 id="drawbacks-9"><a class="header" href="#drawbacks-9">Drawbacks</a></h2>
+<h2 id="drawbacks-10"><a class="header" href="#drawbacks-10">Drawbacks</a></h2>
 <ul>
 <li>Churn.</li>
 <li>A somewhat unusual loading mechanism could cause confusion.</li>
 </ul>
-<h2 id="rationale-and-alternatives-8"><a class="header" href="#rationale-and-alternatives-8">Rationale and alternatives</a></h2>
+<h2 id="rationale-and-alternatives-9"><a class="header" href="#rationale-and-alternatives-9">Rationale and alternatives</a></h2>
 <p>Decoupling marketing/brand names from technical names is increasingly important as Amaranth evolves and supports more FPGA families. It allows us to maintain any internal hierarchy we want without it having any impact on downstream code, which solely operates on names imported from <code>amaranth.vendor</code>.</p>
-<h2 id="prior-art-8"><a class="header" href="#prior-art-8">Prior art</a></h2>
+<h2 id="prior-art-9"><a class="header" href="#prior-art-9">Prior art</a></h2>
 <p>None.</p>
-<h2 id="unresolved-questions-8"><a class="header" href="#unresolved-questions-8">Unresolved questions</a></h2>
+<h2 id="unresolved-questions-9"><a class="header" href="#unresolved-questions-9">Unresolved questions</a></h2>
 <p>None.</p>
-<h2 id="future-possibilities-8"><a class="header" href="#future-possibilities-8">Future possibilities</a></h2>
+<h2 id="future-possibilities-9"><a class="header" href="#future-possibilities-9">Future possibilities</a></h2>
 <p>None.</p>
 <div style="break-before: page; page-break-before: always;"></div><ul>
 <li>Start Date: 2023-08-22</li>
@@ -1719,28 +1806,28 @@ $ python
 <li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/874">amaranth-lang/amaranth#874</a></li>
 </ul>
 <h1 id="remove-amaranthlibscheduler"><a class="header" href="#remove-amaranthlibscheduler">Remove <code>amaranth.lib.scheduler</code></a></h1>
-<h2 id="summary-11"><a class="header" href="#summary-11">Summary</a></h2>
+<h2 id="summary-12"><a class="header" href="#summary-12">Summary</a></h2>
 <p>Remove <code>amaranth.lib.scheduler</code> and the only class <code>RoundRobin</code> in it.</p>
-<h2 id="motivation-11"><a class="header" href="#motivation-11">Motivation</a></h2>
+<h2 id="motivation-12"><a class="header" href="#motivation-12">Motivation</a></h2>
 <p>This module is not used in the sole place for which it was added (Amaranth SoC), it is not especially useful, and it has not undergone proper community review when it was added.</p>
-<h2 id="guide-level-explanation-9"><a class="header" href="#guide-level-explanation-9">Guide-level explanation</a></h2>
+<h2 id="guide-level-explanation-10"><a class="header" href="#guide-level-explanation-10">Guide-level explanation</a></h2>
 <p>The module <code>amaranth.lib.scheduler</code> and the sole class <code>RoundRobin</code> in it is removed. To continue using it, copy the contents of the module into your own project.</p>
-<h2 id="reference-level-explanation-9"><a class="header" href="#reference-level-explanation-9">Reference-level explanation</a></h2>
+<h2 id="reference-level-explanation-10"><a class="header" href="#reference-level-explanation-10">Reference-level explanation</a></h2>
 <p>The class <code>amaranth.lib.scheduler.RoundRobin</code> is deprecated in Amaranth 0.4 and removed in Amaranth 0.5.</p>
-<h2 id="drawbacks-10"><a class="header" href="#drawbacks-10">Drawbacks</a></h2>
+<h2 id="drawbacks-11"><a class="header" href="#drawbacks-11">Drawbacks</a></h2>
 <ul>
 <li>Churn.</li>
 </ul>
-<h2 id="rationale-and-alternatives-9"><a class="header" href="#rationale-and-alternatives-9">Rationale and alternatives</a></h2>
+<h2 id="rationale-and-alternatives-10"><a class="header" href="#rationale-and-alternatives-10">Rationale and alternatives</a></h2>
 <ul>
 <li>This module is out of place in the standard library.</li>
 <li>It has not seen much use and is trivially implemented outside of it.</li>
 <li>Downstream consumers tend to inline the logic anyway.</li>
 <li>It does not seem like there would be any other uses for the <code>amaranth.lib.scheduler</code> module since any other scheduling algorithm would be more closely tied to the consumer.</li>
 </ul>
-<h2 id="unresolved-questions-9"><a class="header" href="#unresolved-questions-9">Unresolved questions</a></h2>
+<h2 id="unresolved-questions-10"><a class="header" href="#unresolved-questions-10">Unresolved questions</a></h2>
 <p>None.</p>
-<h2 id="future-possibilities-9"><a class="header" href="#future-possibilities-9">Future possibilities</a></h2>
+<h2 id="future-possibilities-10"><a class="header" href="#future-possibilities-10">Future possibilities</a></h2>
 <p>None.</p>
 <div style="break-before: page; page-break-before: always;"></div><ul>
 <li>Start Date: 2023-08-22</li>
@@ -1748,9 +1835,9 @@ $ python
 <li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/875">amaranth-lang/amaranth#875</a></li>
 </ul>
 <h1 id="deprecate-non-fwft-fifos"><a class="header" href="#deprecate-non-fwft-fifos">Deprecate non-FWFT FIFOs</a></h1>
-<h2 id="summary-12"><a class="header" href="#summary-12">Summary</a></h2>
+<h2 id="summary-13"><a class="header" href="#summary-13">Summary</a></h2>
 <p>Deprecate non-first-word-fall-through FIFOs.</p>
-<h2 id="motivation-12"><a class="header" href="#motivation-12">Motivation</a></h2>
+<h2 id="motivation-13"><a class="header" href="#motivation-13">Motivation</a></h2>
 <p>Currently, FIFOs in <code>amaranth.lib.fifo</code> have two incompatible interfaces: FWFT (first word fallthrough) and non-FWFT. The incompatibility concerns only the read half. FWFT FIFOs have <code>r_data</code> valid when <code>r_rdy</code> is asserted. Non-FWFT FIFOs have <code>r_data</code> valid only after strobing <code>r_en</code>, if the FIFO was empty previously.</p>
 <p>Non-FWFT interface is awkward and is essentially never used. It is a holdover from Migen and its implementation details that was included for compatibility. There are three downsides to having it:</p>
 <ol>
@@ -1763,12 +1850,12 @@ $ python
 <p>In the version after that, there is no way to instantiate <code>SyncFIFO(fwft=False)</code>. The feature and all references to it are removed in their entirety.</p>
 <h2 id="implementation-considerations"><a class="header" href="#implementation-considerations">Implementation considerations</a></h2>
 <p>At the moment, <code>SyncFIFOBuffered</code> is implemented as a register in the output of <code>SyncFIFO(fwft=False)</code>. The implementation will need to be rewritten.</p>
-<h2 id="drawbacks-11"><a class="header" href="#drawbacks-11">Drawbacks</a></h2>
+<h2 id="drawbacks-12"><a class="header" href="#drawbacks-12">Drawbacks</a></h2>
 <ul>
 <li>Churn.</li>
 <li>There will be no alternative to <code>SyncFIFO(fwft=False)</code>.</li>
 </ul>
-<h2 id="rationale-and-alternatives-10"><a class="header" href="#rationale-and-alternatives-10">Rationale and alternatives</a></h2>
+<h2 id="rationale-and-alternatives-11"><a class="header" href="#rationale-and-alternatives-11">Rationale and alternatives</a></h2>
 <ul>
 <li>It is feasible to extract <code>SyncFIFO(fwft=False)</code> into its own module that may be used by downstream code that needs non-FWFT FIFOs. It would not implement <code>FIFOInterface</code>.
 <ul>
@@ -1781,20 +1868,20 @@ $ python
 </ul>
 </li>
 </ul>
-<h2 id="prior-art-9"><a class="header" href="#prior-art-9">Prior art</a></h2>
+<h2 id="prior-art-10"><a class="header" href="#prior-art-10">Prior art</a></h2>
 <p>Not relevant.</p>
-<h2 id="unresolved-questions-10"><a class="header" href="#unresolved-questions-10">Unresolved questions</a></h2>
+<h2 id="unresolved-questions-11"><a class="header" href="#unresolved-questions-11">Unresolved questions</a></h2>
 <p>None.</p>
-<h2 id="future-possibilities-10"><a class="header" href="#future-possibilities-10">Future possibilities</a></h2>
+<h2 id="future-possibilities-11"><a class="header" href="#future-possibilities-11">Future possibilities</a></h2>
 <p>This RFC primarily exists to enable better stream interface integration.</p>
 <div style="break-before: page; page-break-before: always;"></div><ul>
 <li>Start Date: 2023-08-22</li>
 <li>RFC PR: <a href="https://github.com/amaranth-lang/rfcs/pull/21">amaranth-lang/rfcs#21</a></li>
 </ul>
 <h1 id="patch-releases"><a class="header" href="#patch-releases">Patch releases</a></h1>
-<h2 id="summary-13"><a class="header" href="#summary-13">Summary</a></h2>
+<h2 id="summary-14"><a class="header" href="#summary-14">Summary</a></h2>
 <p>Change Amaranth versioning from <code>major.minor</code> to <code>major.minor.patch</code> after version 0.4, and define the backport policy for patch releases.</p>
-<h2 id="motivation-13"><a class="header" href="#motivation-13">Motivation</a></h2>
+<h2 id="motivation-14"><a class="header" href="#motivation-14">Motivation</a></h2>
 <p>Amaranth 0.3 was released on 2021-12-16; almost two years ago. Several important bugs have been fixed in <code>main</code> since, most notably depending on a version of <code>Jinja2</code> that is no longer installable. At the moment the policy is to issue only <code>major.minor</code> releases, which was OK in the early days but no longer fits the project.</p>
 <p>We should change the policy that is used for the next Amaranth release and later ones.</p>
 <h2 id="explanation-1"><a class="header" href="#explanation-1">Explanation</a></h2>
@@ -1811,9 +1898,9 @@ $ python
 </ul>
 </li>
 </ul>
-<h2 id="drawbacks-12"><a class="header" href="#drawbacks-12">Drawbacks</a></h2>
+<h2 id="drawbacks-13"><a class="header" href="#drawbacks-13">Drawbacks</a></h2>
 <p>This creates additional work for maintainers.</p>
-<h2 id="rationale-and-alternatives-11"><a class="header" href="#rationale-and-alternatives-11">Rationale and alternatives</a></h2>
+<h2 id="rationale-and-alternatives-12"><a class="header" href="#rationale-and-alternatives-12">Rationale and alternatives</a></h2>
 <ul>
 <li>It would be possible to backport all feasible fixes as a policy.
 <ul>
@@ -1826,11 +1913,11 @@ $ python
 </ul>
 </li>
 </ul>
-<h2 id="prior-art-10"><a class="header" href="#prior-art-10">Prior art</a></h2>
+<h2 id="prior-art-11"><a class="header" href="#prior-art-11">Prior art</a></h2>
 <p>Rust has an even stricter bug-fix release policy: the Rust project only issues patch releases in cases of security issues, widespread miscompilations, or unintentional breaking changes.</p>
-<h2 id="unresolved-questions-11"><a class="header" href="#unresolved-questions-11">Unresolved questions</a></h2>
+<h2 id="unresolved-questions-12"><a class="header" href="#unresolved-questions-12">Unresolved questions</a></h2>
 <p>Should Amaranth SoC adopt the same policy?</p>
-<h2 id="future-possibilities-11"><a class="header" href="#future-possibilities-11">Future possibilities</a></h2>
+<h2 id="future-possibilities-12"><a class="header" href="#future-possibilities-12">Future possibilities</a></h2>
 <p>Eventually, Amaranth may gain release engineers who will maintain long-living release branches.</p>
 <div style="break-before: page; page-break-before: always;"></div><ul>
 <li>Start Date: 2023-08-22</li>
@@ -1838,14 +1925,14 @@ $ python
 <li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/876">amaranth-lang/amaranth#876</a></li>
 </ul>
 <h1 id="define-valuecastableshape"><a class="header" href="#define-valuecastableshape">Define <code>ValueCastable.shape()</code></a></h1>
-<h2 id="summary-14"><a class="header" href="#summary-14">Summary</a></h2>
+<h2 id="summary-15"><a class="header" href="#summary-15">Summary</a></h2>
 <p>Require value-castable objects to have a method that returns their high-level shape.</p>
-<h2 id="motivation-14"><a class="header" href="#motivation-14">Motivation</a></h2>
+<h2 id="motivation-15"><a class="header" href="#motivation-15">Motivation</a></h2>
 <p><a href="0015-lifting-shape-castables.html">RFC #15</a> advanced the extensibility of the language significantly, but broke constructs like <code>Signal.like(Signal(data.StructLayout(...)))</code>. In addition, not having a well-defined point for returning the high-level shape (i.e. a shape-castable object from which this value-castable object was creaed rather than a <code>Shape</code> instance) causes workarounds such as <code>data.Layout.of</code> to be added to the language and standard library.</p>
 <h2 id="explanation-2"><a class="header" href="#explanation-2">Explanation</a></h2>
 <p>The <code>ValueCastable</code> interface has a method <code>.shape()</code>. This method returns a shape-castable object. Where possibe, this object should, when passed to <code>Signal</code>, create a value-castable object of the same type.</p>
 <p><code>amaranth.lib.data.Layout.of</code> is removed immediately.</p>
-<h2 id="drawbacks-13"><a class="header" href="#drawbacks-13">Drawbacks</a></h2>
+<h2 id="drawbacks-14"><a class="header" href="#drawbacks-14">Drawbacks</a></h2>
 <ul>
 <li>Increased API surface area
 <ul>
@@ -1853,7 +1940,7 @@ $ python
 </ul>
 </li>
 </ul>
-<h2 id="rationale-and-alternatives-12"><a class="header" href="#rationale-and-alternatives-12">Rationale and alternatives</a></h2>
+<h2 id="rationale-and-alternatives-13"><a class="header" href="#rationale-and-alternatives-13">Rationale and alternatives</a></h2>
 <p>This change is the minimal possible one that fixes the problem systemically. Some minor variations in the design are possible:</p>
 <ul>
 <li>Instead of requiring <code>shape()</code> to be defined (which is a breaking change), this method can be added optionally in the next release and be required in the release after that.
@@ -1863,11 +1950,11 @@ $ python
 </ul>
 </li>
 </ul>
-<h2 id="prior-art-11"><a class="header" href="#prior-art-11">Prior art</a></h2>
+<h2 id="prior-art-12"><a class="header" href="#prior-art-12">Prior art</a></h2>
 <p>It is typical for a programming language to have a way of retrieving the type of a value. The mechanism being added here is equivalent.</p>
-<h2 id="unresolved-questions-12"><a class="header" href="#unresolved-questions-12">Unresolved questions</a></h2>
+<h2 id="unresolved-questions-13"><a class="header" href="#unresolved-questions-13">Unresolved questions</a></h2>
 <p>None.</p>
-<h2 id="future-possibilities-12"><a class="header" href="#future-possibilities-12">Future possibilities</a></h2>
+<h2 id="future-possibilities-13"><a class="header" href="#future-possibilities-13">Future possibilities</a></h2>
 <p>None.</p>
 <div style="break-before: page; page-break-before: always;"></div><ul>
 <li>Start Date: 2023-10-30</li>
@@ -1875,9 +1962,9 @@ $ python
 <li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/0929">amaranth-lang/amaranth#0929</a></li>
 </ul>
 <h1 id="allow-overriding-value-operators"><a class="header" href="#allow-overriding-value-operators">Allow overriding Value operators</a></h1>
-<h2 id="summary-15"><a class="header" href="#summary-15">Summary</a></h2>
+<h2 id="summary-16"><a class="header" href="#summary-16">Summary</a></h2>
 <p>Allow overriding binary <code>Value</code> operators with reflected operators in a value-castable type.</p>
-<h2 id="motivation-15"><a class="header" href="#motivation-15">Motivation</a></h2>
+<h2 id="motivation-16"><a class="header" href="#motivation-16">Motivation</a></h2>
 <p>A value-castable type can define operators that return another value-castable.
 However, if the left side operand is a <code>Value</code>, its operator will be called first, casting the right side operand to a plain <code>Value</code>.
 This creates a mismatch in behavior depending on the type and order of operands.</p>
@@ -1893,20 +1980,20 @@ This creates a mismatch in behavior depending on the type and order of operands.
 </code></pre>
 <h2 id="explanation-3"><a class="header" href="#explanation-3">Explanation</a></h2>
 <p>When a binary <code>Value</code> operator is called with a value-castable <code>other</code>, check whether the value-castable implements the reflected variant of the operator first and defer to it when present.</p>
-<h2 id="drawbacks-14"><a class="header" href="#drawbacks-14">Drawbacks</a></h2>
+<h2 id="drawbacks-15"><a class="header" href="#drawbacks-15">Drawbacks</a></h2>
 <p>Extra logic required around every <code>Value</code> operator.</p>
-<h2 id="prior-art-12"><a class="header" href="#prior-art-12">Prior art</a></h2>
+<h2 id="prior-art-13"><a class="header" href="#prior-art-13">Prior art</a></h2>
 <p>This is standard behavior for inheritance in <a href="https://docs.python.org/3/reference/datamodel.html#emulating-numeric-types">Python</a>:</p>
 <blockquote>
 <p>Note: If the right operand’s type is a subclass of the left operand’s type and that subclass provides a different implementation of the reflected method for the operation, this method will be called before the left operand’s non-reflected method. This behavior allows subclasses to override their ancestors’ operations.</p>
 </blockquote>
 <p>We don't get this behavior automatically because <code>Value</code> is not an ancestor of <code>ValueCastable</code>, but it would make sense for it to behave as it were.</p>
-<h2 id="rationale-and-alternatives-13"><a class="header" href="#rationale-and-alternatives-13">Rationale and alternatives</a></h2>
+<h2 id="rationale-and-alternatives-14"><a class="header" href="#rationale-and-alternatives-14">Rationale and alternatives</a></h2>
 <p>As an alternative, <code>Value</code> and <code>ValueCastable</code> could be rearchitected so that <code>ValueCastable</code> inherits from either <code>Value</code> or a common base that implements the <code>Value</code> operators.
 This would make Python do the right thing w.r.t. operator overriding, but is a larger change with more potential for undesirable consequences.</p>
-<h2 id="unresolved-questions-13"><a class="header" href="#unresolved-questions-13">Unresolved questions</a></h2>
+<h2 id="unresolved-questions-14"><a class="header" href="#unresolved-questions-14">Unresolved questions</a></h2>
 <p>None.</p>
-<h2 id="future-possibilities-13"><a class="header" href="#future-possibilities-13">Future possibilities</a></h2>
+<h2 id="future-possibilities-14"><a class="header" href="#future-possibilities-14">Future possibilities</a></h2>
 <p><code>Value.eq()</code> could in the same manner check for and defer to a <code>.req()</code> method, i.e. reflected <code>.eq()</code>, to allow a value-castable to override how assignment from it to a <code>Value</code> is handled.</p>
 <div style="break-before: page; page-break-before: always;"></div><ul>
 <li>Start Date: 2023-11-27</li>
@@ -1914,9 +2001,9 @@ This would make Python do the right thing w.r.t. operator overriding, but is a l
 <li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/972">amaranth-lang/amaranth#972</a></li>
 </ul>
 <h1 id="enumeration-type-safety"><a class="header" href="#enumeration-type-safety">Enumeration type safety</a></h1>
-<h2 id="summary-16"><a class="header" href="#summary-16">Summary</a></h2>
+<h2 id="summary-17"><a class="header" href="#summary-17">Summary</a></h2>
 <p>Make Amaranth <code>Enum</code> and <code>Flag</code> use a custom <code>ValueCastable</code> view class, enforcing type safety.</p>
-<h2 id="motivation-16"><a class="header" href="#motivation-16">Motivation</a></h2>
+<h2 id="motivation-17"><a class="header" href="#motivation-17">Motivation</a></h2>
 <p>Python <code>Enum</code> provides an opaque wrapper over the underlying enum values,
 providing type safety and guarding against improper usage in arithmetic
 operations:</p>
@@ -1965,7 +2052,7 @@ on enum-typed signals:</p>
 &gt;&gt;&gt; a | b
 (| (sig a) (sig b))
 </code></pre>
-<h2 id="guide-level-explanation-10"><a class="header" href="#guide-level-explanation-10">Guide-level explanation</a></h2>
+<h2 id="guide-level-explanation-11"><a class="header" href="#guide-level-explanation-11">Guide-level explanation</a></h2>
 <p>Like in Python, <code>Enum</code> and <code>Flag</code> subclasses are considered strongly-typed,
 while <code>IntEnum</code> and <code>IntFlag</code> are weakly-typed. Enum-typed Amaranth values
 with strong typing are manipulated through <code>amaranth.lib.enum.EnumView</code>
@@ -1993,7 +2080,7 @@ interchangeability with other values.</p>
 <p>A custom subclass of <code>EnumView</code> or <code>FlagView</code> can be used for a given enum
 type if so desired, by using the <code>view_class</code> keyword parameter on enum
 creation.</p>
-<h2 id="reference-level-explanation-10"><a class="header" href="#reference-level-explanation-10">Reference-level explanation</a></h2>
+<h2 id="reference-level-explanation-11"><a class="header" href="#reference-level-explanation-11">Reference-level explanation</a></h2>
 <p><code>amaranth.lib.enum.EnumView</code> is a <code>ValueCastable</code> subclass.  The following
 operations are defined on it:</p>
 <ul>
@@ -2031,25 +2118,25 @@ is wrapped in <code>FlagView</code></li>
 <li>Otherwise, the value-castable is wrapped in <code>EnumView</code></li>
 </ul>
 <p>The behavior of <code>EnumMeta.const</code> is modified to go through the same logic.</p>
-<h2 id="drawbacks-15"><a class="header" href="#drawbacks-15">Drawbacks</a></h2>
+<h2 id="drawbacks-16"><a class="header" href="#drawbacks-16">Drawbacks</a></h2>
 <p>This proposal increases language complexity, and is not consistent with
 eg. how <code>amaranth.lib.data.View</code> operates (which has much more lax type
 checking).</p>
-<h2 id="rationale-and-alternatives-14"><a class="header" href="#rationale-and-alternatives-14">Rationale and alternatives</a></h2>
+<h2 id="rationale-and-alternatives-15"><a class="header" href="#rationale-and-alternatives-15">Rationale and alternatives</a></h2>
 <p>Do nothing. Operations on mismatched types will continue to be silently
 allowed.</p>
 <p>Equality could work more like Python equality (always returning false
 for mismatched types).</p>
 <p>Assignment could be made strongly-typed as well (with corresponding hook
 added to <code>Value</code>).</p>
-<h2 id="prior-art-13"><a class="header" href="#prior-art-13">Prior art</a></h2>
+<h2 id="prior-art-14"><a class="header" href="#prior-art-14">Prior art</a></h2>
 <p>This feature directly parallels the differences between Python's
 <code>Enum</code>/<code>Flag</code> and <code>IntEnum</code>/<code>IntFlag</code>.</p>
-<h2 id="unresolved-questions-14"><a class="header" href="#unresolved-questions-14">Unresolved questions</a></h2>
+<h2 id="unresolved-questions-15"><a class="header" href="#unresolved-questions-15">Unresolved questions</a></h2>
 <p>Instead of having an extension point via <code>view_class</code>, we could instead
 automatically forward all otherwise unknown methods to the underlying enum
 class, providing it the <code>EnumView</code> as <code>self</code>.</p>
-<h2 id="future-possibilities-14"><a class="header" href="#future-possibilities-14">Future possibilities</a></h2>
+<h2 id="future-possibilities-15"><a class="header" href="#future-possibilities-15">Future possibilities</a></h2>
 <p>None.</p>
 <div style="break-before: page; page-break-before: always;"></div><ul>
 <li>Start Date: 2023-12-04</li>
@@ -2057,29 +2144,29 @@ class, providing it the <code>EnumView</code> as <code>self</code>.</p>
 <li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/985">amaranth-lang/amaranth#985</a></li>
 </ul>
 <h1 id="rename-amaranthlibwiringinterface-to-pureinterface"><a class="header" href="#rename-amaranthlibwiringinterface-to-pureinterface">Rename <code>amaranth.lib.wiring.Interface</code> to <code>PureInterface</code></a></h1>
-<h2 id="summary-17"><a class="header" href="#summary-17">Summary</a></h2>
+<h2 id="summary-18"><a class="header" href="#summary-18">Summary</a></h2>
 <p>The <code>Interface</code> class in <code>amaranth.lib.wiring</code> is renamed to <code>PureInterface</code>, to avoid the impression that it is used for <em>all</em> interfaces.</p>
-<h2 id="motivation-17"><a class="header" href="#motivation-17">Motivation</a></h2>
+<h2 id="motivation-18"><a class="header" href="#motivation-18">Motivation</a></h2>
 <p>The current naming of the <code>Interface</code> class wrongly suggests that it is the base class to be used for all interfaces, and that <code>isinstance(foo, Interface)</code> is a valid check for an interface. However, this is in stark contrast to how <code>lib.wiring</code> works: any object can be an interface, as long as it has a <code>signature</code> property and compliant members. This misleads users (and, on at least two occasions, amaranth developers), making them write buggy code.</p>
 <p>Additionally, the naming makes spoken language ambiguous in a bad way, as it is impossible to tell apart &quot;an interface&quot; and &quot;an Interface&quot;.</p>
 <p>Therefore, this RFC proposes to rename <code>Interface</code> to something more specific and reflecting its function.</p>
-<h2 id="guide-level-explanation-11"><a class="header" href="#guide-level-explanation-11">Guide-level explanation</a></h2>
+<h2 id="guide-level-explanation-12"><a class="header" href="#guide-level-explanation-12">Guide-level explanation</a></h2>
 <p>The <code>Interface</code> class in <code>amaranth.lib.wiring</code> is renamed to <code>PureInterface</code>.</p>
-<h2 id="reference-level-explanation-11"><a class="header" href="#reference-level-explanation-11">Reference-level explanation</a></h2>
+<h2 id="reference-level-explanation-12"><a class="header" href="#reference-level-explanation-12">Reference-level explanation</a></h2>
 <p>The <code>Interface</code> class in <code>amaranth.lib.wiring</code> is renamed to <code>PureInterface</code>.</p>
-<h2 id="drawbacks-16"><a class="header" href="#drawbacks-16">Drawbacks</a></h2>
+<h2 id="drawbacks-17"><a class="header" href="#drawbacks-17">Drawbacks</a></h2>
 <p>Minor churn.</p>
-<h2 id="rationale-and-alternatives-15"><a class="header" href="#rationale-and-alternatives-15">Rationale and alternatives</a></h2>
+<h2 id="rationale-and-alternatives-16"><a class="header" href="#rationale-and-alternatives-16">Rationale and alternatives</a></h2>
 <p>The new name is, of course, subject to bikeshedding. The names that have been proposed are:</p>
 <ul>
 <li><code>PureInterface</code></li>
 <li><code>BareInterface</code></li>
 </ul>
-<h2 id="prior-art-14"><a class="header" href="#prior-art-14">Prior art</a></h2>
+<h2 id="prior-art-15"><a class="header" href="#prior-art-15">Prior art</a></h2>
 <p>None.</p>
-<h2 id="unresolved-questions-15"><a class="header" href="#unresolved-questions-15">Unresolved questions</a></h2>
+<h2 id="unresolved-questions-16"><a class="header" href="#unresolved-questions-16">Unresolved questions</a></h2>
 <p>None.</p>
-<h2 id="future-possibilities-15"><a class="header" href="#future-possibilities-15">Future possibilities</a></h2>
+<h2 id="future-possibilities-16"><a class="header" href="#future-possibilities-16">Future possibilities</a></h2>
 <p>The name <code>Interface</code> that has just been freed up can be reused for an ABC-like class representing all valid interfaces.</p>
 <div style="break-before: page; page-break-before: always;"></div><ul>
 <li>Start Date: 2023-12-04</li>
@@ -2087,12 +2174,12 @@ class, providing it the <code>EnumView</code> as <code>self</code>.</p>
 <li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/986">amaranth-lang/amaranth#986</a></li>
 </ul>
 <h1 id="add-shapelike-valuelike"><a class="header" href="#add-shapelike-valuelike">Add <code>ShapeLike</code>, <code>ValueLike</code></a></h1>
-<h2 id="summary-18"><a class="header" href="#summary-18">Summary</a></h2>
+<h2 id="summary-19"><a class="header" href="#summary-19">Summary</a></h2>
 <p>Two special classes are added to the language: <code>ShapeLike</code> and <code>ValueLike</code>. They cannot be constructed, but can be used to determine with <code>isinstance</code> and <code>issubclass</code> to determine whether something can be cast to <code>Shape</code> or a <code>Value</code>, respectively.</p>
-<h2 id="motivation-18"><a class="header" href="#motivation-18">Motivation</a></h2>
+<h2 id="motivation-19"><a class="header" href="#motivation-19">Motivation</a></h2>
 <p>As it stands, we have multiple types of objects that can be used as shapes (<code>Shape</code>, <code>ShapeCastable</code>, <code>int</code>, <code>range</code>, <code>EnumMeta</code>) and values (<code>Value</code>, <code>ValueCastable</code>, <code>int</code>, <code>Enum</code>). These types have no common superclass, so there's no easy way to check if an object can be used as a shape or a value, save for actually calling <code>Shape.cast</code> or <code>Value.cast</code>. Introducing <code>ShapeLike</code> and <code>ValueLike</code> provides an idiomatic way to perform such a check.</p>
 <p>Additionally, when type annotations are in use, there is currently no simple type that can be used for an argument that takes an arbitrary shape- or value-castable object. These new classes provide such a simple type.</p>
-<h2 id="guide-level-explanation-12"><a class="header" href="#guide-level-explanation-12">Guide-level explanation</a></h2>
+<h2 id="guide-level-explanation-13"><a class="header" href="#guide-level-explanation-13">Guide-level explanation</a></h2>
 <p>In Amaranth, multiple types of objects can be cast to shapes:</p>
 <ul>
 <li>actual <code>Shape</code> objects</li>
@@ -2110,7 +2197,7 @@ class, providing it the <code>EnumView</code> as <code>self</code>.</p>
 <li>values of <code>Enum</code> subclasses with const-castable values</li>
 </ul>
 <p>To check whether an object is of a type that can be cast to a value, <code>isinstance(obj, ValueLike)</code> can be used. To check whether a type can be, in general, cast to a value, <code>issubclass(cls, ValueLike)</code> can be used.</p>
-<h2 id="reference-level-explanation-12"><a class="header" href="#reference-level-explanation-12">Reference-level explanation</a></h2>
+<h2 id="reference-level-explanation-13"><a class="header" href="#reference-level-explanation-13">Reference-level explanation</a></h2>
 <p>A <code>ShapeLike</code> class is provided. It cannot be constructed, and can only be used with <code>isinstance</code> and <code>issubclass</code>, which are overriden by a custom metaclass.</p>
 <p><code>issubclass(cls, ShapeLike)</code> returns <code>True</code> for:</p>
 <ul>
@@ -2136,20 +2223,20 @@ class, providing it the <code>EnumView</code> as <code>self</code>.</p>
 <li><code>enum.Enum</code> subclasses where every value is a <code>ValueLike</code></li>
 </ul>
 <p><code>isinstance(obj, ValueLike)</code> returns <code>True</code> iff <code>issubclass(type(obj), ValueLike)</code> returns <code>True</code>.</p>
-<h2 id="drawbacks-17"><a class="header" href="#drawbacks-17">Drawbacks</a></h2>
+<h2 id="drawbacks-18"><a class="header" href="#drawbacks-18">Drawbacks</a></h2>
 <p>More moving parts in the language.</p>
 <p><code>isinstance(obj, ShapeLike)</code> does not actually guarantee that <code>Shape.cast(obj)</code> will succeed — the instance check looks only at surface-level information, and an exception can still be thrown. <code>issubclass(cls, ShapeLike)</code> is, by necessity, even more inaccurate.</p>
-<h2 id="rationale-and-alternatives-16"><a class="header" href="#rationale-and-alternatives-16">Rationale and alternatives</a></h2>
+<h2 id="rationale-and-alternatives-17"><a class="header" href="#rationale-and-alternatives-17">Rationale and alternatives</a></h2>
 <p>There are many ways to implement the instance and subclass checks, some more precise (and complex) than others. The semantics described above are a compromise.</p>
 <p>For <code>isinstance</code>, a simple variant would be to just try <code>Shape.cast</code> or <code>Value.cast</code> and see if it raises an exception. However, this will sometimes result in <code>isinstance(MyShapeCastable(), ShapeLike)</code> returning <code>False</code>, which may be very unintuitive and hide bugs.</p>
 <p>The check for a valid shape-castable enum described above is an approximation — the actual logic used requires all values of an enum to be <em>const</em>-castable, not just value-castable. However, there is no way to check this without actually invoking <code>Value.cast</code> on the enum members.</p>
-<h2 id="prior-art-15"><a class="header" href="#prior-art-15">Prior art</a></h2>
+<h2 id="prior-art-16"><a class="header" href="#prior-art-16">Prior art</a></h2>
 <p>Python has the concept of abstract base classes, such as <code>collections.abc.Sequence</code>, which can be used for subclass checking even if they are not actual superclasses of the types involved. <code>ShapeLike</code> and <code>ValueLike</code> are effectively ABCs, though they do not use the actual ABC machinery (due to having custom logic in instance checking).</p>
-<h2 id="unresolved-questions-16"><a class="header" href="#unresolved-questions-16">Unresolved questions</a></h2>
+<h2 id="unresolved-questions-17"><a class="header" href="#unresolved-questions-17">Unresolved questions</a></h2>
 <ul>
 <li>Should the exact details of the instance and subclass checks be changed?</li>
 </ul>
-<h2 id="future-possibilities-16"><a class="header" href="#future-possibilities-16">Future possibilities</a></h2>
+<h2 id="future-possibilities-17"><a class="header" href="#future-possibilities-17">Future possibilities</a></h2>
 <p>A similar ABC-like class has been proposed for <code>lib.wiring</code> interfaces.</p>
 <div style="break-before: page; page-break-before: always;"></div><ul>
 <li>Start Date: 2023-12-11</li>
@@ -2157,9 +2244,9 @@ class, providing it the <code>EnumView</code> as <code>self</code>.</p>
 <li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/995">amaranth-lang/amaranth#995</a></li>
 </ul>
 <h1 id="make-signature-immutable"><a class="header" href="#make-signature-immutable">Make <code>Signature</code> immutable</a></h1>
-<h2 id="summary-19"><a class="header" href="#summary-19">Summary</a></h2>
+<h2 id="summary-20"><a class="header" href="#summary-20">Summary</a></h2>
 <p>Remove mutability from <code>amaranth.lib.wiring.Signature</code>.</p>
-<h2 id="motivation-19"><a class="header" href="#motivation-19">Motivation</a></h2>
+<h2 id="motivation-20"><a class="header" href="#motivation-20">Motivation</a></h2>
 <p>At the time of writing, <code>Signature</code> allows limited mutability: members can be added, but not removed or changed; and a signature may be frozen, preventing further mutation.</p>
 <p>The intent behind this feature was unfortunately never explicitly described. I (Catherine) came up with it, to cover the following case: suppose an interface without certain features needs to be connected to an interface with such features. For example, a Wishbone initiator that does not handle errors needs to be connected to a Wishbone decoder that does. In this case, a method on the Wishbone initiator's interface could be used to add a dummy <code>err</code> output, which will always remain at its reset value, zero.</p>
 <p>This intent was never realized as the feature was never actually used by Amaranth SoC. In addition, it turned out to be problematic when combined with variable annotations. Consider this class definition:</p>
@@ -2174,17 +2261,17 @@ class, providing it the <code>EnumView</code> as <code>self</code>.</p>
 <p>The <code>SignatureMembers.freeze</code>, <code>SignatureMembers.frozen</code>, <code>Signature.freeze</code>, <code>Signature.frozen</code>, <code>FlippedSignatureMembers.freeze</code>, <code>FlippedSignatureMembers.frozen</code>, <code>FlippedSignature.freeze</code>, <code>FlippedSignature.frozen</code>, <code>SignatureMembers.__iadd__</code>, <code>SignatureMembers.__setitem__</code>, <code>FlippedSignatureMembers.__iadd__</code>, <code>FlippedSignatureMembers.__setitem__</code> methods and properties are removed.</p>
 <p><code>SignatureMembers</code> becomes an immutable mapping.</p>
 <p><code>Signature</code> becomes immutable. Subclasses of <code>Signature</code> are required to ensure any additional methods or properties do not allow mutation.</p>
-<h2 id="drawbacks-18"><a class="header" href="#drawbacks-18">Drawbacks</a></h2>
+<h2 id="drawbacks-19"><a class="header" href="#drawbacks-19">Drawbacks</a></h2>
 <p>The author is not aware of anyone actually using this feature.</p>
-<h2 id="rationale-and-alternatives-17"><a class="header" href="#rationale-and-alternatives-17">Rationale and alternatives</a></h2>
+<h2 id="rationale-and-alternatives-18"><a class="header" href="#rationale-and-alternatives-18">Rationale and alternatives</a></h2>
 <p>An alternative to this proposal would be to automatically freeze any signature that is used in <code>wiring.Component</code> variable annotations. This does not address similar hazards, such as the case of a user-defined constant <code>SomeSignature = Signature({...})</code>, which is also a legitimate way to define a signature that does not require parameterization. It also would not address hazards associated with interior mutability.</p>
-<h2 id="prior-art-16"><a class="header" href="#prior-art-16">Prior art</a></h2>
+<h2 id="prior-art-17"><a class="header" href="#prior-art-17">Prior art</a></h2>
 <p>None seems applicable. Mutation of interface definitions is uncommon in first place (excluding languages where everything is mutable, like Python).</p>
-<h2 id="unresolved-questions-17"><a class="header" href="#unresolved-questions-17">Unresolved questions</a></h2>
+<h2 id="unresolved-questions-18"><a class="header" href="#unresolved-questions-18">Unresolved questions</a></h2>
 <ul>
 <li>Should <em>all</em> interior mutability be prohibited? At the moment it is not completely clear where memory maps should be attached, and requiring no interior mutability would mean it cannot be <code>Signature</code> no matter what. Interior mutability could be left to specific <code>Signature</code> subclasses instead on an experimental basis, and prohibited later if it turns out to be a bad idea.</li>
 </ul>
-<h2 id="future-possibilities-17"><a class="header" href="#future-possibilities-17">Future possibilities</a></h2>
+<h2 id="future-possibilities-18"><a class="header" href="#future-possibilities-18">Future possibilities</a></h2>
 <p>Reintroducing mutability of <code>Signature</code> after it has been removed will be unfeasible due to expectation of immutability being baked in widely in downstream code. Once we commit to this RFC we will have to commit to it effectively forever.</p>
 <div style="break-before: page; page-break-before: always;"></div><ul>
 <li>Start Date: 2023-12-11</li>
@@ -2192,13 +2279,13 @@ class, providing it the <code>EnumView</code> as <code>self</code>.</p>
 <li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/996">amaranth-lang/amaranth#996</a></li>
 </ul>
 <h1 id="componentsignature-immutability"><a class="header" href="#componentsignature-immutability"><code>Component.signature</code> immutability</a></h1>
-<h2 id="summary-20"><a class="header" href="#summary-20">Summary</a></h2>
+<h2 id="summary-21"><a class="header" href="#summary-21">Summary</a></h2>
 <p>Clearly define the contract for <code>amaranth.lib.wiring.Component.signature</code>: an <code>amaranth.lib.wiring.Signature</code> object is assigned in the constructor to the read-only property <code>.signature</code>.</p>
-<h2 id="motivation-20"><a class="header" href="#motivation-20">Motivation</a></h2>
+<h2 id="motivation-21"><a class="header" href="#motivation-21">Motivation</a></h2>
 <p>It is important that the signature of an interface object never change. <code>connect</code> relies on the signature to check that the connection being made is valid; if the signature changes after the connection is made (intentionally or accidentally), the design would silently break in a difficult to debug ways. For an ASIC this may mean a respin.</p>
 <p>Right now, the guidance for the case where the default behavior of <code>Component.signature</code> is insufficient (i.e. for parametric components) and the generation of the signature must be customized, is to override the <code>signature</code> property, or to assign <code>self.signature =</code> in the constructor. This is clearly wrong: both of these approaches can easily result in the signature changing after construction of the component.</p>
 <p>Moreover, at the moment, the implementation of the <code>Component.signature</code> property creates a new <code>Signature</code> object every time it is called. If the identity of the <code>Signature</code> object is important (i.e. if it has interior mutability, which is currently the case in Amaranth SoC), this is unsound. (It is unlikely, though not impossible, that this implementation would return an object with different members.)</p>
-<h2 id="guide-level-explanation-13"><a class="header" href="#guide-level-explanation-13">Guide-level explanation</a></h2>
+<h2 id="guide-level-explanation-14"><a class="header" href="#guide-level-explanation-14">Guide-level explanation</a></h2>
 <p>To define a simple component whose signature does not change, use variable annotations:</p>
 <pre><code class="language-python">class SimpleComponent(wiring.Component):
     en: In(1)
@@ -2213,7 +2300,7 @@ class, providing it the <code>EnumView</code> as <code>self</code>.</p>
         })
 </code></pre>
 <p>Do not override the <code>signature</code> property, as both Amaranth and third-party code relies on the fact that it is assigned in the constructor and never changes.</p>
-<h2 id="reference-level-explanation-13"><a class="header" href="#reference-level-explanation-13">Reference-level explanation</a></h2>
+<h2 id="reference-level-explanation-14"><a class="header" href="#reference-level-explanation-14">Reference-level explanation</a></h2>
 <p>The constructor of <code>Component</code> is updated to take one argument: <code>def __init__(self, signature=None)</code>.</p>
 <ul>
 <li>If the <code>signature</code> argument is not provided, the signature is derived from class variable annotations, as in RFC 2, and assigned to an internal attribute.</li>
@@ -2229,13 +2316,13 @@ class, providing it the <code>EnumView</code> as <code>self</code>.</p>
 <p>The <code>signature</code> property is redefined to return the value of this internal attribute.</p>
 <p>No access to this attribute is provided besides the means above, and the name of the attribute is not defined in the documentation.</p>
 <p>After assigning the internal attribute, the constructor creates the members as in RFC 2.</p>
-<h2 id="drawbacks-19"><a class="header" href="#drawbacks-19">Drawbacks</a></h2>
+<h2 id="drawbacks-20"><a class="header" href="#drawbacks-20">Drawbacks</a></h2>
 <p>None. This properly enforces an invariant that is already relied upon.</p>
-<h2 id="rationale-and-alternatives-18"><a class="header" href="#rationale-and-alternatives-18">Rationale and alternatives</a></h2>
+<h2 id="rationale-and-alternatives-19"><a class="header" href="#rationale-and-alternatives-19">Rationale and alternatives</a></h2>
 <p>Some other behaviors were considered for <code>Component</code>: those which would made <code>signature</code> a class attribute, assigned in <code>__init_subclass__</code>. However, this option would leave the <code>signature</code> attribute mutable (as class-level properties are not reasonably supported in Python), which is undesirable, and significantly complicated the case of signatures with interior mutability.</p>
-<h2 id="unresolved-questions-18"><a class="header" href="#unresolved-questions-18">Unresolved questions</a></h2>
+<h2 id="unresolved-questions-19"><a class="header" href="#unresolved-questions-19">Unresolved questions</a></h2>
 <p>None.</p>
-<h2 id="future-possibilities-18"><a class="header" href="#future-possibilities-18">Future possibilities</a></h2>
+<h2 id="future-possibilities-19"><a class="header" href="#future-possibilities-19">Future possibilities</a></h2>
 <p>None.</p>
 <div style="break-before: page; page-break-before: always;"></div><ul>
 <li>Start Date: 2024-01-08</li>
@@ -2243,31 +2330,31 @@ class, providing it the <code>EnumView</code> as <code>self</code>.</p>
 <li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/1021">amaranth-lang/amaranth#1021</a></li>
 </ul>
 <h1 id="change-semantics-of-no-argument-mcase"><a class="header" href="#change-semantics-of-no-argument-mcase">Change semantics of no-argument <code>m.Case()</code></a></h1>
-<h2 id="summary-21"><a class="header" href="#summary-21">Summary</a></h2>
+<h2 id="summary-22"><a class="header" href="#summary-22">Summary</a></h2>
 <p>Change the semantics of <code>with m.Case():</code> (without any arguments) from always-true conditional to always-false conditional. Likewise, change <code>value.matches()</code> from returning <code>C(1)</code> to returning <code>C(0)</code>.</p>
-<h2 id="motivation-21"><a class="header" href="#motivation-21">Motivation</a></h2>
+<h2 id="motivation-22"><a class="header" href="#motivation-22">Motivation</a></h2>
 <p>Currently, <code>with m.Case():</code> results in an always-true conditional, and <code>value.matches()</code> likewise returns a const-1 value. However, this is not consistent with what would be expected from extrapolating the non-empty case.</p>
 <p>In all non-empty cases, the semantics are equivalent to an OR of equality comparisons with all specified values:</p>
 <p><code>value.matches(1, 2, 3) =def= (value == 1) | (value == 2) | (value == 3)</code></p>
 <p><code>value.matches(1, 2, 3) =def= Const(0) | (value == 1) | (value == 2) | (value == 3)</code></p>
 <p>Extrapolating from this, one would expect <code>value.matches()</code> to be the empty OR, ie. <code>Const(0)</code>.</p>
 <p>It is unlikely that any manually written code will rely on this, but this can be a dangerous trap for machine-generated code that doesn't take the empty case into account.</p>
-<h2 id="guide-level-explanation-14"><a class="header" href="#guide-level-explanation-14">Guide-level explanation</a></h2>
+<h2 id="guide-level-explanation-15"><a class="header" href="#guide-level-explanation-15">Guide-level explanation</a></h2>
 <p>The semantics of <code>m.Case()</code> change from always matching to never matching. Likewise, the semantics of <code>value.matches()</code> change from always-1 to always-0. The change is committed to the current <code>main</code> branch and will be included in Amaranth 0.5.</p>
 <p>Amaranth 0.4.1 is released with the old semantics, but a deprecation warning is emitted whenever <code>m.Case()</code> or <code>value.matches()</code> is used.</p>
-<h2 id="reference-level-explanation-14"><a class="header" href="#reference-level-explanation-14">Reference-level explanation</a></h2>
+<h2 id="reference-level-explanation-15"><a class="header" href="#reference-level-explanation-15">Reference-level explanation</a></h2>
 <p>See above.</p>
-<h2 id="drawbacks-20"><a class="header" href="#drawbacks-20">Drawbacks</a></h2>
+<h2 id="drawbacks-21"><a class="header" href="#drawbacks-21">Drawbacks</a></h2>
 <p>Obviously backwards-incompatible, changes the semantics of a language construct to the direct opposite.</p>
-<h2 id="rationale-and-alternatives-19"><a class="header" href="#rationale-and-alternatives-19">Rationale and alternatives</a></h2>
+<h2 id="rationale-and-alternatives-20"><a class="header" href="#rationale-and-alternatives-20">Rationale and alternatives</a></h2>
 <p>It is unlikely anyone actually uses <code>value.matches()</code> directly, since this is just a constant. For generated code, the current semantics is much more likely to be a bug that intended behavior.</p>
 <p>For <code>m.Case()</code> the situation is similar: it is redundant with <code>m.Default()</code>, which should be used instead. It is somewhat possible that there is code out there written by someone who didn't know about <code>m.Default()</code> and ended up using <code>m.Case()</code> instead (the official documentation didn't include either for a long time). This code will need to be fixed.</p>
 <p>An alternative, if the empty case is deemed too confusing or insufficiently useful, is to make the semantics a hard error instead.</p>
-<h2 id="prior-art-17"><a class="header" href="#prior-art-17">Prior art</a></h2>
+<h2 id="prior-art-18"><a class="header" href="#prior-art-18">Prior art</a></h2>
 <p>The current behavior is likely taken directly from RTLIL, which exhibits a similar inconsistency.</p>
-<h2 id="unresolved-questions-19"><a class="header" href="#unresolved-questions-19">Unresolved questions</a></h2>
+<h2 id="unresolved-questions-20"><a class="header" href="#unresolved-questions-20">Unresolved questions</a></h2>
 <p>Should we include more warnings about the change? This RFC proposes a warning in the 0.4.1 release, but this will never be seen by someone always using amaranth from git main.</p>
-<h2 id="future-possibilities-19"><a class="header" href="#future-possibilities-19">Future possibilities</a></h2>
+<h2 id="future-possibilities-20"><a class="header" href="#future-possibilities-20">Future possibilities</a></h2>
 <p>None.</p>
 
                     </main>
