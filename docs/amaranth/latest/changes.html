@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Changelog &mdash; Amaranth HDL toolchain 0.4.1.dev30 documentation</title>
+  <title>Changelog &mdash; Amaranth HDL toolchain 0.4.1.dev31 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -15,7 +15,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=6976a3e7"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=cd0e27fe"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/platformpicker.js"></script>
@@ -39,7 +39,7 @@
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.4.1.dev30+geb1c558
+                0.4.1.dev31+g86d14f5
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -128,6 +128,8 @@
 <h3>Migrating from version 0.4<a class="headerlink" href="#migrating-from-version-0-4" title="Permalink to this heading"></a></h3>
 <p>Apply the following changes to code written against Amaranth 0.4 to migrate it to version 0.5:</p>
 <ul class="simple">
+<li><p>Replace uses of <code class="docutils literal notranslate"><span class="pre">m.Case()</span></code> with no patterns with <code class="docutils literal notranslate"><span class="pre">m.Default()</span></code></p></li>
+<li><p>Replace uses of <code class="docutils literal notranslate"><span class="pre">Value.matches()</span></code> with no patterns with <code class="docutils literal notranslate"><span class="pre">Const(1)</span></code></p></li>
 <li><p>Update uses of <code class="xref py py-func docutils literal notranslate"><span class="pre">amaranth.utils.log2_int(need_pow2=False)()</span></code> to <code class="xref py py-func docutils literal notranslate"><span class="pre">amaranth.utils.ceil_log2()</span></code></p></li>
 <li><p>Update uses of <code class="xref py py-func docutils literal notranslate"><span class="pre">amaranth.utils.log2_int(need_pow2=True)()</span></code> to <code class="xref py py-func docutils literal notranslate"><span class="pre">amaranth.utils.exact_log2()</span></code></p></li>
 </ul>
@@ -136,6 +138,7 @@
 <h3>Implemented RFCs<a class="headerlink" href="#implemented-rfcs" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p><a class="reference external" href="https://amaranth-lang.org/rfcs/0017-remove-log2-int.html">RFC 17</a>: Remove <code class="docutils literal notranslate"><span class="pre">log2_int</span></code></p></li>
+<li><p><a class="reference external" href="https://amaranth-lang.org/rfcs/0039-empty-case.html">RFC 39</a>: Change semantics of no-argument <code class="docutils literal notranslate"><span class="pre">m.Case()</span></code></p></li>
 </ul>
 </section>
 <section id="language-changes">
@@ -143,6 +146,8 @@
 <ul class="simple">
 <li><p>Added: <a class="reference external" href="https://docs.python.org/3/library/ast.html#ast.Slice" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ast.Slice</span></code></a> objects have been made const-castable.</p></li>
 <li><p>Added: <code class="xref py py-func docutils literal notranslate"><span class="pre">amaranth.utils.ceil_log2()</span></code>, <code class="xref py py-func docutils literal notranslate"><span class="pre">amaranth.utils.exact_log2()</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0017-remove-log2-int.html">RFC 17</a>)</p></li>
+<li><p>Changed: <code class="docutils literal notranslate"><span class="pre">m.Case()</span></code> with no patterns is never active instead of always active. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0039-empty-case.html">RFC 39</a>)</p></li>
+<li><p>Changed: <code class="docutils literal notranslate"><span class="pre">Value.matches()</span></code> with no patterns is <code class="docutils literal notranslate"><span class="pre">Const(0)</span></code> instead of <code class="docutils literal notranslate"><span class="pre">Const(1)</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0039-empty-case.html">RFC 39</a>)</p></li>
 <li><p>Deprecated: <code class="xref py py-func docutils literal notranslate"><span class="pre">amaranth.utils.log2_int()</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0017-remove-log2-int.html">RFC 17</a>)</p></li>
 <li><p>Removed: (deprecated in 0.4) <code class="xref py py-meth docutils literal notranslate"><span class="pre">Const.normalize()</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0005-remove-const-normalize.html">RFC 5</a>)</p></li>
 <li><p>Removed: (deprecated in 0.4) <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.Sample</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.Past</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.Stable</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.Rose</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.Fell</span></code>.</p></li>
