@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Language guide &mdash; Amaranth HDL toolchain 0.4.1.dev32 documentation</title>
+  <title>Language guide &mdash; Amaranth HDL toolchain 0.4.1.dev35 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -15,7 +15,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=faf6ad94"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=317f3d59"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/platformpicker.js"></script>
@@ -39,7 +39,7 @@
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.4.1.dev32+gbf8faea
+                0.4.1.dev35+g95538a3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -1225,7 +1225,7 @@ inside `Else`
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">startup</span> <span class="o">=</span> <span class="n">ClockDomain</span><span class="p">(</span><span class="n">reset_less</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>If a clock domain is defined in a module, it is also available in all of its submodules.</p>
+<p>If a clock domain is defined in a module, all of its submodules can refer to that domain under the same name.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Always provide the <code class="code highlight pc python docutils literal highlight-python"><span class="n">local</span><span class="o">=</span><span class="kc">True</span></code> keyword argument when defining a clock domain. The behavior of clock domains defined without this keyword argument is subject to change in near future, and is intentionally left undocumented.</p>
@@ -1233,6 +1233,11 @@ inside `Else`
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Clock domains use synchronous reset unless otherwise specified. Clock domains with asynchronous reset are implemented, but their behavior is subject to change in near future, and is intentionally left undocumented.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Unless you need to introduce a new asynchronous control set in the design, consider <a class="reference internal" href="#lang-controlinserter"><span class="std std-ref">using ResetInserter or EnableInserter</span></a> instead of defining a new clock domain. Designs with fewer clock domains are easier to reason about.</p>
+<p>A new asynchronous control set is necessary when some signals must change on a different active edge of a clock, at a different frequency, with a different phase, or when a different asynchronous reset signal is asserted.</p>
 </div>
 <section id="late-binding-of-clock-and-reset-signals">
 <span id="lang-latesignals"></span><h3>Late binding of clock and reset signals<a class="headerlink" href="#late-binding-of-clock-and-reset-signals" title="Permalink to this heading"></a></h3>
@@ -1243,8 +1248,8 @@ inside `Else`
 <span class="p">]</span>
 </pre></div>
 </div>
-<p>In this example, once the design is processed, <code class="code highlight pc python docutils literal highlight-python"><span class="n">bus_clk</span></code> will be assigned to the clock signal of the clock domain <cite>sync</cite> found in this module or one of its containing modules. The <code class="code highlight pc python docutils literal highlight-python"><span class="n">bus_rstn</span></code> signal will be assigned to the inverted reset signal of the same clock domain. With the <cite>sync</cite> domain created in the same module, these statements become equivalent to:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">sync</span> <span class="o">=</span> <span class="n">cd_sync</span> <span class="o">=</span> <span class="n">ClockDomain</span><span class="p">()</span>
+<p>In this example, once the design is processed, the clock signal of the clock domain <code class="docutils literal notranslate"><span class="pre">sync</span></code> found in this module or one of its containing modules will be equal to <code class="code highlight pc python docutils literal highlight-python"><span class="n">bus_clk</span></code>. The reset signal of the same clock domain will be equal to the negated <code class="code highlight pc python docutils literal highlight-python"><span class="n">bus_rstn</span></code>. With the <code class="docutils literal notranslate"><span class="pre">sync</span></code> domain created in the same module, these statements become equivalent to:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">sync</span> <span class="o">=</span> <span class="n">cd_sync</span> <span class="o">=</span> <span class="n">ClockDomain</span><span class="p">(</span><span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="p">[</span>
     <span class="n">cd_sync</span><span class="o">.</span><span class="n">clk</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">bus_clk</span><span class="p">),</span>
     <span class="n">cd_sync</span><span class="o">.</span><span class="n">rst</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="o">~</span><span class="n">bus_rstn</span><span class="p">),</span>
@@ -1307,14 +1312,52 @@ inside `Else`
 </section>
 <section id="modifying-control-flow">
 <span id="lang-controlinserter"></span><h3>Modifying control flow<a class="headerlink" href="#modifying-control-flow" title="Permalink to this heading"></a></h3>
-<div class="admonition-todo admonition" id="id14">
-<p class="admonition-title">Todo</p>
-<p>Write this section about <code class="xref py py-class docutils literal notranslate"><span class="pre">ResetInserter</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">EnableInserter</span></code></p>
+<p>Control flow within an elaboratable can be altered without introducing a new clock domain by using <em>control flow modifiers</em> that affect <a class="reference internal" href="#lang-sync"><span class="std std-ref">synchronous evaluation</span></a> of signals in a specified domain (or domains). They never affect <a class="reference internal" href="#lang-comb"><span class="std std-ref">combinatorial evaluation</span></a>. There are two control flow modifiers:</p>
+<ul class="simple">
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ResetInserter</span></code> introduces a synchronous reset input (or inputs), updating all of the signals in the specified domains to their <a class="reference internal" href="#lang-initial"><span class="std std-ref">initial value</span></a> whenever the active edge occurs on the clock of the domain <em>if</em> the synchronous reset input is asserted.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">EnableInserter</span></code> introduces a synchronous enable input (or inputs), preventing any of the signals in the specified domains from changing value whenever the active edge occurs on the clock of the domain <em>unless</em> the synchronous enable input is asserted.</p></li>
+</ul>
+<p>Control flow modifiers use the syntax <code class="code highlight pc python docutils literal highlight-python"><span class="n">Modifier</span><span class="p">(</span><span class="n">controls</span><span class="p">)(</span><span class="n">elaboratable</span><span class="p">)</span></code>, where <code class="code highlight pc python docutils literal highlight-python"><span class="n">controls</span></code> is a mapping from <a class="reference internal" href="#lang-clockdomains"><span class="std std-ref">clock domain</span></a> names to 1-wide <a class="reference internal" href="#lang-values"><span class="std std-ref">values</span></a> and <code class="code highlight pc python docutils literal highlight-python"><span class="n">elaboratable</span></code> is any <a class="reference internal" href="#lang-elaboration"><span class="std std-ref">elaboratable</span></a> object. When only the <code class="docutils literal notranslate"><span class="pre">sync</span></code> domain is involved, instead of writing <code class="code highlight pc python docutils literal highlight-python"><span class="n">Modifier</span><span class="p">({</span><span class="s2">&quot;sync&quot;</span><span class="p">:</span> <span class="nb">input</span><span class="p">})(</span><span class="n">elaboratable</span><span class="p">)</span></code>, the equivalent but shorter <code class="code highlight pc python docutils literal highlight-python"><span class="n">Modifier</span><span class="p">(</span><span class="nb">input</span><span class="p">)(</span><span class="n">elaboratable</span><span class="p">)</span></code> syntax can be used.</p>
+<p>The result of applying a control flow modifier to an elaboratable is, itself, an elaboratable object. A common way to use a control flow modifier is to apply it to another elaboratable while adding it as a submodule:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rst</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">()</span>
+<span class="n">m</span><span class="o">.</span><span class="n">submodules</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="n">counter</span> <span class="o">=</span> <span class="n">ResetInserter</span><span class="p">(</span><span class="n">rst</span><span class="p">)(</span><span class="n">Counter</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>A control flow modifier affects all logic within a given elaboratable and clock domain, which includes the submodules of that elaboratable.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Applying a control flow modifier to an elaboratable does not mutate it; a new proxy object is returned that forwards attribute accesses and method calls to the original elaboratable. Whenever this proxy object is elaborated, it manipulates the circuit defined by the original elaboratable to include the requested control inputs.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is possible to apply several control flow modifiers to the same elaboratable, even if the same domain is used. For <code class="xref py py-class docutils literal notranslate"><span class="pre">ResetInserter</span></code>, the signals in a domain are held at their initial value whenever any of the reset inputs for that domain are asserted (logical OR), and for <code class="xref py py-class docutils literal notranslate"><span class="pre">EnableInserter</span></code>, the signals in a domain are allowed to update whenever all of the enable signals for that domain are asserted (logical AND).</p>
+</div>
+<p>Consider the following code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">Module</span><span class="p">()</span>
+<span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">n</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="n">z</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">ResetInserter</span><span class="p">({</span><span class="s2">&quot;sync&quot;</span><span class="p">:</span> <span class="n">rst</span><span class="p">})(</span><span class="n">m</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">EnableInserter</span><span class="p">({</span><span class="s2">&quot;sync&quot;</span><span class="p">:</span> <span class="n">en</span><span class="p">})(</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The application of control flow modifiers in it causes the behavior of the final <code class="code highlight pc python docutils literal highlight-python"><span class="n">m</span></code> to be identical to that of this module:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">Module</span><span class="p">()</span>
+<span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">If</span><span class="p">(</span><span class="n">en</span><span class="p">):</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">n</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">If</span><span class="p">(</span><span class="n">rst</span><span class="p">):</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">n</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">reset</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="n">z</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The control input provided to <code class="xref py py-class docutils literal notranslate"><span class="pre">ResetInserter</span></code> must be synchronous to the domain that is being reset by it. If you need to reset another domain, use <a class="reference internal" href="stdlib/cdc.html#amaranth.lib.cdc.ResetSynchronizer" title="amaranth.lib.cdc.ResetSynchronizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.lib.cdc.ResetSynchronizer</span></code></a> instead.</p>
 </div>
 </section>
 <section id="renaming-domains">
 <span id="lang-domainrenamer"></span><h3>Renaming domains<a class="headerlink" href="#renaming-domains" title="Permalink to this heading"></a></h3>
-<div class="admonition-todo admonition" id="id15">
+<div class="admonition-todo admonition" id="id14">
 <p class="admonition-title">Todo</p>
 <p>Write this section about <code class="xref py py-class docutils literal notranslate"><span class="pre">DomainRenamer</span></code></p>
 </div>
@@ -1322,14 +1365,14 @@ inside `Else`
 </section>
 <section id="memories">
 <span id="lang-memory"></span><h2>Memories<a class="headerlink" href="#memories" title="Permalink to this heading"></a></h2>
-<div class="admonition-todo admonition" id="id16">
+<div class="admonition-todo admonition" id="id15">
 <p class="admonition-title">Todo</p>
 <p>Write this section.</p>
 </div>
 </section>
 <section id="instances">
 <h2>Instances<a class="headerlink" href="#instances" title="Permalink to this heading"></a></h2>
-<div class="admonition-todo admonition" id="id17">
+<div class="admonition-todo admonition" id="id16">
 <p class="admonition-title">Todo</p>
 <p>Write this section.</p>
 </div>

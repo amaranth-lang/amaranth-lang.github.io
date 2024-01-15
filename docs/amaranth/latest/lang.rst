@@ -1316,7 +1316,7 @@ A clock domain also has a reset signal, which can be accessed through the :attr:
 
     m.domains.startup = ClockDomain(reset_less=True, local=True)
 
-If a clock domain is defined in a module, it is also available in all of its submodules.
+If a clock domain is defined in a module, all of its submodules can refer to that domain under the same name.
 
 .. warning::
 
@@ -1325,6 +1325,12 @@ If a clock domain is defined in a module, it is also available in all of its sub
 .. warning::
 
     Clock domains use synchronous reset unless otherwise specified. Clock domains with asynchronous reset are implemented, but their behavior is subject to change in near future, and is intentionally left undocumented.
+
+.. tip::
+
+    Unless you need to introduce a new asynchronous control set in the design, consider :ref:`using ResetInserter or EnableInserter <lang-controlinserter>` instead of defining a new clock domain. Designs with fewer clock domains are easier to reason about.
+
+    A new asynchronous control set is necessary when some signals must change on a different active edge of a clock, at a different frequency, with a different phase, or when a different asynchronous reset signal is asserted.
 
 .. TODO: mention that ResetInserter will add a reset even to a reset-less domain
 .. TODO: link to hierarchy section
@@ -1351,11 +1357,13 @@ Clock domains are *late bound*, which means that their signals and properties ca
         ResetSignal().eq(~bus_rstn),
     ]
 
-In this example, once the design is processed, :pc:`bus_clk` will be assigned to the clock signal of the clock domain `sync` found in this module or one of its containing modules. The :pc:`bus_rstn` signal will be assigned to the inverted reset signal of the same clock domain. With the `sync` domain created in the same module, these statements become equivalent to:
+In this example, once the design is processed, the clock signal of the clock domain ``sync`` found in this module or one of its containing modules will be equal to :pc:`bus_clk`. The reset signal of the same clock domain will be equal to the negated :pc:`bus_rstn`. With the ``sync`` domain created in the same module, these statements become equivalent to:
+
+.. TODO: explain the difference (or lack thereof, eventually) between m.d, m.domain, and m.domains
 
 .. testcode::
 
-    m.domains.sync = cd_sync = ClockDomain()
+    m.domains.sync = cd_sync = ClockDomain(local=True)
     m.d.comb += [
         cd_sync.clk.eq(bus_clk),
         cd_sync.rst.eq(~bus_rstn),
@@ -1441,7 +1449,70 @@ A submodule can also be added without specifying a name:
 Modifying control flow
 ----------------------
 
-.. todo:: Write this section about :class:`ResetInserter` and :class:`EnableInserter`
+Control flow within an elaboratable can be altered without introducing a new clock domain by using *control flow modifiers* that affect :ref:`synchronous evaluation <lang-sync>` of signals in a specified domain (or domains). They never affect :ref:`combinatorial evaluation <lang-comb>`. There are two control flow modifiers:
+
+* :class:`ResetInserter` introduces a synchronous reset input (or inputs), updating all of the signals in the specified domains to their :ref:`initial value <lang-initial>` whenever the active edge occurs on the clock of the domain *if* the synchronous reset input is asserted.
+* :class:`EnableInserter` introduces a synchronous enable input (or inputs), preventing any of the signals in the specified domains from changing value whenever the active edge occurs on the clock of the domain *unless* the synchronous enable input is asserted.
+
+Control flow modifiers use the syntax :pc:`Modifier(controls)(elaboratable)`, where :pc:`controls` is a mapping from :ref:`clock domain <lang-clockdomains>` names to 1-wide :ref:`values <lang-values>` and :pc:`elaboratable` is any :ref:`elaboratable <lang-elaboration>` object. When only the ``sync`` domain is involved, instead of writing :pc:`Modifier({"sync": input})(elaboratable)`, the equivalent but shorter :pc:`Modifier(input)(elaboratable)` syntax can be used.
+
+The result of applying a control flow modifier to an elaboratable is, itself, an elaboratable object. A common way to use a control flow modifier is to apply it to another elaboratable while adding it as a submodule:
+
+.. testcode::
+    :hide:
+
+    m = Module()
+
+.. testcode::
+
+    rst = Signal()
+    m.submodules.counter = counter = ResetInserter(rst)(Counter())
+
+A control flow modifier affects all logic within a given elaboratable and clock domain, which includes the submodules of that elaboratable.
+
+.. note::
+
+    Applying a control flow modifier to an elaboratable does not mutate it; a new proxy object is returned that forwards attribute accesses and method calls to the original elaboratable. Whenever this proxy object is elaborated, it manipulates the circuit defined by the original elaboratable to include the requested control inputs.
+
+.. note::
+
+    It is possible to apply several control flow modifiers to the same elaboratable, even if the same domain is used. For :class:`ResetInserter`, the signals in a domain are held at their initial value whenever any of the reset inputs for that domain are asserted (logical OR), and for :class:`EnableInserter`, the signals in a domain are allowed to update whenever all of the enable signals for that domain are asserted (logical AND).
+
+Consider the following code:
+
+.. testcode::
+    :hide:
+
+    z = Signal()
+    n = Signal(8)
+    en = Signal()
+    rst = Signal()
+
+.. testcode::
+
+    m = Module()
+    m.d.sync += n.eq(n + 1)
+    m.d.comb += z.eq(n == 0)
+
+    m = ResetInserter({"sync": rst})(m)
+    m = EnableInserter({"sync": en})(m)
+
+The application of control flow modifiers in it causes the behavior of the final :pc:`m` to be identical to that of this module:
+
+.. testcode::
+
+    m = Module()
+    with m.If(en):
+        m.d.sync += n.eq(n + 1)
+    with m.If(rst):
+        m.d.sync += n.eq(n.reset)
+    m.d.comb += z.eq(n == 0)
+
+.. tip::
+
+    The control input provided to :class:`ResetInserter` must be synchronous to the domain that is being reset by it. If you need to reset another domain, use :class:`amaranth.lib.cdc.ResetSynchronizer` instead.
+
+.. TODO: link to a clock gating primitive if/when we ever get one, from a tip about EnableInserter similar to the tip about ResetInserter above
 
 
 .. _lang-domainrenamer:
