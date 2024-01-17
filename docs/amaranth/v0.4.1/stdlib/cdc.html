@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clock domain crossing &mdash; Amaranth HDL toolchain 0.4.1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/platformpicker.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=ea00750a"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/platformpicker.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Code conversion" href="coding.html" />
+    <link rel="prev" title="Interfaces and connections" href="wiring.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../cover.html" class="icon icon-home">
+            Amaranth HDL toolchain
+          </a>
+              <div class="version">
+                0.4.1+editable
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Language &amp; toolchain</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../start.html">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lang.html">Language guide</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../stdlib.html">Standard library</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="enum.html">Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data.html">Data structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wiring.html">Interfaces and connections</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Clock domain crossing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#amaranth.lib.cdc.FFSynchronizer"><code class="docutils literal notranslate"><span class="pre">FFSynchronizer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#amaranth.lib.cdc.AsyncFFSynchronizer"><code class="docutils literal notranslate"><span class="pre">AsyncFFSynchronizer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#amaranth.lib.cdc.ResetSynchronizer"><code class="docutils literal notranslate"><span class="pre">ResetSynchronizer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#amaranth.lib.cdc.PulseSynchronizer"><code class="docutils literal notranslate"><span class="pre">PulseSynchronizer</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="coding.html">Code conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fifo.html">First-in first-out queues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="crc.html">Cyclic redundancy checks</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../platform.html">Platform integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../changes.html">Changelog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib.html">Contributing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="https://amaranth-lang.org/docs/amaranth-boards/latest/">Board definitions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../cover.html">Amaranth HDL toolchain</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../cover.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Language &amp; toolchain</a></li>
+          <li class="breadcrumb-item"><a href="../stdlib.html">Standard library</a></li>
+      <li class="breadcrumb-item active">Clock domain crossing</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/stdlib/cdc.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-amaranth.lib.cdc">
+<span id="clock-domain-crossing"></span><h1>Clock domain crossing<a class="headerlink" href="#module-amaranth.lib.cdc" title="Permalink to this heading"></a></h1>
+<p>The <a class="reference internal" href="#module-amaranth.lib.cdc" title="amaranth.lib.cdc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.cdc</span></code></a> module provides building blocks for transferring data between clock domains.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="amaranth.lib.cdc.FFSynchronizer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.cdc.</span></span><span class="sig-name descname"><span class="pre">FFSynchronizer</span></span><a class="headerlink" href="#amaranth.lib.cdc.FFSynchronizer" title="Permalink to this definition"></a></dt>
+<dd><p>Resynchronise a signal to a different clock domain.</p>
+<p>Consists of a chain of flip-flops. Eliminates metastabilities at the output, but provides
+no other guarantee as to the safe domain-crossing of a signal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i</strong> (<em>Signal</em><em>(</em><em>n</em><em>)</em><em>, </em><em>in</em>) – Signal to be resynchronised.</p></li>
+<li><p><strong>o</strong> (<em>Signal</em><em>(</em><em>n</em><em>)</em><em>, </em><em>out</em>) – Signal connected to synchroniser output.</p></li>
+<li><p><strong>o_domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of output clock domain.</p></li>
+<li><p><strong>reset</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Reset value of the flip-flops. On FPGAs, even if <code class="docutils literal notranslate"><span class="pre">reset_less</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>,
+the <a class="reference internal" href="#amaranth.lib.cdc.FFSynchronizer" title="amaranth.lib.cdc.FFSynchronizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">FFSynchronizer</span></code></a> is still set to this value during initialization.</p></li>
+<li><p><strong>reset_less</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code> (the default), this <a class="reference internal" href="#amaranth.lib.cdc.FFSynchronizer" title="amaranth.lib.cdc.FFSynchronizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">FFSynchronizer</span></code></a> is unaffected by <code class="docutils literal notranslate"><span class="pre">o_domain</span></code>
+reset. See the note below for details.</p></li>
+<li><p><strong>stages</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>&gt;=2</em>) – Number of synchronization stages between input and output. The lowest safe number is 2,
+with higher numbers reducing MTBF further, at the cost of increased latency.</p></li>
+<li><p><strong>max_input_delay</strong> (<em>None</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Maximum delay from the input signal’s clock to the first synchronization stage, in seconds.
+If specified and the platform does not support it, elaboration will fail.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#amaranth.lib.cdc.FFSynchronizer" title="amaranth.lib.cdc.FFSynchronizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">FFSynchronizer</span></code></a> is non-resettable by default. Usually this is the safest option;
+on FPGAs the <a class="reference internal" href="#amaranth.lib.cdc.FFSynchronizer" title="amaranth.lib.cdc.FFSynchronizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">FFSynchronizer</span></code></a> will still be initialized to its <code class="docutils literal notranslate"><span class="pre">reset</span></code> value when
+the FPGA loads its configuration.</p>
+<p>However, in designs where the value of the <a class="reference internal" href="#amaranth.lib.cdc.FFSynchronizer" title="amaranth.lib.cdc.FFSynchronizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">FFSynchronizer</span></code></a> must be valid immediately
+after reset, consider setting <code class="docutils literal notranslate"><span class="pre">reset_less</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code> if any of the following is true:</p>
+<ul class="simple">
+<li><p>You are targeting an ASIC, or an FPGA that does not allow arbitrary initial flip-flop states;</p></li>
+<li><p>Your design features warm (non-power-on) resets of <code class="docutils literal notranslate"><span class="pre">o_domain</span></code>, so the one-time
+initialization at power on is insufficient;</p></li>
+<li><p>Your design features a sequenced reset, and the <a class="reference internal" href="#amaranth.lib.cdc.FFSynchronizer" title="amaranth.lib.cdc.FFSynchronizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">FFSynchronizer</span></code></a> must maintain
+its reset value until <code class="docutils literal notranslate"><span class="pre">o_domain</span></code> reset specifically is deasserted.</p></li>
+</ul>
+<p><a class="reference internal" href="#amaranth.lib.cdc.FFSynchronizer" title="amaranth.lib.cdc.FFSynchronizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">FFSynchronizer</span></code></a> is reset by the <code class="docutils literal notranslate"><span class="pre">o_domain</span></code> reset only.</p>
+</div>
+<p class="rubric">Platform overrides</p>
+<p>Define the <code class="docutils literal notranslate"><span class="pre">get_ff_sync</span></code> platform method to override the implementation of
+<a class="reference internal" href="#amaranth.lib.cdc.FFSynchronizer" title="amaranth.lib.cdc.FFSynchronizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">FFSynchronizer</span></code></a>, e.g. to instantiate library cells directly.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="amaranth.lib.cdc.AsyncFFSynchronizer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.cdc.</span></span><span class="sig-name descname"><span class="pre">AsyncFFSynchronizer</span></span><a class="headerlink" href="#amaranth.lib.cdc.AsyncFFSynchronizer" title="Permalink to this definition"></a></dt>
+<dd><p>Synchronize deassertion of an asynchronous signal.</p>
+<p>The signal driven by the <a class="reference internal" href="#amaranth.lib.cdc.AsyncFFSynchronizer" title="amaranth.lib.cdc.AsyncFFSynchronizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncFFSynchronizer</span></code></a> is asserted asynchronously and deasserted
+synchronously, eliminating metastability during deassertion.</p>
+<p>This synchronizer is primarily useful for resets and reset-like signals.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Asynchronous input signal, to be synchronized.</p></li>
+<li><p><strong>o</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>out</em>) – Synchronously released output signal.</p></li>
+<li><p><strong>o_domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of clock domain to synchronize to.</p></li>
+<li><p><strong>stages</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>&gt;=2</em>) – Number of synchronization stages between input and output. The lowest safe number is 2,
+with higher numbers reducing MTBF further, at the cost of increased deassertion latency.</p></li>
+<li><p><strong>async_edge</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The edge of the input signal which causes the output to be set. Must be one of “pos” or “neg”.</p></li>
+<li><p><strong>max_input_delay</strong> (<em>None</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Maximum delay from the input signal’s clock to the first synchronization stage, in seconds.
+If specified and the platform does not support it, elaboration will fail.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Platform overrides</p>
+<p>Define the <code class="docutils literal notranslate"><span class="pre">get_async_ff_sync</span></code> platform method to override the implementation of
+<a class="reference internal" href="#amaranth.lib.cdc.AsyncFFSynchronizer" title="amaranth.lib.cdc.AsyncFFSynchronizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncFFSynchronizer</span></code></a>, e.g. to instantiate library cells directly.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="amaranth.lib.cdc.ResetSynchronizer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.cdc.</span></span><span class="sig-name descname"><span class="pre">ResetSynchronizer</span></span><a class="headerlink" href="#amaranth.lib.cdc.ResetSynchronizer" title="Permalink to this definition"></a></dt>
+<dd><p>Synchronize deassertion of a clock domain reset.</p>
+<p>The reset of the clock domain driven by the <a class="reference internal" href="#amaranth.lib.cdc.ResetSynchronizer" title="amaranth.lib.cdc.ResetSynchronizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResetSynchronizer</span></code></a> is asserted
+asynchronously and deasserted synchronously, eliminating metastability during deassertion.</p>
+<p>The driven clock domain could use a reset that is asserted either synchronously or
+asynchronously; a reset is always deasserted synchronously. A domain with an asynchronously
+asserted reset is useful if the clock of the domain may be gated, yet the domain still
+needs to be reset promptly; otherwise, synchronously asserted reset (the default) should
+be used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>arst</strong> (<em>Signal</em><em>(</em><em>1</em><em>)</em><em>, </em><em>in</em>) – Asynchronous reset signal, to be synchronized.</p></li>
+<li><p><strong>domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of clock domain to reset.</p></li>
+<li><p><strong>stages</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>&gt;=2</em>) – Number of synchronization stages between input and output. The lowest safe number is 2,
+with higher numbers reducing MTBF further, at the cost of increased deassertion latency.</p></li>
+<li><p><strong>max_input_delay</strong> (<em>None</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Maximum delay from the input signal’s clock to the first synchronization stage, in seconds.
+If specified and the platform does not support it, elaboration will fail.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Platform overrides</p>
+<p>Define the <code class="docutils literal notranslate"><span class="pre">get_reset_sync</span></code> platform method to override the implementation of
+<a class="reference internal" href="#amaranth.lib.cdc.ResetSynchronizer" title="amaranth.lib.cdc.ResetSynchronizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResetSynchronizer</span></code></a>, e.g. to instantiate library cells directly.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="amaranth.lib.cdc.PulseSynchronizer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.cdc.</span></span><span class="sig-name descname"><span class="pre">PulseSynchronizer</span></span><a class="headerlink" href="#amaranth.lib.cdc.PulseSynchronizer" title="Permalink to this definition"></a></dt>
+<dd><p>A one-clock pulse on the input produces a one-clock pulse on the output.</p>
+<p>If the output clock is faster than the input clock, then the input may be safely asserted at
+100% duty cycle. Otherwise, if the clock ratio is <code class="docutils literal notranslate"><span class="pre">n</span></code>:1, the input may be asserted at most
+once in every <code class="docutils literal notranslate"><span class="pre">n</span></code> input clocks, else pulses may be dropped. Other than this there is
+no constraint on the ratio of input and output clock frequency.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i_domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of input clock domain.</p></li>
+<li><p><strong>o_domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Name of output clock domain.</p></li>
+<li><p><strong>stages</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>&gt;=2</em>) – Number of synchronization stages between input and output. The lowest safe number is 2,
+with higher numbers reducing MTBF further, at the cost of increased deassertion latency.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="wiring.html" class="btn btn-neutral float-left" title="Interfaces and connections" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="coding.html" class="btn btn-neutral float-right" title="Code conversion" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020—2023, Amaranth HDL developers.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
