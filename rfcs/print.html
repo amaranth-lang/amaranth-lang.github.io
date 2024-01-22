@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li><li class="chapter-item expanded "><a href="0002-interfaces.html">0002-interfaces</a></li><li class="chapter-item expanded "><a href="0003-enumeration-shapes.html">0003-enumeration-shapes</a></li><li class="chapter-item expanded "><a href="0004-const-castable-exprs.html">0004-const-castable-exprs</a></li><li class="chapter-item expanded "><a href="0005-remove-const-normalize.html">0005-remove-const-normalize</a></li><li class="chapter-item expanded "><a href="0006-stdlib-crc.html">0006-stdlib-crc</a></li><li class="chapter-item expanded "><a href="0008-aggregate-extensibility.html">0008-aggregate-extensibility</a></li><li class="chapter-item expanded "><a href="0009-const-init-shape-castable.html">0009-const-init-shape-castable</a></li><li class="chapter-item expanded "><a href="0010-move-repl-to-value.html">0010-move-repl-to-value</a></li><li class="chapter-item expanded "><a href="0015-lifting-shape-castables.html">0015-lifting-shape-castables</a></li><li class="chapter-item expanded "><a href="0017-remove-log2-int.html">0017-remove-log2-int</a></li><li class="chapter-item expanded "><a href="0018-reorganize-vendor-platforms.html">0018-reorganize-vendor-platforms</a></li><li class="chapter-item expanded "><a href="0019-remove-scheduler.html">0019-remove-scheduler</a></li><li class="chapter-item expanded "><a href="0020-deprecate-non-fwft-fifos.html">0020-deprecate-non-fwft-fifos</a></li><li class="chapter-item expanded "><a href="0021-patch-releases.html">0021-patch-releases</a></li><li class="chapter-item expanded "><a href="0022-valuecastable-shape.html">0022-valuecastable-shape</a></li><li class="chapter-item expanded "><a href="0028-override-value-operators.html">0028-override-value-operators</a></li><li class="chapter-item expanded "><a href="0031-enumeration-type-safety.html">0031-enumeration-type-safety</a></li><li class="chapter-item expanded "><a href="0034-interface-rename.html">0034-interface-rename</a></li><li class="chapter-item expanded "><a href="0035-shapelike-valuelike.html">0035-shapelike-valuelike</a></li><li class="chapter-item expanded "><a href="0037-make-signature-immutable.html">0037-make-signature-immutable</a></li><li class="chapter-item expanded "><a href="0038-component-signature-immutability.html">0038-component-signature-immutability</a></li><li class="chapter-item expanded "><a href="0039-empty-case.html">0039-empty-case</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li><li class="chapter-item expanded "><a href="0002-interfaces.html">0002-interfaces</a></li><li class="chapter-item expanded "><a href="0003-enumeration-shapes.html">0003-enumeration-shapes</a></li><li class="chapter-item expanded "><a href="0004-const-castable-exprs.html">0004-const-castable-exprs</a></li><li class="chapter-item expanded "><a href="0005-remove-const-normalize.html">0005-remove-const-normalize</a></li><li class="chapter-item expanded "><a href="0006-stdlib-crc.html">0006-stdlib-crc</a></li><li class="chapter-item expanded "><a href="0008-aggregate-extensibility.html">0008-aggregate-extensibility</a></li><li class="chapter-item expanded "><a href="0009-const-init-shape-castable.html">0009-const-init-shape-castable</a></li><li class="chapter-item expanded "><a href="0010-move-repl-to-value.html">0010-move-repl-to-value</a></li><li class="chapter-item expanded "><a href="0015-lifting-shape-castables.html">0015-lifting-shape-castables</a></li><li class="chapter-item expanded "><a href="0017-remove-log2-int.html">0017-remove-log2-int</a></li><li class="chapter-item expanded "><a href="0018-reorganize-vendor-platforms.html">0018-reorganize-vendor-platforms</a></li><li class="chapter-item expanded "><a href="0019-remove-scheduler.html">0019-remove-scheduler</a></li><li class="chapter-item expanded "><a href="0020-deprecate-non-fwft-fifos.html">0020-deprecate-non-fwft-fifos</a></li><li class="chapter-item expanded "><a href="0021-patch-releases.html">0021-patch-releases</a></li><li class="chapter-item expanded "><a href="0022-valuecastable-shape.html">0022-valuecastable-shape</a></li><li class="chapter-item expanded "><a href="0028-override-value-operators.html">0028-override-value-operators</a></li><li class="chapter-item expanded "><a href="0030-component-metadata.html">0030-component-metadata</a></li><li class="chapter-item expanded "><a href="0031-enumeration-type-safety.html">0031-enumeration-type-safety</a></li><li class="chapter-item expanded "><a href="0034-interface-rename.html">0034-interface-rename</a></li><li class="chapter-item expanded "><a href="0035-shapelike-valuelike.html">0035-shapelike-valuelike</a></li><li class="chapter-item expanded "><a href="0037-make-signature-immutable.html">0037-make-signature-immutable</a></li><li class="chapter-item expanded "><a href="0038-component-signature-immutability.html">0038-component-signature-immutability</a></li><li class="chapter-item expanded "><a href="0039-empty-case.html">0039-empty-case</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -1996,14 +1996,478 @@ This would make Python do the right thing w.r.t. operator overriding, but is a l
 <h2 id="future-possibilities-14"><a class="header" href="#future-possibilities-14">Future possibilities</a></h2>
 <p><code>Value.eq()</code> could in the same manner check for and defer to a <code>.req()</code> method, i.e. reflected <code>.eq()</code>, to allow a value-castable to override how assignment from it to a <code>Value</code> is handled.</p>
 <div style="break-before: page; page-break-before: always;"></div><ul>
+<li>Start Date: 2024-01-22</li>
+<li>RFC PR: <a href="https://github.com/amaranth-lang/rfcs/pull/30">amaranth-lang/rfcs#30</a></li>
+<li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/1047">amaranth-lang/amaranth#1047</a></li>
+</ul>
+<h1 id="component-metadata-rfc"><a class="header" href="#component-metadata-rfc">Component metadata RFC</a></h1>
+<h2 id="summary-17"><a class="header" href="#summary-17">Summary</a></h2>
+<p>Add support for JSON-based introspection of an Amaranth component, describing its interface and properties.</p>
+<h2 id="motivation-17"><a class="header" href="#motivation-17">Motivation</a></h2>
+<p>Introspection of components is an inherent feature of Amaranth. As Python objects, they make use of attributes to:</p>
+<ul>
+<li>expose the ports that compose their interface.</li>
+<li>communicate other kinds of metadata, such as behavioral properties or safety invariants.</li>
+</ul>
+<p>Multiple tools may consume parts of this metadata at different points in time. While the ports of an interface must be known at build time, other properties (such as a bus memory map) may be used afterwards to operate or verify the design.</p>
+<p>However, in a mixed HDL design, components implemented in other HDLs require ad-hoc integration:</p>
+<ul>
+<li>their netlist must be consulted in order to know their signature.</li>
+<li>each port must be connected individually (whereas Amaranth components can use <code>connect()</code> on compatible interfaces).</li>
+<li>there is no mechanism to pass metadata besides instance parameters and attributes. Any information produced by the instance itself cannot be easily passed to its parent.</li>
+</ul>
+<p>This RFC proposes a JSON-based format to describe and exchange component metadata. While building upon the concepts of <a href="https://github.com/amaranth-lang/rfcs/blob/main/text/0002-interfaces.md">RFC 2</a>, this metadata format tries to avoid making assumptions about its consumers (which could be other HDL frontends, block diagram design tools, etc).</p>
+<h2 id="guide-level-explanation-11"><a class="header" href="#guide-level-explanation-11">Guide-level explanation</a></h2>
+<h3 id="component-metadata"><a class="header" href="#component-metadata">Component metadata</a></h3>
+<p>An <code>amaranth.lib.wiring.Component</code> can provide metadata about itself, represented as a JSON object. This metadata contains a hierarchical description of every port of its interface.</p>
+<p>The following example defines an <code>AsyncSerial</code> component, and outputs its metadata:</p>
+<pre><code class="language-python3">from amaranth import *
+from amaranth.lib.data import StructLayout
+from amaranth.lib.wiring import In, Out, Signature, Component
+
+
+class AsyncSerialSignature(Signature):
+    def __init__(self, divisor_reset, divisor_bits, data_bits, parity):
+        self.data_bits = data_bits
+        self.parity    = parity
+
+        super().__init__({
+            &quot;divisor&quot;: In(divisor_bits, reset=divisor_reset),
+
+            &quot;rx_data&quot;: Out(data_bits),
+            &quot;rx_err&quot;:  Out(StructLayout({&quot;overflow&quot;: 1, &quot;frame&quot;: 1, &quot;parity&quot;: 1})),
+            &quot;rx_rdy&quot;:  Out(1),
+            &quot;rx_ack&quot;:  In(1),
+            &quot;rx_i&quot;:    In(1),
+
+            &quot;tx_data&quot;: In(data_bits),
+            &quot;tx_rdy&quot;:  Out(1),
+            &quot;tx_ack&quot;:  In(1),
+            &quot;tx_o&quot;:    Out(1),
+        })
+
+
+class AsyncSerial(Component):
+    def __init__(self, *, divisor_reset, divisor_bits, data_bits=8, parity=&quot;none&quot;):
+        super().__init__(AsyncSerialSignature(divisor_reset, divisor_bits, data_bits, parity))
+
+
+if __name__ == &quot;__main__&quot;:
+    import json
+    from amaranth.utils import bits_for
+
+    divisor = int(100e6 // 115200)
+    serial = AsyncSerial(divisor_reset=divisor, divisor_bits=bits_for(divisor), data_bits=8, parity=&quot;none&quot;)
+
+    print(json.dumps(serial.metadata.as_json(), indent=4))
+</code></pre>
+<p>The <code>.metadata</code> property of a <code>Component</code> returns a <code>ComponentMetadata</code> instance describing that component. In the above example, <code>serial.metadata.as_json()</code> converts this metadata into a JSON object, which is then printed:</p>
+<pre><code class="language-json">{
+    &quot;interface&quot;: {
+        &quot;members&quot;: {
+            &quot;divisor&quot;: {
+                &quot;type&quot;: &quot;port&quot;,
+                &quot;name&quot;: &quot;divisor&quot;,
+                &quot;dir&quot;: &quot;in&quot;,
+                &quot;width&quot;: 10,
+                &quot;signed&quot;: false,
+                &quot;reset&quot;: &quot;868&quot;
+            },
+            &quot;rx_ack&quot;: {
+                &quot;type&quot;: &quot;port&quot;,
+                &quot;name&quot;: &quot;rx_ack&quot;,
+                &quot;dir&quot;: &quot;in&quot;,
+                &quot;width&quot;: 1,
+                &quot;signed&quot;: false,
+                &quot;reset&quot;: &quot;0&quot;
+            },
+            &quot;rx_data&quot;: {
+                &quot;type&quot;: &quot;port&quot;,
+                &quot;name&quot;: &quot;rx_data&quot;,
+                &quot;dir&quot;: &quot;out&quot;,
+                &quot;width&quot;: 8,
+                &quot;signed&quot;: false,
+                &quot;reset&quot;: &quot;0&quot;
+            },
+            &quot;rx_err&quot;: {
+                &quot;type&quot;: &quot;port&quot;,
+                &quot;name&quot;: &quot;rx_err&quot;,
+                &quot;dir&quot;: &quot;out&quot;,
+                &quot;width&quot;: 3,
+                &quot;signed&quot;: false,
+                &quot;reset&quot;: &quot;0&quot;
+            },
+            &quot;rx_i&quot;: {
+                &quot;type&quot;: &quot;port&quot;,
+                &quot;name&quot;: &quot;rx_i&quot;,
+                &quot;dir&quot;: &quot;in&quot;,
+                &quot;width&quot;: 1,
+                &quot;signed&quot;: false,
+                &quot;reset&quot;: &quot;0&quot;
+            },
+            &quot;rx_rdy&quot;: {
+                &quot;type&quot;: &quot;port&quot;,
+                &quot;name&quot;: &quot;rx_rdy&quot;,
+                &quot;dir&quot;: &quot;out&quot;,
+                &quot;width&quot;: 1,
+                &quot;signed&quot;: false,
+                &quot;reset&quot;: &quot;0&quot;
+            },
+            &quot;tx_ack&quot;: {
+                &quot;type&quot;: &quot;port&quot;,
+                &quot;name&quot;: &quot;tx_ack&quot;,
+                &quot;dir&quot;: &quot;in&quot;,
+                &quot;width&quot;: 1,
+                &quot;signed&quot;: false,
+                &quot;reset&quot;: &quot;0&quot;
+            },
+            &quot;tx_data&quot;: {
+                &quot;type&quot;: &quot;port&quot;,
+                &quot;name&quot;: &quot;tx_data&quot;,
+                &quot;dir&quot;: &quot;in&quot;,
+                &quot;width&quot;: 8,
+                &quot;signed&quot;: false,
+                &quot;reset&quot;: &quot;0&quot;
+            },
+            &quot;tx_o&quot;: {
+                &quot;type&quot;: &quot;port&quot;,
+                &quot;name&quot;: &quot;tx_o&quot;,
+                &quot;dir&quot;: &quot;out&quot;,
+                &quot;width&quot;: 1,
+                &quot;signed&quot;: false,
+                &quot;reset&quot;: &quot;0&quot;
+            },
+            &quot;tx_rdy&quot;: {
+                &quot;type&quot;: &quot;port&quot;,
+                &quot;name&quot;: &quot;tx_rdy&quot;,
+                &quot;dir&quot;: &quot;out&quot;,
+                &quot;width&quot;: 1,
+                &quot;signed&quot;: false,
+                &quot;reset&quot;: &quot;0&quot;
+            }
+        },
+        &quot;annotations&quot;: {}
+    }
+}
+</code></pre>
+<p>The <code>[&quot;interface&quot;][&quot;annotations&quot;]</code> object, which is empty here, is explained in the next section.</p>
+<h3 id="annotations"><a class="header" href="#annotations">Annotations</a></h3>
+<p>Users can attach arbitrary annotations to an <code>amaranth.lib.wiring.Signature</code>, which are automatically collected into the metadata of components using this signature.</p>
+<p>An <code>Annotation</code> class has a name (e.g. <code>&quot;org.amaranth-lang.amaranth-soc.memory-map&quot;</code>) and a <a href="https://json-schema.org">JSON schema</a> defining the structure of its instances. To continue our <code>AsyncSerial</code> example, we add an annotation to <code>AsyncSerialSignature</code> that will allow us to describe a <a href="https://en.wikipedia.org/wiki/8-N-1">8-N-1</a> configuration:</p>
+<pre><code class="language-python3">class AsyncSerialAnnotation(Annotation):
+    schema = {
+        &quot;$schema&quot;: &quot;https://json-schema.org/draft/2020-12/schema&quot;,
+        &quot;$id&quot;: &quot;https://example.com/schema/foo/1.0/serial.json&quot;,
+        &quot;type&quot;: &quot;object&quot;,
+        &quot;properties&quot;: {
+            &quot;data_bits&quot;: {
+                &quot;type&quot;: &quot;integer&quot;,
+                &quot;minimum&quot;: 0,
+            },
+            &quot;parity&quot;: {
+                &quot;enum&quot;: [ &quot;none&quot;, &quot;mark&quot;, &quot;space&quot;, &quot;even&quot;, &quot;odd&quot; ],
+            },
+        },
+        &quot;additionalProperties&quot;: False,
+        &quot;required&quot;: [
+            &quot;data_bits&quot;,
+            &quot;parity&quot;,
+        ],
+    }
+
+    def __init__(self, origin):
+        assert isinstance(origin, AsyncSerialSignature)
+        self.origin = origin
+
+    def as_json(self):
+        instance = {
+            &quot;data_bits&quot;: self.origin.data_bits,
+            &quot;parity&quot;: self.origin.parity,
+        }
+        self.validate(instance)
+        return instance
+</code></pre>
+<p>We can attach annotations to a <code>Signature</code> subclass by overriding its <code>.annotations()</code> method:</p>
+<pre><code class="language-python3">class AsyncSerialSignature(Signature):
+    # ...
+
+    def annotations(self, obj):
+        return (*super().annotations(obj), AsyncSerialAnnotation(self))
+</code></pre>
+<p>In this case, <code>AsyncSerialAnnotation</code> depends on immutable metadata attached to <code>AsyncSerialSignature</code> (<code>.data_bits</code> and <code>.parity</code>).</p>
+<p>The JSON object returned by <code>serial.metadata.as_json()</code> will now use this annotation:</p>
+<pre><code class="language-json">{
+    &quot;interface&quot;: {
+        &quot;members&quot;: {
+            &quot;divisor&quot;: {
+                &quot;type&quot;: &quot;port&quot;,
+                &quot;name&quot;: &quot;divisor&quot;,
+                &quot;dir&quot;: &quot;in&quot;,
+                &quot;width&quot;: 10,
+                &quot;signed&quot;: false,
+                &quot;reset&quot;: &quot;868&quot;
+            },
+            &quot;rx_ack&quot;: {
+                &quot;type&quot;: &quot;port&quot;,
+                &quot;name&quot;: &quot;rx_ack&quot;,
+                &quot;dir&quot;: &quot;in&quot;,
+                &quot;width&quot;: 1,
+                &quot;signed&quot;: false,
+                &quot;reset&quot;: &quot;0&quot;
+            },
+            &quot;rx_data&quot;: {
+                &quot;type&quot;: &quot;port&quot;,
+                &quot;name&quot;: &quot;rx_data&quot;,
+                &quot;dir&quot;: &quot;out&quot;,
+                &quot;width&quot;: 8,
+                &quot;signed&quot;: false,
+                &quot;reset&quot;: &quot;0&quot;
+            },
+            &quot;rx_err&quot;: {
+                &quot;type&quot;: &quot;port&quot;,
+                &quot;name&quot;: &quot;rx_err&quot;,
+                &quot;dir&quot;: &quot;out&quot;,
+                &quot;width&quot;: 3,
+                &quot;signed&quot;: false,
+                &quot;reset&quot;: &quot;0&quot;
+            },
+            &quot;rx_i&quot;: {
+                &quot;type&quot;: &quot;port&quot;,
+                &quot;name&quot;: &quot;rx_i&quot;,
+                &quot;dir&quot;: &quot;in&quot;,
+                &quot;width&quot;: 1,
+                &quot;signed&quot;: false,
+                &quot;reset&quot;: &quot;0&quot;
+            },
+            &quot;rx_rdy&quot;: {
+                &quot;type&quot;: &quot;port&quot;,
+                &quot;name&quot;: &quot;rx_rdy&quot;,
+                &quot;dir&quot;: &quot;out&quot;,
+                &quot;width&quot;: 1,
+                &quot;signed&quot;: false,
+                &quot;reset&quot;: &quot;0&quot;
+            },
+            &quot;tx_ack&quot;: {
+                &quot;type&quot;: &quot;port&quot;,
+                &quot;name&quot;: &quot;tx_ack&quot;,
+                &quot;dir&quot;: &quot;in&quot;,
+                &quot;width&quot;: 1,
+                &quot;signed&quot;: false,
+                &quot;reset&quot;: &quot;0&quot;
+            },
+            &quot;tx_data&quot;: {
+                &quot;type&quot;: &quot;port&quot;,
+                &quot;name&quot;: &quot;tx_data&quot;,
+                &quot;dir&quot;: &quot;in&quot;,
+                &quot;width&quot;: 8,
+                &quot;signed&quot;: false,
+                &quot;reset&quot;: &quot;0&quot;
+            },
+            &quot;tx_o&quot;: {
+                &quot;type&quot;: &quot;port&quot;,
+                &quot;name&quot;: &quot;tx_o&quot;,
+                &quot;dir&quot;: &quot;out&quot;,
+                &quot;width&quot;: 1,
+                &quot;signed&quot;: false,
+                &quot;reset&quot;: &quot;0&quot;
+            },
+            &quot;tx_rdy&quot;: {
+                &quot;type&quot;: &quot;port&quot;,
+                &quot;name&quot;: &quot;tx_rdy&quot;,
+                &quot;dir&quot;: &quot;out&quot;,
+                &quot;width&quot;: 1,
+                &quot;signed&quot;: false,
+                &quot;reset&quot;: &quot;0&quot;
+            }
+        },
+        &quot;annotations&quot;: {
+            &quot;https://example.com/schema/foo/1.0/serial.json&quot;: {
+                &quot;data_bits&quot;: 8,
+                &quot;parity&quot;: &quot;none&quot;
+            }
+        }
+    }
+}
+</code></pre>
+<h4 id="annotation-schema-urls"><a class="header" href="#annotation-schema-urls">Annotation schema URLs</a></h4>
+<p>An <code>Annotation</code> schema must have a <code>&quot;$id&quot;</code> property, which holds an URL that serves as its unique identifier. The following convention is required for the <code>&quot;$id&quot;</code> of schemas hosted at https://amaranth-lang.org, and suggested otherwise:</p>
+<p><code>&lt;protocol&gt;://&lt;domain&gt;/schema/&lt;package&gt;/&lt;version&gt;/&lt;path&gt;.json</code></p>
+<p>where:</p>
+<ul>
+<li><code>&lt;domain&gt;</code> is a domain name registered to the person or entity defining the annotation;</li>
+<li><code>&lt;package&gt;</code> is the name of the Python package providing the <code>Annotation</code> subclass;</li>
+<li><code>&lt;version&gt;</code> is the version of the aforementioned package;</li>
+<li><code>&lt;path&gt;</code> is a non-empty string.</li>
+</ul>
+<p>For example:</p>
+<ul>
+<li>&quot;https://amaranth-lang.org/schema/amaranth/0.5/fifo.json&quot;;</li>
+<li>&quot;https://amaranth-lang.org/schema/amaranth-soc/0.1/memory-map.json&quot;.</li>
+</ul>
+<p>Changes to schema definitions hosted at https://amaranth-lang.org should follow the <a href="https://github.com/amaranth-lang/rfcs">RFC process</a>.</p>
+<h2 id="reference-level-explanation-11"><a class="header" href="#reference-level-explanation-11">Reference-level explanation</a></h2>
+<h3 id="annotations-1"><a class="header" href="#annotations-1">Annotations</a></h3>
+<ul>
+<li>add an <code>Annotation</code> base class to <code>amaranth.lib.meta</code>, with:
+<ul>
+<li>a <code>.schema</code> &quot;abstract&quot; class attribute, which must be a JSON schema, as a dict.</li>
+<li>a <code>.__init_subclass__()</code> class method, which raises an exception if:
+<ul>
+<li><code>.schema</code> does not comply with the <a href="https://json-schema.org/specification-links#2020-12">2020-12 draft</a> of the JSON Schema specification.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>a <code>.origin</code> attribute, which returns the Python object described by an annotation instance.</li>
+</ul>
+<ul>
+<li>a <code>.validate()</code> class method, which takes a JSON instance as argument. An exception is raised if the instance does not comply with the schema.</li>
+<li>a <code>.as_json()</code> abstract method, which must return a JSON instance, as a dict. This instance must be compliant with <code>.schema</code>, i.e. <code>self.validate(self.as_json())</code> must succeed.</li>
+</ul>
+</li>
+</ul>
+<p>The following changes are made to <code>amaranth.lib.wiring</code>:</p>
+<ul>
+<li>add a <code>.annotations(self, obj)</code> method to <code>Signature</code>, which returns an empty tuple. If overriden, it must return an iterable of <code>Annotation</code> objects. <code>obj</code> is an interface object that complies with this signature, i.e. <code>self.is_compliant(obj)</code> must succeed.</li>
+</ul>
+<h3 id="component-metadata-1"><a class="header" href="#component-metadata-1">Component metadata</a></h3>
+<p>The following changes are made to <code>amaranth.lib.wiring</code>:</p>
+<ul>
+<li>add a <code>ComponentMetadata</code> class, with:
+<ul>
+<li>a <code>.schema</code> class attribute, which returns a JSON schema of component metadata. Its definition is detailed <a href="0030-component-metadata.html#component-metadata-schema">below</a>.</li>
+<li>a <code>.validate()</code> class method, which takes a JSON instance as argument. An exception is raised if the instance does not comply with the schema.</li>
+<li><code>.__init__()</code> takes a <code>Component</code> object as parameter.</li>
+<li>a <code>.origin</code> attribute, which returns the component object given in <code>.__init__()</code>.</li>
+<li>a <code>.as_json()</code> method, which returns a JSON instance of <code>.origin</code> that complies with <code>.schema</code>. It is populated by iterating over the component's interface and annotations.</li>
+</ul>
+</li>
+<li>add a <code>.metadata</code> property to <code>Component</code>, which returns <code>ComponentMetadata(self)</code>.</li>
+</ul>
+<h4 id="component-metadata-schema"><a class="header" href="#component-metadata-schema">Component metadata schema</a></h4>
+<pre><code class="language-python3">class ComponentMetadata(Annotation):
+    schema = {
+        &quot;$schema&quot;: &quot;https://json-schema.org/draft/2020-12/schema&quot;,
+        &quot;$id&quot;: &quot;https://amaranth-lang.org/schema/amaranth/0.5/component.json&quot;,
+        &quot;type&quot;: &quot;object&quot;,
+        &quot;properties&quot;: {
+            &quot;interface&quot;: {
+                &quot;type&quot;: &quot;object&quot;,
+                &quot;properties&quot;: {
+                    &quot;members&quot;: {
+                        &quot;type&quot;: &quot;object&quot;,
+                        &quot;patternProperties&quot;: {
+                            &quot;^[A-Za-z][0-9A-Za-z_]*$&quot;: {
+                                &quot;oneOf&quot;: [
+                                    {
+                                        &quot;type&quot;: &quot;object&quot;,
+                                        &quot;properties&quot;: {
+                                            &quot;type&quot;: {
+                                                &quot;enum&quot;: [&quot;port&quot;],
+                                            },
+                                            &quot;name&quot;: {
+                                                &quot;type&quot;: &quot;string&quot;,
+                                                &quot;pattern&quot;: &quot;^[A-Za-z][A-Za-z0-9_]*$&quot;,
+                                            },
+                                            &quot;dir&quot;: {
+                                                &quot;enum&quot;: [&quot;in&quot;, &quot;out&quot;],
+                                            },
+                                            &quot;width&quot;: {
+                                                &quot;type&quot;: &quot;integer&quot;,
+                                                &quot;minimum&quot;: 0,
+                                            },
+                                            &quot;signed&quot;: {
+                                                &quot;type&quot;: &quot;boolean&quot;,
+                                            },
+                                            &quot;reset&quot;: {
+                                                &quot;type&quot;: &quot;string&quot;,
+                                                &quot;pattern&quot;: &quot;^[+-]?[0-9]+$&quot;,
+                                            },
+                                        },
+                                        &quot;additionalProperties&quot;: False,
+                                        &quot;required&quot;: [
+                                            &quot;type&quot;,
+                                            &quot;name&quot;,
+                                            &quot;dir&quot;,
+                                            &quot;width&quot;,
+                                            &quot;signed&quot;,
+                                            &quot;reset&quot;,
+                                        ],
+                                    },
+                                    {
+                                        &quot;type&quot;: &quot;object&quot;,
+                                        &quot;properties&quot;: {
+                                            &quot;type&quot;: {
+                                                &quot;enum&quot;: [&quot;interface&quot;],
+                                            },
+                                            &quot;members&quot;: {
+                                                &quot;$ref&quot;: &quot;#/properties/interface/properties/members&quot;,
+                                            },
+                                            &quot;annotations&quot;: {
+                                                &quot;type&quot;: &quot;object&quot;,
+                                            },
+                                        },
+                                        &quot;additionalProperties&quot;: False,
+                                        &quot;required&quot;: [
+                                            &quot;type&quot;,
+                                            &quot;members&quot;,
+                                            &quot;annotations&quot;,
+                                        ],
+                                    },
+                                ],
+                            },
+                        },
+                        &quot;additionalProperties&quot;: False,
+                    },
+                    &quot;annotations&quot;: {
+                        &quot;type&quot;: &quot;object&quot;,
+                    },
+                },
+                &quot;additionalProperties&quot;: False,
+                &quot;required&quot;: [
+                    &quot;members&quot;,
+                    &quot;annotations&quot;,
+                ],
+            },
+        },
+        &quot;additionalProperties&quot;: False,
+        &quot;required&quot;: [
+            &quot;interface&quot;,
+        ]
+    }
+
+    # ...
+</code></pre>
+<p>Reset values are serialized to strings (e.g. &quot;-1&quot;), because JSON can only represent integers up to 2^53.</p>
+<h2 id="drawbacks-16"><a class="header" href="#drawbacks-16">Drawbacks</a></h2>
+<ul>
+<li>Developers need to learn the JSON Schema language to define annotations.</li>
+<li>An annotation schema URL may point to a non-existent domain, despite being well formatted.</li>
+<li>Handling backward-incompatible changes in new versions of an annotation is left to its consumers.</li>
+</ul>
+<h2 id="rationale-and-alternatives-15"><a class="header" href="#rationale-and-alternatives-15">Rationale and alternatives</a></h2>
+<ul>
+<li>As an alternative, do nothing; let tools and downstream libraries provide non-interoperable mechanisms to introspect components to and from Amaranth designs.</li>
+<li>Usage of this feature is entirely optional. It has a limited impact on the <code>amaranth.lib.wiring</code>, by reserving only two attributes: <code>Signature.annotations</code> and <code>Component.metadata</code>.</li>
+<li>JSON schema is an IETF standard that is well supported across tools and programming languages.</li>
+<li>This metadata format can be translated into other formats, such as <a href="https://www.accellera.org/downloads/standards/ip-xact">IP-XACT</a>.</li>
+</ul>
+<h2 id="unresolved-questions-15"><a class="header" href="#unresolved-questions-15">Unresolved questions</a></h2>
+<ul>
+<li>The clock and reset ports of a component are omitted from this metadata format. Currently, the clock domains of an Amaranth component are only known at elaboration, whereas this RFC requires metadata to be accessible at any time. While this is a significant limitation for multi-clock components, single-clock components may be assumed to have a positive edge clock <code>&quot;clk&quot;</code> and a synchronous reset <code>&quot;rst&quot;</code>. Support for arbitrary clock domains should be introduced in later RFCs.</li>
+<li>Annotating individual ports of an interface is out of the scope of this RFC. Port annotations may be useful to describe non-trivial signal shapes, and introduced in a later RFC.</li>
+</ul>
+<h2 id="future-possibilities-15"><a class="header" href="#future-possibilities-15">Future possibilities</a></h2>
+<p>While this RFC can apply to any Amaranth component, one of its motivating use cases is the ability to export the interface and behavioral properties of SoC peripherals in various formats, such as SVD.</p>
+<div style="break-before: page; page-break-before: always;"></div><ul>
 <li>Start Date: 2023-11-27</li>
 <li>RFC PR: <a href="https://github.com/amaranth-lang/rfcs/pull/31">amaranth-lang/rfcs#31</a></li>
 <li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/972">amaranth-lang/amaranth#972</a></li>
 </ul>
 <h1 id="enumeration-type-safety"><a class="header" href="#enumeration-type-safety">Enumeration type safety</a></h1>
-<h2 id="summary-17"><a class="header" href="#summary-17">Summary</a></h2>
+<h2 id="summary-18"><a class="header" href="#summary-18">Summary</a></h2>
 <p>Make Amaranth <code>Enum</code> and <code>Flag</code> use a custom <code>ValueCastable</code> view class, enforcing type safety.</p>
-<h2 id="motivation-17"><a class="header" href="#motivation-17">Motivation</a></h2>
+<h2 id="motivation-18"><a class="header" href="#motivation-18">Motivation</a></h2>
 <p>Python <code>Enum</code> provides an opaque wrapper over the underlying enum values,
 providing type safety and guarding against improper usage in arithmetic
 operations:</p>
@@ -2052,7 +2516,7 @@ on enum-typed signals:</p>
 &gt;&gt;&gt; a | b
 (| (sig a) (sig b))
 </code></pre>
-<h2 id="guide-level-explanation-11"><a class="header" href="#guide-level-explanation-11">Guide-level explanation</a></h2>
+<h2 id="guide-level-explanation-12"><a class="header" href="#guide-level-explanation-12">Guide-level explanation</a></h2>
 <p>Like in Python, <code>Enum</code> and <code>Flag</code> subclasses are considered strongly-typed,
 while <code>IntEnum</code> and <code>IntFlag</code> are weakly-typed. Enum-typed Amaranth values
 with strong typing are manipulated through <code>amaranth.lib.enum.EnumView</code>
@@ -2080,7 +2544,7 @@ interchangeability with other values.</p>
 <p>A custom subclass of <code>EnumView</code> or <code>FlagView</code> can be used for a given enum
 type if so desired, by using the <code>view_class</code> keyword parameter on enum
 creation.</p>
-<h2 id="reference-level-explanation-11"><a class="header" href="#reference-level-explanation-11">Reference-level explanation</a></h2>
+<h2 id="reference-level-explanation-12"><a class="header" href="#reference-level-explanation-12">Reference-level explanation</a></h2>
 <p><code>amaranth.lib.enum.EnumView</code> is a <code>ValueCastable</code> subclass.  The following
 operations are defined on it:</p>
 <ul>
@@ -2118,11 +2582,11 @@ is wrapped in <code>FlagView</code></li>
 <li>Otherwise, the value-castable is wrapped in <code>EnumView</code></li>
 </ul>
 <p>The behavior of <code>EnumMeta.const</code> is modified to go through the same logic.</p>
-<h2 id="drawbacks-16"><a class="header" href="#drawbacks-16">Drawbacks</a></h2>
+<h2 id="drawbacks-17"><a class="header" href="#drawbacks-17">Drawbacks</a></h2>
 <p>This proposal increases language complexity, and is not consistent with
 eg. how <code>amaranth.lib.data.View</code> operates (which has much more lax type
 checking).</p>
-<h2 id="rationale-and-alternatives-15"><a class="header" href="#rationale-and-alternatives-15">Rationale and alternatives</a></h2>
+<h2 id="rationale-and-alternatives-16"><a class="header" href="#rationale-and-alternatives-16">Rationale and alternatives</a></h2>
 <p>Do nothing. Operations on mismatched types will continue to be silently
 allowed.</p>
 <p>Equality could work more like Python equality (always returning false
@@ -2132,11 +2596,11 @@ added to <code>Value</code>).</p>
 <h2 id="prior-art-14"><a class="header" href="#prior-art-14">Prior art</a></h2>
 <p>This feature directly parallels the differences between Python's
 <code>Enum</code>/<code>Flag</code> and <code>IntEnum</code>/<code>IntFlag</code>.</p>
-<h2 id="unresolved-questions-15"><a class="header" href="#unresolved-questions-15">Unresolved questions</a></h2>
+<h2 id="unresolved-questions-16"><a class="header" href="#unresolved-questions-16">Unresolved questions</a></h2>
 <p>Instead of having an extension point via <code>view_class</code>, we could instead
 automatically forward all otherwise unknown methods to the underlying enum
 class, providing it the <code>EnumView</code> as <code>self</code>.</p>
-<h2 id="future-possibilities-15"><a class="header" href="#future-possibilities-15">Future possibilities</a></h2>
+<h2 id="future-possibilities-16"><a class="header" href="#future-possibilities-16">Future possibilities</a></h2>
 <p>None.</p>
 <div style="break-before: page; page-break-before: always;"></div><ul>
 <li>Start Date: 2023-12-04</li>
@@ -2144,19 +2608,19 @@ class, providing it the <code>EnumView</code> as <code>self</code>.</p>
 <li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/985">amaranth-lang/amaranth#985</a></li>
 </ul>
 <h1 id="rename-amaranthlibwiringinterface-to-pureinterface"><a class="header" href="#rename-amaranthlibwiringinterface-to-pureinterface">Rename <code>amaranth.lib.wiring.Interface</code> to <code>PureInterface</code></a></h1>
-<h2 id="summary-18"><a class="header" href="#summary-18">Summary</a></h2>
+<h2 id="summary-19"><a class="header" href="#summary-19">Summary</a></h2>
 <p>The <code>Interface</code> class in <code>amaranth.lib.wiring</code> is renamed to <code>PureInterface</code>, to avoid the impression that it is used for <em>all</em> interfaces.</p>
-<h2 id="motivation-18"><a class="header" href="#motivation-18">Motivation</a></h2>
+<h2 id="motivation-19"><a class="header" href="#motivation-19">Motivation</a></h2>
 <p>The current naming of the <code>Interface</code> class wrongly suggests that it is the base class to be used for all interfaces, and that <code>isinstance(foo, Interface)</code> is a valid check for an interface. However, this is in stark contrast to how <code>lib.wiring</code> works: any object can be an interface, as long as it has a <code>signature</code> property and compliant members. This misleads users (and, on at least two occasions, amaranth developers), making them write buggy code.</p>
 <p>Additionally, the naming makes spoken language ambiguous in a bad way, as it is impossible to tell apart &quot;an interface&quot; and &quot;an Interface&quot;.</p>
 <p>Therefore, this RFC proposes to rename <code>Interface</code> to something more specific and reflecting its function.</p>
-<h2 id="guide-level-explanation-12"><a class="header" href="#guide-level-explanation-12">Guide-level explanation</a></h2>
+<h2 id="guide-level-explanation-13"><a class="header" href="#guide-level-explanation-13">Guide-level explanation</a></h2>
 <p>The <code>Interface</code> class in <code>amaranth.lib.wiring</code> is renamed to <code>PureInterface</code>.</p>
-<h2 id="reference-level-explanation-12"><a class="header" href="#reference-level-explanation-12">Reference-level explanation</a></h2>
+<h2 id="reference-level-explanation-13"><a class="header" href="#reference-level-explanation-13">Reference-level explanation</a></h2>
 <p>The <code>Interface</code> class in <code>amaranth.lib.wiring</code> is renamed to <code>PureInterface</code>.</p>
-<h2 id="drawbacks-17"><a class="header" href="#drawbacks-17">Drawbacks</a></h2>
+<h2 id="drawbacks-18"><a class="header" href="#drawbacks-18">Drawbacks</a></h2>
 <p>Minor churn.</p>
-<h2 id="rationale-and-alternatives-16"><a class="header" href="#rationale-and-alternatives-16">Rationale and alternatives</a></h2>
+<h2 id="rationale-and-alternatives-17"><a class="header" href="#rationale-and-alternatives-17">Rationale and alternatives</a></h2>
 <p>The new name is, of course, subject to bikeshedding. The names that have been proposed are:</p>
 <ul>
 <li><code>PureInterface</code></li>
@@ -2164,9 +2628,9 @@ class, providing it the <code>EnumView</code> as <code>self</code>.</p>
 </ul>
 <h2 id="prior-art-15"><a class="header" href="#prior-art-15">Prior art</a></h2>
 <p>None.</p>
-<h2 id="unresolved-questions-16"><a class="header" href="#unresolved-questions-16">Unresolved questions</a></h2>
+<h2 id="unresolved-questions-17"><a class="header" href="#unresolved-questions-17">Unresolved questions</a></h2>
 <p>None.</p>
-<h2 id="future-possibilities-16"><a class="header" href="#future-possibilities-16">Future possibilities</a></h2>
+<h2 id="future-possibilities-17"><a class="header" href="#future-possibilities-17">Future possibilities</a></h2>
 <p>The name <code>Interface</code> that has just been freed up can be reused for an ABC-like class representing all valid interfaces.</p>
 <div style="break-before: page; page-break-before: always;"></div><ul>
 <li>Start Date: 2023-12-04</li>
@@ -2174,12 +2638,12 @@ class, providing it the <code>EnumView</code> as <code>self</code>.</p>
 <li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/986">amaranth-lang/amaranth#986</a></li>
 </ul>
 <h1 id="add-shapelike-valuelike"><a class="header" href="#add-shapelike-valuelike">Add <code>ShapeLike</code>, <code>ValueLike</code></a></h1>
-<h2 id="summary-19"><a class="header" href="#summary-19">Summary</a></h2>
+<h2 id="summary-20"><a class="header" href="#summary-20">Summary</a></h2>
 <p>Two special classes are added to the language: <code>ShapeLike</code> and <code>ValueLike</code>. They cannot be constructed, but can be used to determine with <code>isinstance</code> and <code>issubclass</code> to determine whether something can be cast to <code>Shape</code> or a <code>Value</code>, respectively.</p>
-<h2 id="motivation-19"><a class="header" href="#motivation-19">Motivation</a></h2>
+<h2 id="motivation-20"><a class="header" href="#motivation-20">Motivation</a></h2>
 <p>As it stands, we have multiple types of objects that can be used as shapes (<code>Shape</code>, <code>ShapeCastable</code>, <code>int</code>, <code>range</code>, <code>EnumMeta</code>) and values (<code>Value</code>, <code>ValueCastable</code>, <code>int</code>, <code>Enum</code>). These types have no common superclass, so there's no easy way to check if an object can be used as a shape or a value, save for actually calling <code>Shape.cast</code> or <code>Value.cast</code>. Introducing <code>ShapeLike</code> and <code>ValueLike</code> provides an idiomatic way to perform such a check.</p>
 <p>Additionally, when type annotations are in use, there is currently no simple type that can be used for an argument that takes an arbitrary shape- or value-castable object. These new classes provide such a simple type.</p>
-<h2 id="guide-level-explanation-13"><a class="header" href="#guide-level-explanation-13">Guide-level explanation</a></h2>
+<h2 id="guide-level-explanation-14"><a class="header" href="#guide-level-explanation-14">Guide-level explanation</a></h2>
 <p>In Amaranth, multiple types of objects can be cast to shapes:</p>
 <ul>
 <li>actual <code>Shape</code> objects</li>
@@ -2197,7 +2661,7 @@ class, providing it the <code>EnumView</code> as <code>self</code>.</p>
 <li>values of <code>Enum</code> subclasses with const-castable values</li>
 </ul>
 <p>To check whether an object is of a type that can be cast to a value, <code>isinstance(obj, ValueLike)</code> can be used. To check whether a type can be, in general, cast to a value, <code>issubclass(cls, ValueLike)</code> can be used.</p>
-<h2 id="reference-level-explanation-13"><a class="header" href="#reference-level-explanation-13">Reference-level explanation</a></h2>
+<h2 id="reference-level-explanation-14"><a class="header" href="#reference-level-explanation-14">Reference-level explanation</a></h2>
 <p>A <code>ShapeLike</code> class is provided. It cannot be constructed, and can only be used with <code>isinstance</code> and <code>issubclass</code>, which are overriden by a custom metaclass.</p>
 <p><code>issubclass(cls, ShapeLike)</code> returns <code>True</code> for:</p>
 <ul>
@@ -2223,20 +2687,20 @@ class, providing it the <code>EnumView</code> as <code>self</code>.</p>
 <li><code>enum.Enum</code> subclasses where every value is a <code>ValueLike</code></li>
 </ul>
 <p><code>isinstance(obj, ValueLike)</code> returns <code>True</code> iff <code>issubclass(type(obj), ValueLike)</code> returns <code>True</code>.</p>
-<h2 id="drawbacks-18"><a class="header" href="#drawbacks-18">Drawbacks</a></h2>
+<h2 id="drawbacks-19"><a class="header" href="#drawbacks-19">Drawbacks</a></h2>
 <p>More moving parts in the language.</p>
 <p><code>isinstance(obj, ShapeLike)</code> does not actually guarantee that <code>Shape.cast(obj)</code> will succeed — the instance check looks only at surface-level information, and an exception can still be thrown. <code>issubclass(cls, ShapeLike)</code> is, by necessity, even more inaccurate.</p>
-<h2 id="rationale-and-alternatives-17"><a class="header" href="#rationale-and-alternatives-17">Rationale and alternatives</a></h2>
+<h2 id="rationale-and-alternatives-18"><a class="header" href="#rationale-and-alternatives-18">Rationale and alternatives</a></h2>
 <p>There are many ways to implement the instance and subclass checks, some more precise (and complex) than others. The semantics described above are a compromise.</p>
 <p>For <code>isinstance</code>, a simple variant would be to just try <code>Shape.cast</code> or <code>Value.cast</code> and see if it raises an exception. However, this will sometimes result in <code>isinstance(MyShapeCastable(), ShapeLike)</code> returning <code>False</code>, which may be very unintuitive and hide bugs.</p>
 <p>The check for a valid shape-castable enum described above is an approximation — the actual logic used requires all values of an enum to be <em>const</em>-castable, not just value-castable. However, there is no way to check this without actually invoking <code>Value.cast</code> on the enum members.</p>
 <h2 id="prior-art-16"><a class="header" href="#prior-art-16">Prior art</a></h2>
 <p>Python has the concept of abstract base classes, such as <code>collections.abc.Sequence</code>, which can be used for subclass checking even if they are not actual superclasses of the types involved. <code>ShapeLike</code> and <code>ValueLike</code> are effectively ABCs, though they do not use the actual ABC machinery (due to having custom logic in instance checking).</p>
-<h2 id="unresolved-questions-17"><a class="header" href="#unresolved-questions-17">Unresolved questions</a></h2>
+<h2 id="unresolved-questions-18"><a class="header" href="#unresolved-questions-18">Unresolved questions</a></h2>
 <ul>
 <li>Should the exact details of the instance and subclass checks be changed?</li>
 </ul>
-<h2 id="future-possibilities-17"><a class="header" href="#future-possibilities-17">Future possibilities</a></h2>
+<h2 id="future-possibilities-18"><a class="header" href="#future-possibilities-18">Future possibilities</a></h2>
 <p>A similar ABC-like class has been proposed for <code>lib.wiring</code> interfaces.</p>
 <div style="break-before: page; page-break-before: always;"></div><ul>
 <li>Start Date: 2023-12-11</li>
@@ -2244,9 +2708,9 @@ class, providing it the <code>EnumView</code> as <code>self</code>.</p>
 <li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/995">amaranth-lang/amaranth#995</a></li>
 </ul>
 <h1 id="make-signature-immutable"><a class="header" href="#make-signature-immutable">Make <code>Signature</code> immutable</a></h1>
-<h2 id="summary-20"><a class="header" href="#summary-20">Summary</a></h2>
+<h2 id="summary-21"><a class="header" href="#summary-21">Summary</a></h2>
 <p>Remove mutability from <code>amaranth.lib.wiring.Signature</code>.</p>
-<h2 id="motivation-20"><a class="header" href="#motivation-20">Motivation</a></h2>
+<h2 id="motivation-21"><a class="header" href="#motivation-21">Motivation</a></h2>
 <p>At the time of writing, <code>Signature</code> allows limited mutability: members can be added, but not removed or changed; and a signature may be frozen, preventing further mutation.</p>
 <p>The intent behind this feature was unfortunately never explicitly described. I (Catherine) came up with it, to cover the following case: suppose an interface without certain features needs to be connected to an interface with such features. For example, a Wishbone initiator that does not handle errors needs to be connected to a Wishbone decoder that does. In this case, a method on the Wishbone initiator's interface could be used to add a dummy <code>err</code> output, which will always remain at its reset value, zero.</p>
 <p>This intent was never realized as the feature was never actually used by Amaranth SoC. In addition, it turned out to be problematic when combined with variable annotations. Consider this class definition:</p>
@@ -2261,17 +2725,17 @@ class, providing it the <code>EnumView</code> as <code>self</code>.</p>
 <p>The <code>SignatureMembers.freeze</code>, <code>SignatureMembers.frozen</code>, <code>Signature.freeze</code>, <code>Signature.frozen</code>, <code>FlippedSignatureMembers.freeze</code>, <code>FlippedSignatureMembers.frozen</code>, <code>FlippedSignature.freeze</code>, <code>FlippedSignature.frozen</code>, <code>SignatureMembers.__iadd__</code>, <code>SignatureMembers.__setitem__</code>, <code>FlippedSignatureMembers.__iadd__</code>, <code>FlippedSignatureMembers.__setitem__</code> methods and properties are removed.</p>
 <p><code>SignatureMembers</code> becomes an immutable mapping.</p>
 <p><code>Signature</code> becomes immutable. Subclasses of <code>Signature</code> are required to ensure any additional methods or properties do not allow mutation.</p>
-<h2 id="drawbacks-19"><a class="header" href="#drawbacks-19">Drawbacks</a></h2>
+<h2 id="drawbacks-20"><a class="header" href="#drawbacks-20">Drawbacks</a></h2>
 <p>The author is not aware of anyone actually using this feature.</p>
-<h2 id="rationale-and-alternatives-18"><a class="header" href="#rationale-and-alternatives-18">Rationale and alternatives</a></h2>
+<h2 id="rationale-and-alternatives-19"><a class="header" href="#rationale-and-alternatives-19">Rationale and alternatives</a></h2>
 <p>An alternative to this proposal would be to automatically freeze any signature that is used in <code>wiring.Component</code> variable annotations. This does not address similar hazards, such as the case of a user-defined constant <code>SomeSignature = Signature({...})</code>, which is also a legitimate way to define a signature that does not require parameterization. It also would not address hazards associated with interior mutability.</p>
 <h2 id="prior-art-17"><a class="header" href="#prior-art-17">Prior art</a></h2>
 <p>None seems applicable. Mutation of interface definitions is uncommon in first place (excluding languages where everything is mutable, like Python).</p>
-<h2 id="unresolved-questions-18"><a class="header" href="#unresolved-questions-18">Unresolved questions</a></h2>
+<h2 id="unresolved-questions-19"><a class="header" href="#unresolved-questions-19">Unresolved questions</a></h2>
 <ul>
 <li>Should <em>all</em> interior mutability be prohibited? At the moment it is not completely clear where memory maps should be attached, and requiring no interior mutability would mean it cannot be <code>Signature</code> no matter what. Interior mutability could be left to specific <code>Signature</code> subclasses instead on an experimental basis, and prohibited later if it turns out to be a bad idea.</li>
 </ul>
-<h2 id="future-possibilities-18"><a class="header" href="#future-possibilities-18">Future possibilities</a></h2>
+<h2 id="future-possibilities-19"><a class="header" href="#future-possibilities-19">Future possibilities</a></h2>
 <p>Reintroducing mutability of <code>Signature</code> after it has been removed will be unfeasible due to expectation of immutability being baked in widely in downstream code. Once we commit to this RFC we will have to commit to it effectively forever.</p>
 <div style="break-before: page; page-break-before: always;"></div><ul>
 <li>Start Date: 2023-12-11</li>
@@ -2279,13 +2743,13 @@ class, providing it the <code>EnumView</code> as <code>self</code>.</p>
 <li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/996">amaranth-lang/amaranth#996</a></li>
 </ul>
 <h1 id="componentsignature-immutability"><a class="header" href="#componentsignature-immutability"><code>Component.signature</code> immutability</a></h1>
-<h2 id="summary-21"><a class="header" href="#summary-21">Summary</a></h2>
+<h2 id="summary-22"><a class="header" href="#summary-22">Summary</a></h2>
 <p>Clearly define the contract for <code>amaranth.lib.wiring.Component.signature</code>: an <code>amaranth.lib.wiring.Signature</code> object is assigned in the constructor to the read-only property <code>.signature</code>.</p>
-<h2 id="motivation-21"><a class="header" href="#motivation-21">Motivation</a></h2>
+<h2 id="motivation-22"><a class="header" href="#motivation-22">Motivation</a></h2>
 <p>It is important that the signature of an interface object never change. <code>connect</code> relies on the signature to check that the connection being made is valid; if the signature changes after the connection is made (intentionally or accidentally), the design would silently break in a difficult to debug ways. For an ASIC this may mean a respin.</p>
 <p>Right now, the guidance for the case where the default behavior of <code>Component.signature</code> is insufficient (i.e. for parametric components) and the generation of the signature must be customized, is to override the <code>signature</code> property, or to assign <code>self.signature =</code> in the constructor. This is clearly wrong: both of these approaches can easily result in the signature changing after construction of the component.</p>
 <p>Moreover, at the moment, the implementation of the <code>Component.signature</code> property creates a new <code>Signature</code> object every time it is called. If the identity of the <code>Signature</code> object is important (i.e. if it has interior mutability, which is currently the case in Amaranth SoC), this is unsound. (It is unlikely, though not impossible, that this implementation would return an object with different members.)</p>
-<h2 id="guide-level-explanation-14"><a class="header" href="#guide-level-explanation-14">Guide-level explanation</a></h2>
+<h2 id="guide-level-explanation-15"><a class="header" href="#guide-level-explanation-15">Guide-level explanation</a></h2>
 <p>To define a simple component whose signature does not change, use variable annotations:</p>
 <pre><code class="language-python">class SimpleComponent(wiring.Component):
     en: In(1)
@@ -2300,7 +2764,7 @@ class, providing it the <code>EnumView</code> as <code>self</code>.</p>
         })
 </code></pre>
 <p>Do not override the <code>signature</code> property, as both Amaranth and third-party code relies on the fact that it is assigned in the constructor and never changes.</p>
-<h2 id="reference-level-explanation-14"><a class="header" href="#reference-level-explanation-14">Reference-level explanation</a></h2>
+<h2 id="reference-level-explanation-15"><a class="header" href="#reference-level-explanation-15">Reference-level explanation</a></h2>
 <p>The constructor of <code>Component</code> is updated to take one argument: <code>def __init__(self, signature=None)</code>.</p>
 <ul>
 <li>If the <code>signature</code> argument is not provided, the signature is derived from class variable annotations, as in RFC 2, and assigned to an internal attribute.</li>
@@ -2316,13 +2780,13 @@ class, providing it the <code>EnumView</code> as <code>self</code>.</p>
 <p>The <code>signature</code> property is redefined to return the value of this internal attribute.</p>
 <p>No access to this attribute is provided besides the means above, and the name of the attribute is not defined in the documentation.</p>
 <p>After assigning the internal attribute, the constructor creates the members as in RFC 2.</p>
-<h2 id="drawbacks-20"><a class="header" href="#drawbacks-20">Drawbacks</a></h2>
+<h2 id="drawbacks-21"><a class="header" href="#drawbacks-21">Drawbacks</a></h2>
 <p>None. This properly enforces an invariant that is already relied upon.</p>
-<h2 id="rationale-and-alternatives-19"><a class="header" href="#rationale-and-alternatives-19">Rationale and alternatives</a></h2>
+<h2 id="rationale-and-alternatives-20"><a class="header" href="#rationale-and-alternatives-20">Rationale and alternatives</a></h2>
 <p>Some other behaviors were considered for <code>Component</code>: those which would made <code>signature</code> a class attribute, assigned in <code>__init_subclass__</code>. However, this option would leave the <code>signature</code> attribute mutable (as class-level properties are not reasonably supported in Python), which is undesirable, and significantly complicated the case of signatures with interior mutability.</p>
-<h2 id="unresolved-questions-19"><a class="header" href="#unresolved-questions-19">Unresolved questions</a></h2>
+<h2 id="unresolved-questions-20"><a class="header" href="#unresolved-questions-20">Unresolved questions</a></h2>
 <p>None.</p>
-<h2 id="future-possibilities-19"><a class="header" href="#future-possibilities-19">Future possibilities</a></h2>
+<h2 id="future-possibilities-20"><a class="header" href="#future-possibilities-20">Future possibilities</a></h2>
 <p>None.</p>
 <div style="break-before: page; page-break-before: always;"></div><ul>
 <li>Start Date: 2024-01-08</li>
@@ -2330,31 +2794,31 @@ class, providing it the <code>EnumView</code> as <code>self</code>.</p>
 <li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/1021">amaranth-lang/amaranth#1021</a></li>
 </ul>
 <h1 id="change-semantics-of-no-argument-mcase"><a class="header" href="#change-semantics-of-no-argument-mcase">Change semantics of no-argument <code>m.Case()</code></a></h1>
-<h2 id="summary-22"><a class="header" href="#summary-22">Summary</a></h2>
+<h2 id="summary-23"><a class="header" href="#summary-23">Summary</a></h2>
 <p>Change the semantics of <code>with m.Case():</code> (without any arguments) from always-true conditional to always-false conditional. Likewise, change <code>value.matches()</code> from returning <code>C(1)</code> to returning <code>C(0)</code>.</p>
-<h2 id="motivation-22"><a class="header" href="#motivation-22">Motivation</a></h2>
+<h2 id="motivation-23"><a class="header" href="#motivation-23">Motivation</a></h2>
 <p>Currently, <code>with m.Case():</code> results in an always-true conditional, and <code>value.matches()</code> likewise returns a const-1 value. However, this is not consistent with what would be expected from extrapolating the non-empty case.</p>
 <p>In all non-empty cases, the semantics are equivalent to an OR of equality comparisons with all specified values:</p>
 <p><code>value.matches(1, 2, 3) =def= (value == 1) | (value == 2) | (value == 3)</code></p>
 <p><code>value.matches(1, 2, 3) =def= Const(0) | (value == 1) | (value == 2) | (value == 3)</code></p>
 <p>Extrapolating from this, one would expect <code>value.matches()</code> to be the empty OR, ie. <code>Const(0)</code>.</p>
 <p>It is unlikely that any manually written code will rely on this, but this can be a dangerous trap for machine-generated code that doesn't take the empty case into account.</p>
-<h2 id="guide-level-explanation-15"><a class="header" href="#guide-level-explanation-15">Guide-level explanation</a></h2>
+<h2 id="guide-level-explanation-16"><a class="header" href="#guide-level-explanation-16">Guide-level explanation</a></h2>
 <p>The semantics of <code>m.Case()</code> change from always matching to never matching. Likewise, the semantics of <code>value.matches()</code> change from always-1 to always-0. The change is committed to the current <code>main</code> branch and will be included in Amaranth 0.5.</p>
 <p>Amaranth 0.4.1 is released with the old semantics, but a deprecation warning is emitted whenever <code>m.Case()</code> or <code>value.matches()</code> is used.</p>
-<h2 id="reference-level-explanation-15"><a class="header" href="#reference-level-explanation-15">Reference-level explanation</a></h2>
+<h2 id="reference-level-explanation-16"><a class="header" href="#reference-level-explanation-16">Reference-level explanation</a></h2>
 <p>See above.</p>
-<h2 id="drawbacks-21"><a class="header" href="#drawbacks-21">Drawbacks</a></h2>
+<h2 id="drawbacks-22"><a class="header" href="#drawbacks-22">Drawbacks</a></h2>
 <p>Obviously backwards-incompatible, changes the semantics of a language construct to the direct opposite.</p>
-<h2 id="rationale-and-alternatives-20"><a class="header" href="#rationale-and-alternatives-20">Rationale and alternatives</a></h2>
+<h2 id="rationale-and-alternatives-21"><a class="header" href="#rationale-and-alternatives-21">Rationale and alternatives</a></h2>
 <p>It is unlikely anyone actually uses <code>value.matches()</code> directly, since this is just a constant. For generated code, the current semantics is much more likely to be a bug that intended behavior.</p>
 <p>For <code>m.Case()</code> the situation is similar: it is redundant with <code>m.Default()</code>, which should be used instead. It is somewhat possible that there is code out there written by someone who didn't know about <code>m.Default()</code> and ended up using <code>m.Case()</code> instead (the official documentation didn't include either for a long time). This code will need to be fixed.</p>
 <p>An alternative, if the empty case is deemed too confusing or insufficiently useful, is to make the semantics a hard error instead.</p>
 <h2 id="prior-art-18"><a class="header" href="#prior-art-18">Prior art</a></h2>
 <p>The current behavior is likely taken directly from RTLIL, which exhibits a similar inconsistency.</p>
-<h2 id="unresolved-questions-20"><a class="header" href="#unresolved-questions-20">Unresolved questions</a></h2>
+<h2 id="unresolved-questions-21"><a class="header" href="#unresolved-questions-21">Unresolved questions</a></h2>
 <p>Should we include more warnings about the change? This RFC proposes a warning in the 0.4.1 release, but this will never be seen by someone always using amaranth from git main.</p>
-<h2 id="future-possibilities-20"><a class="header" href="#future-possibilities-20">Future possibilities</a></h2>
+<h2 id="future-possibilities-21"><a class="header" href="#future-possibilities-21">Future possibilities</a></h2>
 <p>None.</p>
 
                     </main>
