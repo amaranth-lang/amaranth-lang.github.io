@@ -432,20 +432,12 @@ Signals assigned in a :ref:`combinatorial <lang-comb>` domain are not affected b
    True
 
 
-.. _lang-data:
-
-Data structures
-===============
-
-Amaranth provides aggregate data structures in the standard library module :mod:`amaranth.lib.data`.
-
-
 .. _lang-operators:
 
 Operators
 =========
 
-To describe computations, Amaranth values can be combined with each other or with :ref:`value-like <lang-valuelike>` objects using a rich array of arithmetic, bitwise, logical, bit sequence, and other *operators* to form *expressions*, which are themselves values.
+To describe computations, Amaranth values can be combined with each other or with :ref:`value-like <lang-valuelike>` objects using a rich set of arithmetic, bitwise, logical, bit sequence, and other *operators* to form *expressions*, which are themselves values.
 
 
 .. _lang-abstractexpr:
@@ -795,15 +787,56 @@ Choice operator
 The ``Mux(sel, val1, val0)`` choice expression (similar to the :ref:`conditional expression <python:if_expr>` in Python) is equal to the operand ``val1`` if ``sel`` is non-zero, and to the other operand ``val0`` otherwise. If any of ``val1`` or ``val0`` are signed, the expression itself is signed as well.
 
 
+.. _lang-array:
+
+Arrays
+======
+
+An *array* is a mutable collection that can be indexed not only with an :class:`int` or with a :ref:`value-like <lang-valuelike>` object. When indexed with an :class:`int`, it behaves like a :class:`list`. When indexed with a value-like object, it returns a proxy object containing the elements of the array that has three useful properties:
+
+* The result of accessing an attribute of the proxy object or indexing it is another proxy object that contains the elements transformed in the same way.
+* When the proxy object is :ref:`cast to a value <lang-valuelike>`, all of its elements are also cast to a value, and an element is selected using the index originally used with the array.
+* The proxy object can be used both in an expression and :ref:`as the target of an assignment <lang-assigns>`.
+
+Crucially, this means that any Python object can be added to an array; the only requirement is that the final result of any computation involving it is a value-like object. For example:
+
+.. testcode::
+
+    pixels = Array([
+        {"r": 180, "g": 92, "b": 230},
+        {"r": 74, "g": 130, "b": 128},
+        {"r": 115, "g": 58, "b": 31},
+    ])
+
+.. doctest::
+
+    >>> index = Signal(range(len(pixels)))
+    >>> pixels[index]["r"]
+    (proxy (array [180, 74, 115]) (sig index))
+
+.. note::
+
+    An array becomes immutable after it is indexed for the first time. The elements of the array do not themselves become immutable, but it is not recommended to mutate them as the behavior can become unpredictable.
+
+.. important::
+
+    Each time an array proxy object with ``n`` elements is used in an expression, it generates a multiplexer with ``n`` branches. However, using ``k`` of such array proxy objects in an expression generates a multiplexer with ``n**k`` branches. This can generate extremely large circuits that may quickly exhaust the resources of the synthesis target or even the available RAM.
+
+
+.. _lang-data:
+
+Data structures
+===============
+
+Amaranth provides aggregate data structures in the standard library module :mod:`amaranth.lib.data`.
+
+
 .. _lang-modules:
 
 Modules
 =======
 
-A *module* is a unit of the Amaranth design hierarchy: the smallest collection of logic that can be independently simulated, synthesized, or otherwise processed. Modules associate signals with :ref:`control domains <lang-domains>`, provide :ref:`control flow syntax <lang-control>`, manage clock domains, and aggregate submodules.
-
-.. TODO: link to clock domains
-.. TODO: link to submodules
+A *module* is a unit of the Amaranth design hierarchy: the smallest collection of logic that can be independently simulated, synthesized, or otherwise processed. Modules associate signals with :ref:`control domains <lang-domains>`, provide :ref:`control flow syntax <lang-control>`, manage :ref:`clock domains <lang-clockdomains>`, and aggregate :ref:`submodules <lang-submodules>`.
 
 Every Amaranth design starts with a fresh module:
 
@@ -824,8 +857,6 @@ All designs have a single predefined *combinatorial domain*, containing all sign
 A design can also have any amount of user-defined *synchronous domains*, also called :ref:`clock domains <lang-clockdomains>`, containing signals that change when a specific edge occurs on the domain's clock signal or, for domains with asynchronous reset, on the domain's reset signal. Most modules only use a single synchronous domain, conventionally called ``sync``, but the name ``sync`` does not have to be used, and lacks any special meaning beyond being the default.
 
 The behavior of assignments differs for signals in :ref:`combinatorial <lang-comb>` and :ref:`synchronous <lang-sync>` domains. Collectively, signals in synchronous domains contain the state of a design, whereas signals in the combinatorial domain cannot form feedback loops or hold state.
-
-.. TODO: link to clock domains
 
 
 .. _lang-assigns:
@@ -849,9 +880,7 @@ Similar to :ref:`how Amaranth operators work <lang-abstractexpr>`, an Amaranth a
 Assignment targets
 ------------------
 
-The target of an assignment can be more complex than a single signal. It is possible to assign to any combination of signals, :ref:`bit slices <lang-seqops>`, :ref:`concatenations <lang-seqops>`, and :ref:`part selects <lang-seqops>` as long as it includes no other values:
-
-.. TODO: mention arrays, records, user values
+The target of an assignment can be more complex than a single signal. It is possible to assign to any combination of signals, :ref:`bit slices <lang-seqops>`, :ref:`concatenations <lang-seqops>`, :ref:`part selects <lang-seqops>`, and :ref:`array proxy objects <lang-array>` as long as it includes no other values:
 
 .. doctest::
 
@@ -1385,7 +1414,7 @@ Elaboration
 
 Amaranth designs are built from a hierarchy of smaller subdivisions, which are called *elaboratables*. The process of creating a data structure representing the behavior of a complete design by composing such subdivisions together is called *elaboration*.
 
-An elaboratable is any Python object that inherits from the :class:`Elaboratable` base class and implements the ``elaborate``  method:
+An elaboratable is any Python object that inherits from the :class:`Elaboratable` base class and implements the :meth:`~Elaboratable.elaborate`  method:
 
 .. testcode::
 
@@ -1397,19 +1426,19 @@ An elaboratable is any Python object that inherits from the :class:`Elaboratable
 
             return m
 
-The ``elaborate`` method must either return an instance of :class:`Module` to describe the behavior of the elaboratable, or delegate it by returning another elaboratable object.
+The :meth:`~Elaboratable.elaborate` method must either return an instance of :class:`Module` or :class:`Instance` to describe the behavior of the elaboratable, or delegate it by returning another elaboratable object.
 
 .. note::
 
-    Instances of :class:`Module` also implement the ``elaborate`` method, which returns a special object that represents a fragment of a netlist. Such an object cannot be constructed without using :class:`Module`.
+    Instances of :class:`Module` also implement the :meth:`~Elaboratable.elaborate` method, which returns a special object that represents a fragment of a netlist. Such an object cannot be constructed without using :class:`Module`.
 
-The :pc:`platform` argument received by the ``elaborate`` method can be :pc:`None`, an instance of :ref:`a built-in platform <platform>`, or a custom object. It is used for `dependency injection <https://en.wikipedia.org/wiki/Dependency_injection>`_ and to contain the state of a design while it is being elaborated.
+The :pc:`platform` argument received by the :meth:`~Elaboratable.elaborate` method can be :pc:`None`, an instance of :ref:`a built-in platform <platform>`, or a custom object. It is used for `dependency injection <https://en.wikipedia.org/wiki/Dependency_injection>`_ and to contain the state of a design while it is being elaborated.
 
 .. important::
 
-    The ``elaborate`` method should not modify the ``self`` object it receives other than for debugging and experimentation. Elaborating the same design twice with two identical platform objects should produce two identical netlists. If the design needs to be modified after construction, this should happen before elaboration.
+    The :meth:`~Elaboratable.elaborate` method should not modify the ``self`` object it receives other than for debugging and experimentation. Elaborating the same design twice with two identical platform objects should produce two identical netlists. If the design needs to be modified after construction, this should happen before elaboration.
 
-    It is not possible to ensure that a design which modifies itself during elaboration is correctly converted to a netlist because the relative order in which the ``elaborate`` methods are called within a single design is not guaranteed.
+    It is not possible to ensure that a design which modifies itself during elaboration is correctly converted to a netlist because the relative order in which the :meth:`~Elaboratable.elaborate` methods are called within a single design is not guaranteed.
 
 The Amaranth standard library provides *components*: elaboratable objects that also include a description of their interface. Unless otherwise necessary, an elaboratable should inherit from :class:`amaranth.lib.wiring.Component` rather than plain :class:`Elaboratable`. See the :ref:`introduction to interfaces and components <wiring-introduction>` for details.
 
@@ -1419,7 +1448,7 @@ The Amaranth standard library provides *components*: elaboratable objects that a
 Submodules
 ----------
 
-An elaboratable can be included within another elaboratable by adding it as a submodule:
+An elaboratable can be included within another elaboratable, which is called its *containing elaboratable*, by adding it as a submodule:
 
 .. testcode::
 
@@ -1442,6 +1471,8 @@ A submodule can also be added without specifying a name:
 .. tip::
 
     If a name is not explicitly specified for a submodule, one will be generated and assigned automatically. Designs with many autogenerated names can be difficult to debug, so a name should usually be supplied.
+
+A non-Amaranth design unit can be added as a submodule using an :ref:`instance <lang-instance>`.
 
 
 .. _lang-controlinserter:
@@ -1520,7 +1551,58 @@ The application of control flow modifiers in it causes the behavior of the final
 Renaming domains
 ----------------
 
-.. todo:: Write this section about :class:`DomainRenamer`
+A reusable :ref:`elaboratable <lang-elaboration>` usually specifies the use of one or more :ref:`clock domains <lang-clockdomains>` while leaving the details of clocking and initialization to a later phase in the design process. :class:`DomainRenamer` can be used to alter a reusable elaboratable for integration in a specific design. Most elaboratables use a single clock domain named ``sync``, and :class:`DomainRenamer` makes it easy to place such elaboratables in any clock domain of a design.
+
+Clock domains can be renamed using the syntax :pc:`DomainRenamer(domains)(elaboratable)`, where :pc:`domains` is a mapping from clock domain names to clock domain names and :pc:`elaboratable` is any :ref:`elaboratable <lang-elaboration>` object. The keys of :pc:`domains` correspond to existing clock domain names specified by :pc:`elaboratable`, and the values of :pc:`domains` correspond to the clock domain names from the containing elaboratable that will be used instead. When only the ``sync`` domain is being renamed, instead of writing :pc:`DomainRenamer({"sync": name})(elaboratable)`, the equivalent but shorter :pc:`DomainRenamer(name)(elaboratable)` syntax can be used.
+
+The result of renaming clock domains in an elaboratable is, itself, an elaboratable object. A common way to rename domains is to apply :class:`DomainRenamer` to another elaboratable while adding it as a submodule:
+
+.. testcode::
+    :hide:
+
+    m = Module()
+
+.. testcode::
+
+    m.submodules.counter = counter = DomainRenamer("video")(counter)
+
+Renaming a clock domain affects all logic within a given elaboratable and clock domain, which includes the submodules of that elaboratable. It does not affect any logic outside of that elaboratable.
+
+.. note::
+
+    Renaming domains in an elaboratable does not mutate it; a new proxy object is returned that forwards attribute accesses and method calls to the original elaboratable. Whenever this proxy object is elaborated, it manipulates the circuit defined by the original elaboratable to use the requested clock domain.
+
+.. note::
+
+    It is possible to rename domains in an elaboratable and also apply :ref:`control flow modifiers <lang-controlinserter>`.
+
+Consider the following code:
+
+.. testcode::
+    :hide:
+
+    count = Signal(8)
+    zero = Signal()
+
+.. testcode::
+
+    m = Module()
+    m.d.sync += count.eq(count + 1)
+    m.d.comb += zero.eq(count == 0)
+
+    m = DomainRenamer({"sync": "video"})(m)
+
+The renaming of the ``sync`` clock domain in it causes the behavior of the final :pc:`m` to be identical to that of this module:
+
+.. testcode::
+
+    m = Module()
+    m.d.video += count.eq(count + 1)
+    m.d.comb += zero.eq(count == 0)
+
+.. tip::
+
+    A combinatorial signal can change synchronously to a clock domain, as in the example above, in which case it may only be sampled from the same clock domain unless explicitly synchronized. Renaming a clock domain must be assumed to potentially affect any output of an elaboratable.
 
 
 .. _lang-memory:
@@ -1531,7 +1613,97 @@ Memories
 .. todo:: Write this section.
 
 
+.. _lang-instance:
+
 Instances
 =========
 
-.. todo:: Write this section.
+.. attributes are not documented because they can be easily used to break soundness and we don't document them for signals either; they are rarely necessary for interoperability
+
+A submodule written in a non-Amaranth language is called an *instance*. An instance can be written in any language supported by the synthesis toolchain; usually, that is (System)Verilog, VHDL, or a language that is translated to one of those two. Adding an instance as a submodule corresponds to "module instantiation" in (System)Verilog and "component instantiation" in VHDL, and is done by specifying the following:
+
+* The *type* of an instance is the name of a (System)Verilog module, VHDL entity or component, or another HDL design unit that is being instantiated.
+* The *name* of an instance is the name of the submodule within the containing elaboratable.
+* The *attributes* of an instance correspond to attributes of a (System)Verilog module instance, or a custom attribute of a VHDL entity or component instance. Attributes applied to instances are interpreted by the synthesis toolchain rather than the HDL.
+* The *parameters* of an instance correspond to parameters of a (System)Verilog module instance, or a generic constant of a VHDL entity or component instance. Not all HDLs allow their design units to be parameterized during instantiation.
+* The *inputs* and *outputs* of an instance correspond to inputs and outputs of the external design unit.
+
+An instance can be added as a submodule using the :pc:`m.submodules.name = Instance("type", ...)` syntax, where :pc:`"type"` is the type of the instance as a string (which is passed to the synthesis toolchain uninterpreted), and :pc:`...` is a list of parameters, inputs, and outputs. Depending on whether the name of an attribute, parameter, input, or output can be written as a part of a Python identifier or not, one of two possible syntaxes is used to specify them:
+
+* An attribute is specified using the :pc:`a_ANAME=attr` or :pc:`("a", "ANAME", attr)` syntaxes. The :pc:`attr` must be an :class:`int`, a :class:`str`, or a :class:`Const`.
+* A parameter is specified using the :pc:`p_PNAME=param` or :pc:`("p", "PNAME", param)` syntaxes. The :pc:`param` must be an :class:`int`, a :class:`str`, or a :class:`Const`.
+* An input is specified using the :pc:`i_INAME=in_val` or :pc:`("i", "INAME", in_val)` syntaxes. The :pc:`in_val` must be a :ref:`value-like <lang-valuelike>` object.
+* An output is specified using the :pc:`o_ONAME=out_val` or :pc:`("o", "ONAME", out_val)` syntaxes. The :pc:`out_val` must be a :ref:`value-like <lang-valuelike>` object that casts to a :class:`Signal`.
+
+The two following examples use both syntaxes to add the same instance of type ``external`` as a submodule named ``processor``:
+
+.. testcode::
+    :hide:
+
+    i_data = Signal(8)
+    o_data = Signal(8)
+    m = Module()
+
+.. testcode::
+
+    m.submodules.processor = Instance("external",
+        p_width=8,
+        i_clk=ClockSignal(),
+        i_rst=ResetSignal(),
+        i_en=1,
+        i_mode=Const(3, unsigned(4)),
+        i_data_in=i_data,
+        o_data_out=o_data,
+    )
+
+.. testcode::
+    :hide:
+
+    m = Module()
+
+.. testcode::
+
+    m.submodules.processor = Instance("external",
+        ("p", "width", 8),
+        ("i", "clk", ClockSignal()),
+        ("i", "rst", ResetSignal()),
+        ("i", "en", 1),
+        ("i", "mode", Const(3, unsigned(4))),
+        ("i", "data_in", i_data),
+        ("o", "data_out", o_data),
+    )
+
+Like a regular submodule, an instance can also be added without specifying a name:
+
+.. testcode::
+
+    m.submodules += Instance("external",
+        # ...
+    )
+
+.. tip::
+
+    If a name is not explicitly specified for a submodule, one will be generated and assigned automatically. Designs with many autogenerated names can be difficult to debug, so a name should usually be supplied.
+
+Although an :class:`Instance` is not an elaboratable, as a special case, it can be returned from the :pc:`elaborate()` method. This is conveinent for implementing an elaboratable that adorns an instance with an Amaranth interface:
+
+.. testcode::
+
+    from amaranth import vendor
+
+
+    class FlipFlop(Elaboratable):
+        def __init__(self):
+            self.d = Signal()
+            self.q = Signal()
+
+        def elaborate(self, platform):
+            # Decide on the instance to use based on the platform we are elaborating for.
+            if isinstance(platform, vendor.LatticeICE40Platform):
+                return Instance("SB_DFF",
+                    i_C=ClockSignal(),
+                    i_D=self.d,
+                    o_Q=self.q
+                )
+            else:
+                raise NotImplementedError

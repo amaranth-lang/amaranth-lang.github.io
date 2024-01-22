@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Language guide &mdash; Amaranth language &amp; toolchain 0.4.1.dev41 documentation</title>
+  <title>Language guide &mdash; Amaranth language &amp; toolchain 0.4.1.dev45 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -15,7 +15,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=28101063"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=d4610ac4"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/platformpicker.js"></script>
@@ -39,7 +39,7 @@
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.4.1.dev41+gdb7e649
+                0.4.1.dev45+g0ea2aa6
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -82,7 +82,6 @@
 <li class="toctree-l4"><a class="reference internal" href="#reset-less-signals">Reset-less signals</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#data-structures">Data structures</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#operators">Operators</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#performing-or-describing-computations">Performing or describing computations?</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#width-extension">Width extension</a></li>
@@ -97,6 +96,8 @@
 <li class="toctree-l4"><a class="reference internal" href="#choice-operator">Choice operator</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#arrays">Arrays</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data-structures">Data structures</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#modules">Modules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#control-domains">Control domains</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#assigning-to-signals">Assigning to signals</a></li>
@@ -453,13 +454,9 @@ This happens because, being empty, it does not contain any negative values.</p>
 </div>
 </section>
 </section>
-<section id="data-structures">
-<span id="lang-data"></span><h2>Data structures<a class="headerlink" href="#data-structures" title="Permalink to this heading"></a></h2>
-<p>Amaranth provides aggregate data structures in the standard library module <a class="reference internal" href="stdlib/data.html#module-amaranth.lib.data" title="amaranth.lib.data"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.data</span></code></a>.</p>
-</section>
 <section id="operators">
 <span id="lang-operators"></span><h2>Operators<a class="headerlink" href="#operators" title="Permalink to this heading"></a></h2>
-<p>To describe computations, Amaranth values can be combined with each other or with <a class="reference internal" href="#lang-valuelike"><span class="std std-ref">value-like</span></a> objects using a rich array of arithmetic, bitwise, logical, bit sequence, and other <em>operators</em> to form <em>expressions</em>, which are themselves values.</p>
+<p>To describe computations, Amaranth values can be combined with each other or with <a class="reference internal" href="#lang-valuelike"><span class="std std-ref">value-like</span></a> objects using a rich set of arithmetic, bitwise, logical, bit sequence, and other <em>operators</em> to form <em>expressions</em>, which are themselves values.</p>
 <section id="performing-or-describing-computations">
 <span id="lang-abstractexpr"></span><h3>Performing or describing computations?<a class="headerlink" href="#performing-or-describing-computations" title="Permalink to this heading"></a></h3>
 <p>Code written in the Python language <em>performs</em> computations on concrete objects, like integers, with the goal of calculating a concrete result:</p>
@@ -886,9 +883,43 @@ This happens because, being empty, it does not contain any negative values.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">Mux(sel,</span> <span class="pre">val1,</span> <span class="pre">val0)</span></code> choice expression (similar to the <a class="reference external" href="https://docs.python.org/3/reference/expressions.html#if-expr" title="(in Python v3.12)"><span class="xref std std-ref">conditional expression</span></a> in Python) is equal to the operand <code class="docutils literal notranslate"><span class="pre">val1</span></code> if <code class="docutils literal notranslate"><span class="pre">sel</span></code> is non-zero, and to the other operand <code class="docutils literal notranslate"><span class="pre">val0</span></code> otherwise. If any of <code class="docutils literal notranslate"><span class="pre">val1</span></code> or <code class="docutils literal notranslate"><span class="pre">val0</span></code> are signed, the expression itself is signed as well.</p>
 </section>
 </section>
+<section id="arrays">
+<span id="lang-array"></span><h2>Arrays<a class="headerlink" href="#arrays" title="Permalink to this heading"></a></h2>
+<p>An <em>array</em> is a mutable collection that can be indexed not only with an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> or with a <a class="reference internal" href="#lang-valuelike"><span class="std std-ref">value-like</span></a> object. When indexed with an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, it behaves like a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>. When indexed with a value-like object, it returns a proxy object containing the elements of the array that has three useful properties:</p>
+<ul class="simple">
+<li><p>The result of accessing an attribute of the proxy object or indexing it is another proxy object that contains the elements transformed in the same way.</p></li>
+<li><p>When the proxy object is <a class="reference internal" href="#lang-valuelike"><span class="std std-ref">cast to a value</span></a>, all of its elements are also cast to a value, and an element is selected using the index originally used with the array.</p></li>
+<li><p>The proxy object can be used both in an expression and <a class="reference internal" href="#lang-assigns"><span class="std std-ref">as the target of an assignment</span></a>.</p></li>
+</ul>
+<p>Crucially, this means that any Python object can be added to an array; the only requirement is that the final result of any computation involving it is a value-like object. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pixels</span> <span class="o">=</span> <span class="n">Array</span><span class="p">([</span>
+    <span class="p">{</span><span class="s2">&quot;r&quot;</span><span class="p">:</span> <span class="mi">180</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">:</span> <span class="mi">92</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mi">230</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;r&quot;</span><span class="p">:</span> <span class="mi">74</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">:</span> <span class="mi">130</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mi">128</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;r&quot;</span><span class="p">:</span> <span class="mi">115</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">:</span> <span class="mi">58</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mi">31</span><span class="p">},</span>
+<span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">index</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pixels</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pixels</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s2">&quot;r&quot;</span><span class="p">]</span>
+<span class="go">(proxy (array [180, 74, 115]) (sig index))</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>An array becomes immutable after it is indexed for the first time. The elements of the array do not themselves become immutable, but it is not recommended to mutate them as the behavior can become unpredictable.</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Each time an array proxy object with <code class="docutils literal notranslate"><span class="pre">n</span></code> elements is used in an expression, it generates a multiplexer with <code class="docutils literal notranslate"><span class="pre">n</span></code> branches. However, using <code class="docutils literal notranslate"><span class="pre">k</span></code> of such array proxy objects in an expression generates a multiplexer with <code class="docutils literal notranslate"><span class="pre">n**k</span></code> branches. This can generate extremely large circuits that may quickly exhaust the resources of the synthesis target or even the available RAM.</p>
+</div>
+</section>
+<section id="data-structures">
+<span id="lang-data"></span><h2>Data structures<a class="headerlink" href="#data-structures" title="Permalink to this heading"></a></h2>
+<p>Amaranth provides aggregate data structures in the standard library module <a class="reference internal" href="stdlib/data.html#module-amaranth.lib.data" title="amaranth.lib.data"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.data</span></code></a>.</p>
+</section>
 <section id="modules">
 <span id="lang-modules"></span><h2>Modules<a class="headerlink" href="#modules" title="Permalink to this heading"></a></h2>
-<p>A <em>module</em> is a unit of the Amaranth design hierarchy: the smallest collection of logic that can be independently simulated, synthesized, or otherwise processed. Modules associate signals with <a class="reference internal" href="#lang-domains"><span class="std std-ref">control domains</span></a>, provide <a class="reference internal" href="#lang-control"><span class="std std-ref">control flow syntax</span></a>, manage clock domains, and aggregate submodules.</p>
+<p>A <em>module</em> is a unit of the Amaranth design hierarchy: the smallest collection of logic that can be independently simulated, synthesized, or otherwise processed. Modules associate signals with <a class="reference internal" href="#lang-domains"><span class="std std-ref">control domains</span></a>, provide <a class="reference internal" href="#lang-control"><span class="std std-ref">control flow syntax</span></a>, manage <a class="reference internal" href="#lang-clockdomains"><span class="std std-ref">clock domains</span></a>, and aggregate <a class="reference internal" href="#lang-submodules"><span class="std std-ref">submodules</span></a>.</p>
 <p>Every Amaranth design starts with a fresh module:</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">Module</span><span class="p">()</span>
 </pre></div>
@@ -912,7 +943,7 @@ This happens because, being empty, it does not contain any negative values.</p>
 </section>
 <section id="assignment-targets">
 <span id="lang-assignlhs"></span><h3>Assignment targets<a class="headerlink" href="#assignment-targets" title="Permalink to this heading"></a></h3>
-<p>The target of an assignment can be more complex than a single signal. It is possible to assign to any combination of signals, <a class="reference internal" href="#lang-seqops"><span class="std std-ref">bit slices</span></a>, <a class="reference internal" href="#lang-seqops"><span class="std std-ref">concatenations</span></a>, and <a class="reference internal" href="#lang-seqops"><span class="std std-ref">part selects</span></a> as long as it includes no other values:</p>
+<p>The target of an assignment can be more complex than a single signal. It is possible to assign to any combination of signals, <a class="reference internal" href="#lang-seqops"><span class="std std-ref">bit slices</span></a>, <a class="reference internal" href="#lang-seqops"><span class="std std-ref">concatenations</span></a>, <a class="reference internal" href="#lang-seqops"><span class="std std-ref">part selects</span></a>, and <a class="reference internal" href="#lang-array"><span class="std std-ref">array proxy objects</span></a> as long as it includes no other values:</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Cat</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -1268,7 +1299,7 @@ inside `Else`
 <section id="elaboration">
 <span id="lang-elaboration"></span><h2>Elaboration<a class="headerlink" href="#elaboration" title="Permalink to this heading"></a></h2>
 <p>Amaranth designs are built from a hierarchy of smaller subdivisions, which are called <em>elaboratables</em>. The process of creating a data structure representing the behavior of a complete design by composing such subdivisions together is called <em>elaboration</em>.</p>
-<p>An elaboratable is any Python object that inherits from the <code class="xref py py-class docutils literal notranslate"><span class="pre">Elaboratable</span></code> base class and implements the <code class="docutils literal notranslate"><span class="pre">elaborate</span></code>  method:</p>
+<p>An elaboratable is any Python object that inherits from the <code class="xref py py-class docutils literal notranslate"><span class="pre">Elaboratable</span></code> base class and implements the <code class="xref py py-meth docutils literal notranslate"><span class="pre">elaborate()</span></code>  method:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Counter</span><span class="p">(</span><span class="n">Elaboratable</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">elaborate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
         <span class="n">m</span> <span class="o">=</span> <span class="n">Module</span><span class="p">()</span>
@@ -1278,21 +1309,21 @@ inside `Else`
         <span class="k">return</span> <span class="n">m</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">elaborate</span></code> method must either return an instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> to describe the behavior of the elaboratable, or delegate it by returning another elaboratable object.</p>
+<p>The <code class="xref py py-meth docutils literal notranslate"><span class="pre">elaborate()</span></code> method must either return an instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">Instance</span></code> to describe the behavior of the elaboratable, or delegate it by returning another elaboratable object.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Instances of <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> also implement the <code class="docutils literal notranslate"><span class="pre">elaborate</span></code> method, which returns a special object that represents a fragment of a netlist. Such an object cannot be constructed without using <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code>.</p>
+<p>Instances of <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> also implement the <code class="xref py py-meth docutils literal notranslate"><span class="pre">elaborate()</span></code> method, which returns a special object that represents a fragment of a netlist. Such an object cannot be constructed without using <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code>.</p>
 </div>
-<p>The <code class="code highlight pc python docutils literal highlight-python"><span class="n">platform</span></code> argument received by the <code class="docutils literal notranslate"><span class="pre">elaborate</span></code> method can be <code class="code highlight pc python docutils literal highlight-python"><span class="kc">None</span></code>, an instance of <a class="reference internal" href="platform.html#platform"><span class="std std-ref">a built-in platform</span></a>, or a custom object. It is used for <a class="reference external" href="https://en.wikipedia.org/wiki/Dependency_injection">dependency injection</a> and to contain the state of a design while it is being elaborated.</p>
+<p>The <code class="code highlight pc python docutils literal highlight-python"><span class="n">platform</span></code> argument received by the <code class="xref py py-meth docutils literal notranslate"><span class="pre">elaborate()</span></code> method can be <code class="code highlight pc python docutils literal highlight-python"><span class="kc">None</span></code>, an instance of <a class="reference internal" href="platform.html#platform"><span class="std std-ref">a built-in platform</span></a>, or a custom object. It is used for <a class="reference external" href="https://en.wikipedia.org/wiki/Dependency_injection">dependency injection</a> and to contain the state of a design while it is being elaborated.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">elaborate</span></code> method should not modify the <code class="docutils literal notranslate"><span class="pre">self</span></code> object it receives other than for debugging and experimentation. Elaborating the same design twice with two identical platform objects should produce two identical netlists. If the design needs to be modified after construction, this should happen before elaboration.</p>
-<p>It is not possible to ensure that a design which modifies itself during elaboration is correctly converted to a netlist because the relative order in which the <code class="docutils literal notranslate"><span class="pre">elaborate</span></code> methods are called within a single design is not guaranteed.</p>
+<p>The <code class="xref py py-meth docutils literal notranslate"><span class="pre">elaborate()</span></code> method should not modify the <code class="docutils literal notranslate"><span class="pre">self</span></code> object it receives other than for debugging and experimentation. Elaborating the same design twice with two identical platform objects should produce two identical netlists. If the design needs to be modified after construction, this should happen before elaboration.</p>
+<p>It is not possible to ensure that a design which modifies itself during elaboration is correctly converted to a netlist because the relative order in which the <code class="xref py py-meth docutils literal notranslate"><span class="pre">elaborate()</span></code> methods are called within a single design is not guaranteed.</p>
 </div>
 <p>The Amaranth standard library provides <em>components</em>: elaboratable objects that also include a description of their interface. Unless otherwise necessary, an elaboratable should inherit from <a class="reference internal" href="stdlib/wiring.html#amaranth.lib.wiring.Component" title="amaranth.lib.wiring.Component"><code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.lib.wiring.Component</span></code></a> rather than plain <code class="xref py py-class docutils literal notranslate"><span class="pre">Elaboratable</span></code>. See the <a class="reference internal" href="stdlib/wiring.html#wiring-introduction"><span class="std std-ref">introduction to interfaces and components</span></a> for details.</p>
 <section id="submodules">
 <span id="lang-submodules"></span><h3>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h3>
-<p>An elaboratable can be included within another elaboratable by adding it as a submodule:</p>
+<p>An elaboratable can be included within another elaboratable, which is called its <em>containing elaboratable</em>, by adding it as a submodule:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">submodules</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="n">counter</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1310,6 +1341,7 @@ inside `Else`
 <p class="admonition-title">Tip</p>
 <p>If a name is not explicitly specified for a submodule, one will be generated and assigned automatically. Designs with many autogenerated names can be difficult to debug, so a name should usually be supplied.</p>
 </div>
+<p>A non-Amaranth design unit can be added as a submodule using an <a class="reference internal" href="#lang-instance"><span class="std std-ref">instance</span></a>.</p>
 </section>
 <section id="modifying-control-flow">
 <span id="lang-controlinserter"></span><h3>Modifying control flow<a class="headerlink" href="#modifying-control-flow" title="Permalink to this heading"></a></h3>
@@ -1358,24 +1390,118 @@ inside `Else`
 </section>
 <section id="renaming-domains">
 <span id="lang-domainrenamer"></span><h3>Renaming domains<a class="headerlink" href="#renaming-domains" title="Permalink to this heading"></a></h3>
-<div class="admonition-todo admonition" id="id14">
-<p class="admonition-title">Todo</p>
-<p>Write this section about <code class="xref py py-class docutils literal notranslate"><span class="pre">DomainRenamer</span></code></p>
+<p>A reusable <a class="reference internal" href="#lang-elaboration"><span class="std std-ref">elaboratable</span></a> usually specifies the use of one or more <a class="reference internal" href="#lang-clockdomains"><span class="std std-ref">clock domains</span></a> while leaving the details of clocking and initialization to a later phase in the design process. <code class="xref py py-class docutils literal notranslate"><span class="pre">DomainRenamer</span></code> can be used to alter a reusable elaboratable for integration in a specific design. Most elaboratables use a single clock domain named <code class="docutils literal notranslate"><span class="pre">sync</span></code>, and <code class="xref py py-class docutils literal notranslate"><span class="pre">DomainRenamer</span></code> makes it easy to place such elaboratables in any clock domain of a design.</p>
+<p>Clock domains can be renamed using the syntax <code class="code highlight pc python docutils literal highlight-python"><span class="n">DomainRenamer</span><span class="p">(</span><span class="n">domains</span><span class="p">)(</span><span class="n">elaboratable</span><span class="p">)</span></code>, where <code class="code highlight pc python docutils literal highlight-python"><span class="n">domains</span></code> is a mapping from clock domain names to clock domain names and <code class="code highlight pc python docutils literal highlight-python"><span class="n">elaboratable</span></code> is any <a class="reference internal" href="#lang-elaboration"><span class="std std-ref">elaboratable</span></a> object. The keys of <code class="code highlight pc python docutils literal highlight-python"><span class="n">domains</span></code> correspond to existing clock domain names specified by <code class="code highlight pc python docutils literal highlight-python"><span class="n">elaboratable</span></code>, and the values of <code class="code highlight pc python docutils literal highlight-python"><span class="n">domains</span></code> correspond to the clock domain names from the containing elaboratable that will be used instead. When only the <code class="docutils literal notranslate"><span class="pre">sync</span></code> domain is being renamed, instead of writing <code class="code highlight pc python docutils literal highlight-python"><span class="n">DomainRenamer</span><span class="p">({</span><span class="s2">&quot;sync&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">})(</span><span class="n">elaboratable</span><span class="p">)</span></code>, the equivalent but shorter <code class="code highlight pc python docutils literal highlight-python"><span class="n">DomainRenamer</span><span class="p">(</span><span class="n">name</span><span class="p">)(</span><span class="n">elaboratable</span><span class="p">)</span></code> syntax can be used.</p>
+<p>The result of renaming clock domains in an elaboratable is, itself, an elaboratable object. A common way to rename domains is to apply <code class="xref py py-class docutils literal notranslate"><span class="pre">DomainRenamer</span></code> to another elaboratable while adding it as a submodule:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">submodules</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="n">counter</span> <span class="o">=</span> <span class="n">DomainRenamer</span><span class="p">(</span><span class="s2">&quot;video&quot;</span><span class="p">)(</span><span class="n">counter</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Renaming a clock domain affects all logic within a given elaboratable and clock domain, which includes the submodules of that elaboratable. It does not affect any logic outside of that elaboratable.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Renaming domains in an elaboratable does not mutate it; a new proxy object is returned that forwards attribute accesses and method calls to the original elaboratable. Whenever this proxy object is elaborated, it manipulates the circuit defined by the original elaboratable to use the requested clock domain.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is possible to rename domains in an elaboratable and also apply <a class="reference internal" href="#lang-controlinserter"><span class="std std-ref">control flow modifiers</span></a>.</p>
+</div>
+<p>Consider the following code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">Module</span><span class="p">()</span>
+<span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">count</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="n">zero</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">DomainRenamer</span><span class="p">({</span><span class="s2">&quot;sync&quot;</span><span class="p">:</span> <span class="s2">&quot;video&quot;</span><span class="p">})(</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The renaming of the <code class="docutils literal notranslate"><span class="pre">sync</span></code> clock domain in it causes the behavior of the final <code class="code highlight pc python docutils literal highlight-python"><span class="n">m</span></code> to be identical to that of this module:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">Module</span><span class="p">()</span>
+<span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">video</span> <span class="o">+=</span> <span class="n">count</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="n">zero</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>A combinatorial signal can change synchronously to a clock domain, as in the example above, in which case it may only be sampled from the same clock domain unless explicitly synchronized. Renaming a clock domain must be assumed to potentially affect any output of an elaboratable.</p>
 </div>
 </section>
 </section>
 <section id="memories">
 <span id="lang-memory"></span><h2>Memories<a class="headerlink" href="#memories" title="Permalink to this heading"></a></h2>
-<div class="admonition-todo admonition" id="id15">
+<div class="admonition-todo admonition" id="id14">
 <p class="admonition-title">Todo</p>
 <p>Write this section.</p>
 </div>
 </section>
 <section id="instances">
-<h2>Instances<a class="headerlink" href="#instances" title="Permalink to this heading"></a></h2>
-<div class="admonition-todo admonition" id="id16">
-<p class="admonition-title">Todo</p>
-<p>Write this section.</p>
+<span id="lang-instance"></span><h2>Instances<a class="headerlink" href="#instances" title="Permalink to this heading"></a></h2>
+<p>A submodule written in a non-Amaranth language is called an <em>instance</em>. An instance can be written in any language supported by the synthesis toolchain; usually, that is (System)Verilog, VHDL, or a language that is translated to one of those two. Adding an instance as a submodule corresponds to “module instantiation” in (System)Verilog and “component instantiation” in VHDL, and is done by specifying the following:</p>
+<ul class="simple">
+<li><p>The <em>type</em> of an instance is the name of a (System)Verilog module, VHDL entity or component, or another HDL design unit that is being instantiated.</p></li>
+<li><p>The <em>name</em> of an instance is the name of the submodule within the containing elaboratable.</p></li>
+<li><p>The <em>attributes</em> of an instance correspond to attributes of a (System)Verilog module instance, or a custom attribute of a VHDL entity or component instance. Attributes applied to instances are interpreted by the synthesis toolchain rather than the HDL.</p></li>
+<li><p>The <em>parameters</em> of an instance correspond to parameters of a (System)Verilog module instance, or a generic constant of a VHDL entity or component instance. Not all HDLs allow their design units to be parameterized during instantiation.</p></li>
+<li><p>The <em>inputs</em> and <em>outputs</em> of an instance correspond to inputs and outputs of the external design unit.</p></li>
+</ul>
+<p>An instance can be added as a submodule using the <code class="code highlight pc python docutils literal highlight-python"><span class="n">m</span><span class="o">.</span><span class="n">submodules</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">Instance</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span></code> syntax, where <code class="code highlight pc python docutils literal highlight-python"><span class="s2">&quot;type&quot;</span></code> is the type of the instance as a string (which is passed to the synthesis toolchain uninterpreted), and <code class="code highlight pc python docutils literal highlight-python"><span class="o">...</span></code> is a list of parameters, inputs, and outputs. Depending on whether the name of an attribute, parameter, input, or output can be written as a part of a Python identifier or not, one of two possible syntaxes is used to specify them:</p>
+<ul class="simple">
+<li><p>An attribute is specified using the <code class="code highlight pc python docutils literal highlight-python"><span class="n">a_ANAME</span><span class="o">=</span><span class="n">attr</span></code> or <code class="code highlight pc python docutils literal highlight-python"><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;ANAME&quot;</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span></code> syntaxes. The <code class="code highlight pc python docutils literal highlight-python"><span class="n">attr</span></code> must be an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, or a <code class="xref py py-class docutils literal notranslate"><span class="pre">Const</span></code>.</p></li>
+<li><p>A parameter is specified using the <code class="code highlight pc python docutils literal highlight-python"><span class="n">p_PNAME</span><span class="o">=</span><span class="n">param</span></code> or <code class="code highlight pc python docutils literal highlight-python"><span class="p">(</span><span class="s2">&quot;p&quot;</span><span class="p">,</span> <span class="s2">&quot;PNAME&quot;</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span></code> syntaxes. The <code class="code highlight pc python docutils literal highlight-python"><span class="n">param</span></code> must be an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, or a <code class="xref py py-class docutils literal notranslate"><span class="pre">Const</span></code>.</p></li>
+<li><p>An input is specified using the <code class="code highlight pc python docutils literal highlight-python"><span class="n">i_INAME</span><span class="o">=</span><span class="n">in_val</span></code> or <code class="code highlight pc python docutils literal highlight-python"><span class="p">(</span><span class="s2">&quot;i&quot;</span><span class="p">,</span> <span class="s2">&quot;INAME&quot;</span><span class="p">,</span> <span class="n">in_val</span><span class="p">)</span></code> syntaxes. The <code class="code highlight pc python docutils literal highlight-python"><span class="n">in_val</span></code> must be a <a class="reference internal" href="#lang-valuelike"><span class="std std-ref">value-like</span></a> object.</p></li>
+<li><p>An output is specified using the <code class="code highlight pc python docutils literal highlight-python"><span class="n">o_ONAME</span><span class="o">=</span><span class="n">out_val</span></code> or <code class="code highlight pc python docutils literal highlight-python"><span class="p">(</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="s2">&quot;ONAME&quot;</span><span class="p">,</span> <span class="n">out_val</span><span class="p">)</span></code> syntaxes. The <code class="code highlight pc python docutils literal highlight-python"><span class="n">out_val</span></code> must be a <a class="reference internal" href="#lang-valuelike"><span class="std std-ref">value-like</span></a> object that casts to a <code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code>.</p></li>
+</ul>
+<p>The two following examples use both syntaxes to add the same instance of type <code class="docutils literal notranslate"><span class="pre">external</span></code> as a submodule named <code class="docutils literal notranslate"><span class="pre">processor</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">submodules</span><span class="o">.</span><span class="n">processor</span> <span class="o">=</span> <span class="n">Instance</span><span class="p">(</span><span class="s2">&quot;external&quot;</span><span class="p">,</span>
+    <span class="n">p_width</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+    <span class="n">i_clk</span><span class="o">=</span><span class="n">ClockSignal</span><span class="p">(),</span>
+    <span class="n">i_rst</span><span class="o">=</span><span class="n">ResetSignal</span><span class="p">(),</span>
+    <span class="n">i_en</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">i_mode</span><span class="o">=</span><span class="n">Const</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">unsigned</span><span class="p">(</span><span class="mi">4</span><span class="p">)),</span>
+    <span class="n">i_data_in</span><span class="o">=</span><span class="n">i_data</span><span class="p">,</span>
+    <span class="n">o_data_out</span><span class="o">=</span><span class="n">o_data</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">submodules</span><span class="o">.</span><span class="n">processor</span> <span class="o">=</span> <span class="n">Instance</span><span class="p">(</span><span class="s2">&quot;external&quot;</span><span class="p">,</span>
+    <span class="p">(</span><span class="s2">&quot;p&quot;</span><span class="p">,</span> <span class="s2">&quot;width&quot;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;i&quot;</span><span class="p">,</span> <span class="s2">&quot;clk&quot;</span><span class="p">,</span> <span class="n">ClockSignal</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s2">&quot;i&quot;</span><span class="p">,</span> <span class="s2">&quot;rst&quot;</span><span class="p">,</span> <span class="n">ResetSignal</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s2">&quot;i&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;i&quot;</span><span class="p">,</span> <span class="s2">&quot;mode&quot;</span><span class="p">,</span> <span class="n">Const</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">unsigned</span><span class="p">(</span><span class="mi">4</span><span class="p">))),</span>
+    <span class="p">(</span><span class="s2">&quot;i&quot;</span><span class="p">,</span> <span class="s2">&quot;data_in&quot;</span><span class="p">,</span> <span class="n">i_data</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="s2">&quot;data_out&quot;</span><span class="p">,</span> <span class="n">o_data</span><span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Like a regular submodule, an instance can also be added without specifying a name:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">submodules</span> <span class="o">+=</span> <span class="n">Instance</span><span class="p">(</span><span class="s2">&quot;external&quot;</span><span class="p">,</span>
+    <span class="c1"># ...</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If a name is not explicitly specified for a submodule, one will be generated and assigned automatically. Designs with many autogenerated names can be difficult to debug, so a name should usually be supplied.</p>
+</div>
+<p>Although an <code class="xref py py-class docutils literal notranslate"><span class="pre">Instance</span></code> is not an elaboratable, as a special case, it can be returned from the <code class="code highlight pc python docutils literal highlight-python"><span class="n">elaborate</span><span class="p">()</span></code> method. This is conveinent for implementing an elaboratable that adorns an instance with an Amaranth interface:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">amaranth</span> <span class="kn">import</span> <span class="n">vendor</span>
+
+
+<span class="k">class</span> <span class="nc">FlipFlop</span><span class="p">(</span><span class="n">Elaboratable</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">d</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">q</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">elaborate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
+        <span class="c1"># Decide on the instance to use based on the platform we are elaborating for.</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">platform</span><span class="p">,</span> <span class="n">vendor</span><span class="o">.</span><span class="n">LatticeICE40Platform</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Instance</span><span class="p">(</span><span class="s2">&quot;SB_DFF&quot;</span><span class="p">,</span>
+                <span class="n">i_C</span><span class="o">=</span><span class="n">ClockSignal</span><span class="p">(),</span>
+                <span class="n">i_D</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">,</span>
+                <span class="n">o_Q</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">q</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+</pre></div>
 </div>
 </section>
 </section>
