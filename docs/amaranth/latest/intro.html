@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Introduction &mdash; Amaranth language &amp; toolchain 0.4.1.dev53 documentation</title>
+  <title>Introduction &mdash; Amaranth language &amp; toolchain 0.4.1.dev55 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -15,7 +15,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=df5fce54"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b0aeda80"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/platformpicker.js"></script>
@@ -39,7 +39,7 @@
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.4.1.dev53+g5dd1223
+                0.4.1.dev55+gea3d6c9
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -65,7 +65,8 @@
 <li class="toctree-l2"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="start.html">Getting started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lang.html">Language guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide.html">Language guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Language reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stdlib.html">Standard library</a></li>
 <li class="toctree-l2"><a class="reference internal" href="platform.html">Platform integration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changes.html">Changelog</a></li>
@@ -107,7 +108,7 @@
 <p>The Amaranth toolchain consists of the <a class="reference internal" href="#intro-lang"><span class="std std-ref">Amaranth language</span></a>, the <a class="reference internal" href="#intro-stdlib"><span class="std std-ref">standard library</span></a>, the <a class="reference internal" href="#intro-sim"><span class="std std-ref">simulator</span></a>, and the <a class="reference internal" href="#intro-build"><span class="std std-ref">build system</span></a>, covering all steps of a typical FPGA development workflow. At the same time, it does not restrict the designer’s choice of tools: existing industry-standard (System)Verilog or VHDL code can be integrated into an Amaranth-based design flow, or, conversely, Amaranth code can be integrated into an existing Verilog-based design flow.</p>
 <section id="the-amaranth-language">
 <span id="intro-lang"></span><h2>The Amaranth language<a class="headerlink" href="#the-amaranth-language" title="Permalink to this heading"></a></h2>
-<p>The <a class="reference internal" href="lang.html"><span class="doc">Amaranth hardware description language</span></a> is a Python library for register transfer level modeling of synchronous logic. Ordinary Python code is used to construct a netlist of a digital circuit, which can be simulated, directly synthesized via <a class="reference external" href="https://yosyshq.net/yosys/">Yosys</a>, or converted to human-readable Verilog code for use with industry-standard toolchains.</p>
+<p>The <a class="reference internal" href="guide.html"><span class="doc">Amaranth hardware description language</span></a> is a Python library for register transfer level modeling of synchronous logic. Ordinary Python code is used to construct a netlist of a digital circuit, which can be simulated, directly synthesized via <a class="reference external" href="https://yosyshq.net/yosys/">Yosys</a>, or converted to human-readable Verilog code for use with industry-standard toolchains.</p>
 <p>By relying on the flexibility, rich functionality and widespread adoption of the Python language, the Amaranth language is focused on a single task: modeling digital logic well. It has first-class support for building blocks like clock domains and finite state machines, and uses simple rules for arithmetic operations that closely match the Python semantics. Python classes, functions, loops and conditionals can be used to build organized and flexible designs; Python libraries can be seamlessly used with Amaranth during design or verification; and Python development tools can process Amaranth code.</p>
 <p>A core design principle of the Amaranth language is to be not only easy to use, but also hard to accidentally misuse. Some HDLs provide functionality that has unexpected and undesirable behavior in synthesis, often with expensive consequences, and require a significant effort in learning a “safe” coding style and adopting third-party linting tools. Amaranth lacks non-synthesizable constructs and avoids error-prone inference in favor of explicit instantiation. It has many diagnostics (and regularly adds new ones) highlighting potential design issues. Most importantly, all usability issues are considered <a class="reference external" href="https://github.com/amaranth-lang/amaranth/issues">reportable bugs</a>.</p>
 </section>

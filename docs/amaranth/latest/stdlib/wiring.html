@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Interfaces and connections &mdash; Amaranth language &amp; toolchain 0.4.1.dev53 documentation</title>
+  <title>Interfaces and connections &mdash; Amaranth language &amp; toolchain 0.4.1.dev55 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/platformpicker.css" type="text/css" />
@@ -15,7 +15,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=df5fce54"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b0aeda80"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="../_static/platformpicker.js"></script>
@@ -39,7 +39,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.4.1.dev53+g5dd1223
+                0.4.1.dev55+gea3d6c9
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -55,7 +55,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../install.html">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../start.html">Getting started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../lang.html">Language guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide.html">Language guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference.html">Language reference</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../stdlib.html">Standard library</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="enum.html">Enumerations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="data.html">Data structures</a></li>
@@ -190,7 +191,7 @@
 <span class="go">Signature({&#39;en&#39;: In(1), &#39;count&#39;: Out(8), &#39;limit&#39;: In(8), &#39;overflow&#39;: Out(1)})</span>
 </pre></div>
 </div>
-<p>The <a class="reference internal" href="../lang.html#lang-shapes"><span class="std std-ref">shapes</span></a> of the ports need not be static. The <code class="code highlight pc python docutils literal highlight-python"><span class="n">ComponentCounter</span></code> can be made generic, with its range specified when it is constructed, by creating the signature explicitly in its constructor:</p>
+<p>The <a class="reference internal" href="../guide.html#lang-shapes"><span class="std std-ref">shapes</span></a> of the ports need not be static. The <code class="code highlight pc python docutils literal highlight-python"><span class="n">ComponentCounter</span></code> can be made generic, with its range specified when it is constructed, by creating the signature explicitly in its constructor:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">GenericCounter</span><span class="p">(</span><span class="n">wiring</span><span class="o">.</span><span class="n">Component</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">({</span>
@@ -638,7 +639,7 @@ reset value.</p>
 a <cite>signature member</cite>, and accessing properties for the wrong kind of member raises
 an <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.12)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a>.</p>
 <p>The class is created from a <cite>description</cite>: a <a class="reference internal" href="#amaranth.lib.wiring.Signature" title="amaranth.lib.wiring.Signature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Signature</span></code></a> instance (in which case
-the <a class="reference internal" href="#amaranth.lib.wiring.Member" title="amaranth.lib.wiring.Member"><code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code></a> is created as a signature member), or a <a class="reference internal" href="../lang.html#lang-shapelike"><span class="std std-ref">shape-like</span></a>
+the <a class="reference internal" href="#amaranth.lib.wiring.Member" title="amaranth.lib.wiring.Member"><code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code></a> is created as a signature member), or a <a class="reference internal" href="../guide.html#lang-shapelike"><span class="std std-ref">shape-like</span></a>
 object (in which case it is created as a port member). After creation the <a class="reference internal" href="#amaranth.lib.wiring.Member" title="amaranth.lib.wiring.Member"><code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code></a>
 instance cannot be modified.</p>
 <p>When a <code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code> is created from a description of a port member, the signal’s reset value
@@ -734,7 +735,7 @@ identical to <code class="code highlight pc python docutils literal highlight-py
 <dd class="field-odd"><p>The shape that was provided when constructing this <a class="reference internal" href="#amaranth.lib.wiring.Member" title="amaranth.lib.wiring.Member"><code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code></a>.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="../lang.html#lang-shapelike"><span class="std std-ref">shape-like object</span></a></p>
+<dd class="field-even"><p><a class="reference internal" href="../guide.html#lang-shapelike"><span class="std std-ref">shape-like object</span></a></p>
 </dd>
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.12)"><strong>AttributeError</strong></a> – If <code class="code highlight pc python docutils literal highlight-python"><span class="bp">self</span></code> describes a signature member.</p>
@@ -751,7 +752,7 @@ identical to <code class="code highlight pc python docutils literal highlight-py
 <dd class="field-odd"><p>The reset value that was provided when constructing this <a class="reference internal" href="#amaranth.lib.wiring.Member" title="amaranth.lib.wiring.Member"><code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code></a>.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="../lang.html#lang-constcasting"><span class="std std-ref">const-castable object</span></a></p>
+<dd class="field-even"><p><a class="reference internal" href="../guide.html#lang-constcasting"><span class="std std-ref">const-castable object</span></a></p>
 </dd>
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.12)"><strong>AttributeError</strong></a> – If <code class="code highlight pc python docutils literal highlight-python"><span class="bp">self</span></code> describes a signature member.</p>
@@ -963,7 +964,7 @@ a list of members is returned, for two dimensions a list of lists is returned, a
 <dd class="field-odd"><p>Mapping of names to actual signature members.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>dict of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> to <a class="reference internal" href="../lang.html#lang-valuelike"><span class="std std-ref">value-like</span></a> or interface object or a potentially nested list of these</p>
+<dd class="field-even"><p>dict of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> to <a class="reference internal" href="../guide.html#lang-valuelike"><span class="std std-ref">value-like</span></a> or interface object or a potentially nested list of these</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1098,7 +1099,7 @@ yielded by this method is a tuple of strings or integers where each item is an a
 name or index (correspondingly) using which the member value was retrieved.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>iterator of (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference internal" href="#amaranth.lib.wiring.Flow" title="amaranth.lib.wiring.Flow"><code class="xref py py-class docutils literal notranslate"><span class="pre">Flow</span></code></a>, <a class="reference internal" href="../lang.html#lang-valuelike"><span class="std std-ref">value-like</span></a>)</p>
+<dd class="field-even"><p>iterator of (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference internal" href="#amaranth.lib.wiring.Flow" title="amaranth.lib.wiring.Flow"><code class="xref py py-class docutils literal notranslate"><span class="pre">Flow</span></code></a>, <a class="reference internal" href="../guide.html#lang-valuelike"><span class="std std-ref">value-like</span></a>)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1121,7 +1122,7 @@ such that <code class="docutils literal notranslate"><span class="pre">self</spa
 <li><p>for members with <a class="reference internal" href="#amaranth.lib.wiring.Member.dimensions" title="amaranth.lib.wiring.Member.dimensions"><code class="xref py py-meth docutils literal notranslate"><span class="pre">dimensions</span></code></a> specified, contains a list or
 a tuple (or several levels of nested lists or tuples, for multiple dimensions)
 satisfying the requirements below;</p></li>
-<li><p>for port members, is a <a class="reference internal" href="../lang.html#lang-valuelike"><span class="std std-ref">value-like</span></a> object casting to
+<li><p>for port members, is a <a class="reference internal" href="../guide.html#lang-valuelike"><span class="std std-ref">value-like</span></a> object casting to
 a <code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code> or a <code class="xref py py-class docutils literal notranslate"><span class="pre">Const</span></code> whose width and signedness is the same as that
 of the member, and (in case of a <code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code>) which is not reset-less and whose
 reset value is that of the member;</p></li>

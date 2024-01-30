@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Language reference &mdash; Amaranth language &amp; toolchain 0.4.1.dev55 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b0aeda80"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/platformpicker.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Standard library" href="stdlib.html" />
+    <link rel="prev" title="Language guide" href="guide.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="cover.html" class="icon icon-home">
+            Amaranth language & toolchain
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.4.1.dev55+gea3d6c9
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Language &amp; toolchain</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="start.html">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide.html">Language guide</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Language reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#backwards-compatibility">Backwards compatibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#importing-syntax">Importing syntax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#source-locations">Source locations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#shapes">Shapes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#amaranth.hdl.Shape"><code class="docutils literal notranslate"><span class="pre">Shape</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#amaranth.hdl.unsigned"><code class="docutils literal notranslate"><span class="pre">unsigned()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#amaranth.hdl.signed"><code class="docutils literal notranslate"><span class="pre">signed()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#amaranth.hdl.ShapeCastable"><code class="docutils literal notranslate"><span class="pre">ShapeCastable</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#amaranth.hdl.ShapeLike"><code class="docutils literal notranslate"><span class="pre">ShapeLike</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="stdlib.html">Standard library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="platform.html">Platform integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changes.html">Changelog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contrib.html">Contributing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="https://amaranth-lang.org/docs/amaranth-stdio/latest/">Standard I/O components</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://amaranth-lang.org/docs/amaranth-soc/latest/">System on Chip toolkit</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="cover.html">Amaranth language & toolchain</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="cover.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Language &amp; toolchain</a></li>
+      <li class="breadcrumb-item active">Language reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/reference.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-amaranth.hdl">
+<span id="language-reference"></span><h1>Language reference<a class="headerlink" href="#module-amaranth.hdl" title="Permalink to this heading"></a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This reference is a work in progress and is seriously incomplete!</p>
+<p>While the wording below states that anything not described in this document isn’t covered by the backwards compatibility guarantee, this should be ignored until the document is complete and this warning is removed.</p>
+</div>
+<p>This reference describes the Python classes that underlie the Amaranth language’s syntax. It assumes familiarity with the <a class="reference internal" href="guide.html"><span class="doc">language guide</span></a>.</p>
+<section id="backwards-compatibility">
+<span id="lang-stability"></span><h2>Backwards compatibility<a class="headerlink" href="#backwards-compatibility" title="Permalink to this heading"></a></h2>
+<p>As part of the Amaranth backwards compatibility guarantee, any behaviors described in this document will not change from a version to another without at least one version including a warning about the impending change. Any nontrivial change to these behaviors must also go through the public review as a part of the <a class="reference external" href="https://amaranth-lang.org/rfcs/">Amaranth Request for Comments process</a>.</p>
+<p>Conversely, any behavior not documented here is subject to change at any time with or without notice, and any names under the <a class="reference internal" href="#module-amaranth.hdl" title="amaranth.hdl"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.hdl</span></code></a> module that are not explicitly included in this document, even if they do not begin with an underscore, are internal to the implementation of the language.</p>
+</section>
+<section id="importing-syntax">
+<span id="lang-importing"></span><h2>Importing syntax<a class="headerlink" href="#importing-syntax" title="Permalink to this heading"></a></h2>
+<p>There are two ways to import the Amaranth syntax into a Python file: by importing the <a class="reference internal" href="guide.html#lang-prelude"><span class="std std-ref">prelude</span></a> or by importing individual names from the <a class="reference internal" href="#module-amaranth.hdl" title="amaranth.hdl"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.hdl</span></code></a> module. Since the prelude is kept small and rarely extended to avoid breaking downstream code that uses a glob import, there are some names that are only exported from the <a class="reference internal" href="#module-amaranth.hdl" title="amaranth.hdl"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.hdl</span></code></a> module. The following three snippets are equivalent:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">amaranth</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">Module</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">amaranth</span> <span class="k">as</span> <span class="nn">am</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">am</span><span class="o">.</span><span class="n">Module</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">amaranth.hdl</span> <span class="kn">import</span> <span class="n">Module</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">Module</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The prelude exports exactly the following names:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#amaranth.hdl.Shape" title="amaranth.hdl.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code></a></p></li>
+<li><p><a class="reference internal" href="#amaranth.hdl.unsigned" title="amaranth.hdl.unsigned"><code class="xref py py-func docutils literal notranslate"><span class="pre">unsigned()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#amaranth.hdl.signed" title="amaranth.hdl.signed"><code class="xref py py-func docutils literal notranslate"><span class="pre">signed()</span></code></a></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Const</span></code></p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">C()</span></code></p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">Mux()</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Cat</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Repl</span></code> (deprecated)</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ClockSignal</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ResetSignal</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ClockDomain</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Elaboratable</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Fragment</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Instance</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Memory</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Record</span></code> (deprecated)</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DomainRenamer</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ResetInserter</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">EnableInserter</span></code></p></li>
+</ul>
+</section>
+<section id="source-locations">
+<span id="lang-srcloc"></span><h2>Source locations<a class="headerlink" href="#source-locations" title="Permalink to this heading"></a></h2>
+<p>Many functions and methods in Amaranth take the <code class="code highlight pc python docutils literal highlight-python"><span class="n">src_loc_at</span><span class="o">=</span><span class="mi">0</span></code> keyword argument. These language constructs may inspect the call stack to determine the file and line of its call site, which will be used to annotate generated code when a netlist is generated or to improve diagnostic messages.</p>
+<p>Some call sites are not relevant for an Amaranth designer; e.g. when an Amaranth language construct is called from a user-defined utility function, the source location of the call site within this utility function is usually not interesting to the designer. In these cases, one or more levels of function calls can be removed from consideration using the <code class="code highlight pc python docutils literal highlight-python"><span class="n">src_loc_at</span></code> argument as follows (using <a class="reference internal" href="#amaranth.hdl.Shape.cast" title="amaranth.hdl.Shape.cast"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Shape.cast()</span></code></a> to demonstrate the concept):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_shape_cast</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">src_loc_at</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="o">...</span> <span class="c1"># additionally process `obj`...</span>
+    <span class="k">return</span> <span class="n">Shape</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">src_loc_at</span><span class="o">=</span><span class="mi">1</span> <span class="o">+</span> <span class="n">src_loc_at</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The number <code class="code highlight pc python docutils literal highlight-python"><span class="mi">1</span></code> corresponds to the number of call stack frames that should be skipped.</p>
+</section>
+<section id="shapes">
+<h2>Shapes<a class="headerlink" href="#shapes" title="Permalink to this heading"></a></h2>
+<p>See also the introduction to <a class="reference internal" href="guide.html#lang-shapes"><span class="std std-ref">shapes</span></a> and <a class="reference internal" href="guide.html#lang-shapelike"><span class="std std-ref">casting from shape-like objects</span></a> in the language guide.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="amaranth.hdl.Shape">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.hdl.</span></span><span class="sig-name descname"><span class="pre">Shape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Shape" title="Permalink to this definition"></a></dt>
+<dd><p>Bit width and signedness of a value.</p>
+<p>A <a class="reference internal" href="#amaranth.hdl.Shape" title="amaranth.hdl.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code></a> can be obtained by:</p>
+<ul class="simple">
+<li><p>constructing with explicit bit width and signedness;</p></li>
+<li><p>using the <a class="reference internal" href="#amaranth.hdl.signed" title="amaranth.hdl.signed"><code class="xref py py-func docutils literal notranslate"><span class="pre">signed()</span></code></a> and <a class="reference internal" href="#amaranth.hdl.unsigned" title="amaranth.hdl.unsigned"><code class="xref py py-func docutils literal notranslate"><span class="pre">unsigned()</span></code></a> aliases if the signedness is known upfront;</p></li>
+<li><p>casting from a variety of objects using the <a class="reference internal" href="#amaranth.hdl.Shape.cast" title="amaranth.hdl.Shape.cast"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cast()</span></code></a> method.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – The number of bits in the representation of a value. This includes the sign bit for signed
+values. Cannot be zero if the value is signed.</p></li>
+<li><p><strong>signed</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Whether the value is signed. Signed values use the
+<a class="reference external" href="https://en.wikipedia.org/wiki/Two's_complement">two’s complement</a> representation.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="amaranth.hdl.Shape.cast">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cast</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_loc_at</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Shape.cast" title="Permalink to this definition"></a></dt>
+<dd><p>Cast <code class="code highlight pc python docutils literal highlight-python"><span class="n">obj</span></code> to a shape.</p>
+<p>Many <a class="reference internal" href="guide.html#lang-shapelike"><span class="std std-ref">shape-like</span></a> objects can be cast to a shape:</p>
+<ul class="simple">
+<li><p>a <a class="reference internal" href="#amaranth.hdl.Shape" title="amaranth.hdl.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code></a>, where the result is itself;</p></li>
+<li><p>an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, where the result is <a class="reference internal" href="#amaranth.hdl.unsigned" title="amaranth.hdl.unsigned"><code class="xref py py-func docutils literal notranslate"><span class="pre">unsigned(obj)</span></code></a>;</p></li>
+<li><p>a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">range</span></code></a>, where the result is wide enough to represent any element of the range,
+and is signed if any element of the range is signed;</p></li>
+<li><p>an <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a> whose members are all <a class="reference internal" href="guide.html#lang-constcasting"><span class="std std-ref">constant-castable</span></a>
+or <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></a>, where the result is wide enough to represent any member of
+the enumeration, and is signed if any member of the enumeration is signed;</p></li>
+<li><p>a <a class="reference internal" href="#amaranth.hdl.ShapeCastable" title="amaranth.hdl.ShapeCastable"><code class="xref py py-class docutils literal notranslate"><span class="pre">ShapeCastable</span></code></a> object, where the result is obtained by repeatedly calling
+<a class="reference internal" href="#amaranth.hdl.ShapeCastable.as_shape" title="amaranth.hdl.ShapeCastable.as_shape"><code class="xref py py-meth docutils literal notranslate"><span class="pre">obj.as_shape()</span></code></a>.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.12)"><strong>TypeError</strong></a> – If <code class="code highlight pc python docutils literal highlight-python"><span class="n">obj</span></code> cannot be converted to a <a class="reference internal" href="#amaranth.hdl.Shape" title="amaranth.hdl.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code></a>.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RecursionError" title="(in Python v3.12)"><strong>RecursionError</strong></a> – If <code class="code highlight pc python docutils literal highlight-python"><span class="n">obj</span></code> is a <a class="reference internal" href="#amaranth.hdl.ShapeCastable" title="amaranth.hdl.ShapeCastable"><code class="xref py py-class docutils literal notranslate"><span class="pre">ShapeCastable</span></code></a> object that casts to itself.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="amaranth.hdl.Shape.__repr__">
+<span class="sig-name descname"><span class="pre">__repr__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Shape.__repr__" title="Permalink to this definition"></a></dt>
+<dd><p>Python code that creates this shape.</p>
+<p>Returns <code class="code highlight pc python docutils literal highlight-python"><span class="sa">f</span><span class="s2">&quot;signed(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="si">}</span><span class="s2">)&quot;</span></code> or <code class="code highlight pc python docutils literal highlight-python"><span class="sa">f</span><span class="s2">&quot;unsigned(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="si">}</span><span class="s2">)&quot;</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="amaranth.hdl.unsigned">
+<span class="sig-prename descclassname"><span class="pre">amaranth.hdl.</span></span><span class="sig-name descname"><span class="pre">unsigned</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">width</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.unsigned" title="Permalink to this definition"></a></dt>
+<dd><p>Returns <code class="code highlight pc python docutils literal highlight-python"><span class="n">Shape</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">signed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="amaranth.hdl.signed">
+<span class="sig-prename descclassname"><span class="pre">amaranth.hdl.</span></span><span class="sig-name descname"><span class="pre">signed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">width</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.signed" title="Permalink to this definition"></a></dt>
+<dd><p>Returns <code class="code highlight pc python docutils literal highlight-python"><span class="n">Shape</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">signed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="amaranth.hdl.ShapeCastable">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.hdl.</span></span><span class="sig-name descname"><span class="pre">ShapeCastable</span></span><a class="headerlink" href="#amaranth.hdl.ShapeCastable" title="Permalink to this definition"></a></dt>
+<dd><p>Interface class for objects that can be cast to a <a class="reference internal" href="#amaranth.hdl.Shape" title="amaranth.hdl.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code></a>.</p>
+<p>Shapes of values in the Amaranth language are specified using <a class="reference internal" href="guide.html#lang-shapelike"><span class="std std-ref">shape-like objects</span></a>. Inheriting a class from <a class="reference internal" href="#amaranth.hdl.ShapeCastable" title="amaranth.hdl.ShapeCastable"><code class="xref py py-class docutils literal notranslate"><span class="pre">ShapeCastable</span></code></a> and implementing all of
+the methods described below adds instances of that class to the list of shape-like objects
+recognized by the <a class="reference internal" href="#amaranth.hdl.Shape.cast" title="amaranth.hdl.Shape.cast"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Shape.cast()</span></code></a> method. This is a part of the mechanism for seamlessly
+extending the Amaranth language in third-party code.</p>
+<p>To illustrate their purpose, consider constructing a signal from a shape-castable object
+<code class="code highlight pc python docutils literal highlight-python"><span class="n">shape_castable</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">value_like</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="n">shape_castable</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="n">initializer</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The code above is equivalent to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">value_like</span> <span class="o">=</span> <span class="n">shape_castable</span><span class="p">(</span><span class="n">Signal</span><span class="p">(</span>
+    <span class="n">shape_castable</span><span class="o">.</span><span class="n">as_shape</span><span class="p">(),</span>
+    <span class="n">reset</span><span class="o">=</span><span class="n">shape_castable</span><span class="o">.</span><span class="n">const</span><span class="p">(</span><span class="n">initializer</span><span class="p">)</span>
+<span class="p">))</span>
+</pre></div>
+</div>
+<p>Note that the <code class="code highlight pc python docutils literal highlight-python"><span class="n">shape_castable</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></code> syntax performs <code class="code highlight pc python docutils literal highlight-python"><span class="n">shape_castable</span><span class="o">.</span><span class="fm">__call__</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></code>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The source code of the <a class="reference internal" href="stdlib/data.html#module-amaranth.lib.data" title="amaranth.lib.data"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.data</span></code></a> module can be used as a reference for
+implementing a fully featured shape-castable object.</p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="amaranth.hdl.ShapeCastable.as_shape">
+<span class="sig-name descname"><span class="pre">as_shape</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.ShapeCastable.as_shape" title="Permalink to this definition"></a></dt>
+<dd><p>Convert <code class="code highlight pc python docutils literal highlight-python"><span class="bp">self</span></code> to a <a class="reference internal" href="guide.html#lang-shapelike"><span class="std std-ref">shape-like object</span></a>.</p>
+<p>This method is called by the Amaranth language to convert <code class="code highlight pc python docutils literal highlight-python"><span class="bp">self</span></code> to a concrete
+<a class="reference internal" href="#amaranth.hdl.Shape" title="amaranth.hdl.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code></a>. It will usually return a <a class="reference internal" href="#amaranth.hdl.Shape" title="amaranth.hdl.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code></a> object, but it may also return
+another shape-like object to delegate its functionality.</p>
+<p>This method must be idempotent: when called twice on the same object, the result must be
+exactly the same.</p>
+<p>This method may also be called by code that is not a part of the Amaranth language.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any other object recognized by <a class="reference internal" href="#amaranth.hdl.Shape.cast" title="amaranth.hdl.Shape.cast"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Shape.cast()</span></code></a>.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.12)"><strong>Exception</strong></a> – When the conversion cannot be done. This exception must be propagated by callers
+    (except when checking whether an object is shape-castable or not), either directly
+    or as a cause of another exception.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="amaranth.hdl.ShapeCastable.const">
+<span class="sig-name descname"><span class="pre">const</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.ShapeCastable.const" title="Permalink to this definition"></a></dt>
+<dd><p>Convert a constant initializer <code class="code highlight pc python docutils literal highlight-python"><span class="n">obj</span></code> to its value representation.</p>
+<p>This method is called by the Amaranth language to convert <code class="code highlight pc python docutils literal highlight-python"><span class="n">obj</span></code>, which may be an
+arbitrary Python object, to a concrete <a class="reference internal" href="guide.html#lang-valuelike"><span class="std std-ref">value-like object</span></a>.
+The object <code class="code highlight pc python docutils literal highlight-python"><span class="n">obj</span></code> will usually be a Python literal that can conveniently represent
+a constant value whose shape is described by <code class="code highlight pc python docutils literal highlight-python"><span class="bp">self</span></code>. While not constrained here,
+the result will usually be an instance of the return type of <a class="reference internal" href="#amaranth.hdl.ShapeCastable.__call__" title="amaranth.hdl.ShapeCastable.__call__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__call__()</span></code></a>.</p>
+<p>For any <code class="code highlight pc python docutils literal highlight-python"><span class="n">obj</span></code>, the following condition must hold:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Shape</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">==</span> <span class="n">Const</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">const</span><span class="p">(</span><span class="n">obj</span><span class="p">))</span><span class="o">.</span><span class="n">shape</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This method may also be called by code that is not a part of the Amaranth language.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A <a class="reference internal" href="guide.html#lang-valuelike"><span class="std std-ref">value-like object</span></a> that is <a class="reference internal" href="guide.html#lang-constcasting"><span class="std std-ref">constant-castable</span></a>.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.12)"><strong>Exception</strong></a> – When the conversion cannot be done. This exception must be propagated by callers,
+    either directly or as a cause of another exception. While not constrained here,
+    usually the exception class will be <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.12)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.12)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="amaranth.hdl.ShapeCastable.__call__">
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.ShapeCastable.__call__" title="Permalink to this definition"></a></dt>
+<dd><p>Lift a <a class="reference internal" href="guide.html#lang-valuelike"><span class="std std-ref">value-like object</span></a> to a higher-level representation.</p>
+<p>This method is called by the Amaranth language to lift <code class="code highlight pc python docutils literal highlight-python"><span class="n">obj</span></code>, which may be any
+<a class="reference internal" href="guide.html#lang-valuelike"><span class="std std-ref">value-like object</span></a> whose shape equals <code class="code highlight pc python docutils literal highlight-python"><span class="n">Shape</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>,
+to a higher-level representation, which may be any value-like object with the same
+shape. While not constrained here, usually a <a class="reference internal" href="#amaranth.hdl.ShapeCastable" title="amaranth.hdl.ShapeCastable"><code class="xref py py-class docutils literal notranslate"><span class="pre">ShapeCastable</span></code></a> implementation will
+be paired with a <code class="xref py py-class docutils literal notranslate"><span class="pre">ValueCastable</span></code> implementation, and this method will return
+an instance of the latter.</p>
+<p>If <code class="code highlight pc python docutils literal highlight-python"><span class="n">obj</span></code> is not as described above, this interface does not constrain the behavior
+of this method. This may be used to implement another call-based protocol at the same
+time.</p>
+<p>For any compliant <code class="code highlight pc python docutils literal highlight-python"><span class="n">obj</span></code>, the following condition must hold:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Value</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="bp">self</span><span class="p">(</span><span class="n">obj</span><span class="p">))</span> <span class="o">==</span> <span class="n">Value</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This method may also be called by code that is not a part of the Amaranth language.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A <a class="reference internal" href="guide.html#lang-valuelike"><span class="std std-ref">value-like object</span></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="amaranth.hdl.ShapeLike">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.hdl.</span></span><span class="sig-name descname"><span class="pre">ShapeLike</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.ShapeLike" title="Permalink to this definition"></a></dt>
+<dd><p>An abstract class representing all objects that can be cast to a <a class="reference internal" href="#amaranth.hdl.Shape" title="amaranth.hdl.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code></a>.</p>
+<p><code class="code highlight pc python docutils literal highlight-python"><span class="nb">issubclass</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ShapeLike</span><span class="p">)</span></code> returns <code class="code highlight pc python docutils literal highlight-python"><span class="kc">True</span></code> for:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#amaranth.hdl.Shape" title="amaranth.hdl.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code></a>;</p></li>
+<li><p><a class="reference internal" href="#amaranth.hdl.ShapeCastable" title="amaranth.hdl.ShapeCastable"><code class="xref py py-class docutils literal notranslate"><span class="pre">ShapeCastable</span></code></a> and its subclasses;</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> and its subclasses;</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">range</span></code></a> and its subclasses;</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.EnumMeta</span></code> and its subclasses;</p></li>
+<li><p><a class="reference internal" href="#amaranth.hdl.ShapeLike" title="amaranth.hdl.ShapeLike"><code class="xref py py-class docutils literal notranslate"><span class="pre">ShapeLike</span></code></a> itself.</p></li>
+</ul>
+<p><code class="code highlight pc python docutils literal highlight-python"><span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">ShapeLike</span><span class="p">)</span></code> returns <code class="code highlight pc python docutils literal highlight-python"><span class="kc">True</span></code> for:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#amaranth.hdl.Shape" title="amaranth.hdl.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code></a> instances;</p></li>
+<li><p><a class="reference internal" href="#amaranth.hdl.ShapeCastable" title="amaranth.hdl.ShapeCastable"><code class="xref py py-class docutils literal notranslate"><span class="pre">ShapeCastable</span></code></a> instances;</p></li>
+<li><p>non-negative <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> values;</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">range</span></code></a> instances;</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a> subclasses where all values are <a class="reference internal" href="guide.html#lang-valuelike"><span class="std std-ref">value-like objects</span></a>.</p></li>
+</ul>
+<p>This class cannot be instantiated or subclassed. It can only be used for checking types of
+objects.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="guide.html" class="btn btn-neutral float-left" title="Language guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="stdlib.html" class="btn btn-neutral float-right" title="Standard library" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020—2024, Amaranth project contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
