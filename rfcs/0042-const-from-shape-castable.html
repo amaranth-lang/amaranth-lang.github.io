@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>0010-move-repl-to-value - The Amaranth RFC Book</title>
+        <title>0042-const-from-shape-castable - The Amaranth RFC Book</title>
 
 
         <!-- Custom HTML head -->
@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li><li class="chapter-item expanded "><a href="0002-interfaces.html">0002-interfaces</a></li><li class="chapter-item expanded "><a href="0003-enumeration-shapes.html">0003-enumeration-shapes</a></li><li class="chapter-item expanded "><a href="0004-const-castable-exprs.html">0004-const-castable-exprs</a></li><li class="chapter-item expanded "><a href="0005-remove-const-normalize.html">0005-remove-const-normalize</a></li><li class="chapter-item expanded "><a href="0006-stdlib-crc.html">0006-stdlib-crc</a></li><li class="chapter-item expanded "><a href="0008-aggregate-extensibility.html">0008-aggregate-extensibility</a></li><li class="chapter-item expanded "><a href="0009-const-init-shape-castable.html">0009-const-init-shape-castable</a></li><li class="chapter-item expanded "><a href="0010-move-repl-to-value.html" class="active">0010-move-repl-to-value</a></li><li class="chapter-item expanded "><a href="0015-lifting-shape-castables.html">0015-lifting-shape-castables</a></li><li class="chapter-item expanded "><a href="0017-remove-log2-int.html">0017-remove-log2-int</a></li><li class="chapter-item expanded "><a href="0018-reorganize-vendor-platforms.html">0018-reorganize-vendor-platforms</a></li><li class="chapter-item expanded "><a href="0019-remove-scheduler.html">0019-remove-scheduler</a></li><li class="chapter-item expanded "><a href="0020-deprecate-non-fwft-fifos.html">0020-deprecate-non-fwft-fifos</a></li><li class="chapter-item expanded "><a href="0021-patch-releases.html">0021-patch-releases</a></li><li class="chapter-item expanded "><a href="0022-valuecastable-shape.html">0022-valuecastable-shape</a></li><li class="chapter-item expanded "><a href="0027-simulator-testbenches.html">0027-simulator-testbenches</a></li><li class="chapter-item expanded "><a href="0028-override-value-operators.html">0028-override-value-operators</a></li><li class="chapter-item expanded "><a href="0030-component-metadata.html">0030-component-metadata</a></li><li class="chapter-item expanded "><a href="0031-enumeration-type-safety.html">0031-enumeration-type-safety</a></li><li class="chapter-item expanded "><a href="0034-interface-rename.html">0034-interface-rename</a></li><li class="chapter-item expanded "><a href="0035-shapelike-valuelike.html">0035-shapelike-valuelike</a></li><li class="chapter-item expanded "><a href="0037-make-signature-immutable.html">0037-make-signature-immutable</a></li><li class="chapter-item expanded "><a href="0038-component-signature-immutability.html">0038-component-signature-immutability</a></li><li class="chapter-item expanded "><a href="0039-empty-case.html">0039-empty-case</a></li><li class="chapter-item expanded "><a href="0040-arbitrary-memory-shape.html">0040-arbitrary-memory-shape</a></li><li class="chapter-item expanded "><a href="0042-const-from-shape-castable.html">0042-const-from-shape-castable</a></li><li class="chapter-item expanded "><a href="0045-lib-memory.html">0045-lib-memory</a></li><li class="chapter-item expanded "><a href="0046-shape-range-1.html">0046-shape-range-1</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li><li class="chapter-item expanded "><a href="0002-interfaces.html">0002-interfaces</a></li><li class="chapter-item expanded "><a href="0003-enumeration-shapes.html">0003-enumeration-shapes</a></li><li class="chapter-item expanded "><a href="0004-const-castable-exprs.html">0004-const-castable-exprs</a></li><li class="chapter-item expanded "><a href="0005-remove-const-normalize.html">0005-remove-const-normalize</a></li><li class="chapter-item expanded "><a href="0006-stdlib-crc.html">0006-stdlib-crc</a></li><li class="chapter-item expanded "><a href="0008-aggregate-extensibility.html">0008-aggregate-extensibility</a></li><li class="chapter-item expanded "><a href="0009-const-init-shape-castable.html">0009-const-init-shape-castable</a></li><li class="chapter-item expanded "><a href="0010-move-repl-to-value.html">0010-move-repl-to-value</a></li><li class="chapter-item expanded "><a href="0015-lifting-shape-castables.html">0015-lifting-shape-castables</a></li><li class="chapter-item expanded "><a href="0017-remove-log2-int.html">0017-remove-log2-int</a></li><li class="chapter-item expanded "><a href="0018-reorganize-vendor-platforms.html">0018-reorganize-vendor-platforms</a></li><li class="chapter-item expanded "><a href="0019-remove-scheduler.html">0019-remove-scheduler</a></li><li class="chapter-item expanded "><a href="0020-deprecate-non-fwft-fifos.html">0020-deprecate-non-fwft-fifos</a></li><li class="chapter-item expanded "><a href="0021-patch-releases.html">0021-patch-releases</a></li><li class="chapter-item expanded "><a href="0022-valuecastable-shape.html">0022-valuecastable-shape</a></li><li class="chapter-item expanded "><a href="0027-simulator-testbenches.html">0027-simulator-testbenches</a></li><li class="chapter-item expanded "><a href="0028-override-value-operators.html">0028-override-value-operators</a></li><li class="chapter-item expanded "><a href="0030-component-metadata.html">0030-component-metadata</a></li><li class="chapter-item expanded "><a href="0031-enumeration-type-safety.html">0031-enumeration-type-safety</a></li><li class="chapter-item expanded "><a href="0034-interface-rename.html">0034-interface-rename</a></li><li class="chapter-item expanded "><a href="0035-shapelike-valuelike.html">0035-shapelike-valuelike</a></li><li class="chapter-item expanded "><a href="0037-make-signature-immutable.html">0037-make-signature-immutable</a></li><li class="chapter-item expanded "><a href="0038-component-signature-immutability.html">0038-component-signature-immutability</a></li><li class="chapter-item expanded "><a href="0039-empty-case.html">0039-empty-case</a></li><li class="chapter-item expanded "><a href="0040-arbitrary-memory-shape.html">0040-arbitrary-memory-shape</a></li><li class="chapter-item expanded "><a href="0042-const-from-shape-castable.html" class="active">0042-const-from-shape-castable</a></li><li class="chapter-item expanded "><a href="0045-lib-memory.html">0045-lib-memory</a></li><li class="chapter-item expanded "><a href="0046-shape-range-1.html">0046-shape-range-1</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -146,58 +146,51 @@
                 <div id="content" class="content">
                     <main>
                         <ul>
-<li>Start Date: 2023-05-11</li>
-<li>RFC PR: <a href="https://github.com/amaranth-lang/rfcs/pull/10">amaranth-lang/rfcs#10</a></li>
-<li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/770">amaranth-lang/amaranth#770</a></li>
+<li>Start Date: 2024-02-05</li>
+<li>RFC PR: <a href="https://github.com/amaranth-lang/rfcs/pull/42">amaranth-lang/rfcs#42</a></li>
+<li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/1084">amaranth-lang/amaranth#1084</a></li>
 </ul>
-<h1 id="move-repl-to-valuereplicate"><a class="header" href="#move-repl-to-valuereplicate">Move <code>Repl</code> to <code>Value.replicate</code></a></h1>
+<h1 id="const-from-shape-castable"><a class="header" href="#const-from-shape-castable"><code>Const</code> from shape-castable</a></h1>
 <h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
-<p>Replace the standalone <code>Repl(value, count)</code> node with <code>value.replicate(count)</code>.</p>
+<p>Allow passing a shape-castable to <code>Const</code>.</p>
 <h2 id="motivation"><a class="header" href="#motivation">Motivation</a></h2>
-<p><code>Repl</code> is a <a href="https://github.com/search?q=%2F%5CbRepl%5Cb%2F+amaranth+language%3Apython&amp;type=code">rarely used</a> construct (it's mostly useful for manual sign extension).</p>
-<p>It is currently a first-class entity that has its own AST node and a name in the prelude, mostly for historical reasons (<code>Repl(v, n)</code> is analogous to Verilog's <code>{x{n}}</code>).</p>
-<p><code>Repl</code> does not need to be a first-class entity; <code>Repl(x, n)</code> is almost exactly equivalent to <code>Cat(x for x in range(n))</code>. It especially does not need a name in the prelude.</p>
-<h2 id="guide-level-explanation"><a class="header" href="#guide-level-explanation">Guide-level explanation</a></h2>
-<p>Use of <code>Repl</code> is deprecated. To replicate a value multiple times, use <code>value.replicate()</code>.</p>
-<h2 id="reference-level-explanation"><a class="header" href="#reference-level-explanation">Reference-level explanation</a></h2>
-<p>Direct use of <code>Repl</code> is deprecated. Its implementation is replaced with <code>def Repl(value, count): return Value.cast(value).replicate(count)</code>.</p>
-<p>A function <code>Value.replicate(count)</code> is added. It is implemented as <code>Cat(value for _ in range(count))</code>. The <code>Repl</code> AST node is removed.</p>
+<p>We currently have two incompatible syntaxes for making a constant, depending on whether it's made from a <code>Shape</code> or a shape-castable.
+The former uses <code>Const(value, shape)</code>, while the latter requires <code>shape.const(value)</code>.</p>
+<p>Making <code>Const</code> accept shape-castables means we'll have a syntax that works for all shape-likes, reducing the need to special case for shape-castables.</p>
+<h2 id="guide--and-reference-level-explanation"><a class="header" href="#guide--and-reference-level-explanation">Guide- and reference-level explanation</a></h2>
+<p><code>Const(value, shape)</code> checks whether <code>shape</code> is a shape-castable and returns <code>shape.const(value)</code> when this is the case.</p>
 <h2 id="drawbacks"><a class="header" href="#drawbacks">Drawbacks</a></h2>
 <ul>
-<li>Churn.</li>
-<li>The proposed implementation makes <code>Value.replicate</code> valid on left-hand side of assignment, with potentially surprising behavior. However, this can be handled by prohibiting multiple assignment to the same bit of a signal in general.</li>
+<li>A <code>Const()</code> constructor sometimes returning non-<code>Const</code> objects can be confusing.
+<ul>
+<li><code>Signal()</code> already behaves this way.</li>
+</ul>
+</li>
 </ul>
 <h2 id="rationale-and-alternatives"><a class="header" href="#rationale-and-alternatives">Rationale and alternatives</a></h2>
-<p>Rationale:</p>
 <ul>
-<li>Fewer names in the prelude is always good.</li>
-<li>Unlike with <code>Cat</code> (where <code>Cat()</code> makes sense), <code>Repl</code> does not make sense as a standalone node any more than <code>Part</code> does (and we do not currently export <code>Part</code>).</li>
-<li>Despite existing by analogy with <code>{x{n}}</code>, it is currently turned into a concatenation before it reaches the Verilog backend <em>anyway</em>, and any future work will have to reconstruct replication from concatenation in any case.</li>
-<li><code>Repl</code> being a dedicated node complicates AST processing for no reason.</li>
+<li>This is consistent with how <code>Signal()</code> handles shape-castables.</li>
 </ul>
 <p>Alternatives:</p>
 <ul>
-<li>Do not do this.</li>
+<li>Do not do this. Require code that makes constants from a passed shape-like to check whether it got passed a shape-castable or not and pick the appropriate syntax.</li>
 </ul>
 <h2 id="prior-art"><a class="header" href="#prior-art">Prior art</a></h2>
-<p>None.</p>
+<p><a href="0015-lifting-shape-castables.html">RFC #15</a> added the equivalent behavior to <code>Signal()</code>.</p>
 <h2 id="unresolved-questions"><a class="header" href="#unresolved-questions">Unresolved questions</a></h2>
 <p>None.</p>
 <h2 id="future-possibilities"><a class="header" href="#future-possibilities">Future possibilities</a></h2>
-<ul>
-<li>The Verilog backend currently bitblasts what could be a replication. We could detect these and convert them to replications proper.</li>
-<li>We could detect code like <code>Cat(x, x).eq(0b11)</code> and warn or reject it.</li>
-</ul>
+<p>None.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="0009-const-init-shape-castable.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="0040-arbitrary-memory-shape.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="0015-lifting-shape-castables.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="0045-lib-memory.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -207,11 +200,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="0009-const-init-shape-castable.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="0040-arbitrary-memory-shape.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="0015-lifting-shape-castables.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="0045-lib-memory.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
