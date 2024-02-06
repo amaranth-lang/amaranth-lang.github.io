@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Language reference &mdash; Amaranth language &amp; toolchain 0.4.1.dev62 documentation</title>
+  <title>Language reference &mdash; Amaranth language &amp; toolchain 0.4.1.dev63 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -15,7 +15,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=d6773a81"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=720fbe98"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/platformpicker.js"></script>
@@ -39,7 +39,7 @@
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.4.1.dev62+g1fe7bd0
+                0.4.1.dev63+g089213e
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -204,8 +204,8 @@ values. Cannot be zero if the value is signed.</p></li>
 <ul class="simple">
 <li><p>a <a class="reference internal" href="#amaranth.hdl.Shape" title="amaranth.hdl.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code></a>, where the result is itself;</p></li>
 <li><p>an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, where the result is <a class="reference internal" href="#amaranth.hdl.unsigned" title="amaranth.hdl.unsigned"><code class="xref py py-func docutils literal notranslate"><span class="pre">unsigned(obj)</span></code></a>;</p></li>
-<li><p>a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">range</span></code></a>, where the result is wide enough to represent any element of the range,
-and is signed if any element of the range is signed;</p></li>
+<li><p>a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">range</span></code></a>, where the result has minimal width required to represent all elements
+of the range, and is signed if any element of the range is signed;</p></li>
 <li><p>an <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a> whose members are all <a class="reference internal" href="guide.html#lang-constcasting"><span class="std std-ref">constant-castable</span></a>
 or <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></a>, where the result is wide enough to represent any member of
 the enumeration, and is signed if any member of the enumeration is signed;</p></li>
