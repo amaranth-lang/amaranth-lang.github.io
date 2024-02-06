@@ -1,0 +1,796 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>0016-soc-csr-regs - The Amaranth RFC Book</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li><li class="chapter-item expanded "><a href="0002-interfaces.html">0002-interfaces</a></li><li class="chapter-item expanded "><a href="0003-enumeration-shapes.html">0003-enumeration-shapes</a></li><li class="chapter-item expanded "><a href="0004-const-castable-exprs.html">0004-const-castable-exprs</a></li><li class="chapter-item expanded "><a href="0005-remove-const-normalize.html">0005-remove-const-normalize</a></li><li class="chapter-item expanded "><a href="0006-stdlib-crc.html">0006-stdlib-crc</a></li><li class="chapter-item expanded "><a href="0008-aggregate-extensibility.html">0008-aggregate-extensibility</a></li><li class="chapter-item expanded "><a href="0009-const-init-shape-castable.html">0009-const-init-shape-castable</a></li><li class="chapter-item expanded "><a href="0010-move-repl-to-value.html">0010-move-repl-to-value</a></li><li class="chapter-item expanded "><a href="0015-lifting-shape-castables.html">0015-lifting-shape-castables</a></li><li class="chapter-item expanded "><a href="0016-soc-csr-regs.html" class="active">0016-soc-csr-regs</a></li><li class="chapter-item expanded "><a href="0017-remove-log2-int.html">0017-remove-log2-int</a></li><li class="chapter-item expanded "><a href="0018-reorganize-vendor-platforms.html">0018-reorganize-vendor-platforms</a></li><li class="chapter-item expanded "><a href="0019-remove-scheduler.html">0019-remove-scheduler</a></li><li class="chapter-item expanded "><a href="0020-deprecate-non-fwft-fifos.html">0020-deprecate-non-fwft-fifos</a></li><li class="chapter-item expanded "><a href="0021-patch-releases.html">0021-patch-releases</a></li><li class="chapter-item expanded "><a href="0022-valuecastable-shape.html">0022-valuecastable-shape</a></li><li class="chapter-item expanded "><a href="0027-simulator-testbenches.html">0027-simulator-testbenches</a></li><li class="chapter-item expanded "><a href="0028-override-value-operators.html">0028-override-value-operators</a></li><li class="chapter-item expanded "><a href="0030-component-metadata.html">0030-component-metadata</a></li><li class="chapter-item expanded "><a href="0031-enumeration-type-safety.html">0031-enumeration-type-safety</a></li><li class="chapter-item expanded "><a href="0034-interface-rename.html">0034-interface-rename</a></li><li class="chapter-item expanded "><a href="0035-shapelike-valuelike.html">0035-shapelike-valuelike</a></li><li class="chapter-item expanded "><a href="0037-make-signature-immutable.html">0037-make-signature-immutable</a></li><li class="chapter-item expanded "><a href="0038-component-signature-immutability.html">0038-component-signature-immutability</a></li><li class="chapter-item expanded "><a href="0039-empty-case.html">0039-empty-case</a></li><li class="chapter-item expanded "><a href="0040-arbitrary-memory-shape.html">0040-arbitrary-memory-shape</a></li><li class="chapter-item expanded "><a href="0042-const-from-shape-castable.html">0042-const-from-shape-castable</a></li><li class="chapter-item expanded "><a href="0045-lib-memory.html">0045-lib-memory</a></li><li class="chapter-item expanded "><a href="0046-shape-range-1.html">0046-shape-range-1</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Amaranth RFC Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/amaranth-lang/rfcs" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <ul>
+<li>Start Date: 2024-02-02</li>
+<li>RFC PR: <a href="https://github.com/amaranth-lang/rfcs/pull/16">amaranth-lang/rfcs#16</a></li>
+<li>Amaranth SoC Issue: <a href="https://github.com/amaranth-lang/amaranth-soc/issues/68">amaranth-lang/amaranth-soc#68</a></li>
+</ul>
+<h1 id="csr-register-definition-rfc"><a class="header" href="#csr-register-definition-rfc">CSR register definition RFC</a></h1>
+<h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
+<p>Add primitives to define CSR registers.</p>
+<h2 id="motivation"><a class="header" href="#motivation">Motivation</a></h2>
+<p>The Amaranth SoC library support for CSRs currently consists of bus primitives behind which multiple registers can be gathered.</p>
+<p>Its current notion of a CSR register is limited to the <code>csr.Element</code> class, which provides an interface between a register and a CSR bus. The information we have about a register is limited to its width and access mode (necessary to determine the layout of <code>csr.Element</code>), in addition to its name and address. This information can then be aggregated by walking through the memory map of a SoC, to generate header files (and documentation, etc) for use by firmware.</p>
+<p>However, amaranth-soc lacks the notion of register fields. The CSR bus acts as a transport and isn't concerned about fields. Peripherals often expose their functionality using multiple fields of a register, and initiators (e.g. a CPU running firmware) need to be aware of them.</p>
+<p>In addition, users must currently implement their own register primitives, which adds boilerplate.</p>
+<p>This RFC aims to add a standard implementation of a CSR register, while building upon the existing infrastructure.</p>
+<h2 id="guide-level-explanation"><a class="header" href="#guide-level-explanation">Guide-level explanation</a></h2>
+<p>Currently, the implementation of a CSR register is left to the user, as amaranth-soc only requires the use of <code>csr.Element</code> as its interface:</p>
+<pre><code class="language-python3">class UARTPeripheral(Elaboratable):
+    def __init__(self):
+        self._phy = AsyncSerial(divisor=int(100e6//115200), data_width=8)
+
+        self._divisor = csr.Element(self._phy.divisor.width, &quot;rw&quot;)
+        self._rx_rdy  = csr.Element(1, &quot;r&quot;)
+        self._rx_err  = csr.Element(1, &quot;r&quot;)
+
+        self._csr_mux = csr.Multiplexer(addr_width=4, data_width=32)
+        self._csr_mux.add(self._divisor)
+        self._csr_mux.add(self._rx_rdy)
+        self._csr_mux.add(self._rx_err)
+
+        self.bus = self._csr_mux.bus
+
+    def elaborate(self, platform):
+        m = Module()
+        m.submodules.phy     = self._phy
+        m.submodules.csr_mux = self._csr_mux
+
+        m.d.comb += self._divisor.r_data.eq(self._phy.divisor)
+
+        with m.If(self._divisor.w_stb):
+            m.d.sync += self._phy.divisor.eq(self._divisor.w_data)
+
+        # ...
+
+        return m
+</code></pre>
+<p>This RFC adds register primitives to amaranth-soc, which are defined by subclassing <code>csr.Register</code>:</p>
+<pre><code class="language-python3">class UARTPeripheral(wiring.Component):
+    # A register with a parameterized width and reset value:
+    class Divisor(csr.Register, access=&quot;rw&quot;):
+        def __init__(self, *, width, reset):
+            super().__init__({
+                &quot;divisor&quot;: csr.Field(csr.action.RW, width, reset=reset),
+            })
+
+    # A simple register, with reserved fields:
+    class RxStatus(csr.Register, access=&quot;r&quot;):
+        rdy : csr.Field(csr.action.R,       unsigned(1))
+        _0  : csr.Field(csr.action.ResRAW0, unsigned(3))
+        err : csr.Field(csr.action.R,       unsigned(1))
+        _1  : csr.Field(csr.action.ResRAW0, unsigned(3))
+
+    class RxData(csr.Register, access=&quot;r&quot;):
+        data : csr.Field(csr.action.R, unsigned(8))
+
+    def __init__(self, *, divisor):
+        self._phy = AsyncSerial(divisor=int(100e6//115200), data_width=8)
+
+        regs = csr.Builder(addr_width=4, data_width=8)
+
+        self._divisor = regs.add(&quot;divisor&quot;, self.Divisor(width=bits_for(divisor), reset=divisor))
+
+        with regs.Cluster(&quot;rx&quot;):
+            self._rx_status = regs.add(&quot;status&quot;, self.RxStatus(), offset=3)
+            self._rx_data   = regs.add(&quot;data&quot;,   self.RxData(),   offset=4)
+
+        self._bridge = csr.Bridge(regs.as_memory_map())
+
+        super().__init__({
+            &quot;bus&quot;: In(csr.Signature(addr_width=4, data_width=8))
+        })
+        self.bus.memory_map = self._bridge.bus.memory_map
+
+    def elaborate(self, platform):
+        m = Module()
+
+        m.submodules.phy    = self._phy
+        m.submodules.bridge = self._bridge
+
+        m.submodules.rx_fifo = rx_fifo = SyncFIFOBuffered(width=8 + 1, depth=16)
+
+        m.d.comb += [
+            # Reading a field from the peripheral side:
+            self._phy.divisor.eq(self.divisor.f.divisor.data),
+
+            rx_fifo.w_en  .eq(self._phy.rx.rdy),
+            rx_fifo.w_data.eq(Cat(self._phy.rx.data, self._phy.rx.err)),
+            self._phy.rx.ack.eq(rx_fifo.w_rdy),
+
+            # Writing to a field from the peripheral side:
+            self._rx_status.f.rdy.r_data.eq(rx_fifo.r_rdy),
+            self._rx_status.f.err.r_data.eq(rx_fifo.r_data[-1]),
+
+            # Consuming data from a FIFO, as a side-effect from a bus read:
+            self._rx_data.f.data.r_data.eq(rx_fifo.r_data[:8]),
+            rx_fifo.r_en.eq(self._rx_data.f.data.r_stb),
+        ]
+
+        return m
+</code></pre>
+<h3 id="register-definitions"><a class="header" href="#register-definitions">Register definitions</a></h3>
+<p>The fields of a <code>Register</code> instance can be defined in two different ways:</p>
+<ul>
+<li>using <a href="https://peps.python.org/pep-0526/">PEP 526</a> variable annotations.</li>
+<li>by calling <code>Register.__init__()</code> with a non-default <code>fields</code> argument.</li>
+</ul>
+<p>Variable annotations are suitable for simple use-cases, whereas overriding <code>Register.__init__()</code> allows field definitions to be parameterized.</p>
+<pre><code class="language-python3">class UARTPeripheral(Elaboratable):
+    class Divisor(csr.Register, access=&quot;rw&quot;):
+        def __init__(self, *, width, reset):
+            super().__init__({
+                &quot;divisor&quot;: csr.Field(csr.action.RW, width, reset=reset),
+            })
+
+    class RxStatus(csr.Register, access=&quot;r&quot;):
+        rdy : csr.Field(csr.action.R,       unsigned(1))
+        _0  : csr.Field(csr.action.ResRAW0, unsigned(3))
+        err : csr.Field(csr.action.R,       unsigned(1))
+        _1  : csr.Field(csr.action.ResRAW0, unsigned(3))
+
+    class RxData(csr.Register, access=&quot;r&quot;):
+        data : csr.Field(csr.action.R, unsigned(8))
+
+    ...
+</code></pre>
+<h3 id="field-access-and-ownership"><a class="header" href="#field-access-and-ownership">Field access and ownership</a></h3>
+<p>The <code>csr.action</code> class definitions differ by their access mode.</p>
+<p>For example, <code>csr.action.R</code> describes a field that is:</p>
+<ul>
+<li><em>read-only</em> from the point-of-view of a <em>bus initiator</em> (such as a CPU);</li>
+<li><em>read/write</em> from the point-of-view of the peripheral;</li>
+</ul>
+<p>Whereas <code>csr.action.RW</code> describes a field that is:</p>
+<ul>
+<li><em>read/write</em> from the point-of-view of a CPU</li>
+<li><em>read-only</em> from the point-of-view of the peripheral</li>
+</ul>
+<p>In this RFC, write access is defined by ownership. A register field can only be written to by its owner(s). For example:</p>
+<ul>
+<li>a <code>csr.action.R</code> field is owned by the peripheral;</li>
+<li>a <code>csr.action.RW</code> field is owned by the bus initiator.</li>
+</ul>
+<p>In the <code>UARTPeripheral</code> example above, each register field has a single owner. This effectively removes the possibility of a write conflict between a CPU and the peripheral.</p>
+<p>Otherwise, in case of shared ownership, deciding which transaction has precedence is context-dependent.</p>
+<h3 id="flag-fields"><a class="header" href="#flag-fields">Flag fields</a></h3>
+<p>Flag fields may be writable by both the bus initiator and the peripheral. Flag fields are distinct from other kinds of fields, as each bit may be set or cleared independently of others.</p>
+<p>This RFC provides two types of flag:</p>
+<ul>
+<li><code>csr.action.RW1C</code> (read/write-one-to-clear) flags may be used when a peripheral needs to notify a CPU of a condition (e.g. an error or a pending interrupt). The CPU clears the flag to acknowledge it. If a write conflict occurs, setting the bit from the peripheral side would have precedence.</li>
+<li><code>csr.action.RW1S</code> (read/write-one-to-set) flags may be used for self-clearing bits, such as the enable bit of a one-shot timer. When the counter reaches its maximum value, it would automatically disable itself by clearing the enable bit. If a write conflict occurs, setting the bit from the CPU side would have precedence.</li>
+</ul>
+<p>A use case that involves both <code>RW1C</code> and <code>RW1S</code> fields would be a register driving an array of GPIO pins. Their values may be set or cleared by a CPU. In a multitasked environment, a read-modify-write transaction would require locking to insure atomicity; whereas having two fields (<code>RW1S</code> and <code>RW1C</code>) targeting the same flags allows a CPU to set or clear any of them in a single write transaction.</p>
+<h3 id="reserved-fields"><a class="header" href="#reserved-fields">Reserved fields</a></h3>
+<p>Reserved fields may be defined to provide placeholders for past, future or undocumented functions.</p>
+<p>This RFC provides four types of reserved fields:</p>
+<ul>
+<li><code>csr.action.ResRAW0</code> (read-any/write-zero)</li>
+<li><code>csr.action.ResRAWL</code> (read-any/write-last)</li>
+<li><code>csr.action.ResR0WA</code> (read-zero/write-any)</li>
+<li><code>csr.action.ResR0W0</code> (read-zero/write-zero)</li>
+</ul>
+<h4 id="example-use-cases-for-reserved-fields"><a class="header" href="#example-use-cases-for-reserved-fields">Example use cases for reserved fields</a></h4>
+<h5 id="one-time-programmable-fuse"><a class="header" href="#one-time-programmable-fuse">One-Time Programmable fuse</a></h5>
+<ul>
+<li>Field type: <code>ResRAW0</code> (read-any/write-zero)</li>
+<li>Reads return the fuse state. Writing 1 will blow the fuse.</li>
+</ul>
+<h5 id="reserved-for-future-use-as-value"><a class="header" href="#reserved-for-future-use-as-value">Reserved for future use (as value)</a></h5>
+<ul>
+<li>Field type: <code>ResRAWL</code> (read-any/write-last)</li>
+<li>Software drivers need to be aware of such fields, to ensure forward compatibility of software binaries with future silicon versions.</li>
+<li>Software drivers are assumed to access such fields by setting up an atomic read-modify-write transaction.</li>
+<li>The value returned by reads (and written back) must have defined semantics (e.g. a no-op) that can be relied upon in future silicon versions.</li>
+</ul>
+<h5 id="reserved-for-future-use-as-flag"><a class="header" href="#reserved-for-future-use-as-flag">Reserved for future use (as flag)</a></h5>
+<ul>
+<li>Field type: <code>ResRAW0</code> (read-any/write-zero)</li>
+<li>Software drivers need to be aware of such fields, to ensure forward compatibility of software binaries with future silicon versions.</li>
+<li>Software drivers do not need a read-modify-write transaction to write these fields.</li>
+<li>Software drivers should ignore the value returned by reads.</li>
+<li>Writing a value of 0 is a no-op for <code>RW1C</code> and <code>RW1S</code> flags, if implemented by future silicon versions.</li>
+</ul>
+<h5 id="defined-but-deprecated"><a class="header" href="#defined-but-deprecated">Defined, but deprecated</a></h5>
+<ul>
+<li>Field type: <code>ResR0WA</code> (read-zero/write-any)</li>
+<li>Such fields may be used as placeholders for phased out fields from previous silicon versions. They are required for backward compatibility with existing software binaries.</li>
+<li>The value of 0 returned by reads (and written back) must have defined semantics (e.g. a no-op).</li>
+</ul>
+<h5 id="defined-but-unimplemented"><a class="header" href="#defined-but-unimplemented">Defined, but unimplemented</a></h5>
+<ul>
+<li>Field type: <code>ResR0W0</code> (read-zero/write-zero)</li>
+<li>Such fields may be used to provide variants of a peripheral IP, and facilitate code re-use in software drivers.</li>
+<li>For example on STM32F0x SoCs, the CR1.CKD field (clock divider ratio) is read/write in the &quot;general-purpose&quot; timer TIM14 , but always reads 0 in the &quot;basic&quot; timer TIM6.</li>
+</ul>
+<h3 id="accessing-register-fields-from-peripherals"><a class="header" href="#accessing-register-fields-from-peripherals">Accessing register fields from peripherals</a></h3>
+<pre><code class="language-python3">class UARTPeripheral(Elaboratable):
+    ...
+
+    def elaborate(self, platform):
+        ...
+
+        m.d.comb += [
+            self._phy.divisor.eq(self._divisor.f.divisor.data),
+
+            ...
+
+            self._rx_status.f.rdy.r_data.eq(rx_fifo.r_rdy),
+            self._rx_status.f.err.r_data.eq(rx_fifo.r_data[-1]),
+
+            self._rx_data.f.data.r_data.eq(rx_fifo.r_data[:8]),
+            rx_fifo.r_en.eq(self._rx_data.f.data.r_stb),
+        ]
+
+        ...
+</code></pre>
+<p>From the peripheral side, fields are exposed by the <code>&lt;reg&gt;.f</code> attribute of the <code>csr.Register</code> they belong to.</p>
+<h5 id="access-strobes"><a class="header" href="#access-strobes">Access strobes</a></h5>
+<p>Peripherals can sample access strobes of <code>csr.action.R</code> and <code>csr.action.W</code> fields to perform side-effects:</p>
+<ul>
+<li><code>&lt;reg&gt;.f.&lt;field&gt;.r_stb</code> is asserted when the register is read from the CSR bus (i.e. it is hardwired to <code>&lt;reg&gt;.element.r_stb</code>);</li>
+<li><code>&lt;reg&gt;.f.&lt;field&gt;.w_stb</code> is asserted when the register is written by the CSR bus (i.e. it is hardwired to <code>&lt;reg&gt;.element.w_stb</code>).</li>
+</ul>
+<h5 id="data"><a class="header" href="#data">Data</a></h5>
+<ul>
+<li><code>&lt;reg&gt;.f.&lt;field&gt;.w_data</code> is driven by the register if the field is write-only by the bus (i.e. <code>W</code>), and hardwired to a slice of <code>&lt;reg&gt;.element.w_data</code>.</li>
+<li><code>&lt;reg&gt;.f.&lt;field&gt;.r_data</code> is driven by the peripheral if the field is read-only by the bus (i.e. <code>R</code>), and hardwired to a slice of <code>&lt;reg&gt;.element.r_data</code>.</li>
+<li><code>&lt;reg&gt;.f.&lt;field&gt;.data</code> is driven by the register (with the value held in its storage), if the field is read-write for the bus (i.e. <code>RW</code>, <code>RW1C</code>, <code>RW1S</code>). It is updated one clock cycle after <code>&lt;reg&gt;.element.w_stb</code> is high (on the <code>sync</code> clock domain by default).</li>
+<li><code>&lt;reg&gt;.f.&lt;field&gt;.set</code> is driven by the peripheral to set bits of a field that can be cleared by the bus (i.e. <code>RW1C</code>).</li>
+<li><code>&lt;reg&gt;.f.&lt;field&gt;.clear</code> is driven by the peripheral to clear bits of a field that can be set by the bus (i.e. <code>RW1S</code>).</li>
+</ul>
+<h3 id="building-registers"><a class="header" href="#building-registers">Building registers</a></h3>
+<p>The <code>csr.Builder</code> provides fine-grained control over the address space occupied by the CSR registers of a peripheral. Registers may be organized into a hierarchy of clusters and arrays, which can be composed together (e.g. into an array of clusters, a multi-dimensional array, etc).</p>
+<p>For example, an (artificially simplified) interrupt controller could use a 2-dimensional array of registers:</p>
+<pre><code class="language-python3">regs = csr.Builder(addr_width=csr_addr_width, data_width=32, granularity=8):
+
+# For each CPU core and each group of 32 interrupts, add two registers: &quot;IE&quot; and &quot;IP&quot;.
+for i in range(nb_cpu_cores):
+    with regs.Index(i):
+        for j in range(ceil(nb_intr_sources / 32)):
+            with regs.Index(j):
+                self.ie[i][j] = regs.add(&quot;IE&quot;, self.IE(width=32))
+                self.ip[i][j] = regs.add(&quot;IP&quot;, self.IP(width=32))
+</code></pre>
+<p><code>regs.as_memory_map()</code> will create a <code>MemoryMap</code> containing those registers, which can be passed to a <code>csr.Bridge</code> to expose them over a CSR bus.</p>
+<h2 id="reference-level-explanation"><a class="header" href="#reference-level-explanation">Reference-level explanation</a></h2>
+<h3 id="fields"><a class="header" href="#fields">Fields</a></h3>
+<h4 id="csrregfieldportaccess"><a class="header" href="#csrregfieldportaccess"><code>csr.reg.FieldPort.Access</code></a></h4>
+<p>The <code>FieldPort.Access</code> enum defines the supported access modes of a field, with:</p>
+<ul>
+<li>the following values: <code>R</code>, <code>W</code>, <code>RW</code> and <code>NC</code> (not connected);</li>
+<li>a <code>.readable(self)</code> method, which returns <code>True</code> if <code>self</code> is <code>R</code> or <code>RW</code>;</li>
+<li>a <code>.writable(self)</code> method, which returns <code>True</code> if <code>self</code> is <code>W</code> or <code>RW</code>.</li>
+</ul>
+<h4 id="csrregfieldport"><a class="header" href="#csrregfieldport"><code>csr.reg.FieldPort</code></a></h4>
+<p>The <code>FieldPort</code> class describes the interface between a register field and the register itself, with:</p>
+<ul>
+<li>a <code>.__init__(self, shape, access)</code> constructor, where <code>shape</code> is a shape-castable and <code>access</code> is a <code>FieldPort.Access</code> value;</li>
+<li>a <code>.shape</code> property;</li>
+<li>a <code>.access</code> property;</li>
+</ul>
+<h4 id="csrregfieldportsignature"><a class="header" href="#csrregfieldportsignature"><code>csr.reg.FieldPort.Signature</code></a></h4>
+<p>The <code>FieldPort.Signature</code> class describes the signature of a <code>FieldPort</code>, with:</p>
+<ul>
+<li>a <code>.__init__(self, shape, access)</code> constructor, where <code>shape</code> is a shape-castable and <code>access</code> is a <code>FieldPort.Access</code> value;</li>
+<li>a <code>.shape</code> property;</li>
+<li>a <code>.access</code> property;</li>
+<li>a <code>.create(self, path=None, src_loc_at=0)</code> method that returns a compatible <code>FieldPort</code> object;</li>
+<li>a <code>.__eq__(self, other)</code> method that returns <code>True</code> if both <code>self</code> and <code>other</code> have the same shape and access mode.</li>
+</ul>
+<h5 id="signature-members"><a class="header" href="#signature-members">Signature members</a></h5>
+<p>The members of a <code>FieldPort.Signature</code> are defined as follows:</p>
+<pre><code class="language-python3">{
+    &quot;r_data&quot;: In(self.shape),
+    &quot;r_stb&quot;:  Out(1),
+    &quot;w_data&quot;: In(self.shape),
+    &quot;w_stb&quot;:  Out(1)
+}
+</code></pre>
+<p>The access mode of a <code>FieldPort.Signature</code> has no influence on its members (e.g. <code>w_data</code> and <code>w_stb</code> are present even if <code>access.writable()</code> returns <code>False</code>).</p>
+<h4 id="csrregfieldaction"><a class="header" href="#csrregfieldaction"><code>csr.reg.FieldAction</code></a></h4>
+<p>The <code>FieldAction</code> class is a <code>Component</code> subclass implementing the behavior of a register field, with:</p>
+<ul>
+<li>a <code>.__init__(self, shape, access, members=()</code> constructor, where:
+<ul>
+<li><code>shape</code> is a shape-castable;</li>
+<li><code>access</code> is a <code>FieldPort.Access</code> value;</li>
+<li><code>members</code> is an iterable of key/value pairs, where keys are strings and values are signature members.</li>
+</ul>
+</li>
+<li>a <code>.signature</code> property, that returns a <code>Signature</code> with the following members:</li>
+</ul>
+<pre><code class="language-python3">{
+    &quot;port&quot;: In(FieldPort.Signature(shape, access)),
+    **members
+}
+</code></pre>
+<p>where <code>shape</code>, <code>access</code> and <code>members</code> are provided in <code>.__init__()</code>.</p>
+<h4 id="csrregfield"><a class="header" href="#csrregfield"><code>csr.reg.Field</code></a></h4>
+<p>The <code>Field</code> class serves as a factory for builtin or user-defined <code>FieldAction</code>s, with:</p>
+<ul>
+<li>a <code>.__init__(self, action_cls, *args, **kwargs)</code> constructor, where:
+<ul>
+<li><code>action_cls</code> is a <code>FieldAction</code> subclass;</li>
+<li><code>*args</code> and <code>**kwargs</code> are arguments passed to <code>action_cls.__init__()</code>;</li>
+</ul>
+</li>
+<li>a <code>.create(self)</code> method that returns <code>action_cls(*args, **kwargs)</code>.</li>
+</ul>
+<h4 id="csrregfieldactionmap"><a class="header" href="#csrregfieldactionmap"><code>csr.reg.FieldActionMap</code></a></h4>
+<p>The <code>FieldActionMap</code> class describes an immutable mapping of <code>FieldAction</code> objects, with:</p>
+<ul>
+<li>a <code>.__init__(self, fields)</code> constructor, where <code>fields</code> is a dict of strings to either <code>Field</code> objects, nested dicts or lists;</li>
+<li>a <code>.__getitem__(self, key)</code> method to lookup a field instance by name, without recursion;</li>
+<li>a <code>.__getattr__(self, name)</code> method to lookup a field instance by name, without recursion and excluding fields whose name start with <code>&quot;_&quot;</code>;</li>
+<li>a <code>.flatten(self)</code> method that yields for each field, a tuple containing its path (as a tuple of names or indices) and its instance.</li>
+</ul>
+<p>A <code>FieldActionMap</code> contains instances of the fields given in <code>__init__()</code>:</p>
+<ul>
+<li><code>Field</code> objects are instantiated as <code>FieldAction</code> by calling <code>Field.create()</code>;</li>
+<li><code>dict</code> objects are instantiated as <code>FieldActionMap</code>;</li>
+<li><code>list</code> objects  are instantiated as <code>FieldActionArray</code>.</li>
+</ul>
+<p>A <code>FieldActionMap</code> preserves the iteration order of its fields, from least significant to most significant.</p>
+<h4 id="csrregfieldactionarray"><a class="header" href="#csrregfieldactionarray"><code>csr.reg.FieldActionArray</code></a></h4>
+<p>The <code>FieldActionArray</code> class describes an immutable sequence of <code>FieldAction</code> objects, with:</p>
+<ul>
+<li>a <code>.__init__(self, fields)</code> constructor, where <code>fields</code> is a list of either <code>Field</code> objects, nested dicts or lists;</li>
+<li>a <code>.__getitem__(self, key)</code> method to lookup a field instance by index, without recursion;</li>
+<li>a <code>.flatten(self)</code> method that yields for each field, a tuple containing its path (as a tuple of names or indices) and its instance.</li>
+</ul>
+<p>A <code>FieldActionArray</code> contains instances of the fields given in <code>__init__()</code>:</p>
+<ul>
+<li><code>Field</code> objects are instantiated as <code>FieldAction</code> by calling <code>Field.create()</code>;</li>
+<li><code>dict</code> objects are instantiated as <code>FieldActionMap</code>;</li>
+<li><code>list</code> objects  are instantiated as <code>FieldActionArray</code>.</li>
+</ul>
+<p>A <code>FieldActionArray</code> preserves the iteration order of its fields, from least significant to most significant.</p>
+<h3 id="built-in-field-actions"><a class="header" href="#built-in-field-actions">Built-in field actions</a></h3>
+<h4 id="csractionr"><a class="header" href="#csractionr"><code>csr.action.R</code></a></h4>
+<p>The <code>csr.action.R</code> class describes a read-only <code>FieldAction</code>, with:</p>
+<ul>
+<li>a <code>.__init__(self, shape)</code> constructor, where <code>shape</code> is a shape-castable;</li>
+<li>a <code>.signature</code> property, that returns a <code>Signature</code> with the following members:</li>
+</ul>
+<pre><code class="language-python3">{
+    &quot;port&quot;:   In(FieldPort.Signature(shape, access=&quot;r&quot;)),
+    &quot;r_data&quot;: In(shape),
+    &quot;r_stb&quot;:  Out(unsigned(1)),
+}
+</code></pre>
+<ul>
+<li>a <code>.elaborate(self, platform)</code> method, where <code>self.r_data</code> and <code>self.r_stb</code> are connected to <code>self.port.r_data</code> and <code>self.port.r_stb</code>.</li>
+</ul>
+<h4 id="csractionw"><a class="header" href="#csractionw"><code>csr.action.W</code></a></h4>
+<p>The <code>csr.action.W</code> class describes a write-only <code>FieldAction</code>, with:</p>
+<ul>
+<li>a <code>.__init__(self, shape)</code> constructor, where <code>shape</code> is a shape-castable.</li>
+<li>a <code>.signature</code> property, that returns a <code>Signature</code> with the following members:</li>
+</ul>
+<pre><code class="language-python3">{
+    &quot;port&quot;:   In(FieldPort.Signature(shape, access=&quot;w&quot;)),
+    &quot;w_data&quot;: Out(shape),
+    &quot;w_stb&quot;:  Out(unsigned(1)),
+}
+</code></pre>
+<ul>
+<li>a <code>.elaborate(self, platform)</code> method, where <code>self.port.w_data</code> and <code>self.port.w_stb</code> are connected to <code>self.w_data</code> and <code>self.port.w_stb</code>.</li>
+</ul>
+<h4 id="csractionrw"><a class="header" href="#csractionrw"><code>csr.action.RW</code></a></h4>
+<p>The <code>csr.action.RW</code> class describes a read-write <code>FieldAction</code>, with:</p>
+<ul>
+<li>a <code>.__init__(self, shape, reset=0)</code> constructor, where <code>shape</code> is a shape-castable and <code>reset</code> is a const-castable defining the reset value of internal storage;</li>
+<li>a <code>.reset</code> property;</li>
+<li>a <code>.signature</code> property, that returns a <code>Signature</code> with the following members:</li>
+</ul>
+<pre><code class="language-python3">{
+    &quot;port&quot;: In(FieldPort.Signature(shape, access=&quot;rw&quot;)),
+    &quot;data&quot;: Out(shape)
+}
+</code></pre>
+<ul>
+<li>a <code>.elaborate(self, platform)</code> method, where <code>self.port.w_data</code> is used to synchronously write internal storage. Storage output is connected to <code>self.data</code> and <code>self.port.r_data</code>.</li>
+</ul>
+<h4 id="csractionrw1c"><a class="header" href="#csractionrw1c"><code>csr.action.RW1C</code></a></h4>
+<p>The <code>csr.action.RW1C</code> class describes a read-write <code>FieldAction</code>, with:</p>
+<ul>
+<li>a <code>.__init__(self, shape, reset=0)</code> constructor, where <code>shape</code> is a shape-castable and <code>reset</code> is a const-castable defining the reset value of internal storage.</li>
+<li>a <code>.reset</code> property;</li>
+<li>a <code>.signature</code> property, that returns a <code>Signature</code> with the following members:</li>
+</ul>
+<pre><code class="language-python3">{
+    &quot;port&quot;: In(FieldPort.Signature(shape, access=&quot;rw&quot;)),
+    &quot;data&quot;: Out(shape),
+    &quot;set&quot;:  In(shape)
+}
+</code></pre>
+<ul>
+<li>a <code>.elaborate(self, platform)</code> method, where high bits in <code>self.port.w_data</code> and <code>self.port.set</code> are used to synchronously clear and set internal storage, respectively. Storage output is connected to <code>self.data</code> and <code>self.port.r_data</code>.</li>
+</ul>
+<h4 id="csractionrw1s"><a class="header" href="#csractionrw1s"><code>csr.action.RW1S</code></a></h4>
+<p>The <code>csr.action.RW1S</code> class describes a read-write <code>FieldAction</code>, with:</p>
+<ul>
+<li>a <code>.__init__(self, shape, reset=0)</code> constructor, where <code>shape</code> is a shape-castable and <code>reset</code> is a const-castable defining the reset value of internal storage;</li>
+<li>a <code>.reset</code> property;</li>
+<li>a <code>.signature</code> property, that returns a <code>Signature</code> with the following members:</li>
+</ul>
+<pre><code class="language-python3">{
+    &quot;port&quot;:  In(FieldPort.Signature(shape, access=&quot;rw&quot;)),
+    &quot;data&quot;:  Out(shape),
+    &quot;clear&quot;: In(shape)
+}
+</code></pre>
+<ul>
+<li>a <code>.elaborate(self, platform)</code> method, where high bits in <code>self.port.w_data</code> and <code>self.port.clear</code> are used to synchronously set and clear internal storage, respectively. Storage output is connected to <code>self.data</code> and <code>self.port.r_data</code>.</li>
+</ul>
+<h3 id="built-in-reserved-field-actions"><a class="header" href="#built-in-reserved-field-actions">Built-in reserved field actions</a></h3>
+<h4 id="csractionresraw0-csractionresrawl-csractionresr0wa-csractionresr0w0"><a class="header" href="#csractionresraw0-csractionresrawl-csractionresr0wa-csractionresr0w0"><code>csr.action.ResRAW0</code>, <code>csr.action.ResRAWL</code>, <code>csr.action.ResR0WA</code>, <code>csr.action.ResR0W0</code></a></h4>
+<p>These classes describe a reserved <code>FieldAction</code>, with:</p>
+<ul>
+<li>a <code>.__init__(self, shape)</code> constructor, where <code>shape</code> is a shape-castable;</li>
+<li>a <code>.signature</code> property, that returns a <code>Signature</code> with the following members:</li>
+</ul>
+<pre><code class="language-python3">{
+    &quot;port&quot;:  In(FieldPort.Signature(shape, access=&quot;nc&quot;)),
+}
+</code></pre>
+<ul>
+<li>a <code>.elaborate(self, platform)</code> method, that returns an empty <code>Module()</code>.</li>
+</ul>
+<h3 id="registers"><a class="header" href="#registers">Registers</a></h3>
+<h4 id="csrregregister"><a class="header" href="#csrregregister"><code>csr.reg.Register</code></a></h4>
+<p>The <code>csr.reg.Register</code> class describes a CSR register <code>Component</code>, with:</p>
+<ul>
+<li>a <code>.__init_subclass__(cls, access=None, **kwargs)</code> class method, where <code>access</code> is either a <code>csr.Element.Access</code> value, or <code>None</code>.</li>
+<li>a <code>.__init__(self, fields=None, access=None)</code> constructor, where:
+<ul>
+<li><code>fields</code> is either:
+<ul>
+<li>a <code>dict</code> that will be instantiated as a <code>FieldActionMap</code>;</li>
+<li>a <code>list</code> that will be instantiated as a <code>FieldActionArray</code>;</li>
+<li><code>None</code>; in this case a <code>FieldActionMap</code> is instantiated from <code>Field</code> objects in variable annotations.</li>
+</ul>
+</li>
+<li><code>access</code> is either a <code>csr.Element.Access</code> value, or <code>None</code>.</li>
+</ul>
+</li>
+<li>a <code>.fields</code> property, returning a <code>FieldActionMap</code> or a <code>FieldActionArray</code>;</li>
+<li>a <code>.f</code> property, as a shorthand to <code>self.fields</code>;</li>
+<li>a <code>.__iter__(self)</code> method, as a shorthand to <code>self.fields.flatten()</code>;</li>
+<li>a <code>.signature</code> property, that returns a <code>Signature</code> with the following members:</li>
+</ul>
+<pre><code class="language-python3">{
+    &quot;element&quot;: Out(Element.Signature(width, access))
+}
+</code></pre>
+<p>where <code>width</code> is the total width of the register, i.e. <code>sum(Shape.cast(f.port.shape).width for _, f in self</code>.</p>
+<ul>
+<li>a <code>.elaborate(self, platform)</code> method, that connects fields to slices of <code>self.element</code>, depending on their access mode;</li>
+</ul>
+<h5 id="element-access-mode"><a class="header" href="#element-access-mode">Element access mode</a></h5>
+<p>The <code>access</code> parameter must be provided in <code>__init_subclass__()</code> or <code>__init__()</code>. A <code>ValueError</code> is raised in <code>__init__()</code> if:</p>
+<ul>
+<li><code>access</code> is provided in neither method;</li>
+<li><code>access</code> is provided in both methods with different values.</li>
+</ul>
+<h4 id="csrregbuilder"><a class="header" href="#csrregbuilder"><code>csr.reg.Builder</code></a></h4>
+<p>The <code>csr.reg.Builder</code> class can build a <code>MemoryMap</code> from a group of <code>csr.Register</code> objects, with:</p>
+<ul>
+<li>
+<p>a <code>.__init__(self, *, addr_width, data_width, granularity=8, name=None)</code> constructor that:</p>
+<ul>
+<li>raises a <code>TypeError</code> if <code>addr_width</code>, <code>data_width</code> and <code>granularity</code> are not positive integers;</li>
+<li>raises a <code>ValueError</code> if <code>granularity</code> is not a divisor of <code>data_width</code>.</li>
+</ul>
+</li>
+<li>
+<p><code>.addr_width</code>, <code>.data_width</code>, <code>.granularity</code> and <code>.name</code> properties;</p>
+</li>
+<li>
+<p>a <code>.freeze(self)</code> method, which renders the visible state of the <code>csr.Builder</code> immutable;</p>
+</li>
+<li>
+<p>a <code>.add(self, name, register, *, offset=None)</code> method, which:</p>
+<ul>
+<li>adds <code>register</code> to the builder;</li>
+<li>returns <code>register</code>;</li>
+<li>raises a <code>ValueError</code> if <code>self</code> is frozen;</li>
+<li>raises a <code>TypeError</code> if <code>register</code> is not a <code>Register</code> object;</li>
+<li>raises a <code>ValueError</code> if <code>register</code> is already present;</li>
+<li>raises a <code>TypeError</code> if <code>name</code> is not a non-empty string;</li>
+<li>raises a <code>ValueError</code> if <code>name</code> is already assigned to another register or <code>Cluster</code>.</li>
+<li>raises a <code>TypeError</code> if <code>offset</code> is neither a positive integer or 0;</li>
+<li>raises a <code>ValueError</code> if <code>offset</code> is not word-aligned (i.e. a multiple of <code>self.data_width // self.granularity</code>);</li>
+</ul>
+</li>
+<li>
+<p>a <code>.Cluster(self, name)</code> context manager method, which:</p>
+<ul>
+<li>upon entry, creates a scope where registers added by <code>self.add()</code> are assigned to a cluster named <code>name</code>;</li>
+<li>raises a <code>ValueError</code> if <code>self</code> is frozen;</li>
+<li>raises a <code>TypeError</code> if <code>name</code> is not a non-empty string;</li>
+<li>raises a <code>ValueError</code> if <code>name</code> is already assigned to another register or <code>Cluster</code>;</li>
+</ul>
+</li>
+<li>
+<p>a <code>.Index(self, index)</code> context manager method, which:</p>
+<ul>
+<li>upon entry, creates a scope where registers added by <code>self.add()</code> are assigned to an array index <code>index</code>;</li>
+<li>raises a <code>ValueError</code> if <code>self</code> is frozen;</li>
+<li>raises a <code>TypeError</code> if <code>index</code> is neither a positive integer or 0;</li>
+<li>raises a <code>ValueError</code> if <code>index</code> is already assigned to another <code>Index</code>;</li>
+</ul>
+</li>
+<li>
+<p>a <code>.as_memory_map(self)</code> method, that converts <code>self</code> into a <code>MemoryMap</code>. <code>self.freeze()</code> is implicitly called as a side-effect.</p>
+</li>
+</ul>
+<h3 id="csr-bus-primitives"><a class="header" href="#csr-bus-primitives">CSR bus primitives</a></h3>
+<h4 id="changes-to-memorymemorymap"><a class="header" href="#changes-to-memorymemorymap">Changes to <code>memory.MemoryMap</code></a></h4>
+<p><code>MemoryMap.add_resource(self, resource, *, name, size, addr=None, alignment=None)</code> now requires <code>resource</code> to be a <code>wiring.Component</code> object.</p>
+<h4 id="changes-to-csrbusmultiplexer"><a class="header" href="#changes-to-csrbusmultiplexer">Changes to <code>csr.bus.Multiplexer</code></a></h4>
+<p><code>Multiplexer</code> instances are now created from a caller-provided <code>MemoryMap</code>, instead of creating and populating one itself.</p>
+<ul>
+<li>replace <code>.__init__(self, addr_width, data_width, alignment, name)</code> with <code>.__init__(memory_map)</code>, that:
+<ul>
+<li>raises a <code>TypeError</code> if <code>memory_map</code> is not a <code>MemoryMap</code> object;</li>
+<li>raises a <code>ValueError</code> if <code>memory_map</code> has windows.</li>
+<li>raises a <code>TypeError</code> if <code>memory_map</code> has resources that are not <code>wiring.Component</code> objects with the following signature:</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-python3">{
+    &quot;element&quot;: Out(csr.Element.Signature(...)),
+    # additional members are allowed
+}
+</code></pre>
+<ul>
+<li>remove the <code>.align_to(self, alignment)</code> method;</li>
+<li>remove the <code>.add(self, elem, name, addr=None, alignment=None)</code> method.</li>
+</ul>
+<h4 id="csrregbridge"><a class="header" href="#csrregbridge"><code>csr.reg.Bridge</code></a></h4>
+<p>The <code>csr.reg.Bridge</code> class describes a <code>wiring.Component</code> that mediates access between a CSR bus and a group of <code>csr.Register</code>s, with:</p>
+<ul>
+<li>a <code>.__init__(self, memory_map)</code> constructor, that:
+<ul>
+<li>freezes and assigns <code>memory_map</code> to <code>self.bus.memory_map</code>;</li>
+<li>raises a <code>TypeError</code> if <code>memory_map</code> is not a <code>MemoryMap</code> object;</li>
+<li>raises a <code>ValueError</code> if <code>memory_map</code> has windows.</li>
+<li>raises a <code>TypeError</code> if <code>memory_map</code> has resources that are not <code>csr.Register</code> objects;</li>
+</ul>
+</li>
+<li>a <code>.signature</code> property, that returns a <code>wiring.Signature</code> with the following members:</li>
+</ul>
+<pre><code class="language-python3">{
+    &quot;bus&quot;: In(csr.Signature(addr_width=memory_map.addr_width, data_width=memory_map.data_width))
+}
+</code></pre>
+<ul>
+<li>a <code>.elaborate(self, platform)</code> method, that instantiates a <code>csr.Multiplexer</code> submodule and connects its bus interface to <code>self.bus</code>. The registers in <code>self.bus.memory_map</code> are added as submodules.</li>
+</ul>
+<h2 id="drawbacks"><a class="header" href="#drawbacks">Drawbacks</a></h2>
+<ul>
+<li>While this RFC attempts to provide escape hatches to allow users to circumvent some or all of the proposed API, it is possible that common use-cases may be complicated or impossible to implement, due to the author's oversight.</li>
+</ul>
+<h2 id="rationale-and-alternatives"><a class="header" href="#rationale-and-alternatives">Rationale and alternatives</a></h2>
+<ul>
+<li>The existing CSR infrastructure already guarantees that a CSR access completes atomically. This RFC builds upon it by reasoning in terms of atomic transactions: it identifies scenarios where a write-conflict may happen, and either prevents it (e.g. by restricting a field to a single owner) or defines clear precedence rules.</li>
+<li>The absence of <code>csr.action.RW0S</code> and <code>csr.action.RW0C</code> is voluntary, to allow a write of 0 to be no-op.</li>
+<li>Alternatively, do nothing. This maximises user freedom, at the cost of boilerplate. A proliferation of downstream CSR register implementations would prevent amaranth-soc's BSP generator from gathering register fields to generate safe accessors and documentation.</li>
+</ul>
+<h2 id="prior-art"><a class="header" href="#prior-art">Prior art</a></h2>
+<p>The Rocket Chip Generator has a <a href="https://github.com/chipsalliance/rocket-chip/tree/master/src/main/scala/regmapper">register API</a> that supports some use-cases of this RFC:</p>
+<ul>
+<li>Each field of a register is a component with its own interface and access mode.</li>
+<li>Reserved fields are neither readable nor writable.</li>
+<li>A field is created as a <code>RegField</code> instance with separate <code>RegWriteFn</code> and <code>RegReadFn</code> functions implementing its behavior, whereas a <code>csr.FieldAction</code> in this RFC implements both.</li>
+<li>Its <code>RegField.rwReg</code> built-in has the same write latency as <code>csr.action.RW</code>, but differs by having users provide the register storage.</li>
+<li>Its <code>RegField.w1ToClear</code> built-in has the same behavior as <code>csr.action.RW1C</code> (besides the previous point). The peripheral side can only set bits and has precedence in case of set/clear conflicts.</li>
+</ul>
+<h2 id="unresolved-questions"><a class="header" href="#unresolved-questions">Unresolved questions</a></h2>
+<ul>
+<li>What conventions should we follow when documenting CSR registers ?</li>
+</ul>
+<h2 id="future-possibilities"><a class="header" href="#future-possibilities">Future possibilities</a></h2>
+<p>The notion of ownership in CSR registers can be expanded throughout the entire SoC (interconnect primitives, peripherals, events, etc).</p>
+<p>Having an explicit model of ownership across the amaranth-soc library could allow us to provide strong safety guarantees against some concurrency hazards (e.g. two CPU cores writing to the same peripheral).</p>
+<h2 id="acknowledgements"><a class="header" href="#acknowledgements">Acknowledgements</a></h2>
+<p>@whitequark, @zyp, @tpwrules, @galibert and @Fatsie provided valuable feedback while this RFC was being drafted.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="0015-lifting-shape-castables.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="0017-remove-log2-int.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="0015-lifting-shape-castables.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="0017-remove-log2-int.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
