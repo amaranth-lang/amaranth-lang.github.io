@@ -2559,6 +2559,14 @@ $ python
 <li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/1082">amaranth-lang/amaranth#1082</a></li>
 </ul>
 <h1 id="testbench-processes-for-the-simulator"><a class="header" href="#testbench-processes-for-the-simulator">Testbench processes for the simulator</a></h1>
+<blockquote>
+<p><strong>Amendments</strong>
+This RFC was amended on 2024-02-12 to deprecate <code>add_sync_process</code> rather than <code>add_process</code>, for two reasons:</p>
+<ol>
+<li><code>add_process</code> encompasses anything <code>add_sync_process</code> can do, but there is functionality that is quite difficult to do with <code>add_sync_process</code>, such as behavioral implementation of a DDR flop.</li>
+<li><code>add_sync_process</code> relies on argument-less <code>yield</code>, which has no equivalent with <code>await ...</code> syntax that is desired in the future.</li>
+</ol>
+</blockquote>
 <h2 id="summary-17"><a class="header" href="#summary-17">Summary</a></h2>
 <p>The existing <code>Simulator.add_sync_process</code> method causes the process function to observe the design in a state before combinational settling, something that is actively unhelpful in testbenches. A new <code>Simulator.add_testbench</code> method will only return control to the process function after combinational settling.</p>
 <h2 id="motivation-17"><a class="header" href="#motivation-17">Motivation</a></h2>
@@ -2617,10 +2625,10 @@ sim.run()
 <p>Existing testbenches can be ported to use <code>Simulator.add_testbench</code> by removing extraneous <code>yield</code> or <code>yield Settle()</code> calls (and, in some cases, shifting other <code>yield</code> calls around).</p>
 <p>Reusable abstractions can be built by defining generator functions on interfaces or components.</p>
 <h3 id="guidance-on-simulator-modalities"><a class="header" href="#guidance-on-simulator-modalities">Guidance on simulator modalities</a></h3>
-<p>There are two main simulator modalities: <code>add_testbench</code> and <code>add_sync_process</code>. They have completely disjoint purposes:</p>
+<p>There are two main simulator modalities: <code>add_testbench</code> and <code>add_process</code>. They have completely disjoint purposes:</p>
 <ul>
 <li><code>add_testbench</code> is used for testing logic (asynchronous or synchronous). It is not used for behavioral replacement of synchronous logic.</li>
-<li><code>add_sync_process</code> is used for behavioral replacement of synchronous logic. It is not for testing logic (except for legacy code), and a deprecation warning is shown when <code>yield Settle()</code> is executed in such a process.</li>
+<li><code>add_process</code> is used for behavioral replacement of synchronous logic. It is not for testing logic (except for legacy code), and a deprecation warning is shown when <code>yield Settle()</code> is executed in such a process.</li>
 </ul>
 <p>Example of using <code>add_testbench</code> to test combinatorial logic:</p>
 <pre><code class="language-python">m = Module()
@@ -2649,7 +2657,7 @@ sim.add_clock(1e-6)
 sim.add_testbench(testbench)
 sim.run()
 </code></pre>
-<p>Example of using <code>add_sync_process</code> to replace the flop above, and <code>add_testbench</code> to test the flop:</p>
+<p>Example of using <code>add_process</code> to replace the flop above, and <code>add_testbench</code> to test the flop:</p>
 <pre><code class="language-python">m = Module()
 
 def flop():
@@ -2664,11 +2672,11 @@ def testbench():
 
 sim = Simulator(m)
 sim.add_clock(1e-6)
-sim.add_sync_process(flop)
+sim.add_process(flop)
 sim.add_testbench(testbench)
 sim.run()
 </code></pre>
-<h3 id="why-not-replace-add_sync_process-with-add_testbench-entirely"><a class="header" href="#why-not-replace-add_sync_process-with-add_testbench-entirely">Why not replace <code>add_sync_process</code> with <code>add_testbench</code> entirely?</a></h3>
+<h3 id="why-not-replace-add_process-with-add_testbench-entirely"><a class="header" href="#why-not-replace-add_process-with-add_testbench-entirely">Why not replace <code>add_process</code> with <code>add_testbench</code> entirely?</a></h3>
 <p>It is not possible to use <code>add_testbench</code> processes that drive signals in a race-free way. Consider this (behaviorally defined) circuit:</p>
 <pre><code class="language-python">x = Signal(reset=1)
 y = Signal()
@@ -2693,15 +2701,14 @@ def proc3():
 <pre><code>proc3 x=1 y=0
 proc2 x=1 y=1
 </code></pre>
-<p>If they are added using <code>add_sync_process</code>, the output is:</p>
+<p>If they are added using <code>add_process</code>, the output is:</p>
 <pre><code>proc2 x=1 y=0
 proc3 x=1 y=0
 </code></pre>
-<p>Clearly, if <code>proc2</code> and <code>proc3</code> are other flops in the circuit, perhaps performing a computation on <code>x</code> and <code>y</code>, they must be simulated using <code>add_sync_process</code>.</p>
+<p>Clearly, if <code>proc2</code> and <code>proc3</code> are other flops in the circuit, perhaps performing a computation on <code>x</code> and <code>y</code>, they must be simulated using <code>add_process</code>.</p>
 <h2 id="reference-level-explanation-12"><a class="header" href="#reference-level-explanation-12">Reference-level explanation</a></h2>
 <p>A new <code>Simulator.add_testbench(process)</code> is added. This function schedules <code>process</code> similarly to <code>add_process</code>, except that before returning control to the coroutine <code>process</code> it performs the equivalent of <code>yield Settle()</code>.</p>
-<p><code>add_process</code> and <code>Settle</code> are deprecated and removed in a future version.</p>
-<p><code>yield Tick()</code> is deprecated within <code>add_sync_process</code> and the ability to use it as well as <code>yield Settle()</code> is removed in a future version.</p>
+<p><code>add_sync_process</code> and <code>Settle</code> are deprecated and removed in a future version.</p>
 <h2 id="drawbacks-16"><a class="header" href="#drawbacks-16">Drawbacks</a></h2>
 <ul>
 <li>Churn.</li>
@@ -2721,7 +2728,7 @@ proc3 x=1 y=0
 <p>In the standard library, <code>fifo.read()</code> and <code>fifo.write()</code> functions could be defined that aid in testing designs with FIFOs. Such functions will only work correctly within testbench processes.</p>
 <p>As it is, every such helper function would have to take a <code>domain</code> argument, which can quickly get out of hand. We have <code>DomainRenamer</code> in the RTL sub-language and we may want to have something like that in the simulation sub-language. (@zyp)</p>
 <p>A new <code>add_comb_process</code> function could be added, to replace combinatorial logic. This function would have to accept a list of all signals driven by the process, so that combinatorial loops could be detected. (The demand for this has not been high; as of right now, this is not possible anyway.)</p>
-<p>The existing <code>add_sync_process</code> function could accept a list of all signals driven by the process. This could aid in error detection, especially as CXXRTL is integrated into the design, because if a simulator process is driving a signal at the same time as an RTL process, a silent race condition occurs.</p>
+<p>The existing <code>add_process</code> function could accept a list of all signals driven by the process. This could aid in error detection, especially as CXXRTL is integrated into the design, because if a simulator process is driving a signal at the same time as an RTL process, a silent race condition occurs.</p>
 <div style="break-before: page; page-break-before: always;"></div><ul>
 <li>Start Date: 2023-10-30</li>
 <li>RFC PR: <a href="https://github.com/amaranth-lang/rfcs/pull/0028">amaranth-lang/rfcs#0028</a></li>
