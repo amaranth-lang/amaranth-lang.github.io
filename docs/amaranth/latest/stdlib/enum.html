@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Enumerations &mdash; Amaranth language &amp; toolchain 0.4.1.dev96 documentation</title>
+  <title>Enumerations &mdash; Amaranth language &amp; toolchain 0.4.1.dev97 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/platformpicker.css" type="text/css" />
@@ -15,7 +15,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=5f849919"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=fbfc1d00"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="../_static/platformpicker.js"></script>
@@ -39,7 +39,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.4.1.dev96+g3cb5f63
+                0.4.1.dev97+gb9c9948
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -255,13 +255,13 @@ in the <code class="docutils literal notranslate"><span class="pre">view_class</
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.lib.enum.EnumMeta.const">
 <span class="sig-name descname"><span class="pre">const</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.enum.EnumMeta.const" title="Permalink to this definition"></a></dt>
-<dd><p>Convert a constant initializer <code class="code highlight pc python docutils literal highlight-python"><span class="n">obj</span></code> to its value representation.</p>
-<p>This method is called by the Amaranth language to convert <code class="code highlight pc python docutils literal highlight-python"><span class="n">obj</span></code>, which may be an
+<dd><p>Convert a constant initializer <code class="code highlight py python docutils literal highlight-python"><span class="n">obj</span></code> to its value representation.</p>
+<p>This method is called by the Amaranth language to convert <code class="code highlight py python docutils literal highlight-python"><span class="n">obj</span></code>, which may be an
 arbitrary Python object, to a concrete <a class="reference internal" href="../guide.html#lang-valuelike"><span class="std std-ref">value-like object</span></a>.
-The object <code class="code highlight pc python docutils literal highlight-python"><span class="n">obj</span></code> will usually be a Python literal that can conveniently represent
-a constant value whose shape is described by <code class="code highlight pc python docutils literal highlight-python"><span class="bp">self</span></code>. While not constrained here,
+The object <code class="code highlight py python docutils literal highlight-python"><span class="n">obj</span></code> will usually be a Python literal that can conveniently represent
+a constant value whose shape is described by <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span></code>. While not constrained here,
 the result will usually be an instance of the return type of <a class="reference internal" href="#amaranth.lib.enum.EnumMeta.__call__" title="amaranth.lib.enum.EnumMeta.__call__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__call__()</span></code></a>.</p>
-<p>For any <code class="code highlight pc python docutils literal highlight-python"><span class="n">obj</span></code>, the following condition must hold:</p>
+<p>For any <code class="code highlight py python docutils literal highlight-python"><span class="n">obj</span></code>, the following condition must hold:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Shape</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">==</span> <span class="n">Const</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">const</span><span class="p">(</span><span class="n">obj</span><span class="p">))</span><span class="o">.</span><span class="n">shape</span><span class="p">()</span>
 </pre></div>
 </div>
