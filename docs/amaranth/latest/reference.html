@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Language reference &mdash; Amaranth language &amp; toolchain 0.4.1.dev90 documentation</title>
+  <title>Language reference &mdash; Amaranth language &amp; toolchain 0.4.1.dev92 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -15,7 +15,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=30758dcd"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=a3f583be"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/platformpicker.js"></script>
@@ -39,7 +39,7 @@
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.4.1.dev90+g1dc1d2d
+                0.4.1.dev92+g3867623
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -444,15 +444,8 @@ is a shape that can represent every member of the enumeration;</p></li>
 <em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shape</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.shape" title="Permalink to this definition"></a></dt>
 <dd><p>Shape of <code class="code highlight pc python docutils literal highlight-python"><span class="bp">self</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><ul class="simple">
-<li><p><a class="reference internal" href="guide.html#lang-shapelike"><span class="std std-ref">shape-like object</span></a></p></li>
-<li><p><em>..</em> – TODO: while this is documented as returning a shape-like object, in practice we
-guarantee that this is a concrete Shape. it’s unclear whether we will ever want to
-return a shape-catable object here, but there is not much harm in stating a relaxed
-contract, as it can always be tightened later, but not vice-versa</p></li>
-</ul>
-</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="guide.html#lang-shapelike"><span class="std std-ref">shape-like object</span></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -847,7 +840,7 @@ been impossible.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.xor">
 <span class="sig-name descname"><span class="pre">xor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.xor" title="Permalink to this definition"></a></dt>
-<dd><p>Reduction XOR; is an odd amount of bits <code class="code highlight pc python docutils literal highlight-python"><span class="mi">1</span></code>?</p>
+<dd><p>Reduction XOR; are an odd amount of bits <code class="code highlight pc python docutils literal highlight-python"><span class="mi">1</span></code>?</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#amaranth.hdl.Value" title="amaranth.hdl.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a>, <code class="code highlight pc python docutils literal highlight-python"><span class="n">unsigned</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></code></p>
@@ -1004,8 +997,11 @@ for Amaranth values, this operator always raises an exception.</p>
 <span class="sig-name descname"><span class="pre">bit_select</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.bit_select" title="Permalink to this definition"></a></dt>
 <dd><p>Part-select with bit granularity.</p>
 <p>Selects a constant width, variable offset part of <code class="code highlight pc python docutils literal highlight-python"><span class="bp">self</span></code>, where parts with successive
-offsets overlap by <code class="code highlight pc python docutils literal highlight-python"><span class="n">width</span> <span class="o">-</span> <span class="mi">1</span></code> bits. When <code class="code highlight pc python docutils literal highlight-python"><span class="n">offset</span></code> is a constant integer, this
-operation is equivalent to <code class="code highlight pc python docutils literal highlight-python"><span class="bp">self</span><span class="p">[</span><span class="n">offset</span><span class="p">:</span><span class="n">offset</span> <span class="o">+</span> <span class="n">width</span><span class="p">]</span></code>.</p>
+offsets overlap by <code class="code highlight pc python docutils literal highlight-python"><span class="n">width</span> <span class="o">-</span> <span class="mi">1</span></code> bits. Bits above the most significant bit of <code class="code highlight pc python docutils literal highlight-python"><span class="bp">self</span></code>
+may be selected; they are equal to zero if <code class="code highlight pc python docutils literal highlight-python"><span class="bp">self</span></code> is unsigned, to <code class="code highlight pc python docutils literal highlight-python"><span class="bp">self</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></code> if
+<code class="code highlight pc python docutils literal highlight-python"><span class="bp">self</span></code> is signed, and assigning to them does nothing.</p>
+<p>When <code class="code highlight pc python docutils literal highlight-python"><span class="n">offset</span></code> is a constant integer and <code class="code highlight pc python docutils literal highlight-python"><span class="n">offset</span> <span class="o">+</span> <span class="n">width</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>,
+this operation is equivalent to <code class="code highlight pc python docutils literal highlight-python"><span class="bp">self</span><span class="p">[</span><span class="n">offset</span><span class="p">:</span><span class="n">offset</span> <span class="o">+</span> <span class="n">width</span><span class="p">]</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -1030,8 +1026,11 @@ operation is equivalent to <code class="code highlight pc python docutils litera
 <span class="sig-name descname"><span class="pre">word_select</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.word_select" title="Permalink to this definition"></a></dt>
 <dd><p>Part-select with word granularity.</p>
 <p>Selects a constant width, variable offset part of <code class="code highlight pc python docutils literal highlight-python"><span class="bp">self</span></code>, where parts with successive
-offsets are adjacent but do not overlap. When <code class="code highlight pc python docutils literal highlight-python"><span class="n">offset</span></code> is a constant integer, this
-operation is equivalent to <code class="code highlight pc python docutils literal highlight-python"><span class="bp">self</span><span class="p">[</span><span class="n">offset</span> <span class="o">*</span> <span class="n">width</span><span class="p">:(</span><span class="n">offset</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">width</span><span class="p">]</span></code>.</p>
+offsets are adjacent but do not overlap. Bits above the most significant bit of <code class="code highlight pc python docutils literal highlight-python"><span class="bp">self</span></code>
+may be selected; they are equal to zero if <code class="code highlight pc python docutils literal highlight-python"><span class="bp">self</span></code> is unsigned, to <code class="code highlight pc python docutils literal highlight-python"><span class="bp">self</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></code> if
+<code class="code highlight pc python docutils literal highlight-python"><span class="bp">self</span></code> is signed, and assigning to them does nothing.</p>
+<p>When <code class="code highlight pc python docutils literal highlight-python"><span class="n">offset</span></code> is a constant integer and <code class="code highlight pc python docutils literal highlight-python"><span class="n">width</span><span class="p">:(</span><span class="n">offset</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">width</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>,
+this operation is equivalent to <code class="code highlight pc python docutils literal highlight-python"><span class="bp">self</span><span class="p">[</span><span class="n">offset</span> <span class="o">*</span> <span class="n">width</span><span class="p">:(</span><span class="n">offset</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">width</span><span class="p">]</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
