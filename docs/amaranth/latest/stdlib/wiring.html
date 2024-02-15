@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Interfaces and connections &mdash; Amaranth language &amp; toolchain 0.4.1.dev108 documentation</title>
+  <title>Interfaces and connections &mdash; Amaranth language &amp; toolchain 0.4.1.dev109 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/platformpicker.css" type="text/css" />
@@ -15,7 +15,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=8500ee98"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=21786a81"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="../_static/platformpicker.js"></script>
@@ -39,7 +39,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.4.1.dev108+gb30c87f
+                0.4.1.dev109+g24a3928
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -604,12 +604,12 @@ treated as the <cite>initiator</cite>, the same as in the <a class="reference in
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.lib.wiring.Flow.__call__">
-<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_loc_at</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.wiring.Flow.__call__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_loc_at</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.wiring.Flow.__call__" title="Permalink to this definition"></a></dt>
 <dd><p>Create a <a class="reference internal" href="#amaranth.lib.wiring.Member" title="amaranth.lib.wiring.Member"><code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code></a> with this data flow and the provided description and
-reset value.</p>
+initial value.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="code highlight py python docutils literal highlight-python"><span class="n">Member</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="n">reset</span><span class="p">)</span></code></p>
+<dd class="field-odd"><p><code class="code highlight py python docutils literal highlight-python"><span class="n">Member</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="n">init</span><span class="p">)</span></code></p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference internal" href="#amaranth.lib.wiring.Member" title="amaranth.lib.wiring.Member"><code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code></a></p>
@@ -633,7 +633,7 @@ reset value.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.lib.wiring.Member">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.wiring.</span></span><span class="sig-name descname"><span class="pre">Member</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flow</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.wiring.Member" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.wiring.</span></span><span class="sig-name descname"><span class="pre">Member</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flow</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.wiring.Member" title="Permalink to this definition"></a></dt>
 <dd><p>Description of a signature member.</p>
 <p>This class is a discriminated union: its instances describe either a <cite>port member</cite> or
 a <cite>signature member</cite>, and accessing properties for the wrong kind of member raises
@@ -642,9 +642,9 @@ an <a class="reference external" href="https://docs.python.org/3/library/excepti
 the <a class="reference internal" href="#amaranth.lib.wiring.Member" title="amaranth.lib.wiring.Member"><code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code></a> is created as a signature member), or a <a class="reference internal" href="../guide.html#lang-shapelike"><span class="std std-ref">shape-like</span></a>
 object (in which case it is created as a port member). After creation the <a class="reference internal" href="#amaranth.lib.wiring.Member" title="amaranth.lib.wiring.Member"><code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code></a>
 instance cannot be modified.</p>
-<p>When a <code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code> is created from a description of a port member, the signal’s reset value
+<p>When a <code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code> is created from a description of a port member, the signal’s initial value
 is taken from the member description. If this signal is never explicitly assigned a value, it
-will equal <code class="docutils literal notranslate"><span class="pre">reset</span></code>.</p>
+will equal <code class="docutils literal notranslate"><span class="pre">init</span></code>.</p>
 <p>Although instances can be created directly, most often they will be created through
 <a class="reference internal" href="#amaranth.lib.wiring.In" title="amaranth.lib.wiring.In"><code class="xref py py-data docutils literal notranslate"><span class="pre">In</span></code></a> and <a class="reference internal" href="#amaranth.lib.wiring.Out" title="amaranth.lib.wiring.Out"><code class="xref py py-data docutils literal notranslate"><span class="pre">Out</span></code></a>, e.g. <code class="code highlight py python docutils literal highlight-python"><span class="n">In</span><span class="p">(</span><span class="n">unsigned</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span></code> or <code class="code highlight py python docutils literal highlight-python"><span class="n">Out</span><span class="p">(</span><span class="n">stream</span><span class="o">.</span><span class="n">Signature</span><span class="p">(</span><span class="n">RGBPixel</span><span class="p">))</span></code>.</p>
 <dl class="py method">
@@ -744,12 +744,12 @@ identical to <code class="code highlight py python docutils literal highlight-py
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="amaranth.lib.wiring.Member.reset">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">reset</span></span><a class="headerlink" href="#amaranth.lib.wiring.Member.reset" title="Permalink to this definition"></a></dt>
-<dd><p>Reset value of a port member.</p>
+<dt class="sig sig-object py" id="amaranth.lib.wiring.Member.init">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">init</span></span><a class="headerlink" href="#amaranth.lib.wiring.Member.init" title="Permalink to this definition"></a></dt>
+<dd><p>Initial value of a port member.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The reset value that was provided when constructing this <a class="reference internal" href="#amaranth.lib.wiring.Member" title="amaranth.lib.wiring.Member"><code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code></a>.</p>
+<dd class="field-odd"><p>The initial value that was provided when constructing this <a class="reference internal" href="#amaranth.lib.wiring.Member" title="amaranth.lib.wiring.Member"><code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code></a>.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference internal" href="../guide.html#lang-constcasting"><span class="std std-ref">const-castable object</span></a></p>
@@ -949,7 +949,7 @@ be reached.</p>
 <dt class="sig sig-object py" id="amaranth.lib.wiring.SignatureMembers.create">
 <span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_loc_at</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.wiring.SignatureMembers.create" title="Permalink to this definition"></a></dt>
 <dd><p>Create members from their descriptions.</p>
-<p>For each port member, this function creates a <code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code> with the shape and reset
+<p>For each port member, this function creates a <code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code> with the shape and initial
 value taken from the member description, and the name constructed from
 the <a class="reference internal" href="#wiring-path"><span class="std std-ref">paths</span></a> to the member (by concatenating path items with a double
 underscore, <code class="docutils literal notranslate"><span class="pre">__</span></code>).</p>
@@ -1125,7 +1125,7 @@ satisfying the requirements below;</p></li>
 <li><p>for port members, is a <a class="reference internal" href="../guide.html#lang-valuelike"><span class="std std-ref">value-like</span></a> object casting to
 a <code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code> or a <code class="xref py py-class docutils literal notranslate"><span class="pre">Const</span></code> whose width and signedness is the same as that
 of the member, and (in case of a <code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code>) which is not reset-less and whose
-reset value is that of the member;</p></li>
+initial value is that of the member;</p></li>
 <li><p>for signature members, matches the description in the signature as verified by
 <a class="reference internal" href="#amaranth.lib.wiring.Signature.is_compliant" title="amaranth.lib.wiring.Signature.is_compliant"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Signature.is_compliant()</span></code></a>.</p></li>
 </ul>
@@ -1482,7 +1482,7 @@ interface objects may be provided; in most cases it is two.)</p>
 <ul class="simple">
 <li><p>Every interface object must have the same set of port members, and they must have the same
 <a class="reference internal" href="#amaranth.lib.wiring.Member.dimensions" title="amaranth.lib.wiring.Member.dimensions"><code class="xref py py-meth docutils literal notranslate"><span class="pre">dimensions</span></code></a>.</p></li>
-<li><p>For each path, the port members of every interface object must have the same width and reset
+<li><p>For each path, the port members of every interface object must have the same width and initial
 value (for port members corresponding to signals) or constant value (for port members
 corresponding to constants). Signedness may differ.</p></li>
 <li><p>For each path, at most one interface object must have the corresponding port member be
