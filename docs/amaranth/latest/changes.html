@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Changelog &mdash; Amaranth language &amp; toolchain 0.4.1.dev109 documentation</title>
+  <title>Changelog &mdash; Amaranth language &amp; toolchain 0.4.1.dev110 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -15,7 +15,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=21786a81"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=c25c0dd3"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/platformpicker.js"></script>
@@ -39,7 +39,7 @@
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.4.1.dev109+g24a3928
+                0.4.1.dev110+g6058ad3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -171,6 +171,7 @@
 <li><p>Changed: <code class="docutils literal notranslate"><span class="pre">Signal(range(0))</span></code> is now valid without a warning.</p></li>
 <li><p>Changed: <code class="docutils literal notranslate"><span class="pre">Shape.cast(range(1))</span></code> is now <code class="docutils literal notranslate"><span class="pre">unsigned(0)</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0046-shape-range-1.html">RFC 46</a>)</p></li>
 <li><p>Changed: the <code class="docutils literal notranslate"><span class="pre">reset=</span></code> argument of <code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code>, <code class="xref py py-meth docutils literal notranslate"><span class="pre">Signal.like()</span></code>, <a class="reference internal" href="stdlib/wiring.html#amaranth.lib.wiring.Member" title="amaranth.lib.wiring.Member"><code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.lib.wiring.Member</span></code></a>, <a class="reference internal" href="stdlib/cdc.html#amaranth.lib.cdc.FFSynchronizer" title="amaranth.lib.cdc.FFSynchronizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.lib.cdc.FFSynchronizer</span></code></a>, and <code class="docutils literal notranslate"><span class="pre">m.FSM()</span></code> has been renamed to <code class="docutils literal notranslate"><span class="pre">init=</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0043-rename-reset-to-init.html">RFC 43</a>)</p></li>
+<li><p>Changed: <a class="reference internal" href="reference.html#amaranth.hdl.Shape" title="amaranth.hdl.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code></a> has been made immutable and hashable.</p></li>
 <li><p>Deprecated: <code class="xref py py-func docutils literal notranslate"><span class="pre">amaranth.utils.log2_int()</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0017-remove-log2-int.html">RFC 17</a>)</p></li>
 <li><p>Removed: (deprecated in 0.4) <code class="xref py py-meth docutils literal notranslate"><span class="pre">Const.normalize()</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0005-remove-const-normalize.html">RFC 5</a>)</p></li>
 <li><p>Removed: (deprecated in 0.4) <code class="xref py py-class docutils literal notranslate"><span class="pre">Repl</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0010-move-repl-to-value.html">RFC 10</a>)</p></li>
