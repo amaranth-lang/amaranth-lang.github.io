@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Interfaces and connections &mdash; Amaranth language &amp; toolchain 0.4.1.dev115 documentation</title>
+  <title>Interfaces and connections &mdash; Amaranth language &amp; toolchain 0.4.1.dev116 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/platformpicker.css" type="text/css" />
@@ -15,7 +15,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=9a55936d"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=adad1907"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="../_static/platformpicker.js"></script>
@@ -39,7 +39,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.4.1.dev115+g09029cd
+                0.4.1.dev116+ga586df8
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -1490,6 +1490,7 @@ an output.</p></li>
 <li><p>For a given path, if any of the interface objects has an input port member corresponding
 to a constant value, then the rest of the interface objects must have output port members
 corresponding to the same constant value.</p></li>
+<li><p>When connecting multiple interface objects, at least one connection must be made.</p></li>
 </ul>
 <p>For example, if <code class="code highlight py python docutils literal highlight-python"><span class="n">obj1</span></code> is being connected to <code class="code highlight py python docutils literal highlight-python"><span class="n">obj2</span></code> and <code class="code highlight py python docutils literal highlight-python"><span class="n">obj3</span></code>, and <code class="code highlight py python docutils literal highlight-python"><span class="n">obj1</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">b</span></code>
 is an output, then <code class="code highlight py python docutils literal highlight-python"><span class="n">obj2</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">b</span></code> and <code class="code highlight py python docutils literal highlight-python"><span class="n">obj2</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">b</span></code> must exist and be inputs. If <code class="code highlight py python docutils literal highlight-python"><span class="n">obj2</span><span class="o">.</span><span class="n">c</span></code>
