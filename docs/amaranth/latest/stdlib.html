@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Standard library &mdash; Amaranth language &amp; toolchain 0.4.1.dev120 documentation</title>
+  <title>Standard library &mdash; Amaranth language &amp; toolchain 0.4.1.dev122 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -15,7 +15,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=6f0c7d1f"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=fc8c736c"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/platformpicker.js"></script>
@@ -39,7 +39,7 @@
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.4.1.dev120+g751e0f4
+                0.4.1.dev122+g6dc7c27
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -61,6 +61,7 @@
 <li class="toctree-l3"><a class="reference internal" href="stdlib/enum.html">Enumerations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stdlib/data.html">Data structures</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stdlib/wiring.html">Interfaces and connections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stdlib/memory.html">Memories</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stdlib/cdc.html">Clock domain crossing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stdlib/coding.html">Code conversion</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stdlib/fifo.html">First-in first-out queues</a></li>
@@ -106,7 +107,7 @@
 <p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib</span></code> module, also known as the standard library, provides modules that falls into one of the three categories:</p>
 <ol class="arabic simple">
 <li><p>Modules that will used by essentially all idiomatic Amaranth code, and are necessary for interoperability. This includes <a class="reference internal" href="stdlib/enum.html#module-amaranth.lib.enum" title="amaranth.lib.enum"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.enum</span></code></a> (enumerations), <a class="reference internal" href="stdlib/data.html#module-amaranth.lib.data" title="amaranth.lib.data"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.data</span></code></a> (data structures), and <a class="reference internal" href="stdlib/wiring.html#module-amaranth.lib.wiring" title="amaranth.lib.wiring"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.wiring</span></code></a> (interfaces and components).</p></li>
-<li><p>Modules that abstract common functionality whose implementation differs between hardware platforms. This includes <a class="reference internal" href="stdlib/cdc.html#module-amaranth.lib.cdc" title="amaranth.lib.cdc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.cdc</span></code></a>, <code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.memory</span></code>.</p></li>
+<li><p>Modules that abstract common functionality whose implementation differs between hardware platforms. This includes <a class="reference internal" href="stdlib/cdc.html#module-amaranth.lib.cdc" title="amaranth.lib.cdc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.cdc</span></code></a>, <a class="reference internal" href="stdlib/memory.html#module-amaranth.lib.memory" title="amaranth.lib.memory"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.memory</span></code></a>.</p></li>
 <li><p>Modules that have essentially one correct implementation and are of broad utility in digital designs. This includes <a class="reference internal" href="stdlib/coding.html#module-amaranth.lib.coding" title="amaranth.lib.coding"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.coding</span></code></a>, <a class="reference internal" href="stdlib/fifo.html#module-amaranth.lib.fifo" title="amaranth.lib.fifo"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.fifo</span></code></a>, and <a class="reference internal" href="stdlib/crc.html#module-amaranth.lib.crc" title="amaranth.lib.crc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.crc</span></code></a>.</p></li>
 </ol>
 <p>As part of the Amaranth backwards compatibility guarantee, any behaviors described in these documents will not change from a version to another without at least one version including a warning about the impending change. Any nontrivial change to these behaviors must also go through the public review as a part of the <a class="reference external" href="https://amaranth-lang.org/rfcs/">Amaranth Request for Comments process</a>.</p>
@@ -135,6 +136,7 @@
 <li class="toctree-l2"><a class="reference internal" href="stdlib/wiring.html#components">Components</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="stdlib/memory.html">Memories</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stdlib/cdc.html">Clock domain crossing</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="stdlib/cdc.html#amaranth.lib.cdc.FFSynchronizer"><code class="docutils literal notranslate"><span class="pre">FFSynchronizer</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="stdlib/cdc.html#amaranth.lib.cdc.AsyncFFSynchronizer"><code class="docutils literal notranslate"><span class="pre">AsyncFFSynchronizer</span></code></a></li>

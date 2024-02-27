@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Language guide &mdash; Amaranth language &amp; toolchain 0.4.1.dev120 documentation</title>
+  <title>Language guide &mdash; Amaranth language &amp; toolchain 0.4.1.dev122 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -15,7 +15,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=6f0c7d1f"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=fc8c736c"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/platformpicker.js"></script>
@@ -39,7 +39,7 @@
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.4.1.dev120+g751e0f4
+                0.4.1.dev122+g6dc7c27
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -168,10 +168,6 @@
              
   <section id="language-guide">
 <h1>Language guide<a class="headerlink" href="#language-guide" title="Permalink to this heading"></a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>This guide is a work in progress and is seriously incomplete!</p>
-</div>
 <p>This guide introduces the Amaranth language in depth. It assumes familiarity with synchronous digital logic and the Python programming language, but does not require prior experience with any hardware description language. See the <a class="reference internal" href="tutorial.html"><span class="doc">tutorial</span></a> for a step-by-step introduction to the language, and the <a class="reference internal" href="reference.html"><span class="doc">reference</span></a> for a detailed description of the Python classes that underlie the language’s syntax.</p>
 <section id="the-prelude">
 <span id="lang-prelude"></span><h2>The prelude<a class="headerlink" href="#the-prelude" title="Permalink to this heading"></a></h2>
@@ -335,7 +331,7 @@ This happens because, being empty, it does not contain any negative values.</p>
 </section>
 <section id="value-casting">
 <span id="lang-valuelike"></span><h2>Value casting<a class="headerlink" href="#value-casting" title="Permalink to this heading"></a></h2>
-<p>Like shapes, values may be <em>cast</em> from other objects, which are called <em>value-like</em>. Casting to values allows objects that are not provided by Amaranth, such as integers or enumeration members, to be used in Amaranth expressions directly. Values are value-like objects as well.</p>
+<p>Like shapes, values may be <em>cast</em> from other objects, which are called <em>value-like</em>. Casting to values allows objects that are not provided by Amaranth, such as integers or enumeration members, to be used in Amaranth expressions directly. Custom value-like objects can be defined by implementing the <a class="reference internal" href="reference.html#amaranth.hdl.ValueCastable" title="amaranth.hdl.ValueCastable"><code class="xref py py-class docutils literal notranslate"><span class="pre">ValueCastable</span></code></a> interface. Values are value-like objects as well.</p>
 <p>Casting to a value can be done explicitly with <a class="reference internal" href="reference.html#amaranth.hdl.Value.cast" title="amaranth.hdl.Value.cast"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Value.cast()</span></code></a>, but is usually implicit, since value-like objects are accepted anywhere values are.</p>
 <section id="values-from-integers">
 <h3>Values from integers<a class="headerlink" href="#values-from-integers" title="Permalink to this heading"></a></h3>
@@ -450,7 +446,7 @@ This happens because, being empty, it does not contain any negative values.</p>
 </section>
 <section id="reset-less-signals">
 <span id="lang-resetless"></span><h3>Reset-less signals<a class="headerlink" href="#reset-less-signals" title="Permalink to this heading"></a></h3>
-<p>Signals assigned in a <a class="reference internal" href="#lang-sync"><span class="std std-ref">synchronous</span></a> domain can be <em>resettable</em> or <em>reset-less</em>, specified with the <code class="docutils literal notranslate"><span class="pre">reset_less=</span></code> parameter. If the parameter is not specified, signals are resettable by default. Resettable signals assume their <a class="reference internal" href="#lang-initial"><span class="std std-ref">initial value</span></a> on explicit reset, which can be asserted via the clock domain or by using <code class="docutils literal notranslate"><span class="pre">ResetInserter</span></code>. Reset-less signals are not affected by explicit reset.</p>
+<p>Signals assigned in a <a class="reference internal" href="#lang-sync"><span class="std std-ref">synchronous</span></a> domain can be <em>resettable</em> or <em>reset-less</em>, specified with the <code class="docutils literal notranslate"><span class="pre">reset_less=</span></code> parameter. If the parameter is not specified, signals are resettable by default. Resettable signals assume their <a class="reference internal" href="#lang-initial"><span class="std std-ref">initial value</span></a> on explicit reset, which can be asserted via the <a class="reference internal" href="#lang-clockdomains"><span class="std std-ref">clock domain</span></a> or by <a class="reference internal" href="#lang-controlinserter"><span class="std std-ref">modifying control flow</span></a> with <code class="xref py py-class docutils literal notranslate"><span class="pre">ResetInserter</span></code>. Reset-less signals are not affected by explicit reset.</p>
 <p>Signals assigned in a <a class="reference internal" href="#lang-comb"><span class="std std-ref">combinatorial</span></a> domain are not affected by the <code class="docutils literal notranslate"><span class="pre">reset_less</span></code> parameter.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Signal</span><span class="p">()</span><span class="o">.</span><span class="n">reset_less</span>
 <span class="go">False</span>
@@ -1216,7 +1212,7 @@ inside `Else`
 </section>
 <section id="synchronous-evaluation">
 <span id="lang-sync"></span><h2>Synchronous evaluation<a class="headerlink" href="#synchronous-evaluation" title="Permalink to this heading"></a></h2>
-<p>Signals in synchronous <a class="reference internal" href="#lang-domains"><span class="std std-ref">control domains</span></a> change whenever the <em>active edge</em> (a 0-to-1 or 1-to-0 transition, configured when <a class="reference internal" href="#lang-clockdomains"><span class="std std-ref">creating the domain</span></a>) occurs on the clock of the synchronous domain. In addition, the signals in clock domains with an asynchronous reset change when such a reset is asserted. The final value of a synchronous signal is equal to its <a class="reference internal" href="#lang-initial"><span class="std std-ref">initial value</span></a> if the reset (of any type) is asserted, or to its current value updated by the <a class="reference internal" href="#lang-active"><span class="std std-ref">active assignments</span></a> in the <a class="reference internal" href="#lang-assignorder"><span class="std std-ref">assignment order</span></a> otherwise. Synchronous signals always hold state.</p>
+<p>Signals in synchronous <a class="reference internal" href="#lang-domains"><span class="std std-ref">control domains</span></a> change whenever the <em>active edge</em> (a 0-to-1 or 1-to-0 transition, configured when <a class="reference internal" href="#lang-clockdomains"><span class="std std-ref">creating the domain</span></a>) occurs on the clock of the synchronous domain. In addition, the signals in <a class="reference internal" href="#lang-clockdomains"><span class="std std-ref">clock domains</span></a> with an asynchronous reset change when such a reset is asserted. The final value of a synchronous signal is equal to its <a class="reference internal" href="#lang-initial"><span class="std std-ref">initial value</span></a> if the reset (of any type) is asserted, or to its current value updated by the <a class="reference internal" href="#lang-active"><span class="std std-ref">active assignments</span></a> in the <a class="reference internal" href="#lang-assignorder"><span class="std std-ref">assignment order</span></a> otherwise. Synchronous signals always hold state.</p>
 <p>Consider the following code:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">timer</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
 
@@ -1255,7 +1251,8 @@ inside `Else`
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">startup</span> <span class="o">=</span> <span class="n">ClockDomain</span><span class="p">(</span><span class="n">reset_less</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>If a clock domain is defined in a module, all of its submodules can refer to that domain under the same name.</p>
+<p>Signals in a reset-less clock domain can still be explicitly reset using the <code class="xref py py-class docutils literal notranslate"><span class="pre">ResetInserter</span></code> <a class="reference internal" href="#lang-controlinserter"><span class="std std-ref">control flow modifier</span></a>.</p>
+<p>If a clock domain is defined in a module, all of its <a class="reference internal" href="#lang-submodules"><span class="std std-ref">submodules</span></a> can refer to that domain under the same name.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Always provide the <code class="code highlight py python docutils literal highlight-python"><span class="n">local</span><span class="o">=</span><span class="kc">True</span></code> keyword argument when defining a clock domain. The behavior of clock domains defined without this keyword argument is subject to change in near future, and is intentionally left undocumented.</p>
@@ -1425,10 +1422,7 @@ inside `Else`
 </section>
 <section id="memories">
 <span id="lang-memory"></span><h2>Memories<a class="headerlink" href="#memories" title="Permalink to this heading"></a></h2>
-<div class="admonition-todo admonition" id="id14">
-<p class="admonition-title">Todo</p>
-<p>Write this section.</p>
-</div>
+<p>Amaranth provides support for memories in the standard library module <a class="reference internal" href="stdlib/memory.html#module-amaranth.lib.memory" title="amaranth.lib.memory"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.memory</span></code></a>.</p>
 </section>
 <section id="instances">
 <span id="lang-instance"></span><h2>Instances<a class="headerlink" href="#instances" title="Permalink to this heading"></a></h2>
