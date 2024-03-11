@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Language guide &mdash; Amaranth language &amp; toolchain 0.5.0.dev152 documentation</title>
+  <title>Language guide &mdash; Amaranth language &amp; toolchain 0.5.0.dev153 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -15,7 +15,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=ef465cc0"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=4b3ed8d9"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/platformpicker.js"></script>
@@ -39,7 +39,7 @@
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.5.0.dev152+g715a8d4
+                0.5.0.dev153+gbfe541a
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -116,6 +116,8 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#combinatorial-evaluation">Combinatorial evaluation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#synchronous-evaluation">Synchronous evaluation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#assertions">Assertions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#debug-printing">Debug printing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#clock-domains">Clock domains</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#late-binding-of-clock-and-reset-signals">Late binding of clock and reset signals</a></li>
 </ul>
@@ -992,6 +994,7 @@ This happens because, being empty, it does not contain any negative values.</p>
 </div>
 <p>The answer is no. While this kind of code is occasionally useful, rejecting it greatly simplifies backends, simulators, and analyzers.</p>
 </div>
+<p>In addition to assignments, <span class="xref std std-ref">assertions, assumptions</span>, and <a class="reference internal" href="#lang-print"><span class="std std-ref">debug prints</span></a> can be added using the same syntax.</p>
 </section>
 <section id="assignment-order">
 <span id="lang-assignorder"></span><h3>Assignment order<a class="headerlink" href="#assignment-order" title="Permalink to this heading"></a></h3>
@@ -1223,6 +1226,61 @@ inside `Else`
 </pre></div>
 </div>
 <p>Whenever there is a transition on the clock of the <code class="docutils literal notranslate"><span class="pre">sync</span></code> domain, the <code class="code highlight py python docutils literal highlight-python"><span class="n">timer</span></code> signal is incremented by one if <code class="code highlight py python docutils literal highlight-python"><span class="n">up</span></code> is true, decremented by one if <code class="code highlight py python docutils literal highlight-python"><span class="n">down</span></code> is true, and retains its value otherwise.</p>
+</section>
+<section id="assertions">
+<span id="lang-assert"></span><h2>Assertions<a class="headerlink" href="#assertions" title="Permalink to this heading"></a></h2>
+<p>Some properties are so important that if they are violated, the computations described by the design become meaningless. These properties should be guarded with an <code class="xref py py-class docutils literal notranslate"><span class="pre">Assert</span></code> statement that immediately terminates the simulation if its condition is false. Assertions should generally be added to a <a class="reference internal" href="#lang-sync"><span class="std std-ref">synchronous domain</span></a>, and may have an optional message printed when it is violated:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ip</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">Assert</span><span class="p">(</span><span class="n">ip</span> <span class="o">&lt;</span> <span class="mi">128</span><span class="p">,</span> <span class="s2">&quot;instruction pointer past the end of program code!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Assertions may be nested within a <a class="reference internal" href="#lang-control"><span class="std std-ref">control block</span></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">If</span><span class="p">(</span><span class="o">~</span><span class="n">booting</span><span class="p">):</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">Assert</span><span class="p">(</span><span class="n">ip</span> <span class="o">&lt;</span> <span class="mi">128</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>While is is also possible to add assertions to the <a class="reference internal" href="#lang-comb"><span class="std std-ref">combinatorial domain</span></a>, simulations of combinatorial circuits may have <em>glitches</em>: instantaneous, transient changes in the values of expressions that are being computed which do not affect the result of the computation (and are not visible in most waveform viewers for that reason). Depending on the tools used for simulation, a glitch in the condition of an assertion or of a <a class="reference internal" href="#lang-control"><span class="std std-ref">control block</span></a> that contains it may cause the simulation to be terminated, even if the glitch would have been instantaneously resolved afterwards.</p>
+<p>If the condition of an assertion is assigned in a synchronous domain, then it is safe to add that assertion in the combinatorial domain. For example, neither of the assertions in the example below will be violated due to glitches, regardless of which domain the <code class="code highlight py python docutils literal highlight-python"><span class="n">ip</span></code> and <code class="code highlight py python docutils literal highlight-python"><span class="n">booting</span></code> signals are driven by:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ip_sync</span> <span class="o">=</span> <span class="n">Signal</span><span class="o">.</span><span class="n">like</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">ip_sync</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
+
+<span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="n">Assert</span><span class="p">(</span><span class="n">ip_sync</span> <span class="o">&lt;</span> <span class="mi">128</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">If</span><span class="p">(</span><span class="n">booting</span><span class="p">):</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="n">Assert</span><span class="p">(</span><span class="n">ip_sync</span> <span class="o">&lt;</span> <span class="mi">128</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Assertions should be added in a <a class="reference internal" href="#lang-sync"><span class="std std-ref">synchronous domain</span></a> when possible. In cases where it is not, such as if the condition is a signal that is assigned in a synchronous domain elsewhere, care should be taken while adding the assertion to the combinatorial domain.</p>
+</div>
+</section>
+<section id="debug-printing">
+<span id="lang-print"></span><h2>Debug printing<a class="headerlink" href="#debug-printing" title="Permalink to this heading"></a></h2>
+<p>The value of any expression, or of several of them, can be printed to the terminal during simulation using the <code class="xref py py-class docutils literal notranslate"><span class="pre">Print</span></code> statement. When added to the <a class="reference internal" href="#lang-comb"><span class="std std-ref">combinatorial domain</span></a>, the value of an expression is printed whenever it changes:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">()</span>
+<span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="n">Print</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>When added to a <a class="reference internal" href="#lang-sync"><span class="std std-ref">synchronous domain</span></a>, the value of an expression is printed whenever the active edge occurs on the clock of that domain:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">Print</span><span class="p">(</span><span class="s2">&quot;on tick: &quot;</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">Print</span></code> statement, regardless of the domain, may be nested within a <a class="reference internal" href="#lang-control"><span class="std std-ref">control block</span></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">old_state</span> <span class="o">=</span> <span class="n">Signal</span><span class="o">.</span><span class="n">like</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">old_state</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">If</span><span class="p">(</span><span class="n">state</span> <span class="o">!=</span> <span class="n">old_state</span><span class="p">):</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">Print</span><span class="p">(</span><span class="s2">&quot;was: &quot;</span><span class="p">,</span> <span class="n">old_state</span><span class="p">,</span> <span class="s2">&quot;now: &quot;</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The arguments to the <code class="xref py py-class docutils literal notranslate"><span class="pre">Print</span></code> statement have the same meaning as the arguments to the Python <a class="reference external" href="https://docs.python.org/3/library/functions.html#print" title="(in Python v3.12)"><code class="xref py py-func docutils literal notranslate"><span class="pre">print()</span></code></a> function, with the exception that only <code class="code highlight py python docutils literal highlight-python"><span class="n">sep</span></code> and <code class="code highlight py python docutils literal highlight-python"><span class="n">end</span></code> keyword arguments are supported. In addition, the <code class="xref py py-class docutils literal notranslate"><span class="pre">Format</span></code> helper can be used to apply formatting to the values, similar to the Python <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str.format" title="(in Python v3.12)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.format()</span></code></a> method:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">addr</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">Print</span><span class="p">(</span><span class="n">Format</span><span class="p">(</span><span class="s2">&quot;address: </span><span class="si">{:08x}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">addr</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>In both <code class="xref py py-class docutils literal notranslate"><span class="pre">Print</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">Format</span></code>, arguments that are not Amaranth <a class="reference internal" href="#lang-values"><span class="std std-ref">values</span></a> are formatted using the usual Python rules. The optional second <code class="code highlight py python docutils literal highlight-python"><span class="n">message</span></code> argument to <code class="xref py py-class docutils literal notranslate"><span class="pre">Assert</span></code> (described <a class="reference internal" href="#lang-assert"><span class="std std-ref">above</span></a>) also accepts a string or the <code class="xref py py-class docutils literal notranslate"><span class="pre">Format</span></code> helper:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">Assert</span><span class="p">((</span><span class="n">addr</span> <span class="o">&amp;</span> <span class="mb">0b111</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">Format</span><span class="p">(</span><span class="s2">&quot;unaligned address </span><span class="si">{:08x}</span><span class="s2">!&quot;</span><span class="p">,</span> <span class="n">addr</span><span class="p">))</span>
+</pre></div>
+</div>
 </section>
 <section id="clock-domains">
 <span id="lang-clockdomains"></span><h2>Clock domains<a class="headerlink" href="#clock-domains" title="Permalink to this heading"></a></h2>
