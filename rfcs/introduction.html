@@ -149,6 +149,22 @@
 <p>The &quot;RFC&quot; (request for comments) process is intended to provide a consistent and controlled path for changes to Amaranth (such as new features) so that all stakeholders can be confident about the direction of the project.</p>
 <p>Many changes, including bug fixes and documentation improvements can be implemented and reviewed via the normal GitHub pull request workflow.</p>
 <p>Some changes though are &quot;substantial&quot;, and we ask that these be put through a bit of a design process and produce a consensus among the Amaranth community.</p>
+<p>The responsibility for evolving an Amaranth &quot;subsystem&quot; (a clearly defined part of the Amaranth project) lies on a subsystem maintainer. The assignment of maintainers to subsystems is:</p>
+<ul>
+<li><strong>Core</strong>: Catherine @whitequark
+<ul>
+<li>The &quot;core&quot; subsystem includes the HDL frontend, backend, and simulator, as well as the build and platform systems.</li>
+<li>This covers the [amaranth-lang/amaranth][] repository and the <code>amaranth</code> Python package.</li>
+</ul>
+</li>
+<li><strong>SoC</strong>: Jean-François @jfng
+<ul>
+<li>The &quot;SoC&quot; subsystem includes the SoC infrastructure.</li>
+<li>This covers the [amaranth-lang/amaranth-soc][] repository and the <code>amaranth_soc</code> Python package.</li>
+</ul>
+</li>
+<li>Other repositories and Python packages are not currently covered by the RFC process and changes are implemented on an ad-hoc basis.</li>
+</ul>
 <h2 id="table-of-contents"><a class="header" href="#table-of-contents">Table of Contents</a></h2>
 <ul>
 <li><a href="#amaranth-rfcs">Opening</a></li>
@@ -163,7 +179,7 @@
 <li><a href="#license">License</a></li>
 </ul>
 <h2 id="when-you-need-to-follow-this-process"><a class="header" href="#when-you-need-to-follow-this-process">When you need to follow this process</a></h2>
-<p>You need to follow this process if you intend to make &quot;substantial&quot; changes to <a href="https://github.com/amaranth-lang/amaranth">core Amaranth language</a>. In the future you will need to follow this process for the <a href="https://github.com/amaranth-lang/amaranth-stdio">standard I/O library</a> and the <a href="https://github.com/amaranth-lang/amaranth-soc">System-on-Chip library</a> as well, but at the moment they are not covered.</p>
+<p>You need to follow this process if you intend to make &quot;substantial&quot; changes to any of the subsystems listed above.</p>
 <p>What constitutes a &quot;substantial&quot; change is evolving based on community norms and varies depending on what part of the ecosystem you are proposing to change, but may include the following:</p>
 <ul>
 <li>Any semantic or syntactic change to the language (<code>amaranth.hdl</code>) that is not a bugfix.</li>
@@ -175,7 +191,7 @@
 <li>Rephrasing, reorganizing, refactoring, or otherwise &quot;changing shape does not change meaning&quot;.</li>
 <li>Additions that strictly improve objective, numerical quality criteria (warning removal, speedup, better platform coverage, handling more errors, etc.)</li>
 </ul>
-<p>If you submit a pull request to implement a new feature without going through the RFC process, it may be closed with a polite request to submit an RFC first. When in doubt, please open an issue to discuss the feature first and one of the core maintainers will say if the change requires an RFC or not.</p>
+<p>If you submit a pull request to implement a new feature without going through the RFC process, it may be closed with a polite request to submit an RFC first. When in doubt, please open an issue to discuss the feature first and the subsystem maintainer will say if the change requires an RFC or not.</p>
 <h2 id="before-creating-an-rfc"><a class="header" href="#before-creating-an-rfc">Before creating an RFC</a></h2>
 <p>A hastily-proposed RFC can hurt its chances of acceptance. Low quality proposals, proposals for previously-rejected features, or those that don't fit into the near-term roadmap, may be quickly rejected, which can be demotivating for the unprepared contributor. Laying some groundwork ahead of the RFC can make the process smoother.</p>
 <p>Although there is no single way to prepare for submitting an RFC, it is generally a good idea to pursue feedback from other project developers beforehand, to ascertain that the RFC may be desirable; having a consistent impact on the project requires concerted effort toward consensus-building.</p>
@@ -190,9 +206,9 @@
 <li>Now that your RFC has an open pull request, use the issue number of the PR to update your 0000- prefix to that number.</li>
 <li>Build consensus and integrate feedback. RFCs that have broad support are much more likely to make progress than those that don't receive any comments. Feel free to reach out to the RFC assignee in particular to get help identifying stakeholders and obstacles.</li>
 <li>RFCs rarely go through this process unchanged, especially as alternatives and drawbacks are shown. You can make edits, big and small, to the RFC to clarify or change the design, but make changes as new commits to the pull request, and leave a comment on the pull request explaining your changes. Specifically, do not squash or rebase commits after they are visible on the pull request.</li>
-<li>At some point, a core maintainer will make a decision on the disposition for the RFC (merge, close, or postpone).
+<li>At some point, the subsystem maintainer will make a decision on the disposition for the RFC (merge, close, or postpone).
 <ul>
-<li>This step is taken when enough of the tradeoffs have been discussed that the core maintainer is in a position to make a decision. That does not require consensus amongst all participants in the RFC thread (which is usually impossible). However, the argument supporting the disposition on the RFC needs to have already been clearly articulated, and there should not be a strong consensus against that position.</li>
+<li>This step is taken when enough of the tradeoffs have been discussed that the subsystem maintainer is in a position to make a decision. That does not require consensus amongst all participants in the RFC thread (which is usually impossible). However, the argument supporting the disposition on the RFC needs to have already been clearly articulated, and there should not be a strong consensus against that position.</li>
 </ul>
 </li>
 </ul>
@@ -200,16 +216,16 @@
 <p>Once an RFC becomes &quot;active&quot; then authors may implement it and submit the feature as a pull request to the corresponding repository. Being &quot;active&quot; is not a rubber stamp, and in particular still does not mean the feature will ultimately be merged; it does mean that in principle all the major stakeholders have agreed to the feature and are amenable to merging it.</p>
 <p>Furthermore, the fact that a given RFC has been accepted and is &quot;active&quot; implies nothing about what priority is assigned to its implementation, nor does it imply anything about whether a developer has been assigned the task of implementing the feature. While it is not necessary that the author of the RFC also write the implementation, it is by far the most effective way to see an RFC through to completion: authors should not expect that other project developers will take on responsibility for implementing their accepted feature.</p>
 <p>Modifications to &quot;active&quot; RFCs can be done in follow-up pull requests. We strive to write each RFC in a manner that it will reflect the final design of the feature; but the nature of the process means that we cannot expect every merged RFC to actually reflect what the end result will be at the time of the next major release.</p>
-<p>In general, once accepted, RFCs should not be substantially changed. Only very minor changes should be submitted as amendments. More substantial changes should be new RFCs, with a note added to the original RFC. Exactly what counts as a &quot;very minor change&quot; is up to the core maintainers to decide.</p>
+<p>In general, once accepted, RFCs should not be substantially changed. Only very minor changes should be submitted as amendments. More substantial changes should be new RFCs, with a note added to the original RFC. Exactly what counts as a &quot;very minor change&quot; is up to the subsystem maintainers to decide.</p>
 <h2 id="reviewing-rfcs"><a class="header" href="#reviewing-rfcs">Reviewing RFCs</a></h2>
-<p>While the RFC pull request is up, the core maintainers may schedule meetings with the author and/or relevant stakeholders to discuss the issues in greater detail, and the topic may be discussed at weekly meetings. In either case a summary from the meeting will be posted back to the RFC pull request.</p>
-<p>A core maintainer makes final decisions about RFCs after the benefits and drawbacks are well understood. These decisions can be made at any time, but the core maintainer will regularly issue decisions. When a decision is made, the RFC pull request will either be merged or closed. In either case, if the reasoning is not clear from the discussion in thread, the core maintainer will add a comment describing the rationale for the decision.</p>
+<p>While the RFC pull request is up, the subsystem maintainers may schedule meetings with the author and/or relevant stakeholders to discuss the issues in greater detail, and the topic may be discussed at weekly meetings. In either case a summary from the meeting will be posted back to the RFC pull request.</p>
+<p>The subsystem maintainer makes final decisions about RFCs after the benefits and drawbacks are well understood. These decisions can be made at any time, but the subsystem maintainer will regularly issue decisions. When a decision is made, the RFC pull request will either be merged or closed. In either case, if the reasoning is not clear from the discussion in thread, the subsystem maintainer will add a comment describing the rationale for the decision.</p>
 <h2 id="implementing-an-rfc"><a class="header" href="#implementing-an-rfc">Implementing an RFC</a></h2>
 <p>Some accepted RFCs represent vital features that need to be implemented right away. Other accepted RFCs can represent features that can wait until some arbitrary developer feels like doing the work. Every accepted RFC has an associated issue tracking its implementation in the corresponding repository.</p>
 <p>The author of an RFC is not obligated to implement it. Of course, the RFC author (like any other developer) is welcome to post an implementation for review after the RFC has been accepted.</p>
 <p>If you are interested in working on the implementation for an &quot;active&quot; RFC, but cannot determine if someone else is already working on it, feel free to ask (e.g. by leaving a comment on the associated issue).</p>
 <h2 id="rfc-postponement"><a class="header" href="#rfc-postponement">RFC Postponement</a></h2>
-<p>Some RFC pull requests are tagged with the &quot;postponed&quot; label when they are closed (as part of the rejection process). An RFC closed with &quot;postponed&quot; is marked as such because we want neither to think about evaluating the proposal nor about implementing the described feature until some time in the future, and we believe that we can afford to wait until then to do so. Postponed pull requests may be re-opened when the time is right. We don't have any formal process for that, you should ask a core maintainer.</p>
+<p>Some RFC pull requests are tagged with the &quot;postponed&quot; label when they are closed (as part of the rejection process). An RFC closed with &quot;postponed&quot; is marked as such because we want neither to think about evaluating the proposal nor about implementing the described feature until some time in the future, and we believe that we can afford to wait until then to do so. Postponed pull requests may be re-opened when the time is right. We don't have any formal process for that, you should ask the subsystem maintainer.</p>
 <p>Usually an RFC pull request marked as &quot;postponed&quot; has already passed an informal first round of evaluation, namely the round of &quot;do we think we would ever possibly consider making this change, as outlined in the RFC pull request, or some semi-obvious variation of it.&quot; (When the answer to the latter question is &quot;no&quot;, then the appropriate response is to close the RFC, not postpone it.)</p>
 <h2 id="acknowledgements"><a class="header" href="#acknowledgements">Acknowledgements</a></h2>
 <p>The process described in this document is based on the <a href="https://github.com/rust-lang/rfcs">Rust RFC process</a>. It has been simplified to match the needs of the much smaller Amaranth community; in particular, policy (including the RFC process itself) is not currently defined through the RFC process.</p>
