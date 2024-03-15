@@ -221,6 +221,24 @@
 <h2 id="reviewing-rfcs"><a class="header" href="#reviewing-rfcs">Reviewing RFCs</a></h2>
 <p>While the RFC pull request is up, the subsystem maintainers may schedule meetings with the author and/or relevant stakeholders to discuss the issues in greater detail, and the topic may be discussed at weekly meetings. In either case a summary from the meeting will be posted back to the RFC pull request.</p>
 <p>The subsystem maintainer makes final decisions about RFCs after the benefits and drawbacks are well understood. These decisions can be made at any time, but the subsystem maintainer will regularly issue decisions. When a decision is made, the RFC pull request will either be merged or closed. In either case, if the reasoning is not clear from the discussion in thread, the subsystem maintainer will add a comment describing the rationale for the decision.</p>
+<h2 id="merging-an-rfc"><a class="header" href="#merging-an-rfc">Merging an RFC</a></h2>
+<p>Once the decision is made to merge an RFC, the text must be prepared first. To do this:</p>
+<ul>
+<li>Update the RFC text to reflect any changes that had to be made to achieve consensus.</li>
+<li>Ensure that the &quot;Unresolved questions&quot; section does not have any unanswered questions.</li>
+<li>Create a tracking issue in the relevant repository.</li>
+<li>Fill in the RFC header fields (start date, RFC PR, tracking issue).</li>
+<li>Rename the RFC filename to include the number of the RFC PR instead of <code>0000</code>.
+<ul>
+<li>This step can be done either as a part of the merge commit in the next step, or by the RFC author right after submitting the PR.</li>
+</ul>
+</li>
+<li>Merge the RFC PR with the commit message &quot;RFC #NNNN: Title of the RFC&quot;.
+<ul>
+<li>This step can only be done by someone with the write access to the RFC repository.</li>
+</ul>
+</li>
+</ul>
 <h2 id="implementing-an-rfc"><a class="header" href="#implementing-an-rfc">Implementing an RFC</a></h2>
 <p>Some accepted RFCs represent vital features that need to be implemented right away. Other accepted RFCs can represent features that can wait until some arbitrary developer feels like doing the work. Every accepted RFC has an associated issue tracking its implementation in the corresponding repository.</p>
 <p>The author of an RFC is not obligated to implement it. Of course, the RFC author (like any other developer) is welcome to post an implementation for review after the RFC has been accepted.</p>
