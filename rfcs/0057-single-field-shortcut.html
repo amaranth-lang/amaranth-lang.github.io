@@ -1,0 +1,360 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>0057-single-field-shortcut - The Amaranth RFC Book</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li><li class="chapter-item expanded "><a href="0002-interfaces.html">0002-interfaces</a></li><li class="chapter-item expanded "><a href="0003-enumeration-shapes.html">0003-enumeration-shapes</a></li><li class="chapter-item expanded "><a href="0004-const-castable-exprs.html">0004-const-castable-exprs</a></li><li class="chapter-item expanded "><a href="0005-remove-const-normalize.html">0005-remove-const-normalize</a></li><li class="chapter-item expanded "><a href="0006-stdlib-crc.html">0006-stdlib-crc</a></li><li class="chapter-item expanded "><a href="0008-aggregate-extensibility.html">0008-aggregate-extensibility</a></li><li class="chapter-item expanded "><a href="0009-const-init-shape-castable.html">0009-const-init-shape-castable</a></li><li class="chapter-item expanded "><a href="0010-move-repl-to-value.html">0010-move-repl-to-value</a></li><li class="chapter-item expanded "><a href="0015-lifting-shape-castables.html">0015-lifting-shape-castables</a></li><li class="chapter-item expanded "><a href="0016-soc-csr-regs.html">0016-soc-csr-regs</a></li><li class="chapter-item expanded "><a href="0017-remove-log2-int.html">0017-remove-log2-int</a></li><li class="chapter-item expanded "><a href="0018-reorganize-vendor-platforms.html">0018-reorganize-vendor-platforms</a></li><li class="chapter-item expanded "><a href="0019-remove-scheduler.html">0019-remove-scheduler</a></li><li class="chapter-item expanded "><a href="0020-deprecate-non-fwft-fifos.html">0020-deprecate-non-fwft-fifos</a></li><li class="chapter-item expanded "><a href="0021-patch-releases.html">0021-patch-releases</a></li><li class="chapter-item expanded "><a href="0022-valuecastable-shape.html">0022-valuecastable-shape</a></li><li class="chapter-item expanded "><a href="0027-simulator-testbenches.html">0027-simulator-testbenches</a></li><li class="chapter-item expanded "><a href="0028-override-value-operators.html">0028-override-value-operators</a></li><li class="chapter-item expanded "><a href="0030-component-metadata.html">0030-component-metadata</a></li><li class="chapter-item expanded "><a href="0031-enumeration-type-safety.html">0031-enumeration-type-safety</a></li><li class="chapter-item expanded "><a href="0034-interface-rename.html">0034-interface-rename</a></li><li class="chapter-item expanded "><a href="0035-shapelike-valuelike.html">0035-shapelike-valuelike</a></li><li class="chapter-item expanded "><a href="0037-make-signature-immutable.html">0037-make-signature-immutable</a></li><li class="chapter-item expanded "><a href="0038-component-signature-immutability.html">0038-component-signature-immutability</a></li><li class="chapter-item expanded "><a href="0039-empty-case.html">0039-empty-case</a></li><li class="chapter-item expanded "><a href="0040-arbitrary-memory-shape.html">0040-arbitrary-memory-shape</a></li><li class="chapter-item expanded "><a href="0042-const-from-shape-castable.html">0042-const-from-shape-castable</a></li><li class="chapter-item expanded "><a href="0043-rename-reset-to-init.html">0043-rename-reset-to-init</a></li><li class="chapter-item expanded "><a href="0045-lib-memory.html">0045-lib-memory</a></li><li class="chapter-item expanded "><a href="0046-shape-range-1.html">0046-shape-range-1</a></li><li class="chapter-item expanded "><a href="0049-soc-gpio-peripheral.html">0049-soc-gpio-peripheral</a></li><li class="chapter-item expanded "><a href="0050-print.html">0050-print</a></li><li class="chapter-item expanded "><a href="0051-const-from-bits.html">0051-const-from-bits</a></li><li class="chapter-item expanded "><a href="0053-ioport.html">0053-ioport</a></li><li class="chapter-item expanded "><a href="0057-single-field-shortcut.html" class="active">0057-single-field-shortcut</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Amaranth RFC Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/amaranth-lang/rfcs" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <ul>
+<li>Start Date: 2024-03-15</li>
+<li>RFC PR: <a href="https://github.com/amaranth-lang/rfcs/pull/57">amaranth-lang/rfcs#57</a></li>
+<li>Amaranth SoC Issue: <a href="https://github.com/amaranth-lang/amaranth-soc/issues/78">amaranth-lang/amaranth-soc#78</a></li>
+</ul>
+<h1 id="single-field-register-definition-and-usage-shortcut"><a class="header" href="#single-field-register-definition-and-usage-shortcut">Single-Field Register Definition and Usage Shortcut</a></h1>
+<h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
+<p>Add a shortcut to <code>csr.Register</code> to enable easier and cleaner definition and use
+of registers which contain exactly one <code>csr.Field</code>.</p>
+<h2 id="motivation"><a class="header" href="#motivation">Motivation</a></h2>
+<p>Currently, use of a <code>csr.Register</code> in an amaranth-soc peripheral requires creation of a map (or list) of <code>csr.Field</code>s, which actually represent the register data and control access to each part. This is commonly done by creating a <code>Register</code> subclass. Each <code>Field</code> also needs a name (or index) in the <code>Register</code>. However, many registers in peripherals only contain one field, so the extra name and subclass are unnecessary and redundant. This RFC introduces a shortcut for constructing and using a <code>Register</code> containing exactly one un-named <code>Field</code>.</p>
+<h2 id="guide-level-explanation"><a class="header" href="#guide-level-explanation">Guide-level explanation</a></h2>
+<p>Consider the following simple peripheral which generates a toggling signal on bits of an output corresponding to bits set in a register:</p>
+<pre><code class="language-python">from amaranth import *
+from amaranth.lib import wiring
+from amaranth.lib.wiring import In, Out
+from amaranth_soc import csr
+
+class Toggle(wiring.Component):
+    bus: In(csr.Signature(addr_width=1, data_width=32))
+    toggle: Out(32)
+
+    class Toggle(csr.Register, access=&quot;rw&quot;):
+        toggle: csr.Field(csr.action.RW, 32)
+
+    def __init__(self):
+        self._toggle = Toggle()
+
+        # ... bridge setup ...
+
+    def elaborate(self, platform):
+        m = Module()
+
+        # ... bridge setup ...
+
+        for i in range(32):
+            with m.If(self._toggle.f.toggle.data[i]):
+                m.d.sync += self.toggle[i].eq(~self.toggle[i])
+            with m.Else():
+                m.d.sync += self.toggle[i].eq(0)
+
+        return m
+</code></pre>
+<p>The <code>toggle</code> name is used, among other ways, to name the register class, to name
+the field within, and to access that field on the register instance during
+elaboration.</p>
+<p>This can be simplified by passing the <code>csr.Field</code> directly to the <code>csr.Register</code>
+without enclosing it in a dict/list and naming/indexing it, or subclassing
+<code>csr.Register</code>. This also causes the <code>.f</code> member to access that Field directly
+instead of needing to provide a name/index.</p>
+<p>This simplifies the design as follows, reducing clutter and redundancy:</p>
+<pre><code class="language-python">from amaranth import *
+from amaranth.lib import wiring
+from amaranth.lib.wiring import In, Out
+from amaranth_soc import csr
+
+class Toggle(wiring.Component):
+    bus: In(csr.Signature(addr_width=1, data_width=32))
+    toggle: Out(32)
+
+    def __init__(self):
+        # Register can take the Field directly, eliminating the subclass
+        self._toggle = csr.Register(csr.Field(csr.action.RW, 32), access=&quot;rw&quot;)
+
+        # ... bridge setup ...
+
+    def elaborate(self, platform):
+        m = Module()
+
+        # ... bridge setup ...
+
+        for i in range(32):
+            # FieldAction accessed directly, no need to specify `toggle` again
+            with m.If(self._toggle.f.data[i]):
+                m.d.sync += self.toggle[i].eq(~self.toggle[i])
+            with m.Else():
+                m.d.sync += self.toggle[i].eq(0)
+
+        return m
+</code></pre>
+<h2 id="reference-level-explanation"><a class="header" href="#reference-level-explanation">Reference-level explanation</a></h2>
+<p>(with reference to <a href="https://github.com/amaranth-lang/rfcs/blob/main/text/0016-soc-csr-regs.md">RFC #16</a>)</p>
+<h4 id="csrregregister"><a class="header" href="#csrregregister"><code>csr.reg.Register</code></a></h4>
+<p>The <code>csr.reg.Register</code> class describes a CSR register <code>Component</code>, with:</p>
+<ul>
+<li>a <code>.__init__(self, fields=None, access=None)</code> constructor, where:
+<ul>
+<li><code>fields</code> is either:
+<ul>
+<li>a <code>dict</code> that will be instantiated as a <code>FieldActionMap</code>;</li>
+<li>a <code>list</code> that will be instantiated as a <code>FieldActionArray</code>;</li>
+<li>a <code>Field</code> that will be instantiated as a <code>FieldAction</code>;</li>
+<li><code>None</code>; in this case a <code>FieldActionMap</code> is instantiated from <code>Field</code> objects in variable annotations.</li>
+</ul>
+</li>
+<li><code>access</code> is either a <code>csr.Element.Access</code> value, or <code>None</code>.</li>
+</ul>
+</li>
+<li>a <code>.field</code> property, returning the instantiated <code>FieldActionMap</code>/<code>FieldActionArray</code>/<code>FieldAction</code>;</li>
+<li>a <code>.f</code> property, as a shorthand to <code>self.field</code>;</li>
+<li>a <code>.__iter__(self)</code> method that yields, for each contained field, a tuple containing its path (as a tuple of names or indices) and its instantiated <code>FieldAction</code>. If only a single <code>Field</code> was supplied, its path is always <code>tuple()</code>.</li>
+</ul>
+<h2 id="drawbacks"><a class="header" href="#drawbacks">Drawbacks</a></h2>
+<ul>
+<li>A novice might not understand that it's possible to create a <code>Register</code> with multiple <code>Fields</code> if exposed only to code which uses single-<code>Field</code> <code>Register</code>s.</li>
+<li>There is a difference between a <code>Register</code> with one named/indexed <code>Field</code> and with one unnamed <code>Field</code>.</li>
+<li>Library code will be made more confusing by having <code>fields</code> refer to possibly only one field.</li>
+<li>Downstream code will have to deal with a third type of object returned by the
+<code>.f</code> property which behaves unlike the current two.</li>
+<li>BSP/doc generators will have to intelligently render a <code>Field</code> with an empty name and path (likely by omitting them, possibly by reusing the register's name).
+<ul>
+<li>An empty name is prohibited by <code>FieldActionMap</code>, so empty names are a novel
+problem.</li>
+<li>The register does not know its own name independently of its container, so this may be difficult in practice.</li>
+</ul>
+</li>
+<li>Adding a second <code>Field</code> to a register created this way will break all accesses to the <code>.f</code> property and likely all BSP users (though the actual bus transactions to the first <code>Field</code> will not change).
+<ul>
+<li>This could be especially entertaining if the new <code>Field</code> names happen to
+be the same as properties of the first <code>Field</code>'s <code>FieldAction</code>.</li>
+<li>BSP users will have to change all constants/functions named after just the
+register to instead use the register + the field name.</li>
+</ul>
+</li>
+</ul>
+<h2 id="rationale-and-alternatives"><a class="header" href="#rationale-and-alternatives">Rationale and alternatives</a></h2>
+<ul>
+<li>Simple and easily explainable change, easy to migrate code to, though no
+migration is even necessary</li>
+<li>Minimal change to the library's existing code</li>
+<li>Nicely reduces redundant names, types, and properties</li>
+<li>Not strictly necessary, not having it will just make peripheral code a little
+more cluttered</li>
+<li>Users could instead be taught to eliminate the subclass by passing a dict to
+the <code>Register</code> constructor and assign the <code>.f</code> property of interest to a
+local variable to de-clutter code</li>
+</ul>
+<h2 id="prior-art"><a class="header" href="#prior-art">Prior art</a></h2>
+<p>AVR microcontrollers have many registers where the field name is the same as the register name, though this is not always the case for single-field registers. Application code usually uses the register name in this case and ignores the field name.</p>
+<p>STM32 microcontrollers are similar, but the field name is usually a suffix of the register name, as the field name is not expected to be globally unique. However, the generated BSP files do appear to always contain the field name at least somewhere.</p>
+<p>Field arrays are already in some sense anonymous, being named by an integer instead of a string.</p>
+<p>More experienced input is welcomed here.</p>
+<h2 id="unresolved-questions"><a class="header" href="#unresolved-questions">Unresolved questions</a></h2>
+<ul>
+<li><del>Should we change <code>fields</code> to <code>field</code> in the constructor and properties? This could break existing code.</del>
+<ul>
+<li>The property will be <code>.field</code> and the constructor will be <code>fields=</code>.</li>
+</ul>
+</li>
+<li><del>Should we add <code>field</code> too? This would access the same object/s as <code>fields</code> and so would make available the option to use the right plurality, though it would be more code and wouldn't force it.</del>
+<ul>
+<li>The property will be <code>.field</code> and the constructor will be <code>fields=</code>.</li>
+</ul>
+</li>
+<li><del>Should we force a <code>Register</code> with a single <code>Field</code> to always have that one be un-named? Would create backwards compatibility problems, but reduce ambiguity.</del>
+<ul>
+<li>No, would cause backwards compatibility problems, which we don't want.</li>
+</ul>
+</li>
+<li><del>Should we go further? <code>Register</code> could take a single <code>FieldAction</code> and automatically wrap it in a <code>Field</code> (and inherit its access mode).</del>
+<ul>
+<li>No, unnecessarily convenient and not yet proved necessary by experience.</li>
+</ul>
+</li>
+</ul>
+<h2 id="future-possibilities"><a class="header" href="#future-possibilities">Future possibilities</a></h2>
+<p>None obvious, this is a pretty small and self-contained idea.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="0053-ioport.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="0053-ioport.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
