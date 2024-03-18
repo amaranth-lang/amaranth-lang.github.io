@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>0046-shape-range-1 - The Amaranth RFC Book</title>
+        <title>0054-read-port-init - The Amaranth RFC Book</title>
 
 
         <!-- Custom HTML head -->
@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li><li class="chapter-item expanded "><a href="0002-interfaces.html">0002-interfaces</a></li><li class="chapter-item expanded "><a href="0003-enumeration-shapes.html">0003-enumeration-shapes</a></li><li class="chapter-item expanded "><a href="0004-const-castable-exprs.html">0004-const-castable-exprs</a></li><li class="chapter-item expanded "><a href="0005-remove-const-normalize.html">0005-remove-const-normalize</a></li><li class="chapter-item expanded "><a href="0006-stdlib-crc.html">0006-stdlib-crc</a></li><li class="chapter-item expanded "><a href="0008-aggregate-extensibility.html">0008-aggregate-extensibility</a></li><li class="chapter-item expanded "><a href="0009-const-init-shape-castable.html">0009-const-init-shape-castable</a></li><li class="chapter-item expanded "><a href="0010-move-repl-to-value.html">0010-move-repl-to-value</a></li><li class="chapter-item expanded "><a href="0015-lifting-shape-castables.html">0015-lifting-shape-castables</a></li><li class="chapter-item expanded "><a href="0016-soc-csr-regs.html">0016-soc-csr-regs</a></li><li class="chapter-item expanded "><a href="0017-remove-log2-int.html">0017-remove-log2-int</a></li><li class="chapter-item expanded "><a href="0018-reorganize-vendor-platforms.html">0018-reorganize-vendor-platforms</a></li><li class="chapter-item expanded "><a href="0019-remove-scheduler.html">0019-remove-scheduler</a></li><li class="chapter-item expanded "><a href="0020-deprecate-non-fwft-fifos.html">0020-deprecate-non-fwft-fifos</a></li><li class="chapter-item expanded "><a href="0021-patch-releases.html">0021-patch-releases</a></li><li class="chapter-item expanded "><a href="0022-valuecastable-shape.html">0022-valuecastable-shape</a></li><li class="chapter-item expanded "><a href="0027-simulator-testbenches.html">0027-simulator-testbenches</a></li><li class="chapter-item expanded "><a href="0028-override-value-operators.html">0028-override-value-operators</a></li><li class="chapter-item expanded "><a href="0030-component-metadata.html">0030-component-metadata</a></li><li class="chapter-item expanded "><a href="0031-enumeration-type-safety.html">0031-enumeration-type-safety</a></li><li class="chapter-item expanded "><a href="0034-interface-rename.html">0034-interface-rename</a></li><li class="chapter-item expanded "><a href="0035-shapelike-valuelike.html">0035-shapelike-valuelike</a></li><li class="chapter-item expanded "><a href="0037-make-signature-immutable.html">0037-make-signature-immutable</a></li><li class="chapter-item expanded "><a href="0038-component-signature-immutability.html">0038-component-signature-immutability</a></li><li class="chapter-item expanded "><a href="0039-empty-case.html">0039-empty-case</a></li><li class="chapter-item expanded "><a href="0040-arbitrary-memory-shape.html">0040-arbitrary-memory-shape</a></li><li class="chapter-item expanded "><a href="0042-const-from-shape-castable.html">0042-const-from-shape-castable</a></li><li class="chapter-item expanded "><a href="0043-rename-reset-to-init.html">0043-rename-reset-to-init</a></li><li class="chapter-item expanded "><a href="0045-lib-memory.html">0045-lib-memory</a></li><li class="chapter-item expanded "><a href="0046-shape-range-1.html" class="active">0046-shape-range-1</a></li><li class="chapter-item expanded "><a href="0049-soc-gpio-peripheral.html">0049-soc-gpio-peripheral</a></li><li class="chapter-item expanded "><a href="0050-print.html">0050-print</a></li><li class="chapter-item expanded "><a href="0051-const-from-bits.html">0051-const-from-bits</a></li><li class="chapter-item expanded "><a href="0053-ioport.html">0053-ioport</a></li><li class="chapter-item expanded "><a href="0054-read-port-init.html">0054-read-port-init</a></li><li class="chapter-item expanded "><a href="0055-lib-io.html">0055-lib-io</a></li><li class="chapter-item expanded "><a href="0056-mem-wide.html">0056-mem-wide</a></li><li class="chapter-item expanded "><a href="0057-single-field-shortcut.html">0057-single-field-shortcut</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li><li class="chapter-item expanded "><a href="0002-interfaces.html">0002-interfaces</a></li><li class="chapter-item expanded "><a href="0003-enumeration-shapes.html">0003-enumeration-shapes</a></li><li class="chapter-item expanded "><a href="0004-const-castable-exprs.html">0004-const-castable-exprs</a></li><li class="chapter-item expanded "><a href="0005-remove-const-normalize.html">0005-remove-const-normalize</a></li><li class="chapter-item expanded "><a href="0006-stdlib-crc.html">0006-stdlib-crc</a></li><li class="chapter-item expanded "><a href="0008-aggregate-extensibility.html">0008-aggregate-extensibility</a></li><li class="chapter-item expanded "><a href="0009-const-init-shape-castable.html">0009-const-init-shape-castable</a></li><li class="chapter-item expanded "><a href="0010-move-repl-to-value.html">0010-move-repl-to-value</a></li><li class="chapter-item expanded "><a href="0015-lifting-shape-castables.html">0015-lifting-shape-castables</a></li><li class="chapter-item expanded "><a href="0016-soc-csr-regs.html">0016-soc-csr-regs</a></li><li class="chapter-item expanded "><a href="0017-remove-log2-int.html">0017-remove-log2-int</a></li><li class="chapter-item expanded "><a href="0018-reorganize-vendor-platforms.html">0018-reorganize-vendor-platforms</a></li><li class="chapter-item expanded "><a href="0019-remove-scheduler.html">0019-remove-scheduler</a></li><li class="chapter-item expanded "><a href="0020-deprecate-non-fwft-fifos.html">0020-deprecate-non-fwft-fifos</a></li><li class="chapter-item expanded "><a href="0021-patch-releases.html">0021-patch-releases</a></li><li class="chapter-item expanded "><a href="0022-valuecastable-shape.html">0022-valuecastable-shape</a></li><li class="chapter-item expanded "><a href="0027-simulator-testbenches.html">0027-simulator-testbenches</a></li><li class="chapter-item expanded "><a href="0028-override-value-operators.html">0028-override-value-operators</a></li><li class="chapter-item expanded "><a href="0030-component-metadata.html">0030-component-metadata</a></li><li class="chapter-item expanded "><a href="0031-enumeration-type-safety.html">0031-enumeration-type-safety</a></li><li class="chapter-item expanded "><a href="0034-interface-rename.html">0034-interface-rename</a></li><li class="chapter-item expanded "><a href="0035-shapelike-valuelike.html">0035-shapelike-valuelike</a></li><li class="chapter-item expanded "><a href="0037-make-signature-immutable.html">0037-make-signature-immutable</a></li><li class="chapter-item expanded "><a href="0038-component-signature-immutability.html">0038-component-signature-immutability</a></li><li class="chapter-item expanded "><a href="0039-empty-case.html">0039-empty-case</a></li><li class="chapter-item expanded "><a href="0040-arbitrary-memory-shape.html">0040-arbitrary-memory-shape</a></li><li class="chapter-item expanded "><a href="0042-const-from-shape-castable.html">0042-const-from-shape-castable</a></li><li class="chapter-item expanded "><a href="0043-rename-reset-to-init.html">0043-rename-reset-to-init</a></li><li class="chapter-item expanded "><a href="0045-lib-memory.html">0045-lib-memory</a></li><li class="chapter-item expanded "><a href="0046-shape-range-1.html">0046-shape-range-1</a></li><li class="chapter-item expanded "><a href="0049-soc-gpio-peripheral.html">0049-soc-gpio-peripheral</a></li><li class="chapter-item expanded "><a href="0050-print.html">0050-print</a></li><li class="chapter-item expanded "><a href="0051-const-from-bits.html">0051-const-from-bits</a></li><li class="chapter-item expanded "><a href="0053-ioport.html">0053-ioport</a></li><li class="chapter-item expanded "><a href="0054-read-port-init.html" class="active">0054-read-port-init</a></li><li class="chapter-item expanded "><a href="0055-lib-io.html">0055-lib-io</a></li><li class="chapter-item expanded "><a href="0056-mem-wide.html">0056-mem-wide</a></li><li class="chapter-item expanded "><a href="0057-single-field-shortcut.html">0057-single-field-shortcut</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -146,43 +146,58 @@
                 <div id="content" class="content">
                     <main>
                         <ul>
-<li>Start Date: 2024-02-05</li>
-<li>RFC PR: <a href="https://github.com/amaranth-lang/rfcs/pull/46">amaranth-lang/rfcs#46</a></li>
-<li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/1081">amaranth-lang/amaranth#1081</a></li>
+<li>Start Date: 2024-03-18</li>
+<li>RFC PR: <a href="https://github.com/amaranth-lang/rfcs/pull/54">amaranth-lang/rfcs#54</a></li>
+<li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/1212">amaranth-lang/amaranth#1212</a></li>
 </ul>
-<h1 id="change-shapecastrange1-to-unsigned0"><a class="header" href="#change-shapecastrange1-to-unsigned0">Change <code>Shape.cast(range(1))</code> to <code>unsigned(0)</code></a></h1>
+<h1 id="initial-and-reset-values-on-memory-read-ports"><a class="header" href="#initial-and-reset-values-on-memory-read-ports">Initial and reset values on memory read ports</a></h1>
 <h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
-<p>Change <code>Shape.cast(range(1))</code> to return <code>unsigned(0)</code> instead of <code>unsigned(1)</code>.</p>
+<p>Synchronous memory read ports get initial values, just like <code>Signal</code>s.</p>
 <h2 id="motivation"><a class="header" href="#motivation">Motivation</a></h2>
-<p>Currently, <code>Shape.cast(range(1))</code> returns <code>unsigned(1)</code>. This is inconsistent with the expectation that casting <code>range</code> to a shape will return the minimal shape capable of representing all elements of that range, which is clearly <code>unsigned(0)</code>.</p>
-<p>This behavior is an accidental result of using <code>bits_for</code> internally to determine required width for both endpoints, which returns <code>1</code> for an input of <code>0</code>.</p>
-<p>The behavior introduces edge cases in unexpected places. For example, one may expect that <code>Memory(depth=depth).read_port().addr.width == ceil_log2(depth)</code>. This is currently false for <code>depth</code> of 1 for no particularly good reason.</p>
+<p>Currently, the initial state of synchronous memory read port's data output is undefined in synthesis, making it one of the very few places in Amaranth where an undefined value can be obtained, and an unexpected one at that. This also cannot be caught with pysim, as it initializes all read ports to 0. This is easily fixable on almost all FPGA targets, as almost all FPGAs have well-defined initial values.</p>
+<p>Further, the read ports on almost all FPGA targets also support a reset signal, which is currently not exposed in any way in Amaranth.</p>
+<p>The hardware capabilities for yosys-supported targets are as follows:</p>
+<ul>
+<li>Xilinx BRAM: arbitrary initial and reset values, reset can be sync or async (except for very old FPGAs that have sync reset only)</li>
+<li>Lattice, Anlogic, Gowin BRAM; Xilinx URAM, Nexus LRAM: always-zero initial and reset value, reset can be sync or async</li>
+<li>Efinix, iCE40, Gatemate BRAM; iCE40 SPRAM: undefined initial value, no reset</li>
+<li>LUT RAM on any target: full support (uses a normal FF to create a sync read port)</li>
+</ul>
+<p>Additionally, on any platform where requested initial value or reset is not natively supported by hardware, yosys will insert a FF and a mux to make it work regardless.</p>
+<p>This RFC thus proposes to:</p>
+<ul>
+<li>close the expressiveness hole, making use of the hardware features where supported, using emulation otherwise</li>
+<li>get rid of the undefined behavior</li>
+</ul>
 <h2 id="guide-level-explanation"><a class="header" href="#guide-level-explanation">Guide-level explanation</a></h2>
-<p><code>Shape.cast(range(1))</code> is changed to return <code>unsigned(0)</code>. The same applies to any other range whose only element is <code>0</code>, like <code>Shape.cast(range(0, 2, 2))</code>.</p>
-<p>Arguably, this change requires a negative amount of exlanation, since it removes an edge case and brings the behavior into alignment with the language reference.</p>
+<p>Synchronous memory read ports behave in most respects like <code>Signal</code>s driven from a synchronous clock domain. As such, they have an initial value that can be set via <code>init=</code> on the constructor:</p>
+<pre><code class="language-py">mem = Memory(shape=unsigned(8), depth=8, init=[])
+rp = mem.read_port(domain=&quot;sync&quot;, init=13)
+</code></pre>
+<p>The read port's <code>data</code> signal will hold the initial value at startup and whenever a domain reset occurs. Additionally, as for <code>Signal</code>, <code>reset_less=True</code> can be specified to make the port not react to the domain reset.</p>
 <h2 id="reference-level-explanation"><a class="header" href="#reference-level-explanation">Reference-level explanation</a></h2>
-<p>See above.</p>
+<p><code>lib.memory.Memory.read_port</code> and <code>lib.memory.ReadPort</code> get two new keyword-only arguments: <code>init=None</code> and <code>reset_less=False</code>. For synchronous read ports, they effectively have the same behavior as they have on <code>Signal</code> when applied to <code>port.data</code>. They become introspectable attributes on the port. If the port has <code>comb</code> domain, they cannot be changed from their default values and are meaningless.</p>
+<p><code>hdl.MemoryInstance.read_port</code> likewise gets two new keyword-only arguments: <code>init=0</code> and <code>reset_less=False</code>. <code>init</code> must be an integer.</p>
 <h2 id="drawbacks"><a class="header" href="#drawbacks">Drawbacks</a></h2>
-<p>This is a minor backwards compatibility hazard.</p>
+<p>This is not natively supported by <em>all</em> FPGAs. While it can be reasonably cheaply emulated, in the author's experience, any amount of emulation circuitry inserted automatically by the toolchain to ensure well-defined behavior results solely in complaints.</p>
 <h2 id="rationale-and-alternatives"><a class="header" href="#rationale-and-alternatives">Rationale and alternatives</a></h2>
-<p>The change itself is simple enough that it cannot really be done any other way.</p>
-<p>It would be possible to introduce a compatibility warning to the 0.4 branch. However, a <code>range()</code> signal having a shape that's slightly too large is unlikely to cause problems in the first place, so the warning would cause a mass of false positives without a nice way to turn it off.</p>
+<p>An alternative is to put <code>init</code> and <code>reset_less</code> on the signature and on the <code>port.data</code> signal instead of on the read port. However, <code>reset_less</code> is currently not supported by <code>lib.wiring</code>, and <code>is_compliant</code> will reject any signal with <code>reset_less=True</code>. This could be changed by a simple amendment to RFC 2.</p>
 <h2 id="prior-art"><a class="header" href="#prior-art">Prior art</a></h2>
-<p>None.</p>
+<p>None, or rather obvious enough.</p>
 <h2 id="unresolved-questions"><a class="header" href="#unresolved-questions">Unresolved questions</a></h2>
 <p>None.</p>
 <h2 id="future-possibilities"><a class="header" href="#future-possibilities">Future possibilities</a></h2>
-<p>The <code>bits_for</code> function, which led to this issue in the first place, could be deprecated and removed from public interface to avoid introducing similar problems to external code. Otherwise, it should at the very least be documented and loudly call out this special case.</p>
+<p>A way to explicitly request undefined initial value could be added in the future, once undefined values are a well-defined concept in Amaranth.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="0045-lib-memory.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="0053-ioport.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="0049-soc-gpio-peripheral.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="0055-lib-io.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -192,11 +207,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="0045-lib-memory.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="0053-ioport.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="0049-soc-gpio-peripheral.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="0055-lib-io.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
