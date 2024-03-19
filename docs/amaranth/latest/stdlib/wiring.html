@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Interfaces and connections &mdash; Amaranth language &amp; toolchain 0.5.0.dev167 documentation</title>
+  <title>Interfaces and connections &mdash; Amaranth language &amp; toolchain 0.5.0.dev168 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/platformpicker.css" type="text/css" />
@@ -15,7 +15,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=1a1fb2b2"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=f2051170"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="../_static/platformpicker.js"></script>
@@ -39,7 +39,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.5.0.dev167+gd6bf47d
+                0.5.0.dev168+g2569886
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -570,7 +570,7 @@ data flow carries data from an <cite>initiator</cite> to a <cite>responder</cite
 describes the initiator <cite>driving</cite> the signal and the responder <cite>sampling</cite> the signal.</p>
 <p>When used as the flow of a signature <a class="reference internal" href="#amaranth.lib.wiring.Member" title="amaranth.lib.wiring.Member"><code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code></a>, indicates that the data flow of
 the port members of the inner signature <cite>remains the same</cite>.</p>
-<p>When included in the <code class="docutils literal notranslate"><span class="pre">signature</span></code> property of an <code class="xref py py-class docutils literal notranslate"><span class="pre">Elaboratable</span></code>, the signature
+<p>When included in the <code class="code highlight py python docutils literal highlight-python"><span class="n">signature</span></code> property of an <code class="xref py py-class docutils literal notranslate"><span class="pre">Elaboratable</span></code>, the signature
 describes the elaboratable <cite>driving</cite> the corresponding signal. That is, the elaboratable is
 treated as the <cite>initiator</cite>.</p>
 </dd></dl>
@@ -584,7 +584,7 @@ data flow carries data from an <cite>responder</cite> to a <cite>initiator</cite
 describes the initiator <cite>sampling</cite> the signal and the responder <cite>driving</cite> the signal.</p>
 <p>When used as the flow of a signature <a class="reference internal" href="#amaranth.lib.wiring.Member" title="amaranth.lib.wiring.Member"><code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code></a>, indicates that the data flow of
 the port members of the inner signature <cite>is flipped</cite>.</p>
-<p>When included in the <code class="docutils literal notranslate"><span class="pre">signature</span></code> property of an <code class="xref py py-class docutils literal notranslate"><span class="pre">Elaboratable</span></code>, the signature
+<p>When included in the <code class="code highlight py python docutils literal highlight-python"><span class="n">signature</span></code> property of an <code class="xref py py-class docutils literal notranslate"><span class="pre">Elaboratable</span></code>, the signature
 describes the elaboratable <cite>sampling</cite> the corresponding signal. That is, the elaboratable is
 treated as the <cite>initiator</cite>, the same as in the <a class="reference internal" href="#amaranth.lib.wiring.Out" title="amaranth.lib.wiring.Out"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Out</span></code></a> case.</p>
 </dd></dl>
@@ -645,7 +645,7 @@ object (in which case it is created as a port member). After creation the <a cla
 instance cannot be modified.</p>
 <p>When a <code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code> is created from a description of a port member, the signal’s initial value
 is taken from the member description. If this signal is never explicitly assigned a value, it
-will equal <code class="docutils literal notranslate"><span class="pre">init</span></code>.</p>
+will equal <code class="code highlight py python docutils literal highlight-python"><span class="n">init</span></code>.</p>
 <p>Although instances can be created directly, most often they will be created through
 <a class="reference internal" href="#amaranth.lib.wiring.In" title="amaranth.lib.wiring.In"><code class="xref py py-data docutils literal notranslate"><span class="pre">In</span></code></a> and <a class="reference internal" href="#amaranth.lib.wiring.Out" title="amaranth.lib.wiring.Out"><code class="xref py py-data docutils literal notranslate"><span class="pre">Out</span></code></a>, e.g. <code class="code highlight py python docutils literal highlight-python"><span class="n">In</span><span class="p">(</span><span class="n">unsigned</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span></code> or <code class="code highlight py python docutils literal highlight-python"><span class="n">Out</span><span class="p">(</span><span class="n">stream</span><span class="o">.</span><span class="n">Signature</span><span class="p">(</span><span class="n">RGBPixel</span><span class="p">))</span></code>.</p>
 <dl class="py method">
@@ -1117,7 +1117,7 @@ object for compliance with the signature.</p>
 <p>It verifies that:</p>
 <ul class="simple">
 <li><p><code class="code highlight py python docutils literal highlight-python"><span class="n">obj</span></code> has a <code class="code highlight py python docutils literal highlight-python"><span class="n">signature</span></code> attribute whose value a <a class="reference internal" href="#amaranth.lib.wiring.Signature" title="amaranth.lib.wiring.Signature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Signature</span></code></a> instance
-such that <code class="docutils literal notranslate"><span class="pre">self</span> <span class="pre">==</span> <span class="pre">obj.signature</span></code>;</p></li>
+such that <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span> <span class="o">==</span> <span class="n">obj</span><span class="o">.</span><span class="n">signature</span></code>;</p></li>
 <li><p>for each member, <code class="code highlight py python docutils literal highlight-python"><span class="n">obj</span></code> has an attribute with the same name, whose value:</p>
 <ul>
 <li><p>for members with <a class="reference internal" href="#amaranth.lib.wiring.Member.dimensions" title="amaranth.lib.wiring.Member.dimensions"><code class="xref py py-meth docutils literal notranslate"><span class="pre">dimensions</span></code></a> specified, contains a list or
@@ -1258,7 +1258,7 @@ method’s <code class="code highlight py python docutils literal highlight-pyth
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.lib.wiring.FlippedSignature.__setattr__">
 <span class="sig-name descname"><span class="pre">__setattr__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.wiring.FlippedSignature.__setattr__" title="Permalink to this definition"></a></dt>
-<dd><p>Assigns attribute <code class="code highlight py python docutils literal highlight-python"><span class="n">name</span></code> of the unflipped signature to <code class="docutils literal notranslate"><span class="pre">value</span></code>.</p>
+<dd><p>Assigns attribute <code class="code highlight py python docutils literal highlight-python"><span class="n">name</span></code> of the unflipped signature to <code class="code highlight py python docutils literal highlight-python"><span class="n">value</span></code>.</p>
 <p>Performs <code class="code highlight py python docutils literal highlight-python"><span class="nb">setattr</span><span class="p">(</span><span class="n">unflipped</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></code>, ensuring that, if <code class="code highlight py python docutils literal highlight-python"><span class="n">name</span></code> refers to
 a property setter, its <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span></code> argument receives the flipped signature.</p>
 </dd></dl>
@@ -1433,7 +1433,7 @@ the <em>unflipped</em> interface, as usual.</p></li>
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.lib.wiring.FlippedInterface.__setattr__">
 <span class="sig-name descname"><span class="pre">__setattr__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.wiring.FlippedInterface.__setattr__" title="Permalink to this definition"></a></dt>
-<dd><p>Assigns attribute <code class="code highlight py python docutils literal highlight-python"><span class="n">name</span></code> of the unflipped interface to <code class="docutils literal notranslate"><span class="pre">value</span></code>.</p>
+<dd><p>Assigns attribute <code class="code highlight py python docutils literal highlight-python"><span class="n">name</span></code> of the unflipped interface to <code class="code highlight py python docutils literal highlight-python"><span class="n">value</span></code>.</p>
 <p>Performs <code class="code highlight py python docutils literal highlight-python"><span class="nb">setattr</span><span class="p">(</span><span class="n">unflipped</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></code>, with the following caveats:</p>
 <ol class="arabic simple">
 <li><p>If <code class="code highlight py python docutils literal highlight-python"><span class="n">name</span></code> refers to a signature member, the assigned interface object is flipped.</p></li>
