@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Index &mdash; Amaranth language &amp; toolchain 0.5.0.dev166 documentation</title>
+  <title>Index &mdash; Amaranth language &amp; toolchain 0.5.0.dev167 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
@@ -14,7 +14,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=be6736ab"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=1a1fb2b2"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/platformpicker.js"></script>
@@ -36,7 +36,7 @@
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.5.0.dev166+g598cf8d
+                0.5.0.dev167+gd6bf47d
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -164,9 +164,11 @@
 </li>
       <li><a href="reference.html#amaranth.hdl.Value.__ge__">__ge__() (amaranth.hdl.Value method)</a>
 </li>
-      <li><a href="stdlib/data.html#amaranth.lib.data.View.__getattr__">__getattr__() (amaranth.lib.data.View method)</a>
+      <li><a href="stdlib/data.html#amaranth.lib.data.Const.__getattr__">__getattr__() (amaranth.lib.data.Const method)</a>
 
       <ul>
+        <li><a href="stdlib/data.html#amaranth.lib.data.View.__getattr__">(amaranth.lib.data.View method)</a>
+</li>
         <li><a href="stdlib/wiring.html#amaranth.lib.wiring.FlippedInterface.__getattr__">(amaranth.lib.wiring.FlippedInterface method)</a>
 </li>
         <li><a href="stdlib/wiring.html#amaranth.lib.wiring.FlippedSignature.__getattr__">(amaranth.lib.wiring.FlippedSignature method)</a>
@@ -175,6 +177,8 @@
       <li><a href="reference.html#amaranth.hdl.Value.__getitem__">__getitem__() (amaranth.hdl.Value method)</a>
 
       <ul>
+        <li><a href="stdlib/data.html#amaranth.lib.data.Const.__getitem__">(amaranth.lib.data.Const method)</a>
+</li>
         <li><a href="stdlib/data.html#amaranth.lib.data.Layout.__getitem__">(amaranth.lib.data.Layout method)</a>
 </li>
         <li><a href="stdlib/data.html#amaranth.lib.data.View.__getitem__">(amaranth.lib.data.View method)</a>
@@ -192,10 +196,10 @@
         <li><a href="stdlib/wiring.html#amaranth.lib.wiring.PureInterface.__init__">(amaranth.lib.wiring.PureInterface method)</a>
 </li>
       </ul></li>
-      <li><a href="stdlib/wiring.html#amaranth.lib.wiring.SignatureMeta.__instancecheck__">__instancecheck__() (amaranth.lib.wiring.SignatureMeta method)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="stdlib/wiring.html#amaranth.lib.wiring.SignatureMeta.__instancecheck__">__instancecheck__() (amaranth.lib.wiring.SignatureMeta method)</a>
+</li>
       <li><a href="reference.html#amaranth.hdl.Value.__invert__">__invert__() (amaranth.hdl.Value method)</a>
 
       <ul>
@@ -378,6 +382,8 @@
 </li>
       <li><a href="stdlib/data.html#amaranth.lib.data.ArrayLayout">ArrayLayout (class in amaranth.lib.data)</a>
 </li>
+      <li><a href="stdlib/data.html#amaranth.lib.data.Const.as_bits">as_bits() (amaranth.lib.data.Const method)</a>
+</li>
       <li><a href="reference.html#amaranth.hdl.ShapeCastable.as_shape">as_shape() (amaranth.hdl.ShapeCastable method)</a>
 
       <ul>
@@ -393,6 +399,8 @@
       <li><a href="reference.html#amaranth.hdl.ValueCastable.as_value">as_value() (amaranth.hdl.ValueCastable method)</a>
 
       <ul>
+        <li><a href="stdlib/data.html#amaranth.lib.data.Const.as_value">(amaranth.lib.data.Const method)</a>
+</li>
         <li><a href="stdlib/data.html#amaranth.lib.data.View.as_value">(amaranth.lib.data.View method)</a>
 </li>
         <li><a href="stdlib/enum.html#amaranth.lib.enum.EnumView.as_value">(amaranth.lib.enum.EnumView method)</a>
@@ -437,6 +445,8 @@
       <li><a href="stdlib/wiring.html#amaranth.lib.wiring.connect">connect() (in module amaranth.lib.wiring)</a>
 </li>
       <li><a href="stdlib/wiring.html#amaranth.lib.wiring.ConnectionError">ConnectionError</a>
+</li>
+      <li><a href="stdlib/data.html#amaranth.lib.data.Const">Const (class in amaranth.lib.data)</a>
 </li>
       <li><a href="reference.html#amaranth.hdl.ShapeCastable.const">const() (amaranth.hdl.ShapeCastable method)</a>
 
@@ -860,6 +870,14 @@
 </li>
       <li><a href="stdlib/wiring.html#amaranth.lib.wiring.Flow">Flow (class in amaranth.lib.wiring)</a>
 </li>
+      <li><a href="reference.html#amaranth.hdl.ShapeCastable.from_bits">from_bits() (amaranth.hdl.ShapeCastable method)</a>
+
+      <ul>
+        <li><a href="stdlib/data.html#amaranth.lib.data.Layout.from_bits">(amaranth.lib.data.Layout method)</a>
+</li>
+        <li><a href="stdlib/enum.html#amaranth.lib.enum.EnumMeta.from_bits">(amaranth.lib.enum.EnumMeta method)</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -1029,6 +1047,8 @@
 
       <ul>
         <li><a href="reference.html#amaranth.hdl.ValueCastable.shape">(amaranth.hdl.ValueCastable method)</a>
+</li>
+        <li><a href="stdlib/data.html#amaranth.lib.data.Const.shape">(amaranth.lib.data.Const method)</a>
 </li>
         <li><a href="stdlib/data.html#amaranth.lib.data.View.shape">(amaranth.lib.data.View method)</a>
 </li>

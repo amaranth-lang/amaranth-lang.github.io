@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Enumerations &mdash; Amaranth language &amp; toolchain 0.5.0.dev166 documentation</title>
+  <title>Enumerations &mdash; Amaranth language &amp; toolchain 0.5.0.dev167 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/platformpicker.css" type="text/css" />
@@ -15,7 +15,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=be6736ab"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=1a1fb2b2"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="../_static/platformpicker.js"></script>
@@ -39,7 +39,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.5.0.dev166+g598cf8d
+                0.5.0.dev167+gd6bf47d
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -275,6 +275,35 @@ the result will usually be an instance of the return type of <a class="reference
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.12)"><strong>Exception</strong></a> – When the conversion cannot be done. This exception must be propagated by callers,
     either directly or as a cause of another exception. While not constrained here,
     usually the exception class will be <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.12)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.12)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="amaranth.lib.enum.EnumMeta.from_bits">
+<span class="sig-name descname"><span class="pre">from_bits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bits</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.enum.EnumMeta.from_bits" title="Permalink to this definition"></a></dt>
+<dd><p>Lift a bit pattern to a higher-level representation.</p>
+<p>This method is called by the Amaranth language to lift <code class="code highlight py python docutils literal highlight-python"><span class="n">raw</span></code>, which is an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>,
+to a higher-level representation, which may be any object accepted by <a class="reference internal" href="#amaranth.lib.enum.EnumMeta.const" title="amaranth.lib.enum.EnumMeta.const"><code class="xref py py-meth docutils literal notranslate"><span class="pre">const()</span></code></a>.
+Most importantly, the simulator calls this method when the value of a shape-castable
+object is retrieved.</p>
+<p>For any valid bit pattern <code class="code highlight py python docutils literal highlight-python"><span class="n">raw</span></code>, the following condition must hold:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Const</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">const</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">from_bits</span><span class="p">(</span><span class="n">raw</span><span class="p">)))</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="n">raw</span>
+</pre></div>
+</div>
+<p>While <a class="reference internal" href="#amaranth.lib.enum.EnumMeta.const" title="amaranth.lib.enum.EnumMeta.const"><code class="xref py py-meth docutils literal notranslate"><span class="pre">const()</span></code></a> will usually return an Amaranth value or a custom value-castable
+object that is convenient to use while constructing the design, this method will usually
+return a Python object that is convenient to use while simulating the design. While not
+constrained here, these objects should have the same type whenever feasible.</p>
+<p>This method may also be called by code that is not a part of the Amaranth language.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>unspecified type</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.12)"><strong>Exception</strong></a> – When the bit pattern isn’t valid. This exception must be propagated by callers,
+    either directly or as a cause of another exception. While not constrained here,
+    usually the exception class will be <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.12)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>.</p>
 </dd>
 </dl>
 </dd></dl>
