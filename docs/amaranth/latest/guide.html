@@ -1,21 +1,23 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Language guide &mdash; Amaranth language &amp; toolchain 0.5.0.dev174 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
-      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  <title>Language guide &mdash; Amaranth language &amp; toolchain 0.5.0.dev183 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/platformpicker.css" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=87fc4a05" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=4928e89c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f723c16e"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/platformpicker.js"></script>
@@ -39,7 +41,7 @@
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.5.0.dev174+g8861b8a
+                0.5.0.dev183+g6ce8284
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -638,16 +640,16 @@ This happens because, being empty, it does not contain any negative values.</p>
 </tbody>
 </table>
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="opb1" role="note">
+<aside class="footnote brackets" id="opb1" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
 <p>Logical and arithmetic right shift of an unsigned value are equivalent. Logical right shift of a signed value can be expressed by <a class="reference internal" href="#lang-convops"><span class="std std-ref">converting it to unsigned</span></a> first.</p>
 </aside>
-<aside class="footnote brackets" id="opb2" role="note">
+<aside class="footnote brackets" id="opb2" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id2">1</a>,<a role="doc-backlink" href="#id3">2</a>)</span>
 <p>Shift amount must be unsigned; integer shifts in Python require the amount to be positive.</p>
 </aside>
-<aside class="footnote brackets" id="opb3" role="note">
+<aside class="footnote brackets" id="opb3" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id4">1</a>,<a role="doc-backlink" href="#id5">2</a>,<a role="doc-backlink" href="#id6">3</a>,<a role="doc-backlink" href="#id7">4</a>)</span>
 <p>Shift and rotate amounts can be negative, in which case the direction is reversed.</p>
@@ -695,12 +697,12 @@ This happens because, being empty, it does not contain any negative values.</p>
 </tbody>
 </table>
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="opr1" role="note">
+<aside class="footnote brackets" id="opr1" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id8">1</a>,<a role="doc-backlink" href="#id9">2</a>)</span>
 <p>Conceptually the same as applying the Python <a class="reference external" href="https://docs.python.org/3/library/functions.html#all" title="(in Python v3.12)"><code class="xref py py-func docutils literal notranslate"><span class="pre">all()</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/functions.html#any" title="(in Python v3.12)"><code class="xref py py-func docutils literal notranslate"><span class="pre">any()</span></code></a> function to the value viewed as a collection of bits.</p>
 </aside>
-<aside class="footnote brackets" id="opr2" role="note">
+<aside class="footnote brackets" id="opr2" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">5</a><span class="fn-bracket">]</span></span>
 <p>Conceptually the same as applying the Python <code class="xref py py-func docutils literal notranslate"><span class="pre">bool()</span></code> function to the value viewed as an integer.</p>
 </aside>
@@ -826,15 +828,15 @@ This happens because, being empty, it does not contain any negative values.</p>
 </tbody>
 </table>
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="ops1" role="note">
+<aside class="footnote brackets" id="ops1" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id11">6</a><span class="fn-bracket">]</span></span>
 <p>Words “length” and “width” have the same meaning when talking about Amaranth values. Conventionally, “width” is used.</p>
 </aside>
-<aside class="footnote brackets" id="ops2" role="note">
+<aside class="footnote brackets" id="ops2" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id12">7</a><span class="fn-bracket">]</span></span>
 <p>All variations of the Python slice notation are supported, including “extended slicing”. E.g. all of <code class="code highlight py python docutils literal highlight-python"><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></code>, <code class="code highlight py python docutils literal highlight-python"><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">9</span><span class="p">]</span></code>, <code class="code highlight py python docutils literal highlight-python"><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span></code>, <code class="code highlight py python docutils literal highlight-python"><span class="n">a</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span></code>, <code class="code highlight py python docutils literal highlight-python"><span class="n">a</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></code>, <code class="code highlight py python docutils literal highlight-python"><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">8</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span></code> select bits in the same way as other Python sequence types select their elements.</p>
 </aside>
-<aside class="footnote brackets" id="ops3" role="note">
+<aside class="footnote brackets" id="ops3" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id13">8</a><span class="fn-bracket">]</span></span>
 <p>In the concatenated value, <code class="code highlight py python docutils literal highlight-python"><span class="n">a</span></code> occupies the least significant bits, and <code class="code highlight py python docutils literal highlight-python"><span class="n">b</span></code> the most significant bits. Any number of arguments (zero, one, two, or more) are supported.</p>
 </aside>
@@ -1541,19 +1543,19 @@ inside `Else`
 </tbody>
 </table>
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="iops1" role="note">
+<aside class="footnote brackets" id="iops1" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id14">9</a><span class="fn-bracket">]</span></span>
 <p>Words “length” and “width” have the same meaning when talking about Amaranth I/O values. Conventionally, “width” is used.</p>
 </aside>
-<aside class="footnote brackets" id="iops2" role="note">
+<aside class="footnote brackets" id="iops2" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id15">10</a><span class="fn-bracket">]</span></span>
 <p>All variations of the Python slice notation are supported, including “extended slicing”. E.g. all of <code class="code highlight py python docutils literal highlight-python"><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></code>, <code class="code highlight py python docutils literal highlight-python"><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">9</span><span class="p">]</span></code>, <code class="code highlight py python docutils literal highlight-python"><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span></code>, <code class="code highlight py python docutils literal highlight-python"><span class="n">a</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span></code>, <code class="code highlight py python docutils literal highlight-python"><span class="n">a</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></code>, <code class="code highlight py python docutils literal highlight-python"><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">8</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span></code> select wires in the same way as other Python sequence types select their elements.</p>
 </aside>
-<aside class="footnote brackets" id="iops3" role="note">
+<aside class="footnote brackets" id="iops3" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id16">11</a><span class="fn-bracket">]</span></span>
 <p>In the concatenated value, <code class="code highlight py python docutils literal highlight-python"><span class="n">a</span></code> occupies the lower indices and <code class="code highlight py python docutils literal highlight-python"><span class="n">b</span></code> the higher indices. Any number of arguments (zero, one, two, or more) are supported.</p>
 </aside>
-<aside class="footnote brackets" id="iops4" role="note">
+<aside class="footnote brackets" id="iops4" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id17">12</a><span class="fn-bracket">]</span></span>
 <p>Concatenation of zero arguments, <code class="code highlight py python docutils literal highlight-python"><span class="n">Cat</span><span class="p">()</span></code>, returns a 0-bit regular value, however any such value is accepted (and ignored) anywhere an I/O value is expected.</p>
 </aside>

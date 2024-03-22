@@ -1,21 +1,23 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Code conversion &mdash; Amaranth language &amp; toolchain 0.5.0.dev174 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/platformpicker.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  <title>Code conversion &mdash; Amaranth language &amp; toolchain 0.5.0.dev183 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=87fc4a05" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=4928e89c"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=f723c16e"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="../_static/platformpicker.js"></script>
@@ -39,7 +41,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.5.0.dev174+g8861b8a
+                0.5.0.dev183+g6ce8284
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -61,7 +63,7 @@
 <li class="toctree-l3"><a class="reference internal" href="enum.html">Enumerations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="data.html">Data structures</a></li>
 <li class="toctree-l3"><a class="reference internal" href="wiring.html">Interfaces and connections</a></li>
-<li class="toctree-l3"><a class="reference internal" href="memory.html">Memories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="memory.html">Memory arrays</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cdc.html">Clock domain crossing</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Code conversion</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#one-hot-coding">One-hot coding</a></li>
@@ -123,11 +125,11 @@ Otherwise, <code class="docutils literal notranslate"><span class="pre">n</span>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Bit width of the input</p>
 </dd>
-<dt class="field-even">Variables<span class="colon">:</span></dt>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>i</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>in</em>) – One-hot input.</p></li>
-<li><p><strong>o</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.12)"><em>range</em></a><em>(</em><em>width</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Encoded natural binary.</p></li>
-<li><p><strong>n</strong> (<em>Signal</em><em>, </em><em>out</em>) – Invalid: either none or multiple input bits are asserted.</p></li>
+<li><p><strong>i</strong> (<em>Signal(width), in</em>) – One-hot input.</p></li>
+<li><p><strong>o</strong> (<em>Signal(range(width)), out</em>) – Encoded natural binary.</p></li>
+<li><p><strong>n</strong> (<em>Signal, out</em>) – Invalid: either none or multiple input bits are asserted.</p></li>
 </ul>
 </dd>
 </dl>
@@ -143,11 +145,11 @@ If <code class="docutils literal notranslate"><span class="pre">n</span></code> 
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Bit width of the output.</p>
 </dd>
-<dt class="field-even">Variables<span class="colon">:</span></dt>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>i</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.12)"><em>range</em></a><em>(</em><em>width</em><em>)</em><em>)</em><em>, </em><em>in</em>) – Input binary.</p></li>
-<li><p><strong>o</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>out</em>) – Decoded one-hot.</p></li>
-<li><p><strong>n</strong> (<em>Signal</em><em>, </em><em>in</em>) – Invalid, no output bits are to be asserted.</p></li>
+<li><p><strong>i</strong> (<em>Signal(range(width)), in</em>) – Input binary.</p></li>
+<li><p><strong>o</strong> (<em>Signal(width), out</em>) – Decoded one-hot.</p></li>
+<li><p><strong>n</strong> (<em>Signal, in</em>) – Invalid, no output bits are to be asserted.</p></li>
 </ul>
 </dd>
 </dl>
@@ -167,11 +169,11 @@ Otherwise, <code class="docutils literal notranslate"><span class="pre">n</span>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Bit width of the input.</p>
 </dd>
-<dt class="field-even">Variables<span class="colon">:</span></dt>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>i</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>in</em>) – Input requests.</p></li>
-<li><p><strong>o</strong> (<em>Signal</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.12)"><em>range</em></a><em>(</em><em>width</em><em>)</em><em>)</em><em>, </em><em>out</em>) – Encoded natural binary.</p></li>
-<li><p><strong>n</strong> (<em>Signal</em><em>, </em><em>out</em>) – Invalid: no input bits are asserted.</p></li>
+<li><p><strong>i</strong> (<em>Signal(width), in</em>) – Input requests.</p></li>
+<li><p><strong>o</strong> (<em>Signal(range(width)), out</em>) – Encoded natural binary.</p></li>
+<li><p><strong>n</strong> (<em>Signal, out</em>) – Invalid: no input bits are asserted.</p></li>
 </ul>
 </dd>
 </dl>
@@ -195,10 +197,10 @@ Otherwise, <code class="docutils literal notranslate"><span class="pre">n</span>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Bit width.</p>
 </dd>
-<dt class="field-even">Variables<span class="colon">:</span></dt>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>i</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>in</em>) – Natural binary input.</p></li>
-<li><p><strong>o</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>out</em>) – Encoded Gray code.</p></li>
+<li><p><strong>i</strong> (<em>Signal(width), in</em>) – Natural binary input.</p></li>
+<li><p><strong>o</strong> (<em>Signal(width), out</em>) – Encoded Gray code.</p></li>
 </ul>
 </dd>
 </dl>
@@ -212,10 +214,10 @@ Otherwise, <code class="docutils literal notranslate"><span class="pre">n</span>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Bit width.</p>
 </dd>
-<dt class="field-even">Variables<span class="colon">:</span></dt>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>i</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>in</em>) – Gray code input.</p></li>
-<li><p><strong>o</strong> (<em>Signal</em><em>(</em><em>width</em><em>)</em><em>, </em><em>out</em>) – Decoded natural binary.</p></li>
+<li><p><strong>i</strong> (<em>Signal(width), in</em>) – Gray code input.</p></li>
+<li><p><strong>o</strong> (<em>Signal(width), out</em>) – Decoded natural binary.</p></li>
 </ul>
 </dd>
 </dl>
