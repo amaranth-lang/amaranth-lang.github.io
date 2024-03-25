@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Memory arrays &mdash; Amaranth language &amp; toolchain 0.5.0.dev190 documentation</title>
+  <title>Memory arrays &mdash; Amaranth language &amp; toolchain 0.5.0.dev191 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
@@ -17,7 +17,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=a4149b40"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=006c1f59"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="../_static/platformpicker.js"></script>
@@ -41,7 +41,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.5.0.dev190+g3d5c36a
+                0.5.0.dev191+g6ffafef
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -197,7 +197,8 @@
 dimensions and initial contents using the <code class="code highlight py python docutils literal highlight-python"><span class="n">shape</span></code>, <code class="code highlight py python docutils literal highlight-python"><span class="n">depth</span></code>, and <code class="code highlight py python docutils literal highlight-python"><span class="n">init</span></code> parameters,
 and then adding memory ports using the <a class="reference internal" href="#amaranth.lib.memory.Memory.read_port" title="amaranth.lib.memory.Memory.read_port"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read_port()</span></code></a> and <a class="reference internal" href="#amaranth.lib.memory.Memory.write_port" title="amaranth.lib.memory.Memory.write_port"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write_port()</span></code></a> methods.
 Because it is mutable, it should be created and used locally within
-the <a class="reference internal" href="../guide.html#lang-elaboration"><span class="std std-ref">elaborate</span></a> method.</p>
+the <a class="reference internal" href="../guide.html#lang-elaboration"><span class="std std-ref">elaborate</span></a> method. It is an error to add ports to or change
+initial contents of a memory after it has been elaborated.</p>
 <p>The <code class="code highlight py python docutils literal highlight-python"><span class="n">init</span></code> parameter and assignment to the <code class="code highlight py python docutils literal highlight-python"><span class="n">init</span></code> attribute have the same effect, with
 <a class="reference internal" href="#amaranth.lib.memory.Memory.Init" title="amaranth.lib.memory.Memory.Init"><code class="xref py py-class docutils literal notranslate"><span class="pre">Memory.Init</span></code></a> converting elements of the iterable to match <code class="code highlight py python docutils literal highlight-python"><span class="n">shape</span></code> and using
 a default value for rows that are not explicitly initialized.</p>
