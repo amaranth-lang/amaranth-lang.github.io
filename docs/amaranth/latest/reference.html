@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Language reference &mdash; Amaranth language &amp; toolchain 0.5.0.dev189 documentation</title>
+  <title>Language reference &mdash; Amaranth language &amp; toolchain 0.5.0.dev190 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/platformpicker.css" />
@@ -17,7 +17,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=4730fc12"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=a4149b40"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/platformpicker.js"></script>
@@ -41,7 +41,7 @@
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.5.0.dev189+gcd51e02
+                0.5.0.dev190+g3d5c36a
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -433,7 +433,7 @@ domain-specific operations. It is possible to extend Amaranth in third-party cod
 value-castable objects, and the Amaranth standard library provides several built-in ones:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="stdlib/enum.html#module-amaranth.lib.enum" title="amaranth.lib.enum"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.enum</span></code></a> classes are a drop-in replacement for the standard Python
-<code class="xref py py-class docutils literal notranslate"><span class="pre">enum</span></code> classes that can be defined with an Amaranth shape;</p></li>
+<a class="reference external" href="https://docs.python.org/3/library/enum.html#module-enum" title="(in Python v3.12)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">enum</span></code></a> classes that can be defined with an Amaranth shape;</p></li>
 <li><p><a class="reference internal" href="stdlib/data.html#module-amaranth.lib.data" title="amaranth.lib.data"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.data</span></code></a> classes allow defining complex data structures such as structures
 and unions.</p></li>
 </ul>
@@ -1006,10 +1006,22 @@ been impossible.</p>
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__getitem__">
 <span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__getitem__" title="Permalink to this definition"></a></dt>
 <dd><p>Bit slicing.</p>
-<div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<p>Describe this operation.</p>
-</div>
+<p>Selects a constant-width, constant-offset part of <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span></code>. All three slicing syntaxes
+(<code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">]</span></code>, <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">j</span><span class="p">]</span></code>, and <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">j</span><span class="p">:</span><span class="n">k</span><span class="p">]</span></code>) as well as negative indices are
+supported. Like with other Python containers, out-of-bounds indices are trimmed to
+the bounds of <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span></code>.</p>
+<p>To select a variable-offset part of <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span></code>, use <a class="reference internal" href="#amaranth.hdl.Value.bit_select" title="amaranth.hdl.Value.bit_select"><code class="xref py py-meth docutils literal notranslate"><span class="pre">bit_select()</span></code></a> or
+<a class="reference internal" href="#amaranth.hdl.Value.word_select" title="amaranth.hdl.Value.word_select"><code class="xref py py-meth docutils literal notranslate"><span class="pre">word_select()</span></code></a> instead.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><a class="reference internal" href="#amaranth.hdl.Value" title="amaranth.hdl.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a>, <code class="code highlight py python docutils literal highlight-python"><span class="n">unsigned</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></code>, <a class="reference internal" href="guide.html#lang-assignable"><span class="std std-ref">assignable</span></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">key</span></code> is an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>.</p></li>
+<li><p><a class="reference internal" href="#amaranth.hdl.Value" title="amaranth.hdl.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a>, <code class="code highlight py python docutils literal highlight-python"><span class="n">unsigned</span><span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span></code>, <a class="reference internal" href="guide.html#lang-assignable"><span class="std std-ref">assignable</span></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">key</span></code> is a slice <code class="code highlight py python docutils literal highlight-python"><span class="n">i</span><span class="p">:</span><span class="n">j</span></code> where <code class="code highlight py python docutils literal highlight-python"><span class="n">i</span></code> and <code class="code highlight py python docutils literal highlight-python"><span class="n">j</span></code> are <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>s.</p></li>
+<li><p><a class="reference internal" href="#amaranth.hdl.Value" title="amaranth.hdl.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a>, <code class="code highlight py python docutils literal highlight-python"><span class="n">unsigned</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="o">*</span><span class="nb">slice</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span><span class="o">.</span><span class="n">indices</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)))))</span></code>, <a class="reference internal" href="guide.html#lang-assignable"><span class="std std-ref">assignable</span></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">key</span></code> is a slice <code class="code highlight py python docutils literal highlight-python"><span class="n">i</span><span class="p">:</span><span class="n">j</span><span class="p">:</span><span class="n">k</span></code> where <code class="code highlight py python docutils literal highlight-python"><span class="n">i</span></code>, <code class="code highlight py python docutils literal highlight-python"><span class="n">j</span></code>, and <code class="code highlight py python docutils literal highlight-python"><span class="n">k</span></code> are <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>s.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -1103,14 +1115,15 @@ this operation is equivalent to <code class="code highlight py python docutils l
 <dt class="sig sig-object py" id="amaranth.hdl.Value.matches">
 <span class="sig-name descname"><span class="pre">matches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">patterns</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.matches" title="Permalink to this definition"></a></dt>
 <dd><p>Pattern matching.</p>
-<p>Matches against a set of patterns, recognizing the same grammar as <code class="code highlight py python docutils literal highlight-python"><span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">Case</span><span class="p">()</span></code>.</p>
-<div class="admonition-todo admonition" id="id2">
-<p class="admonition-title">Todo</p>
-<p>Describe the pattern language in detail.</p>
-</div>
+<p>Matches against a set of patterns, recognizing the same grammar as <code class="code highlight py python docutils literal highlight-python"><span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">Case</span><span class="p">()</span></code>.
+The pattern syntax is described in the <a class="reference internal" href="guide.html#lang-matchop"><span class="std std-ref">language guide</span></a>.</p>
+<p>Each of the <code class="code highlight py python docutils literal highlight-python"><span class="n">patterns</span></code> may be a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> or a <a class="reference internal" href="guide.html#lang-constcasting"><span class="std std-ref">constant-castable object</span></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#amaranth.hdl.Value" title="amaranth.hdl.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a>, <code class="code highlight py python docutils literal highlight-python"><span class="n">unsigned</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></code></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#SyntaxError" title="(in Python v3.12)"><strong>SyntaxError</strong></a> – If a pattern has invalid syntax.</p>
 </dd>
 </dl>
 </dd></dl>
