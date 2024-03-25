@@ -1,0 +1,279 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>0062-memory-data - The Amaranth RFC Book</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="theme/img-color-scheme.css">
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li><li class="chapter-item expanded "><a href="0002-interfaces.html">0002-interfaces</a></li><li class="chapter-item expanded "><a href="0003-enumeration-shapes.html">0003-enumeration-shapes</a></li><li class="chapter-item expanded "><a href="0004-const-castable-exprs.html">0004-const-castable-exprs</a></li><li class="chapter-item expanded "><a href="0005-remove-const-normalize.html">0005-remove-const-normalize</a></li><li class="chapter-item expanded "><a href="0006-stdlib-crc.html">0006-stdlib-crc</a></li><li class="chapter-item expanded "><a href="0008-aggregate-extensibility.html">0008-aggregate-extensibility</a></li><li class="chapter-item expanded "><a href="0009-const-init-shape-castable.html">0009-const-init-shape-castable</a></li><li class="chapter-item expanded "><a href="0010-move-repl-to-value.html">0010-move-repl-to-value</a></li><li class="chapter-item expanded "><a href="0015-lifting-shape-castables.html">0015-lifting-shape-castables</a></li><li class="chapter-item expanded "><a href="0016-soc-csr-regs.html">0016-soc-csr-regs</a></li><li class="chapter-item expanded "><a href="0017-remove-log2-int.html">0017-remove-log2-int</a></li><li class="chapter-item expanded "><a href="0018-reorganize-vendor-platforms.html">0018-reorganize-vendor-platforms</a></li><li class="chapter-item expanded "><a href="0019-remove-scheduler.html">0019-remove-scheduler</a></li><li class="chapter-item expanded "><a href="0020-deprecate-non-fwft-fifos.html">0020-deprecate-non-fwft-fifos</a></li><li class="chapter-item expanded "><a href="0021-patch-releases.html">0021-patch-releases</a></li><li class="chapter-item expanded "><a href="0022-valuecastable-shape.html">0022-valuecastable-shape</a></li><li class="chapter-item expanded "><a href="0027-simulator-testbenches.html">0027-simulator-testbenches</a></li><li class="chapter-item expanded "><a href="0028-override-value-operators.html">0028-override-value-operators</a></li><li class="chapter-item expanded "><a href="0030-component-metadata.html">0030-component-metadata</a></li><li class="chapter-item expanded "><a href="0031-enumeration-type-safety.html">0031-enumeration-type-safety</a></li><li class="chapter-item expanded "><a href="0034-interface-rename.html">0034-interface-rename</a></li><li class="chapter-item expanded "><a href="0035-shapelike-valuelike.html">0035-shapelike-valuelike</a></li><li class="chapter-item expanded "><a href="0036-async-testbench-functions.html">0036-async-testbench-functions</a></li><li class="chapter-item expanded "><a href="0037-make-signature-immutable.html">0037-make-signature-immutable</a></li><li class="chapter-item expanded "><a href="0038-component-signature-immutability.html">0038-component-signature-immutability</a></li><li class="chapter-item expanded "><a href="0039-empty-case.html">0039-empty-case</a></li><li class="chapter-item expanded "><a href="0040-arbitrary-memory-shape.html">0040-arbitrary-memory-shape</a></li><li class="chapter-item expanded "><a href="0042-const-from-shape-castable.html">0042-const-from-shape-castable</a></li><li class="chapter-item expanded "><a href="0043-rename-reset-to-init.html">0043-rename-reset-to-init</a></li><li class="chapter-item expanded "><a href="0045-lib-memory.html">0045-lib-memory</a></li><li class="chapter-item expanded "><a href="0046-shape-range-1.html">0046-shape-range-1</a></li><li class="chapter-item expanded "><a href="0049-soc-gpio-peripheral.html">0049-soc-gpio-peripheral</a></li><li class="chapter-item expanded "><a href="0050-print.html">0050-print</a></li><li class="chapter-item expanded "><a href="0051-const-from-bits.html">0051-const-from-bits</a></li><li class="chapter-item expanded "><a href="0053-ioport.html">0053-ioport</a></li><li class="chapter-item expanded "><a href="0054-read-port-init.html">0054-read-port-init</a></li><li class="chapter-item expanded "><a href="0055-lib-io.html">0055-lib-io</a></li><li class="chapter-item expanded "><a href="0056-mem-wide.html">0056-mem-wide</a></li><li class="chapter-item expanded "><a href="0057-single-field-shortcut.html">0057-single-field-shortcut</a></li><li class="chapter-item expanded "><a href="0061-minimal-streams.html">0061-minimal-streams</a></li><li class="chapter-item expanded "><a href="0062-memory-data.html" class="active">0062-memory-data</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Amaranth RFC Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/amaranth-lang/rfcs" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <ul>
+<li>Start Date: 2024-03-25</li>
+<li>RFC PR: <a href="https://github.com/amaranth-lang/rfcs/pull/62">amaranth-lang/rfcs#62</a></li>
+<li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/1241">amaranth-lang/amaranth#1241</a></li>
+</ul>
+<h1 id="the-memorydata-class"><a class="header" href="#the-memorydata-class">The <code>MemoryData</code> class</a></h1>
+<h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
+<p>A new class, <code>amaranth.hdl.MemoryData</code>, is added to represent the data and identity of a memory. It is used to reference the memory in simulation.</p>
+<h2 id="motivation"><a class="header" href="#motivation">Motivation</a></h2>
+<p>It is commonly useful to access a memory in a simulation testbench without having to create a special port for it. This requires storing some kind of a reference to the memory on the elaboratables.</p>
+<p>Currently, the object used for this is of a private <code>MemoryIdentity</code> class. It is implicitly created by <code>lib.memory.Memory</code> constructor, and passed to the private <code>_MemorySim{Read|Write}</code> objects when <code>__getitem__</code> is called.  This has a few problems:</p>
+<ul>
+<li>the <code>Memory</code> needs to be instantiated in the constructor of the containing elaboratable; combined with its mutability and the occasional need to defer memory port creation to <code>elaborate</code>, this results in elaboratables that break when elaborated more than once</li>
+<li><code>amaranth.sim</code> currently requires a gross hack to recognize <code>Memory</code> objects in <code>traces</code></li>
+<li>occasionally, it is useful to have <code>Signal</code>s that are not included in the design proper, but are used to communicate between simulator processes; it could be likewise useful with memories, but it cannot work with the current code (since the <code>MemoryIdentity</code> that the simulator gets doesn't have enough information to actually create backing storage for the memory)</li>
+<li><code>MemoryIdentity</code> nor <code>MemoryInstance</code> don't contain information about the element shape, which would require further wrappers on <code>lib.Memory</code> to perform shape conversion in post-RFC 36 world</li>
+</ul>
+<p>The proposed <code>MemoryData</code> class:</p>
+<ul>
+<li>replaces <code>MemoryIdentity</code> and serves as the reference point for the simulator</li>
+<li>encapsulates the memory's shape, depth, and initial value (so the simulator can use it to create backing storage)</li>
+<li>in the common scenario, is created by the user in elaboratable constructor, stored as an attribute on the elaboratable, then passed to <code>Memory</code> constructor in <code>elaborate</code></li>
+</ul>
+<h2 id="guide-level-explanation"><a class="header" href="#guide-level-explanation">Guide-level explanation</a></h2>
+<p>If the memory is to be accessible in simulation, the code to create a memory changes from:</p>
+<pre><code class="language-py">m.submodules.memory = memory = Memory(shape=..., depth=..., init=...)
+port = memory.read_port(...)
+</code></pre>
+<p>to:</p>
+<pre><code class="language-py"># in __init__
+self.mem_data = MemoryData(shape=..., depth=..., init=...)
+# in elaborate
+m.submodules.memory = memory = Memory(self.mem_data)
+port = memory.read_port(...)
+</code></pre>
+<p>The <code>my_component.mem_data</code> object can then be used in simulation to read and write memory:</p>
+<pre><code class="language-py">addr = 0x1234
+row = sim.get(mem_data[addr])
+row += 1
+sim.set(mem_data[addr], row)
+</code></pre>
+<p>The old way of creating memories is still supported, though somewhat less flexible.</p>
+<h2 id="reference-level-explanation"><a class="header" href="#reference-level-explanation">Reference-level explanation</a></h2>
+<p>Two new classes are added:</p>
+<ul>
+<li><code>amaranth.hdl.MemoryData(*, shape: ShapeLike, depth: int, init: Iterable[int | Any], name=None)</code>: represents a memory's data storage. <code>name</code>, if not specified, defaults to the variable name used to store the <code>MemoryData</code>, like it does for <code>Signal</code>.
+<ul>
+<li><code>__getitem__(self, addr: int) -&gt; MemoryData._Row | ValueCastable</code>: creates a <code>MemoryData._Row</code> object; if <code>self.shape</code> is a <code>ShapeCastable</code>, the <code>MemoryData._Row</code> object constructed is immediately wrapped via <code>ShapeCastable.__call__</code></li>
+</ul>
+</li>
+<li><code>amaranth.hdl.MemoryData._Row</code> (subclass of <code>Value</code>): represents a single row of <code>MemoryData</code>, has no public constructor nor operations (other than ones derived from <code>Value</code>), can only be used in simulator processes and testbenches</li>
+</ul>
+<p>The <code>MemoryData</code> class allows access to its constructor arguments via read-only properties.</p>
+<p>The <code>lib.memory.Memory.Init</code> class is moved to <code>amaranth.hdl.MemoryData.Init</code>. It is used for the <code>init</code> property of <code>MemoryData</code>.</p>
+<p>The <code>Memory</code> constructor is changed to:</p>
+<ul>
+<li>
+<p><code>amaranth.lib.memory.Memory(data: MemoryData = None, *, shape=None, depth=None, init=None, name=None)</code></p>
+<ul>
+<li>either <code>data</code>, or all three of <code>shape</code>, <code>depth</code>, <code>init</code> need to be provided, but not both</li>
+<li>if <code>data</code> is provided, it is used directly, and stored</li>
+<li>if <code>shape</code>, <code>depth</code>, <code>init</code> (and possibly <code>name</code>) are provided, they are used to create a <code>MemoryData</code>, which is then stored</li>
+</ul>
+</li>
+</ul>
+<p>The <code>MemoryData</code> object is accessible via a new read-only <code>data</code> property on <code>Memory</code>. The existing <code>shape</code>, <code>depth</code>, <code>init</code> properties become aliases for <code>data.shape</code>, <code>data.depth</code>, <code>data.init</code>.</p>
+<p><code>MemoryInstance</code> constructor is likewise changed to:</p>
+<ul>
+<li><code>amaranth.hdl.MemoryInstance(data: MemoryData, *, attrs={})</code></li>
+</ul>
+<p>The <code>sim.memory_read</code> and <code>sim.memory_write</code> methods proposed by RFC 36 are removed. Instead, the new <code>Memory._Row</code> simulation-only value is introduced, which can be passed to <code>get</code>/<code>set</code>/<code>changed</code> like any other value. Masked writes can be implemented by <code>set</code> with a slice of <code>MemoryData._Row</code>, just like for signals.</p>
+<p><code>MemoryData</code> and <code>MemoryData._Row</code> instances (possibly wrapped in <code>ShapeCastable</code> for the latter) can be added to the <code>traces</code> argument when writing a VCD file with the simulator.</p>
+<p>Using <code>MemoryData._Row</code> within an elaboratable results in an immediate error, even if the design is only to be used in simulation. The only place where <code>MemoryData._Row</code> is valid is within an argument to <code>sim.get</code>/<code>sim.set</code>/<code>sim.changed</code> and similar functions.</p>
+<p><code>sim.edge</code> remains restricted to plain <code>Signal</code> and single-bit slices thereof. <code>MemoryData._Row</code> is not supported.</p>
+<h2 id="drawbacks"><a class="header" href="#drawbacks">Drawbacks</a></h2>
+<p>None.</p>
+<h2 id="rationale-and-alternatives"><a class="header" href="#rationale-and-alternatives">Rationale and alternatives</a></h2>
+<p><code>MemoryData</code> having <code>shape</code>, <code>depth</code>, and <code>init</code> is necessary to allow the simulator to create the underlying storage if the memory is not included in the design hierarchy, but is used to communicate between simulator processes.</p>
+<h2 id="prior-art"><a class="header" href="#prior-art">Prior art</a></h2>
+<p><code>MemoryData</code> is conceptually equivalent to a 2D <code>Signal</code>, for simulation purposes. It thus follows similar rules.</p>
+<h2 id="unresolved-questions"><a class="header" href="#unresolved-questions">Unresolved questions</a></h2>
+<p>None.</p>
+<h2 id="future-possibilities"><a class="header" href="#future-possibilities">Future possibilities</a></h2>
+<p>A <code>MemoryData.Slice</code> class could be added, allowing a whole range of memory addresses to be <code>get</code>/<code>set</code> at once, monitored for changes with <code>changes</code>, or added to <code>traces</code>.</p>
+<p>Support for <code>__getitem__(Value)</code> could be added (currently it would be blocked on CXXRTL capabilities).</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="0061-minimal-streams.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="0061-minimal-streams.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
