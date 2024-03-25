@@ -1,0 +1,458 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>0061-minimal-streams - The Amaranth RFC Book</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="theme/img-color-scheme.css">
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li><li class="chapter-item expanded "><a href="0002-interfaces.html">0002-interfaces</a></li><li class="chapter-item expanded "><a href="0003-enumeration-shapes.html">0003-enumeration-shapes</a></li><li class="chapter-item expanded "><a href="0004-const-castable-exprs.html">0004-const-castable-exprs</a></li><li class="chapter-item expanded "><a href="0005-remove-const-normalize.html">0005-remove-const-normalize</a></li><li class="chapter-item expanded "><a href="0006-stdlib-crc.html">0006-stdlib-crc</a></li><li class="chapter-item expanded "><a href="0008-aggregate-extensibility.html">0008-aggregate-extensibility</a></li><li class="chapter-item expanded "><a href="0009-const-init-shape-castable.html">0009-const-init-shape-castable</a></li><li class="chapter-item expanded "><a href="0010-move-repl-to-value.html">0010-move-repl-to-value</a></li><li class="chapter-item expanded "><a href="0015-lifting-shape-castables.html">0015-lifting-shape-castables</a></li><li class="chapter-item expanded "><a href="0016-soc-csr-regs.html">0016-soc-csr-regs</a></li><li class="chapter-item expanded "><a href="0017-remove-log2-int.html">0017-remove-log2-int</a></li><li class="chapter-item expanded "><a href="0018-reorganize-vendor-platforms.html">0018-reorganize-vendor-platforms</a></li><li class="chapter-item expanded "><a href="0019-remove-scheduler.html">0019-remove-scheduler</a></li><li class="chapter-item expanded "><a href="0020-deprecate-non-fwft-fifos.html">0020-deprecate-non-fwft-fifos</a></li><li class="chapter-item expanded "><a href="0021-patch-releases.html">0021-patch-releases</a></li><li class="chapter-item expanded "><a href="0022-valuecastable-shape.html">0022-valuecastable-shape</a></li><li class="chapter-item expanded "><a href="0027-simulator-testbenches.html">0027-simulator-testbenches</a></li><li class="chapter-item expanded "><a href="0028-override-value-operators.html">0028-override-value-operators</a></li><li class="chapter-item expanded "><a href="0030-component-metadata.html">0030-component-metadata</a></li><li class="chapter-item expanded "><a href="0031-enumeration-type-safety.html">0031-enumeration-type-safety</a></li><li class="chapter-item expanded "><a href="0034-interface-rename.html">0034-interface-rename</a></li><li class="chapter-item expanded "><a href="0035-shapelike-valuelike.html">0035-shapelike-valuelike</a></li><li class="chapter-item expanded "><a href="0036-async-testbench-functions.html">0036-async-testbench-functions</a></li><li class="chapter-item expanded "><a href="0037-make-signature-immutable.html">0037-make-signature-immutable</a></li><li class="chapter-item expanded "><a href="0038-component-signature-immutability.html">0038-component-signature-immutability</a></li><li class="chapter-item expanded "><a href="0039-empty-case.html">0039-empty-case</a></li><li class="chapter-item expanded "><a href="0040-arbitrary-memory-shape.html">0040-arbitrary-memory-shape</a></li><li class="chapter-item expanded "><a href="0042-const-from-shape-castable.html">0042-const-from-shape-castable</a></li><li class="chapter-item expanded "><a href="0043-rename-reset-to-init.html">0043-rename-reset-to-init</a></li><li class="chapter-item expanded "><a href="0045-lib-memory.html">0045-lib-memory</a></li><li class="chapter-item expanded "><a href="0046-shape-range-1.html">0046-shape-range-1</a></li><li class="chapter-item expanded "><a href="0049-soc-gpio-peripheral.html">0049-soc-gpio-peripheral</a></li><li class="chapter-item expanded "><a href="0050-print.html">0050-print</a></li><li class="chapter-item expanded "><a href="0051-const-from-bits.html">0051-const-from-bits</a></li><li class="chapter-item expanded "><a href="0053-ioport.html">0053-ioport</a></li><li class="chapter-item expanded "><a href="0054-read-port-init.html">0054-read-port-init</a></li><li class="chapter-item expanded "><a href="0055-lib-io.html">0055-lib-io</a></li><li class="chapter-item expanded "><a href="0056-mem-wide.html">0056-mem-wide</a></li><li class="chapter-item expanded "><a href="0057-single-field-shortcut.html">0057-single-field-shortcut</a></li><li class="chapter-item expanded "><a href="0061-minimal-streams.html" class="active">0061-minimal-streams</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Amaranth RFC Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/amaranth-lang/rfcs" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <ul>
+<li>Start Date: 2024-03-25</li>
+<li>RFC PR: <a href="https://github.com/amaranth-lang/rfcs/pull/61">amaranth-lang/rfcs#61</a></li>
+<li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/1244">amaranth-lang/amaranth#1244</a></li>
+</ul>
+<h1 id="minimal-streams"><a class="header" href="#minimal-streams">Minimal streams</a></h1>
+<h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
+<p>Define a protocol for unidirectional communication (data streaming) with ready/valid handshaking.</p>
+<h2 id="motivation"><a class="header" href="#motivation">Motivation</a></h2>
+<p>Digital designs are typically built from separately designed and tested functional blocks that are composed together and perform a high-level task by exchanging data. These blocks define interfaces that typically combine a payload (e.g.: bytes or symbols received or sent via a physical interface, addresses and data on a memory bus, samples exchanged between DSP blocks) with handshaking or flow control (e.g.: whether the physical interface can accept a new symbol or has one available, whether a memory transaction is in progress, whether the DSP block has finished processing).</p>
+<p>Amaranth supports specifying the structure of such interfaces with the very general <code>amaranth.lib.wiring</code> module, but the structure is only half of the story, as even the simplest flow control schemes include complex requirements, restricting not only the permissible sequences of states of flow control signals, but often also the domain from which the signals may be driven, and which signals may combinatorially depend on which other ones. A mistake in flow control circuitry is often difficult to discover (it may only manifest when used with a subset of compatible blocks and not surface in tests) and debug (waveform viewers generally do not show data dependencies so it may not be clear why a certain signal is asserted or deasserted).</p>
+<p>This complexity and challenges makes it useful to standardize on specific data exchange interfaces with a simple, robust, flexible, and well-defined flow control scheme. This proposal offers one such scheme suited for unidirectional communication only. In turn, it can be used to build bidirectional communication protocols.</p>
+<h2 id="guide-level-explanation"><a class="header" href="#guide-level-explanation">Guide-level explanation</a></h2>
+<p>The <code>amaranth.lib.stream</code> module defines the concept of a <em>stream</em>. A stream is an <code>amaranth.lib.wiring</code> interface consisting of three port members:</p>
+<ul>
+<li><code>payload: Out(payload_shape)</code></li>
+<li><code>valid: Out(1)</code></li>
+<li><code>ready: In(1)</code></li>
+</ul>
+<p>The purpose of a stream is to mediate unidirectional data transfer between two components, called a <em>transmitter component</em> (which drives <code>payload</code> and <code>valid</code> members in its <em>output stream</em>, and samples <code>ready</code>) and a <em>receiver component</em> (which drives <code>ready</code> member in its <em>input stream</em>, and samples <code>payload</code> and <code>valid</code>). The directions of port members above are from the perspective of the transmitter component, as required by <code>amaranth.lib.wiring</code>. The values of every member must be fixed or change according to the same clock domain.</p>
+<p>Data is transferred via the stream according to the following rules:</p>
+<ol>
+<li>On each cycle where both <code>valid</code> and <code>ready</code> are asserted, a transfer is performed: the contents of <code>payload</code> is conveyed from the transmitter to the receiver.</li>
+<li>Once the transmitter asserts <code>valid</code>, it must not deassert it until a transfer is performed.</li>
+<li>As an exception to rule (2), when the transmitter is reset it must deassert <code>valid</code>, unless it ties <code>valid</code> to <code>Const(1)</code> in the interface object.</li>
+<li>Once the transmitter asserts <code>valid</code>, it must not change the contents of <code>payload</code> until a transfer is performed.</li>
+<li>The transmitter must not wait for <code>ready</code> to be asserted before asserting <code>valid</code>. Any form of feedback from <code>ready</code> that causes <code>valid</code> to go from deasserted to asserted is prohibited.</li>
+<li>Once the receiver asserts <code>ready</code> it may deassert it at any time.</li>
+<li>The receiver may wait for <code>valid</code> to be asserted before asserting <code>ready</code>. Combinatorial feedback from <code>valid</code> to <code>ready</code> is allowed.</li>
+</ol>
+<p>These rules ensure that transmitters and receivers can be developed independently yet safely used together, without unduly restricting the application-specific conditions that determine assertion of <code>valid</code> and <code>ready</code>.</p>
+<p>Some transmitters and receivers may be designed in a way that requires them to perform a transfer on every cycle when they are not reset. Such transmitters and receivers may (but are not required to) tie <code>valid</code> to <code>Const(1)</code>. Similarly, some transmitters and receivers may be designed without support for backpressure. Such transmitters and receivers may (but are not required to) tie <code>ready</code> to <code>Const(1)</code>.</p>
+<p>If these control signals are tied to <code>Const(1)</code>, then <code>amaranth.lib.wiring.connect</code> ensures that only compatible streams are connected. For example, if the transmitter does not support backpressure (<code>ready</code> tied to <code>Const(1)</code>), it can only be connected to receivers that do not support backpressure. However, receivers that do not support backpressure can be connected to any transmitter, since the receiver would appear as an always-ready one to a transmitter that does support backpressure. Similar logic applies to <code>valid</code> when it is tied to <code>Const(1)</code>.</p>
+<h2 id="reference-level-explanation"><a class="header" href="#reference-level-explanation">Reference-level explanation</a></h2>
+<p>A new <code>amaranth.lib.stream</code> module is added, defining two classes: <code>Signature</code> and <code>Interface</code>:</p>
+<ul>
+<li><code>amaranth.lib.stream.Signature(payload_shape, *, always_valid=False, always_ready=False)</code>
+<ul>
+<li>with members:
+<ul>
+<li><code>payload: Out(payload_shape)</code></li>
+<li><code>valid: Out(1)</code></li>
+<li><code>ready: In(1)</code></li>
+</ul>
+</li>
+<li>with properties:
+<ul>
+<li><code>always_valid: bool</code></li>
+<li><code>always_ready: bool</code></li>
+</ul>
+</li>
+<li>with methods:
+<ul>
+<li><code>__eq__(other)</code>: requires <code>isinstance(other, amaranth.lib.stream.Signature)</code> and all three of <code>payload_shape</code>, <code>always_valid</code>, <code>always_ready</code> to match</li>
+<li><code>create()</code>: constructs an <code>amaranth.lib.stream.Interface</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>amaranth.lib.stream.Interface(signature, *, path=None, src_loc_at=0)</code>
+<ul>
+<li>with attributes:
+<ul>
+<li><code>.payload = Signal(payload_shape)</code></li>
+<li>If <code>signature.always_valid == False</code>: <code>.valid = Signal()</code></li>
+<li>If <code>signature.always_valid == True</code>:  <code>.valid = Const(1)</code></li>
+<li>If <code>signature.always_ready == False</code>: <code>.ready = Signal()</code></li>
+<li>If <code>signature.always_ready == True</code>:  <code>.ready = Const(1)</code></li>
+</ul>
+</li>
+<li>with properties:
+<ul>
+<li><code>p</code>: alias of <code>payload</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Like other <code>amaranth.lib</code> modules, it is intended to be imported with the <code>from amaranth.lib import stream</code> statement and the classes be used with their qualified names, <code>stream.Signature</code> and <code>stream.Interface</code>.</p>
+<p>There is purposefully no <code>amaranth.lib.stream.Signature.payload_shape</code> property. It is expected that a future RFC will enable construction and introspection of complex streams, and the provision of any introspection of the payload is deferred until then.</p>
+<p>The <code>amaranth.lib.fifo.FIFOInterface</code> class is extended with properties:
+- <code>r_stream: stream.Interface</code>: interface adapter with <code>payload = .r_data</code>, <code>valid = .r_rdy</code>, <code>ready = .r_en</code>.
+- <code>w_stream: stream.Interface</code>: interface adapter with <code>payload = .w_data</code>, <code>valid = .w_en</code>, <code>ready = .r_rdy</code>.</p>
+<h2 id="drawbacks"><a class="header" href="#drawbacks">Drawbacks</a></h2>
+<p>This proposal errs heavily on the side of minimalism, making it less broadly applicable.</p>
+<p>This proposal locks in two major design decisions:</p>
+<ul>
+<li>That <code>payload</code> is a port member, not an interface member.</li>
+<li>That the stream signature always has exactly these three members.</li>
+</ul>
+<p>If this turns out to be a mistake, existing code relying on the guarantees provided by these decisions will break.</p>
+<h2 id="rationale-and-alternatives"><a class="header" href="#rationale-and-alternatives">Rationale and alternatives</a></h2>
+<h3 id="a-scope-of-this-proposal"><a class="header" href="#a-scope-of-this-proposal">A: Scope of this proposal</a></h3>
+<p>Streams are one of the most highly coveted planned features. While we could choose to not provide them at all (as an external library implementation is possible), this will make Amaranth less competitive and perpetuate the status quo of every complex downstream project implementing their own, incompatible, version of streams.</p>
+<p>This module is described as &quot;minimal&quot; because it is highly limited in scope. This has the desirable qualities that it is easier to implement, document, and teach; that it is more widely compatible with existing code using streams; and that it is amenable to further gradual expansion.</p>
+<ul>
+<li>The payload is an opaque (to the <code>amaranth.lib.stream</code> module) shape that is not given further meaning.</li>
+<li>The rules of data transfer are very restrictive; in particular rules (5) and (7) ensure that the flow control is performed by the transmitter and the receiver independently.</li>
+<li>No interconnect components are proposed; only a minimal viable extension for the standard FIFOs, which is likely to be used in most designs.</li>
+</ul>
+<p>The scope has been chosen to provide a useful implementation without delaying further work that relies on streams until every detail involved in defining fully functional streams can be agreed upon. Although it largely avoids delving into such detail, it does make some choices that will impact further work (see the <a href="#drawbacks">Drawbacks</a> section). We could decide to reject this proposal in favor of one with a broader scope and make a choice informed by further design and prototyping, but this is likely to unacceptably delay other work.</p>
+<h3 id="b-always-valid-and-always-ready-streams"><a class="header" href="#b-always-valid-and-always-ready-streams">B: Always-valid and always-ready streams</a></h3>
+<p>Although, in general, a transmitter may produce a payload only on some cycles (communicated by <code>valid</code>) and a receiver may accept a payload only on some cycles (communicated by <code>ready</code>), there are important cases where dynamic flow control on either endpoint is undesirable, such as:</p>
+<ul>
+<li>A SerDes/transceiver block would typically produce a symbol and consume a symbol on each cycle, with no ability to pause transmission or reception without losing the link.</li>
+<li>Similarly, a parallel ADC will produce a code on each cycle, and a parallel DAC will accept a code on each cycle.</li>
+<li>When interfacing with such I/O devices, there is no need for flow control, and it should be excluded from the interconnect as it can cause significant overhead. This especially applies to the <code>ready</code> signal, which can form long combinatorial chains through the interconnect, pessimizing delay. The <code>valid</code> signal is registered, pessimizing area alone.</li>
+<li>Digital signal processing blocks often perform computations at a constant rate; for example, a pipelined multiplier may accept a pair of operands each cycle, and produce a result each cycle, with a fixed latency of 5. In such blocks, accounting for bubbles in the pipeline can be complex and error-prone, while stopping the entire pipeline if the inputs are not <code>valid</code> can cause deadlocks.</li>
+</ul>
+<p>It appears essential to support endpoints that always assert <code>valid</code> and/or <code>ready</code>. There are several possible approaches to implementing them:</p>
+<ol>
+<li>Do nothing special. Assign <code>valid</code> and/or <code>ready</code> to <code>1</code> at all times.</li>
+<li>Remove <code>valid</code> and/or <code>ready</code> from the signature of such streams, and treat the four kinds of streams entirely separately.</li>
+<li>Remove <code>valid</code> and/or <code>ready</code> from the signature of such streams, and use subclasses to unify the four kinds of streams.</li>
+<li>Set the <code>valid</code> and/or <code>ready</code> attributes to <code>Const(1)</code> and rely on <code>amaranth.lib.wiring.connect()</code> to enforce well-formedness of connections.
+<ul>
+<li>This is the option used in this proposal.</li>
+</ul>
+</li>
+</ol>
+<p>Option (B1) is not very useful: streams have no way to indicate an error, so data being pushed into a non-ready stream from an always-valid one will get discarded, and an always-ready stream will pull nonsense data from a non-valid stream.</p>
+<p>Option (B2) is not very useful either: since there is no way to treat the four kinds of streams generically, even basic interconnect (e.g. a FIFO queue) will in effect have 16 possible instantiations, which is too high of a burden to implement and test.</p>
+<p>Option (B3) would, at first glance, require the use of a complex diamond inheritance pattern (below) and adaptation functions converting one type of interface into another. Unfortunately, even that cannot be made to work, since the subtyping relationship does not capture directionality. A payload+ready+valid output stream can be connected to a payload+valid (always ready) input stream, but not vice versa; similarly, a payload+ready output stream (always valid) can be connected to a payload+ready+valid input stream, but not vice versa.</p>
+<img src="./0061-minimal-streams/subtyping.svg" width="550" alt="a diagram showing node 'payload+ready+valid' subtyping node 'payload+ready', node 'payload+valid', and node 'payload'; and both node 'payload+ready' and node 'payload+valid' subtyping node 'payload'">
+<p>Thus, option (B4) is the only feasible one: it does not require interface adaptation and avoids complex inheritance hierarchies in favor of a one-class solution while at the same time capturing the complex and directional subtyping relationship through the use of <code>amaranth.lib.wiring.connect()</code>. Also, since <code>connect()</code> can connect multiple streams, it is possible to broadcast a stream (connect a single transmitter to multiple receivers) with no interconnect, provided that none of the receivers require backpressure.</p>
+<h3 id="c-payload-shape"><a class="header" href="#c-payload-shape">C: Payload shape</a></h3>
+<p>There are three options for the payload member that are naturally possible with <code>lib.wiring</code>:</p>
+<ol>
+<li>Unrestricted <code>payload</code> member: a shape (port) or a signature (interface) are all valid, with no restrictions on the interface.</li>
+<li><code>payload</code> member restricted to a shape (port) or a signature (interface) with only <code>Out</code> members.</li>
+<li><code>payload</code> member restricted to a shape (port) only.
+<ul>
+<li>This is the option used in this proposal.</li>
+</ul>
+</li>
+</ol>
+<p>Option (C1) is not viable as it allows bidirectional communication to happen through the <code>payload</code> member, in contradiction to the goals of this proposal. Among other reasons, it makes streams no longer possible to pass through an async FIFO for clock domain crossing, which drastically reduces their usefulness.</p>
+<p>Option (C2) does have the advantage of splitting the payload into individual signals, which are more visible in waveform diagrams and on module boundaries in Verilog. However, it has a serious drawback, which is that <code>amaranth.lib.wiring.connect()</code> will not connect a single member to multiple members. This means that streams can no longer be directly connected to the three signals made available by the existing FIFOs in <code>amaranth.lib.fifo</code>, requiring adaptation.</p>
+<p>Option (C3) affords the same flexibility in the payload as option (2), without requiring stream-specific FIFOs; instead, an existing FIFO with its <code>[rw]_ack</code>, <code>[rw]_rdy</code>, <code>[rw]_data</code> signals can be connected to a stream endpoint provided that the same signals are put into an <code>amaranth.lib.wiring.PureInterface</code>, as long as the <code>[rw]_data</code> signal has the right width.</p>
+<h3 id="d-omitted-features"><a class="header" href="#d-omitted-features">D: Omitted features</a></h3>
+<p>This proposal intentionally omits the following features:</p>
+<ol>
+<li>packetization (often implemented using <code>first</code> and/or <code>last</code> control signals)</li>
+<li>multiple lanes (often implemented using <code>data[n]</code> data signal coupled with <code>stb[n]</code> control signal)</li>
+<li>sub-streams (often implemented using <code>id</code> and <code>dest</code> sideband signals)</li>
+<li>unstructured metadata (often implemented using <code>user</code> sideband signal)</li>
+</ol>
+<p>Based on the prior art examined and preliminary design work, the author of this proposal believes that all of these features may be implemented in a backward-compatible manner, by embedding all of the associated information in the <code>payload</code> port member and enabling extraction of the features and their configuration from the signature of the stream. This has the advantage that not all interconnect needs to be aware of such features, and interconnect that has little ability to be enhanced by them (e.g. an async FIFO) will be compatible with them without any changes.</p>
+<p>There is no <code>payload_shape</code> accessor on <code>amaranth.lib.stream.Signature</code> to allow flexibility for future expansion.</p>
+<h2 id="prior-art"><a class="header" href="#prior-art">Prior art</a></h2>
+<p>The two main influences on this proposal are AMBA AXI4-Stream protocol and LiteX stream functionality.</p>
+<h3 id="amba-axi-stream"><a class="header" href="#amba-axi-stream">AMBA AXI-Stream</a></h3>
+<p>The AMBA AXI-Stream protocol is specified in the openly available <a href="https://documentation-service.arm.com/static/64819f1516f0f201aa6b963c">ARM IHI 0051B document</a> and is similar in some respects to this proposal. <strong>The protocol described in this proposal is not compliant with the AMBA Specification nor is it intended to be compliant with the AMBA Specification.</strong> The AMBA specification is merely referenced here as a point of discussion.</p>
+<p>The AMBA AXI-Stream protocol is both more specialized and more constrained than this proposal. To compare them:</p>
+<ol>
+<li>AXI-Stream signal <strong>TDATA</strong> must be an integer number of bytes (a multiple of 8 wide) and is recommended to be a power of 2 and cannot be zero-width. This proposal makes no such restrictions.</li>
+<li>AXI-Stream allows, though does not recommend, the omission of <strong>TREADY</strong> and <strong>TVALID</strong> signals. This proposal mandates their inclusion but allows tie-off to constant 1.</li>
+<li>The rules for asserting <strong>TREADY</strong> and <strong>TVALID</strong> in AXI-Stream are the same as the rules for asserting <code>ready</code> and <code>valid</code> in this proposal, except for the deassertion of <code>valid</code> during reset.</li>
+<li>AXI-Stream separates the optional ancillary signals <strong>TSTRB</strong>, <strong>TKEEP</strong>, <strong>TLAST</strong>, <strong>TID</strong>, <strong>TDEST</strong>, <strong>TUSER</strong> from the primary <strong>TDATA</strong> signal. This proposal includes all of these signals under the umbrella <code>payload</code> port. Note that the AXI-Stream handshake covers both <strong>TDATA</strong> and all of the ancillary signals that are present (see figures 2-1, 2-2, 2.3); as such, it is similar to this proposal in that their treatment is similarly uniform.</li>
+<li>AXI-Stream includes complex rules for merging, packing, upsizing, downsizing, interleaving, and ordering, as well as position bytes and null bytes, which are not present in this proposal and are not in its scope.</li>
+<li>AXI-Stream mandates that transfers happen synchronously to the rising edge of <strong>ACLK</strong>, and specifies <strong>ARESETn</strong> to be an active low reset (synchronous or asynchronous). This proposal differs in that it allows any clock and reset expressible as an Amaranth clock domain. It is similar in that it mandates <code>valid</code> to be driven low during reset, but has a carve-out for tying <code>valid</code> to 1.</li>
+<li>AXI5-Stream includes a <strong>TWAKEUP</strong> signal for power management. This signal is associated with a stream but is not subject to handshaking; it is not directly a part of the stream, even if it influences the behavior of the stream and can cause a deadlock.</li>
+</ol>
+<p>Although the protocol in this proposal and the AXI-Stream protocols are not interoperable, it is possible and straightforward to define components that are functionally compliant (without exceptions) with both the protocol in this proposal, making use of a subset of it, and the AMBA AXI4-Stream or AXI5-Stream protocols. Such components will require an adapter to match the AXI-Stream protocols, but the adapter will not require any logic gates.</p>
+<p>The AXI4-Stream protocol is pervasively used in the industry and well regarded, and the ability to define components functionally compatibile with it is highly desirable. At the same time, some of the technical features of the AXI-Stream protocols (most importantly the restrictions on the <strong>TDATA</strong> signal, which prevent the use of arbitrary data/payload shapes), as well as the license under which it is distributed, make it unsuitable for use as-is in the Amaranth ecosystem.</p>
+<h3 id="avalon-st"><a class="header" href="#avalon-st">Avalon-ST</a></h3>
+<p>The Avalon-ST protocol is specified in the openly available <a href="https://cdrdv2-public.intel.com/743655/mnl_avalon_spec-683091-743655.pdf">Intel 683091(2022.09.26) document</a> (section 5) and is similar in some respects to this proposal. The Avalon-ST specification is merely referenced here as a point of discussion.</p>
+<p>The Avalon-ST protocol is similar to this proposal, but includes some additional features. Note that &quot;practically&quot; below means &quot;formally the wording may be different but it is not expected that this will ever cause any incompatibility in practical use&quot;. To compare them:</p>
+<ol>
+<li>Avalon-ST signal <code>data</code> can carry 1 to 8192 bits, not restricted to a power of 2 or a multiple of 8, and can be omitted. Avalon-ST includes a provision for bytes, but the byte size can be any number from 1 to 512 bits. This is practically identical to this proposal.</li>
+<li>Avalon-ST does not require inclusion of any of the signals, even <code>ready</code> and <code>valid</code>. This proposal mandates their inclusion but allows tie-off to constant 1.</li>
+<li>The rules for asserting <code>ready</code> and <code>valid</code> in Avalon-ST when the components are configured with <code>readyLatency = readyAllowance = 0</code> are practically the same as rules for asserting <code>ready</code> and <code>valid</code> in this proposal. Some of the behavior in Avalon-ST is implicitly specified; the <code>valid</code> signal is required to be registered at the source, which defines its behavior during reset (that matches this proposal). However, the <code>readyLatency &gt; 0</code> or <code>readyAllowance &gt; 0</code> configuration has no equivalent to this proposal (or the other stream interfaces being compared).</li>
+<li>Avalon-ST separates the optional ancillary signals <code>channel</code>, <code>error</code>, <code>empty</code>, <code>startofpacket</code>, <code>endofpacket</code> from the primary <code>data</code> signal. This proposal includes all of these signals under the umbrella <code>payload</code> port. Note that the Avalon-ST handshake covers both <code>data</code> and all of the ancillary signals that are present per the description of the <code>valid</code> signal in Table 17; as such, it is similar to this proposal in that their treatment is similarly uniform.</li>
+<li>Avalon-ST optionally includes fairly simple routing and packetization interfaces, which are not present in this proposal and are not in its scope.</li>
+<li>Avalon-ST mandates that transfers happen synchronously to the rising edge of the associated clock sink, and that the logic is reset by the associated reset sink. This proposal differs in that it allows any clock and reset expressible as an Amaranth clock domain. Avalon reset sinks are as expressive as Amaranth clock domain resets. In both this proposal and Avalon-ST, <code>valid</code> will be either tied off to 1 (in which case it's omitted from Avalon-ST) or driven low during reset.</li>
+<li>Avalon-ST includes an unusual <code>error</code> signal that allows the source signal an error to the sink. Importantly, it is not useful for signaling protocol errors (e.g. overflow due to an error in <code>ready</code> signal handling by the source), since the sink either drives only a <code>ready</code> signal or nothing.</li>
+</ol>
+<p>The protocol in this proposal and the Avalon-ST protocol are interoperable if the Avalon-ST interface is configured with parameters <code>readyLatency = readyAllowance = 0</code> and includes <code>data</code>, <code>ready</code>, and <code>valid</code> signals only (i.e. beats, packets, or channels are not used). In addition, <code>data</code> must be renamed to <code>payload</code> and a posedge clock domain must be used in Amaranth.</p>
+<p>The Avalon-ST protocol is widely used in the industry, especially in the Altera (Intel (Altera)) ecosystem, and the ability to define components interoperable with it is highly desirable. While it could be used as-is in the Amaranth ecosystem, it is valuable to reconsider whether the inclusion of some of the rarely used features is worth the support and compatibility burden, since all generic interconnect would have to be aware of them. Splitting of <code>data</code> into symbols or bytes seems particularly unnecessary.</p>
+<p>The <code>readyLatency</code> and <code>readyAllowance</code> parameters allow a more efficient use of FPGA resources (registers) and while adding them at this stage seems premature, it is a useful feature and should be considered for future work. Since connecting interfaces with mismatched <code>readyLatency</code> and <code>readyAllowance</code> is disastrous (results in silent data loss), this would likely require support for matching interface parameters to <code>amaranth.lib.wiring.connect()</code>, which is not currently available. Such support must be able to take into account that interfaces are compatible if a parameter of the source is <em>equal or less than</em> of the same parameter on the sink, which is a complex relation that would require significant design work.</p>
+<h3 id="litex-streams"><a class="header" href="#litex-streams">LiteX streams</a></h3>
+<p>The LiteX stream protocol does not have a specification. It is described in a <a href="https://github.com/enjoy-digital/litex/wiki/Streams">very short wiki page</a> as &quot;LiteX's streams are a simplified compromise between AXI-4/Avalon-ST&quot; and is similar in some respects to this proposal. There is also <a href="https://github.com/enjoy-digital/litex/blob/master/litex/soc/interconnect/stream.py">an implementation</a> that may be used to attempt to understand the protocol.</p>
+<p>The LiteX stream protocol is very similar to this proposal, but includes some additional features. To compare them:</p>
+<ol>
+<li>LiteX stream <code>payload</code> signal can carry unrestricted structured data, similarly to the <code>payload</code> port in this proposal. However, since it is a full Migen <code>Record</code>, it carries the same flaw as the <a href="#payload-shape">option (C1)</a>, and it is easy to misuse it.</li>
+<li>LiteX streams always include all of the defined signals: <code>valid</code>, <code>ready</code>, <code>first</code>, <code>last</code>, <code>payload</code>, and <code>param</code>, handling always-valid/always-ready streams the same way as <a href="#always-valid-and-always-ready-streams">option (B1)</a>, and always including <a href="#omitted-features">options (D1) and (D4)</a>. This proposal includes only <code>valid</code>, <code>ready</code>, and <code>payload</code>.</li>
+<li>The rules for assertion of <code>ready</code> and <code>valid</code> are not documented but (given the references to AXI-Stream and Avalon-ST) may be assumed to be entirely or mostly compatible with these two protocols, and consequently this proposal.</li>
+<li>LiteX streams separates ancillary signals <code>first</code>, <code>last</code>, and <code>param</code> from the primary <code>payload</code> signal. This proposal includes all of these signals under the umbrella <code>payload</code> signal, if they are implemented. The flow control rules for <code>first</code> and <code>last</code> are the same as for the <code>payload</code> signal in LiteX, but the flow control rules for <code>param</code> are different: <code>param</code> must be constant for the entire duration of a packet. (The flow control rules for <code>param</code> reference the flow control users for <code>TUSER</code> in AXI-Stream, but this is actually incorrect: unlike <code>param</code> in LiteX, <code>TUSER</code> in AXI-Stream specifies ancillary data per-byte or per-transfer, not per-packet).</li>
+<li>LiteX would appear, from the examination of the signals, to include a mandatory packetization scheme, but this is not the case. Rather, any sources, sinks, or interconnect that do not support packetization ignore <code>first</code> and <code>last</code>, and those of them which do support packetization may support exclusively <code>first</code> or exclusively <code>last</code>. There is no way to indicate any of these choices mechanically.</li>
+<li>LiteX streams and this proposal both reference transfers to a clock domain. However, Migen only supports posedge clocks and synchronous active-high reset.</li>
+</ol>
+<p>The protocol in this proposal and the LiteX stream protocol cannot be readily described as interoperable or not due to the lack of formal description and general scarcity of documentation of the LiteX stream protocol. However, so long as packetization is not involved, and the LiteX <code>param</code> record is empty, they are probably interoperable.</p>
+<p>The LiteX stream protocol is used exclusively in the LiteX ecosystem. Due to the rich availability of ready-made components in this ecosystem, the ability to define components interoperable with it is desirable. However, this is challenged by the difficulty of determining the feature set supported by a particular LiteX component. The flow control rules for the LiteX <code>param</code> signal are also unusual and may require an adapter with logic gates to reliably ensure compliance of an arbitrary Amaranth stream with the LiteX rules.</p>
+<p>Due to the fact that LiteX endpoints and interconnect <a href="https://github.com/amaranth-lang/amaranth/issues/317#issuecomment-899407394">often arbitrarily decide to implement or leave unimplemented any subset of the <code>first</code> and <code>last</code> signals without necessarily documenting this choice</a>, it is easy to run into data loss, deadlocks, and other confusing behavior with LiteX streams, especially as a newcomer to the ecosystem. The author of this RFC has had LiteX streams described to her as &quot;frustrating&quot;, &quot;a real source of difficulty&quot;, or in one case &quot;traumatizing&quot;. This was the driving force behind the decision to <strong>not</strong> include either <code>first</code> or <code>last</code> signals in this proposal. It was also one of the chief motivations behind <code>amaranth.lib.wiring</code> refusing to connect interfaces except in a highly restrictive manner where signals may not be arbitrarily excluded at the point of connection.</p>
+<h2 id="unresolved-questions"><a class="header" href="#unresolved-questions">Unresolved questions</a></h2>
+<p>None.</p>
+<h2 id="future-possibilities"><a class="header" href="#future-possibilities">Future possibilities</a></h2>
+<ul>
+<li>A new module with FIFO queues can be added (e.g. <code>amaranth.lib.queue</code>) with largely the same functionality that are built as components and are stream-only.
+<ul>
+<li>This has the advantage of being less constraining. Since all of the functionality of the existing <code>amaranth.lib.fifo</code> module as of Amaranth 0.5 will be provided in it, a clean migration path is available.</li>
+</ul>
+</li>
+<li>Streams can be extended with a mechanism to specify complex payload shape that can be introspected by interconnect.</li>
+<li>Interconnect components that operate on and process such complex payloads can be added via the RFC process, such as:
+<ul>
+<li>Lane converters (up-converter, down-converter).
+<ul>
+<li><a href="0056-mem-wide.html">RFC 56</a> almost but not quite enables existing FIFO queues to serve as such.</li>
+</ul>
+</li>
+<li>Packetizers/de-packetizers.</li>
+<li>Packet based queues that allow accepting or discarding a complete packet, or discarding incomplete or corrupted packets.</li>
+<li>Stream routers based on destination ID.</li>
+<li>Stream aligners that ensure a packet always starts on the 0th lane, or each Nth lane (e.g. each 4th 8-bit lane, for 32-bit alignment).</li>
+</ul>
+</li>
+<li>AXI3 or AXI4 interfaces may be added to Amaranth SoC, as these protocols are designed as a bundle of streams (address channels, data channels, and completion channel).</li>
+<li>The <code>readyLatency</code> and <code>readyAllowance</code> configuration parameters of Avalon-ST may be further investigated and potentially added to streams if they turn out to be broadly useful.</li>
+<li>The <code>amaranth.lib.io</code> library may be extended to add a pair of always-ready, always-valid stream interfaces to <code>FFBuffer</code> and <code>DDRBuffer</code> (one for input, one for output). In this way, the same paradigm, multi-lane bit streams, may be used to communicate at data rates anywhere from 1 kilobit/s to 1 terabit/s.</li>
+</ul>
+<h3 id="stream-combinators"><a class="header" href="#stream-combinators">Stream combinators</a></h3>
+<p>This proposal references many desirable stream features (primarily multiple lanes and packetization) to a future RFC that will extend the existing design. In the interest of convincing the reader that such an RFC is feasible, a sketch of how such extension may look like follows.</p>
+<p>The stream protocol is extended with &quot;combinators&quot;, a composable mechanism of defining the shape and behavior of the <code>payload</code> members. The <code>payload</code> argument of the <code>amaranth.lib.stream.Signature(...)</code> constructor may receive a <em>combinator</em>, which is a shape-castable object (usually a <code>data.Struct</code> subclass):</p>
+<ol>
+<li><code>payload=Lanes(4, lane_shape)</code>
+<ul>
+<li>causes the <code>payload</code> member to contain a <code>lane: ArrayLayout(lane_shape, 4)</code> field</li>
+<li>an up/down-converter interconnect may, by introspection, determine whether the input and output streams are compatible and what the ratio of lanes is</li>
+</ul>
+</li>
+<li><code>payload=Lanes(4, lane_shape, en=True)</code>
+<ul>
+<li>causes the <code>payload</code> member to contain a <code>lane: ArrayLayout(lane_shape, 4)</code> field and a <code>en: 4</code> field</li>
+<li>by introspection, the endpoints and the interconnect is aware that some of the lanes may not contain meaningful data and discard such data during up/down-conversion or upon receipt</li>
+</ul>
+</li>
+<li><code>payload=Packet(data_layout, first=True, last=True)</code>
+<ul>
+<li>causes the <code>payload</code> member to contain a <code>data: data_layout</code> field, as well as <code>first: 1</code> and <code>last: 1</code> fields</li>
+<li>by introspection, the components are aware that each individual transfer may begin and/or end the packet, with packet data being uninterpreted</li>
+</ul>
+</li>
+<li><code>payload=Packet(Lanes(4, lane_shape), first=True, last=True)</code>
+<ul>
+<li>causes the <code>payload</code> member to contain a <code>data: StructLayout({&quot;lane&quot;: ArrayLayout(lane_shape, 4)})</code> field, as well as <code>first: 1</code> and <code>last: 1</code> fields</li>
+<li>by introspection, the components are aware that each individual transfer may begin and/or end the packet, and that each packet consists of four individual symbols</li>
+</ul>
+</li>
+<li><code>payload=Lanes(4, Packet(data_shape, first=True, last=True))</code>
+<ul>
+<li>causes the <code>payload</code> member to contain a <code>lane: ArrayLayout(StructLayout({&quot;data&quot;: data_shape, &quot;first&quot;: 1, &quot;last&quot;: 1}), 4)</code> field</li>
+<li>by introspection, the components are aware that each individual transfer consists of up to four individual packets, and that packets may begin or end at any symbol</li>
+</ul>
+</li>
+</ol>
+<p>Please note that the degree of configurability in the examples is illustrative of the potential of the proposed functionality and do not necessarily reflect best practices to be established. That said, example (4) follows a real-world example where a 1024-bit wide bus used in a high-throughput PCIe interconnect implementation requires support for multiple packets per transfer to meet its efficiency target.</p>
+<p>Stream combinators can be defined in code downstream to Amaranth, and streams employing user-defined combinators remain usable with some standard interconnect; e.g. an async FIFO does not introspect the payload at all, and an up/down-converter only &quot;unwraps&quot; the outermost combinator, expecting to find the <code>amaranth.lib.stream.Lanes</code> combinator there, and treating the <code>lane_shape</code> shaped element as opaque.</p>
+<p>The fact that <code>amaranth.lib.wiring.connect()</code> will connect any two port members with a matching name and width and compatible flows without regard to the shape of the member is concerning in light of the importance of the shape of the <code>payload</code> member of a stream. There are multiple options in handling this issue, including:</p>
+<ol>
+<li>Reconsidering the behavior of <code>amaranth.lib.wiring.connect()</code> so that the shape of a port member is taken into account, either to emit a warning or to raise an error.</li>
+<li>Introducing additional behavior to <code>amaranth.lib.wiring.connect()</code> so that a function attached to a port member is called to check its compatibility with another port member.</li>
+<li>Relying on the fact that adding a stream combinator essentially always changes the width of the <code>payload</code> member and therefore the existing width check is sufficient to catch most errors.</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="0057-single-field-shortcut.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="0057-single-field-shortcut.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
