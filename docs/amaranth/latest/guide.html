@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Language guide &mdash; Amaranth language &amp; toolchain 0.5.0.dev195 documentation</title>
+  <title>Language guide &mdash; Amaranth language &amp; toolchain 0.5.0.dev196 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/platformpicker.css" />
@@ -17,7 +17,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=fc1d05fe"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=cbe58f94"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/platformpicker.js"></script>
@@ -41,7 +41,7 @@
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.5.0.dev195+g738d8b7
+                0.5.0.dev196+gf261071
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -1639,7 +1639,7 @@ inside `Else`
 </section>
 <section id="i-o-buffer-instances">
 <span id="lang-iobufferinstance"></span><h2>I/O buffer instances<a class="headerlink" href="#i-o-buffer-instances" title="Permalink to this heading"></a></h2>
-<p>An <em>I/O buffer instance</em> is a submodule that allows assigning <a class="reference internal" href="#lang-iovalues"><span class="std std-ref">I/O values</span></a> to or from regular <a class="reference internal" href="#lang-values"><span class="std std-ref">values</span></a> without the use of an external, toolchain- and technology-dependent <a class="reference internal" href="#lang-instance"><span class="std std-ref">instance</span></a>. It can be created in four configurations: input, output, tristatable output, and bidirectional (input/output).</p>
+<p>An <em>I/O buffer instance</em> is a submodule that allows connecting <a class="reference internal" href="#lang-iovalues"><span class="std std-ref">I/O values</span></a> and regular <a class="reference internal" href="#lang-values"><span class="std std-ref">values</span></a> without the use of an external, toolchain- and technology-dependent <a class="reference internal" href="#lang-instance"><span class="std std-ref">instance</span></a>. It can be created in four configurations: input, output, tristatable output, and bidirectional (input/output).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">amaranth.hdl</span> <span class="kn">import</span> <span class="n">IOBufferInstance</span>
 
 <span class="n">m</span> <span class="o">=</span> <span class="n">Module</span><span class="p">()</span>
@@ -1648,20 +1648,20 @@ inside `Else`
 <p>In the input configuration, the buffer combinatorially drives a signal <code class="code highlight py python docutils literal highlight-python"><span class="n">i</span></code> by the port:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">port</span> <span class="o">=</span> <span class="n">IOPort</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">port_i</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">m</span><span class="o">.</span><span class="n">submodules</span><span class="o">.</span><span class="n">ibuf</span> <span class="o">=</span> <span class="n">IOBufferInstance</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="n">port_i</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">submodules</span> <span class="o">+=</span> <span class="n">IOBufferInstance</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="n">port_i</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>In the output configuration, the buffer combinatorially drives the port by a value <code class="code highlight py python docutils literal highlight-python"><span class="n">o</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">port</span> <span class="o">=</span> <span class="n">IOPort</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">port_o</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">m</span><span class="o">.</span><span class="n">submodules</span><span class="o">.</span><span class="n">obuf</span> <span class="o">=</span> <span class="n">IOBufferInstance</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="n">o</span><span class="o">=</span><span class="n">port_o</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">submodules</span> <span class="o">+=</span> <span class="n">IOBufferInstance</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="n">o</span><span class="o">=</span><span class="n">port_o</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>In the tristatable output configuration, the buffer combinatorially drives the port by a value <code class="code highlight py python docutils literal highlight-python"><span class="n">o</span></code> if <code class="code highlight py python docutils literal highlight-python"><span class="n">oe</span></code> is asserted, and does not drive (leaves in a high-impedance state, or tristates) the port otherwise:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">port</span> <span class="o">=</span> <span class="n">IOPort</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">port_o</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">port_oe</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">()</span>
-<span class="n">m</span><span class="o">.</span><span class="n">submodules</span><span class="o">.</span><span class="n">obuft</span> <span class="o">=</span> <span class="n">IOBufferInstance</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="n">o</span><span class="o">=</span><span class="n">port_o</span><span class="p">,</span> <span class="n">oe</span><span class="o">=</span><span class="n">port_oe</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">submodules</span> <span class="o">+=</span> <span class="n">IOBufferInstance</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="n">o</span><span class="o">=</span><span class="n">port_o</span><span class="p">,</span> <span class="n">oe</span><span class="o">=</span><span class="n">port_oe</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>In the bidirectional (input/output) configuration, the buffer combiatorially drives a signal <code class="code highlight py python docutils literal highlight-python"><span class="n">i</span></code> by the port, combinatorially drives the port by a value <code class="code highlight py python docutils literal highlight-python"><span class="n">o</span></code> if <code class="code highlight py python docutils literal highlight-python"><span class="n">oe</span></code> is asserted, and does not drive (leaves in a high-impedance state, or tristates) the port otherwise:</p>
@@ -1669,7 +1669,7 @@ inside `Else`
 <span class="n">port_i</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">port_o</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">port_oe</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">()</span>
-<span class="n">m</span><span class="o">.</span><span class="n">submodules</span><span class="o">.</span><span class="n">iobuf</span> <span class="o">=</span> <span class="n">IOBufferInstance</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="n">port_i</span><span class="p">,</span> <span class="n">o</span><span class="o">=</span><span class="n">port_o</span><span class="p">,</span> <span class="n">oe</span><span class="o">=</span><span class="n">port_oe</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">submodules</span> <span class="o">+=</span> <span class="n">IOBufferInstance</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="n">port_i</span><span class="p">,</span> <span class="n">o</span><span class="o">=</span><span class="n">port_o</span><span class="p">,</span> <span class="n">oe</span><span class="o">=</span><span class="n">port_oe</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The width of the <code class="code highlight py python docutils literal highlight-python"><span class="n">i</span></code> and <code class="code highlight py python docutils literal highlight-python"><span class="n">o</span></code> values (when present) must be the same as the width of the port, and the width of the <code class="code highlight py python docutils literal highlight-python"><span class="n">oe</span></code> value must be 1.</p>
