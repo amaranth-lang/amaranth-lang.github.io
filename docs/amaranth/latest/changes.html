@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Changelog &mdash; Amaranth language &amp; toolchain 0.5.0.dev200 documentation</title>
+  <title>Changelog &mdash; Amaranth language &amp; toolchain 0.5.0.dev201 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/platformpicker.css" />
@@ -17,7 +17,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=c2381b4d"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=66409f54"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/platformpicker.js"></script>
@@ -41,7 +41,7 @@
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.5.0.dev200+g1deaf70
+                0.5.0.dev201+g09d5540
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -180,6 +180,7 @@
 <li><p>Added: <code class="xref py py-class docutils literal notranslate"><span class="pre">Format</span></code> objects, <code class="xref py py-class docutils literal notranslate"><span class="pre">Print</span></code> statements, messages in <code class="xref py py-class docutils literal notranslate"><span class="pre">Assert</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Assume</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">Cover</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0050-print.html">RFC 50</a>)</p></li>
 <li><p>Added: <a class="reference internal" href="reference.html#amaranth.hdl.ShapeCastable.from_bits" title="amaranth.hdl.ShapeCastable.from_bits"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ShapeCastable.from_bits()</span></code></a> method. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0051-const-from-bits.html">RFC 51</a>)</p></li>
 <li><p>Added: IO values, <code class="xref py py-class docutils literal notranslate"><span class="pre">IOPort</span></code> objects, <code class="xref py py-class docutils literal notranslate"><span class="pre">IOBufferInstance</span></code> objects. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0053-ioport.html">RFC 53</a>)</p></li>
+<li><p>Added: <code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryData</span></code> objects. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0062-memory-data.html">RFC 62</a>)</p></li>
 <li><p>Changed: <code class="docutils literal notranslate"><span class="pre">m.Case()</span></code> with no patterns is never active instead of always active. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0039-empty-case.html">RFC 39</a>)</p></li>
 <li><p>Changed: <code class="docutils literal notranslate"><span class="pre">Value.matches()</span></code> with no patterns is <code class="docutils literal notranslate"><span class="pre">Const(0)</span></code> instead of <code class="docutils literal notranslate"><span class="pre">Const(1)</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0039-empty-case.html">RFC 39</a>)</p></li>
 <li><p>Changed: <code class="docutils literal notranslate"><span class="pre">Signal(range(stop),</span> <span class="pre">init=stop)</span></code> warning has been changed into a hard error and made to trigger on any out-of range value.</p></li>
