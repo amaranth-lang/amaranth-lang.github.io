@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Changelog &mdash; Amaranth language &amp; toolchain 0.5.0.dev201 documentation</title>
+  <title>Changelog &mdash; Amaranth language &amp; toolchain 0.5.0.dev202 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/platformpicker.css" />
@@ -17,7 +17,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=66409f54"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=51b8153e"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/platformpicker.js"></script>
@@ -41,7 +41,7 @@
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.5.0.dev201+g09d5540
+                0.5.0.dev202+g0e4c2de
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -156,6 +156,7 @@
 <li><p>Replace imports of <code class="docutils literal notranslate"><span class="pre">amaranth.asserts.{Assert,</span> <span class="pre">Assume,</span> <span class="pre">Cover}</span></code> with imports from <code class="docutils literal notranslate"><span class="pre">amaranth.hdl</span></code></p></li>
 <li><p>Remove any usage of <code class="docutils literal notranslate"><span class="pre">name=</span></code> with assertions, possibly replacing them with custom messages</p></li>
 <li><p>Ensure all elaboratables are subclasses of <code class="xref py py-class docutils literal notranslate"><span class="pre">Elaboratable</span></code></p></li>
+<li><p>Ensure clock domains aren’t used outside the module that defines them, or its submodules; move clock domain definitions upwards in the hierarchy as necessary</p></li>
 </ul>
 </section>
 <section id="implemented-rfcs">
@@ -170,6 +171,7 @@
 <li><p><a class="reference external" href="https://amaranth-lang.org/rfcs/0050-print.html">RFC 50</a>: <code class="docutils literal notranslate"><span class="pre">Print</span></code> statement and string formatting</p></li>
 <li><p><a class="reference external" href="https://amaranth-lang.org/rfcs/0051-const-from-bits.html">RFC 51</a>: Add <code class="docutils literal notranslate"><span class="pre">ShapeCastable.from_bits</span></code> and <code class="docutils literal notranslate"><span class="pre">amaranth.lib.data.Const</span></code></p></li>
 <li><p><a class="reference external" href="https://amaranth-lang.org/rfcs/0053-ioport.html">RFC 53</a>: Low-level I/O primitives</p></li>
+<li><p><a class="reference external" href="https://amaranth-lang.org/rfcs/0059-no-domain-upwards-propagation.html">RFC 59</a>: Get rid of upwards propagation of clock domains</p></li>
 </ul>
 </section>
 <section id="language-changes">
@@ -192,6 +194,7 @@
 <li><p>Changed: <code class="xref py py-class docutils literal notranslate"><span class="pre">Instance</span></code> IO ports now accept only IO values, not plain values. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0053-ioport.html">RFC 53</a>)</p></li>
 <li><p>Deprecated: <code class="xref py py-func docutils literal notranslate"><span class="pre">amaranth.utils.log2_int()</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0017-remove-log2-int.html">RFC 17</a>)</p></li>
 <li><p>Deprecated: <code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.hdl.Memory</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0045-lib-memory.html">RFC 45</a>)</p></li>
+<li><p>Deprecated: upwards propagation of clock domains. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0059-no-domain-upwards-propagation.html">RFC 59</a>)</p></li>
 <li><p>Removed: (deprecated in 0.4) <code class="xref py py-meth docutils literal notranslate"><span class="pre">Const.normalize()</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0005-remove-const-normalize.html">RFC 5</a>)</p></li>
 <li><p>Removed: (deprecated in 0.4) <code class="xref py py-class docutils literal notranslate"><span class="pre">Repl</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0010-move-repl-to-value.html">RFC 10</a>)</p></li>
 <li><p>Removed: (deprecated in 0.4) <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.Sample</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.Past</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.Stable</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.Rose</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.Fell</span></code>.</p></li>
