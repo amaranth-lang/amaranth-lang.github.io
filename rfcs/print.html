@@ -5498,9 +5498,11 @@ m.domains.sync = ImportedDomain(&quot;clkgen&quot;, &quot;sync&quot;) # Imports 
 </ul>
 <p>Like other <code>amaranth.lib</code> modules, it is intended to be imported with the <code>from amaranth.lib import stream</code> statement and the classes be used with their qualified names, <code>stream.Signature</code> and <code>stream.Interface</code>.</p>
 <p>There is purposefully no <code>amaranth.lib.stream.Signature.payload_shape</code> property. It is expected that a future RFC will enable construction and introspection of complex streams, and the provision of any introspection of the payload is deferred until then.</p>
-<p>The <code>amaranth.lib.fifo.FIFOInterface</code> class is extended with properties:
-- <code>r_stream: stream.Interface</code>: interface adapter with <code>payload = .r_data</code>, <code>valid = .r_rdy</code>, <code>ready = .r_en</code>.
-- <code>w_stream: stream.Interface</code>: interface adapter with <code>payload = .w_data</code>, <code>valid = .w_en</code>, <code>ready = .r_rdy</code>.</p>
+<p>The <code>amaranth.lib.fifo.FIFOInterface</code> class is extended with properties:</p>
+<ul>
+<li><code>r_stream: stream.Interface</code>: interface adapter with <code>payload = .r_data</code>, <code>valid = .r_rdy</code>, <code>ready = .r_en</code>.</li>
+<li><code>w_stream: stream.Interface</code>: interface adapter with <code>payload = .w_data</code>, <code>valid = .w_en</code>, <code>ready = .r_rdy</code>.</li>
+</ul>
 <h2 id="drawbacks-41"><a class="header" href="#drawbacks-41">Drawbacks</a></h2>
 <p>This proposal errs heavily on the side of minimalism, making it less broadly applicable.</p>
 <p>This proposal locks in two major design decisions:</p>
