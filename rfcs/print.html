@@ -3527,31 +3527,20 @@ class, providing it the <code>EnumView</code> as <code>self</code>.</p>
 <h2 id="guide-level-explanation-17"><a class="header" href="#guide-level-explanation-17">Guide-level explanation</a></h2>
 <p>As an example, let's consider a simple stream interface with <code>valid</code>, <code>ready</code> and <code>data</code> members.
 We can then implement <code>stream_send()</code> and <code>stream_recv()</code> functions like this:</p>
-<pre><code class="language-python">@testbench_helper
-async def stream_recv(sim, stream):
-    await sim.set(stream.ready, 1)
-    await sim.tick().until(stream.valid)
-
-    value = await sim.get(stream.data)
-
-    await sim.tick()
-    await sim.set(stream.ready, 0)
-
+<pre><code class="language-python">async def stream_recv(sim, stream):
+    sim.set(stream.ready, 1)
+    value = await sim.tick().sample(stream.data).until(stream.valid)
+    sim.set(stream.ready, 0)
     return value
 
-@testbench_helper
 async def stream_send(sim, stream, value):
-    await sim.set(stream.data, value)
-
-    await sim.set(stream.valid, 1)
+    sim.set(stream.data, value)
+    sim.set(stream.valid, 1)
     await sim.tick().until(stream.ready)
-
-    await sim.tick()
-    await sim.set(stream.valid, 0)
+    sim.set(stream.valid, 0)
 </code></pre>
-<p><code>await sim.get()</code> and <code>await sim.set()</code> replaces the existing operations <code>yield signal</code> and <code>yield signal.eq()</code> respectively.</p>
-<p><code>sim.tick()</code> replaces the existing <code>Tick()</code>. It returns a trigger object that either can be awaited directly, or made conditional through <code>.until()</code>.</p>
-<p>The <code>testbench_helper</code> decorator indicates that this function is only designed to be called from testbench processes and will raise an exception if called elsewhere.</p>
+<p><code>sim.get()</code> and <code>sim.set()</code> replaces the existing operations <code>yield signal</code> and <code>yield signal.eq()</code> respectively.</p>
+<p><code>sim.tick()</code> replaces the existing <code>Tick()</code>. It returns a trigger object that either can be awaited directly, or made conditional through <code>.until()</code>. Values of signals can be captured using <code>.sample()</code>, which is used to sample the interface members at the active edge of the clock. This approach makes these functions robust in presence of combinational feedback or concurrent use in multiple testbench processes.</p>
 <blockquote>
 <p><strong>Note</strong>
 This simplified example does not include any way of specifying the clock domain of the interface and as such is only directly applicable to single domain simulations.
@@ -3580,7 +3569,7 @@ async def testbench(sim):
 <p>Since <code>stream_send()</code> and <code>stream_recv()</code> invokes <code>sim.get()</code> and <code>sim.set()</code> that in turn will invoke the appropriate value conversions for a value castable (here <code>data.View</code>), it is general enough to work for streams with arbitrary shapes.</p>
 <p><code>Tick()</code> and <code>Delay()</code> are replaced by <code>sim.tick()</code> and <code>sim.delay()</code> respectively.
 In addition, <code>sim.changed()</code> and <code>sim.edge()</code> is introduced that allows creating triggers from arbitrary signals.</p>
-<p><code>sim.tick()</code> return a domain trigger object that can be made conditional through <code>.until()</code> or repeated through <code>.repeat()</code>.</p>
+<p><code>sim.tick()</code> return a domain trigger object that can be made conditional through <code>.until()</code> or repeated through <code>.repeat()</code>. Arbitrary expressions may be sampled at the active edge of the domain clock using <code>.sample()</code>.</p>
 <p><code>sim.delay()</code>, <code>sim.changed()</code> and <code>sim.edge()</code> return a combinable trigger object that can be used to add additional triggers.</p>
 <p><code>Active()</code> and <code>Passive()</code> are replaced by an <code>background=False</code> keyword argument to <code>.add_testbench()</code>.
 Processes created through <code>.add_process()</code> are always created as background processes.
@@ -3602,7 +3591,7 @@ Consider the following examples:</p>
 <pre><code class="language-python">a = Signal(); b = Signal(); o = Signal()
 async def adder(sim):
     async for a_val, b_val in sim.changed(a, b):
-        await sim.set(o, a_val + b_val)
+        sim.set(o, a_val + b_val)
 sim.add_process(adder)
 </code></pre>
 <p>DDR IO buffer as a process:</p>
@@ -3610,9 +3599,9 @@ sim.add_process(adder)
 async def ddr_buffer(sim):
     while True: # could be extended to pre-capture next `o` on posedge
         await sim.negedge(clk)
-        await sim.set(pin, o[0])
+        sim.set(pin, o[0])
         await sim.posedge(clk)
-        await sim.set(pin, o[1])
+        sim.set(pin, o[1])
 sim.add_process(ddr_buffer)
 </code></pre>
 <p>Flop with configurable edge reset and posedge clock as a process:</p>
@@ -3620,7 +3609,7 @@ sim.add_process(ddr_buffer)
 def dff(rst_edge):
     async def process(sim):
         async for clk_hit, rst_hit in sim.posedge(clk).edge(rst, rst_edge):
-            await sim.set(q, 0 if rst_hit else await sim.get(d))
+            sim.set(q, 0 if rst_hit else d)
     return process
 sim.add_process(dff(rst_edge=0))
 </code></pre>
@@ -3633,6 +3622,49 @@ sim.add_process(dff(rst_edge=0))
 <p>Both methods are updated to accept an async function passed as <code>process</code>.
 The async function must accept an argument <code>sim</code>, which will be passed a simulator context.
 (Argument name is just convention, will be passed positionally.)</p>
+<p>The usage model of the two kinds of processes are:</p>
+<ul>
+<li>Processes are added with <code>add_process()</code> for the sole purpose of simulating a part of the netlist with behavioral Python code.
+<ul>
+<li>Typically such a process will consist of a top-level <code>async for values in sim.tick().sample(...):</code> or <code>async for values in sim.changed(...)</code>, but this is not a requirement.</li>
+<li>Such processes may only wait on signals, via <code>sim.tick()</code>, <code>sim.changed()</code>, and <code>sim.edge()</code>. They cannot advance simulation time via <code>sim.delay()</code>.</li>
+<li>In these processes, <code>sim.get()</code> is not available; values of signals may only be obtained by awaiting on triggers.
+<code>sim.set(x, y)</code> may be used to propagate the value of <code>y</code> without reading it.</li>
+<li>The function passed to <code>add_process()</code> must be idempotent: applying it multiple times to the same simulation state and with same local variable values must produce the same effect each time.
+Provided that, the outcome of running such a process is deterministic regardless of the order of their execution.</li>
+</ul>
+</li>
+<li>Processes are added with <code>add_testbench()</code> for any other purpose, including but not limited to: providing a stimulus, performing I/O, displaying state, asserting outcomes, and so on.
+<ul>
+<li>Such a process may be a simple linear function, use a top-level loop, or have arbitrarily complex structure.</li>
+<li>Such processes may wait on signals as well as advance simulation time.</li>
+<li>In these processes, <code>sim.get(x)</code> is available and returns the most current value of <code>x</code> (after all pending combinatorial propagation finishes).</li>
+<li>The function passed to <code>add_testbench()</code> may have arbitrary side effects.
+These processes are scheduled in an unspecified order that may not be deterministic, and no mechanisms are provided to recover determinism of outcomes.</li>
+<li>When waiting on signals, e.g. via <code>sim.tick()</code>, the requested expressions are sampled before the processes added with <code>add_process()</code> and RTL processes perform combinatorial propagation. However, execution continues only after all pending combinatorial propagation finishes.</li>
+</ul>
+</li>
+</ul>
+<p>The following concurrency guarantees are provided:</p>
+<ul>
+<li>Async processes registered with <code>add_testbench</code> may be preempted by:
+<ul>
+<li>Any other process when calling <code>await ...</code>.</li>
+<li>A process registered with <code>add_process</code> (or an RTL process) when calling <code>sim.set()</code> or <code>sim.memory_write()</code>. In this case, control is returned to the same testbench after combinational settling.</li>
+</ul>
+</li>
+<li>Async processes registered with <code>add_process</code> may be preempted by:
+<ul>
+<li>Any other process when calling <code>await ...</code>.</li>
+</ul>
+</li>
+<li>Legacy processes follow the same rules as async processes, with the exception of:
+<ul>
+<li>A legacy process may not be preempted when calling <code>yield x:ValueLike</code> or <code>yield x:Assign</code>.</li>
+</ul>
+</li>
+<li>Once running, a process continues to execute until it terminates or is preempted.</li>
+</ul>
 <p>The new optional named argument <code>background</code> registers the testbench as a background process when true.
 Processes created through <code>add_process</code> are always registered as background processes (except when registering legacy non-async generator functions).</p>
 <p>The simulator context has the following methods:</p>
@@ -3640,28 +3672,32 @@ Processes created through <code>add_process</code> are always registered as back
 <li><code>get(expr: Value) -&gt; int</code></li>
 <li><code>get(expr: ValueCastable) -&gt; any</code>
 <ul>
-<li>Returns the value of <code>expr</code> when awaited.
+<li>Returns the value of <code>expr</code>.
 When <code>expr</code> is a value-castable, and its <code>shape()</code> is a <code>ShapeCastable</code>, the value will be converted through the shape's <code>.from_bits()</code>.
-Otherwise, a plain integer is returned.</li>
+Otherwise, a plain integer is returned.
+This function is not available in processes created through <code>add_process</code>.</li>
 </ul>
 </li>
 <li><code>set(expr: Value, value: ConstLike)</code></li>
 <li><code>set(expr: ValueCastable, value: any)</code>
 <ul>
-<li>Set <code>expr</code> to <code>value</code> when awaited.
+<li>Set <code>expr</code> to <code>value</code>.
 When <code>expr</code> is a value-castable, and its <code>shape()</code> is a <code>ShapeCastable</code>, the value will be converted through the shape's <code>.const()</code>.
-Otherwise, it must be a const-castable <code>ValueLike</code>.</li>
+Otherwise, it must be a const-castable <code>ValueLike</code>.
+When used in a process created through <code>add_testbench</code>, it may execute RTL processes and processes created through <code>add_process</code>.</li>
 </ul>
 </li>
 <li><code>memory_read(instance: MemoryIdentity, address: int)</code>
 <ul>
-<li>Read the value from <code>address</code> in <code>instance</code> when awaited.</li>
+<li>Read the value from <code>address</code> in <code>instance</code>.
+This function is not available in processes created through <code>add_process</code>.</li>
 </ul>
 </li>
 <li><code>memory_write(instance: MemoryIdentity, address: int, value: int, mask:int = None)</code>
 <ul>
-<li>Write <code>value</code> to <code>address</code> in <code>instance</code> when awaited. If <code>mask</code> is given, only the corresponding bits are written.
+<li>Write <code>value</code> to <code>address</code> in <code>instance</code>. If <code>mask</code> is given, only the corresponding bits are written.
 Like <code>MemoryInstance</code>, these two functions are an internal interface that will be usually only used via <code>lib.Memory</code>.
+When used in a process created through <code>add_testbench</code>, it may execute RTL processes and processes created through <code>add_process</code>.
 It comes without a stability guarantee.</li>
 </ul>
 </li>
@@ -3674,7 +3710,8 @@ When an elaboratable is passed to <code>context</code>, <code>domain</code> will
 </li>
 <li><code>delay(interval: float)</code>
 <ul>
-<li>Create a combinable trigger object for advancing simulation by <code>interval</code> seconds.</li>
+<li>Create a combinable trigger object for advancing simulation by <code>interval</code> seconds.
+This function is not available in processes created through <code>add_process</code>.</li>
 </ul>
 </li>
 <li><code>changed(*signals)</code>
@@ -3706,20 +3743,32 @@ If the current process is a background process, <code>async with sim.critical():
 <ul>
 <li><code>__await__()</code>
 <ul>
-<li>Advance simulation. No value is returned.</li>
+<li>Advance simulation and return the value(s) of the sampled expression(s). Values are returned in the same order as the expressions were added.</li>
+</ul>
+</li>
+<li><code>__aiter__()</code>
+<ul>
+<li>Return an async generator that is equivalent to repeatedly awaiting the trigger object in an infinite loop.</li>
+<li>The async generator yields value(s) of the sampled expression(s).</li>
+</ul>
+</li>
+<li><code>sample(*expressions)</code>
+<ul>
+<li>Create a new trigger object by copying the current object and appending the expressions to be sampled.</li>
 </ul>
 </li>
 <li><code>until(condition)</code>
 <ul>
 <li>Repeat the trigger until <code>condition</code> is true.
 <code>condition</code> is an arbitrary Amaranth expression.
-If <code>condition</code> is initially true, <code>await</code> will return immediately without advancing simulation.
 The return value is an unspecified awaitable with <code>await</code> as the only defined operation.
-It is only awaitable once and awaiting it returns no value.</li>
-<li>Example implementation:
+It is only awaitable once and returns the value(s) of the sampled expression(s) at the last time the trigger was repeated.</li>
+<li>Example implementation (without error checking):
 <pre><code class="language-python">async def until(self, condition):
-  while not await self._sim.get(condition):
-    await self
+    while True:
+        *values, done = await self.sample(condition)
+        if done:
+          return values
 </code></pre>
 </li>
 </ul>
@@ -3727,13 +3776,15 @@ It is only awaitable once and awaiting it returns no value.</li>
 <li><code>repeat(times: int)</code>
 <ul>
 <li>Repeat the trigger <code>times</code> times.
-Valid values are <code>times &gt;= 0</code>.
+Valid values are <code>times &gt; 0</code>.
 The return value is an unspecified awaitable with <code>await</code> as the only defined operation.
-It is only awaitable once and awaiting it returns no value.</li>
-<li>Example implementation:
+It is only awaitable once and returns the value(s) of the sampled expression(s) at the last time the trigger was repeated.</li>
+<li>Example implementation (without error checking):
 <pre><code class="language-python">async def repeat(self, times):
-  for _ in range(times):
-    await self
+    values = None
+    for _ in range(times):
+        values = await self
+    return values
 </code></pre>
 </li>
 </ul>
@@ -3756,6 +3807,7 @@ In case of multiple triggers occuring at the same time step, it is unspecified w
 <li><code>__aiter__()</code>
 <ul>
 <li>Return an async generator that is equivalent to repeatedly awaiting the trigger object in an infinite loop.</li>
+<li>The async generator yields value(s) of the trigger(s).</li>
 </ul>
 </li>
 <li><code>delay(interval: float)</code></li>
@@ -3769,9 +3821,6 @@ In case of multiple triggers occuring at the same time step, it is unspecified w
 </ul>
 </li>
 </ul>
-<p>To ensure testbench helper functions are only called from a testbench process, the <code>amaranth.sim.testbench_helper</code> decorator is added.
-The function wrapper expects the first positional argument (or second, after <code>self</code> or <code>cls</code> if decorating a method/classmethod) to be a simulator context, and will raise <code>TypeError</code> if not.
-If the function is called outside a testbench process, an exception will be raised.</p>
 <p><code>Tick()</code>, <code>Delay()</code>, <code>Active()</code> and <code>Passive()</code> as well as the ability to pass generator coroutines as <code>process</code> are deprecated and removed in a future version.</p>
 <h2 id="drawbacks-22"><a class="header" href="#drawbacks-22">Drawbacks</a></h2>
 <ul>
@@ -3779,13 +3828,27 @@ If the function is called outside a testbench process, an exception will be rais
 <li>Churn.</li>
 </ul>
 <h2 id="rationale-and-alternatives-21"><a class="header" href="#rationale-and-alternatives-21">Rationale and alternatives</a></h2>
+<p><code>sim.get()</code> is not available in processes created with <code>add_process()</code> to simplify the user interface and eliminate the possibility of misusing a helper function by calling it from the wrong type of process.</p>
 <ul>
-<li>Do nothing. Keep the existing interface, add <code>Changed()</code> alongside <code>Delay()</code> and <code>Tick()</code>, use <code>yield from</code> when calling functions.</li>
+<li>Most helper functions will be implemented using <code>await sim.tick().sample(...)</code>, mirroring the structure of the gateware they are driving. These functions may be safely called from either processes added with <code>add_testbench()</code> or with <code>add_process()</code> since the semantics of <code>await sim.tick()</code> is the same between them.</li>
+<li>Some helper functions will be using <code>sim.get(val)</code>, and will only be callable from processes added with <code>add_testbench()</code>, raising an error otherwise. In the legacy interface, the semantics of <code>yield val</code> changes depending on the type of the process, potentially leading to extremely confusing behavior. This is not possible in the async interface.</li>
+</ul>
+<p>Alternatives:</p>
+<ul>
+<li>Do nothing. Keep the existing interface, add <code>Changed()</code> alongside <code>Delay()</code> and <code>Tick()</code>, expand <code>Tick()</code> to add sampling, use <code>yield from</code> when calling functions.</li>
 </ul>
 <h2 id="prior-art-19"><a class="header" href="#prior-art-19">Prior art</a></h2>
 <p>Other python libraries like <a href="https://docs.cocotb.org/en/stable/coroutines.html">cocotb</a> that originally used generator based coroutines have also moved to <code>async</code>/<code>await</code> style coroutines.</p>
 <h2 id="unresolved-questions-21"><a class="header" href="#unresolved-questions-21">Unresolved questions</a></h2>
-<p>None.</p>
+<ul>
+<li>Is there really a need to ban <code>sim.delay()</code> from processes added with <code>add_process()</code>?
+<ul>
+<li>The value of <code>add_process()</code> is in ensuring that multiple processes waiting on the same trigger will modify simulation state deterministically no matter which order they run. Multiple processes waiting on a specific point in time using <code>sim.delay()</code> does not appear a common case.</li>
+<li><code>sim.delay()</code> in processes added with <code>add_process()</code> may unduly complicate implementation, since timeline advancement then can raise readiness of two kinds of processes instead of one. It is also likely to cause issues with CXXRTL integration.</li>
+<li><code>sim.delay()</code> in processes added with <code>add_process()</code> is useful to implement delay and phase shift blocks. However, these can be implemented in processes added with <code>add_testbench()</code> with no loss of functionality, as such blocks do not need delta cycle accurate synchronization with others on the same trigger.</li>
+</ul>
+</li>
+</ul>
 <h2 id="future-possibilities-21"><a class="header" href="#future-possibilities-21">Future possibilities</a></h2>
 <ul>
 <li>Add simulation helper methods to standard interfaces where it makes sense.
