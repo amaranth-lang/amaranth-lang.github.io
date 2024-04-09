@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Memory arrays &mdash; Amaranth language &amp; toolchain 0.5.0.dev227 documentation</title>
+  <title>Memory arrays &mdash; Amaranth language &amp; toolchain 0.5.0.dev228 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
@@ -17,7 +17,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c02e2b08"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=283488ca"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="../_static/platformpicker.js"></script>
@@ -41,7 +41,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.5.0.dev227+g38ad357
+                0.5.0.dev228+g7dd93be
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -66,7 +66,9 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Memory arrays</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#memories">Memories</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#simulation">Simulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#memory-description">Memory description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#memory-component">Memory component</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#memory-ports">Memory ports</a></li>
 </ul>
 </li>
@@ -187,21 +189,33 @@
 <p>However, the memory read port is also configured to be <em>transparent</em> relative to the memory write port. This means that if a write and a read operation (labelled <cite>t</cite>, <cite>u</cite> respectively) access the same row with address 3, the new contents will be read out, reducing the minimum push-to-pop latency to one cycle, down from two cycles that would be required without the use of transparency.</p>
 <img src="_images/memory/example_fifo.svg" alt="{'signal': [{'name': 'clk', 'wave': 'P........'}, {'name': 'push', 'wave': '01..0.10.', 'node': '.x'}, {'name': 'wr_port.addr', 'wave': '=.===..=.', 'data': ['0', '1', '2', '3', '4', '5']}, {'name': 'wr_port.data', 'wave': '====..=..', 'data': ['00', 'AA', 'BB', 'CC', 'DD'], 'node': '.w....t'}, {'name': 'memory[0]', 'wave': '=.=......', 'data': ['00', 'AA'], 'node': '..G'}, {'name': 'memory[3]', 'wave': '=......=.', 'data': ['00', 'DD'], 'node': '.......H'}, {'name': 'pop', 'wave': '0..1...0.', 'node': '...y'}, {'name': 'rd_port.addr', 'wave': '=...====.', 'data': ['0', '1', '2', '3', '4', '5']}, {'name': 'rd_port.data', 'wave': '=...====.', 'data': ['00', 'AA', 'BB', 'CC', 'DD'], 'node': '....r..u'}], 'edge': ['x-~&gt;G', 'w-&gt;G', 'y-~&gt;r', 't-&gt;H', 't-&gt;u'], 'config': {'skin': 'light'}}"></section>
 </section>
-<section id="memories">
-<h2>Memories<a class="headerlink" href="#memories" title="Permalink to this heading"></a></h2>
+<section id="simulation">
+<h2>Simulation<a class="headerlink" href="#simulation" title="Permalink to this heading"></a></h2>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>This section will be written once the simulator itself is documented.</p>
+</div>
+</section>
+<section id="memory-description">
+<h2>Memory description<a class="headerlink" href="#memory-description" title="Permalink to this heading"></a></h2>
+<dl class="py exception">
+<dt class="sig sig-object py" id="amaranth.hdl.FrozenMemory">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.hdl.</span></span><span class="sig-name descname"><span class="pre">FrozenMemory</span></span><a class="headerlink" href="#amaranth.hdl.FrozenMemory" title="Permalink to this definition"></a></dt>
+<dd><p>This exception is raised when a memory array is being modified after elaboration.</p>
+</dd></dl>
+
 <dl class="py class">
-<dt class="sig sig-object py" id="amaranth.lib.memory.Memory">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.memory.</span></span><span class="sig-name descname"><span class="pre">Memory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_loc_at</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.memory.Memory" title="Permalink to this definition"></a></dt>
-<dd><p>Addressable array of rows.</p>
-<p>This <a class="reference internal" href="wiring.html#wiring"><span class="std std-ref">component</span></a> is used to construct a memory array by first specifying its
-dimensions and initial contents using the <code class="code highlight py python docutils literal highlight-python"><span class="n">shape</span></code>, <code class="code highlight py python docutils literal highlight-python"><span class="n">depth</span></code>, and <code class="code highlight py python docutils literal highlight-python"><span class="n">init</span></code> parameters,
-and then adding memory ports using the <a class="reference internal" href="#amaranth.lib.memory.Memory.read_port" title="amaranth.lib.memory.Memory.read_port"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read_port()</span></code></a> and <a class="reference internal" href="#amaranth.lib.memory.Memory.write_port" title="amaranth.lib.memory.Memory.write_port"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write_port()</span></code></a> methods.
-Because it is mutable, it should be created and used locally within
-the <a class="reference internal" href="../guide.html#lang-elaboration"><span class="std std-ref">elaborate</span></a> method. It is an error to add ports to or change
-initial contents of a memory after it has been elaborated.</p>
+<dt class="sig sig-object py" id="amaranth.hdl.MemoryData">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.hdl.</span></span><span class="sig-name descname"><span class="pre">MemoryData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_loc_at</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.MemoryData" title="Permalink to this definition"></a></dt>
+<dd><p>Abstract description of a memory array.</p>
+<p>A <a class="reference internal" href="#amaranth.hdl.MemoryData" title="amaranth.hdl.MemoryData"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryData</span></code></a> object describes the geometry (shape and depth) and the initial contents
+of a memory array, without specifying the way in which it is accessed. It is conceptually
+similar to an array of <code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code>s.</p>
 <p>The <code class="code highlight py python docutils literal highlight-python"><span class="n">init</span></code> parameter and assignment to the <code class="code highlight py python docutils literal highlight-python"><span class="n">init</span></code> attribute have the same effect, with
-<a class="reference internal" href="#amaranth.lib.memory.Memory.Init" title="amaranth.lib.memory.Memory.Init"><code class="xref py py-class docutils literal notranslate"><span class="pre">Memory.Init</span></code></a> converting elements of the iterable to match <code class="code highlight py python docutils literal highlight-python"><span class="n">shape</span></code> and using
+<a class="reference internal" href="#amaranth.hdl.MemoryData.Init" title="amaranth.hdl.MemoryData.Init"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryData.Init</span></code></a> converting elements of the iterable to match <code class="code highlight py python docutils literal highlight-python"><span class="n">shape</span></code> and using
 a default value for rows that are not explicitly initialized.</p>
+<p>Changing the initial contents of a <a class="reference internal" href="#amaranth.hdl.MemoryData" title="amaranth.hdl.MemoryData"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryData</span></code></a> is only possible until it is used to
+elaborate a memory; afterwards, attempting to do so will raise <a class="reference internal" href="#amaranth.hdl.FrozenMemory" title="amaranth.hdl.FrozenMemory"><code class="xref py py-exc docutils literal notranslate"><span class="pre">FrozenMemory</span></code></a>.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Uninitialized memories (including ASIC memories and some FPGA memories) are
@@ -217,12 +231,9 @@ the <code class="code highlight py python docutils literal highlight-python"><sp
 </ul>
 </dd>
 </dl>
-<p class="rubric">Platform overrides</p>
-<p>Define the <code class="code highlight py python docutils literal highlight-python"><span class="n">get_memory</span><span class="p">()</span></code> platform method to override the implementation of
-<a class="reference internal" href="#amaranth.lib.memory.Memory" title="amaranth.lib.memory.Memory"><code class="xref py py-class docutils literal notranslate"><span class="pre">Memory</span></code></a>, e.g. to instantiate library cells directly.</p>
 <dl class="py class">
-<dt class="sig sig-object py" id="amaranth.lib.memory.Memory.Init">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">...</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.memory.Memory.Init" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="amaranth.hdl.MemoryData.Init">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">...</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.MemoryData.Init" title="Permalink to this definition"></a></dt>
 <dd><p>Memory initialization data.</p>
 <p>This is a special container used only for initial contents of memories. It is similar
 to <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>, but does not support inserting or deleting elements; its length is always
@@ -239,6 +250,60 @@ the same as the depth of the memory it belongs to.</p>
 </ul>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="amaranth.hdl.MemoryData.__getitem__">
+<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.MemoryData.__getitem__" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve a memory row for simulation.</p>
+<p>A <a class="reference internal" href="#amaranth.hdl.MemoryData" title="amaranth.hdl.MemoryData"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryData</span></code></a> object can be indexed with an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> to construct a special
+value that can be used to read and write the selected memory row in a simulation testbench,
+without having to create a memory port.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Even in a simulation, the value returned by this function cannot be used in a module;
+it can only be used with <code class="code highlight py python docutils literal highlight-python"><span class="n">sim</span><span class="o">.</span><span class="n">get</span><span class="p">()</span></code> and <code class="code highlight py python docutils literal highlight-python"><span class="n">sim</span><span class="o">.</span><span class="n">set</span><span class="p">()</span></code>.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../reference.html#amaranth.hdl.Value" title="amaranth.hdl.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a>, <a class="reference internal" href="../guide.html#lang-assignable"><span class="std std-ref">assignable</span></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="memory-component">
+<h2>Memory component<a class="headerlink" href="#memory-component" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="amaranth.lib.memory.Memory">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.memory.</span></span><span class="sig-name descname"><span class="pre">Memory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_loc_at</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.memory.Memory" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.memory.</span></span><span class="sig-name descname"><span class="pre">Memory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_loc_at</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Addressable array of rows.</p>
+<p>This <a class="reference internal" href="wiring.html#wiring"><span class="std std-ref">component</span></a> is used to construct a memory array by first specifying its
+dimensions and initial contents using the <a class="reference internal" href="#amaranth.hdl.MemoryData" title="amaranth.hdl.MemoryData"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryData</span></code></a> object and
+the <code class="code highlight py python docutils literal highlight-python"><span class="n">data</span></code> parameter (or by providing <code class="code highlight py python docutils literal highlight-python"><span class="n">shape</span></code>, <code class="code highlight py python docutils literal highlight-python"><span class="n">depth</span></code>, and <code class="code highlight py python docutils literal highlight-python"><span class="n">init</span></code> parameters
+directly instead) and then adding memory ports using the <a class="reference internal" href="#amaranth.lib.memory.Memory.read_port" title="amaranth.lib.memory.Memory.read_port"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read_port()</span></code></a> and
+<a class="reference internal" href="#amaranth.lib.memory.Memory.write_port" title="amaranth.lib.memory.Memory.write_port"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write_port()</span></code></a> methods. Because it is mutable, it should be created and used locally within
+the <a class="reference internal" href="../guide.html#lang-elaboration"><span class="std std-ref">elaborate</span></a> method.</p>
+<p>Adding ports or changing initial contents of a <a class="reference internal" href="#amaranth.lib.memory.Memory" title="amaranth.lib.memory.Memory"><code class="xref py py-class docutils literal notranslate"><span class="pre">Memory</span></code></a> is only possible until it is
+elaborated; afterwards, attempting to do so will raise <a class="reference internal" href="#amaranth.hdl.FrozenMemory" title="amaranth.hdl.FrozenMemory"><code class="xref py py-class docutils literal notranslate"><span class="pre">FrozenMemory</span></code></a>.</p>
+<p class="rubric">Platform overrides</p>
+<p>Define the <code class="code highlight py python docutils literal highlight-python"><span class="n">get_memory</span><span class="p">()</span></code> platform method to override the implementation of
+<a class="reference internal" href="#amaranth.lib.memory.Memory" title="amaranth.lib.memory.Memory"><code class="xref py py-class docutils literal notranslate"><span class="pre">Memory</span></code></a>, e.g. to instantiate library cells directly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<a class="reference internal" href="#amaranth.hdl.MemoryData" title="amaranth.hdl.MemoryData"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryData</span></code></a>) – Representation of memory geometry and contents.</p></li>
+<li><p><strong>shape</strong> (<a class="reference internal" href="../guide.html#lang-shapelike"><span class="std std-ref">shape-like</span></a> object) – Shape of each memory row.</p></li>
+<li><p><strong>depth</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Number of memory rows.</p></li>
+<li><p><strong>init</strong> (<em>iterable</em><em> of </em><em>initial values</em>) – Initial values for memory rows.</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.lib.memory.Memory.read_port">
 <span class="sig-name descname"><span class="pre">read_port</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sync'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transparent_for</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_loc_at</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.memory.Memory.read_port" title="Permalink to this definition"></a></dt>
