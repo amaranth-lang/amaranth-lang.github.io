@@ -4,11 +4,11 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Data structures &mdash; Amaranth language &amp; toolchain 0.5.0.dev236 documentation</title>
+  <title>Data structures &mdash; Amaranth language &amp; toolchain 0.5.0.dev239 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=87fc4a05" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=712c6b04" />
 
   
   <!--[if lt IE 9]>
@@ -17,7 +17,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=00997f55"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=e883dc97"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="../_static/platformpicker.js"></script>
@@ -41,7 +41,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.5.0.dev236+g4f6b0f2
+                0.5.0.dev239+gd557afd
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -135,7 +135,7 @@
 <h3>Motivation<a class="headerlink" href="#motivation" title="Permalink to this heading"></a></h3>
 <p>The fundamental Amaranth type is a <code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code>: a sequence of bits that can also be used as a number. Manipulating values directly is sufficient for simple applications, but in more complex ones, values are often more than just a sequence of bits; they have well-defined internal structure.</p>
 <p>For example, consider a module that processes pixels, converting them from RGB to grayscale. The color pixel format is RGB565:</p>
-<img alt="../_images/rgb565_layout.svg" src="../_images/rgb565_layout.svg" /><p>This module could be implemented (using a fast but <em>very</em> approximate method) as follows:</p>
+<img src="_images/data/rgb565_layout.svg" class="wavedrom wavedrom-reg" alt="{'reg': [{'name': '.red', 'bits': 5, 'type': 2}, {'name': '.green', 'bits': 6, 'type': 3}, {'name': '.blue', 'bits': 5, 'type': 4}], 'config': {'lanes': 1, 'compact': True, 'vflip': True, 'hspace': 650}}"><p>This module could be implemented (using a fast but <em>very</em> approximate method) as follows:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">i_color</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
 <span class="n">o_gray</span>  <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
 
@@ -182,7 +182,7 @@
                   <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">i_stream</span><span class="o">.</span><span class="n">valid</span><span class="p">))))</span>
 </pre></div>
 </div>
-<p>Note how the width of <code class="docutils literal notranslate"><span class="pre">i_stream</span></code> is never defined explicitly; it is instead inferred from the shapes of its fields.</p>
+<p>Note how the width of <code class="code highlight py python docutils literal highlight-python"><span class="n">i_stream</span></code> is never defined explicitly; it is instead inferred from the shapes of its fields.</p>
 <p>In the previous section, the precise bitwise layout was important, since RGB565 is an interchange format. In this section however the exact bit positions do not matter, since the layout is only used internally to communicate between two modules in the same design. It is sufficient that both of them use the same layout.</p>
 </section>
 <section id="defining-layouts">
@@ -217,7 +217,7 @@
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">red</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">green</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">blue</span><span class="p">)[</span><span class="o">-</span><span class="mi">8</span><span class="p">:]</span>
 </pre></div>
 </div>
-<p>Here, the <code class="docutils literal notranslate"><span class="pre">RGBLayout</span></code> class itself is <a class="reference internal" href="../guide.html#lang-shapelike"><span class="std std-ref">shape-like</span></a> and can be used anywhere a shape is accepted. When a <code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code> is constructed with this layout, the returned value is wrapped in an <code class="docutils literal notranslate"><span class="pre">RGBView</span></code>:</p>
+<p>Here, the <code class="code highlight py python docutils literal highlight-python"><span class="n">RGBLayout</span></code> class itself is <a class="reference internal" href="../guide.html#lang-shapelike"><span class="std std-ref">shape-like</span></a> and can be used anywhere a shape is accepted. When a <code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code> is constructed with this layout, the returned value is wrapped in an <code class="code highlight py python docutils literal highlight-python"><span class="n">RGBView</span></code>:</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pixel</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="n">RGBLayout</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">pixel</span><span class="o">.</span><span class="n">as_value</span><span class="p">())</span>
 <span class="go">16</span>
@@ -257,7 +257,7 @@
     <span class="p">})</span>
 </pre></div>
 </div>
-<p>Here, the shape of the <code class="docutils literal notranslate"><span class="pre">Command</span></code> is inferred, being large enough to accommodate the biggest of all defined parameter structures, and it is not necessary to manage it manually.</p>
+<p>Here, the shape of the <code class="code highlight py python docutils literal highlight-python"><span class="n">Command</span></code> is inferred, being large enough to accommodate the biggest of all defined parameter structures, and it is not necessary to manage it manually.</p>
 <p>One module could submit a command with:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cmd</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="n">Command</span><span class="p">)</span>
 
@@ -480,7 +480,7 @@ in which they appear in <code class="code highlight py python docutils literal h
 <p>The fields of a structure layout follow one another without any gaps, and the size of
 a structure layout is the sum of the sizes of its members.</p>
 <p>For example, the following layout of a 16-bit value:</p>
-<img alt="../_images/struct_layout.svg" src="../_images/struct_layout.svg" /><p>can be described with:</p>
+<img src="_images/data/struct_layout.svg" class="wavedrom wavedrom-reg" alt="{'reg': [{'name': '.first', 'bits': 3}, {'name': '.second', 'bits': 7}, {'name': '.third', 'bits': 6}], 'config': {'lanes': 1, 'compact': True, 'vflip': True, 'hspace': 650}}"><p>can be described with:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">StructLayout</span><span class="p">({</span>
     <span class="s2">&quot;first&quot;</span><span class="p">:</span>  <span class="mi">3</span><span class="p">,</span>
     <span class="s2">&quot;second&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
@@ -523,7 +523,7 @@ no fields.</p>
 <p>The fields of a union layout all start from bit 0, and the size of a union layout is the size
 of the largest of its members.</p>
 <p>For example, the following layout of a 7-bit value:</p>
-<img alt="../_images/union_layout.svg" src="../_images/union_layout.svg" /><p>can be described with:</p>
+<img src="_images/data/union_layout.svg" class="wavedrom wavedrom-reg" alt="{'reg': [{'name': '.third', 'bits': 6}, {'name': '', 'bits': 1, 'type': 1}, {'name': '.second', 'bits': 7}, {'name': '.first', 'bits': 3}, {'name': '', 'bits': 4, 'type': 1}], 'config': {'lanes': 3, 'compact': True, 'vflip': True, 'hspace': 289.4375}}"><p>can be described with:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">UnionLayout</span><span class="p">({</span>
     <span class="s2">&quot;first&quot;</span><span class="p">:</span>  <span class="mi">3</span><span class="p">,</span>
     <span class="s2">&quot;second&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
@@ -577,7 +577,7 @@ in which they appear in <code class="code highlight py python docutils literal h
 <p>The fields of an array layout follow one another without any gaps, and the size of an array
 layout is the size of its element multiplied by its length.</p>
 <p>For example, the following layout of a 16-bit value:</p>
-<img alt="../_images/array_layout.svg" src="../_images/array_layout.svg" /><p>can be described with:</p>
+<img src="_images/data/array_layout.svg" class="wavedrom wavedrom-reg" alt="{'reg': [{'name': '[0]', 'bits': 4}, {'name': '[1]', 'bits': 4}, {'name': '[2]', 'bits': 4}, {'name': '[3]', 'bits': 4}], 'config': {'lanes': 1, 'compact': True, 'vflip': True, 'hspace': 650}}"><p>can be described with:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">ArrayLayout</span><span class="p">(</span><span class="n">unsigned</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -619,7 +619,7 @@ defined contiguously, the fields in a flexible layout can overlap and have gaps 
 may also be more convenient to use a flexible layout when the layout information is derived
 from an external data file rather than defined in Python code.</p>
 <p>For example, the following layout of a 16-bit value:</p>
-<img alt="../_images/flexible_layout.svg" src="../_images/flexible_layout.svg" /><p>can be described with:</p>
+<img src="_images/data/flexible_layout.svg" class="wavedrom wavedrom-reg" alt="{'reg': [{'name': '', 'bits': 14, 'type': 1}, {'name': '[0]', 'bits': 1}, {'name': '', 'bits': 1, 'type': 1}, {'name': '', 'bits': 10, 'type': 1}, {'name': '.third', 'bits': 6}, {'name': '.second', 'bits': 7}, {'name': '', 'bits': 9, 'type': 1}, {'name': '', 'bits': 1, 'type': 1}, {'name': '.first', 'bits': 3}, {'name': '', 'bits': 12, 'type': 1}], 'config': {'lanes': 4, 'compact': True, 'vflip': True, 'hspace': 650}}"><p>can be described with:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">FlexibleLayout</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="p">{</span>
     <span class="s2">&quot;first&quot;</span><span class="p">:</span>  <span class="n">data</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">unsigned</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="mi">1</span><span class="p">),</span>
     <span class="s2">&quot;second&quot;</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">unsigned</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="mi">0</span><span class="p">),</span>

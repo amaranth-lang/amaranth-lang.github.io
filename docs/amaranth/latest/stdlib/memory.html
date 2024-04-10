@@ -4,11 +4,11 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Memory arrays &mdash; Amaranth language &amp; toolchain 0.5.0.dev236 documentation</title>
+  <title>Memory arrays &mdash; Amaranth language &amp; toolchain 0.5.0.dev239 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
-      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=87fc4a05" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=712c6b04" />
 
   
   <!--[if lt IE 9]>
@@ -17,7 +17,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=00997f55"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=e883dc97"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="../_static/platformpicker.js"></script>
@@ -41,7 +41,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.5.0.dev236+g4f6b0f2
+                0.5.0.dev239+gd557afd
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -161,7 +161,7 @@
 </pre></div>
 </div>
 <p>In this example, the memory read port is asynchronous, and a change of the address input (labelled <cite>a</cite> on the diagram below) results in an immediate change of the data output (labelled <cite>d</cite>).</p>
-<img src="_images/memory/example_hello.svg" class="wavedrom wavedrom-signal" alt="{'signal': [{'name': 'clk', 'wave': '0P............'}, {'name': 'rd_port.addr', 'wave': '==============', 'data': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 0, 1], 'node': '.a'}, {'name': 'rd_port.data', 'wave': '==============', 'data': ['H', 'e', 'l', 'l', 'o', ' ', 'w', 'o', 'r', 'l', 'd', '\\n', 'H', 'e'], 'node': '.d'}], 'edge': ['a-|d'], 'config': {'skin': 'light'}}"></section>
+<img src="_images/memory/example_hello.svg" class="wavedrom wavedrom-signal" alt="{'signal': [{'name': 'clk', 'wave': '0P............'}, {'name': 'rd_port.addr', 'wave': '==============', 'data': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 0, 1], 'node': '.a'}, {'name': 'rd_port.data', 'wave': '==============', 'data': ['H', 'e', 'l', 'l', 'o', ' ', 'w', 'o', 'r', 'l', 'd', '\\n', 'H', 'e'], 'node': '.d'}], 'edge': ['a-|d'], 'config': {'skin': 'default'}}"></section>
 <section id="first-in-first-out-queue">
 <h3>First-in, first-out queue<a class="headerlink" href="#first-in-first-out-queue" title="Permalink to this heading"></a></h3>
 <p>In a more complex example, a power-of-2 sized writable memory is used to implement a first-in, first-out queue:</p>
@@ -187,7 +187,7 @@
 </div>
 <p>In this example, the memory read and write ports are synchronous. A write operation (labelled <cite>x</cite>, <cite>w</cite>) updates the addressed row 0 on the next clock cycle, and a read operation (labelled <cite>y</cite>, <cite>r</cite>) retrieves the contents of the same addressed row 0 on the next clock cycle as well.</p>
 <p>However, the memory read port is also configured to be <em>transparent</em> relative to the memory write port. This means that if a write and a read operation (labelled <cite>t</cite>, <cite>u</cite> respectively) access the same row with address 3, the new contents will be read out, reducing the minimum push-to-pop latency to one cycle, down from two cycles that would be required without the use of transparency.</p>
-<img src="_images/memory/example_fifo.svg" class="wavedrom wavedrom-signal" alt="{'signal': [{'name': 'clk', 'wave': 'P........'}, {'name': 'push', 'wave': '01..0.10.', 'node': '.x'}, {'name': 'wr_port.addr', 'wave': '=.===..=.', 'data': ['0', '1', '2', '3', '4', '5']}, {'name': 'wr_port.data', 'wave': '====..=..', 'data': ['00', 'AA', 'BB', 'CC', 'DD'], 'node': '.w....t'}, {'name': 'memory[0]', 'wave': '=.=......', 'data': ['00', 'AA'], 'node': '..G'}, {'name': 'memory[3]', 'wave': '=......=.', 'data': ['00', 'DD'], 'node': '.......H'}, {'name': 'pop', 'wave': '0..1...0.', 'node': '...y'}, {'name': 'rd_port.addr', 'wave': '=...====.', 'data': ['0', '1', '2', '3', '4', '5']}, {'name': 'rd_port.data', 'wave': '=...====.', 'data': ['00', 'AA', 'BB', 'CC', 'DD'], 'node': '....r..u'}], 'edge': ['x-~&gt;G', 'w-&gt;G', 'y-~&gt;r', 't-&gt;H', 't-&gt;u'], 'config': {'skin': 'light'}}"></section>
+<img src="_images/memory/example_fifo.svg" class="wavedrom wavedrom-signal" alt="{'signal': [{'name': 'clk', 'wave': 'P........'}, {'name': 'push', 'wave': '01..0.10.', 'node': '.x'}, {'name': 'wr_port.addr', 'wave': '=.===..=.', 'data': ['0', '1', '2', '3', '4', '5']}, {'name': 'wr_port.data', 'wave': '====..=..', 'data': ['00', 'AA', 'BB', 'CC', 'DD'], 'node': '.w....t'}, {'name': 'memory[0]', 'wave': '=.=......', 'data': ['00', 'AA'], 'node': '..G'}, {'name': 'memory[3]', 'wave': '=......=.', 'data': ['00', 'DD'], 'node': '.......H'}, {'name': 'pop', 'wave': '0..1...0.', 'node': '...y'}, {'name': 'rd_port.addr', 'wave': '=...====.', 'data': ['0', '1', '2', '3', '4', '5']}, {'name': 'rd_port.data', 'wave': '=...====.', 'data': ['00', 'AA', 'BB', 'CC', 'DD'], 'node': '....r..u'}], 'edge': ['x-~&gt;G', 'w-&gt;G', 'y-~&gt;r', 't-&gt;H', 't-&gt;u'], 'config': {'skin': 'default'}}"></section>
 </section>
 <section id="simulation">
 <h2>Simulation<a class="headerlink" href="#simulation" title="Permalink to this heading"></a></h2>
