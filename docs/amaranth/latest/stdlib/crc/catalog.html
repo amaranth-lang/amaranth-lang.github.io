@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Predefined CRC Algorithms &mdash; Amaranth language &amp; toolchain 0.5.0.dev241 documentation</title>
+  <title>Algorithm catalog &mdash; Amaranth language &amp; toolchain 0.5.0.dev244 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../_static/platformpicker.css" />
@@ -17,7 +17,7 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=2e0ed805"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=760746bb"></script>
         <script src="../../_static/doctools.js?v=888ff710"></script>
         <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="../../_static/platformpicker.js"></script>
@@ -41,7 +41,7 @@
               <img src="../../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.5.0.dev241+g544eeee
+                0.5.0.dev244+g1b81a47
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -68,10 +68,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../coding.html">Code conversion</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../fifo.html">First-in first-out queues</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="../crc.html">Cyclic redundancy checks</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="../crc.html#amaranth.lib.crc.Algorithm"><code class="docutils literal notranslate"><span class="pre">Algorithm</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../crc.html#amaranth.lib.crc.Parameters"><code class="docutils literal notranslate"><span class="pre">Parameters</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../crc.html#amaranth.lib.crc.Processor"><code class="docutils literal notranslate"><span class="pre">Processor</span></code></a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">Predefined CRC Algorithms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../crc.html#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../crc.html#examples">Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../crc.html#algorithms-and-parameters">Algorithms and parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../crc.html#crc-computation">CRC computation</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../crc.html#predefined-algorithms">Predefined algorithms</a></li>
 </ul>
 </li>
 </ul>
@@ -102,7 +103,7 @@
           <li class="breadcrumb-item"><a href="../../index.html">Language &amp; toolchain</a></li>
           <li class="breadcrumb-item"><a href="../../stdlib.html">Standard library</a></li>
           <li class="breadcrumb-item"><a href="../crc.html">Cyclic redundancy checks</a></li>
-      <li class="breadcrumb-item active">Predefined CRC Algorithms</li>
+      <li class="breadcrumb-item active">Algorithm catalog</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/stdlib/crc/catalog.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -113,16 +114,10 @@
            <div itemprop="articleBody">
              
   <section id="module-amaranth.lib.crc.catalog">
-<span id="predefined-crc-algorithms"></span><h1>Predefined CRC Algorithms<a class="headerlink" href="#module-amaranth.lib.crc.catalog" title="Permalink to this heading"></a></h1>
-<p>This module contains a catalog of predefined CRC algorithms.</p>
-<p>All entries are from <a class="reference external" href="https://reveng.sourceforge.io/crc-catalogue/all.htm">reveng</a>, accessed on 2023-05-25.</p>
-<blockquote>
-<div></div></blockquote>
-<p>To use an entry, call it with an optional <code class="docutils literal notranslate"><span class="pre">data_width</span></code> which defaults
-to 8. For example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">crc8</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">submodules</span><span class="o">.</span><span class="n">crc8</span> <span class="o">=</span> <span class="n">crc</span><span class="o">.</span><span class="n">catalog</span><span class="o">.</span><span class="n">CRC8_AUTOSAR</span><span class="p">()</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
-</pre></div>
-</div>
+<span id="algorithm-catalog"></span><h1>Algorithm catalog<a class="headerlink" href="#module-amaranth.lib.crc.catalog" title="Permalink to this heading"></a></h1>
+<p>This module contains a catalog of predefined CRC algorithms, retrieved from the <a class="reference external" href="https://reveng.sourceforge.io/crc-catalogue/all.htm">reveng catalogue</a>
+on 2023-05-25.</p>
+<p>See the documentation for the <a class="reference internal" href="../crc.html#module-amaranth.lib.crc" title="amaranth.lib.crc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">crc</span></code></a> module for examples.</p>
 <dl class="py data">
 <dt class="sig sig-object py" id="amaranth.lib.crc.catalog.CRC3_GSM">
 <span class="sig-prename descclassname"><span class="pre">amaranth.lib.crc.catalog.</span></span><span class="sig-name descname"><span class="pre">CRC3_GSM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">Algorithm(crc_width=3,</span> <span class="pre">polynomial=0x3,</span> <span class="pre">initial_crc=0x0,</span> <span class="pre">reflect_input=False,</span> <span class="pre">reflect_output=False,</span> <span class="pre">xor_output=0x7)</span></em><a class="headerlink" href="#amaranth.lib.crc.catalog.CRC3_GSM" title="Permalink to this definition"></a></dt>
