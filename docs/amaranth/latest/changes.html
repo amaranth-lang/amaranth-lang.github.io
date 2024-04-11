@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Changelog &mdash; Amaranth language &amp; toolchain 0.5.0.dev248 documentation</title>
+  <title>Changelog &mdash; Amaranth language &amp; toolchain 0.5.0.dev249 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/platformpicker.css" />
@@ -17,7 +17,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=a9e56f13"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=0d9deb0a"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/platformpicker.js"></script>
@@ -41,7 +41,7 @@
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.5.0.dev248+g8c02d3e
+                0.5.0.dev249+g7fe62f8
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -159,6 +159,7 @@
 <li><p>Remove any usage of <code class="docutils literal notranslate"><span class="pre">name=</span></code> with assertions, possibly replacing them with custom messages</p></li>
 <li><p>Ensure all elaboratables are subclasses of <code class="xref py py-class docutils literal notranslate"><span class="pre">Elaboratable</span></code></p></li>
 <li><p>Ensure clock domains aren’t used outside the module that defines them, or its submodules; move clock domain definitions upwards in the hierarchy as necessary</p></li>
+<li><p>Remove uses of <code class="docutils literal notranslate"><span class="pre">amaranth.lib.coding.*</span></code> by inlining or copying the implementation of the modules.</p></li>
 </ul>
 </section>
 <section id="implemented-rfcs">
@@ -175,7 +176,8 @@
 <li><p><a class="reference external" href="https://amaranth-lang.org/rfcs/0053-ioport.html">RFC 53</a>: Low-level I/O primitives</p></li>
 <li><p><a class="reference external" href="https://amaranth-lang.org/rfcs/0058-valuecastable-format.html">RFC 58</a>: Core support for <code class="docutils literal notranslate"><span class="pre">ValueCastable</span></code> formatting</p></li>
 <li><p><a class="reference external" href="https://amaranth-lang.org/rfcs/0059-no-domain-upwards-propagation.html">RFC 59</a>: Get rid of upwards propagation of clock domains</p></li>
-<li><p><a class="reference external" href="https://amaranth-lang.org/rfcs/0062-memory-data.html">RFC 62</a>: The <cite>MemoryData`</cite> class</p></li>
+<li><p><a class="reference external" href="https://amaranth-lang.org/rfcs/0062-memory-data.html">RFC 62</a>: The <code class="docutils literal notranslate"><span class="pre">MemoryData</span></code> class</p></li>
+<li><p><a class="reference external" href="https://amaranth-lang.org/rfcs/0063-remove-lib-coding.html">RFC 63</a>: Remove <code class="docutils literal notranslate"><span class="pre">amaranth.lib.coding</span></code></p></li>
 </ul>
 </section>
 <section id="language-changes">
@@ -215,6 +217,7 @@
 <li><p>Changed: <a class="reference internal" href="stdlib/wiring.html#amaranth.lib.wiring.Signature.is_compliant" title="amaranth.lib.wiring.Signature.is_compliant"><code class="xref py py-meth docutils literal notranslate"><span class="pre">amaranth.lib.wiring.Signature.is_compliant()</span></code></a> no longer rejects reset-less signals.</p></li>
 <li><p>Added: <code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.lib.io.SingleEndedPort</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.lib.io.DifferentialPort</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0055-lib-io.html">RFC 55</a>)</p></li>
 <li><p>Added: <code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.lib.io.Buffer</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.lib.io.FFBuffer</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.lib.io.DDRBuffer</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0055-lib-io.html">RFC 55</a>)</p></li>
+<li><p>Deprecated: <a class="reference internal" href="stdlib/coding.html#module-amaranth.lib.coding" title="amaranth.lib.coding"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.coding</span></code></a>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0063-remove-lib-coding.html">RFC 63</a>)</p></li>
 <li><p>Removed: (deprecated in 0.4) <code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.scheduler</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0019-remove-scheduler.html">RFC 19</a>)</p></li>
 <li><p>Removed: (deprecated in 0.4) <a class="reference internal" href="stdlib/fifo.html#amaranth.lib.fifo.FIFOInterface" title="amaranth.lib.fifo.FIFOInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.lib.fifo.FIFOInterface</span></code></a> with <code class="docutils literal notranslate"><span class="pre">fwft=False</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0020-deprecate-non-fwft-fifos.html">RFC 20</a>)</p></li>
 <li><p>Removed: (deprecated in 0.4) <a class="reference internal" href="stdlib/fifo.html#amaranth.lib.fifo.SyncFIFO" title="amaranth.lib.fifo.SyncFIFO"><code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.lib.fifo.SyncFIFO</span></code></a> with <code class="docutils literal notranslate"><span class="pre">fwft=False</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0020-deprecate-non-fwft-fifos.html">RFC 20</a>)</p></li>
