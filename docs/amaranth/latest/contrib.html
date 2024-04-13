@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contributing &mdash; Amaranth language &amp; toolchain 0.5.0.dev266 documentation</title>
+  <title>Contributing &mdash; Amaranth language &amp; toolchain 0.5.0.dev267 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/platformpicker.css" />
@@ -17,7 +17,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=2c18e840"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=88606c59"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/platformpicker.js"></script>
@@ -40,7 +40,7 @@
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.5.0.dev266
+                0.5.0.dev267
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -71,6 +71,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#building-the-documentation">Building the documentation</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#documentation-style-guide">Documentation style guide</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#contributing-your-changes">Contributing your changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#weekly-meetings">Weekly meetings</a></li>
 </ul>
@@ -168,13 +169,54 @@
 </div>
 </section>
 </section>
+<section id="documentation-style-guide">
+<h2>Documentation style guide<a class="headerlink" href="#documentation-style-guide" title="Permalink to this heading"></a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Our documentation style guidelines are evolving, and this section is incomplete.</p>
+</div>
+<p>Some of the fundamental guidelines are:</p>
+<ul>
+<li><p><strong>Document the contract and the affordances,</strong> not the implementation. This is especially important because the Amaranth documentation is <em>the</em> source of truth for its semantics; the tests and the implementation source code are secondary to it, and the RFCs exist to record the process rather than document the outcome.</p></li>
+<li><p><strong>Shape the code to be documentable.</strong> This is a corollary to the previous guideline. If an interface is difficult to describe in a way that is readily understood, then it may need to be changed. Many breaking changes in Amaranth were done to make the language and libraries easier to understand.</p></li>
+<li><p><strong>Be consistent.</strong> Take inspiration from existing documentation for similar modules. However, don’t be consistent at the expense of clarity.</p></li>
+<li><p><strong>Be concise.</strong> It is easy to write boilerplate, and difficult to navigate through it.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>In particular, if the <cite>Parameters</cite> section of the class docstring describes a parameter, it is expected that the same parameter will be available as a class attribute (usually, but not always, read-only), and there is no need to additionally document this fact. If there isn’t a corresponding attribute it should likely be added.</p></li>
+<li><p>There is no need to individually document every argument and every return value of every method. This mainly creates clutter. The goal in writing documentation is transferring knowledge, not ticking boxes.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>Some of the formatting guidelines are:</p>
+<ul>
+<li><p>Limit code (including docstrings, where possible–some of the Sphinx syntax does not allow wrapping) to 100 columns in <code class="docutils literal notranslate"><span class="pre">.py</span></code> files, but do not break paragraphs in <code class="docutils literal notranslate"><span class="pre">.rst</span></code> files.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">###...#</span></code> for first-level headings, <code class="docutils literal notranslate"><span class="pre">===...=</span></code> for second-level headings, <code class="docutils literal notranslate"><span class="pre">---...-</span></code> for third-level headings.</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">:py:`...`</span></code> syntax for inline Python code references (even trivial ones, e.g. <code class="docutils literal notranslate"><span class="pre">:py:`var_name`</span></code>), <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">testcode::</span></code> for most Python code blocks (use <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">code::</span></code> where the code cannot or should not be tested), <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">doctest::</span></code> for doctests.</p></li>
+<li><p>Use admonitions sparingly, and only of the following kinds:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">warning::</span></code> for text which MUST be paid attention to, or else unexpected bad things may happen. This is the most noticeable kind, rendered in yellow at the moment.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">tip::</span></code> for text which SHOULD be paid attention to, otherwise annoyance may happen. This is the second most noticeable kind, rendered in bright blue-green at the moment.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">note::</span></code> for text which MAY be paid attention to, but which is not key for understanding of the topic as a whole. This is the least noticeable kind, rendered in faint blue at the moment.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">todo::</span></code> may also be used for incomplete sections.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>For methods, phrase the short description (first line of docstring) like <code class="docutils literal notranslate"><span class="pre">Do</span> <span class="pre">the</span> <span class="pre">thing.</span></code>, i.e. as an imperative sentence.</p></li>
+<li><p>For properties, phrase the short description (first line of docstring) like <code class="docutils literal notranslate"><span class="pre">Value</span> <span class="pre">of</span> <span class="pre">thing.</span></code>, i.e. as a declarative sentence.</p></li>
+<li><p>When documenting signatures of interfaces, as well as components, use the (non-standard) <cite>Members</cite> section to document their interface members, and only that section; do not document them in an <cite>Attributes</cite> section.</p></li>
+<li><p>If an anchor for a section is needed, namespace it, e.g. the <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">_lang-assignable:</span></code> anchor is a part of the <code class="docutils literal notranslate"><span class="pre">lang</span></code> namespace. Anchor names are global.</p></li>
+</ul>
+</section>
 <section id="contributing-your-changes">
 <h2>Contributing your changes<a class="headerlink" href="#contributing-your-changes" title="Permalink to this heading"></a></h2>
-<div class="admonition attention">
-<p class="admonition-title">Attention</p>
-<p>Our code style guidelines are evolving, and we will eventually have a formal document listing them.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Our code style guidelines are evolving, and we do not yet have a formal document listing them.</p>
 </div>
-<p>At the moment there is no formal style guide for source code. We ask that you do your best effort to keep the code that you add or modify similar in style as well as in spirit to the code surrounding it, and we may ask you to change it during review. When in doubt, submit your code as-is.</p>
+<p>We ask that you do your best effort to keep the code that you add or modify similar in style as well as in spirit to the code surrounding it, and we may ask you to change it during review. When in doubt, submit your code as-is.</p>
 </section>
 <section id="weekly-meetings">
 <h2>Weekly meetings<a class="headerlink" href="#weekly-meetings" title="Permalink to this heading"></a></h2>

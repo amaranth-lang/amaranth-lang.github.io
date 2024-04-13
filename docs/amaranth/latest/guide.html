@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Language guide &mdash; Amaranth language &amp; toolchain 0.5.0.dev266 documentation</title>
+  <title>Language guide &mdash; Amaranth language &amp; toolchain 0.5.0.dev267 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/platformpicker.css" />
@@ -17,7 +17,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=2c18e840"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=88606c59"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/platformpicker.js"></script>
@@ -41,7 +41,7 @@
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.5.0.dev266
+                0.5.0.dev267
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -921,9 +921,9 @@ This happens because, being empty, it does not contain any negative values.</p>
 <p class="admonition-title">Note</p>
 <p>An array becomes immutable after it is indexed for the first time. The elements of the array do not themselves become immutable, but it is not recommended to mutate them as the behavior can become unpredictable.</p>
 </div>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>Each time an array proxy object with <code class="docutils literal notranslate"><span class="pre">n</span></code> elements is used in an expression, it generates a multiplexer with <code class="docutils literal notranslate"><span class="pre">n</span></code> branches. However, using <code class="docutils literal notranslate"><span class="pre">k</span></code> of such array proxy objects in an expression generates a multiplexer with <code class="docutils literal notranslate"><span class="pre">n**k</span></code> branches. This can generate extremely large circuits that may quickly exhaust the resources of the synthesis target or even the available RAM.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Each time an array proxy object with <code class="code highlight py python docutils literal highlight-python"><span class="n">n</span></code> elements is used in an expression, it generates a multiplexer with <code class="code highlight py python docutils literal highlight-python"><span class="n">n</span></code> branches. However, using <code class="code highlight py python docutils literal highlight-python"><span class="n">k</span></code> of such array proxy objects in an expression generates a multiplexer with <code class="code highlight py python docutils literal highlight-python"><span class="n">n</span><span class="o">**</span><span class="n">k</span></code> branches. This can generate extremely large circuits that may quickly exhaust the resources of the synthesis target or even the available RAM.</p>
 </div>
 </section>
 <section id="data-structures">
@@ -1381,8 +1381,8 @@ inside `Else`
 <p>Instances of <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> also implement the <code class="xref py py-meth docutils literal notranslate"><span class="pre">elaborate()</span></code> method, which returns a special object that represents a fragment of a netlist. Such an object cannot be constructed without using <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code>.</p>
 </div>
 <p>The <code class="code highlight py python docutils literal highlight-python"><span class="n">platform</span></code> argument received by the <code class="xref py py-meth docutils literal notranslate"><span class="pre">elaborate()</span></code> method can be <code class="code highlight py python docutils literal highlight-python"><span class="kc">None</span></code>, an instance of <a class="reference internal" href="platform.html#platform"><span class="std std-ref">a built-in platform</span></a>, or a custom object. It is used for <a class="reference external" href="https://en.wikipedia.org/wiki/Dependency_injection">dependency injection</a> and to contain the state of a design while it is being elaborated.</p>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
 <p>The <code class="xref py py-meth docutils literal notranslate"><span class="pre">elaborate()</span></code> method should not modify the <code class="docutils literal notranslate"><span class="pre">self</span></code> object it receives other than for debugging and experimentation. Elaborating the same design twice with two identical platform objects should produce two identical netlists. If the design needs to be modified after construction, this should happen before elaboration.</p>
 <p>It is not possible to ensure that a design which modifies itself during elaboration is correctly converted to a netlist because the relative order in which the <code class="xref py py-meth docutils literal notranslate"><span class="pre">elaborate()</span></code> methods are called within a single design is not guaranteed.</p>
 </div>
@@ -1485,8 +1485,8 @@ inside `Else`
 <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="n">zero</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
 <p>A combinatorial signal can change synchronously to a clock domain, as in the example above, in which case it may only be sampled from the same clock domain unless explicitly synchronized. Renaming a clock domain must be assumed to potentially affect any output of an elaboratable.</p>
 </div>
 </section>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Memory arrays &mdash; Amaranth language &amp; toolchain 0.5.0.dev266 documentation</title>
+  <title>Memory arrays &mdash; Amaranth language &amp; toolchain 0.5.0.dev267 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
@@ -17,7 +17,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=2c18e840"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=88606c59"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="../_static/platformpicker.js"></script>
@@ -41,7 +41,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.5.0.dev266
+                0.5.0.dev267
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -201,7 +201,7 @@
 <dl class="py exception">
 <dt class="sig sig-object py" id="amaranth.hdl.FrozenMemory">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.hdl.</span></span><span class="sig-name descname"><span class="pre">FrozenMemory</span></span><a class="headerlink" href="#amaranth.hdl.FrozenMemory" title="Permalink to this definition"></a></dt>
-<dd><p>This exception is raised when a memory array is being modified after elaboration.</p>
+<dd><p>Exception raised when a memory array is being modified after elaboration.</p>
 </dd></dl>
 
 <dl class="py class">
@@ -257,8 +257,8 @@ the same as the depth of the memory it belongs to.</p>
 <p>A <a class="reference internal" href="#amaranth.hdl.MemoryData" title="amaranth.hdl.MemoryData"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryData</span></code></a> object can be indexed with an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> to construct a special
 value that can be used to read and write the selected memory row in a simulation testbench,
 without having to create a memory port.</p>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <p>Even in a simulation, the value returned by this function cannot be used in a module;
 it can only be used with <code class="code highlight py python docutils literal highlight-python"><span class="n">sim</span><span class="o">.</span><span class="n">get</span><span class="p">()</span></code> and <code class="code highlight py python docutils literal highlight-python"><span class="n">sim</span><span class="o">.</span><span class="n">set</span><span class="p">()</span></code>.</p>
 </div>

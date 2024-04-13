@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Interfaces and connections &mdash; Amaranth language &amp; toolchain 0.5.0.dev266 documentation</title>
+  <title>Interfaces and connections &mdash; Amaranth language &amp; toolchain 0.5.0.dev267 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
@@ -17,7 +17,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=2c18e840"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=88606c59"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="../_static/platformpicker.js"></script>
@@ -41,7 +41,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.5.0.dev266
+                0.5.0.dev267
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -1013,8 +1013,8 @@ together. See the <a class="reference internal" href="#wiring-intro1"><span clas
 explanation of why this is useful.</p>
 <p><a class="reference internal" href="#amaranth.lib.wiring.Signature" title="amaranth.lib.wiring.Signature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Signature</span></code></a> can be used as a base class to define <a class="reference internal" href="#wiring-customizing"><span class="std std-ref">customized</span></a>
 signatures and interface objects.</p>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
 <p><a class="reference internal" href="#amaranth.lib.wiring.Signature" title="amaranth.lib.wiring.Signature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Signature</span></code></a> objects are immutable. Classes inheriting from <a class="reference internal" href="#amaranth.lib.wiring.Signature" title="amaranth.lib.wiring.Signature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Signature</span></code></a> must
 ensure this remains the case when additional functionality is added.</p>
 </div>
@@ -1312,8 +1312,8 @@ described below.</p>
 <p>The <a class="reference internal" href="#amaranth.lib.wiring.PureInterface" title="amaranth.lib.wiring.PureInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">PureInterface</span></code></a> helper primarily exists to be used by the default implementation of
 <a class="reference internal" href="#amaranth.lib.wiring.Signature.create" title="amaranth.lib.wiring.Signature.create"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Signature.create()</span></code></a>, but it can also be used in any other context where an interface
 object needs to be created without the overhead of defining a class for it.</p>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <p>Any object can be an interface object; it only needs a <code class="code highlight py python docutils literal highlight-python"><span class="n">signature</span></code> property containing
 a compliant signature. It is <strong>not</strong> necessary to use <a class="reference internal" href="#amaranth.lib.wiring.PureInterface" title="amaranth.lib.wiring.PureInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">PureInterface</span></code></a> in order to
 create an interface object, but it may be used either directly or as a base class whenever
@@ -1568,8 +1568,8 @@ If an attribute with the same name as that of a member already exists, an error 
 <dt class="sig sig-object py" id="amaranth.lib.wiring.Component.signature">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">signature</span></span><a class="headerlink" href="#amaranth.lib.wiring.Component.signature" title="Permalink to this definition"></a></dt>
 <dd><p>The signature of the component.</p>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
 <p>Do not override this property. Once a component is constructed, its <a class="reference internal" href="#amaranth.lib.wiring.Component.signature" title="amaranth.lib.wiring.Component.signature"><code class="xref py py-attr docutils literal notranslate"><span class="pre">signature</span></code></a>
 property must always return the same <a class="reference internal" href="#amaranth.lib.wiring.Signature" title="amaranth.lib.wiring.Signature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Signature</span></code></a> instance. The constructor
 can be used to customize a component’s signature.</p>
