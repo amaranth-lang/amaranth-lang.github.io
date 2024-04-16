@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Language guide &mdash; Amaranth language &amp; toolchain 0.5.0.dev270 documentation</title>
+  <title>Language guide &mdash; Amaranth language &amp; toolchain 0.5.0.dev271 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/platformpicker.css" />
@@ -17,7 +17,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=27262cd0"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=835ea8c9"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/platformpicker.js"></script>
@@ -41,7 +41,7 @@
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.5.0.dev270
+                0.5.0.dev271
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -116,7 +116,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#fsm-state-control-blocks"><code class="code highlight py python docutils literal highlight-python"><span class="n">FSM</span></code>/<code class="code highlight py python docutils literal highlight-python"><span class="n">State</span></code> control blocks</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#combinatorial-evaluation">Combinatorial evaluation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#combinational-evaluation">Combinational evaluation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#synchronous-evaluation">Synchronous evaluation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#assertions">Assertions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#debug-printing">Debug printing</a></li>
@@ -405,7 +405,7 @@ This happens because, being empty, it does not contain any negative values.</p>
 </section>
 <section id="signals">
 <span id="lang-signals"></span><h2>Signals<a class="headerlink" href="#signals" title="Permalink to this heading"></a></h2>
-<p>A <em>signal</em> is a value representing a (potentially) varying number. Signals can be <a class="reference external" href="#lang-assigns"><em>assigned</em></a> in a <a class="reference internal" href="#lang-comb"><span class="std std-ref">combinatorial</span></a> or <a class="reference internal" href="#lang-sync"><span class="std std-ref">synchronous</span></a> domain, in which case they are generated as wires or registers, respectively. Signals always have a well-defined value; they cannot be uninitialized or undefined.</p>
+<p>A <em>signal</em> is a value representing a (potentially) varying number. Signals can be <a class="reference external" href="#lang-assigns"><em>assigned</em></a> in a <a class="reference internal" href="#lang-comb"><span class="std std-ref">combinational</span></a> or <a class="reference internal" href="#lang-sync"><span class="std std-ref">synchronous</span></a> domain, in which case they are generated as wires or registers, respectively. Signals always have a well-defined value; they cannot be uninitialized or undefined.</p>
 <section id="signal-shapes">
 <h3>Signal shapes<a class="headerlink" href="#signal-shapes" title="Permalink to this heading"></a></h3>
 <p>A signal can be created with an explicitly specified shape (any <a class="reference internal" href="#lang-shapelike"><span class="std std-ref">shape-like</span></a> object); if omitted, the shape defaults to <a class="reference internal" href="reference.html#amaranth.hdl.unsigned" title="amaranth.hdl.unsigned"><code class="xref py py-func docutils literal notranslate"><span class="pre">unsigned(1)</span></code></a>. Although rarely useful, 0-bit signals are permitted.</p>
@@ -444,7 +444,7 @@ This happens because, being empty, it does not contain any negative values.</p>
 <section id="initial-signal-values">
 <span id="lang-initial"></span><h3>Initial signal values<a class="headerlink" href="#initial-signal-values" title="Permalink to this heading"></a></h3>
 <p>Each signal has an <em>initial value</em>, specified with the <code class="docutils literal notranslate"><span class="pre">init=</span></code> parameter. If the initial value is not specified explicitly, zero is used by default. An initial value can be specified with an integer or an enumeration member.</p>
-<p>Signals <a class="reference internal" href="#lang-assigns"><span class="std std-ref">assigned</span></a> in a <a class="reference internal" href="#lang-comb"><span class="std std-ref">combinatorial</span></a> domain assume their initial value when none of the assignments are <a class="reference internal" href="#lang-active"><span class="std std-ref">active</span></a>. Signals assigned in a <a class="reference internal" href="#lang-sync"><span class="std std-ref">synchronous</span></a> domain assume their initial value after <em>power-on reset</em> and, unless the signal is <a class="reference internal" href="#lang-resetless"><span class="std std-ref">reset-less</span></a>, <em>explicit reset</em>. Signals that are used but never assigned are equivalent to constants of their initial value.</p>
+<p>Signals <a class="reference internal" href="#lang-assigns"><span class="std std-ref">assigned</span></a> in a <a class="reference internal" href="#lang-comb"><span class="std std-ref">combinational</span></a> domain assume their initial value when none of the assignments are <a class="reference internal" href="#lang-active"><span class="std std-ref">active</span></a>. Signals assigned in a <a class="reference internal" href="#lang-sync"><span class="std std-ref">synchronous</span></a> domain assume their initial value after <em>power-on reset</em> and, unless the signal is <a class="reference internal" href="#lang-resetless"><span class="std std-ref">reset-less</span></a>, <em>explicit reset</em>. Signals that are used but never assigned are equivalent to constants of their initial value.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Signal</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">init</span>
 <span class="go">0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Signal</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">init</span>
@@ -457,7 +457,7 @@ This happens because, being empty, it does not contain any negative values.</p>
 <section id="reset-less-signals">
 <span id="lang-resetless"></span><h3>Reset-less signals<a class="headerlink" href="#reset-less-signals" title="Permalink to this heading"></a></h3>
 <p>Signals assigned in a <a class="reference internal" href="#lang-sync"><span class="std std-ref">synchronous</span></a> domain can be <em>resettable</em> or <em>reset-less</em>, specified with the <code class="docutils literal notranslate"><span class="pre">reset_less=</span></code> parameter. If the parameter is not specified, signals are resettable by default. Resettable signals assume their <a class="reference internal" href="#lang-initial"><span class="std std-ref">initial value</span></a> on explicit reset, which can be asserted via the <a class="reference internal" href="#lang-clockdomains"><span class="std std-ref">clock domain</span></a> or by <a class="reference internal" href="#lang-controlinserter"><span class="std std-ref">modifying control flow</span></a> with <code class="xref py py-class docutils literal notranslate"><span class="pre">ResetInserter</span></code>. Reset-less signals are not affected by explicit reset.</p>
-<p>Signals assigned in a <a class="reference internal" href="#lang-comb"><span class="std std-ref">combinatorial</span></a> domain are not affected by the <code class="docutils literal notranslate"><span class="pre">reset_less</span></code> parameter.</p>
+<p>Signals assigned in a <a class="reference internal" href="#lang-comb"><span class="std std-ref">combinational</span></a> domain are not affected by the <code class="docutils literal notranslate"><span class="pre">reset_less</span></code> parameter.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Signal</span><span class="p">()</span><span class="o">.</span><span class="n">reset_less</span>
 <span class="go">False</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Signal</span><span class="p">(</span><span class="n">reset_less</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">reset_less</span>
@@ -941,9 +941,9 @@ This happens because, being empty, it does not contain any negative values.</p>
 <section id="control-domains">
 <span id="lang-domains"></span><h2>Control domains<a class="headerlink" href="#control-domains" title="Permalink to this heading"></a></h2>
 <p>A <em>control domain</em> is a named group of <a class="reference internal" href="#lang-signals"><span class="std std-ref">signals</span></a> that change their value in identical conditions.</p>
-<p>All designs have a single predefined <em>combinatorial domain</em>, containing all signals that change immediately when any value used to compute them changes. The name <code class="docutils literal notranslate"><span class="pre">comb</span></code> is reserved for the combinatorial domain, and refers to the same domain in all modules.</p>
+<p>All designs have a single predefined <em>combinational domain</em>, containing all signals that change immediately when any value used to compute them changes. The name <code class="docutils literal notranslate"><span class="pre">comb</span></code> is reserved for the combinational domain, and refers to the same domain in all modules.</p>
 <p>A design can also have any amount of user-defined <em>synchronous domains</em>, also called <a class="reference internal" href="#lang-clockdomains"><span class="std std-ref">clock domains</span></a>, containing signals that change when a specific edge occurs on the domain’s clock signal or, for domains with asynchronous reset, on the domain’s reset signal. Most modules only use a single synchronous domain, conventionally called <code class="docutils literal notranslate"><span class="pre">sync</span></code>, but the name <code class="docutils literal notranslate"><span class="pre">sync</span></code> does not have to be used, and lacks any special meaning beyond being the default.</p>
-<p>The behavior of assignments differs for signals in <a class="reference internal" href="#lang-comb"><span class="std std-ref">combinatorial</span></a> and <a class="reference internal" href="#lang-sync"><span class="std std-ref">synchronous</span></a> domains. Collectively, signals in synchronous domains contain the state of a design, whereas signals in the combinatorial domain cannot form feedback loops or hold state.</p>
+<p>The behavior of assignments differs for signals in <a class="reference internal" href="#lang-comb"><span class="std std-ref">combinational</span></a> and <a class="reference internal" href="#lang-sync"><span class="std std-ref">synchronous</span></a> domains. Collectively, signals in synchronous domains contain the state of a design, whereas signals in the combinational domain cannot form feedback loops or hold state.</p>
 <section id="assigning-to-signals">
 <span id="lang-assigns"></span><h3>Assigning to signals<a class="headerlink" href="#assigning-to-signals" title="Permalink to this heading"></a></h3>
 <p><em>Assignments</em> are used to change the values of signals. An assignment statement can be introduced with the <code class="docutils literal notranslate"><span class="pre">.eq(...)</span></code> syntax:</p>
@@ -1037,7 +1037,7 @@ This happens because, being empty, it does not contain any negative values.</p>
 <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="n">b</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">Cat</span><span class="p">(</span><span class="n">C</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">C</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">C</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
 </pre></div>
 </div>
-<p>Multiple assignments to the same signal bits are more useful when combined with control structures, which can make some of the assignments <a class="reference internal" href="#lang-active"><span class="std std-ref">active or inactive</span></a>. If all assignments to some signal bits are <a class="reference internal" href="#lang-active"><span class="std std-ref">inactive</span></a>, their final values are determined by the signal’s domain, <a class="reference internal" href="#lang-comb"><span class="std std-ref">combinatorial</span></a> or <a class="reference internal" href="#lang-sync"><span class="std std-ref">synchronous</span></a>.</p>
+<p>Multiple assignments to the same signal bits are more useful when combined with control structures, which can make some of the assignments <a class="reference internal" href="#lang-active"><span class="std std-ref">active or inactive</span></a>. If all assignments to some signal bits are <a class="reference internal" href="#lang-active"><span class="std std-ref">inactive</span></a>, their final values are determined by the signal’s domain, <a class="reference internal" href="#lang-comb"><span class="std std-ref">combinational</span></a> or <a class="reference internal" href="#lang-sync"><span class="std std-ref">synchronous</span></a>.</p>
 </section>
 </section>
 <section id="control-flow">
@@ -1205,9 +1205,9 @@ inside `Else`
 </div>
 </section>
 </section>
-<section id="combinatorial-evaluation">
-<span id="lang-comb"></span><h2>Combinatorial evaluation<a class="headerlink" href="#combinatorial-evaluation" title="Permalink to this heading"></a></h2>
-<p>Signals in the combinatorial <a class="reference internal" href="#lang-domains"><span class="std std-ref">control domain</span></a> change whenever any value used to compute them changes. The final value of a combinatorial signal is equal to its <a class="reference internal" href="#lang-initial"><span class="std std-ref">initial value</span></a> updated by the <a class="reference internal" href="#lang-active"><span class="std std-ref">active assignments</span></a> in the <a class="reference internal" href="#lang-assignorder"><span class="std std-ref">assignment order</span></a>. Combinatorial signals cannot hold any state.</p>
+<section id="combinational-evaluation">
+<span id="lang-comb"></span><h2>Combinational evaluation<a class="headerlink" href="#combinational-evaluation" title="Permalink to this heading"></a></h2>
+<p>Signals in the combinational <a class="reference internal" href="#lang-domains"><span class="std std-ref">control domain</span></a> change whenever any value used to compute them changes. The final value of a combinational signal is equal to its <a class="reference internal" href="#lang-initial"><span class="std std-ref">initial value</span></a> updated by the <a class="reference internal" href="#lang-active"><span class="std std-ref">active assignments</span></a> in the <a class="reference internal" href="#lang-assignorder"><span class="std std-ref">assignment order</span></a>. Combinational signals cannot hold any state.</p>
 <p>Consider the following code:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">If</span><span class="p">(</span><span class="n">en</span><span class="p">):</span>
@@ -1215,10 +1215,10 @@ inside `Else`
 </pre></div>
 </div>
 <p>Whenever the signals <code class="docutils literal notranslate"><span class="pre">en</span></code> or <code class="docutils literal notranslate"><span class="pre">b</span></code> change, the signal <code class="docutils literal notranslate"><span class="pre">a</span></code> changes as well. If <code class="docutils literal notranslate"><span class="pre">en</span></code> is false, the final value of <code class="docutils literal notranslate"><span class="pre">a</span></code> is its initial value, <code class="docutils literal notranslate"><span class="pre">1</span></code>. If <code class="docutils literal notranslate"><span class="pre">en</span></code> is true, the final value of <code class="docutils literal notranslate"><span class="pre">a</span></code> is equal to <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">+</span> <span class="pre">1</span></code>.</p>
-<p>A combinatorial signal that is computed directly or indirectly based on its own value is a part of a <em>combinatorial feedback loop</em>, sometimes shortened to just <em>feedback loop</em>. Combinatorial feedback loops can be stable (e.g. implement a constant driver or a transparent latch), or unstable (e.g. implement a ring oscillator). Amaranth prohibits using assignments to describe any kind of a combinatorial feedback loop, including transparent latches.</p>
+<p>A combinational signal that is computed directly or indirectly based on its own value is a part of a <em>combinational feedback loop</em>, sometimes shortened to just <em>feedback loop</em>. Combinational feedback loops can be stable (e.g. implement a constant driver or a transparent latch), or unstable (e.g. implement a ring oscillator). Amaranth prohibits using assignments to describe any kind of a combinational feedback loop, including transparent latches.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>In the exceedingly rare case when a combinatorial feedback loop is desirable, it is possible to implement it by directly instantiating technology primitives (e.g. device-specific LUTs or latches). This is also the only way to introduce a combinatorial feedback loop with well-defined behavior in simulation and synthesis, regardless of the HDL being used.</p>
+<p>In the exceedingly rare case when a combinational feedback loop is desirable, it is possible to implement it by directly instantiating technology primitives (e.g. device-specific LUTs or latches). This is also the only way to introduce a combinational feedback loop with well-defined behavior in simulation and synthesis, regardless of the HDL being used.</p>
 </div>
 </section>
 <section id="synchronous-evaluation">
@@ -1249,8 +1249,8 @@ inside `Else`
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>While is is also possible to add assertions to the <a class="reference internal" href="#lang-comb"><span class="std std-ref">combinatorial domain</span></a>, simulations of combinatorial circuits may have <em>glitches</em>: instantaneous, transient changes in the values of expressions that are being computed which do not affect the result of the computation (and are not visible in most waveform viewers for that reason). Depending on the tools used for simulation, a glitch in the condition of an assertion or of a <a class="reference internal" href="#lang-control"><span class="std std-ref">control block</span></a> that contains it may cause the simulation to be terminated, even if the glitch would have been instantaneously resolved afterwards.</p>
-<p>If the condition of an assertion is assigned in a synchronous domain, then it is safe to add that assertion in the combinatorial domain. For example, neither of the assertions in the example below will be violated due to glitches, regardless of which domain the <code class="code highlight py python docutils literal highlight-python"><span class="n">ip</span></code> and <code class="code highlight py python docutils literal highlight-python"><span class="n">booting</span></code> signals are driven by:</p>
+<p>While is is also possible to add assertions to the <a class="reference internal" href="#lang-comb"><span class="std std-ref">combinational domain</span></a>, simulations of combinational circuits may have <em>glitches</em>: instantaneous, transient changes in the values of expressions that are being computed which do not affect the result of the computation (and are not visible in most waveform viewers for that reason). Depending on the tools used for simulation, a glitch in the condition of an assertion or of a <a class="reference internal" href="#lang-control"><span class="std std-ref">control block</span></a> that contains it may cause the simulation to be terminated, even if the glitch would have been instantaneously resolved afterwards.</p>
+<p>If the condition of an assertion is assigned in a synchronous domain, then it is safe to add that assertion in the combinational domain. For example, neither of the assertions in the example below will be violated due to glitches, regardless of which domain the <code class="code highlight py python docutils literal highlight-python"><span class="n">ip</span></code> and <code class="code highlight py python docutils literal highlight-python"><span class="n">booting</span></code> signals are driven by:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ip_sync</span> <span class="o">=</span> <span class="n">Signal</span><span class="o">.</span><span class="n">like</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
 <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">ip_sync</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
 
@@ -1259,12 +1259,12 @@ inside `Else`
     <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="n">Assert</span><span class="p">(</span><span class="n">ip_sync</span> <span class="o">&lt;</span> <span class="mi">128</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Assertions should be added in a <a class="reference internal" href="#lang-sync"><span class="std std-ref">synchronous domain</span></a> when possible. In cases where it is not, such as if the condition is a signal that is assigned in a synchronous domain elsewhere, care should be taken while adding the assertion to the combinatorial domain.</p>
+<p>Assertions should be added in a <a class="reference internal" href="#lang-sync"><span class="std std-ref">synchronous domain</span></a> when possible. In cases where it is not, such as if the condition is a signal that is assigned in a synchronous domain elsewhere, care should be taken while adding the assertion to the combinational domain.</p>
 </div>
 </section>
 <section id="debug-printing">
 <span id="lang-print"></span><h2>Debug printing<a class="headerlink" href="#debug-printing" title="Permalink to this heading"></a></h2>
-<p>The value of any expression, or of several of them, can be printed to the terminal during simulation using the <code class="xref py py-class docutils literal notranslate"><span class="pre">Print</span></code> statement. When added to the <a class="reference internal" href="#lang-comb"><span class="std std-ref">combinatorial domain</span></a>, the value of an expression is printed whenever it changes:</p>
+<p>The value of any expression, or of several of them, can be printed to the terminal during simulation using the <code class="xref py py-class docutils literal notranslate"><span class="pre">Print</span></code> statement. When added to the <a class="reference internal" href="#lang-comb"><span class="std std-ref">combinational domain</span></a>, the value of an expression is printed whenever it changes:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">()</span>
 <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="n">Print</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
 </pre></div>
@@ -1406,7 +1406,7 @@ inside `Else`
 </section>
 <section id="modifying-control-flow">
 <span id="lang-controlinserter"></span><h3>Modifying control flow<a class="headerlink" href="#modifying-control-flow" title="Permalink to this heading"></a></h3>
-<p>Control flow within an elaboratable can be altered without introducing a new clock domain by using <em>control flow modifiers</em> that affect <a class="reference internal" href="#lang-sync"><span class="std std-ref">synchronous evaluation</span></a> of signals in a specified domain (or domains). They never affect <a class="reference internal" href="#lang-comb"><span class="std std-ref">combinatorial evaluation</span></a>. There are two control flow modifiers:</p>
+<p>Control flow within an elaboratable can be altered without introducing a new clock domain by using <em>control flow modifiers</em> that affect <a class="reference internal" href="#lang-sync"><span class="std std-ref">synchronous evaluation</span></a> of signals in a specified domain (or domains). They never affect <a class="reference internal" href="#lang-comb"><span class="std std-ref">combinational evaluation</span></a>. There are two control flow modifiers:</p>
 <ul class="simple">
 <li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ResetInserter</span></code> introduces a synchronous reset input (or inputs), updating all of the signals in the specified domains to their <a class="reference internal" href="#lang-initial"><span class="std std-ref">initial value</span></a> whenever the active edge occurs on the clock of the domain <em>if</em> the synchronous reset input is asserted.</p></li>
 <li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">EnableInserter</span></code> introduces a synchronous enable input (or inputs), preventing any of the signals in the specified domains from changing value whenever the active edge occurs on the clock of the domain <em>unless</em> the synchronous enable input is asserted.</p></li>
@@ -1482,7 +1482,7 @@ inside `Else`
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>A combinatorial signal can change synchronously to a clock domain, as in the example above, in which case it may only be sampled from the same clock domain unless explicitly synchronized. Renaming a clock domain must be assumed to potentially affect any output of an elaboratable.</p>
+<p>A combinational signal can change synchronously to a clock domain, as in the example above, in which case it may only be sampled from the same clock domain unless explicitly synchronized. Renaming a clock domain must be assumed to potentially affect any output of an elaboratable.</p>
 </div>
 </section>
 </section>
@@ -1645,26 +1645,26 @@ inside `Else`
 <span class="n">m</span> <span class="o">=</span> <span class="n">Module</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>In the input configuration, the buffer combinatorially drives a signal <code class="code highlight py python docutils literal highlight-python"><span class="n">i</span></code> by the port:</p>
+<p>In the input configuration, the buffer combinationally drives a signal <code class="code highlight py python docutils literal highlight-python"><span class="n">i</span></code> by the port:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">port</span> <span class="o">=</span> <span class="n">IOPort</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">port_i</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">m</span><span class="o">.</span><span class="n">submodules</span> <span class="o">+=</span> <span class="n">IOBufferInstance</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="n">port_i</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>In the output configuration, the buffer combinatorially drives the port by a value <code class="code highlight py python docutils literal highlight-python"><span class="n">o</span></code>:</p>
+<p>In the output configuration, the buffer combinationally drives the port by a value <code class="code highlight py python docutils literal highlight-python"><span class="n">o</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">port</span> <span class="o">=</span> <span class="n">IOPort</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">port_o</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">m</span><span class="o">.</span><span class="n">submodules</span> <span class="o">+=</span> <span class="n">IOBufferInstance</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="n">o</span><span class="o">=</span><span class="n">port_o</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>In the tristatable output configuration, the buffer combinatorially drives the port by a value <code class="code highlight py python docutils literal highlight-python"><span class="n">o</span></code> if <code class="code highlight py python docutils literal highlight-python"><span class="n">oe</span></code> is asserted, and does not drive (leaves in a high-impedance state, or tristates) the port otherwise:</p>
+<p>In the tristatable output configuration, the buffer combinationally drives the port by a value <code class="code highlight py python docutils literal highlight-python"><span class="n">o</span></code> if <code class="code highlight py python docutils literal highlight-python"><span class="n">oe</span></code> is asserted, and does not drive (leaves in a high-impedance state, or tristates) the port otherwise:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">port</span> <span class="o">=</span> <span class="n">IOPort</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">port_o</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">port_oe</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">()</span>
 <span class="n">m</span><span class="o">.</span><span class="n">submodules</span> <span class="o">+=</span> <span class="n">IOBufferInstance</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="n">o</span><span class="o">=</span><span class="n">port_o</span><span class="p">,</span> <span class="n">oe</span><span class="o">=</span><span class="n">port_oe</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>In the bidirectional (input/output) configuration, the buffer combiatorially drives a signal <code class="code highlight py python docutils literal highlight-python"><span class="n">i</span></code> by the port, combinatorially drives the port by a value <code class="code highlight py python docutils literal highlight-python"><span class="n">o</span></code> if <code class="code highlight py python docutils literal highlight-python"><span class="n">oe</span></code> is asserted, and does not drive (leaves in a high-impedance state, or tristates) the port otherwise:</p>
+<p>In the bidirectional (input/output) configuration, the buffer combinationally drives a signal <code class="code highlight py python docutils literal highlight-python"><span class="n">i</span></code> by the port, combinationally drives the port by a value <code class="code highlight py python docutils literal highlight-python"><span class="n">o</span></code> if <code class="code highlight py python docutils literal highlight-python"><span class="n">oe</span></code> is asserted, and does not drive (leaves in a high-impedance state, or tristates) the port otherwise:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">port</span> <span class="o">=</span> <span class="n">IOPort</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">port_i</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">port_o</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
