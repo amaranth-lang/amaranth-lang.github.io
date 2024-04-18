@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lattice &mdash; Amaranth language &amp; toolchain 0.5.0.dev273 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=d131d90a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=10dea6ba"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/platformpicker.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Quicklogic" href="quicklogic.html" />
+    <link rel="prev" title="Gowin" href="gowin.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../cover.html" class="icon icon-home">
+            Amaranth language & toolchain
+              <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.5.0.dev273
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Language &amp; toolchain</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../start.html">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide.html">Language guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference.html">Language reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib.html">Standard library</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../platform.html">Platform integration</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="altera.html">Altera</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gowin.html">Gowin</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Lattice</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#amaranth.vendor.LatticePlatform"><code class="docutils literal notranslate"><span class="pre">LatticePlatform</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="quicklogic.html">Quicklogic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="siliconblue.html">SiliconBlue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xilinx.html">Xilinx</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../changes.html">Changelog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib.html">Contributing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="https://amaranth-lang.org/docs/amaranth-stdio/latest/">Standard I/O components</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://amaranth-lang.org/docs/amaranth-soc/latest/">System on Chip toolkit</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../cover.html">Amaranth language & toolchain</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../cover.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Language &amp; toolchain</a></li>
+          <li class="breadcrumb-item"><a href="../platform.html">Platform integration</a></li>
+      <li class="breadcrumb-item active">Lattice</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/platform/lattice.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="lattice">
+<h1>Lattice<a class="headerlink" href="#lattice" title="Permalink to this heading"></a></h1>
+<p>The <a class="reference internal" href="#amaranth.vendor.LatticePlatform" title="amaranth.vendor.LatticePlatform"><code class="xref py py-class docutils literal notranslate"><span class="pre">LatticePlatform</span></code></a> class provides a base platform to support Lattice toolchains (not including iCE40 devices, which are supported by <a class="reference internal" href="siliconblue.html#amaranth.vendor.SiliconBluePlatform" title="amaranth.vendor.SiliconBluePlatform"><code class="xref py py-class docutils literal notranslate"><span class="pre">SiliconBluePlatform</span></code></a>). Currently supported devices include ECP5, MachXO2, and MachXO3L.</p>
+<p>The Trellis and Diamond toolchains are supported.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="amaranth.vendor.LatticePlatform">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.vendor.</span></span><span class="sig-name descname"><span class="pre">LatticePlatform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toolchain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.vendor.LatticePlatform" title="Permalink to this definition"></a></dt>
+<dd><p class="rubric">Trellis toolchain (ECP5 only)</p>
+<dl class="simple">
+<dt>Required tools:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">yosys</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nextpnr-ecp5</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ecppack</span></code></p></li>
+</ul>
+</dd>
+</dl>
+<p>The environment is populated by running the script specified in the environment variable
+<code class="docutils literal notranslate"><span class="pre">AMARANTH_ENV_TRELLIS</span></code>, if present.</p>
+<dl class="simple">
+<dt>Available overrides:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">verbose</span></code>: enables logging of informational messages to standard error.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">read_verilog_opts</span></code>: adds options for <code class="docutils literal notranslate"><span class="pre">read_verilog</span></code> Yosys command.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">synth_opts</span></code>: adds options for <code class="docutils literal notranslate"><span class="pre">synth_ecp5</span></code> Yosys command.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">script_after_read</span></code>: inserts commands after <code class="docutils literal notranslate"><span class="pre">read_ilang</span></code> in Yosys script.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">script_after_synth</span></code>: inserts commands after <code class="docutils literal notranslate"><span class="pre">synth_ecp5</span></code> in Yosys script.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">yosys_opts</span></code>: adds extra options for <code class="docutils literal notranslate"><span class="pre">yosys</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nextpnr_opts</span></code>: adds extra options for <code class="docutils literal notranslate"><span class="pre">nextpnr-ecp5</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ecppack_opts</span></code>: adds extra options for <code class="docutils literal notranslate"><span class="pre">ecppack</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">add_preferences</span></code>: inserts commands at the end of the LPF file.</p></li>
+</ul>
+</dd>
+<dt>Build products:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">{{name}}.rpt</span></code>: Yosys log.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">{{name}}.json</span></code>: synthesized RTL.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">{{name}}.tim</span></code>: nextpnr log.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">{{name}}.config</span></code>: ASCII bitstream.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">{{name}}.bit</span></code>: binary bitstream.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">{{name}}.svf</span></code>: JTAG programming vector.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Diamond toolchain (ECP5, MachXO2, MachXO3)</p>
+<dl class="simple">
+<dt>Required tools:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pnmainc</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ddtcmd</span></code></p></li>
+</ul>
+</dd>
+</dl>
+<p>The environment is populated by running the script specified in the environment variable
+<code class="docutils literal notranslate"><span class="pre">AMARANTH_ENV_DIAMOND</span></code>, if present. On Linux, diamond_env as provided by Diamond
+itself is a good candidate. On Windows, the following script (named <code class="docutils literal notranslate"><span class="pre">diamond_env.bat</span></code>,
+for instance) is known to work:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@echo</span> <span class="n">off</span>
+<span class="nb">set</span> <span class="n">PATH</span><span class="o">=</span><span class="n">C</span><span class="p">:</span>\<span class="n">lscc</span>\<span class="n">diamond</span>\<span class="o">%</span><span class="n">DIAMOND_VERSION</span><span class="o">%</span>\<span class="nb">bin</span>\<span class="n">nt64</span><span class="p">;</span><span class="o">%</span><span class="n">PATH</span><span class="o">%</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>Available overrides:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">script_project</span></code>: inserts commands before <code class="docutils literal notranslate"><span class="pre">prj_project</span> <span class="pre">save</span></code> in Tcl script.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">script_after_export</span></code>: inserts commands after <code class="docutils literal notranslate"><span class="pre">prj_run</span> <span class="pre">Export</span></code> in Tcl script.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">add_preferences</span></code>: inserts commands at the end of the LPF file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">add_constraints</span></code>: inserts commands at the end of the XDC file.</p></li>
+</ul>
+</dd>
+<dt>Build products:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">{{name}}_impl/{{name}}_impl.htm</span></code>: consolidated log.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">{{name}}.jed</span></code>: JEDEC fuse file (MachXO2, MachXO3 only).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">{{name}}.bit</span></code>: binary bitstream.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">{{name}}.svf</span></code>: JTAG programming vector (ECP5 only).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">{{name}}_flash.svf</span></code>: JTAG programming vector for FLASH programming (MachXO2, MachXO3 only).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">{{name}}_sram.svf</span></code>: JTAG programming vector for SRAM programming (MachXO2, MachXO3 only).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="gowin.html" class="btn btn-neutral float-left" title="Gowin" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="quicklogic.html" class="btn btn-neutral float-right" title="Quicklogic" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020—2024, Amaranth project contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
