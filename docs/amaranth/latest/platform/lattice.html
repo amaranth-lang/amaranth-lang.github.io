@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lattice &mdash; Amaranth language &amp; toolchain 0.5.0.dev274 documentation</title>
+  <title>Lattice &mdash; Amaranth language &amp; toolchain 0.5.0.dev275 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
@@ -17,7 +17,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=db573677"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=7f2fb26e"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="../_static/platformpicker.js"></script>
@@ -41,7 +41,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.5.0.dev274
+                0.5.0.dev275
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -108,7 +108,7 @@
              
   <section id="lattice">
 <h1>Lattice<a class="headerlink" href="#lattice" title="Permalink to this heading"></a></h1>
-<p>The <a class="reference internal" href="#amaranth.vendor.LatticePlatform" title="amaranth.vendor.LatticePlatform"><code class="xref py py-class docutils literal notranslate"><span class="pre">LatticePlatform</span></code></a> class provides a base platform to support Lattice toolchains (not including iCE40 devices, which are supported by <a class="reference internal" href="siliconblue.html#amaranth.vendor.SiliconBluePlatform" title="amaranth.vendor.SiliconBluePlatform"><code class="xref py py-class docutils literal notranslate"><span class="pre">SiliconBluePlatform</span></code></a>). Currently supported devices include ECP5, MachXO2, and MachXO3L.</p>
+<p>The <a class="reference internal" href="#amaranth.vendor.LatticePlatform" title="amaranth.vendor.LatticePlatform"><code class="xref py py-class docutils literal notranslate"><span class="pre">LatticePlatform</span></code></a> class provides a base platform to support Lattice toolchains (not including iCE40 devices, which are supported by <a class="reference internal" href="siliconblue.html#amaranth.vendor.SiliconBluePlatform" title="amaranth.vendor.SiliconBluePlatform"><code class="xref py py-class docutils literal notranslate"><span class="pre">SiliconBluePlatform</span></code></a>). Currently supported devices include ECP5, MachXO2, MachXO3L, and Nexus.</p>
 <p>The Trellis and Diamond toolchains are supported.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.vendor.LatticePlatform">
@@ -147,6 +147,40 @@
 </ul>
 </dd>
 </dl>
+<p class="rubric">Oxide toolchain (Nexus)</p>
+<dl class="simple">
+<dt>Required tools:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">yosys</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nextpnr-nexus</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prjoxide</span></code></p></li>
+</ul>
+</dd>
+</dl>
+<p>The environment is populated by running the script specified in the environment variable
+<code class="docutils literal notranslate"><span class="pre">AMARANTH_ENV_OXIDE</span></code>, if present.</p>
+<dl class="simple">
+<dt>Available overrides:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">verbose</span></code>: enables logging of informational messages to standard error.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">read_verilog_opts</span></code>: adds options for <code class="docutils literal notranslate"><span class="pre">read_verilog</span></code> Yosys command.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">synth_opts</span></code>: adds options for <code class="docutils literal notranslate"><span class="pre">synth_nexus</span></code> Yosys command.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">script_after_read</span></code>: inserts commands after <code class="docutils literal notranslate"><span class="pre">read_ilang</span></code> in Yosys script.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">script_after_synth</span></code>: inserts commands after <code class="docutils literal notranslate"><span class="pre">synth_nexus</span></code> in Yosys script.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">yosys_opts</span></code>: adds extra options for <code class="docutils literal notranslate"><span class="pre">yosys</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nextpnr_opts</span></code>: adds extra options for <code class="docutils literal notranslate"><span class="pre">nextpnr-nexus</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prjoxide_opts</span></code>: adds extra options for <code class="docutils literal notranslate"><span class="pre">prjoxide</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">add_preferences</span></code>: inserts commands at the end of the PDC file.</p></li>
+</ul>
+</dd>
+<dt>Build products:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">{{name}}.rpt</span></code>: Yosys log.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">{{name}}.json</span></code>: synthesized RTL.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">{{name}}.tim</span></code>: nextpnr log.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">{{name}}.config</span></code>: ASCII bitstream.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">{{name}}.bit</span></code>: binary bitstream.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">{{name}}.xcf</span></code>: JTAG programming vector.</p></li>
+</ul>
+</dd>
+</dl>
 <p class="rubric">Diamond toolchain (ECP5, MachXO2, MachXO3)</p>
 <dl class="simple">
 <dt>Required tools:</dt><dd><ul class="simple">
@@ -178,6 +212,36 @@ for instance) is known to work:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">{{name}}.svf</span></code>: JTAG programming vector (ECP5 only).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">{{name}}_flash.svf</span></code>: JTAG programming vector for FLASH programming (MachXO2, MachXO3 only).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">{{name}}_sram.svf</span></code>: JTAG programming vector for SRAM programming (MachXO2, MachXO3 only).</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Radiant toolchain (Nexus)</p>
+<dl class="simple">
+<dt>Required tools:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">radiantc</span></code></p></li>
+</ul>
+</dd>
+</dl>
+<p>The environment is populated by running the script specified in the environment variable
+<code class="docutils literal notranslate"><span class="pre">AMARANTH_ENV_RADIANT</span></code>, if present. On Linux, radiant_env as provided by Radiant
+itself is a good candidate. On Windows, the following script (named <code class="docutils literal notranslate"><span class="pre">radiant_env.bat</span></code>,
+for instance) is known to work:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@echo</span> <span class="n">off</span>
+<span class="nb">set</span> <span class="n">PATH</span><span class="o">=</span><span class="n">C</span><span class="p">:</span>\<span class="n">lscc</span>\<span class="n">radiant</span>\<span class="o">%</span><span class="n">RADIANT_VERSION</span><span class="o">%</span>\<span class="nb">bin</span>\<span class="n">nt64</span><span class="p">;</span><span class="o">%</span><span class="n">PATH</span><span class="o">%</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>Available overrides:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">script_project</span></code>: inserts commands before <code class="docutils literal notranslate"><span class="pre">prj_save</span></code> in Tcl script.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">script_after_export</span></code>: inserts commands after <code class="docutils literal notranslate"><span class="pre">prj_run</span> <span class="pre">Export</span></code> in Tcl script.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">add_constraints</span></code>: inserts commands at the end of the SDC file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">add_preferences</span></code>: inserts commands at the end of the PDC file.</p></li>
+</ul>
+</dd>
+<dt>Build products:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">{{name}}_impl/{{name}}_impl.htm</span></code>: consolidated log.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">{{name}}.bit</span></code>: binary bitstream.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">{{name}}.xcf</span></code>: JTAG programming vector. (if using <code class="docutils literal notranslate"><span class="pre">programmer</span></code>)</p></li>
 </ul>
 </dd>
 </dl>
