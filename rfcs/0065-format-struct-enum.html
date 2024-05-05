@@ -212,12 +212,6 @@
     def format(self, obj, spec):
         assert spec == &quot;&quot;
         return Format(&quot;{{a: {}, b: {}, c: {}}}&quot;, obj.a, obj.b, obj.c)
-        return Format.Struct(Value.cast(obj), {
-            # Assume obj.a, obj.b, obj.c are accessors that return the struct fields as ValueLike.
-            &quot;a&quot;: Format(&quot;{}&quot;, obj.a),
-            &quot;b&quot;: Format(&quot;{}&quot;, obj.b),
-            &quot;c&quot;: Format(&quot;{}&quot;, obj.c),
-        })
 </code></pre>
 <p>with the added benefit that any <code>MyStruct</code>-shaped signal will automatically have per-field traces included in VCD output and per-field wires included in RTLIL output.</p>
 <p>Implementations of <code>format</code> are added as appropriate to <code>lib.enum</code> and <code>lib.data</code>, making use of the above features.</p>
