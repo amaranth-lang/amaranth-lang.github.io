@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://amaranth-lang.org/schema/amaranth/0.5/component.json",
+  "$defs": {
+    "member": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/member-array"
+        },
+        {
+          "$ref": "#/$defs/member-port"
+        },
+        {
+          "$ref": "#/$defs/member-interface"
+        }
+      ]
+    },
+    "member-array": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/member"
+      }
+    },
+    "member-port": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "port"
+        },
+        "name": {
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+        },
+        "dir": {
+          "enum": [
+            "in",
+            "out"
+          ]
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "signed": {
+          "type": "boolean"
+        },
+        "init": {
+          "type": "string",
+          "pattern": "^[+-]?[0-9]+$"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "name",
+        "dir",
+        "width",
+        "signed",
+        "init"
+      ]
+    },
+    "member-interface": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "interface"
+        },
+        "members": {
+          "type": "object",
+          "patternProperties": {
+            "^[A-Za-z][A-Za-z0-9_]*$": {
+              "$ref": "#/$defs/member"
+            }
+          }
+        },
+        "annotations": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "members",
+        "annotations"
+      ]
+    }
+  },
+  "type": "object",
+  "properties": {
+    "interface": {
+      "type": "object",
+      "properties": {
+        "members": {
+          "type": "object",
+          "patternProperties": {
+            "^[A-Za-z][A-Za-z0-9_]*$": {
+              "$ref": "#/$defs/member"
+            }
+          }
+        },
+        "annotations": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "members",
+        "annotations"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "interface"
+  ]
+}
