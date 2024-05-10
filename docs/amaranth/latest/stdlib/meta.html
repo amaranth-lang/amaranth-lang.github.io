@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interface metadata &mdash; Amaranth language &amp; toolchain 0.5.0.dev291 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=d131d90a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=9213c1b2"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/platformpicker.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Memory arrays" href="memory.html" />
+    <link rel="prev" title="Interfaces and connections" href="wiring.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../cover.html" class="icon icon-home">
+            Amaranth language & toolchain
+              <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.5.0.dev291
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Language &amp; toolchain</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../start.html">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide.html">Language guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference.html">Language reference</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../stdlib.html">Standard library</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="enum.html">Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data.html">Data structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wiring.html">Interfaces and connections</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Interface metadata</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#defining-annotations">Defining annotations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#identifying-schemas">Identifying schemas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reference">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="memory.html">Memory arrays</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cdc.html">Clock domain crossing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="coding.html">Code conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fifo.html">First-in first-out queues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="crc.html">Cyclic redundancy checks</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../platform.html">Platform integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../changes.html">Changelog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib.html">Contributing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="https://amaranth-lang.org/docs/amaranth-stdio/latest/">Standard I/O components</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://amaranth-lang.org/docs/amaranth-soc/latest/">System on Chip toolkit</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../cover.html">Amaranth language & toolchain</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../cover.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Language &amp; toolchain</a></li>
+          <li class="breadcrumb-item"><a href="../stdlib.html">Standard library</a></li>
+      <li class="breadcrumb-item active">Interface metadata</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/stdlib/meta.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-amaranth.lib.meta">
+<span id="interface-metadata"></span><span id="meta"></span><h1>Interface metadata<a class="headerlink" href="#module-amaranth.lib.meta" title="Permalink to this heading"></a></h1>
+<p>The <a class="reference internal" href="#module-amaranth.lib.meta" title="amaranth.lib.meta"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.meta</span></code></a> module provides a way to annotate objects in an Amaranth design and exchange these annotations with external tools in a standardized format.</p>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<p>Many Amaranth designs stay entirely within the Amaranth ecosystem, using the facilities it provides to define, test, and build hardware. In this case, the design is available for exploration using Python code, and metadata is not necessary. However, if an Amaranth design needs to fit into an existing ecosystem, or, conversely, to integrate components developed for another ecosystem, metadata can be used to exchange structured information about the design.</p>
+<p>Consider a simple <a class="reference internal" href="wiring.html#wiring"><span class="std std-ref">component</span></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Adder</span><span class="p">(</span><span class="n">wiring</span><span class="o">.</span><span class="n">Component</span><span class="p">):</span>
+    <span class="n">a</span><span class="p">:</span> <span class="n">In</span><span class="p">(</span><span class="n">unsigned</span><span class="p">(</span><span class="mi">32</span><span class="p">))</span>
+    <span class="n">b</span><span class="p">:</span> <span class="n">In</span><span class="p">(</span><span class="n">unsigned</span><span class="p">(</span><span class="mi">32</span><span class="p">))</span>
+    <span class="n">o</span><span class="p">:</span> <span class="n">Out</span><span class="p">(</span><span class="n">unsigned</span><span class="p">(</span><span class="mi">33</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">elaborate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">Module</span><span class="p">()</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">o</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">m</span>
+</pre></div>
+</div>
+<p>While it can be easily converted to Verilog, external tools will find the interface of the resulting module opaque unless they parse its Verilog source (a difficult and unrewarding task), or are provided with a description of it. Components can describe their signature with JSON-based metadata:</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">adder</span> <span class="o">=</span> <span class="n">Adder</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adder</span><span class="o">.</span><span class="n">metadata</span> 
+<span class="go">&lt;amaranth.lib.wiring.ComponentMetadata for ...Adder object at ...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adder</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">as_json</span><span class="p">()</span> 
+<span class="go">{</span>
+<span class="go">    &#39;interface&#39;: {</span>
+<span class="go">        &#39;members&#39;: {</span>
+<span class="go">            &#39;a&#39;: {</span>
+<span class="go">                &#39;type&#39;: &#39;port&#39;,</span>
+<span class="go">                &#39;name&#39;: &#39;a&#39;,</span>
+<span class="go">                &#39;dir&#39;: &#39;in&#39;,</span>
+<span class="go">                &#39;width&#39;: 32,</span>
+<span class="go">                &#39;signed&#39;: False,</span>
+<span class="go">                &#39;init&#39;: &#39;0&#39;</span>
+<span class="go">            },</span>
+<span class="go">            &#39;b&#39;: {</span>
+<span class="go">                &#39;type&#39;: &#39;port&#39;,</span>
+<span class="go">                &#39;name&#39;: &#39;b&#39;,</span>
+<span class="go">                &#39;dir&#39;: &#39;in&#39;,</span>
+<span class="go">                &#39;width&#39;: 32,</span>
+<span class="go">                &#39;signed&#39;: False,</span>
+<span class="go">                &#39;init&#39;: &#39;0&#39;</span>
+<span class="go">            },</span>
+<span class="go">            &#39;o&#39;: {</span>
+<span class="go">                &#39;type&#39;: &#39;port&#39;,</span>
+<span class="go">                &#39;name&#39;: &#39;o&#39;,</span>
+<span class="go">                &#39;dir&#39;: &#39;out&#39;,</span>
+<span class="go">                &#39;width&#39;: 33,</span>
+<span class="go">                &#39;signed&#39;: False,</span>
+<span class="go">                &#39;init&#39;: &#39;0&#39;</span>
+<span class="go">            }</span>
+<span class="go">        },</span>
+<span class="go">        &#39;annotations&#39;: {}</span>
+<span class="go">    }</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<p>All metadata in Amaranth must adhere to a schema in the <a class="reference external" href="https://json-schema.org">JSON Schema</a> language, which is integral to its definition, and can be used to validate the generated JSON:</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">wiring</span><span class="o">.</span><span class="n">ComponentMetadata</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">adder</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">as_json</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>The built-in component metadata can be extended to provide arbitrary information about an interface through user-defined annotations. For example, a memory bus interface could provide the layout of any memory-mapped peripherals accessible through that bus.</p>
+</section>
+<section id="defining-annotations">
+<h2>Defining annotations<a class="headerlink" href="#defining-annotations" title="Permalink to this heading"></a></h2>
+<p>Consider a simple control and status register (CSR) bus that provides the memory layout of the accessible registers via an annotation:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">CSRLayoutAnnotation</span><span class="p">(</span><span class="n">meta</span><span class="o">.</span><span class="n">Annotation</span><span class="p">):</span>
+    <span class="n">schema</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;$schema&quot;</span><span class="p">:</span> <span class="s2">&quot;https://json-schema.org/draft/2020-12/schema&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;$id&quot;</span><span class="p">:</span> <span class="s2">&quot;https://amaranth-lang.org/schema/example/0/csr-layout.json&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;registers&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;patternProperties&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;^.+$&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;integer&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;minimum&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                    <span class="p">},</span>
+                <span class="p">},</span>
+            <span class="p">},</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;requiredProperties&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;registers&quot;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">origin</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_origin</span> <span class="o">=</span> <span class="n">origin</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">origin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_origin</span>
+
+    <span class="k">def</span> <span class="nf">as_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">instance</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;registers&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">origin</span><span class="o">.</span><span class="n">registers</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="c1"># Validating the value returned by `as_json()` ensures its conformance.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">instance</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">instance</span>
+
+
+<span class="k">class</span> <span class="nc">CSRSignature</span><span class="p">(</span><span class="n">wiring</span><span class="o">.</span><span class="n">Signature</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">({</span>
+            <span class="s2">&quot;addr&quot;</span><span class="p">:</span>     <span class="n">Out</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span>
+            <span class="s2">&quot;w_en&quot;</span><span class="p">:</span>     <span class="n">Out</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+            <span class="s2">&quot;w_data&quot;</span><span class="p">:</span>   <span class="n">Out</span><span class="p">(</span><span class="mi">32</span><span class="p">),</span>
+            <span class="s2">&quot;r_en&quot;</span><span class="p">:</span>     <span class="n">Out</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+            <span class="s2">&quot;r_data&quot;</span><span class="p">:</span>   <span class="n">In</span><span class="p">(</span><span class="mi">32</span><span class="p">),</span>
+        <span class="p">})</span>
+
+    <span class="k">def</span> <span class="nf">annotations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="o">/</span><span class="p">):</span>
+        <span class="c1"># Unfortunately `super()` cannot be used in `wiring.Signature` subclasses;</span>
+        <span class="c1"># instead, use a direct call to a superclass method. In this case that is</span>
+        <span class="c1"># `wiring.Signature` itself, but in a more complex class hierarchy it could</span>
+        <span class="c1"># be different.</span>
+        <span class="k">return</span> <span class="n">wiring</span><span class="o">.</span><span class="n">Signature</span><span class="o">.</span><span class="n">annotations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">CSRLayoutAnnotation</span><span class="p">(</span><span class="n">obj</span><span class="p">),)</span>
+</pre></div>
+</div>
+<p>A component that embeds a few CSR registers would define their addresses:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyPeripheral</span><span class="p">(</span><span class="n">wiring</span><span class="o">.</span><span class="n">Component</span><span class="p">):</span>
+    <span class="n">csr_bus</span><span class="p">:</span> <span class="n">In</span><span class="p">(</span><span class="n">CSRSignature</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">csr_bus</span><span class="o">.</span><span class="n">registers</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;control&quot;</span><span class="p">:</span> <span class="mh">0x0000</span><span class="p">,</span>
+            <span class="s2">&quot;status&quot;</span><span class="p">:</span>  <span class="mh">0x0004</span><span class="p">,</span>
+            <span class="s2">&quot;data&quot;</span><span class="p">:</span>    <span class="mh">0x0008</span><span class="p">,</span>
+        <span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">peripheral</span> <span class="o">=</span> <span class="n">MyPeripheral</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">peripheral</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">as_json</span><span class="p">()</span> 
+<span class="go">{</span>
+<span class="go">    &#39;interface&#39;: {</span>
+<span class="go">        &#39;members&#39;: {</span>
+<span class="go">            &#39;csr_bus&#39;: {</span>
+<span class="go">                &#39;type&#39;: &#39;interface&#39;,</span>
+<span class="go">                &#39;members&#39;: {</span>
+<span class="go">                    &#39;addr&#39;: {</span>
+<span class="go">                        &#39;type&#39;: &#39;port&#39;,</span>
+<span class="go">                        &#39;name&#39;: &#39;csr_bus__addr&#39;,</span>
+<span class="go">                        &#39;dir&#39;: &#39;in&#39;,</span>
+<span class="go">                        &#39;width&#39;: 16,</span>
+<span class="go">                        &#39;signed&#39;: False,</span>
+<span class="go">                        &#39;init&#39;: &#39;0&#39;</span>
+<span class="go">                    },</span>
+<span class="go">                    &#39;w_en&#39;: {</span>
+<span class="go">                        &#39;type&#39;: &#39;port&#39;,</span>
+<span class="go">                        &#39;name&#39;: &#39;csr_bus__w_en&#39;,</span>
+<span class="go">                        &#39;dir&#39;: &#39;in&#39;,</span>
+<span class="go">                        &#39;width&#39;: 1,</span>
+<span class="go">                        &#39;signed&#39;: False,</span>
+<span class="go">                        &#39;init&#39;: &#39;0&#39;</span>
+<span class="go">                    },</span>
+<span class="go">                    &#39;w_data&#39;: {</span>
+<span class="go">                        &#39;type&#39;: &#39;port&#39;,</span>
+<span class="go">                        &#39;name&#39;: &#39;csr_bus__w_data&#39;,</span>
+<span class="go">                        &#39;dir&#39;: &#39;in&#39;,</span>
+<span class="go">                        &#39;width&#39;: 32,</span>
+<span class="go">                        &#39;signed&#39;: False,</span>
+<span class="go">                        &#39;init&#39;: &#39;0&#39;</span>
+<span class="go">                    },</span>
+<span class="go">                    &#39;r_en&#39;: {</span>
+<span class="go">                        &#39;type&#39;: &#39;port&#39;,</span>
+<span class="go">                        &#39;name&#39;: &#39;csr_bus__r_en&#39;,</span>
+<span class="go">                        &#39;dir&#39;: &#39;in&#39;,</span>
+<span class="go">                        &#39;width&#39;: 1,</span>
+<span class="go">                        &#39;signed&#39;: False,</span>
+<span class="go">                        &#39;init&#39;: &#39;0&#39;</span>
+<span class="go">                    },</span>
+<span class="go">                    &#39;r_data&#39;: {</span>
+<span class="go">                        &#39;type&#39;: &#39;port&#39;,</span>
+<span class="go">                        &#39;name&#39;: &#39;csr_bus__r_data&#39;,</span>
+<span class="go">                        &#39;dir&#39;: &#39;out&#39;,</span>
+<span class="go">                        &#39;width&#39;: 32,</span>
+<span class="go">                        &#39;signed&#39;: False,</span>
+<span class="go">                        &#39;init&#39;: &#39;0&#39;</span>
+<span class="go">                    },</span>
+<span class="go">                },</span>
+<span class="go">                &#39;annotations&#39;: {</span>
+<span class="go">                    &#39;https://amaranth-lang.org/schema/example/0/csr-layout.json&#39;: {</span>
+<span class="go">                        &#39;registers&#39;: {</span>
+<span class="go">                            &#39;control&#39;: 0,</span>
+<span class="go">                            &#39;status&#39;:  4,</span>
+<span class="go">                            &#39;data&#39;:    8</span>
+<span class="go">                        }</span>
+<span class="go">                    }</span>
+<span class="go">                }</span>
+<span class="go">            }</span>
+<span class="go">        },</span>
+<span class="go">        &#39;annotations&#39;: {}</span>
+<span class="go">    }</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</section>
+<section id="identifying-schemas">
+<h2>Identifying schemas<a class="headerlink" href="#identifying-schemas" title="Permalink to this heading"></a></h2>
+<p>An <a class="reference internal" href="#amaranth.lib.meta.Annotation" title="amaranth.lib.meta.Annotation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Annotation</span></code></a> schema must have a <code class="docutils literal notranslate"><span class="pre">&quot;$id&quot;</span></code> property, whose value is a URL that serves as its globally unique identifier. The suggested format of this URL is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">protocol</span><span class="o">&gt;</span><span class="p">:</span><span class="o">//&lt;</span><span class="n">domain</span><span class="o">&gt;/</span><span class="n">schema</span><span class="o">/&lt;</span><span class="n">package</span><span class="o">&gt;/&lt;</span><span class="n">version</span><span class="o">&gt;/&lt;</span><span class="n">path</span><span class="o">&gt;.</span><span class="n">json</span>
+</pre></div>
+</div>
+<p>where:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;domain&gt;</span></code> is a domain name registered to the person or entity defining the annotation;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;package&gt;</span></code> is the name of the Python package providing the <a class="reference internal" href="#amaranth.lib.meta.Annotation" title="amaranth.lib.meta.Annotation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Annotation</span></code></a> subclass;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;version&gt;</span></code> is the version of that package;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;path&gt;</span></code> is a non-empty string specific to the annotation.</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Annotations used in the Amaranth project packages are published under <a class="reference external" href="https://amaranth-lang.org/schema/">https://amaranth-lang.org/schema/</a> according to this URL format, and are covered by the usual compatibility commitment.</p>
+<p>Other projects that define additional Amaranth annotations are encouraged, but not required, to make their schemas publicly accessible; the only requirement is for the URL to be globally unique.</p>
+</div>
+</section>
+<section id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this heading"></a></h2>
+<dl class="py exception">
+<dt class="sig sig-object py" id="amaranth.lib.meta.InvalidSchema">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.meta.</span></span><span class="sig-name descname"><span class="pre">InvalidSchema</span></span><a class="headerlink" href="#amaranth.lib.meta.InvalidSchema" title="Permalink to this definition"></a></dt>
+<dd><p>Exception raised when a subclass of <a class="reference internal" href="#amaranth.lib.meta.Annotation" title="amaranth.lib.meta.Annotation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Annotation</span></code></a> is defined with a non-conformant
+<a class="reference internal" href="#amaranth.lib.meta.Annotation.schema" title="amaranth.lib.meta.Annotation.schema"><code class="xref py py-data docutils literal notranslate"><span class="pre">schema</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="amaranth.lib.meta.InvalidAnnotation">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.meta.</span></span><span class="sig-name descname"><span class="pre">InvalidAnnotation</span></span><a class="headerlink" href="#amaranth.lib.meta.InvalidAnnotation" title="Permalink to this definition"></a></dt>
+<dd><p>Exception raised by <a class="reference internal" href="#amaranth.lib.meta.Annotation.validate" title="amaranth.lib.meta.Annotation.validate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Annotation.validate()</span></code></a> when the JSON representation of
+an annotation does not conform to its schema.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="amaranth.lib.meta.Annotation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.meta.</span></span><span class="sig-name descname"><span class="pre">Annotation</span></span><a class="headerlink" href="#amaranth.lib.meta.Annotation" title="Permalink to this definition"></a></dt>
+<dd><p>Interface annotation.</p>
+<p>Annotations are containers for metadata that can be retrieved from an interface object using
+the <a class="reference internal" href="wiring.html#amaranth.lib.wiring.Signature.annotations" title="amaranth.lib.wiring.Signature.annotations"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Signature.annotations</span></code></a> method.</p>
+<p>Annotations have a JSON representation whose structure is defined by the <a class="reference external" href="https://json-schema.org">JSON Schema</a>
+language.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="amaranth.lib.meta.Annotation.__init_subclass__">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__init_subclass__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.meta.Annotation.__init_subclass__" title="Permalink to this definition"></a></dt>
+<dd><p>Defining a subclass of <a class="reference internal" href="#amaranth.lib.meta.Annotation" title="amaranth.lib.meta.Annotation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Annotation</span></code></a> causes its <a class="reference internal" href="#amaranth.lib.meta.Annotation.schema" title="amaranth.lib.meta.Annotation.schema"><code class="xref py py-data docutils literal notranslate"><span class="pre">schema</span></code></a> to be validated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="#amaranth.lib.meta.InvalidSchema" title="amaranth.lib.meta.InvalidSchema"><strong>InvalidSchema</strong></a> – If <a class="reference internal" href="#amaranth.lib.meta.Annotation.schema" title="amaranth.lib.meta.Annotation.schema"><code class="xref py py-data docutils literal notranslate"><span class="pre">schema</span></code></a> doesn’t conform to the <cite>2020-12</cite> draft of <a class="reference external" href="https://json-schema.org">JSON Schema</a>.</p></li>
+<li><p><a class="reference internal" href="#amaranth.lib.meta.InvalidSchema" title="amaranth.lib.meta.InvalidSchema"><strong>InvalidSchema</strong></a> – If <a class="reference internal" href="#amaranth.lib.meta.Annotation.schema" title="amaranth.lib.meta.Annotation.schema"><code class="xref py py-data docutils literal notranslate"><span class="pre">schema</span></code></a> doesn’t have a  <a class="reference external" href="https://json-schema.org/draft/2020-12/draft-bhutton-json-schema-01#name-the-id-keyword">“$id” keyword</a> at its root. This requirement is
+    specific to <a class="reference internal" href="#amaranth.lib.meta.Annotation" title="amaranth.lib.meta.Annotation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Annotation</span></code></a> schemas.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="amaranth.lib.meta.Annotation.schema">
+<span class="sig-name descname"><span class="pre">schema</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">{</span> <span class="pre">&quot;$id&quot;:</span> <span class="pre">&quot;...&quot;,</span> <span class="pre">...</span> <span class="pre">}</span></em><a class="headerlink" href="#amaranth.lib.meta.Annotation.schema" title="Permalink to this definition"></a></dt>
+<dd><p>Schema of this annotation, expressed in the <a class="reference external" href="https://json-schema.org">JSON Schema</a> language.</p>
+<p>Subclasses of <a class="reference internal" href="#amaranth.lib.meta.Annotation" title="amaranth.lib.meta.Annotation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Annotation</span></code></a> must define this class attribute.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="amaranth.lib.meta.Annotation.origin">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">origin</span></span><a class="headerlink" href="#amaranth.lib.meta.Annotation.origin" title="Permalink to this definition"></a></dt>
+<dd><p>Python object described by this <a class="reference internal" href="#amaranth.lib.meta.Annotation" title="amaranth.lib.meta.Annotation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Annotation</span></code></a> instance.</p>
+<p>Subclasses of <a class="reference internal" href="#amaranth.lib.meta.Annotation" title="amaranth.lib.meta.Annotation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Annotation</span></code></a> must implement this property.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="amaranth.lib.meta.Annotation.as_json">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">as_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.meta.Annotation.as_json" title="Permalink to this definition"></a></dt>
+<dd><p>Convert to a JSON representation.</p>
+<p>Subclasses of <a class="reference internal" href="#amaranth.lib.meta.Annotation" title="amaranth.lib.meta.Annotation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Annotation</span></code></a> must implement this method.</p>
+<p>JSON representation returned by this method must adhere to <a class="reference internal" href="#amaranth.lib.meta.Annotation.schema" title="amaranth.lib.meta.Annotation.schema"><code class="xref py py-data docutils literal notranslate"><span class="pre">schema</span></code></a> and pass
+validation by <a class="reference internal" href="#amaranth.lib.meta.Annotation.validate" title="amaranth.lib.meta.Annotation.validate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">validate()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>JSON representation of this annotation, expressed in Python primitive types
+(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>).</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="amaranth.lib.meta.Annotation.validate">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.meta.Annotation.validate" title="Permalink to this definition"></a></dt>
+<dd><p>Validate a JSON representation against <a class="reference internal" href="#amaranth.lib.meta.Annotation.schema" title="amaranth.lib.meta.Annotation.schema"><code class="xref py py-attr docutils literal notranslate"><span class="pre">schema</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>instance</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>) – JSON representation to validate, either previously returned by <a class="reference internal" href="#amaranth.lib.meta.Annotation.as_json" title="amaranth.lib.meta.Annotation.as_json"><code class="xref py py-meth docutils literal notranslate"><span class="pre">as_json()</span></code></a>
+or retrieved from an external source.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#amaranth.lib.meta.InvalidAnnotation" title="amaranth.lib.meta.InvalidAnnotation"><strong>InvalidAnnotation</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">instance</span></code> doesn’t conform to <a class="reference internal" href="#amaranth.lib.meta.Annotation.schema" title="amaranth.lib.meta.Annotation.schema"><code class="xref py py-attr docutils literal notranslate"><span class="pre">schema</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="wiring.html" class="btn btn-neutral float-left" title="Interfaces and connections" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="memory.html" class="btn btn-neutral float-right" title="Memory arrays" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020—2024, Amaranth project contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

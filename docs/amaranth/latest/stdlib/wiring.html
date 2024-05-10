@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Interfaces and connections &mdash; Amaranth language &amp; toolchain 0.5.0.dev289 documentation</title>
+  <title>Interfaces and connections &mdash; Amaranth language &amp; toolchain 0.5.0.dev291 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
@@ -17,14 +17,14 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=d54f22f9"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=9213c1b2"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="../_static/platformpicker.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Memory arrays" href="memory.html" />
+    <link rel="next" title="Interface metadata" href="meta.html" />
     <link rel="prev" title="Data structures" href="data.html" /> 
 </head>
 
@@ -41,7 +41,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.5.0.dev289
+                0.5.0.dev291
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -68,8 +68,10 @@
 <li class="toctree-l4"><a class="reference internal" href="#interfaces">Interfaces</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#making-connections">Making connections</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#components">Components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#component-metadata">Component metadata</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="meta.html">Interface metadata</a></li>
 <li class="toctree-l3"><a class="reference internal" href="memory.html">Memory arrays</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cdc.html">Clock domain crossing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="coding.html">Code conversion</a></li>
@@ -1008,7 +1010,7 @@ for details.</p>
 <p>An interface object is a Python object that has a <code class="code highlight py python docutils literal highlight-python"><span class="n">signature</span></code> attribute containing
 a <a class="reference internal" href="#amaranth.lib.wiring.Signature" title="amaranth.lib.wiring.Signature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Signature</span></code></a> object, as well as an attribute for every member of its signature.
 Signatures and interface objects are tightly linked: an interface object can be created out
-of a signature, and the signature is used when <a class="reference internal" href="#amaranth.lib.wiring.connect" title="amaranth.lib.wiring.connect"><code class="xref py py-func docutils literal notranslate"><span class="pre">connect()</span></code></a> ing two interface objects
+of a signature, and the signature is used when <a class="reference internal" href="#amaranth.lib.wiring.connect" title="amaranth.lib.wiring.connect"><code class="xref py py-func docutils literal notranslate"><span class="pre">connect()</span></code></a>ing two interface objects
 together. See the <a class="reference internal" href="#wiring-intro1"><span class="std std-ref">introduction to interfaces</span></a> for a more detailed
 explanation of why this is useful.</p>
 <p><a class="reference internal" href="#amaranth.lib.wiring.Signature" title="amaranth.lib.wiring.Signature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Signature</span></code></a> can be used as a base class to define <a class="reference internal" href="#wiring-customizing"><span class="std std-ref">customized</span></a>
@@ -1183,6 +1185,23 @@ have informative names and accurate source location information.</p>
 the two listed above. Such arguments must have a default value, because
 the <a class="reference internal" href="#amaranth.lib.wiring.SignatureMembers.create" title="amaranth.lib.wiring.SignatureMembers.create"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SignatureMembers.create()</span></code></a> method will call the <a class="reference internal" href="#amaranth.lib.wiring.Signature.create" title="amaranth.lib.wiring.Signature.create"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Signature.create()</span></code></a> member
 without these additional arguments when this signature is a member of another signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="amaranth.lib.wiring.Signature.annotations">
+<span class="sig-name descname"><span class="pre">annotations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.wiring.Signature.annotations" title="Permalink to this definition"></a></dt>
+<dd><p>Annotate an interface object.</p>
+<p>Subclasses of <a class="reference internal" href="#amaranth.lib.wiring.Signature" title="amaranth.lib.wiring.Signature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Signature</span></code></a> may override this method to provide annotations for
+a corresponding interface object. The default implementation provides none.</p>
+<p>See <a class="reference internal" href="meta.html#module-amaranth.lib.meta" title="amaranth.lib.meta"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.meta</span></code></a> for details.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="code highlight py python docutils literal highlight-python"><span class="nb">tuple</span><span class="p">()</span></code></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>iterable of <a class="reference internal" href="meta.html#amaranth.lib.meta.Annotation" title="amaranth.lib.meta.Annotation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Annotation</span></code></a></p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -1393,7 +1412,7 @@ on the flipped interface object from being called on the unflipped one, use
 <dd class="field-odd"><p><code class="code highlight py python docutils literal highlight-python"><span class="n">unflipped</span><span class="o">.</span><span class="n">signature</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span></code></p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#amaranth.lib.wiring.Signature" title="amaranth.lib.wiring.Signature">Signature</a></p>
+<dd class="field-even"><p><a class="reference internal" href="#amaranth.lib.wiring.Signature" title="amaranth.lib.wiring.Signature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Signature</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1408,7 +1427,7 @@ on the flipped interface object from being called on the unflipped one, use
 <code class="code highlight py python docutils literal highlight-python"><span class="n">unflipped</span> <span class="o">==</span> <span class="n">other_unflipped</span></code>, <code class="code highlight py python docutils literal highlight-python"><span class="kc">False</span></code> otherwise.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)">bool</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1567,13 +1586,102 @@ If an attribute with the same name as that of a member already exists, an error 
 <dl class="py property">
 <dt class="sig sig-object py" id="amaranth.lib.wiring.Component.signature">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">signature</span></span><a class="headerlink" href="#amaranth.lib.wiring.Component.signature" title="Permalink to this definition"></a></dt>
-<dd><p>The signature of the component.</p>
+<dd><p>Signature of the component.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Do not override this property. Once a component is constructed, its <a class="reference internal" href="#amaranth.lib.wiring.Component.signature" title="amaranth.lib.wiring.Component.signature"><code class="xref py py-attr docutils literal notranslate"><span class="pre">signature</span></code></a>
 property must always return the same <a class="reference internal" href="#amaranth.lib.wiring.Signature" title="amaranth.lib.wiring.Signature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Signature</span></code></a> instance. The constructor
 can be used to customize a component’s signature.</p>
 </div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="amaranth.lib.wiring.Component.metadata">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">metadata</span></span><a class="headerlink" href="#amaranth.lib.wiring.Component.metadata" title="Permalink to this definition"></a></dt>
+<dd><p>Metadata attached to the component.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#amaranth.lib.wiring.ComponentMetadata" title="amaranth.lib.wiring.ComponentMetadata"><code class="xref py py-class docutils literal notranslate"><span class="pre">ComponentMetadata</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="component-metadata">
+<h2>Component metadata<a class="headerlink" href="#component-metadata" title="Permalink to this heading"></a></h2>
+<dl class="py exception">
+<dt class="sig sig-object py" id="amaranth.lib.wiring.InvalidMetadata">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.wiring.</span></span><span class="sig-name descname"><span class="pre">InvalidMetadata</span></span><a class="headerlink" href="#amaranth.lib.wiring.InvalidMetadata" title="Permalink to this definition"></a></dt>
+<dd><p>Exception raised by <a class="reference internal" href="#amaranth.lib.wiring.ComponentMetadata.validate" title="amaranth.lib.wiring.ComponentMetadata.validate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ComponentMetadata.validate()</span></code></a> when the JSON representation of
+a component’s metadata does not conform to its schema.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="amaranth.lib.wiring.ComponentMetadata">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.wiring.</span></span><span class="sig-name descname"><span class="pre">ComponentMetadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.wiring.ComponentMetadata" title="Permalink to this definition"></a></dt>
+<dd><p>Component metadata.</p>
+<p>Component <a class="reference internal" href="meta.html#meta"><span class="std std-ref">metadata</span></a> describes the interface of a <a class="reference internal" href="#amaranth.lib.wiring.Component" title="amaranth.lib.wiring.Component"><code class="xref py py-class docutils literal notranslate"><span class="pre">Component</span></code></a> and can be
+exported to JSON for interoperability with non-Amaranth tooling.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>origin</strong> (<a class="reference internal" href="#amaranth.lib.wiring.Component" title="amaranth.lib.wiring.Component"><code class="xref py py-class docutils literal notranslate"><span class="pre">Component</span></code></a>) – Component described by this metadata instance.</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="amaranth.lib.wiring.ComponentMetadata.schema">
+<span class="sig-name descname"><span class="pre">schema</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">{</span> <span class="pre">&quot;$id&quot;:</span> <span class="pre">&quot;https://amaranth-lang.org/schema/amaranth/0.5/component.json&quot;,</span> <span class="pre">...</span> <span class="pre">}</span></em><a class="headerlink" href="#amaranth.lib.wiring.ComponentMetadata.schema" title="Permalink to this definition"></a></dt>
+<dd><p>Schema of component metadata, expressed in the <a class="reference external" href="https://json-schema.org">JSON Schema</a> language.</p>
+<p>A copy of this schema can be retrieved <a class="reference external" href="https://amaranth-lang.org/schema/amaranth/0.5/component.json">from amaranth-lang.org</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="amaranth.lib.wiring.ComponentMetadata.origin">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">origin</span></span><a class="headerlink" href="#amaranth.lib.wiring.ComponentMetadata.origin" title="Permalink to this definition"></a></dt>
+<dd><p>Component described by this metadata.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#amaranth.lib.wiring.Component" title="amaranth.lib.wiring.Component"><code class="xref py py-class docutils literal notranslate"><span class="pre">Component</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="amaranth.lib.wiring.ComponentMetadata.validate">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.wiring.ComponentMetadata.validate" title="Permalink to this definition"></a></dt>
+<dd><p>Validate a JSON representation of component metadata against <a class="reference internal" href="#amaranth.lib.wiring.ComponentMetadata.schema" title="amaranth.lib.wiring.ComponentMetadata.schema"><code class="xref py py-attr docutils literal notranslate"><span class="pre">schema</span></code></a>.</p>
+<p>This method does not validate annotations of the interface members, and consequently does
+not make network requests.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>instance</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>) – JSON representation to validate, either previously returned by <a class="reference internal" href="#amaranth.lib.wiring.ComponentMetadata.as_json" title="amaranth.lib.wiring.ComponentMetadata.as_json"><code class="xref py py-meth docutils literal notranslate"><span class="pre">as_json()</span></code></a> or
+retrieved from an external source.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#amaranth.lib.wiring.InvalidMetadata" title="amaranth.lib.wiring.InvalidMetadata"><strong>InvalidMetadata</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">instance</span></code> doesn’t conform to <a class="reference internal" href="#amaranth.lib.wiring.ComponentMetadata.schema" title="amaranth.lib.wiring.ComponentMetadata.schema"><code class="xref py py-attr docutils literal notranslate"><span class="pre">schema</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="amaranth.lib.wiring.ComponentMetadata.as_json">
+<span class="sig-name descname"><span class="pre">as_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.wiring.ComponentMetadata.as_json" title="Permalink to this definition"></a></dt>
+<dd><p>Translate to JSON.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>JSON representation of <a class="reference internal" href="#amaranth.lib.wiring.ComponentMetadata.origin" title="amaranth.lib.wiring.ComponentMetadata.origin"><code class="xref py py-attr docutils literal notranslate"><span class="pre">origin</span></code></a> that describes its interface members and includes
+their annotations.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -1586,7 +1694,7 @@ can be used to customize a component’s signature.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="data.html" class="btn btn-neutral float-left" title="Data structures" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="memory.html" class="btn btn-neutral float-right" title="Memory arrays" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="meta.html" class="btn btn-neutral float-right" title="Interface metadata" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
