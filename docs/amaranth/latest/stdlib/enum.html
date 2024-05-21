@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Enumerations &mdash; Amaranth language &amp; toolchain 0.5.0.dev298 documentation</title>
+  <title>Enumerations &mdash; Amaranth language &amp; toolchain 0.5.0.dev299 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
@@ -17,7 +17,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=15f876a4"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b180f2bd"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="../_static/platformpicker.js"></script>
@@ -41,7 +41,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.5.0.dev298
+                0.5.0.dev299
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -70,6 +70,7 @@
 <li class="toctree-l3"><a class="reference internal" href="wiring.html">Interfaces and connections</a></li>
 <li class="toctree-l3"><a class="reference internal" href="meta.html">Interface metadata</a></li>
 <li class="toctree-l3"><a class="reference internal" href="memory.html">Memory arrays</a></li>
+<li class="toctree-l3"><a class="reference internal" href="io.html">Input/output buffers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cdc.html">Clock domain crossing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="coding.html">Code conversion</a></li>
 <li class="toctree-l3"><a class="reference internal" href="fifo.html">First-in first-out queues</a></li>
@@ -252,81 +253,6 @@ in the <code class="docutils literal notranslate"><span class="pre">view_class</
 <li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code> – For value-castables, when a view class is not specified for this enum.</p></li>
 </ul>
 </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="amaranth.lib.enum.EnumType.const">
-<span class="sig-name descname"><span class="pre">const</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.enum.EnumType.const" title="Permalink to this definition"></a></dt>
-<dd><p>Convert a constant initializer <code class="code highlight py python docutils literal highlight-python"><span class="n">obj</span></code> to its value representation.</p>
-<p>This method is called by the Amaranth language to convert <code class="code highlight py python docutils literal highlight-python"><span class="n">obj</span></code>, which may be an
-arbitrary Python object, to a concrete <a class="reference internal" href="../guide.html#lang-valuelike"><span class="std std-ref">value-like object</span></a>.
-The object <code class="code highlight py python docutils literal highlight-python"><span class="n">obj</span></code> will usually be a Python literal that can conveniently represent
-a constant value whose shape is described by <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span></code>. While not constrained here,
-the result will usually be an instance of the return type of <a class="reference internal" href="#amaranth.lib.enum.EnumType.__call__" title="amaranth.lib.enum.EnumType.__call__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__call__()</span></code></a>.</p>
-<p>For any <code class="code highlight py python docutils literal highlight-python"><span class="n">obj</span></code>, the following condition must hold:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Shape</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">==</span> <span class="n">Const</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">const</span><span class="p">(</span><span class="n">obj</span><span class="p">))</span><span class="o">.</span><span class="n">shape</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>This method may also be called by code that is not a part of the Amaranth language.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>A <a class="reference internal" href="../guide.html#lang-valuelike"><span class="std std-ref">value-like object</span></a> that is <a class="reference internal" href="../guide.html#lang-constcasting"><span class="std std-ref">constant-castable</span></a>.</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.12)"><strong>Exception</strong></a> – When the conversion cannot be done. This exception must be propagated by callers,
-    either directly or as a cause of another exception. While not constrained here,
-    usually the exception class will be <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.12)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.12)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="amaranth.lib.enum.EnumType.from_bits">
-<span class="sig-name descname"><span class="pre">from_bits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bits</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.enum.EnumType.from_bits" title="Permalink to this definition"></a></dt>
-<dd><p>Lift a bit pattern to a higher-level representation.</p>
-<p>This method is called by the Amaranth language to lift <code class="code highlight py python docutils literal highlight-python"><span class="n">raw</span></code>, which is an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>,
-to a higher-level representation, which may be any object accepted by <a class="reference internal" href="#amaranth.lib.enum.EnumType.const" title="amaranth.lib.enum.EnumType.const"><code class="xref py py-meth docutils literal notranslate"><span class="pre">const()</span></code></a>.
-Most importantly, the simulator calls this method when the value of a shape-castable
-object is retrieved.</p>
-<p>For any valid bit pattern <code class="code highlight py python docutils literal highlight-python"><span class="n">raw</span></code>, the following condition must hold:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Const</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">const</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">from_bits</span><span class="p">(</span><span class="n">raw</span><span class="p">)))</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="n">raw</span>
-</pre></div>
-</div>
-<p>While <a class="reference internal" href="#amaranth.lib.enum.EnumType.const" title="amaranth.lib.enum.EnumType.const"><code class="xref py py-meth docutils literal notranslate"><span class="pre">const()</span></code></a> will usually return an Amaranth value or a custom value-castable
-object that is convenient to use while constructing the design, this method will usually
-return a Python object that is convenient to use while simulating the design. While not
-constrained here, these objects should have the same type whenever feasible.</p>
-<p>This method may also be called by code that is not a part of the Amaranth language.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>unspecified type</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.12)"><strong>Exception</strong></a> – When the bit pattern isn’t valid. This exception must be propagated by callers,
-    either directly or as a cause of another exception. While not constrained here,
-    usually the exception class will be <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.12)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="amaranth.lib.enum.EnumType.format">
-<span class="sig-name descname"><span class="pre">format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format_spec</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.enum.EnumType.format" title="Permalink to this definition"></a></dt>
-<dd><p>Format a value.</p>
-<p>This method is called by the Amaranth language to implement formatting for custom
-shapes. Whenever <code class="code highlight py python docutils literal highlight-python"><span class="s2">&quot;{obj:spec}&quot;</span></code> is encountered by <code class="xref py py-class docutils literal notranslate"><span class="pre">Format</span></code>, and <code class="code highlight py python docutils literal highlight-python"><span class="n">obj</span></code>
-has a custom shape that has a <a class="reference internal" href="#amaranth.lib.enum.EnumType.format" title="amaranth.lib.enum.EnumType.format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">format()</span></code></a> method, <code class="code highlight py python docutils literal highlight-python"><span class="n">obj</span><span class="o">.</span><span class="n">shape</span><span class="p">()</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s2">&quot;spec&quot;</span><span class="p">)</span></code>
-is called, and the format specifier is replaced with the result.</p>
-<p>The default <a class="reference internal" href="#amaranth.lib.enum.EnumType.format" title="amaranth.lib.enum.EnumType.format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">format()</span></code></a> implementation is:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">spec</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">Format</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">{{</span><span class="s2">:</span><span class="si">{</span><span class="n">spec</span><span class="si">}</span><span class="se">}}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">Value</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">obj</span><span class="p">))</span>
-</pre></div>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Format</span></code></p>
 </dd>
 </dl>
 </dd></dl>

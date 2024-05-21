@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Changelog &mdash; Amaranth language &amp; toolchain 0.5.0.dev298 documentation</title>
+  <title>Changelog &mdash; Amaranth language &amp; toolchain 0.5.0.dev299 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/platformpicker.css" />
@@ -17,7 +17,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=15f876a4"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b180f2bd"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/platformpicker.js"></script>
@@ -41,7 +41,7 @@
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.5.0.dev298
+                0.5.0.dev299
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -217,8 +217,8 @@
 <li><p>Added: <a class="reference internal" href="stdlib/data.html#amaranth.lib.data.Const" title="amaranth.lib.data.Const"><code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.lib.data.Const</span></code></a> class. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0051-const-from-bits.html">RFC 51</a>)</p></li>
 <li><p>Changed: <a class="reference internal" href="stdlib/data.html#amaranth.lib.data.Layout.const" title="amaranth.lib.data.Layout.const"><code class="xref py py-meth docutils literal notranslate"><span class="pre">amaranth.lib.data.Layout.const()</span></code></a> returns a <a class="reference internal" href="stdlib/data.html#amaranth.lib.data.Const" title="amaranth.lib.data.Const"><code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.lib.data.Const</span></code></a>, not a view (<a class="reference external" href="https://amaranth-lang.org/rfcs/0051-const-from-bits.html">RFC 51</a>)</p></li>
 <li><p>Changed: <a class="reference internal" href="stdlib/wiring.html#amaranth.lib.wiring.Signature.is_compliant" title="amaranth.lib.wiring.Signature.is_compliant"><code class="xref py py-meth docutils literal notranslate"><span class="pre">amaranth.lib.wiring.Signature.is_compliant()</span></code></a> no longer rejects reset-less signals.</p></li>
-<li><p>Added: <code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.lib.io.SingleEndedPort</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.lib.io.DifferentialPort</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0055-lib-io.html">RFC 55</a>)</p></li>
-<li><p>Added: <code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.lib.io.Buffer</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.lib.io.FFBuffer</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.lib.io.DDRBuffer</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0055-lib-io.html">RFC 55</a>)</p></li>
+<li><p>Added: <a class="reference internal" href="stdlib/io.html#amaranth.lib.io.SingleEndedPort" title="amaranth.lib.io.SingleEndedPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.lib.io.SingleEndedPort</span></code></a>, <a class="reference internal" href="stdlib/io.html#amaranth.lib.io.DifferentialPort" title="amaranth.lib.io.DifferentialPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.lib.io.DifferentialPort</span></code></a>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0055-lib-io.html">RFC 55</a>)</p></li>
+<li><p>Added: <a class="reference internal" href="stdlib/io.html#amaranth.lib.io.Buffer" title="amaranth.lib.io.Buffer"><code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.lib.io.Buffer</span></code></a>, <a class="reference internal" href="stdlib/io.html#amaranth.lib.io.FFBuffer" title="amaranth.lib.io.FFBuffer"><code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.lib.io.FFBuffer</span></code></a>, <a class="reference internal" href="stdlib/io.html#amaranth.lib.io.DDRBuffer" title="amaranth.lib.io.DDRBuffer"><code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.lib.io.DDRBuffer</span></code></a>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0055-lib-io.html">RFC 55</a>)</p></li>
 <li><p>Added: <a class="reference internal" href="stdlib/meta.html#module-amaranth.lib.meta" title="amaranth.lib.meta"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.meta</span></code></a>, <a class="reference internal" href="stdlib/wiring.html#amaranth.lib.wiring.ComponentMetadata" title="amaranth.lib.wiring.ComponentMetadata"><code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.lib.wiring.ComponentMetadata</span></code></a>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0030-component-metadata.html">RFC 30</a>)</p></li>
 <li><p>Deprecated: <a class="reference internal" href="stdlib/coding.html#module-amaranth.lib.coding" title="amaranth.lib.coding"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.coding</span></code></a>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0063-remove-lib-coding.html">RFC 63</a>)</p></li>
 <li><p>Removed: (deprecated in 0.4) <code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.scheduler</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0019-remove-scheduler.html">RFC 19</a>)</p></li>
