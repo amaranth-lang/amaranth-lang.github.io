@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Simulator &mdash; Amaranth language &amp; toolchain 0.5.0.dev318 documentation</title>
+  <title>Simulator &mdash; Amaranth language &amp; toolchain 0.5.0.dev319 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/platformpicker.css" />
@@ -17,7 +17,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f4b1b25f"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=50c93646"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/platformpicker.js"></script>
@@ -41,7 +41,7 @@
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.5.0.dev318
+                0.5.0.dev319
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -172,7 +172,16 @@
 </pre></div>
 </div>
 <p>The captured data is saved to a <abbr>VCD</abbr> file <code class="file docutils literal notranslate"><span class="pre">example1.vcd</span></code>, which can be displayed with a <em>waveform viewer</em> such as <a class="reference external" href="https://surfer-project.org/">Surfer</a> or <a class="reference external" href="https://gtkwave.sourceforge.net/">GTKWave</a>:</p>
-<img src="_images/simulator/example1.svg" class="wavedrom wavedrom-signal" alt="{'head': {'tock': 0}, 'signal': [{'name': 'clk', 'wave': 'lp..............'}, {'name': 'rst', 'wave': 'l...............'}, {'name': 'en', 'wave': 'h...............'}, {'name': 'count', 'wave': '================', 'data': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15']}], 'config': {'skin': 'default'}}"></section>
+<img src="_images/simulator/example1.svg" class="wavedrom wavedrom-signal" alt="{'head': {'tock': 0}, 'signal': [{'name': 'clk', 'wave': 'lp..............'}, {'name': 'rst', 'wave': 'l...............'}, {'name': 'en', 'wave': 'h...............'}, {'name': 'count', 'wave': '================', 'data': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15']}], 'config': {'skin': 'default'}}"><p>The <a class="reference internal" href="#amaranth.sim.Simulator.reset" title="amaranth.sim.Simulator.reset"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Simulator.reset()</span></code></a> method reverts the simulation to its initial state. It can be used to speed up tests by capturing the waveforms only when the simulation is known to encounter an error:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+    <span class="k">with</span> <span class="n">sim</span><span class="o">.</span><span class="n">write_vcd</span><span class="p">(</span><span class="s2">&quot;example1_error.vcd&quot;</span><span class="p">):</span>
+        <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
 <section id="testing-synchronous-circuits">
 <h3>Testing synchronous circuits<a class="headerlink" href="#testing-synchronous-circuits" title="Permalink to this heading"></a></h3>
 <p>To verify that the DUT works as intended during a simulation, known values are provided as the inputs, and the outputs are compared with the expected results.</p>
@@ -348,10 +357,8 @@
 <p>After the simulator is reset, it may be reused to run the simulation again.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Resetting the simulator can also be used to amortize the startup cost while validating
-a large design with many short test. In this case, instead of adding new testbenches,
-the behavior of the already added testbenches would be modified for each of the tests.</p>
-<p>It can also be used to capture waveforms only for simulations that encounter an error.</p>
+<p>Resetting the simulator can also be used to amortize the startup cost of repeatedly
+simulating a large design.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
