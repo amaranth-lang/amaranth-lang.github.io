@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Memory arrays &mdash; Amaranth language &amp; toolchain 0.5.0.dev310 documentation</title>
+  <title>Memory arrays &mdash; Amaranth language &amp; toolchain 0.5.0.dev315 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
@@ -17,7 +17,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=d7228150"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=8f2b1fee"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="../_static/platformpicker.js"></script>
@@ -41,7 +41,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.5.0.dev310
+                0.5.0.dev315
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -67,7 +67,6 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Memory arrays</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#simulation">Simulation</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#memory-description">Memory description</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#memory-component">Memory component</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#memory-ports">Memory ports</a></li>
@@ -80,6 +79,7 @@
 <li class="toctree-l3"><a class="reference internal" href="crc.html">Cyclic redundancy checks</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../simulator.html">Simulator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../platform.html">Platform integration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../changes.html">Changelog</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../contrib.html">Contributing</a></li>
@@ -190,13 +190,16 @@
 <p>In this example, the memory read and write ports are synchronous. A write operation (labelled <cite>x</cite>, <cite>w</cite>) updates the addressed row 0 on the next clock cycle, and a read operation (labelled <cite>y</cite>, <cite>r</cite>) retrieves the contents of the same addressed row 0 on the next clock cycle as well.</p>
 <p>However, the memory read port is also configured to be <em>transparent</em> relative to the memory write port. This means that if a write and a read operation (labelled <cite>t</cite>, <cite>u</cite> respectively) access the same row with address 3, the new contents will be read out, reducing the minimum push-to-pop latency to one cycle, down from two cycles that would be required without the use of transparency.</p>
 <img src="_images/memory/example_fifo.svg" class="wavedrom wavedrom-signal" alt="{'signal': [{'name': 'clk', 'wave': 'P........'}, {'name': 'push', 'wave': '01..0.10.', 'node': '.x'}, {'name': 'wr_port.addr', 'wave': '=.===..=.', 'data': ['0', '1', '2', '3', '4', '5']}, {'name': 'wr_port.data', 'wave': '====..=..', 'data': ['00', 'AA', 'BB', 'CC', 'DD'], 'node': '.w....t'}, {'name': 'memory[0]', 'wave': '=.=......', 'data': ['00', 'AA'], 'node': '..G'}, {'name': 'memory[3]', 'wave': '=......=.', 'data': ['00', 'DD'], 'node': '.......H'}, {'name': 'pop', 'wave': '0..1...0.', 'node': '...y'}, {'name': 'rd_port.addr', 'wave': '=...====.', 'data': ['0', '1', '2', '3', '4', '5']}, {'name': 'rd_port.data', 'wave': '=...====.', 'data': ['00', 'AA', 'BB', 'CC', 'DD'], 'node': '....r..u'}], 'edge': ['x-~&gt;G', 'w-&gt;G', 'y-~&gt;r', 't-&gt;H', 't-&gt;u'], 'config': {'skin': 'default'}}"></section>
-</section>
 <section id="simulation">
-<h2>Simulation<a class="headerlink" href="#simulation" title="Permalink to this heading"></a></h2>
-<div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<p>This section will be written once the simulator itself is documented.</p>
+<h3>Simulation<a class="headerlink" href="#simulation" title="Permalink to this heading"></a></h3>
+<p>There are two ways to interact with a memory array in a simulator: requesting a read and/or write port that is used only in a testbench, or directly reading and writing memory contents. In most cases, directly accessing memory contents using <a class="reference internal" href="#amaranth.hdl.MemoryData.__getitem__" title="amaranth.hdl.MemoryData.__getitem__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">MemoryData.__getitem__</span></code></a> is more convenient.</p>
+<p>For example, this <a class="reference internal" href="../simulator.html"><span class="doc">testbench</span></a> will clear the least significant bit of every memory row:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">testbench</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">len</span><span class="p">(</span><span class="n">memory</span><span class="o">.</span><span class="n">data</span><span class="p">):</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">memory</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">memory</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">index</span><span class="p">])</span> <span class="o">&amp;</span> <span class="o">~</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
 </div>
+</section>
 </section>
 <section id="memory-description">
 <h2>Memory description<a class="headerlink" href="#memory-description" title="Permalink to this heading"></a></h2>
@@ -217,7 +220,8 @@ similar to an array of <code class="xref py py-class docutils literal notranslat
 <a class="reference internal" href="#amaranth.hdl.MemoryData.Init" title="amaranth.hdl.MemoryData.Init"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryData.Init</span></code></a> converting elements of the iterable to match <code class="code highlight py python docutils literal highlight-python"><span class="n">shape</span></code> and using
 a default value for rows that are not explicitly initialized.</p>
 <p>Changing the initial contents of a <a class="reference internal" href="#amaranth.hdl.MemoryData" title="amaranth.hdl.MemoryData"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryData</span></code></a> is only possible until it is used to
-elaborate a memory; afterwards, attempting to do so will raise <code class="xref py py-exc docutils literal notranslate"><span class="pre">AlreadyElaborated</span></code>.</p>
+elaborate a memory; afterwards, attempting to do so will raise the <code class="xref py py-class docutils literal notranslate"><span class="pre">AlreadyElaborated</span></code>
+exception.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Uninitialized memories (including ASIC memories and some FPGA memories) are
@@ -292,7 +296,8 @@ directly instead) and then adding memory ports using the <a class="reference int
 <a class="reference internal" href="#amaranth.lib.memory.Memory.write_port" title="amaranth.lib.memory.Memory.write_port"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write_port()</span></code></a> methods. Because it is mutable, it should be created and used locally within
 the <a class="reference internal" href="../guide.html#lang-elaboration"><span class="std std-ref">elaborate</span></a> method.</p>
 <p>Adding ports or changing initial contents of a <a class="reference internal" href="#amaranth.lib.memory.Memory" title="amaranth.lib.memory.Memory"><code class="xref py py-class docutils literal notranslate"><span class="pre">Memory</span></code></a> is only possible until it is
-elaborated; afterwards, attempting to do so will raise <code class="xref py py-class docutils literal notranslate"><span class="pre">AlreadyElaborated</span></code>.</p>
+elaborated; afterwards, attempting to do so will raise the
+<code class="xref py py-class docutils literal notranslate"><span class="pre">AlreadyElaborated</span></code> exception.</p>
 <p class="rubric">Platform overrides</p>
 <p>Define the <code class="code highlight py python docutils literal highlight-python"><span class="n">get_memory</span><span class="p">()</span></code> platform method to override the implementation of
 <a class="reference internal" href="#amaranth.lib.memory.Memory" title="amaranth.lib.memory.Memory"><code class="xref py py-class docutils literal notranslate"><span class="pre">Memory</span></code></a>, e.g. to instantiate library cells directly.</p>

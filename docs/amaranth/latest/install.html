@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Installation &mdash; Amaranth language &amp; toolchain 0.5.0.dev310 documentation</title>
+  <title>Installation &mdash; Amaranth language &amp; toolchain 0.5.0.dev315 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/platformpicker.css" />
@@ -17,7 +17,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=d7228150"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=8f2b1fee"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/platformpicker.js"></script>
@@ -41,7 +41,7 @@
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.5.0.dev310
+                0.5.0.dev315
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -72,6 +72,7 @@
 <li class="toctree-l2"><a class="reference internal" href="guide.html">Language guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference.html">Language reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stdlib.html">Standard library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simulator.html">Simulator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="platform.html">Platform integration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changes.html">Changelog</a></li>
 <li class="toctree-l2"><a class="reference internal" href="contrib.html">Contributing</a></li>
@@ -116,7 +117,7 @@
 <span id="install-sysreqs"></span><h2>System requirements<a class="headerlink" href="#system-requirements" title="Permalink to this heading"></a></h2>
 <p>Amaranth HDL requires Python 3.8; it works on <a class="reference external" href="https://www.python.org/">CPython</a> 3.8 (or newer), and works faster on <a class="reference external" href="https://www.pypy.org/">PyPy3.8</a> 7.3.7 (or newer). Installation requires <a class="reference external" href="https://pip.pypa.io/en/stable/">pip</a> 23.0 (or newer).</p>
 <p>For most workflows, Amaranth requires <a class="reference external" href="https://yosyshq.net/yosys/">Yosys</a> 0.40 (or newer). A <a class="reference external" href="https://pypi.org/project/amaranth-yosys/">compatible version of Yosys</a> is distributed via <a class="reference external" href="https://pypi.org/">PyPI</a> for most popular platforms, so it is usually not necessary to install Yosys separately.</p>
-<p>Simulating Amaranth code requires no additional software. However, a waveform viewer like <a class="reference external" href="https://gtkwave.sourceforge.net/">GTKWave</a> is invaluable for debugging. As an alternative to GTKWave, the <a class="reference external" href="https://amaranth-lang.org/play/">Amaranth Playground</a> can be used to display waveforms for simple designs.</p>
+<p>Simulating Amaranth code requires no additional software. However, a waveform viewer like <a class="reference external" href="https://surfer-project.org/">Surfer</a> or <a class="reference external" href="https://gtkwave.sourceforge.net/">GTKWave</a> is invaluable for debugging. As an alternative, the <a class="reference external" href="https://amaranth-lang.org/play/">Amaranth Playground</a> can be used to display waveforms for simple designs.</p>
 <p>Synthesizing, placing and routing an Amaranth design for an FPGA requires the FPGA family specific toolchain. The open source iCE40, ECP5, MachXO2/3, Nexus, and Gowin toolchains are distributed via <a class="reference external" href="https://pypi.org/">PyPI</a> for most popular platforms by the <a class="reference external" href="https://yowasp.org/">YoWASP</a> project.</p>
 </section>
 <section id="installing-prerequisites">
@@ -125,7 +126,6 @@
 <div class="platform-choice platform--windows platform-noaltname docutils container">
 <p class="platform-title">Windows</p>
 <p><a class="reference external" href="https://docs.python.org/3/using/windows.html#using-on-windows" title="(in Python v3.12)"><span class="xref std std-ref">Install Python</span></a>, either from Windows Store or using the full installer. If using the full installer, make sure to install a 64-bit version of Python.</p>
-<p><a class="reference external" href="https://sourceforge.net/projects/gtkwave/files/">Download GTKWave</a>, either win32 or win64 binaries. GTKWave does not need to be installed; it can be unpacked to any convenient location and run from there.</p>
 <p>Before continuing, make sure you have the latest version of <a class="reference external" href="https://pip.pypa.io/en/stable/">pip</a> installed by running:</p>
 <div class="highlight-doscon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;</span> pip install --upgrade pip
 </pre></div>
@@ -133,8 +133,8 @@
 </div>
 <div class="platform-choice platform--macos platform-noaltname docutils container">
 <p class="platform-title">macOS</p>
-<p>Install <a class="reference external" href="https://brew.sh">Homebrew</a>. Then, install Python and GTKWave by running:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>brew<span class="w"> </span>install<span class="w"> </span>python<span class="w"> </span>gtkwave
+<p>Install <a class="reference external" href="https://brew.sh">Homebrew</a>. Then, install Python by running:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>brew<span class="w"> </span>install<span class="w"> </span>python
 </pre></div>
 </div>
 <p>Before continuing, make sure you have the latest version of <a class="reference external" href="https://pip.pypa.io/en/stable/">pip</a> installed by running:</p>
@@ -144,8 +144,8 @@
 </div>
 <div class="platform-choice platform--debian platform--linux docutils container">
 <p class="platform-title">Debian</p>
-<p>Install Python and GTKWave by running:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>python3-pip<span class="w"> </span>gtkwave
+<p>Install Python by running:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>python3-pip
 </pre></div>
 </div>
 <p>On architectures other than x86_64 and AArch64, install Yosys by running:</p>
@@ -160,14 +160,14 @@
 </div>
 <div class="platform-choice platform--arch platform--linux docutils container">
 <p class="platform-title">Arch Linux</p>
-<p>Install Python, pip, GTKWave and Yosys by running:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>python<span class="w"> </span>python-pip<span class="w"> </span>gtkwave<span class="w"> </span>yosys
+<p>Install Python and pip by running:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>python<span class="w"> </span>python-pip
 </pre></div>
 </div>
 </div>
 <div class="platform-choice platform--linux platform-noaltname docutils container">
 <p class="platform-title">Other Linux</p>
-<p>Install Python and GTKWave from the package repository of your distribution.</p>
+<p>Install Python from the package repository of your distribution.</p>
 <p>On architectures other than x86_64 and AArch64, install Yosys from the package repository of your distribution.</p>
 <p>If Yosys 0.40 (or newer) is not available, <a class="reference external" href="https://github.com/YosysHQ/yosys/#building-from-source">build Yosys from source</a>.</p>
 <p>Before continuing, make sure you have the latest version of <a class="reference external" href="https://pip.pypa.io/en/stable/">pip</a> installed by running:</p>
