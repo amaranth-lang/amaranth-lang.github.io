@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contributing &mdash; Amaranth language &amp; toolchain 0.6.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/platformpicker.css" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=d131d90a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=add265a1"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/platformpicker.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Changelog" href="changes.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="cover.html" class="icon icon-home">
+            Amaranth language & toolchain
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.6.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Language &amp; toolchain</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="start.html">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide.html">Language guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Language reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stdlib.html">Standard library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simulator.html">Simulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="platform.html">Platform integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changes.html">Changelog</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Contributing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#filing-problem-reports">Filing problem reports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fixing-problems">Fixing problems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#proposing-new-features">Proposing new features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#working-with-the-codebase">Working with the codebase</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#preparing-the-environment">Preparing the environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#running-the-testsuite">Running the testsuite</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-the-documentation">Building the documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#documentation-style-guide">Documentation style guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#contributing-your-changes">Contributing your changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#weekly-meetings">Weekly meetings</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="https://amaranth-lang.org/docs/amaranth-stdio/latest/">Standard I/O components</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://amaranth-lang.org/docs/amaranth-soc/latest/">System on Chip toolkit</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="cover.html">Amaranth language & toolchain</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="cover.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Language &amp; toolchain</a></li>
+      <li class="breadcrumb-item active">Contributing</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/contrib.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="contributing">
+<h1>Contributing<a class="headerlink" href="#contributing" title="Permalink to this heading"></a></h1>
+<p>The Amaranth project is the collective work of many people collaborating over the years, and it would not be the same without everyone’s unique perspectives and contributions. We’re glad that you are considering joining us! This page will guide you through some of the ways to contribute to the project.</p>
+<section id="filing-problem-reports">
+<h2>Filing problem reports<a class="headerlink" href="#filing-problem-reports" title="Permalink to this heading"></a></h2>
+<p>We would like Amaranth to be a best-in-class design tool, and hearing about issues people encounter while using it is crucial for improving it. While we do care a lot about correctness of the results, we care about the experience of using the tool just as much. Amaranth is meant to be a tool that is comfortable to use: with fewer sharp edges (no matter how much technological appeal they might have) and more signs and guardrails.</p>
+<p>Please <a class="reference external" href="https://github.com/amaranth-lang/amaranth/issues">report</a> any problems you encounter using Amaranth. To go beyond that: <strong>If, while you are using Amaranth, you see an error message that is hard to understand or is misleading, please report it as a bug. Even (especially!) if you think you did something wrong.</strong></p>
+<p>When filing problem reports, please include the following information:</p>
+<ul class="simple">
+<li><p>The exact version of Amaranth, which you can find by running <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-c</span> <span class="pre">&quot;import</span> <span class="pre">amaranth;</span> <span class="pre">print(amaranth.__version__)&quot;</span></code>;</p></li>
+<li><p>A complete, self-contained, and minimal program that demonstrates the problem you are reporting (if minimizing it is not feasible, include the exact sequence of steps that reproduces the problem);</p></li>
+<li><p>What you expected to happen, and what actually happened (where possible, including a verbatim copy of the log file or the terminal output);</p></li>
+<li><p>For usability issues: your reason for filing the report (i.e. why did you expect a different behavior).</p></li>
+</ul>
+<p>There is no expectation that a person who is filing a problem report should work on fixing it. Submitting an issue is a valuable contribution in its own right.</p>
+</section>
+<section id="fixing-problems">
+<h2>Fixing problems<a class="headerlink" href="#fixing-problems" title="Permalink to this heading"></a></h2>
+<p>We appreciate that many in the open source community tend to see problems they encounter as opportunities to collaborate, and we enjoy seeing an issue being filed together with a pull request. However, unless you’ve contributed a few times before or the fix is truly trivial, <strong>please discuss it with one of the maintainers first</strong>. It doesn’t take much time and it can sometimes save everyone a lot of unnecessary work and frustration.</p>
+</section>
+<section id="proposing-new-features">
+<h2>Proposing new features<a class="headerlink" href="#proposing-new-features" title="Permalink to this heading"></a></h2>
+<p>Amaranth is a programming language and a toolchain, which is different from many other kinds of open source projects in that just about every part of it is, unavoidably, tightly coupled to every other one, the result being that seemingly obvious and apparently minor decisions can have dramatic consequences years later.</p>
+<p>To make sure that new features undergo the scrutiny necessary for commitment to many years of support, and to make sure that everyone in the community who will be impacted by the changes has a chance to make their voice heard, <strong>all substantial changes, including feature proposals, must go through a formal Request for Comments process</strong>. The process, as well as the accepted proposals, are described <a class="reference external" href="https://amaranth-lang.org/rfcs/">here</a>. Typically, substantial changes are accepted after one to several rounds of community review achieve near-unanimous consensus.</p>
+</section>
+<section id="working-with-the-codebase">
+<h2>Working with the codebase<a class="headerlink" href="#working-with-the-codebase" title="Permalink to this heading"></a></h2>
+<section id="preparing-the-environment">
+<h3>Preparing the environment<a class="headerlink" href="#preparing-the-environment" title="Permalink to this heading"></a></h3>
+<p>The Amaranth codebase uses the <a class="reference external" href="https://pdm-project.org/">PDM</a> package and dependency manager to structure the development workflow. Please <a class="reference external" href="https://pdm-project.org/latest/#recommended-installation-method">install PDM</a> first and make sure you have downloaded the latest changes to the source files. Once you have done so, run:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pdm<span class="w"> </span>install<span class="w"> </span>--dev
+</pre></div>
+</div>
+<p>This command creates a <a class="reference external" href="https://docs.python.org/3/tutorial/venv.html#tut-venv" title="(in Python v3.12)"><span class="xref std std-ref">virtual environment</span></a> located at <code class="docutils literal notranslate"><span class="pre">./.venv/</span></code> and installs the runtime dependencies of Amaranth as well as the necessary development tools in it.</p>
+<p>Amaranth itself is installed in the <em>editable mode</em>, meaning that the changes to its source files are immediately reflected in running the tests and documentation. However, other changes (addition or removal of source files, or changes to dependencies) will not be picked up, and it is a good habit to run <code class="docutils literal notranslate"><span class="pre">pdm</span> <span class="pre">install</span></code> each time after updating the source tree.</p>
+</section>
+<section id="running-the-testsuite">
+<h3>Running the testsuite<a class="headerlink" href="#running-the-testsuite" title="Permalink to this heading"></a></h3>
+<p>Some of the tests make use of <a class="reference external" href="https://symbiyosys.readthedocs.io/en/latest/">formal methods</a>, and to run the complete testsuite, it is necessary to install the <a class="reference external" href="https://github.com/YosysHQ/yosys">Yosys</a> frontend and the <a class="reference external" href="https://github.com/SRI-CSL/yices2">yices2</a> SMT solver. These are distributed as a part of the <a class="reference external" href="https://github.com/YosysHQ/oss-cad-suite-build">OSS CAD Suite</a>. Without the tools being installed, the tests that rely on formal verification will be skipped.</p>
+<p>To run the testsuite, use:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pdm<span class="w"> </span>run<span class="w"> </span><span class="nb">test</span>
+</pre></div>
+</div>
+</section>
+<section id="building-the-documentation">
+<h3>Building the documentation<a class="headerlink" href="#building-the-documentation" title="Permalink to this heading"></a></h3>
+<p>To build the documentation once, use:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pdm<span class="w"> </span>run<span class="w"> </span>document
+</pre></div>
+</div>
+<p>The documentation index is located at <code class="docutils literal notranslate"><span class="pre">./docs/_build/index.html</span></code>.</p>
+<p>Working on documentation usually involves making many small, iterative changes, and it is laborous to rebuild it manually each time. To start a process that rebuilds documentation automatically on change, use:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pdm<span class="w"> </span>run<span class="w"> </span>document-live
+</pre></div>
+</div>
+<p>While it is running you can browse the documentation at <a class="reference external" href="http://127.0.0.1:8000">http://127.0.0.1:8000</a>. The edits you make are reflected on the document open in the browser after a short delay. It is useful to keep an eye on the terminal where this process is running, as the information about syntactic errors, missing references, and other issues will be printed there.</p>
+<p>Occasionally, the documentation builder will persist in rendering an incorrect or outdated version of the contents of a Python source file. To fix this, run:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pdm<span class="w"> </span>run<span class="w"> </span>document-live<span class="w"> </span>-a
+</pre></div>
+</div>
+</section>
+</section>
+<section id="documentation-style-guide">
+<h2>Documentation style guide<a class="headerlink" href="#documentation-style-guide" title="Permalink to this heading"></a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Our documentation style guidelines are evolving, and this section is incomplete.</p>
+</div>
+<p>Some of the fundamental guidelines are:</p>
+<ul>
+<li><p><strong>Document the contract and the affordances,</strong> not the implementation. This is especially important because the Amaranth documentation is <em>the</em> source of truth for its semantics; the tests and the implementation source code are secondary to it, and the RFCs exist to record the process rather than document the outcome.</p></li>
+<li><p><strong>Shape the code to be documentable.</strong> This is a corollary to the previous guideline. If an interface is difficult to describe in a way that is readily understood, then it may need to be changed. Many breaking changes in Amaranth were done to make the language and libraries easier to understand.</p></li>
+<li><p><strong>Be consistent.</strong> Take inspiration from existing documentation for similar modules. However, don’t be consistent at the expense of clarity.</p></li>
+<li><p><strong>Be concise.</strong> It is easy to write boilerplate, and difficult to navigate through it.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>In particular, if the <cite>Parameters</cite> section of the class docstring describes a parameter, it is expected that the same parameter will be available as a class attribute (usually, but not always, read-only), and there is no need to additionally document this fact. If there isn’t a corresponding attribute it should likely be added.</p></li>
+<li><p>There is no need to individually document every argument and every return value of every method. This mainly creates clutter. The goal in writing documentation is transferring knowledge, not ticking boxes.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>Some of the formatting guidelines are:</p>
+<ul>
+<li><p>Limit code (including docstrings, where possible–some of the Sphinx syntax does not allow wrapping) to 100 columns in <code class="docutils literal notranslate"><span class="pre">.py</span></code> files, but do not break paragraphs in <code class="docutils literal notranslate"><span class="pre">.rst</span></code> files.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">###...#</span></code> for first-level headings, <code class="docutils literal notranslate"><span class="pre">===...=</span></code> for second-level headings, <code class="docutils literal notranslate"><span class="pre">---...-</span></code> for third-level headings.</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">:py:`...`</span></code> syntax for inline Python code references (even trivial ones, e.g. <code class="docutils literal notranslate"><span class="pre">:py:`var_name`</span></code>), <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">testcode::</span></code> for most Python code blocks (use <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">code::</span></code> where the code cannot or should not be tested), <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">doctest::</span></code> for doctests.</p></li>
+<li><p>Use admonitions sparingly, and only of the following kinds:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">warning::</span></code> for text which MUST be paid attention to, or else unexpected bad things may happen. This is the most noticeable kind, rendered in yellow at the moment.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">tip::</span></code> for text which SHOULD be paid attention to, otherwise annoyance may happen. This is the second most noticeable kind, rendered in bright blue-green at the moment.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">note::</span></code> for text which MAY be paid attention to, but which is not key for understanding of the topic as a whole. This is the least noticeable kind, rendered in faint blue at the moment.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">todo::</span></code> may also be used for incomplete sections.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>For methods, phrase the short description (first line of docstring) like <code class="docutils literal notranslate"><span class="pre">Do</span> <span class="pre">the</span> <span class="pre">thing.</span></code>, i.e. as an imperative sentence.</p></li>
+<li><p>For properties, phrase the short description (first line of docstring) like <code class="docutils literal notranslate"><span class="pre">Value</span> <span class="pre">of</span> <span class="pre">thing.</span></code>, i.e. as a declarative sentence.</p></li>
+<li><p>When documenting signatures of interfaces, as well as components, use the (non-standard) <cite>Members</cite> section to document their interface members, and only that section; do not document them in an <cite>Attributes</cite> section.</p></li>
+<li><p>If an anchor for a section is needed, namespace it, e.g. the <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">_lang-assignable:</span></code> anchor is a part of the <code class="docutils literal notranslate"><span class="pre">lang</span></code> namespace. Anchor names are global.</p></li>
+<li><p>To refer to non-sequential logic, use the term “combinational” over “combinatorial”.</p></li>
+</ul>
+</section>
+<section id="contributing-your-changes">
+<h2>Contributing your changes<a class="headerlink" href="#contributing-your-changes" title="Permalink to this heading"></a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Our code style guidelines are evolving, and we do not yet have a formal document listing them.</p>
+</div>
+<p>We ask that you do your best effort to keep the code that you add or modify similar in style as well as in spirit to the code surrounding it, and we may ask you to change it during review. When in doubt, submit your code as-is.</p>
+</section>
+<section id="weekly-meetings">
+<h2>Weekly meetings<a class="headerlink" href="#weekly-meetings" title="Permalink to this heading"></a></h2>
+<p>Every Monday at 17:00 UTC on our IRC channel <a class="reference external" href="https://web.libera.chat/#amaranth-lang">#amaranth-lang at libera.chat</a> or Matrix channel <a class="reference external" href="https://matrix.to/#/#amaranth-lang:matrix.org">#amaranth-lang:matrix.org</a> (the channels are bridged together: the same messages appear on both), Amaranth maintainers meet with users and contributors to discuss newly submitted Requests for Comments and any other issues that warrant broad attention. These public meetings are the primary avenue of decision making.</p>
+<p>If you want to contribute, have interest in language evolution, or simply want to voice your view on proposed features, feel free to join these meetings; there is no formal attendance. If you are not able to make the time, the meetings are publicly recorded and the summaries are posted in the relevant GitHub thread after the meeting.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="changes.html" class="btn btn-neutral float-left" title="Changelog" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020—2024, Amaranth project contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
