@@ -29,23 +29,23 @@ Migrating from version 0.4
 
 Apply the following changes to code written against Amaranth 0.4 to migrate it to version 0.5:
 
+* Update uses of :py:`reset=` keyword argument to :py:`init=`.
+* Ensure all elaboratables are subclasses of :class:`Elaboratable`.
 * Replace uses of :py:`m.Case()` with no patterns with :py:`m.Default()`.
 * Replace uses of :py:`Value.matches()` with no patterns with :py:`Const(1)`.
-* Update uses of :py:`amaranth.utils.log2_int(need_pow2=False)` to :func:`amaranth.utils.ceil_log2`.
-* Update uses of :py:`amaranth.utils.log2_int(need_pow2=True)` to :func:`amaranth.utils.exact_log2`.
-* Update uses of :py:`reset=` keyword argument to :py:`init=`.
+* Ensure clock domains aren't used outside the module that defines them, or its submodules; move clock domain definitions upwards in the hierarchy as necessary
+* Replace imports of :py:`amaranth.asserts.Assert`, :py:`Assume`, and :py:`Cover` with imports from :py:`amaranth.hdl`.
+* Remove uses of :py:`name=` keyword argument of :py:`Assert`, :py:`Assume`, and :py:`Cover`; a message can be used instead.
+* Replace uses of :py:`amaranth.hdl.Memory` with :class:`amaranth.lib.memory.Memory`.
+* Update uses of :py:`platform.request` to pass :py:`dir="-"` and use :mod:`amaranth.lib.io` buffers.
+* Remove uses of :py:`amaranth.lib.coding.*` by inlining or copying the implementation of the modules.
 * Convert uses of :py:`Simulator.add_sync_process` used as testbenches to :meth:`Simulator.add_testbench <amaranth.sim.Simulator.add_testbench>`.
 * Convert other uses of :py:`Simulator.add_sync_process` to :meth:`Simulator.add_process <amaranth.sim.Simulator.add_process>`.
 * Convert simulator processes and testbenches to use the new async API.
-* Replace uses of :py:`amaranth.hdl.Memory` with :class:`amaranth.lib.memory.Memory`.
-* Replace imports of :py:`amaranth.asserts.Assert`, :py:`Assume`, and :py:`Cover` with imports from :py:`amaranth.hdl`.
-* Remove uses of :py:`name=` keyword argument of :py:`Assert`, :py:`Assume`, and :py:`Cover`; a message can be used instead.
-* Ensure all elaboratables are subclasses of :class:`Elaboratable`.
-* Ensure clock domains aren't used outside the module that defines them, or its submodules; move clock domain definitions upwards in the hierarchy as necessary
-* Remove uses of :py:`amaranth.lib.coding.*` by inlining or copying the implementation of the modules.
-* Update uses of :py:`platform.request` to pass :py:`dir="-"` and use :mod:`amaranth.lib.io` buffers.
 * Update uses of :meth:`Simulator.add_clock <amaranth.sim.Simulator.add_clock>` with explicit :py:`phase` to take into account simulator no longer adding implicit :py:`period / 2`. (Previously, :meth:`Simulator.add_clock <amaranth.sim.Simulator.add_clock>` was documented to first toggle the clock at the time :py:`phase`, but actually first toggled the clock at :py:`period / 2 + phase`.)
 * Update uses of :meth:`Simulator.run_until <amaranth.sim.Simulator.run_until>` to remove the :py:`run_passive=True` argument. If the code uses :py:`run_passive=False`, ensure it still works with the new behavior.
+* Update uses of :py:`amaranth.utils.log2_int(need_pow2=False)` to :func:`amaranth.utils.ceil_log2`.
+* Update uses of :py:`amaranth.utils.log2_int(need_pow2=True)` to :func:`amaranth.utils.exact_log2`.
 
 
 Implemented RFCs
@@ -55,6 +55,7 @@ Implemented RFCs
 .. _RFC 27: https://amaranth-lang.org/rfcs/0027-simulator-testbenches.html
 .. _RFC 30: https://amaranth-lang.org/rfcs/0030-component-metadata.html
 .. _RFC 36: https://amaranth-lang.org/rfcs/0036-async-testbench-functions.html
+.. _RFC 42: https://amaranth-lang.org/rfcs/0042-const-from-shape-castable.html
 .. _RFC 39: https://amaranth-lang.org/rfcs/0039-empty-case.html
 .. _RFC 43: https://amaranth-lang.org/rfcs/0043-rename-reset-to-init.html
 .. _RFC 45: https://amaranth-lang.org/rfcs/0045-lib-memory.html
@@ -65,6 +66,7 @@ Implemented RFCs
 .. _RFC 55: https://amaranth-lang.org/rfcs/0055-lib-io.html
 .. _RFC 58: https://amaranth-lang.org/rfcs/0058-valuecastable-format.html
 .. _RFC 59: https://amaranth-lang.org/rfcs/0059-no-domain-upwards-propagation.html
+.. _RFC 61: https://amaranth-lang.org/rfcs/0061-minimal-streams.html
 .. _RFC 62: https://amaranth-lang.org/rfcs/0062-memory-data.html
 .. _RFC 63: https://amaranth-lang.org/rfcs/0063-remove-lib-coding.html
 .. _RFC 65: https://amaranth-lang.org/rfcs/0065-format-struct-enum.html
@@ -74,6 +76,7 @@ Implemented RFCs
 * `RFC 30`_: Component metadata
 * `RFC 36`_: Async testbench functions
 * `RFC 39`_: Change semantics of no-argument ``m.Case()``
+* `RFC 42`_: ``Const`` from shape-castable
 * `RFC 43`_: Rename ``reset=`` to ``init=``
 * `RFC 45`_: Move ``hdl.Memory`` to ``lib.Memory``
 * `RFC 46`_: Change ``Shape.cast(range(1))`` to ``unsigned(0)``
@@ -83,6 +86,7 @@ Implemented RFCs
 * `RFC 55`_: New ``lib.io`` components
 * `RFC 58`_: Core support for ``ValueCastable`` formatting
 * `RFC 59`_: Get rid of upwards propagation of clock domains
+* `RFC 61`_: Minimal streams
 * `RFC 62`_: The ``MemoryData`` class
 * `RFC 63`_: Remove ``amaranth.lib.coding``
 * `RFC 65`_: Special formatting for structures and enums
@@ -103,6 +107,7 @@ Language changes
 * Changed: :py:`Value.matches()` with no patterns is :py:`Const(0)` instead of :py:`Const(1)`. (`RFC 39`_)
 * Changed: :py:`Signal(range(stop), init=stop)` warning has been changed into a hard error and made to trigger on any out-of range value.
 * Changed: :py:`Signal(range(0))` is now valid without a warning.
+* Changed: :py:`Const(value, shape)` now accepts shape-castable objects as :py:`shape`. (`RFC 42`_)
 * Changed: :py:`Shape.cast(range(1))` is now :py:`unsigned(0)`. (`RFC 46`_)
 * Changed: the :py:`reset=` argument of :class:`Signal`, :meth:`Signal.like`, :class:`amaranth.lib.wiring.Member`, :class:`amaranth.lib.cdc.FFSynchronizer`, and :py:`m.FSM()` has been renamed to :py:`init=`. (`RFC 43`_)
 * Changed: :class:`Shape` has been made immutable and hashable.
@@ -130,6 +135,7 @@ Standard library changes
 * Added: :class:`amaranth.lib.io.SingleEndedPort`, :class:`amaranth.lib.io.DifferentialPort`. (`RFC 55`_)
 * Added: :class:`amaranth.lib.io.Buffer`, :class:`amaranth.lib.io.FFBuffer`, :class:`amaranth.lib.io.DDRBuffer`. (`RFC 55`_)
 * Added: :mod:`amaranth.lib.meta`, :class:`amaranth.lib.wiring.ComponentMetadata`. (`RFC 30`_)
+* Added: :mod:`amaranth.lib.stream`. (`RFC 61`_)
 * Deprecated: :mod:`amaranth.lib.coding`. (`RFC 63`_)
 * Removed: (deprecated in 0.4) :mod:`amaranth.lib.scheduler`. (`RFC 19`_)
 * Removed: (deprecated in 0.4) :class:`amaranth.lib.fifo.FIFOInterface` with :py:`fwft=False`. (`RFC 20`_)
