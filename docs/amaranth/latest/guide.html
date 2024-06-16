@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Language guide &mdash; Amaranth language &amp; toolchain 0.6.0.dev12 documentation</title>
+  <title>Language guide &mdash; Amaranth language &amp; toolchain 0.6.0.dev13 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/platformpicker.css" />
@@ -17,7 +17,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=d9da91e4"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=7da215fd"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/platformpicker.js"></script>
@@ -41,7 +41,7 @@
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.6.0.dev12
+                0.6.0.dev13
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -895,7 +895,7 @@ This happens because, being empty, it does not contain any negative values.</p>
 </section>
 <section id="arrays">
 <span id="lang-array"></span><h2>Arrays<a class="headerlink" href="#arrays" title="Permalink to this heading"></a></h2>
-<p>An <em>array</em> is a mutable collection that can be indexed not only with an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> or with a <a class="reference internal" href="#lang-valuelike"><span class="std std-ref">value-like</span></a> object. When indexed with an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, it behaves like a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>. When indexed with a value-like object, it returns a proxy object containing the elements of the array that has three useful properties:</p>
+<p>An <em>array</em> is a mutable collection that can be indexed with an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> or with a <a class="reference internal" href="#lang-valuelike"><span class="std std-ref">value-like</span></a> object. When indexed with an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, it behaves like a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>. When indexed with a value-like object, it returns a proxy object containing the elements of the array that has three useful properties:</p>
 <ul class="simple">
 <li><p>The result of accessing an attribute of the proxy object or indexing it is another proxy object that contains the elements transformed in the same way.</p></li>
 <li><p>When the proxy object is <a class="reference internal" href="#lang-valuelike"><span class="std std-ref">cast to a value</span></a>, all of its elements are also cast to a value, and an element is selected using the index originally used with the array.</p></li>
