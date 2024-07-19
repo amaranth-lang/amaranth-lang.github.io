@@ -6196,14 +6196,14 @@ sim.run()
 <p>Since this is a third <code>PortLike</code> with a compatible <code>__add__</code> implementation, and it is weird to have slicing but not concatenation, the <code>__add__</code> method is added to the <code>PortLike</code> signature, with a deprecation warning in 0.5.1 and a hard requirement in 0.6.0.</p>
 <p>The <code>amaranth.lib.io.Buffer</code> component is changed to accept <code>SimulationPort</code>s and performs the following connections (with the direction checks omitted for clarity):</p>
 <pre><code class="language-python">m.d.comb += [
-    buffer.i.eq(Cat(Mux(port.oe, o, i) for o, i in zip(port.o, port.i))),
+    buffer.i.eq(Cat(Mux(oe, o, i) for oe, o, i in zip(port.oe, port.o, port.i))),
     port.o.eq(buffer.o),
     port.oe.eq(buffer.oe.replicate(len(port))),
 ]
 </code></pre>
 <p>The <code>amaranth.lib.io.FFBuffer</code> component is changed to accept <code>SimulationPort</code>s and performs the following connections (with the direction checks omitted for clarity):</p>
 <pre><code class="language-python">m.d[buffer.i_domain] += [
-    buffer.i.eq(Cat(Mux(port.oe, o, i) for o, i in zip(port.o, port.i))),
+    buffer.i.eq(Cat(Mux(oe, o, i) for oe, o, i in zip(port.oe, port.o, port.i))),
 ]
 m.d[buffer.o_domain] += [
     port.o.eq(buffer.o),
