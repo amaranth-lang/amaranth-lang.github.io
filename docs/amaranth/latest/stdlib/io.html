@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Input/output buffers &mdash; Amaranth language &amp; toolchain 0.6.0.dev30 documentation</title>
+  <title>Input/output buffers &mdash; Amaranth language &amp; toolchain 0.6.0.dev32 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
@@ -17,7 +17,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=83c53f1f"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=1045316c"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="../_static/platformpicker.js"></script>
@@ -41,7 +41,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.6.0.dev30
+                0.6.0.dev32
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -69,6 +69,7 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Input/output buffers</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#simulation">Simulation</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ports">Ports</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#buffers">Buffers</a></li>
 </ul>
@@ -133,7 +134,8 @@
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
 <p>All of the following examples assume that one of the built-in FPGA platforms is used.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">amaranth.lib</span> <span class="kn">import</span> <span class="n">io</span><span class="p">,</span> <span class="n">wiring</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">amaranth.sim</span> <span class="kn">import</span> <span class="n">Simulator</span>
+<span class="kn">from</span> <span class="nn">amaranth.lib</span> <span class="kn">import</span> <span class="n">io</span><span class="p">,</span> <span class="n">wiring</span><span class="p">,</span> <span class="n">stream</span>
 <span class="kn">from</span> <span class="nn">amaranth.lib.wiring</span> <span class="kn">import</span> <span class="n">In</span><span class="p">,</span> <span class="n">Out</span>
 </pre></div>
 </div>
@@ -229,6 +231,64 @@
 </div>
 <p>This component transmits <code class="code highlight py python docutils literal highlight-python"><span class="n">dout</span></code> on each cycle as two halves: the low 8 bits on the rising edge of the data clock, and the high 8 bits on the falling edge of the data clock. The transmission is <em>edge-aligned</em>, meaning that the data edges exactly coincide with the clock edges.</p>
 </section>
+</section>
+<section id="simulation">
+<h2>Simulation<a class="headerlink" href="#simulation" title="Permalink to this heading"></a></h2>
+<p>The Amaranth simulator, <a class="reference internal" href="../simulator.html#module-amaranth.sim" title="amaranth.sim"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.sim</span></code></a>, cannot simulate <a class="reference internal" href="../guide.html#lang-iovalues"><span class="std std-ref">core I/O values</span></a> or <a class="reference internal" href="../guide.html#lang-iobufferinstance"><span class="std std-ref">I/O buffer instances</span></a> as it only operates on unidirectionally driven two-state wires. This module provides a simulation-only library I/O port, <a class="reference internal" href="#amaranth.lib.io.SimulationPort" title="amaranth.lib.io.SimulationPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimulationPort</span></code></a>, so that components that use library I/O buffers can be tested.</p>
+<p>A component that is designed for testing should accept the library I/O ports it will drive as constructor parameters rather than requesting them from the platform directly. Synthesizable designs will instantiate the component with a <a class="reference internal" href="#amaranth.lib.io.SingleEndedPort" title="amaranth.lib.io.SingleEndedPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleEndedPort</span></code></a>, <a class="reference internal" href="#amaranth.lib.io.DifferentialPort" title="amaranth.lib.io.DifferentialPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">DifferentialPort</span></code></a>, or a platform-specific library I/O port, while tests will instantiate the component with a <a class="reference internal" href="#amaranth.lib.io.SimulationPort" title="amaranth.lib.io.SimulationPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimulationPort</span></code></a>. Tests are able to inject inputs into the component using <code class="code highlight py python docutils literal highlight-python"><span class="n">sim_port</span><span class="o">.</span><span class="n">i</span></code>, capture the outputs of the component via <code class="code highlight py python docutils literal highlight-python"><span class="n">sim_port</span><span class="o">.</span><span class="n">o</span></code>, and ensure that the component is driving the outputs at the appropriate times using <code class="code highlight py python docutils literal highlight-python"><span class="n">sim_port</span><span class="o">.</span><span class="n">oe</span></code>.</p>
+<p>For example, consider a simple serializer that accepts a stream of multi-bit data words and outputs them bit by bit. It can be tested as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">OutputSerializer</span><span class="p">(</span><span class="n">wiring</span><span class="o">.</span><span class="n">Component</span><span class="p">):</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">In</span><span class="p">(</span><span class="n">stream</span><span class="o">.</span><span class="n">Signature</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dclk_port</span><span class="p">,</span> <span class="n">dout_port</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dclk_port</span> <span class="o">=</span> <span class="n">dclk_port</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dout_port</span> <span class="o">=</span> <span class="n">dout_port</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">elaborate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">Module</span><span class="p">()</span>
+
+        <span class="n">m</span><span class="o">.</span><span class="n">submodules</span><span class="o">.</span><span class="n">dclk</span> <span class="o">=</span> <span class="n">dclk</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">Buffer</span><span class="p">(</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dclk_port</span><span class="p">)</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">submodules</span><span class="o">.</span><span class="n">dout</span> <span class="o">=</span> <span class="n">dout</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">Buffer</span><span class="p">(</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dout_port</span><span class="p">)</span>
+
+        <span class="n">index</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="n">dout</span><span class="o">.</span><span class="n">o</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">payload</span><span class="o">.</span><span class="n">bit_select</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+        <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">If</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">valid</span><span class="p">):</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">dclk</span><span class="o">.</span><span class="n">o</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="o">~</span><span class="n">dclk</span><span class="o">.</span><span class="n">o</span><span class="p">)</span>
+            <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">If</span><span class="p">(</span><span class="n">dclk</span><span class="o">.</span><span class="n">o</span><span class="p">):</span>
+                <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">index</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">If</span><span class="p">(</span><span class="n">index</span> <span class="o">==</span> <span class="mi">7</span><span class="p">):</span>
+                    <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">ready</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">m</span>
+
+<span class="k">def</span> <span class="nf">test_output_serializer</span><span class="p">():</span>
+    <span class="n">dclk_port</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">SimulationPort</span><span class="p">(</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">dout_port</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">SimulationPort</span><span class="p">(</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">dut</span> <span class="o">=</span> <span class="n">OutputSerializer</span><span class="p">(</span><span class="n">dclk_port</span><span class="p">,</span> <span class="n">dout_port</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">testbench_write_data</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">payload</span><span class="p">,</span> <span class="mh">0xA1</span><span class="p">)</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">valid</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">tick</span><span class="p">()</span><span class="o">.</span><span class="n">until</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">ready</span><span class="p">)</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">valid</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">testbench_sample_output</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">bit</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">dout_value</span> <span class="o">=</span> <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">posedge</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">dclk_port</span><span class="o">.</span><span class="n">o</span><span class="p">)</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">dout_port</span><span class="o">.</span><span class="n">o</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">dout_port</span><span class="o">.</span><span class="n">oe</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;DUT is not driving the data output&quot;</span>
+            <span class="k">assert</span> <span class="n">dout_value</span> <span class="o">==</span> <span class="n">bit</span><span class="p">,</span> <span class="s2">&quot;DUT drives the wrong value on data output&quot;</span>
+
+    <span class="n">sim</span> <span class="o">=</span> <span class="n">Simulator</span><span class="p">(</span><span class="n">dut</span><span class="p">)</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">add_clock</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">)</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">add_testbench</span><span class="p">(</span><span class="n">testbench_write_data</span><span class="p">)</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">add_testbench</span><span class="p">(</span><span class="n">testbench_sample_output</span><span class="p">)</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
 </section>
 <section id="ports">
 <h2>Ports<a class="headerlink" href="#ports" title="Permalink to this heading"></a></h2>
@@ -336,6 +396,33 @@ wires as this port, but with polarity inverted.</p>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="amaranth.lib.io.PortLike.__add__">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__add__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.PortLike.__add__" title="Permalink to this definition"></a></dt>
+<dd><p>Concatenates two library I/O ports of the same type.</p>
+<p>The direction of the resulting port is:</p>
+<ul class="simple">
+<li><p>The same as the direction of both, if the two ports have the same direction.</p></li>
+<li><p><a class="reference internal" href="#amaranth.lib.io.Direction.Input" title="amaranth.lib.io.Direction.Input"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Direction.Input</span></code></a> if a bidirectional port is concatenated with an input port.</p></li>
+<li><p><a class="reference internal" href="#amaranth.lib.io.Direction.Output" title="amaranth.lib.io.Direction.Output"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Direction.Output</span></code></a> if a bidirectional port is concatenated with an output port.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A new <code class="code highlight py python docutils literal highlight-python"><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code> which contains wires from <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span></code> followed by wires
+from <code class="code highlight py python docutils literal highlight-python"><span class="n">other</span></code>, preserving their polarity inversion.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="code highlight py python docutils literal highlight-python"><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code></p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.12)"><strong>ValueError</strong></a> – If an input port is concatenated with an output port.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.12)"><strong>TypeError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span></code> and <code class="code highlight py python docutils literal highlight-python"><span class="n">other</span></code> have different types.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
@@ -351,9 +438,9 @@ wires as this port, but with polarity inverted.</p>
 the entire port. If the value is an iterable of <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, the iterable must have the
 same length as the width of <code class="code highlight py python docutils literal highlight-python"><span class="n">io</span></code>, and the inversion is specified for individual wires.</p></li>
 <li><p><strong>direction</strong> (<a class="reference internal" href="#amaranth.lib.io.Direction" title="amaranth.lib.io.Direction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Direction</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Set of allowed buffer directions. A string is converted to a <a class="reference internal" href="#amaranth.lib.io.Direction" title="amaranth.lib.io.Direction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Direction</span></code></a> first.
-If equal to <a class="reference internal" href="#amaranth.lib.io.Direction.Input" title="amaranth.lib.io.Direction.Input"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Direction.Input</span></code></a> or <a class="reference internal" href="#amaranth.lib.io.Direction.Output" title="amaranth.lib.io.Direction.Output"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Direction.Output</span></code></a>, this port can only be used
-with buffers of matching direction. If equal to <a class="reference internal" href="#amaranth.lib.io.Direction.Bidir" title="amaranth.lib.io.Direction.Bidir"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Direction.Bidir</span></code></a>, this port can be
-used with buffers of any direction.</p></li>
+If equal to <a class="reference internal" href="#amaranth.lib.io.Direction.Input" title="amaranth.lib.io.Direction.Input"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Input</span></code></a> or <a class="reference internal" href="#amaranth.lib.io.Direction.Output" title="amaranth.lib.io.Direction.Output"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Output</span></code></a>, this port can only be
+used with buffers of matching direction. If equal to <a class="reference internal" href="#amaranth.lib.io.Direction.Bidir" title="amaranth.lib.io.Direction.Bidir"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Bidir</span></code></a>, this port
+can be used with buffers of any direction.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Attributes<span class="colon">:</span></dt>
@@ -364,33 +451,6 @@ used with buffers of any direction.</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="amaranth.lib.io.SingleEndedPort.__add__">
-<span class="sig-name descname"><span class="pre">__add__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.SingleEndedPort.__add__" title="Permalink to this definition"></a></dt>
-<dd><p>Concatenates two single-ended library I/O ports.</p>
-<p>The direction of the resulting port is:</p>
-<ul class="simple">
-<li><p>The same as the direction of both, if the two ports have the same direction.</p></li>
-<li><p><a class="reference internal" href="#amaranth.lib.io.Direction.Input" title="amaranth.lib.io.Direction.Input"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Direction.Input</span></code></a> if a bidirectional port is concatenated with an input port.</p></li>
-<li><p><a class="reference internal" href="#amaranth.lib.io.Direction.Output" title="amaranth.lib.io.Direction.Output"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Direction.Output</span></code></a> if a bidirectional port is concatenated with an output port.</p></li>
-</ul>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>A new <a class="reference internal" href="#amaranth.lib.io.SingleEndedPort" title="amaranth.lib.io.SingleEndedPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleEndedPort</span></code></a> which contains wires from <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span></code> followed by wires
-from <code class="code highlight py python docutils literal highlight-python"><span class="n">other</span></code>, preserving their polarity inversion.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#amaranth.lib.io.SingleEndedPort" title="amaranth.lib.io.SingleEndedPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleEndedPort</span></code></a></p>
-</dd>
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.12)"><strong>ValueError</strong></a> – If an input port is concatenated with an output port.</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.12)"><strong>TypeError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span></code> and <code class="code highlight py python docutils literal highlight-python"><span class="n">other</span></code> have incompatible types.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="py class">
@@ -409,9 +469,9 @@ the entire port. If the value is an iterable of <a class="reference external" hr
 same length as the width of <code class="code highlight py python docutils literal highlight-python"><span class="n">p</span></code> and <code class="code highlight py python docutils literal highlight-python"><span class="n">n</span></code>, and the inversion is specified for
 individual wires.</p></li>
 <li><p><strong>direction</strong> (<a class="reference internal" href="#amaranth.lib.io.Direction" title="amaranth.lib.io.Direction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Direction</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Set of allowed buffer directions. A string is converted to a <a class="reference internal" href="#amaranth.lib.io.Direction" title="amaranth.lib.io.Direction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Direction</span></code></a> first.
-If equal to <a class="reference internal" href="#amaranth.lib.io.Direction.Input" title="amaranth.lib.io.Direction.Input"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Direction.Input</span></code></a> or <a class="reference internal" href="#amaranth.lib.io.Direction.Output" title="amaranth.lib.io.Direction.Output"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Direction.Output</span></code></a>, this port can only be used
-with buffers of matching direction. If equal to <a class="reference internal" href="#amaranth.lib.io.Direction.Bidir" title="amaranth.lib.io.Direction.Bidir"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Direction.Bidir</span></code></a>, this port can be
-used with buffers of any direction.</p></li>
+If equal to <a class="reference internal" href="#amaranth.lib.io.Direction.Input" title="amaranth.lib.io.Direction.Input"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Input</span></code></a> or <a class="reference internal" href="#amaranth.lib.io.Direction.Output" title="amaranth.lib.io.Direction.Output"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Output</span></code></a>, this port can only be
+used with buffers of matching direction. If equal to <a class="reference internal" href="#amaranth.lib.io.Direction.Bidir" title="amaranth.lib.io.Direction.Bidir"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Bidir</span></code></a>, this port
+can be used with buffers of any direction.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Attributes<span class="colon">:</span></dt>
@@ -423,33 +483,41 @@ used with buffers of any direction.</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="amaranth.lib.io.DifferentialPort.__add__">
-<span class="sig-name descname"><span class="pre">__add__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.DifferentialPort.__add__" title="Permalink to this definition"></a></dt>
-<dd><p>Concatenates two differential library I/O ports.</p>
-<p>The direction of the resulting port is:</p>
-<ul class="simple">
-<li><p>The same as the direction of both, if the two ports have the same direction.</p></li>
-<li><p><a class="reference internal" href="#amaranth.lib.io.Direction.Input" title="amaranth.lib.io.Direction.Input"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Direction.Input</span></code></a> if a bidirectional port is concatenated with an input port.</p></li>
-<li><p><a class="reference internal" href="#amaranth.lib.io.Direction.Output" title="amaranth.lib.io.Direction.Output"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Direction.Output</span></code></a> if a bidirectional port is concatenated with an output port.</p></li>
-</ul>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="amaranth.lib.io.SimulationPort">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.io.</span></span><span class="sig-name descname"><span class="pre">SimulationPort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invert</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_loc_at</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.SimulationPort" title="Permalink to this definition"></a></dt>
+<dd><p>Represents a simulation library I/O port.</p>
+<p>Implements the <a class="reference internal" href="#amaranth.lib.io.PortLike" title="amaranth.lib.io.PortLike"><code class="xref py py-class docutils literal notranslate"><span class="pre">PortLike</span></code></a> interface.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>A new <a class="reference internal" href="#amaranth.lib.io.DifferentialPort" title="amaranth.lib.io.DifferentialPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">DifferentialPort</span></code></a> which contains pairs of wires from <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span></code> followed
-by pairs of wires from <code class="code highlight py python docutils literal highlight-python"><span class="n">other</span></code>, preserving their polarity inversion.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#amaranth.lib.io.DifferentialPort" title="amaranth.lib.io.DifferentialPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">DifferentialPort</span></code></a></p>
-</dd>
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.12)"><strong>ValueError</strong></a> – If an input port is concatenated with an output port.</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.12)"><strong>TypeError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span></code> and <code class="code highlight py python docutils literal highlight-python"><span class="n">other</span></code> have incompatible types.</p></li>
+<li><p><strong>direction</strong> (<a class="reference internal" href="#amaranth.lib.io.Direction" title="amaranth.lib.io.Direction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Direction</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Set of allowed buffer directions. A string is converted to a <a class="reference internal" href="#amaranth.lib.io.Direction" title="amaranth.lib.io.Direction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Direction</span></code></a> first.
+If equal to <a class="reference internal" href="#amaranth.lib.io.Direction.Input" title="amaranth.lib.io.Direction.Input"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Input</span></code></a> or <a class="reference internal" href="#amaranth.lib.io.Direction.Output" title="amaranth.lib.io.Direction.Output"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Output</span></code></a>, this port can only be
+used with buffers of matching direction. If equal to <a class="reference internal" href="#amaranth.lib.io.Direction.Bidir" title="amaranth.lib.io.Direction.Bidir"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Bidir</span></code></a>, this port
+can be used with buffers of any direction.</p></li>
+<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Width of the port. The width of each of the attributes <code class="code highlight py python docutils literal highlight-python"><span class="n">i</span></code>, <code class="code highlight py python docutils literal highlight-python"><span class="n">o</span></code>, <code class="code highlight py python docutils literal highlight-python"><span class="n">oe</span></code> (whenever
+present) equals <code class="code highlight py python docutils literal highlight-python"><span class="n">width</span></code>.</p></li>
+<li><p><strong>invert</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a> or iterable of <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Polarity inversion. If the value is a simple <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, it specifies inversion for
+the entire port. If the value is an iterable of <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, the iterable must have the
+same length as the width of <code class="code highlight py python docutils literal highlight-python"><span class="n">p</span></code> and <code class="code highlight py python docutils literal highlight-python"><span class="n">n</span></code>, and the inversion is specified for
+individual wires.</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> or <code class="code highlight py python docutils literal highlight-python"><span class="kc">None</span></code>) – Name of the port. This name is only used to derive the names of the input, output, and
+output enable signals.</p></li>
+<li><p><strong>src_loc_at</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – <a class="reference internal" href="../reference.html#lang-srcloc"><span class="std std-ref">Source location</span></a>. Used to infer <code class="code highlight py python docutils literal highlight-python"><span class="n">name</span></code> if not specified.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>i</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code>) – Input signal. Present if <code class="code highlight py python docutils literal highlight-python"><span class="n">direction</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Input</span><span class="p">,</span> <span class="n">Bidir</span><span class="p">)</span></code>.</p></li>
+<li><p><strong>o</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code>) – Ouptut signal. Present if <code class="code highlight py python docutils literal highlight-python"><span class="n">direction</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Output</span><span class="p">,</span> <span class="n">Bidir</span><span class="p">)</span></code>.</p></li>
+<li><p><strong>oe</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code>) – Output enable signal. Present if <code class="code highlight py python docutils literal highlight-python"><span class="n">direction</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Output</span><span class="p">,</span> <span class="n">Bidir</span><span class="p">)</span></code>.</p></li>
+<li><p><strong>invert</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – The <code class="code highlight py python docutils literal highlight-python"><span class="n">invert</span></code> parameter, normalized to specify polarity inversion per-wire.</p></li>
+<li><p><strong>direction</strong> (<a class="reference internal" href="#amaranth.lib.io.Direction" title="amaranth.lib.io.Direction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Direction</span></code></a>) – The <code class="code highlight py python docutils literal highlight-python"><span class="n">direction</span></code> parameter, normalized to the <a class="reference internal" href="#amaranth.lib.io.Direction" title="amaranth.lib.io.Direction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Direction</span></code></a> enumeration.</p></li>
 </ul>
 </dd>
 </dl>
-</dd></dl>
-
 </dd></dl>
 
 </section>
@@ -586,6 +654,11 @@ to be higher than one cycle. At the moment there is no way to query these latenc
 <p class="admonition-title">Warning</p>
 <p>On all supported platforms, this buffer can only be used with rising edge clock domains,
 and will raise an exception during conversion of the design to a netlist otherwise.</p>
+<p>This limitation may be lifted in the future.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Double data rate I/O buffers are not compatible with <a class="reference internal" href="#amaranth.lib.io.SimulationPort" title="amaranth.lib.io.SimulationPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimulationPort</span></code></a>.</p>
 <p>This limitation may be lifted in the future.</p>
 </div>
 <dl class="field-list simple">
