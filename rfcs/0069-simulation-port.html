@@ -185,9 +185,9 @@ _, copi_value = await ctx.posedge(sck_port.i).sample(copi_port.i)
         return m
 </code></pre>
 <p>To simulate such a component, instantiate <code>lib.io.SimulationPort</code> objects for each of the ports, and use their <code>.o</code>, <code>.oe</code>, and <code>.i</code> signals to verify the functionality:</p>
-<pre><code class="language-python">sck_port  = io.SimulationPort(1, direction=&quot;o&quot;)
-copi_port = io.SimulationPort(1, direction=&quot;o&quot;)
-cipo_port = io.SimulationPort(1, direction=&quot;i&quot;)
+<pre><code class="language-python">sck_port  = io.SimulationPort(&quot;o&quot;, 1)
+copi_port = io.SimulationPort(&quot;o&quot;, 1)
+cipo_port = io.SimulationPort(&quot;i&quot;, 1)
 
 dut = SPIController(sck_port, copi_port, cipo_port)
 
