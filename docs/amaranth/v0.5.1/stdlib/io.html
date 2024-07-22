@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Input/output buffers &mdash; Amaranth language &amp; toolchain 0.5.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=d131d90a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=9bd53f53"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/platformpicker.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Clock domain crossing" href="cdc.html" />
+    <link rel="prev" title="Memory arrays" href="memory.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../cover.html" class="icon icon-home">
+            Amaranth language & toolchain
+              <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.5.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Language &amp; toolchain</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../start.html">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide.html">Language guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference.html">Language reference</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../stdlib.html">Standard library</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="enum.html">Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data.html">Data structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wiring.html">Interfaces and connections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="meta.html">Interface metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stream.html">Data streams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="memory.html">Memory arrays</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Input/output buffers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#simulation">Simulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ports">Ports</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#buffers">Buffers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cdc.html">Clock domain crossing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="coding.html">Code conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fifo.html">First-in first-out queues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="crc.html">Cyclic redundancy checks</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../simulator.html">Simulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../platform.html">Platform integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../changes.html">Changelog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib.html">Contributing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="https://amaranth-lang.org/docs/amaranth-stdio/latest/">Standard I/O components</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://amaranth-lang.org/docs/amaranth-soc/latest/">System on Chip toolkit</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../cover.html">Amaranth language & toolchain</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../cover.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Language &amp; toolchain</a></li>
+          <li class="breadcrumb-item"><a href="../stdlib.html">Standard library</a></li>
+      <li class="breadcrumb-item active">Input/output buffers</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/stdlib/io.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-amaranth.lib.io">
+<span id="input-output-buffers"></span><h1>Input/output buffers<a class="headerlink" href="#module-amaranth.lib.io" title="Permalink to this heading"></a></h1>
+<p>The <a class="reference internal" href="#module-amaranth.lib.io" title="amaranth.lib.io"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.io</span></code></a> module provides a platform-independent way to instantiate platform-specific input/output buffers: combinational, synchronous, and double data rate (DDR).</p>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<p>The Amaranth language provides <a class="reference internal" href="../guide.html#lang-iovalues"><span class="std std-ref">core I/O values</span></a> that designate connections to external devices, and <a class="reference internal" href="../guide.html#lang-iobufferinstance"><span class="std std-ref">I/O buffer instances</span></a> that implement platform-independent combinational I/O buffers. This low-level mechanism is foundational to all I/O in Amaranth and must be used whenever a device-specific platform is unavailable, but is limited in its capabilities. The <a class="reference internal" href="#module-amaranth.lib.io" title="amaranth.lib.io"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.io</span></code></a> module builds on top of it to provide <em>library I/O ports</em> that specialize and annotate I/O values, and <em>buffer components</em> that connect ports to logic.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Unfortunately, the terminology related to I/O has several ambiguities:</p>
+<ul class="simple">
+<li><p>A “port” could refer to an <em>interface port</em> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code> objects created by the <a class="reference internal" href="wiring.html#module-amaranth.lib.wiring" title="amaranth.lib.wiring"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.wiring</span></code></a> module), a <em>core I/O port</em> (<code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.hdl.IOPort</span></code> object), or a <em>library I/O port</em> (<a class="reference internal" href="#amaranth.lib.io.PortLike" title="amaranth.lib.io.PortLike"><code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.lib.io.PortLike</span></code></a> object).</p></li>
+<li><p>A “I/O buffer” could refer to an <em>I/O buffer instance</em> (<code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.hdl.IOBufferInstance</span></code>) or a <em>I/O buffer component</em> (<a class="reference internal" href="#amaranth.lib.io.Buffer" title="amaranth.lib.io.Buffer"><code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.lib.io.Buffer</span></code></a>, <a class="reference internal" href="#amaranth.lib.io.FFBuffer" title="amaranth.lib.io.FFBuffer"><code class="xref py py-class docutils literal notranslate"><span class="pre">FFBuffer</span></code></a>, or <a class="reference internal" href="#amaranth.lib.io.DDRBuffer" title="amaranth.lib.io.DDRBuffer"><code class="xref py py-class docutils literal notranslate"><span class="pre">DDRBuffer</span></code></a> objects).</p></li>
+</ul>
+<p>Amaranth documentation always uses the least ambiguous form of these terms.</p>
+</div>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<p>All of the following examples assume that one of the built-in FPGA platforms is used.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">amaranth.sim</span> <span class="kn">import</span> <span class="n">Simulator</span>
+<span class="kn">from</span> <span class="nn">amaranth.lib</span> <span class="kn">import</span> <span class="n">io</span><span class="p">,</span> <span class="n">wiring</span><span class="p">,</span> <span class="n">stream</span>
+<span class="kn">from</span> <span class="nn">amaranth.lib.wiring</span> <span class="kn">import</span> <span class="n">In</span><span class="p">,</span> <span class="n">Out</span>
+</pre></div>
+</div>
+<section id="led-output">
+<h3>LED output<a class="headerlink" href="#led-output" title="Permalink to this heading"></a></h3>
+<p>In this example, a library I/O port for a LED is requested from the platform and driven to blink the LED:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Toplevel</span><span class="p">(</span><span class="n">Elaboratable</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">elaborate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">Module</span><span class="p">()</span>
+
+        <span class="n">delay</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">()</span>
+        <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">If</span><span class="p">(</span><span class="n">delay</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">delay</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="o">~</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">state</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="o">~</span><span class="n">state</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">Else</span><span class="p">():</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">delay</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">delay</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">m</span><span class="o">.</span><span class="n">submodules</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="n">led</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">Buffer</span><span class="p">(</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s2">&quot;led&quot;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">))</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="n">led</span><span class="o">.</span><span class="n">o</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">m</span>
+</pre></div>
+</div>
+</section>
+<section id="clock-input">
+<h3>Clock input<a class="headerlink" href="#clock-input" title="Permalink to this heading"></a></h3>
+<p>In this example, a clock domain is created and driven from an external clock source:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Toplevel</span><span class="p">(</span><span class="n">Elaboratable</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">elaborate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">Module</span><span class="p">()</span>
+
+        <span class="n">m</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">sync</span> <span class="o">=</span> <span class="n">cd_sync</span> <span class="o">=</span> <span class="n">ClockDomain</span><span class="p">(</span><span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">m</span><span class="o">.</span><span class="n">submodules</span><span class="o">.</span><span class="n">clk24</span> <span class="o">=</span> <span class="n">clk24</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">Buffer</span><span class="p">(</span><span class="s2">&quot;i&quot;</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s2">&quot;clk24&quot;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">))</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="n">cd_sync</span><span class="o">.</span><span class="n">clk</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">clk24</span><span class="o">.</span><span class="n">i</span><span class="p">)</span>
+
+        <span class="o">...</span>
+
+        <span class="k">return</span> <span class="n">m</span>
+</pre></div>
+</div>
+</section>
+<section id="bidirectional-bus">
+<h3>Bidirectional bus<a class="headerlink" href="#bidirectional-bus" title="Permalink to this heading"></a></h3>
+<p>This example implements a peripheral for a clocked parallel bus. This peripheral can store and recall one byte of data. The data is stored with a write enable pulse, and recalled with a read enable pulse:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Toplevel</span><span class="p">(</span><span class="n">Elaboratable</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">elaborate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">Module</span><span class="p">()</span>
+
+        <span class="n">m</span><span class="o">.</span><span class="n">submodules</span><span class="o">.</span><span class="n">bus_d</span> <span class="o">=</span> <span class="n">bus_d</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">FFBuffer</span><span class="p">(</span><span class="s2">&quot;io&quot;</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s2">&quot;d&quot;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">))</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">submodules</span><span class="o">.</span><span class="n">bus_re</span> <span class="o">=</span> <span class="n">bus_re</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">Buffer</span><span class="p">(</span><span class="s2">&quot;i&quot;</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s2">&quot;re&quot;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">))</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">submodules</span><span class="o">.</span><span class="n">bus_we</span> <span class="o">=</span> <span class="n">bus_we</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">Buffer</span><span class="p">(</span><span class="s2">&quot;i&quot;</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s2">&quot;we&quot;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">))</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="n">Signal</span><span class="o">.</span><span class="n">like</span><span class="p">(</span><span class="n">bus_d</span><span class="o">.</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">If</span><span class="p">(</span><span class="n">bus_re</span><span class="o">.</span><span class="n">i</span><span class="p">):</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="n">bus_d</span><span class="o">.</span><span class="n">oe</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="n">bus_d</span><span class="o">.</span><span class="n">o</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">Elif</span><span class="p">(</span><span class="n">bus_we</span><span class="o">.</span><span class="n">i</span><span class="p">):</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">data</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">bus_d</span><span class="o">.</span><span class="n">i</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">m</span>
+</pre></div>
+</div>
+<p>This bus requires a turn-around time of at least 1 cycle to avoid electrical contention.</p>
+<p>Note that data appears on the bus one cycle after the read enable input is asserted, and that the write enable input stores the data present on the bus in the <em>previous</em> cycle. This is called <em>pipelining</em> and is typical for clocked buses; see <a class="reference internal" href="#amaranth.lib.io.FFBuffer" title="amaranth.lib.io.FFBuffer"><code class="xref py py-class docutils literal notranslate"><span class="pre">FFBuffer</span></code></a> for a waveform diagram. Although it increases the maximum clock frequency at which the bus can run, it also makes the bus signaling more complicated.</p>
+</section>
+<section id="clock-forwarding">
+<h3>Clock forwarding<a class="headerlink" href="#clock-forwarding" title="Permalink to this heading"></a></h3>
+<p>In this example of a <a class="reference external" href="https://en.wikipedia.org/wiki/Source-synchronous">source-synchronous interface</a>, a clock signal is generated with the same phase as the DDR data signals associated with it:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SourceSynchronousOutput</span><span class="p">(</span><span class="n">wiring</span><span class="o">.</span><span class="n">Component</span><span class="p">):</span>
+    <span class="n">dout</span><span class="p">:</span> <span class="n">In</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">elaborate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">Module</span><span class="p">()</span>
+
+        <span class="n">m</span><span class="o">.</span><span class="n">submodules</span><span class="o">.</span><span class="n">bus_dclk</span> <span class="o">=</span> <span class="n">bus_dclk</span> <span class="o">=</span> \
+            <span class="n">io</span><span class="o">.</span><span class="n">DDRBuffer</span><span class="p">(</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s2">&quot;dclk&quot;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">))</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="p">[</span>
+            <span class="n">bus_dclk</span><span class="o">.</span><span class="n">o</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+            <span class="n">bus_dclk</span><span class="o">.</span><span class="n">o</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+        <span class="p">]</span>
+
+        <span class="n">m</span><span class="o">.</span><span class="n">submodules</span><span class="o">.</span><span class="n">bus_dout</span> <span class="o">=</span> <span class="n">bus_dout</span> <span class="o">=</span> \
+            <span class="n">io</span><span class="o">.</span><span class="n">DDRBuffer</span><span class="p">(</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s2">&quot;dout&quot;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">))</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="p">[</span>
+            <span class="n">bus_dout</span><span class="o">.</span><span class="n">o</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dout</span><span class="p">[:</span><span class="mi">8</span><span class="p">]),</span>
+            <span class="n">bus_dout</span><span class="o">.</span><span class="n">o</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dout</span><span class="p">[</span><span class="mi">8</span><span class="p">:]),</span>
+        <span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">m</span>
+</pre></div>
+</div>
+<p>This component transmits <code class="code highlight py python docutils literal highlight-python"><span class="n">dout</span></code> on each cycle as two halves: the low 8 bits on the rising edge of the data clock, and the high 8 bits on the falling edge of the data clock. The transmission is <em>edge-aligned</em>, meaning that the data edges exactly coincide with the clock edges.</p>
+</section>
+</section>
+<section id="simulation">
+<h2>Simulation<a class="headerlink" href="#simulation" title="Permalink to this heading"></a></h2>
+<p>The Amaranth simulator, <a class="reference internal" href="../simulator.html#module-amaranth.sim" title="amaranth.sim"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.sim</span></code></a>, cannot simulate <a class="reference internal" href="../guide.html#lang-iovalues"><span class="std std-ref">core I/O values</span></a> or <a class="reference internal" href="../guide.html#lang-iobufferinstance"><span class="std std-ref">I/O buffer instances</span></a> as it only operates on unidirectionally driven two-state wires. This module provides a simulation-only library I/O port, <a class="reference internal" href="#amaranth.lib.io.SimulationPort" title="amaranth.lib.io.SimulationPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimulationPort</span></code></a>, so that components that use library I/O buffers can be tested.</p>
+<p>A component that is designed for testing should accept the library I/O ports it will drive as constructor parameters rather than requesting them from the platform directly. Synthesizable designs will instantiate the component with a <a class="reference internal" href="#amaranth.lib.io.SingleEndedPort" title="amaranth.lib.io.SingleEndedPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleEndedPort</span></code></a>, <a class="reference internal" href="#amaranth.lib.io.DifferentialPort" title="amaranth.lib.io.DifferentialPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">DifferentialPort</span></code></a>, or a platform-specific library I/O port, while tests will instantiate the component with a <a class="reference internal" href="#amaranth.lib.io.SimulationPort" title="amaranth.lib.io.SimulationPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimulationPort</span></code></a>. Tests are able to inject inputs into the component using <code class="code highlight py python docutils literal highlight-python"><span class="n">sim_port</span><span class="o">.</span><span class="n">i</span></code>, capture the outputs of the component via <code class="code highlight py python docutils literal highlight-python"><span class="n">sim_port</span><span class="o">.</span><span class="n">o</span></code>, and ensure that the component is driving the outputs at the appropriate times using <code class="code highlight py python docutils literal highlight-python"><span class="n">sim_port</span><span class="o">.</span><span class="n">oe</span></code>.</p>
+<p>For example, consider a simple serializer that accepts a stream of multi-bit data words and outputs them bit by bit. It can be tested as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">OutputSerializer</span><span class="p">(</span><span class="n">wiring</span><span class="o">.</span><span class="n">Component</span><span class="p">):</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">In</span><span class="p">(</span><span class="n">stream</span><span class="o">.</span><span class="n">Signature</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dclk_port</span><span class="p">,</span> <span class="n">dout_port</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dclk_port</span> <span class="o">=</span> <span class="n">dclk_port</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dout_port</span> <span class="o">=</span> <span class="n">dout_port</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">elaborate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">Module</span><span class="p">()</span>
+
+        <span class="n">m</span><span class="o">.</span><span class="n">submodules</span><span class="o">.</span><span class="n">dclk</span> <span class="o">=</span> <span class="n">dclk</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">Buffer</span><span class="p">(</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dclk_port</span><span class="p">)</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">submodules</span><span class="o">.</span><span class="n">dout</span> <span class="o">=</span> <span class="n">dout</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">Buffer</span><span class="p">(</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dout_port</span><span class="p">)</span>
+
+        <span class="n">index</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="n">dout</span><span class="o">.</span><span class="n">o</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">payload</span><span class="o">.</span><span class="n">bit_select</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+        <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">If</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">valid</span><span class="p">):</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">dclk</span><span class="o">.</span><span class="n">o</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="o">~</span><span class="n">dclk</span><span class="o">.</span><span class="n">o</span><span class="p">)</span>
+            <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">If</span><span class="p">(</span><span class="n">dclk</span><span class="o">.</span><span class="n">o</span><span class="p">):</span>
+                <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">index</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">If</span><span class="p">(</span><span class="n">index</span> <span class="o">==</span> <span class="mi">7</span><span class="p">):</span>
+                    <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">ready</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">m</span>
+
+<span class="k">def</span> <span class="nf">test_output_serializer</span><span class="p">():</span>
+    <span class="n">dclk_port</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">SimulationPort</span><span class="p">(</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">dout_port</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">SimulationPort</span><span class="p">(</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">dut</span> <span class="o">=</span> <span class="n">OutputSerializer</span><span class="p">(</span><span class="n">dclk_port</span><span class="p">,</span> <span class="n">dout_port</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">testbench_write_data</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">payload</span><span class="p">,</span> <span class="mh">0xA1</span><span class="p">)</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">valid</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">tick</span><span class="p">()</span><span class="o">.</span><span class="n">until</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">ready</span><span class="p">)</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">valid</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">testbench_sample_output</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">bit</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">dout_value</span> <span class="o">=</span> <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">posedge</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">dclk_port</span><span class="o">.</span><span class="n">o</span><span class="p">)</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">dout_port</span><span class="o">.</span><span class="n">o</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">dout_port</span><span class="o">.</span><span class="n">oe</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;DUT is not driving the data output&quot;</span>
+            <span class="k">assert</span> <span class="n">dout_value</span> <span class="o">==</span> <span class="n">bit</span><span class="p">,</span> <span class="s2">&quot;DUT drives the wrong value on data output&quot;</span>
+
+    <span class="n">sim</span> <span class="o">=</span> <span class="n">Simulator</span><span class="p">(</span><span class="n">dut</span><span class="p">)</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">add_clock</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">)</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">add_testbench</span><span class="p">(</span><span class="n">testbench_write_data</span><span class="p">)</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">add_testbench</span><span class="p">(</span><span class="n">testbench_sample_output</span><span class="p">)</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="ports">
+<h2>Ports<a class="headerlink" href="#ports" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="amaranth.lib.io.Direction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.io.</span></span><span class="sig-name descname"><span class="pre">Direction</span></span><a class="headerlink" href="#amaranth.lib.io.Direction" title="Permalink to this definition"></a></dt>
+<dd><p>Represents direction of a library I/O port, or of an I/O buffer component.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="amaranth.lib.io.Direction.Input">
+<span class="sig-name descname"><span class="pre">Input</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'i'</span></em><a class="headerlink" href="#amaranth.lib.io.Direction.Input" title="Permalink to this definition"></a></dt>
+<dd><p>Input direction (from outside world to Amaranth design).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="amaranth.lib.io.Direction.Output">
+<span class="sig-name descname"><span class="pre">Output</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'o'</span></em><a class="headerlink" href="#amaranth.lib.io.Direction.Output" title="Permalink to this definition"></a></dt>
+<dd><p>Output direction (from Amaranth design to outside world).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="amaranth.lib.io.Direction.Bidir">
+<span class="sig-name descname"><span class="pre">Bidir</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'io'</span></em><a class="headerlink" href="#amaranth.lib.io.Direction.Bidir" title="Permalink to this definition"></a></dt>
+<dd><p>Bidirectional (can be switched between input and output).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="amaranth.lib.io.Direction.__and__">
+<span class="sig-name descname"><span class="pre">__and__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.Direction.__and__" title="Permalink to this definition"></a></dt>
+<dd><p>Narrow the set of possible directions.</p>
+<ul class="simple">
+<li><p><code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span> <span class="o">&amp;</span> <span class="bp">self</span></code> returns <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span></code>.</p></li>
+<li><p><code class="code highlight py python docutils literal highlight-python"><span class="n">Bidir</span> <span class="o">&amp;</span> <span class="n">other</span></code> returns <code class="code highlight py python docutils literal highlight-python"><span class="n">other</span></code>.</p></li>
+<li><p><code class="code highlight py python docutils literal highlight-python"><span class="n">Input</span> <span class="o">&amp;</span> <span class="n">Output</span></code> raises <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.12)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>.</p></li>
+</ul>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="amaranth.lib.io.PortLike">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.io.</span></span><span class="sig-name descname"><span class="pre">PortLike</span></span><a class="headerlink" href="#amaranth.lib.io.PortLike" title="Permalink to this definition"></a></dt>
+<dd><p>Represents an abstract library I/O port that can be passed to a buffer.</p>
+<p>The port types supported by most platforms are <a class="reference internal" href="#amaranth.lib.io.SingleEndedPort" title="amaranth.lib.io.SingleEndedPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleEndedPort</span></code></a> and
+<a class="reference internal" href="#amaranth.lib.io.DifferentialPort" title="amaranth.lib.io.DifferentialPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">DifferentialPort</span></code></a>. Platforms may define additional port types where appropriate.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.hdl.IOPort</span></code> is not an instance of <a class="reference internal" href="#amaranth.lib.io.PortLike" title="amaranth.lib.io.PortLike"><code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.lib.io.PortLike</span></code></a>.</p>
+</div>
+<dl class="py property">
+<dt class="sig sig-object py" id="amaranth.lib.io.PortLike.direction">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">direction</span></span><a class="headerlink" href="#amaranth.lib.io.PortLike.direction" title="Permalink to this definition"></a></dt>
+<dd><p>Direction of the port.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#amaranth.lib.io.Direction" title="amaranth.lib.io.Direction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Direction</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="amaranth.lib.io.PortLike.__len__">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.PortLike.__len__" title="Permalink to this definition"></a></dt>
+<dd><p>Computes the width of the port.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The number of wires (for single-ended library I/O ports) or wire pairs (for differential
+library I/O ports) this port consists of.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="amaranth.lib.io.PortLike.__getitem__">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.PortLike.__getitem__" title="Permalink to this definition"></a></dt>
+<dd><p>Slices the port.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A new <a class="reference internal" href="#amaranth.lib.io.PortLike" title="amaranth.lib.io.PortLike"><code class="xref py py-class docutils literal notranslate"><span class="pre">PortLike</span></code></a> instance of the same type as <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span></code>, containing a selection
+of wires of this port according to <code class="code highlight py python docutils literal highlight-python"><span class="n">key</span></code>. Its width is the same as the length of
+the slice (if <code class="code highlight py python docutils literal highlight-python"><span class="n">key</span></code> is a <a class="reference external" href="https://docs.python.org/3/library/functions.html#slice" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">slice</span></code></a>); or 1 (if <code class="code highlight py python docutils literal highlight-python"><span class="n">key</span></code> is an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>).</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#amaranth.lib.io.PortLike" title="amaranth.lib.io.PortLike"><code class="xref py py-class docutils literal notranslate"><span class="pre">PortLike</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="amaranth.lib.io.PortLike.__invert__">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__invert__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.PortLike.__invert__" title="Permalink to this definition"></a></dt>
+<dd><p>Inverts polarity of the port.</p>
+<p>Inverting polarity of a library I/O port has the same effect as adding inverters to
+the <code class="code highlight py python docutils literal highlight-python"><span class="n">i</span></code> and <code class="code highlight py python docutils literal highlight-python"><span class="n">o</span></code> members of an I/O buffer component for that port.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A new <a class="reference internal" href="#amaranth.lib.io.PortLike" title="amaranth.lib.io.PortLike"><code class="xref py py-class docutils literal notranslate"><span class="pre">PortLike</span></code></a> instance of the same type as <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span></code>, containing the same
+wires as this port, but with polarity inverted.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#amaranth.lib.io.PortLike" title="amaranth.lib.io.PortLike"><code class="xref py py-class docutils literal notranslate"><span class="pre">PortLike</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="amaranth.lib.io.PortLike.__add__">
+<span class="sig-name descname"><span class="pre">__add__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.PortLike.__add__" title="Permalink to this definition"></a></dt>
+<dd><p>Concatenates two library I/O ports of the same type.</p>
+<p>The direction of the resulting port is:</p>
+<ul class="simple">
+<li><p>The same as the direction of both, if the two ports have the same direction.</p></li>
+<li><p><a class="reference internal" href="#amaranth.lib.io.Direction.Input" title="amaranth.lib.io.Direction.Input"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Direction.Input</span></code></a> if a bidirectional port is concatenated with an input port.</p></li>
+<li><p><a class="reference internal" href="#amaranth.lib.io.Direction.Output" title="amaranth.lib.io.Direction.Output"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Direction.Output</span></code></a> if a bidirectional port is concatenated with an output port.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A new <code class="code highlight py python docutils literal highlight-python"><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code> which contains wires from <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span></code> followed by wires
+from <code class="code highlight py python docutils literal highlight-python"><span class="n">other</span></code>, preserving their polarity inversion.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="code highlight py python docutils literal highlight-python"><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code></p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.12)"><strong>ValueError</strong></a> – If an input port is concatenated with an output port.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.12)"><strong>TypeError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span></code> and <code class="code highlight py python docutils literal highlight-python"><span class="n">other</span></code> have different types.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="amaranth.lib.io.SingleEndedPort">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.io.</span></span><span class="sig-name descname"><span class="pre">SingleEndedPort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">io</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invert</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Direction.Bidir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.SingleEndedPort" title="Permalink to this definition"></a></dt>
+<dd><p>Represents a single-ended library I/O port.</p>
+<p>Implements the <a class="reference internal" href="#amaranth.lib.io.PortLike" title="amaranth.lib.io.PortLike"><code class="xref py py-class docutils literal notranslate"><span class="pre">PortLike</span></code></a> interface.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>io</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">IOValue</span></code>) – Underlying core I/O value.</p></li>
+<li><p><strong>invert</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a> or iterable of <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Polarity inversion. If the value is a simple <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, it specifies inversion for
+the entire port. If the value is an iterable of <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, the iterable must have the
+same length as the width of <code class="code highlight py python docutils literal highlight-python"><span class="n">io</span></code>, and the inversion is specified for individual wires.</p></li>
+<li><p><strong>direction</strong> (<a class="reference internal" href="#amaranth.lib.io.Direction" title="amaranth.lib.io.Direction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Direction</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Set of allowed buffer directions. A string is converted to a <a class="reference internal" href="#amaranth.lib.io.Direction" title="amaranth.lib.io.Direction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Direction</span></code></a> first.
+If equal to <a class="reference internal" href="#amaranth.lib.io.Direction.Input" title="amaranth.lib.io.Direction.Input"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Input</span></code></a> or <a class="reference internal" href="#amaranth.lib.io.Direction.Output" title="amaranth.lib.io.Direction.Output"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Output</span></code></a>, this port can only be
+used with buffers of matching direction. If equal to <a class="reference internal" href="#amaranth.lib.io.Direction.Bidir" title="amaranth.lib.io.Direction.Bidir"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Bidir</span></code></a>, this port
+can be used with buffers of any direction.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>io</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">IOValue</span></code>) – The <code class="code highlight py python docutils literal highlight-python"><span class="n">io</span></code> parameter.</p></li>
+<li><p><strong>invert</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – The <code class="code highlight py python docutils literal highlight-python"><span class="n">invert</span></code> parameter, normalized to specify polarity inversion per-wire.</p></li>
+<li><p><strong>direction</strong> (<a class="reference internal" href="#amaranth.lib.io.Direction" title="amaranth.lib.io.Direction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Direction</span></code></a>) – The <code class="code highlight py python docutils literal highlight-python"><span class="n">direction</span></code> parameter, normalized to the <a class="reference internal" href="#amaranth.lib.io.Direction" title="amaranth.lib.io.Direction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Direction</span></code></a> enumeration.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="amaranth.lib.io.DifferentialPort">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.io.</span></span><span class="sig-name descname"><span class="pre">DifferentialPort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invert</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Direction.Bidir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.DifferentialPort" title="Permalink to this definition"></a></dt>
+<dd><p>Represents a differential library I/O port.</p>
+<p>Implements the <a class="reference internal" href="#amaranth.lib.io.PortLike" title="amaranth.lib.io.PortLike"><code class="xref py py-class docutils literal notranslate"><span class="pre">PortLike</span></code></a> interface.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">IOValue</span></code>) – Underlying core I/O value for the true (positive) half of the port.</p></li>
+<li><p><strong>n</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">IOValue</span></code>) – Underlying core I/O value for the complement (negative) half of the port.
+Must have the same width as <code class="code highlight py python docutils literal highlight-python"><span class="n">p</span></code>.</p></li>
+<li><p><strong>invert</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a> or iterable of <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Polarity inversion. If the value is a simple <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, it specifies inversion for
+the entire port. If the value is an iterable of <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, the iterable must have the
+same length as the width of <code class="code highlight py python docutils literal highlight-python"><span class="n">p</span></code> and <code class="code highlight py python docutils literal highlight-python"><span class="n">n</span></code>, and the inversion is specified for
+individual wires.</p></li>
+<li><p><strong>direction</strong> (<a class="reference internal" href="#amaranth.lib.io.Direction" title="amaranth.lib.io.Direction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Direction</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Set of allowed buffer directions. A string is converted to a <a class="reference internal" href="#amaranth.lib.io.Direction" title="amaranth.lib.io.Direction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Direction</span></code></a> first.
+If equal to <a class="reference internal" href="#amaranth.lib.io.Direction.Input" title="amaranth.lib.io.Direction.Input"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Input</span></code></a> or <a class="reference internal" href="#amaranth.lib.io.Direction.Output" title="amaranth.lib.io.Direction.Output"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Output</span></code></a>, this port can only be
+used with buffers of matching direction. If equal to <a class="reference internal" href="#amaranth.lib.io.Direction.Bidir" title="amaranth.lib.io.Direction.Bidir"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Bidir</span></code></a>, this port
+can be used with buffers of any direction.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>p</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">IOValue</span></code>) – The <code class="code highlight py python docutils literal highlight-python"><span class="n">p</span></code> parameter.</p></li>
+<li><p><strong>n</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">IOValue</span></code>) – The <code class="code highlight py python docutils literal highlight-python"><span class="n">n</span></code> parameter.</p></li>
+<li><p><strong>invert</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – The <code class="code highlight py python docutils literal highlight-python"><span class="n">invert</span></code> parameter, normalized to specify polarity inversion per-wire.</p></li>
+<li><p><strong>direction</strong> (<a class="reference internal" href="#amaranth.lib.io.Direction" title="amaranth.lib.io.Direction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Direction</span></code></a>) – The <code class="code highlight py python docutils literal highlight-python"><span class="n">direction</span></code> parameter, normalized to the <a class="reference internal" href="#amaranth.lib.io.Direction" title="amaranth.lib.io.Direction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Direction</span></code></a> enumeration.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="amaranth.lib.io.SimulationPort">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.io.</span></span><span class="sig-name descname"><span class="pre">SimulationPort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invert</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_loc_at</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.SimulationPort" title="Permalink to this definition"></a></dt>
+<dd><p>Represents a simulation library I/O port.</p>
+<p>Implements the <a class="reference internal" href="#amaranth.lib.io.PortLike" title="amaranth.lib.io.PortLike"><code class="xref py py-class docutils literal notranslate"><span class="pre">PortLike</span></code></a> interface.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>direction</strong> (<a class="reference internal" href="#amaranth.lib.io.Direction" title="amaranth.lib.io.Direction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Direction</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Set of allowed buffer directions. A string is converted to a <a class="reference internal" href="#amaranth.lib.io.Direction" title="amaranth.lib.io.Direction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Direction</span></code></a> first.
+If equal to <a class="reference internal" href="#amaranth.lib.io.Direction.Input" title="amaranth.lib.io.Direction.Input"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Input</span></code></a> or <a class="reference internal" href="#amaranth.lib.io.Direction.Output" title="amaranth.lib.io.Direction.Output"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Output</span></code></a>, this port can only be
+used with buffers of matching direction. If equal to <a class="reference internal" href="#amaranth.lib.io.Direction.Bidir" title="amaranth.lib.io.Direction.Bidir"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Bidir</span></code></a>, this port
+can be used with buffers of any direction.</p></li>
+<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Width of the port. The width of each of the attributes <code class="code highlight py python docutils literal highlight-python"><span class="n">i</span></code>, <code class="code highlight py python docutils literal highlight-python"><span class="n">o</span></code>, <code class="code highlight py python docutils literal highlight-python"><span class="n">oe</span></code> (whenever
+present) equals <code class="code highlight py python docutils literal highlight-python"><span class="n">width</span></code>.</p></li>
+<li><p><strong>invert</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a> or iterable of <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Polarity inversion. If the value is a simple <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, it specifies inversion for
+the entire port. If the value is an iterable of <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, the iterable must have the
+same length as the width of <code class="code highlight py python docutils literal highlight-python"><span class="n">p</span></code> and <code class="code highlight py python docutils literal highlight-python"><span class="n">n</span></code>, and the inversion is specified for
+individual wires.</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> or <code class="code highlight py python docutils literal highlight-python"><span class="kc">None</span></code>) – Name of the port. This name is only used to derive the names of the input, output, and
+output enable signals.</p></li>
+<li><p><strong>src_loc_at</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – <a class="reference internal" href="../reference.html#lang-srcloc"><span class="std std-ref">Source location</span></a>. Used to infer <code class="code highlight py python docutils literal highlight-python"><span class="n">name</span></code> if not specified.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>i</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code>) – Input signal. Present if <code class="code highlight py python docutils literal highlight-python"><span class="n">direction</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Input</span><span class="p">,</span> <span class="n">Bidir</span><span class="p">)</span></code>.</p></li>
+<li><p><strong>o</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code>) – Ouptut signal. Present if <code class="code highlight py python docutils literal highlight-python"><span class="n">direction</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Output</span><span class="p">,</span> <span class="n">Bidir</span><span class="p">)</span></code>.</p></li>
+<li><p><strong>oe</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code>) – Output enable signal. Present if <code class="code highlight py python docutils literal highlight-python"><span class="n">direction</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Output</span><span class="p">,</span> <span class="n">Bidir</span><span class="p">)</span></code>.</p></li>
+<li><p><strong>invert</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – The <code class="code highlight py python docutils literal highlight-python"><span class="n">invert</span></code> parameter, normalized to specify polarity inversion per-wire.</p></li>
+<li><p><strong>direction</strong> (<a class="reference internal" href="#amaranth.lib.io.Direction" title="amaranth.lib.io.Direction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Direction</span></code></a>) – The <code class="code highlight py python docutils literal highlight-python"><span class="n">direction</span></code> parameter, normalized to the <a class="reference internal" href="#amaranth.lib.io.Direction" title="amaranth.lib.io.Direction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Direction</span></code></a> enumeration.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="buffers">
+<h2>Buffers<a class="headerlink" href="#buffers" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="amaranth.lib.io.Buffer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.io.</span></span><span class="sig-name descname"><span class="pre">Buffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.Buffer" title="Permalink to this definition"></a></dt>
+<dd><p>A combinational I/O buffer component.</p>
+<p>This buffer can be used on any platform; if the platform does not specialize its implementation,
+an <a class="reference internal" href="../guide.html#lang-iobufferinstance"><span class="std std-ref">I/O buffer instance</span></a> is used.</p>
+<p>The following diagram defines the timing relationship between the underlying core I/O value
+(for differential ports, the core I/O value of the true half) and the <code class="code highlight py python docutils literal highlight-python"><span class="n">i</span></code>, <code class="code highlight py python docutils literal highlight-python"><span class="n">o</span></code>, and
+<code class="code highlight py python docutils literal highlight-python"><span class="n">oe</span></code> members:</p>
+<img src="_images/io/buffer.svg" class="wavedrom wavedrom-signal" alt="{'signal': [{'name': 'clk', 'wave': 'p.....'}, {'name': 'o', 'wave': 'x345x.', 'data': ['A', 'B', 'C']}, {'name': 'oe', 'wave': '01..0.'}, {}, {'name': 'port', 'wave': 'z345z.', 'data': ['A', 'B', 'C']}, {}, {'name': 'i', 'wave': 'x345x.', 'data': ['A', 'B', 'C']}], 'config': {'hscale': 2, 'skin': 'default'}}"><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>direction</strong> (<a class="reference internal" href="#amaranth.lib.io.Direction" title="amaranth.lib.io.Direction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Direction</span></code></a>) – Direction of the buffer.</p></li>
+<li><p><strong>port</strong> (<a class="reference internal" href="#amaranth.lib.io.PortLike" title="amaranth.lib.io.PortLike"><code class="xref py py-class docutils literal notranslate"><span class="pre">PortLike</span></code></a>) – Port driven by the buffer.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.12)"><strong>ValueError</strong></a> – Unless <code class="code highlight py python docutils literal highlight-python"><span class="n">port</span><span class="o">.</span><span class="n">direction</span> <span class="ow">in</span> <span class="p">(</span><span class="n">direction</span><span class="p">,</span> <span class="n">Bidir</span><span class="p">)</span></code>.</p>
+</dd>
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>signature</strong> (<a class="reference internal" href="#amaranth.lib.io.Buffer.Signature" title="amaranth.lib.io.Buffer.Signature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Buffer.Signature</span></code></a>) – <code class="code highlight py python docutils literal highlight-python"><span class="n">Signature</span><span class="p">(</span><span class="n">direction</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">port</span><span class="p">))</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span></code>.</p>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="amaranth.lib.io.Buffer.Signature">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Signature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.Buffer.Signature" title="Permalink to this definition"></a></dt>
+<dd><p>Signature of a combinational I/O buffer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>direction</strong> (<a class="reference internal" href="#amaranth.lib.io.Direction" title="amaranth.lib.io.Direction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Direction</span></code></a>) – Direction of the buffer.</p></li>
+<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Width of the buffer.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Members<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>i</strong> (<code class="code highlight py python docutils literal highlight-python"><span class="n">In</span><span class="p">(</span><span class="n">width</span><span class="p">)</span></code>) – Present if <code class="code highlight py python docutils literal highlight-python"><span class="n">direction</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Input</span><span class="p">,</span> <span class="n">Bidir</span><span class="p">)</span></code>.</p></li>
+<li><p><strong>o</strong> (<code class="code highlight py python docutils literal highlight-python"><span class="n">Out</span><span class="p">(</span><span class="n">width</span><span class="p">)</span></code>) – Present if <code class="code highlight py python docutils literal highlight-python"><span class="n">direction</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Output</span><span class="p">,</span> <span class="n">Bidir</span><span class="p">)</span></code>.</p></li>
+<li><p><strong>oe</strong> (<code class="code highlight py python docutils literal highlight-python"><span class="n">Out</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>) – Present if <code class="code highlight py python docutils literal highlight-python"><span class="n">direction</span> <span class="ow">is</span> <span class="n">Bidir</span></code>.</p></li>
+<li><p><strong>oe</strong> (<code class="code highlight py python docutils literal highlight-python"><span class="n">Out</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></code>) – Present if <code class="code highlight py python docutils literal highlight-python"><span class="n">direction</span> <span class="ow">is</span> <span class="n">Output</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="amaranth.lib.io.FFBuffer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.io.</span></span><span class="sig-name descname"><span class="pre">FFBuffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i_domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">o_domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.FFBuffer" title="Permalink to this definition"></a></dt>
+<dd><p>A registered I/O buffer component.</p>
+<p>This buffer can be used on any platform; if the platform does not specialize its implementation,
+an <a class="reference internal" href="../guide.html#lang-iobufferinstance"><span class="std std-ref">I/O buffer instance</span></a> is used, combined with reset-less
+registers on <code class="code highlight py python docutils literal highlight-python"><span class="n">i</span></code>, <code class="code highlight py python docutils literal highlight-python"><span class="n">o</span></code>, and  <code class="code highlight py python docutils literal highlight-python"><span class="n">oe</span></code> members.</p>
+<p>The following diagram defines the timing relationship between the underlying core I/O value
+(for differential ports, the core I/O value of the true half) and the <code class="code highlight py python docutils literal highlight-python"><span class="n">i</span></code>, <code class="code highlight py python docutils literal highlight-python"><span class="n">o</span></code>, and
+<code class="code highlight py python docutils literal highlight-python"><span class="n">oe</span></code> members:</p>
+<img src="_images/io/ff-buffer.svg" class="wavedrom wavedrom-signal" alt="{'signal': [{'name': 'clk', 'wave': 'p......'}, {'name': 'o', 'wave': 'x345x..', 'data': ['A', 'B', 'C']}, {'name': 'oe', 'wave': '01..0..'}, {}, {'name': 'port', 'wave': 'z.345z.', 'data': ['A', 'B', 'C']}, {}, {'name': 'i', 'wave': 'x..345x', 'data': ['A', 'B', 'C']}], 'config': {'hscale': 2, 'skin': 'default'}}"><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>On some platforms, this buffer can only be used with rising edge clock domains, and will
+raise an exception during conversion of the design to a netlist otherwise.</p>
+<p>This limitation will be lifted in the future.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>direction</strong> (<a class="reference internal" href="#amaranth.lib.io.Direction" title="amaranth.lib.io.Direction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Direction</span></code></a>) – Direction of the buffer.</p></li>
+<li><p><strong>port</strong> (<a class="reference internal" href="#amaranth.lib.io.PortLike" title="amaranth.lib.io.PortLike"><code class="xref py py-class docutils literal notranslate"><span class="pre">PortLike</span></code></a>) – Port driven by the buffer.</p></li>
+<li><p><strong>i_domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of the input register’s clock domain. Used when <code class="code highlight py python docutils literal highlight-python"><span class="n">direction</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Input</span><span class="p">,</span> <span class="n">Bidir</span><span class="p">)</span></code>.
+Defaults to <code class="code highlight py python docutils literal highlight-python"><span class="s2">&quot;sync&quot;</span></code>.</p></li>
+<li><p><strong>o_domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of the output and output enable registers’ clock domain. Used when
+<code class="code highlight py python docutils literal highlight-python"><span class="n">direction</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Output</span><span class="p">,</span> <span class="n">Bidir</span><span class="p">)</span></code>. Defaults to <code class="code highlight py python docutils literal highlight-python"><span class="s2">&quot;sync&quot;</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>signature</strong> (<a class="reference internal" href="#amaranth.lib.io.FFBuffer.Signature" title="amaranth.lib.io.FFBuffer.Signature"><code class="xref py py-class docutils literal notranslate"><span class="pre">FFBuffer.Signature</span></code></a>) – <code class="code highlight py python docutils literal highlight-python"><span class="n">Signature</span><span class="p">(</span><span class="n">direction</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">port</span><span class="p">))</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span></code>.</p>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="amaranth.lib.io.FFBuffer.Signature">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Signature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.FFBuffer.Signature" title="Permalink to this definition"></a></dt>
+<dd><p>Signature of a registered I/O buffer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>direction</strong> (<a class="reference internal" href="#amaranth.lib.io.Direction" title="amaranth.lib.io.Direction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Direction</span></code></a>) – Direction of the buffer.</p></li>
+<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Width of the buffer.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Members<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>i</strong> (<code class="code highlight py python docutils literal highlight-python"><span class="n">In</span><span class="p">(</span><span class="n">width</span><span class="p">)</span></code>) – Present if <code class="code highlight py python docutils literal highlight-python"><span class="n">direction</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Input</span><span class="p">,</span> <span class="n">Bidir</span><span class="p">)</span></code>.</p></li>
+<li><p><strong>o</strong> (<code class="code highlight py python docutils literal highlight-python"><span class="n">Out</span><span class="p">(</span><span class="n">width</span><span class="p">)</span></code>) – Present if <code class="code highlight py python docutils literal highlight-python"><span class="n">direction</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Output</span><span class="p">,</span> <span class="n">Bidir</span><span class="p">)</span></code>.</p></li>
+<li><p><strong>oe</strong> (<code class="code highlight py python docutils literal highlight-python"><span class="n">Out</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>) – Present if <code class="code highlight py python docutils literal highlight-python"><span class="n">direction</span> <span class="ow">is</span> <span class="n">Bidir</span></code>.</p></li>
+<li><p><strong>oe</strong> (<code class="code highlight py python docutils literal highlight-python"><span class="n">Out</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></code>) – Present if <code class="code highlight py python docutils literal highlight-python"><span class="n">direction</span> <span class="ow">is</span> <span class="n">Output</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="amaranth.lib.io.DDRBuffer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.io.</span></span><span class="sig-name descname"><span class="pre">DDRBuffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i_domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">o_domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.DDRBuffer" title="Permalink to this definition"></a></dt>
+<dd><p>A double data rate I/O buffer component.</p>
+<p>This buffer is only available on platforms that support double data rate I/O.</p>
+<p>The following diagram defines the timing relationship between the underlying core I/O value
+(for differential ports, the core I/O value of the true half) and the <code class="code highlight py python docutils literal highlight-python"><span class="n">i</span></code>, <code class="code highlight py python docutils literal highlight-python"><span class="n">o</span></code>, and
+<code class="code highlight py python docutils literal highlight-python"><span class="n">oe</span></code> members:</p>
+<img src="_images/io/ddr-buffer.svg" class="wavedrom wavedrom-signal" alt="{'head': {'tick': 0}, 'signal': [{'name': 'clk', 'wave': 'p.......'}, {'name': 'o[0]', 'wave': 'x357x...', 'node': '.a', 'data': ['A', 'C', 'E']}, {'name': 'o[1]', 'wave': 'x468x...', 'node': '.b', 'data': ['B', 'D', 'F']}, {'name': 'oe', 'wave': '01..0...'}, {'node': '........R.S', 'period': 0.5}, {'name': 'port', 'wave': 'z...345678z.....', 'node': '....123456', 'data': ['A', 'B', 'C', 'D', 'E', 'F'], 'period': 0.5}, {'node': '..P.Q', 'period': 0.5}, {'name': 'i[0]', 'wave': 'x...468x', 'node': '.....d', 'data': ['B', 'D', 'F']}, {'name': 'i[1]', 'wave': 'x..357x.', 'node': '.....e', 'data': ['A', 'C', 'E']}], 'edge': ['a~1', 'b-~2', 'P+Q t1', '5~-d', '6~e', 'R+S t2'], 'config': {'hscale': 2, 'skin': 'default'}}"><p>The output data (labelled <em>a</em>, <em>b</em>) is input from <code class="code highlight py python docutils literal highlight-python"><span class="n">o</span></code> into internal registers at
+the beginning of clock cycle 2, and transmitted at points labelled <em>1</em>, <em>2</em> during the same
+clock cycle. The output latency <em>t1</em> is defined as the amount of cycles between the time of
+capture of <code class="code highlight py python docutils literal highlight-python"><span class="n">o</span></code> and the time of transmission of rising edge data plus one cycle, and is 1
+for this diagram.</p>
+<p>The received data is captured into internal registers during the clock cycle 4 at points
+labelled <em>5</em>, <em>6</em>, and output to <code class="code highlight py python docutils literal highlight-python"><span class="n">i</span></code> during the next clock cycle (labelled <em>d</em>, <em>e</em>).
+The input latency <em>t2</em> is defined as the amount of cycles between the time of reception of
+rising edge data and the time of update of <code class="code highlight py python docutils literal highlight-python"><span class="n">i</span></code>, and is 1 for this diagram.</p>
+<p>The output enable signal is input from <code class="code highlight py python docutils literal highlight-python"><span class="n">oe</span></code> once per cycle and affects the entire cycle it
+applies to. Its latency is defined in the same way as the output latency, and is equal to <em>t1</em>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Some platforms include additional pipeline registers that may cause latencies <em>t1</em> and <em>t2</em>
+to be higher than one cycle. At the moment there is no way to query these latencies.</p>
+<p>This limitation will be lifted in the future.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>On all supported platforms, this buffer can only be used with rising edge clock domains,
+and will raise an exception during conversion of the design to a netlist otherwise.</p>
+<p>This limitation may be lifted in the future.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Double data rate I/O buffers are not compatible with <a class="reference internal" href="#amaranth.lib.io.SimulationPort" title="amaranth.lib.io.SimulationPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimulationPort</span></code></a>.</p>
+<p>This limitation may be lifted in the future.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>direction</strong> (<a class="reference internal" href="#amaranth.lib.io.Direction" title="amaranth.lib.io.Direction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Direction</span></code></a>) – Direction of the buffer.</p></li>
+<li><p><strong>port</strong> (<a class="reference internal" href="#amaranth.lib.io.PortLike" title="amaranth.lib.io.PortLike"><code class="xref py py-class docutils literal notranslate"><span class="pre">PortLike</span></code></a>) – Port driven by the buffer.</p></li>
+<li><p><strong>i_domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of the input register’s clock domain. Used when <code class="code highlight py python docutils literal highlight-python"><span class="n">direction</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Input</span><span class="p">,</span> <span class="n">Bidir</span><span class="p">)</span></code>.
+Defaults to <code class="code highlight py python docutils literal highlight-python"><span class="s2">&quot;sync&quot;</span></code>.</p></li>
+<li><p><strong>o_domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of the output and output enable registers’ clock domain. Used when
+<code class="code highlight py python docutils literal highlight-python"><span class="n">direction</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Output</span><span class="p">,</span> <span class="n">Bidir</span><span class="p">)</span></code>. Defaults to <code class="code highlight py python docutils literal highlight-python"><span class="s2">&quot;sync&quot;</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>signature</strong> (<a class="reference internal" href="#amaranth.lib.io.DDRBuffer.Signature" title="amaranth.lib.io.DDRBuffer.Signature"><code class="xref py py-class docutils literal notranslate"><span class="pre">DDRBuffer.Signature</span></code></a>) – <code class="code highlight py python docutils literal highlight-python"><span class="n">Signature</span><span class="p">(</span><span class="n">direction</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">port</span><span class="p">))</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span></code>.</p>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="amaranth.lib.io.DDRBuffer.Signature">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Signature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.DDRBuffer.Signature" title="Permalink to this definition"></a></dt>
+<dd><p>Signature of a double data rate I/O buffer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>direction</strong> (<a class="reference internal" href="#amaranth.lib.io.Direction" title="amaranth.lib.io.Direction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Direction</span></code></a>) – Direction of the buffer.</p></li>
+<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Width of the buffer.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Members<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>i</strong> (<code class="code highlight py python docutils literal highlight-python"><span class="n">In</span><span class="p">(</span><span class="n">ArrayLayout</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span></code>) – Present if <code class="code highlight py python docutils literal highlight-python"><span class="n">direction</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Input</span><span class="p">,</span> <span class="n">Bidir</span><span class="p">)</span></code>.</p></li>
+<li><p><strong>o</strong> (<code class="code highlight py python docutils literal highlight-python"><span class="n">Out</span><span class="p">(</span><span class="n">ArrayLayout</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span></code>) – Present if <code class="code highlight py python docutils literal highlight-python"><span class="n">direction</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Output</span><span class="p">,</span> <span class="n">Bidir</span><span class="p">)</span></code>.</p></li>
+<li><p><strong>oe</strong> (<code class="code highlight py python docutils literal highlight-python"><span class="n">Out</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code>) – Present if <code class="code highlight py python docutils literal highlight-python"><span class="n">direction</span> <span class="ow">is</span> <span class="n">Bidir</span></code>.</p></li>
+<li><p><strong>oe</strong> (<code class="code highlight py python docutils literal highlight-python"><span class="n">Out</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></code>) – Present if <code class="code highlight py python docutils literal highlight-python"><span class="n">direction</span> <span class="ow">is</span> <span class="n">Output</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="memory.html" class="btn btn-neutral float-left" title="Memory arrays" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cdc.html" class="btn btn-neutral float-right" title="Clock domain crossing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020—2024, Amaranth project contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
