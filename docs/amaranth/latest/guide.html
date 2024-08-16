@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Language guide &mdash; Amaranth language &amp; toolchain 0.6.0.dev40 documentation</title>
+  <title>Language guide &mdash; Amaranth language &amp; toolchain 0.6.0.dev44 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/platformpicker.css" />
@@ -17,7 +17,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=66db0882"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=9aaa1225"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="_static/platformpicker.js"></script>
@@ -41,7 +41,7 @@
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.6.0.dev40
+                0.6.0.dev44
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -1290,12 +1290,12 @@ inside `Else`
 <section id="clock-domains">
 <span id="lang-clockdomains"></span><h2>Clock domains<a class="headerlink" href="#clock-domains" title="Permalink to this heading"></a></h2>
 <p>A new synchronous <a class="reference internal" href="#lang-domains"><span class="std std-ref">control domain</span></a>, which is more often called a <em>clock domain</em>, can be defined in a design by creating a <code class="xref py py-class docutils literal notranslate"><span class="pre">ClockDomain</span></code> object and adding it to the <code class="code highlight py python docutils literal highlight-python"><span class="n">m</span><span class="o">.</span><span class="n">domains</span></code> collection:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">video</span> <span class="o">=</span> <span class="n">cd_video</span> <span class="o">=</span> <span class="n">ClockDomain</span><span class="p">(</span><span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">video</span> <span class="o">=</span> <span class="n">cd_video</span> <span class="o">=</span> <span class="n">ClockDomain</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>If the name of the domain is not known upfront, another, less concise, syntax can be used instead:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add_video_domain</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">cd</span> <span class="o">=</span> <span class="n">ClockDomain</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;video_</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">cd</span> <span class="o">=</span> <span class="n">ClockDomain</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;video_</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">m</span><span class="o">.</span><span class="n">domains</span> <span class="o">+=</span> <span class="n">cd</span>
     <span class="k">return</span> <span class="n">cd</span>
 
@@ -1307,19 +1307,15 @@ inside `Else`
 <p>Whenever the created <code class="xref py py-class docutils literal notranslate"><span class="pre">ClockDomain</span></code> object is immediately assigned using the <code class="code highlight py python docutils literal highlight-python"><span class="n">domain_name</span> <span class="o">=</span> <span class="n">ClockDomain</span><span class="p">(</span><span class="o">...</span><span class="p">)</span></code> or <code class="code highlight py python docutils literal highlight-python"><span class="n">m</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">domain_name</span> <span class="o">=</span> <span class="n">ClockDomain</span><span class="p">(</span><span class="o">...</span><span class="p">)</span></code> syntax, the name of the domain may be omitted from the <code class="code highlight py python docutils literal highlight-python"><span class="n">ClockDomain</span><span class="p">()</span></code> invocation. In other cases, it must be provided as the first argument.</p>
 </div>
 <p>A clock domain always has a clock signal, which can be accessed through the <code class="xref py py-attr docutils literal notranslate"><span class="pre">cd.clk</span></code> attribute. By default, the <em>active edge</em> of the clock domain is positive; this means that the signals in the domain change when the clock signal transitions from 0 to 1. A clock domain can be configured to have a negative active edge so that signals in it change when the clock signal transitions from 1 to 0:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">jtag</span> <span class="o">=</span> <span class="n">ClockDomain</span><span class="p">(</span><span class="n">clk_edge</span><span class="o">=</span><span class="s2">&quot;neg&quot;</span><span class="p">,</span> <span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">jtag</span> <span class="o">=</span> <span class="n">ClockDomain</span><span class="p">(</span><span class="n">clk_edge</span><span class="o">=</span><span class="s2">&quot;neg&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>A clock domain also has a reset signal, which can be accessed through the <code class="xref py py-attr docutils literal notranslate"><span class="pre">cd.rst</span></code> attribute. The reset signal is always active-high: the signals in the clock domain are reset if the value of the reset signal is 1. The <a class="reference internal" href="#lang-initial"><span class="std std-ref">initial value</span></a> of this signal is 0, so if the reset signal is never assigned, the signals in the clock domain are never explicitly reset (they are still <a class="reference internal" href="#lang-initial"><span class="std std-ref">reset at power-on</span></a>). Nevertheless, if its existence is undesirable, the clock domain can be configured to omit it:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">startup</span> <span class="o">=</span> <span class="n">ClockDomain</span><span class="p">(</span><span class="n">reset_less</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">startup</span> <span class="o">=</span> <span class="n">ClockDomain</span><span class="p">(</span><span class="n">reset_less</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Signals in a reset-less clock domain can still be explicitly reset using the <code class="xref py py-class docutils literal notranslate"><span class="pre">ResetInserter</span></code> <a class="reference internal" href="#lang-controlinserter"><span class="std std-ref">control flow modifier</span></a>.</p>
 <p>If a clock domain is defined in a module, all of its <a class="reference internal" href="#lang-submodules"><span class="std std-ref">submodules</span></a> can refer to that domain under the same name.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Always provide the <code class="code highlight py python docutils literal highlight-python"><span class="n">local</span><span class="o">=</span><span class="kc">True</span></code> keyword argument when defining a clock domain. The behavior of clock domains defined without this keyword argument is subject to change in near future, and is intentionally left undocumented.</p>
-</div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Clock domains use synchronous reset unless otherwise specified. Clock domains with asynchronous reset are implemented, but their behavior is subject to change in near future, and is intentionally left undocumented.</p>
@@ -1339,7 +1335,7 @@ inside `Else`
 </pre></div>
 </div>
 <p>In this example, once the design is processed, the clock signal of the clock domain <code class="docutils literal notranslate"><span class="pre">sync</span></code> found in this module or one of its containing modules will be equal to <code class="code highlight py python docutils literal highlight-python"><span class="n">bus_clk</span></code>. The reset signal of the same clock domain will be equal to the negated <code class="code highlight py python docutils literal highlight-python"><span class="n">bus_rstn</span></code>. With the <code class="docutils literal notranslate"><span class="pre">sync</span></code> domain created in the same module, these statements become equivalent to:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">sync</span> <span class="o">=</span> <span class="n">cd_sync</span> <span class="o">=</span> <span class="n">ClockDomain</span><span class="p">(</span><span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">sync</span> <span class="o">=</span> <span class="n">cd_sync</span> <span class="o">=</span> <span class="n">ClockDomain</span><span class="p">()</span>
 <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="p">[</span>
     <span class="n">cd_sync</span><span class="o">.</span><span class="n">clk</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">bus_clk</span><span class="p">),</span>
     <span class="n">cd_sync</span><span class="o">.</span><span class="n">rst</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="o">~</span><span class="n">bus_rstn</span><span class="p">),</span>
