@@ -244,7 +244,7 @@ m.d.sync += (Choice(sel)
 <p><code>Choice</code> is also added to the Amaranth prelude.</p>
 <p>In addition, the existing <code>Mux</code> expression is made valid on the left-hand side of an assignment, as if it was lowered as follows:</p>
 <pre><code class="language-py">def Mux(sel, val1, val0):
-    return Choice(a).case(0, val0).default(val1)
+    return Choice(sel).case(0, val0).default(val1)
 </code></pre>
 <p><code>ArrayProxy</code> (ie. the type currently returned by <code>Array</code> indexing) is changed from a native <code>Value</code> to a <code>ValueCastable</code> that lowers to <code>Choice</code> (removing the odd case where we can currently build an invaid <code>Value</code>). To avoid problems with lowering the out-of-bounds case, the value returned for out-of-bounds <code>Array</code> accesses is changed to 0.</p>
 <p><code>__eq__</code> is added to the <code>ShapeCastable</code> protocol and documented (we already have suitable implementations in <code>lib.data</code> and <code>lib.enum</code>).</p>
