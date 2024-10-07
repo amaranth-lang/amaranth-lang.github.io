@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Data structures &mdash; Amaranth language &amp; toolchain 0.6.0.dev66 documentation</title>
+  <title>Data structures &mdash; Amaranth language &amp; toolchain 0.6.0.dev67 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
@@ -17,7 +17,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c0b5bcde"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=64cd38c7"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="../_static/platformpicker.js"></script>
@@ -41,7 +41,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.6.0.dev66
+                0.6.0.dev67
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -127,7 +127,7 @@
 <li><p>Low-level bitwise layout description via <a class="reference internal" href="#amaranth.lib.data.Field" title="amaranth.lib.data.Field"><code class="xref py py-class docutils literal notranslate"><span class="pre">Field</span></code></a> and <a class="reference internal" href="#amaranth.lib.data.Layout" title="amaranth.lib.data.Layout"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layout</span></code></a>. These classes are rarely used directly, but are the foundation on which all other functionality is built. They are also useful for introspection.</p></li>
 <li><p>High-level bitwise layout description via <a class="reference internal" href="#amaranth.lib.data.StructLayout" title="amaranth.lib.data.StructLayout"><code class="xref py py-class docutils literal notranslate"><span class="pre">StructLayout</span></code></a>, <a class="reference internal" href="#amaranth.lib.data.UnionLayout" title="amaranth.lib.data.UnionLayout"><code class="xref py py-class docutils literal notranslate"><span class="pre">UnionLayout</span></code></a>, <a class="reference internal" href="#amaranth.lib.data.ArrayLayout" title="amaranth.lib.data.ArrayLayout"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayLayout</span></code></a>, and <a class="reference internal" href="#amaranth.lib.data.FlexibleLayout" title="amaranth.lib.data.FlexibleLayout"><code class="xref py py-class docutils literal notranslate"><span class="pre">FlexibleLayout</span></code></a>. These classes are the ones most often used directly, in particular <a class="reference internal" href="#amaranth.lib.data.StructLayout" title="amaranth.lib.data.StructLayout"><code class="xref py py-class docutils literal notranslate"><span class="pre">StructLayout</span></code></a> and <a class="reference internal" href="#amaranth.lib.data.ArrayLayout" title="amaranth.lib.data.ArrayLayout"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayLayout</span></code></a>.</p></li>
 <li><p>Data views via <a class="reference internal" href="#amaranth.lib.data.View" title="amaranth.lib.data.View"><code class="xref py py-class docutils literal notranslate"><span class="pre">View</span></code></a> or its user-defined subclasses. This class is used to apply a layout description to a plain <code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code>, enabling structured access to its bits.</p></li>
-<li><p>Data classes <a class="reference internal" href="#amaranth.lib.data.Struct" title="amaranth.lib.data.Struct"><code class="xref py py-class docutils literal notranslate"><span class="pre">Struct</span></code></a> and <a class="reference internal" href="#amaranth.lib.data.Union" title="amaranth.lib.data.Union"><code class="xref py py-class docutils literal notranslate"><span class="pre">Union</span></code></a>. These classes are data views with a layout that is defined using Python <a class="reference external" href="https://docs.python.org/3/glossary.html#term-variable-annotation" title="(in Python v3.12)"><span class="xref std std-term">variable annotations</span></a> (also known as type annotations).</p></li>
+<li><p>Data classes <a class="reference internal" href="#amaranth.lib.data.Struct" title="amaranth.lib.data.Struct"><code class="xref py py-class docutils literal notranslate"><span class="pre">Struct</span></code></a> and <a class="reference internal" href="#amaranth.lib.data.Union" title="amaranth.lib.data.Union"><code class="xref py py-class docutils literal notranslate"><span class="pre">Union</span></code></a>. These classes are data views with a layout that is defined using Python <a class="reference external" href="https://docs.python.org/3/glossary.html#term-variable-annotation" title="(in Python v3.13)"><span class="xref std std-term">variable annotations</span></a> (also known as type annotations).</p></li>
 </ol>
 <p>To use this module, add the following imports to the beginning of the file:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">amaranth.lib</span> <span class="kn">import</span> <span class="n">data</span>
@@ -297,7 +297,7 @@ an Amaranth value.</p>
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>shape</strong> (<a class="reference internal" href="../reference.html#amaranth.hdl.ShapeLike" title="amaranth.hdl.ShapeLike"><code class="xref py py-class docutils literal notranslate"><span class="pre">ShapeLike</span></code></a>) – Shape of the field. When initialized or assigned, the object is stored as-is.</p></li>
-<li><p><strong>offset</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, &gt;=0) – Index of the least significant bit of the field.</p></li>
+<li><p><strong>offset</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, &gt;=0) – Index of the least significant bit of the field.</p></li>
 </ul>
 </dd>
 </dl>
@@ -313,7 +313,7 @@ a <code class="code highlight py python docutils literal highlight-python"><span
 <dd class="field-odd"><p><code class="code highlight py python docutils literal highlight-python"><span class="n">Shape</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="o">.</span><span class="n">width</span></code></p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -348,8 +348,8 @@ recursively call <code class="code highlight py python docutils literal highligh
 <dl class="field-list simple">
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.12)"><strong>TypeError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">obj</span></code> cannot be converted to a <a class="reference internal" href="#amaranth.lib.data.Layout" title="amaranth.lib.data.Layout"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layout</span></code></a> instance.</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RecursionError" title="(in Python v3.12)"><strong>RecursionError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">obj</span><span class="o">.</span><span class="n">as_shape</span><span class="p">()</span></code> returns <code class="code highlight py python docutils literal highlight-python"><span class="n">obj</span></code>.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.13)"><strong>TypeError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">obj</span></code> cannot be converted to a <a class="reference internal" href="#amaranth.lib.data.Layout" title="amaranth.lib.data.Layout"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layout</span></code></a> instance.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RecursionError" title="(in Python v3.13)"><strong>RecursionError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">obj</span><span class="o">.</span><span class="n">as_shape</span><span class="p">()</span></code> returns <code class="code highlight py python docutils literal highlight-python"><span class="n">obj</span></code>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -362,7 +362,7 @@ recursively call <code class="code highlight py python docutils literal highligh
 <dl class="field-list simple">
 <dt class="field-odd">Yields<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> – Key (either name or index) for accessing the field.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> – Key (either name or index) for accessing the field.</p></li>
 <li><p><a class="reference internal" href="#amaranth.lib.data.Field" title="amaranth.lib.data.Field"><code class="xref py py-class docutils literal notranslate"><span class="pre">Field</span></code></a> – Description of the field.</p></li>
 </ul>
 </dd>
@@ -381,7 +381,7 @@ recursively call <code class="code highlight py python docutils literal highligh
 <dd class="field-even"><p><a class="reference internal" href="#amaranth.lib.data.Field" title="amaranth.lib.data.Field"><code class="xref py py-class docutils literal notranslate"><span class="pre">Field</span></code></a></p>
 </dd>
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.12)"><strong>KeyError</strong></a> – If there is no field associated with <code class="code highlight py python docutils literal highlight-python"><span class="n">key</span></code>.</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.13)"><strong>KeyError</strong></a> – If there is no field associated with <code class="code highlight py python docutils literal highlight-python"><span class="n">key</span></code>.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -395,7 +395,7 @@ recursively call <code class="code highlight py python docutils literal highligh
 <dd class="field-odd"><p>The amount of bits required to store every field in the layout.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -460,7 +460,7 @@ in which they appear in <code class="code highlight py python docutils literal h
 <dt class="sig sig-object py" id="amaranth.lib.data.Layout.from_bits">
 <span class="sig-name descname"><span class="pre">from_bits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.data.Layout.from_bits" title="Permalink to this definition"></a></dt>
 <dd><p>Convert a bit pattern to a constant.</p>
-<p>Converts <code class="code highlight py python docutils literal highlight-python"><span class="n">raw</span></code>, which is an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, to a constant.</p>
+<p>Converts <code class="code highlight py python docutils literal highlight-python"><span class="n">raw</span></code>, which is an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, to a constant.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><code class="code highlight py python docutils literal highlight-python"><span class="n">Const</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">raw</span><span class="p">)</span></code></p>
@@ -499,7 +499,7 @@ won’t be accessible as attributes or by using indexing.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>members</strong> (mapping of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> to <a class="reference internal" href="../reference.html#amaranth.hdl.ShapeLike" title="amaranth.hdl.ShapeLike"><code class="xref py py-class docutils literal notranslate"><span class="pre">ShapeLike</span></code></a>) – Dictionary of structure members.</p>
+<dd class="field-odd"><p><strong>members</strong> (mapping of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> to <a class="reference internal" href="../reference.html#amaranth.hdl.ShapeLike" title="amaranth.hdl.ShapeLike"><code class="xref py py-class docutils literal notranslate"><span class="pre">ShapeLike</span></code></a>) – Dictionary of structure members.</p>
 </dd>
 </dl>
 <dl class="py property">
@@ -512,7 +512,7 @@ won’t be accessible as attributes or by using indexing.</p>
 no fields.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -536,7 +536,7 @@ of the largest of its members.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>members</strong> (mapping of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> to <a class="reference internal" href="../reference.html#amaranth.hdl.ShapeLike" title="amaranth.hdl.ShapeLike"><code class="xref py py-class docutils literal notranslate"><span class="pre">ShapeLike</span></code></a>) – Dictionary of union members.</p>
+<dd class="field-odd"><p><strong>members</strong> (mapping of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> to <a class="reference internal" href="../reference.html#amaranth.hdl.ShapeLike" title="amaranth.hdl.ShapeLike"><code class="xref py py-class docutils literal notranslate"><span class="pre">ShapeLike</span></code></a>) – Dictionary of union members.</p>
 </dd>
 </dl>
 <dl class="py property">
@@ -549,7 +549,7 @@ of the largest of its members.</p>
 no fields.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -580,7 +580,7 @@ function than <code class="xref py py-class docutils literal notranslate"><span 
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>elem_shape</strong> (<a class="reference internal" href="../reference.html#amaranth.hdl.ShapeLike" title="amaranth.hdl.ShapeLike"><code class="xref py py-class docutils literal notranslate"><span class="pre">ShapeLike</span></code></a>) – Shape of an individual element.</p></li>
-<li><p><strong>length</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Amount of elements.</p></li>
+<li><p><strong>length</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Amount of elements.</p></li>
 </ul>
 </dd>
 </dl>
@@ -593,7 +593,7 @@ function than <code class="xref py py-class docutils literal notranslate"><span 
 <dd class="field-odd"><p>Size of an individual element multiplied by their amount.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -626,8 +626,8 @@ consider instead inheriting from the base <a class="reference internal" href="#a
 <dl class="field-list simple">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Size of the layout.</p></li>
-<li><p><strong>fields</strong> (mapping of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> to <a class="reference internal" href="#amaranth.lib.data.Field" title="amaranth.lib.data.Field"><code class="xref py py-class docutils literal notranslate"><span class="pre">Field</span></code></a>) – Fields defined in the layout.</p></li>
+<li><p><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Size of the layout.</p></li>
+<li><p><strong>fields</strong> (mapping of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> to <a class="reference internal" href="#amaranth.lib.data.Field" title="amaranth.lib.data.Field"><code class="xref py py-class docutils literal notranslate"><span class="pre">Field</span></code></a>) – Fields defined in the layout.</p></li>
 </ul>
 </dd>
 </dl>
@@ -727,7 +727,7 @@ or a <a class="reference internal" href="../reference.html#amaranth.hdl.Shape" t
 expression with the right shape.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> or <a class="reference internal" href="../reference.html#amaranth.hdl.ValueCastable" title="amaranth.hdl.ValueCastable"><code class="xref py py-class docutils literal notranslate"><span class="pre">ValueCastable</span></code></a>) – Name or index of a field.</p>
+<dd class="field-odd"><p><strong>key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> or <a class="reference internal" href="../reference.html#amaranth.hdl.ValueCastable" title="amaranth.hdl.ValueCastable"><code class="xref py py-class docutils literal notranslate"><span class="pre">ValueCastable</span></code></a>) – Name or index of a field.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A slice of the underlying value defined by the field.</p>
@@ -737,10 +737,10 @@ expression with the right shape.</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.12)"><strong>KeyError</strong></a> – If the layout does not define a field corresponding to <code class="code highlight py python docutils literal highlight-python"><span class="n">key</span></code>.</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.12)"><strong>TypeError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">key</span></code> is a value-castable object, but the layout of the view is not
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.13)"><strong>KeyError</strong></a> – If the layout does not define a field corresponding to <code class="code highlight py python docutils literal highlight-python"><span class="n">key</span></code>.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.13)"><strong>TypeError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">key</span></code> is a value-castable object, but the layout of the view is not
     an <a class="reference internal" href="#amaranth.lib.data.ArrayLayout" title="amaranth.lib.data.ArrayLayout"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayLayout</span></code></a>.</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.12)"><strong>TypeError</strong></a> – If <a class="reference internal" href="../reference.html#amaranth.hdl.ShapeCastable.__call__" title="amaranth.hdl.ShapeCastable.__call__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ShapeCastable.__call__()</span></code></a> does not return a value or a value-castable object.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.13)"><strong>TypeError</strong></a> – If <a class="reference internal" href="../reference.html#amaranth.hdl.ShapeCastable.__call__" title="amaranth.hdl.ShapeCastable.__call__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ShapeCastable.__call__()</span></code></a> does not return a value or a value-castable object.</p></li>
 </ul>
 </dd>
 </dl>
@@ -753,7 +753,7 @@ expression with the right shape.</p>
 <p>Returns <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span><span class="p">[</span><span class="n">name</span><span class="p">]</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.12)"><strong>AttributeError</strong></a> – If the layout does not define a field called <code class="code highlight py python docutils literal highlight-python"><span class="n">name</span></code>, or if <code class="code highlight py python docutils literal highlight-python"><span class="n">name</span></code> starts with
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.13)"><strong>AttributeError</strong></a> – If the layout does not define a field called <code class="code highlight py python docutils literal highlight-python"><span class="n">name</span></code>, or if <code class="code highlight py python docutils literal highlight-python"><span class="n">name</span></code> starts with
     an underscore.</p>
 </dd>
 </dl>
@@ -770,7 +770,7 @@ expression with the right shape.</p>
 a specific bit pattern and operations on it return constants.</p>
 <section id="creating-a-constant">
 <h3>Creating a constant<a class="headerlink" href="#creating-a-constant" title="Permalink to this heading"></a></h3>
-<p>A constant can be created from a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of field values using
+<p>A constant can be created from a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of field values using
 <a class="reference internal" href="#amaranth.lib.data.Layout.const" title="amaranth.lib.data.Layout.const"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Layout.const()</span></code></a>, or from a bit pattern using <a class="reference internal" href="#amaranth.lib.data.Layout.from_bits" title="amaranth.lib.data.Layout.from_bits"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Layout.from_bits()</span></code></a>.</p>
 </section>
 <section id="accessing-a-constant">
@@ -779,12 +779,12 @@ a specific bit pattern and operations on it return constants.</p>
 corresponding to the field with that index or name. If the shape of the field is
 a <a class="reference internal" href="#amaranth.lib.data.Layout" title="amaranth.lib.data.Layout"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layout</span></code></a>, the returned value is a <a class="reference internal" href="#amaranth.lib.data.Const" title="amaranth.lib.data.Const"><code class="xref py py-class docutils literal notranslate"><span class="pre">Const</span></code></a>; if it is a different
 <a class="reference internal" href="../guide.html#lang-shapelike"><span class="std std-ref">shape-like</span></a> object, it will be the result of calling
-<a class="reference internal" href="../reference.html#amaranth.hdl.ShapeCastable.from_bits" title="amaranth.hdl.ShapeCastable.from_bits"><code class="xref py py-meth docutils literal notranslate"><span class="pre">from_bits()</span></code></a>; otherwise, it is an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>.</p>
+<a class="reference internal" href="../reference.html#amaranth.hdl.ShapeCastable.from_bits" title="amaranth.hdl.ShapeCastable.from_bits"><code class="xref py py-meth docutils literal notranslate"><span class="pre">from_bits()</span></code></a>; otherwise, it is an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>.</p>
 <p>Slicing a constant whose layout is an <a class="reference internal" href="#amaranth.lib.data.ArrayLayout" title="amaranth.lib.data.ArrayLayout"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayLayout</span></code></a> can be done with an index that is
 an Amaranth value rather than a constant integer. The returned element is chosen dynamically
 in that case, and the resulting value will be a <a class="reference internal" href="#amaranth.lib.data.View" title="amaranth.lib.data.View"><code class="xref py py-class docutils literal notranslate"><span class="pre">View</span></code></a> instead of a <a class="reference internal" href="#amaranth.lib.data.Const" title="amaranth.lib.data.Const"><code class="xref py py-class docutils literal notranslate"><span class="pre">Const</span></code></a>.</p>
 <p>A <a class="reference internal" href="#amaranth.lib.data.Const" title="amaranth.lib.data.Const"><code class="xref py py-class docutils literal notranslate"><span class="pre">Const</span></code></a> can only be compared for equality with another constant or view that has
-the same layout. When compared with another constant, the result will be a <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>.
+the same layout. When compared with another constant, the result will be a <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>.
 When compared with a view, the result will be a single-bit <a class="reference internal" href="../reference.html#amaranth.hdl.Value" title="amaranth.hdl.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a>. No other operators
 are supported. A constant can be lowered to a <a class="reference internal" href="../reference.html#amaranth.hdl.Value" title="amaranth.hdl.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a> using <a class="reference internal" href="#amaranth.lib.data.Const.as_value" title="amaranth.lib.data.Const.as_value"><code class="xref py py-meth docutils literal notranslate"><span class="pre">as_value()</span></code></a>, or to
 its underlying bit pattern using <a class="reference internal" href="#amaranth.lib.data.Const.as_bits" title="amaranth.lib.data.Const.as_bits"><code class="xref py py-meth docutils literal notranslate"><span class="pre">as_bits()</span></code></a>.</p>
@@ -811,7 +811,7 @@ its underlying bit pattern using <a class="reference internal" href="#amaranth.l
 <dd class="field-odd"><p>The <code class="code highlight py python docutils literal highlight-python"><span class="n">target</span></code> provided when constructing the constant.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -836,24 +836,24 @@ its underlying bit pattern using <a class="reference internal" href="#amaranth.l
 <dd><p>Slice the underlying value.</p>
 <p>A field corresponding to <code class="code highlight py python docutils literal highlight-python"><span class="n">key</span></code> is looked up in the layout. If the field’s shape is
 a shape-castable object, returns the result of calling <a class="reference internal" href="../reference.html#amaranth.hdl.ShapeCastable.from_bits" title="amaranth.hdl.ShapeCastable.from_bits"><code class="xref py py-meth docutils literal notranslate"><span class="pre">from_bits()</span></code></a>.
-Otherwise, returns an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>.</p>
+Otherwise, returns an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> or <a class="reference internal" href="../reference.html#amaranth.hdl.ValueCastable" title="amaranth.hdl.ValueCastable"><code class="xref py py-class docutils literal notranslate"><span class="pre">ValueCastable</span></code></a>) – Name or index of a field.</p>
+<dd class="field-odd"><p><strong>key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> or <a class="reference internal" href="../reference.html#amaranth.hdl.ValueCastable" title="amaranth.hdl.ValueCastable"><code class="xref py py-class docutils literal notranslate"><span class="pre">ValueCastable</span></code></a>) – Name or index of a field.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A slice of the underlying value defined by the field.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>unspecified type or <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+<dd class="field-odd"><p>unspecified type or <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.12)"><strong>KeyError</strong></a> – If the layout does not define a field corresponding to <code class="code highlight py python docutils literal highlight-python"><span class="n">key</span></code>.</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.12)"><strong>TypeError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">key</span></code> is a value-castable object, but the layout of the constant is not
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.13)"><strong>KeyError</strong></a> – If the layout does not define a field corresponding to <code class="code highlight py python docutils literal highlight-python"><span class="n">key</span></code>.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.13)"><strong>TypeError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">key</span></code> is a value-castable object, but the layout of the constant is not
     an <a class="reference internal" href="#amaranth.lib.data.ArrayLayout" title="amaranth.lib.data.ArrayLayout"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayLayout</span></code></a>.</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.12)"><strong>Exception</strong></a> – If the bit pattern of the field is not valid according to
-    <a class="reference internal" href="../reference.html#amaranth.hdl.ShapeCastable.from_bits" title="amaranth.hdl.ShapeCastable.from_bits"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ShapeCastable.from_bits()</span></code></a>. Usually this will be a <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.12)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.13)"><strong>Exception</strong></a> – If the bit pattern of the field is not valid according to
+    <a class="reference internal" href="../reference.html#amaranth.hdl.ShapeCastable.from_bits" title="amaranth.hdl.ShapeCastable.from_bits"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ShapeCastable.from_bits()</span></code></a>. Usually this will be a <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -867,10 +867,10 @@ Otherwise, returns an <a class="reference external" href="https://docs.python.or
 <dl class="field-list simple">
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.12)"><strong>AttributeError</strong></a> – If the layout does not define a field called <code class="code highlight py python docutils literal highlight-python"><span class="n">name</span></code>, or if <code class="code highlight py python docutils literal highlight-python"><span class="n">name</span></code> starts with
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.13)"><strong>AttributeError</strong></a> – If the layout does not define a field called <code class="code highlight py python docutils literal highlight-python"><span class="n">name</span></code>, or if <code class="code highlight py python docutils literal highlight-python"><span class="n">name</span></code> starts with
     an underscore.</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.12)"><strong>Exception</strong></a> – If the bit pattern of the field is not valid according to
-    <a class="reference internal" href="../reference.html#amaranth.hdl.ShapeCastable.from_bits" title="amaranth.hdl.ShapeCastable.from_bits"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ShapeCastable.from_bits()</span></code></a>. Usually this will be a <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.12)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.13)"><strong>Exception</strong></a> – If the bit pattern of the field is not valid according to
+    <a class="reference internal" href="../reference.html#amaranth.hdl.ShapeCastable.from_bits" title="amaranth.hdl.ShapeCastable.from_bits"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ShapeCastable.from_bits()</span></code></a>. Usually this will be a <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -888,7 +888,7 @@ Otherwise, returns an <a class="reference external" href="https://docs.python.or
 <dd><p>Structures defined with annotations.</p>
 <p>The <a class="reference internal" href="#amaranth.lib.data.Struct" title="amaranth.lib.data.Struct"><code class="xref py py-class docutils literal notranslate"><span class="pre">Struct</span></code></a> base class is a subclass of <a class="reference internal" href="#amaranth.lib.data.View" title="amaranth.lib.data.View"><code class="xref py py-class docutils literal notranslate"><span class="pre">View</span></code></a> that provides a concise way
 to describe the structure layout and initial values for the fields using Python
-<a class="reference external" href="https://docs.python.org/3/glossary.html#term-variable-annotation" title="(in Python v3.12)"><span class="xref std std-term">variable annotations</span></a>.</p>
+<a class="reference external" href="https://docs.python.org/3/glossary.html#term-variable-annotation" title="(in Python v3.13)"><span class="xref std std-term">variable annotations</span></a>.</p>
 <p>Any annotations containing <a class="reference internal" href="../guide.html#lang-shapelike"><span class="std std-ref">shape-like</span></a> objects are used,
 in the order in which they appear in the source code, to construct a <a class="reference internal" href="#amaranth.lib.data.StructLayout" title="amaranth.lib.data.StructLayout"><code class="xref py py-class docutils literal notranslate"><span class="pre">StructLayout</span></code></a>.
 The values assigned to such annotations are used to populate the initial value of the signal
@@ -971,7 +971,7 @@ are that:</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.data.</span></span><span class="sig-name descname"><span class="pre">Union</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.data.Union" title="Permalink to this definition"></a></dt>
 <dd><p>Unions defined with annotations.</p>
 <p>The <a class="reference internal" href="#amaranth.lib.data.Union" title="amaranth.lib.data.Union"><code class="xref py py-class docutils literal notranslate"><span class="pre">Union</span></code></a> base class is a subclass of <a class="reference internal" href="#amaranth.lib.data.View" title="amaranth.lib.data.View"><code class="xref py py-class docutils literal notranslate"><span class="pre">View</span></code></a> that provides a concise way
-to describe the union layout using Python <a class="reference external" href="https://docs.python.org/3/glossary.html#term-variable-annotation" title="(in Python v3.12)"><span class="xref std std-term">variable annotations</span></a>. It is very similar to the <a class="reference internal" href="#amaranth.lib.data.Struct" title="amaranth.lib.data.Struct"><code class="xref py py-class docutils literal notranslate"><span class="pre">Struct</span></code></a> class, except that its layout
+to describe the union layout using Python <a class="reference external" href="https://docs.python.org/3/glossary.html#term-variable-annotation" title="(in Python v3.13)"><span class="xref std std-term">variable annotations</span></a>. It is very similar to the <a class="reference internal" href="#amaranth.lib.data.Struct" title="amaranth.lib.data.Struct"><code class="xref py py-class docutils literal notranslate"><span class="pre">Struct</span></code></a> class, except that its layout
 is a <a class="reference internal" href="#amaranth.lib.data.UnionLayout" title="amaranth.lib.data.UnionLayout"><code class="xref py py-class docutils literal notranslate"><span class="pre">UnionLayout</span></code></a>.</p>
 <p>A <a class="reference internal" href="#amaranth.lib.data.Union" title="amaranth.lib.data.Union"><code class="xref py py-class docutils literal notranslate"><span class="pre">Union</span></code></a> can have only one field with a specified initial value. If an initial value is
 explicitly provided during instantiation, it overrides the initial value specified with

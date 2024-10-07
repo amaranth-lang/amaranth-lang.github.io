@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cyclic redundancy checks &mdash; Amaranth language &amp; toolchain 0.6.0.dev66 documentation</title>
+  <title>Cyclic redundancy checks &mdash; Amaranth language &amp; toolchain 0.6.0.dev67 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
@@ -17,7 +17,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c0b5bcde"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=64cd38c7"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="../_static/platformpicker.js"></script>
@@ -41,7 +41,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.6.0.dev66
+                0.6.0.dev67
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -176,22 +176,22 @@ returns a <a class="reference internal" href="#amaranth.lib.crc.Parameters" titl
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>crc_width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Bit width of CRC word. Also known as “width” in the Williams model.</p></li>
-<li><p><strong>polynomial</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – CRC polynomial to use, <code class="code highlight py python docutils literal highlight-python"><span class="n">crc_width</span></code> bits long, without the implicit <code class="code highlight py python docutils literal highlight-python"><span class="n">x</span> <span class="o">**</span> <span class="n">crc_width</span></code>
+<li><p><strong>crc_width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Bit width of CRC word. Also known as “width” in the Williams model.</p></li>
+<li><p><strong>polynomial</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – CRC polynomial to use, <code class="code highlight py python docutils literal highlight-python"><span class="n">crc_width</span></code> bits long, without the implicit <code class="code highlight py python docutils literal highlight-python"><span class="n">x</span> <span class="o">**</span> <span class="n">crc_width</span></code>
 term. Polynomial is always specified with the highest order terms in the most significant
 bit positions; use <code class="code highlight py python docutils literal highlight-python"><span class="n">reflect_input</span></code> and <code class="code highlight py python docutils literal highlight-python"><span class="n">reflect_output</span></code> to perform a least
 significant bit first computation.</p></li>
-<li><p><strong>initial_crc</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Initial value of CRC register at reset. Most significant bit always corresponds to
+<li><p><strong>initial_crc</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Initial value of CRC register at reset. Most significant bit always corresponds to
 the highest order term in the CRC register.</p></li>
-<li><p><strong>reflect_input</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – If <code class="code highlight py python docutils literal highlight-python"><span class="kc">True</span></code>, the input data words are bit-reflected, so that they are processed least
+<li><p><strong>reflect_input</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – If <code class="code highlight py python docutils literal highlight-python"><span class="kc">True</span></code>, the input data words are bit-reflected, so that they are processed least
 significant bit first.</p></li>
-<li><p><strong>reflect_output</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – If <code class="code highlight py python docutils literal highlight-python"><span class="kc">True</span></code>, the output CRC is bit-reflected, so that the least-significant bit of
+<li><p><strong>reflect_output</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – If <code class="code highlight py python docutils literal highlight-python"><span class="kc">True</span></code>, the output CRC is bit-reflected, so that the least-significant bit of
 the output is the highest-order bit of the CRC register. Note that this reflection is
 performed over the entire CRC register; for transmission you may want to treat the output
 as a little-endian multi-word value, so for example the reflected 16-bit output <code class="code highlight py python docutils literal highlight-python"><span class="mh">0x4E4C</span></code>
 would be transmitted as the two octets <code class="code highlight py python docutils literal highlight-python"><span class="mh">0x4C</span><span class="p">,</span> <span class="mh">0x4E</span></code>, each transmitted least significant
 bit first.</p></li>
-<li><p><strong>xor_output</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – The output CRC will be the CRC register XOR’d with this value, applied after any output
+<li><p><strong>xor_output</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – The output CRC will be the CRC register XOR’d with this value, applied after any output
 bit-reflection.</p></li>
 </ul>
 </dd>
@@ -225,7 +225,7 @@ the <a class="reference internal" href="#amaranth.lib.crc.Parameters.create" tit
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>algorithm</strong> (<a class="reference internal" href="#amaranth.lib.crc.Algorithm" title="amaranth.lib.crc.Algorithm"><code class="xref py py-class docutils literal notranslate"><span class="pre">Algorithm</span></code></a>) – CRC algorithm to use. Specifies the CRC width, polynomial, initial value, whether to
 reflect the input or output words, and any output XOR.</p></li>
-<li><p><strong>data_width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Bit width of data words.</p></li>
+<li><p><strong>data_width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Bit width of data words.</p></li>
 </ul>
 </dd>
 </dl>
@@ -241,7 +241,7 @@ reflect the input or output words, and any output XOR.</p></li>
 <dd><p>Compute the CRC of all data words in <code class="code highlight py python docutils literal highlight-python"><span class="n">data</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>data</strong> (iterable of <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Data words, each of which is <code class="code highlight py python docutils literal highlight-python"><span class="n">data_width</span></code> bits wide.</p>
+<dd class="field-odd"><p><strong>data</strong> (iterable of <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Data words, each of which is <code class="code highlight py python docutils literal highlight-python"><span class="n">data_width</span></code> bits wide.</p>
 </dd>
 </dl>
 </dd></dl>

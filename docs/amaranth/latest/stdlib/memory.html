@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Memory arrays &mdash; Amaranth language &amp; toolchain 0.6.0.dev66 documentation</title>
+  <title>Memory arrays &mdash; Amaranth language &amp; toolchain 0.6.0.dev67 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
@@ -17,7 +17,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c0b5bcde"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=64cd38c7"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="../_static/platformpicker.js"></script>
@@ -41,7 +41,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.6.0.dev66
+                0.6.0.dev67
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -232,7 +232,7 @@ the <code class="code highlight py python docutils literal highlight-python"><sp
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>shape</strong> (<a class="reference internal" href="../guide.html#lang-shapelike"><span class="std std-ref">shape-like</span></a> object) – Shape of each memory row.</p></li>
-<li><p><strong>depth</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Number of memory rows.</p></li>
+<li><p><strong>depth</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Number of memory rows.</p></li>
 <li><p><strong>init</strong> (<em>iterable</em><em> of </em><em>initial values</em>) – Initial values for memory rows.</p></li>
 </ul>
 </dd>
@@ -242,7 +242,7 @@ the <code class="code highlight py python docutils literal highlight-python"><sp
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">...</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.MemoryData.Init" title="Permalink to this definition"></a></dt>
 <dd><p>Memory initialization data.</p>
 <p>This is a special container used only for initial contents of memories. It is similar
-to <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>, but does not support inserting or deleting elements; its length is always
+to <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>, but does not support inserting or deleting elements; its length is always
 the same as the depth of the memory it belongs to.</p>
 <p>If <code class="code highlight py python docutils literal highlight-python"><span class="n">shape</span></code> is a <a class="reference internal" href="../guide.html#lang-shapecustom"><span class="std std-ref">custom shape-castable object</span></a>, then:</p>
 <ul class="simple">
@@ -251,7 +251,7 @@ the same as the depth of the memory it belongs to.</p>
 </ul>
 <p>Otherwise (when <code class="code highlight py python docutils literal highlight-python"><span class="n">shape</span></code> is a <a class="reference internal" href="../reference.html#amaranth.hdl.Shape" title="amaranth.hdl.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code></a>):</p>
 <ul class="simple">
-<li><p>Each element must be an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, and</p></li>
+<li><p>Each element must be an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, and</p></li>
 <li><p>Elements that are not explicitly initialized default to <code class="code highlight py python docutils literal highlight-python"><span class="mi">0</span></code>.</p></li>
 </ul>
 </dd></dl>
@@ -260,7 +260,7 @@ the same as the depth of the memory it belongs to.</p>
 <dt class="sig sig-object py" id="amaranth.hdl.MemoryData.__getitem__">
 <span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.MemoryData.__getitem__" title="Permalink to this definition"></a></dt>
 <dd><p>Retrieve a memory row for simulation.</p>
-<p>A <a class="reference internal" href="#amaranth.hdl.MemoryData" title="amaranth.hdl.MemoryData"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryData</span></code></a> object can be indexed with an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> to construct a special
+<p>A <a class="reference internal" href="#amaranth.hdl.MemoryData" title="amaranth.hdl.MemoryData"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryData</span></code></a> object can be indexed with an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> to construct a special
 value that can be used to read and write the selected memory row in a simulation testbench,
 without having to create a memory port.</p>
 <div class="admonition tip">
@@ -306,7 +306,7 @@ elaborated; afterwards, attempting to do so will raise the
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>data</strong> (<a class="reference internal" href="#amaranth.hdl.MemoryData" title="amaranth.hdl.MemoryData"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryData</span></code></a>) – Representation of memory geometry and contents.</p></li>
 <li><p><strong>shape</strong> (<a class="reference internal" href="../guide.html#lang-shapelike"><span class="std std-ref">shape-like</span></a> object) – Shape of each memory row.</p></li>
-<li><p><strong>depth</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Number of memory rows.</p></li>
+<li><p><strong>depth</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Number of memory rows.</p></li>
 <li><p><strong>init</strong> (<em>iterable</em><em> of </em><em>initial values</em>) – Initial values for memory rows.</p></li>
 </ul>
 </dd>
@@ -388,8 +388,8 @@ such a port is tied to <code class="code highlight py python docutils literal hi
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>signature</strong> (<a class="reference internal" href="#amaranth.lib.memory.ReadPort.Signature" title="amaranth.lib.memory.ReadPort.Signature"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReadPort.Signature</span></code></a>) – Signature of this memory port.</p></li>
 <li><p><strong>memory</strong> (<a class="reference internal" href="#amaranth.lib.memory.Memory" title="amaranth.lib.memory.Memory"><code class="xref py py-class docutils literal notranslate"><span class="pre">Memory</span></code></a> or <code class="code highlight py python docutils literal highlight-python"><span class="kc">None</span></code>) – Memory associated with this memory port.</p></li>
-<li><p><strong>domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of this memory port’s clock domain. For asynchronous ports, <code class="code highlight py python docutils literal highlight-python"><span class="s2">&quot;comb&quot;</span></code>.</p></li>
-<li><p><strong>transparent_for</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a> of <a class="reference internal" href="#amaranth.lib.memory.WritePort" title="amaranth.lib.memory.WritePort"><code class="xref py py-class docutils literal notranslate"><span class="pre">WritePort</span></code></a>) – Transparency set of this memory port.</p></li>
+<li><p><strong>domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of this memory port’s clock domain. For asynchronous ports, <code class="code highlight py python docutils literal highlight-python"><span class="s2">&quot;comb&quot;</span></code>.</p></li>
+<li><p><strong>transparent_for</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a> of <a class="reference internal" href="#amaranth.lib.memory.WritePort" title="amaranth.lib.memory.WritePort"><code class="xref py py-class docutils literal notranslate"><span class="pre">WritePort</span></code></a>) – Transparency set of this memory port.</p></li>
 </ul>
 </dd>
 </dl>
@@ -400,7 +400,7 @@ such a port is tied to <code class="code highlight py python docutils literal hi
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>addr_width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Width of the address port.</p></li>
+<li><p><strong>addr_width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Width of the address port.</p></li>
 <li><p><strong>shape</strong> (<a class="reference internal" href="../guide.html#lang-shapelike"><span class="std std-ref">shape-like</span></a> object) – Shape of the data port.</p></li>
 </ul>
 </dd>
@@ -427,7 +427,7 @@ such a port is tied to <code class="code highlight py python docutils literal hi
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>signature</strong> (<a class="reference internal" href="#amaranth.lib.memory.WritePort.Signature" title="amaranth.lib.memory.WritePort.Signature"><code class="xref py py-class docutils literal notranslate"><span class="pre">WritePort.Signature</span></code></a>) – Signature of this memory port.</p></li>
 <li><p><strong>memory</strong> (<a class="reference internal" href="#amaranth.lib.memory.Memory" title="amaranth.lib.memory.Memory"><code class="xref py py-class docutils literal notranslate"><span class="pre">Memory</span></code></a> or <code class="code highlight py python docutils literal highlight-python"><span class="kc">None</span></code>) – Memory associated with this memory port.</p></li>
-<li><p><strong>domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of this memory port’s clock domain. Never <code class="code highlight py python docutils literal highlight-python"><span class="s2">&quot;comb&quot;</span></code>.</p></li>
+<li><p><strong>domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of this memory port’s clock domain. Never <code class="code highlight py python docutils literal highlight-python"><span class="s2">&quot;comb&quot;</span></code>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -447,9 +447,9 @@ then <code class="code highlight py python docutils literal highlight-python"><s
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>addr_width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Width of the address port.</p></li>
+<li><p><strong>addr_width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Width of the address port.</p></li>
 <li><p><strong>shape</strong> (<a class="reference internal" href="../guide.html#lang-shapelike"><span class="std std-ref">shape-like</span></a> object) – Shape of the data port.</p></li>
-<li><p><strong>granularity</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> or <code class="code highlight py python docutils literal highlight-python"><span class="kc">None</span></code>) – Granularity of memory access.</p></li>
+<li><p><strong>granularity</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> or <code class="code highlight py python docutils literal highlight-python"><span class="kc">None</span></code>) – Granularity of memory access.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Members<span class="colon">:</span></dt>
