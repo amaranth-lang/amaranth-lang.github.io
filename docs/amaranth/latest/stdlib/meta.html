@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Interface metadata &mdash; Amaranth language &amp; toolchain 0.6.0.dev68 documentation</title>
+  <title>Interface metadata &mdash; Amaranth language &amp; toolchain 0.6.0.dev69 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
@@ -17,9 +17,9 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=8cd79b05"></script>
-        <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/documentation_options.js?v=f25acf92"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/platformpicker.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -41,7 +41,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.6.0.dev68
+                0.6.0.dev69
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -115,10 +115,10 @@
            <div itemprop="articleBody">
              
   <section id="module-amaranth.lib.meta">
-<span id="interface-metadata"></span><span id="meta"></span><h1>Interface metadata<a class="headerlink" href="#module-amaranth.lib.meta" title="Permalink to this heading"></a></h1>
+<span id="interface-metadata"></span><span id="meta"></span><h1>Interface metadata<a class="headerlink" href="#module-amaranth.lib.meta" title="Link to this heading"></a></h1>
 <p>The <a class="reference internal" href="#module-amaranth.lib.meta" title="amaranth.lib.meta"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.meta</span></code></a> module provides a way to annotate objects in an Amaranth design and exchange these annotations with external tools in a standardized format.</p>
 <section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
 <p>Many Amaranth designs stay entirely within the Amaranth ecosystem, using the facilities it provides to define, test, and build hardware. In this case, the design is available for exploration using Python code, and metadata is not necessary. However, if an Amaranth design needs to fit into an existing ecosystem, or, conversely, to integrate components developed for another ecosystem, metadata can be used to exchange structured information about the design.</p>
 <p>Consider a simple <a class="reference internal" href="wiring.html#wiring"><span class="std std-ref">component</span></a>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Adder</span><span class="p">(</span><span class="n">wiring</span><span class="o">.</span><span class="n">Component</span><span class="p">):</span>
@@ -177,7 +177,7 @@
 <p>The built-in component metadata can be extended to provide arbitrary information about an interface through user-defined annotations. For example, a memory bus interface could provide the layout of any memory-mapped peripherals accessible through that bus.</p>
 </section>
 <section id="defining-annotations">
-<h2>Defining annotations<a class="headerlink" href="#defining-annotations" title="Permalink to this heading"></a></h2>
+<h2>Defining annotations<a class="headerlink" href="#defining-annotations" title="Link to this heading"></a></h2>
 <p>Consider a simple control and status register (CSR) bus that provides the memory layout of the accessible registers via an annotation:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">CSRLayoutAnnotation</span><span class="p">(</span><span class="n">meta</span><span class="o">.</span><span class="n">Annotation</span><span class="p">):</span>
     <span class="n">schema</span> <span class="o">=</span> <span class="p">{</span>
@@ -314,7 +314,7 @@
 </div>
 </section>
 <section id="identifying-schemas">
-<h2>Identifying schemas<a class="headerlink" href="#identifying-schemas" title="Permalink to this heading"></a></h2>
+<h2>Identifying schemas<a class="headerlink" href="#identifying-schemas" title="Link to this heading"></a></h2>
 <p>An <a class="reference internal" href="#amaranth.lib.meta.Annotation" title="amaranth.lib.meta.Annotation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Annotation</span></code></a> schema must have a <code class="docutils literal notranslate"><span class="pre">&quot;$id&quot;</span></code> property, whose value is a URL that serves as its globally unique identifier. The suggested format of this URL is:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">protocol</span><span class="o">&gt;</span><span class="p">:</span><span class="o">//&lt;</span><span class="n">domain</span><span class="o">&gt;/</span><span class="n">schema</span><span class="o">/&lt;</span><span class="n">package</span><span class="o">&gt;/&lt;</span><span class="n">version</span><span class="o">&gt;/&lt;</span><span class="n">path</span><span class="o">&gt;.</span><span class="n">json</span>
 </pre></div>
@@ -335,24 +335,24 @@
 </div>
 </section>
 <section id="reference">
-<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this heading"></a></h2>
+<h2>Reference<a class="headerlink" href="#reference" title="Link to this heading"></a></h2>
 <dl class="py exception">
 <dt class="sig sig-object py" id="amaranth.lib.meta.InvalidSchema">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.meta.</span></span><span class="sig-name descname"><span class="pre">InvalidSchema</span></span><a class="headerlink" href="#amaranth.lib.meta.InvalidSchema" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.meta.</span></span><span class="sig-name descname"><span class="pre">InvalidSchema</span></span><a class="headerlink" href="#amaranth.lib.meta.InvalidSchema" title="Link to this definition"></a></dt>
 <dd><p>Exception raised when a subclass of <a class="reference internal" href="#amaranth.lib.meta.Annotation" title="amaranth.lib.meta.Annotation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Annotation</span></code></a> is defined with a non-conformant
 <a class="reference internal" href="#amaranth.lib.meta.Annotation.schema" title="amaranth.lib.meta.Annotation.schema"><code class="xref py py-data docutils literal notranslate"><span class="pre">schema</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="amaranth.lib.meta.InvalidAnnotation">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.meta.</span></span><span class="sig-name descname"><span class="pre">InvalidAnnotation</span></span><a class="headerlink" href="#amaranth.lib.meta.InvalidAnnotation" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.meta.</span></span><span class="sig-name descname"><span class="pre">InvalidAnnotation</span></span><a class="headerlink" href="#amaranth.lib.meta.InvalidAnnotation" title="Link to this definition"></a></dt>
 <dd><p>Exception raised by <a class="reference internal" href="#amaranth.lib.meta.Annotation.validate" title="amaranth.lib.meta.Annotation.validate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Annotation.validate()</span></code></a> when the JSON representation of
 an annotation does not conform to its schema.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.lib.meta.Annotation">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.meta.</span></span><span class="sig-name descname"><span class="pre">Annotation</span></span><a class="headerlink" href="#amaranth.lib.meta.Annotation" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.meta.</span></span><span class="sig-name descname"><span class="pre">Annotation</span></span><a class="headerlink" href="#amaranth.lib.meta.Annotation" title="Link to this definition"></a></dt>
 <dd><p>Interface annotation.</p>
 <p>Annotations are containers for metadata that can be retrieved from an interface object using
 the <a class="reference internal" href="wiring.html#amaranth.lib.wiring.Signature.annotations" title="amaranth.lib.wiring.Signature.annotations"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Signature.annotations</span></code></a> method.</p>
@@ -360,7 +360,7 @@ the <a class="reference internal" href="wiring.html#amaranth.lib.wiring.Signatur
 language.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.lib.meta.Annotation.__init_subclass__">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__init_subclass__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.meta.Annotation.__init_subclass__" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__init_subclass__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.meta.Annotation.__init_subclass__" title="Link to this definition"></a></dt>
 <dd><p>Defining a subclass of <a class="reference internal" href="#amaranth.lib.meta.Annotation" title="amaranth.lib.meta.Annotation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Annotation</span></code></a> causes its <a class="reference internal" href="#amaranth.lib.meta.Annotation.schema" title="amaranth.lib.meta.Annotation.schema"><code class="xref py py-data docutils literal notranslate"><span class="pre">schema</span></code></a> to be validated.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
@@ -375,7 +375,7 @@ language.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="amaranth.lib.meta.Annotation.schema">
-<span class="sig-name descname"><span class="pre">schema</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">{</span> <span class="pre">&quot;$id&quot;:</span> <span class="pre">&quot;...&quot;,</span> <span class="pre">...</span> <span class="pre">}</span></em><a class="headerlink" href="#amaranth.lib.meta.Annotation.schema" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">schema</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">{</span> <span class="pre">&quot;$id&quot;:</span> <span class="pre">&quot;...&quot;,</span> <span class="pre">...</span> <span class="pre">}</span></em><a class="headerlink" href="#amaranth.lib.meta.Annotation.schema" title="Link to this definition"></a></dt>
 <dd><p>Schema of this annotation, expressed in the <a class="reference external" href="https://json-schema.org">JSON Schema</a> language.</p>
 <p>Subclasses of <a class="reference internal" href="#amaranth.lib.meta.Annotation" title="amaranth.lib.meta.Annotation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Annotation</span></code></a> must define this class attribute.</p>
 <dl class="field-list simple">
@@ -387,14 +387,14 @@ language.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="amaranth.lib.meta.Annotation.origin">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">origin</span></span><a class="headerlink" href="#amaranth.lib.meta.Annotation.origin" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">origin</span></span><a class="headerlink" href="#amaranth.lib.meta.Annotation.origin" title="Link to this definition"></a></dt>
 <dd><p>Python object described by this <a class="reference internal" href="#amaranth.lib.meta.Annotation" title="amaranth.lib.meta.Annotation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Annotation</span></code></a> instance.</p>
 <p>Subclasses of <a class="reference internal" href="#amaranth.lib.meta.Annotation" title="amaranth.lib.meta.Annotation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Annotation</span></code></a> must implement this property.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.lib.meta.Annotation.as_json">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">as_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.meta.Annotation.as_json" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">as_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.meta.Annotation.as_json" title="Link to this definition"></a></dt>
 <dd><p>Convert to a JSON representation.</p>
 <p>Subclasses of <a class="reference internal" href="#amaranth.lib.meta.Annotation" title="amaranth.lib.meta.Annotation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Annotation</span></code></a> must implement this method.</p>
 <p>JSON representation returned by this method must adhere to <a class="reference internal" href="#amaranth.lib.meta.Annotation.schema" title="amaranth.lib.meta.Annotation.schema"><code class="xref py py-data docutils literal notranslate"><span class="pre">schema</span></code></a> and pass
@@ -412,7 +412,7 @@ validation by <a class="reference internal" href="#amaranth.lib.meta.Annotation.
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.lib.meta.Annotation.validate">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.meta.Annotation.validate" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.meta.Annotation.validate" title="Link to this definition"></a></dt>
 <dd><p>Validate a JSON representation against <a class="reference internal" href="#amaranth.lib.meta.Annotation.schema" title="amaranth.lib.meta.Annotation.schema"><code class="xref py py-attr docutils literal notranslate"><span class="pre">schema</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>

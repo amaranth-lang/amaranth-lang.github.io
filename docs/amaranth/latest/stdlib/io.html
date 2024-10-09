@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Input/output buffers &mdash; Amaranth language &amp; toolchain 0.6.0.dev68 documentation</title>
+  <title>Input/output buffers &mdash; Amaranth language &amp; toolchain 0.6.0.dev69 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
@@ -17,9 +17,9 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=8cd79b05"></script>
-        <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/documentation_options.js?v=f25acf92"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/platformpicker.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -41,7 +41,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.6.0.dev68
+                0.6.0.dev69
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -116,10 +116,10 @@
            <div itemprop="articleBody">
              
   <section id="module-amaranth.lib.io">
-<span id="input-output-buffers"></span><h1>Input/output buffers<a class="headerlink" href="#module-amaranth.lib.io" title="Permalink to this heading"></a></h1>
+<span id="input-output-buffers"></span><h1>Input/output buffers<a class="headerlink" href="#module-amaranth.lib.io" title="Link to this heading"></a></h1>
 <p>The <a class="reference internal" href="#module-amaranth.lib.io" title="amaranth.lib.io"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.io</span></code></a> module provides a platform-independent way to instantiate platform-specific input/output buffers: combinational, synchronous, and double data rate (DDR).</p>
 <section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
 <p>The Amaranth language provides <a class="reference internal" href="../guide.html#lang-iovalues"><span class="std std-ref">core I/O values</span></a> that designate connections to external devices, and <a class="reference internal" href="../guide.html#lang-iobufferinstance"><span class="std std-ref">I/O buffer instances</span></a> that implement platform-independent combinational I/O buffers. This low-level mechanism is foundational to all I/O in Amaranth and must be used whenever a device-specific platform is unavailable, but is limited in its capabilities. The <a class="reference internal" href="#module-amaranth.lib.io" title="amaranth.lib.io"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.io</span></code></a> module builds on top of it to provide <em>library I/O ports</em> that specialize and annotate I/O values, and <em>buffer components</em> that connect ports to logic.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -132,7 +132,7 @@
 </div>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
 <p>All of the following examples assume that one of the built-in FPGA platforms is used.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">amaranth.sim</span> <span class="kn">import</span> <span class="n">Simulator</span><span class="p">,</span> <span class="n">Period</span>
 <span class="kn">from</span> <span class="nn">amaranth.lib</span> <span class="kn">import</span> <span class="n">io</span><span class="p">,</span> <span class="n">wiring</span><span class="p">,</span> <span class="n">stream</span>
@@ -140,7 +140,7 @@
 </pre></div>
 </div>
 <section id="led-output">
-<h3>LED output<a class="headerlink" href="#led-output" title="Permalink to this heading"></a></h3>
+<h3>LED output<a class="headerlink" href="#led-output" title="Link to this heading"></a></h3>
 <p>In this example, a library I/O port for a LED is requested from the platform and driven to blink the LED:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Toplevel</span><span class="p">(</span><span class="n">Elaboratable</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">elaborate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
@@ -162,7 +162,7 @@
 </div>
 </section>
 <section id="clock-input">
-<h3>Clock input<a class="headerlink" href="#clock-input" title="Permalink to this heading"></a></h3>
+<h3>Clock input<a class="headerlink" href="#clock-input" title="Link to this heading"></a></h3>
 <p>In this example, a clock domain is created and driven from an external clock source:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Toplevel</span><span class="p">(</span><span class="n">Elaboratable</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">elaborate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
@@ -180,7 +180,7 @@
 </div>
 </section>
 <section id="bidirectional-bus">
-<h3>Bidirectional bus<a class="headerlink" href="#bidirectional-bus" title="Permalink to this heading"></a></h3>
+<h3>Bidirectional bus<a class="headerlink" href="#bidirectional-bus" title="Link to this heading"></a></h3>
 <p>This example implements a peripheral for a clocked parallel bus. This peripheral can store and recall one byte of data. The data is stored with a write enable pulse, and recalled with a read enable pulse:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Toplevel</span><span class="p">(</span><span class="n">Elaboratable</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">elaborate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
@@ -204,7 +204,7 @@
 <p>Note that data appears on the bus one cycle after the read enable input is asserted, and that the write enable input stores the data present on the bus in the <em>previous</em> cycle. This is called <em>pipelining</em> and is typical for clocked buses; see <a class="reference internal" href="#amaranth.lib.io.FFBuffer" title="amaranth.lib.io.FFBuffer"><code class="xref py py-class docutils literal notranslate"><span class="pre">FFBuffer</span></code></a> for a waveform diagram. Although it increases the maximum clock frequency at which the bus can run, it also makes the bus signaling more complicated.</p>
 </section>
 <section id="clock-forwarding">
-<h3>Clock forwarding<a class="headerlink" href="#clock-forwarding" title="Permalink to this heading"></a></h3>
+<h3>Clock forwarding<a class="headerlink" href="#clock-forwarding" title="Link to this heading"></a></h3>
 <p>In this example of a <a class="reference external" href="https://en.wikipedia.org/wiki/Source-synchronous">source-synchronous interface</a>, a clock signal is generated with the same phase as the DDR data signals associated with it:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SourceSynchronousOutput</span><span class="p">(</span><span class="n">wiring</span><span class="o">.</span><span class="n">Component</span><span class="p">):</span>
     <span class="n">dout</span><span class="p">:</span> <span class="n">In</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
@@ -233,7 +233,7 @@
 </section>
 </section>
 <section id="simulation">
-<h2>Simulation<a class="headerlink" href="#simulation" title="Permalink to this heading"></a></h2>
+<h2>Simulation<a class="headerlink" href="#simulation" title="Link to this heading"></a></h2>
 <p>The Amaranth simulator, <a class="reference internal" href="../simulator.html#module-amaranth.sim" title="amaranth.sim"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.sim</span></code></a>, cannot simulate <a class="reference internal" href="../guide.html#lang-iovalues"><span class="std std-ref">core I/O values</span></a> or <a class="reference internal" href="../guide.html#lang-iobufferinstance"><span class="std std-ref">I/O buffer instances</span></a> as it only operates on unidirectionally driven two-state wires. This module provides a simulation-only library I/O port, <a class="reference internal" href="#amaranth.lib.io.SimulationPort" title="amaranth.lib.io.SimulationPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimulationPort</span></code></a>, so that components that use library I/O buffers can be tested.</p>
 <p>A component that is designed for testing should accept the library I/O ports it will drive as constructor parameters rather than requesting them from the platform directly. Synthesizable designs will instantiate the component with a <a class="reference internal" href="#amaranth.lib.io.SingleEndedPort" title="amaranth.lib.io.SingleEndedPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleEndedPort</span></code></a>, <a class="reference internal" href="#amaranth.lib.io.DifferentialPort" title="amaranth.lib.io.DifferentialPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">DifferentialPort</span></code></a>, or a platform-specific library I/O port, while tests will instantiate the component with a <a class="reference internal" href="#amaranth.lib.io.SimulationPort" title="amaranth.lib.io.SimulationPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimulationPort</span></code></a>. Tests are able to inject inputs into the component using <code class="code highlight py python docutils literal highlight-python"><span class="n">sim_port</span><span class="o">.</span><span class="n">i</span></code>, capture the outputs of the component via <code class="code highlight py python docutils literal highlight-python"><span class="n">sim_port</span><span class="o">.</span><span class="n">o</span></code>, and ensure that the component is driving the outputs at the appropriate times using <code class="code highlight py python docutils literal highlight-python"><span class="n">sim_port</span><span class="o">.</span><span class="n">oe</span></code>.</p>
 <p>For example, consider a simple serializer that accepts a stream of multi-bit data words and outputs them bit by bit. It can be tested as follows:</p>
@@ -291,32 +291,32 @@
 </div>
 </section>
 <section id="ports">
-<h2>Ports<a class="headerlink" href="#ports" title="Permalink to this heading"></a></h2>
+<h2>Ports<a class="headerlink" href="#ports" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.lib.io.Direction">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.io.</span></span><span class="sig-name descname"><span class="pre">Direction</span></span><a class="headerlink" href="#amaranth.lib.io.Direction" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.io.</span></span><span class="sig-name descname"><span class="pre">Direction</span></span><a class="headerlink" href="#amaranth.lib.io.Direction" title="Link to this definition"></a></dt>
 <dd><p>Represents direction of a library I/O port, or of an I/O buffer component.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="amaranth.lib.io.Direction.Input">
-<span class="sig-name descname"><span class="pre">Input</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'i'</span></em><a class="headerlink" href="#amaranth.lib.io.Direction.Input" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">Input</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'i'</span></em><a class="headerlink" href="#amaranth.lib.io.Direction.Input" title="Link to this definition"></a></dt>
 <dd><p>Input direction (from outside world to Amaranth design).</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="amaranth.lib.io.Direction.Output">
-<span class="sig-name descname"><span class="pre">Output</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'o'</span></em><a class="headerlink" href="#amaranth.lib.io.Direction.Output" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">Output</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'o'</span></em><a class="headerlink" href="#amaranth.lib.io.Direction.Output" title="Link to this definition"></a></dt>
 <dd><p>Output direction (from Amaranth design to outside world).</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="amaranth.lib.io.Direction.Bidir">
-<span class="sig-name descname"><span class="pre">Bidir</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'io'</span></em><a class="headerlink" href="#amaranth.lib.io.Direction.Bidir" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">Bidir</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'io'</span></em><a class="headerlink" href="#amaranth.lib.io.Direction.Bidir" title="Link to this definition"></a></dt>
 <dd><p>Bidirectional (can be switched between input and output).</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.lib.io.Direction.__and__">
-<span class="sig-name descname"><span class="pre">__and__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.Direction.__and__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__and__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.Direction.__and__" title="Link to this definition"></a></dt>
 <dd><p>Narrow the set of possible directions.</p>
 <ul class="simple">
 <li><p><code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span> <span class="o">&amp;</span> <span class="bp">self</span></code> returns <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span></code>.</p></li>
@@ -329,7 +329,7 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.lib.io.PortLike">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.io.</span></span><span class="sig-name descname"><span class="pre">PortLike</span></span><a class="headerlink" href="#amaranth.lib.io.PortLike" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.io.</span></span><span class="sig-name descname"><span class="pre">PortLike</span></span><a class="headerlink" href="#amaranth.lib.io.PortLike" title="Link to this definition"></a></dt>
 <dd><p>Represents an abstract library I/O port that can be passed to a buffer.</p>
 <p>The port types supported by most platforms are <a class="reference internal" href="#amaranth.lib.io.SingleEndedPort" title="amaranth.lib.io.SingleEndedPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleEndedPort</span></code></a> and
 <a class="reference internal" href="#amaranth.lib.io.DifferentialPort" title="amaranth.lib.io.DifferentialPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">DifferentialPort</span></code></a>. Platforms may define additional port types where appropriate.</p>
@@ -339,7 +339,7 @@
 </div>
 <dl class="py property">
 <dt class="sig sig-object py" id="amaranth.lib.io.PortLike.direction">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">direction</span></span><a class="headerlink" href="#amaranth.lib.io.PortLike.direction" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">direction</span></span><a class="headerlink" href="#amaranth.lib.io.PortLike.direction" title="Link to this definition"></a></dt>
 <dd><p>Direction of the port.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -350,7 +350,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.lib.io.PortLike.__len__">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.PortLike.__len__" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.PortLike.__len__" title="Link to this definition"></a></dt>
 <dd><p>Computes the width of the port.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -365,7 +365,7 @@ library I/O ports) this port consists of.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.lib.io.PortLike.__getitem__">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.PortLike.__getitem__" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.PortLike.__getitem__" title="Link to this definition"></a></dt>
 <dd><p>Slices the port.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -381,7 +381,7 @@ the slice (if <code class="code highlight py python docutils literal highlight-p
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.lib.io.PortLike.__invert__">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__invert__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.PortLike.__invert__" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__invert__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.PortLike.__invert__" title="Link to this definition"></a></dt>
 <dd><p>Inverts polarity of the port.</p>
 <p>Inverting polarity of a library I/O port has the same effect as adding inverters to
 the <code class="code highlight py python docutils literal highlight-python"><span class="n">i</span></code> and <code class="code highlight py python docutils literal highlight-python"><span class="n">o</span></code> members of an I/O buffer component for that port.</p>
@@ -398,7 +398,7 @@ wires as this port, but with polarity inverted.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.lib.io.PortLike.__add__">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__add__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.PortLike.__add__" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__add__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.PortLike.__add__" title="Link to this definition"></a></dt>
 <dd><p>Concatenates two library I/O ports of the same type.</p>
 <p>The direction of the resulting port is:</p>
 <ul class="simple">
@@ -427,7 +427,7 @@ from <code class="code highlight py python docutils literal highlight-python"><s
 
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.lib.io.SingleEndedPort">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.io.</span></span><span class="sig-name descname"><span class="pre">SingleEndedPort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">io</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invert</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Direction.Bidir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.SingleEndedPort" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.io.</span></span><span class="sig-name descname"><span class="pre">SingleEndedPort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">io</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invert</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Direction.Bidir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.SingleEndedPort" title="Link to this definition"></a></dt>
 <dd><p>Represents a single-ended library I/O port.</p>
 <p>Implements the <a class="reference internal" href="#amaranth.lib.io.PortLike" title="amaranth.lib.io.PortLike"><code class="xref py py-class docutils literal notranslate"><span class="pre">PortLike</span></code></a> interface.</p>
 <dl class="field-list simple">
@@ -455,7 +455,7 @@ can be used with buffers of any direction.</p></li>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.lib.io.DifferentialPort">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.io.</span></span><span class="sig-name descname"><span class="pre">DifferentialPort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invert</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Direction.Bidir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.DifferentialPort" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.io.</span></span><span class="sig-name descname"><span class="pre">DifferentialPort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invert</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Direction.Bidir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.DifferentialPort" title="Link to this definition"></a></dt>
 <dd><p>Represents a differential library I/O port.</p>
 <p>Implements the <a class="reference internal" href="#amaranth.lib.io.PortLike" title="amaranth.lib.io.PortLike"><code class="xref py py-class docutils literal notranslate"><span class="pre">PortLike</span></code></a> interface.</p>
 <dl class="field-list simple">
@@ -487,7 +487,7 @@ can be used with buffers of any direction.</p></li>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.lib.io.SimulationPort">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.io.</span></span><span class="sig-name descname"><span class="pre">SimulationPort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invert</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_loc_at</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.SimulationPort" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.io.</span></span><span class="sig-name descname"><span class="pre">SimulationPort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invert</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_loc_at</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.SimulationPort" title="Link to this definition"></a></dt>
 <dd><p>Represents a simulation library I/O port.</p>
 <p>Implements the <a class="reference internal" href="#amaranth.lib.io.PortLike" title="amaranth.lib.io.PortLike"><code class="xref py py-class docutils literal notranslate"><span class="pre">PortLike</span></code></a> interface.</p>
 <dl class="field-list simple">
@@ -522,10 +522,10 @@ output enable signals.</p></li>
 
 </section>
 <section id="buffers">
-<h2>Buffers<a class="headerlink" href="#buffers" title="Permalink to this heading"></a></h2>
+<h2>Buffers<a class="headerlink" href="#buffers" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.lib.io.Buffer">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.io.</span></span><span class="sig-name descname"><span class="pre">Buffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.Buffer" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.io.</span></span><span class="sig-name descname"><span class="pre">Buffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.Buffer" title="Link to this definition"></a></dt>
 <dd><p>A combinational I/O buffer component.</p>
 <p>This buffer can be used on any platform; if the platform does not specialize its implementation,
 an <a class="reference internal" href="../guide.html#lang-iobufferinstance"><span class="std std-ref">I/O buffer instance</span></a> is used.</p>
@@ -548,7 +548,7 @@ an <a class="reference internal" href="../guide.html#lang-iobufferinstance"><spa
 </dl>
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.lib.io.Buffer.Signature">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Signature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.Buffer.Signature" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Signature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.Buffer.Signature" title="Link to this definition"></a></dt>
 <dd><p>Signature of a combinational I/O buffer.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -572,7 +572,7 @@ an <a class="reference internal" href="../guide.html#lang-iobufferinstance"><spa
 
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.lib.io.FFBuffer">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.io.</span></span><span class="sig-name descname"><span class="pre">FFBuffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i_domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">o_domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.FFBuffer" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.io.</span></span><span class="sig-name descname"><span class="pre">FFBuffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i_domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">o_domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.FFBuffer" title="Link to this definition"></a></dt>
 <dd><p>A registered I/O buffer component.</p>
 <p>This buffer can be used on any platform; if the platform does not specialize its implementation,
 an <a class="reference internal" href="../guide.html#lang-iobufferinstance"><span class="std std-ref">I/O buffer instance</span></a> is used, combined with reset-less
@@ -603,7 +603,7 @@ Defaults to <code class="code highlight py python docutils literal highlight-pyt
 </dl>
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.lib.io.FFBuffer.Signature">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Signature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.FFBuffer.Signature" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Signature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.FFBuffer.Signature" title="Link to this definition"></a></dt>
 <dd><p>Signature of a registered I/O buffer.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -627,7 +627,7 @@ Defaults to <code class="code highlight py python docutils literal highlight-pyt
 
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.lib.io.DDRBuffer">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.io.</span></span><span class="sig-name descname"><span class="pre">DDRBuffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i_domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">o_domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.DDRBuffer" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.io.</span></span><span class="sig-name descname"><span class="pre">DDRBuffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i_domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">o_domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.DDRBuffer" title="Link to this definition"></a></dt>
 <dd><p>A double data rate I/O buffer component.</p>
 <p>This buffer is only available on platforms that support double data rate I/O.</p>
 <p>The following diagram defines the timing relationship between the underlying core I/O value
@@ -678,7 +678,7 @@ Defaults to <code class="code highlight py python docutils literal highlight-pyt
 </dl>
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.lib.io.DDRBuffer.Signature">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Signature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.DDRBuffer.Signature" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Signature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.io.DDRBuffer.Signature" title="Link to this definition"></a></dt>
 <dd><p>Signature of a double data rate I/O buffer.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>

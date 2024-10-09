@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Language reference &mdash; Amaranth language &amp; toolchain 0.6.0.dev68 documentation</title>
+  <title>Language reference &mdash; Amaranth language &amp; toolchain 0.6.0.dev69 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/platformpicker.css" />
@@ -17,9 +17,9 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=8cd79b05"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/documentation_options.js?v=f25acf92"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="_static/platformpicker.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -41,7 +41,7 @@
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.6.0.dev68
+                0.6.0.dev69
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -115,7 +115,7 @@
            <div itemprop="articleBody">
              
   <section id="module-amaranth.hdl">
-<span id="language-reference"></span><h1>Language reference<a class="headerlink" href="#module-amaranth.hdl" title="Permalink to this heading"></a></h1>
+<span id="language-reference"></span><h1>Language reference<a class="headerlink" href="#module-amaranth.hdl" title="Link to this heading"></a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>This reference is a work in progress and is seriously incomplete!</p>
@@ -123,12 +123,12 @@
 </div>
 <p>This reference describes the Python classes that underlie the Amaranth language’s syntax. It assumes familiarity with the <a class="reference internal" href="guide.html"><span class="doc">language guide</span></a>.</p>
 <section id="backwards-compatibility">
-<span id="lang-stability"></span><h2>Backwards compatibility<a class="headerlink" href="#backwards-compatibility" title="Permalink to this heading"></a></h2>
+<span id="lang-stability"></span><h2>Backwards compatibility<a class="headerlink" href="#backwards-compatibility" title="Link to this heading"></a></h2>
 <p>As part of the Amaranth backwards compatibility guarantee, any behaviors described in this document will not change from a version to another without at least one version including a warning about the impending change. Any nontrivial change to these behaviors must also go through the public review as a part of the <a class="reference external" href="https://amaranth-lang.org/rfcs/">Amaranth Request for Comments process</a>.</p>
 <p>Conversely, any behavior not documented here is subject to change at any time with or without notice, and any names under the <a class="reference internal" href="#module-amaranth.hdl" title="amaranth.hdl"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.hdl</span></code></a> module that are not explicitly included in this document, even if they do not begin with an underscore, are internal to the implementation of the language.</p>
 </section>
 <section id="importing-syntax">
-<span id="lang-importing"></span><h2>Importing syntax<a class="headerlink" href="#importing-syntax" title="Permalink to this heading"></a></h2>
+<span id="lang-importing"></span><h2>Importing syntax<a class="headerlink" href="#importing-syntax" title="Link to this heading"></a></h2>
 <p>There are two ways to import the Amaranth syntax into a Python file: by importing the <a class="reference internal" href="guide.html#lang-prelude"><span class="std std-ref">prelude</span></a> or by importing individual names from the <a class="reference internal" href="#module-amaranth.hdl" title="amaranth.hdl"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.hdl</span></code></a> module. Since the prelude is kept small and rarely extended to avoid breaking downstream code that uses a glob import, there are some names that are only exported from the <a class="reference internal" href="#module-amaranth.hdl" title="amaranth.hdl"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.hdl</span></code></a> module. The following three snippets are equivalent:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">amaranth</span> <span class="kn">import</span> <span class="o">*</span>
 
@@ -174,7 +174,7 @@
 </ul>
 </section>
 <section id="source-locations">
-<span id="lang-srcloc"></span><h2>Source locations<a class="headerlink" href="#source-locations" title="Permalink to this heading"></a></h2>
+<span id="lang-srcloc"></span><h2>Source locations<a class="headerlink" href="#source-locations" title="Link to this heading"></a></h2>
 <p>Many functions and methods in Amaranth take the <code class="code highlight py python docutils literal highlight-python"><span class="n">src_loc_at</span><span class="o">=</span><span class="mi">0</span></code> keyword argument. These language constructs may inspect the call stack to determine the file and line of its call site, which will be used to annotate generated code when a netlist is generated or to improve diagnostic messages.</p>
 <p>Some call sites are not relevant for an Amaranth designer; e.g. when an Amaranth language construct is called from a user-defined utility function, the source location of the call site within this utility function is usually not interesting to the designer. In these cases, one or more levels of function calls can be removed from consideration using the <code class="code highlight py python docutils literal highlight-python"><span class="n">src_loc_at</span></code> argument as follows (using <a class="reference internal" href="#amaranth.hdl.Shape.cast" title="amaranth.hdl.Shape.cast"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Shape.cast()</span></code></a> to demonstrate the concept):</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_shape_cast</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">src_loc_at</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
@@ -185,11 +185,11 @@
 <p>The number <code class="code highlight py python docutils literal highlight-python"><span class="mi">1</span></code> corresponds to the number of call stack frames that should be skipped.</p>
 </section>
 <section id="shapes">
-<h2>Shapes<a class="headerlink" href="#shapes" title="Permalink to this heading"></a></h2>
+<h2>Shapes<a class="headerlink" href="#shapes" title="Link to this heading"></a></h2>
 <p>See also the introduction to <a class="reference internal" href="guide.html#lang-shapes"><span class="std std-ref">shapes</span></a> and <a class="reference internal" href="guide.html#lang-shapelike"><span class="std std-ref">casting from shape-like objects</span></a> in the language guide.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.hdl.Shape">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.hdl.</span></span><span class="sig-name descname"><span class="pre">Shape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Shape" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.hdl.</span></span><span class="sig-name descname"><span class="pre">Shape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Shape" title="Link to this definition"></a></dt>
 <dd><p>Bit width and signedness of a <a class="reference internal" href="#amaranth.hdl.Value" title="amaranth.hdl.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a>.</p>
 <p>A <a class="reference internal" href="#amaranth.hdl.Shape" title="amaranth.hdl.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code></a> can be obtained by:</p>
 <ul class="simple">
@@ -209,7 +209,7 @@ values. Cannot be zero if the value is signed.</p></li>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Shape.cast">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cast</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_loc_at</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Shape.cast" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cast</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_loc_at</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Shape.cast" title="Link to this definition"></a></dt>
 <dd><p>Cast <code class="code highlight py python docutils literal highlight-python"><span class="n">obj</span></code> to a shape.</p>
 <p>Many <a class="reference internal" href="guide.html#lang-shapelike"><span class="std std-ref">shape-like</span></a> objects can be cast to a shape:</p>
 <ul class="simple">
@@ -235,7 +235,7 @@ the enumeration, and is signed if any member of the enumeration is signed;</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Shape.__repr__">
-<span class="sig-name descname"><span class="pre">__repr__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Shape.__repr__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__repr__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Shape.__repr__" title="Link to this definition"></a></dt>
 <dd><p>Python code that creates this shape.</p>
 <p>Returns <code class="code highlight py python docutils literal highlight-python"><span class="sa">f</span><span class="s2">&quot;signed(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="si">}</span><span class="s2">)&quot;</span></code> or <code class="code highlight py python docutils literal highlight-python"><span class="sa">f</span><span class="s2">&quot;unsigned(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="si">}</span><span class="s2">)&quot;</span></code>.</p>
 </dd></dl>
@@ -244,19 +244,19 @@ the enumeration, and is signed if any member of the enumeration is signed;</p></
 
 <dl class="py function">
 <dt class="sig sig-object py" id="amaranth.hdl.unsigned">
-<span class="sig-prename descclassname"><span class="pre">amaranth.hdl.</span></span><span class="sig-name descname"><span class="pre">unsigned</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">width</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.unsigned" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">amaranth.hdl.</span></span><span class="sig-name descname"><span class="pre">unsigned</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">width</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.unsigned" title="Link to this definition"></a></dt>
 <dd><p>Returns <code class="code highlight py python docutils literal highlight-python"><span class="n">Shape</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">signed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="amaranth.hdl.signed">
-<span class="sig-prename descclassname"><span class="pre">amaranth.hdl.</span></span><span class="sig-name descname"><span class="pre">signed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">width</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.signed" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">amaranth.hdl.</span></span><span class="sig-name descname"><span class="pre">signed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">width</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.signed" title="Link to this definition"></a></dt>
 <dd><p>Returns <code class="code highlight py python docutils literal highlight-python"><span class="n">Shape</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">signed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.hdl.ShapeCastable">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.hdl.</span></span><span class="sig-name descname"><span class="pre">ShapeCastable</span></span><a class="headerlink" href="#amaranth.hdl.ShapeCastable" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.hdl.</span></span><span class="sig-name descname"><span class="pre">ShapeCastable</span></span><a class="headerlink" href="#amaranth.hdl.ShapeCastable" title="Link to this definition"></a></dt>
 <dd><p>Interface class for objects that can be cast to a <a class="reference internal" href="#amaranth.hdl.Shape" title="amaranth.hdl.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code></a>.</p>
 <p>Shapes of values in the Amaranth language are specified using <a class="reference internal" href="guide.html#lang-shapelike"><span class="std std-ref">shape-like objects</span></a>. Inheriting a class from <a class="reference internal" href="#amaranth.hdl.ShapeCastable" title="amaranth.hdl.ShapeCastable"><code class="xref py py-class docutils literal notranslate"><span class="pre">ShapeCastable</span></code></a> and implementing all of
 the methods described below adds instances of that class to the list of shape-like objects
@@ -282,7 +282,7 @@ implementing a fully featured shape-castable object.</p>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.ShapeCastable.as_shape">
-<span class="sig-name descname"><span class="pre">as_shape</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.ShapeCastable.as_shape" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">as_shape</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.ShapeCastable.as_shape" title="Link to this definition"></a></dt>
 <dd><p>Convert <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span></code> to a <a class="reference internal" href="guide.html#lang-shapelike"><span class="std std-ref">shape-like object</span></a>.</p>
 <p>This method is called by the Amaranth language to convert <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span></code> to a concrete
 <a class="reference internal" href="#amaranth.hdl.Shape" title="amaranth.hdl.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code></a>. It will usually return a <a class="reference internal" href="#amaranth.hdl.Shape" title="amaranth.hdl.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code></a> object, but it may also return
@@ -304,7 +304,7 @@ exactly the same.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.ShapeCastable.const">
-<span class="sig-name descname"><span class="pre">const</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.ShapeCastable.const" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">const</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.ShapeCastable.const" title="Link to this definition"></a></dt>
 <dd><p>Convert a constant initializer <code class="code highlight py python docutils literal highlight-python"><span class="n">obj</span></code> to its value representation.</p>
 <p>This method is called by the Amaranth language to convert <code class="code highlight py python docutils literal highlight-python"><span class="n">obj</span></code>, which may be an
 arbitrary Python object, to a concrete <a class="reference internal" href="guide.html#lang-valuelike"><span class="std std-ref">value-like object</span></a>.
@@ -330,7 +330,7 @@ the result will usually be an instance of the return type of <a class="reference
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.ShapeCastable.from_bits">
-<span class="sig-name descname"><span class="pre">from_bits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.ShapeCastable.from_bits" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">from_bits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.ShapeCastable.from_bits" title="Link to this definition"></a></dt>
 <dd><p>Lift a bit pattern to a higher-level representation.</p>
 <p>This method is called by the Amaranth language to lift <code class="code highlight py python docutils literal highlight-python"><span class="n">raw</span></code>, which is an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>,
 to a higher-level representation, which may be any object accepted by <a class="reference internal" href="#amaranth.hdl.ShapeCastable.const" title="amaranth.hdl.ShapeCastable.const"><code class="xref py py-meth docutils literal notranslate"><span class="pre">const()</span></code></a>.
@@ -359,7 +359,7 @@ constrained here, these objects should have the same type whenever feasible.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.ShapeCastable.__call__">
-<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.ShapeCastable.__call__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.ShapeCastable.__call__" title="Link to this definition"></a></dt>
 <dd><p>Lift a <a class="reference internal" href="guide.html#lang-valuelike"><span class="std std-ref">value-like object</span></a> to a higher-level representation.</p>
 <p>This method is called by the Amaranth language to lift <code class="code highlight py python docutils literal highlight-python"><span class="n">obj</span></code>, which may be any
 <a class="reference internal" href="guide.html#lang-valuelike"><span class="std std-ref">value-like object</span></a> whose shape equals <code class="code highlight py python docutils literal highlight-python"><span class="n">Shape</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>,
@@ -384,7 +384,7 @@ time.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.ShapeCastable.format">
-<span class="sig-name descname"><span class="pre">format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spec</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.ShapeCastable.format" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spec</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.ShapeCastable.format" title="Link to this definition"></a></dt>
 <dd><p>Format a value.</p>
 <p>This method is called by the Amaranth language to implement formatting for custom
 shapes. Whenever <code class="code highlight py python docutils literal highlight-python"><span class="s2">&quot;{obj:spec}&quot;</span></code> is encountered by <code class="xref py py-class docutils literal notranslate"><span class="pre">Format</span></code>, and <code class="code highlight py python docutils literal highlight-python"><span class="n">obj</span></code>
@@ -406,7 +406,7 @@ is called, and the format specifier is replaced with the result.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.hdl.ShapeLike">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.hdl.</span></span><span class="sig-name descname"><span class="pre">ShapeLike</span></span><a class="headerlink" href="#amaranth.hdl.ShapeLike" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.hdl.</span></span><span class="sig-name descname"><span class="pre">ShapeLike</span></span><a class="headerlink" href="#amaranth.hdl.ShapeLike" title="Link to this definition"></a></dt>
 <dd><p>Abstract class representing all objects that can be cast to a <a class="reference internal" href="#amaranth.hdl.Shape" title="amaranth.hdl.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code></a>.</p>
 <p><code class="code highlight py python docutils literal highlight-python"><span class="nb">issubclass</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ShapeLike</span><span class="p">)</span></code> returns <code class="code highlight py python docutils literal highlight-python"><span class="kc">True</span></code> for:</p>
 <ul class="simple">
@@ -431,11 +431,11 @@ objects.</p>
 
 </section>
 <section id="values">
-<h2>Values<a class="headerlink" href="#values" title="Permalink to this heading"></a></h2>
+<h2>Values<a class="headerlink" href="#values" title="Link to this heading"></a></h2>
 <p>See also the introduction to <a class="reference internal" href="guide.html#lang-values"><span class="std std-ref">values</span></a> and <a class="reference internal" href="guide.html#lang-valuelike"><span class="std std-ref">casting from value-like objects</span></a> in the language guide.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.hdl.Value">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.hdl.</span></span><span class="sig-name descname"><span class="pre">Value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_loc_at</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.hdl.</span></span><span class="sig-name descname"><span class="pre">Value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_loc_at</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value" title="Link to this definition"></a></dt>
 <dd><p>Abstract representation of a bit pattern computed in a circuit.</p>
 <p>The Amaranth language gives Python code the ability to create a circuit netlist by manipulating
 objects representing the computations within that circuit. The <a class="reference internal" href="#amaranth.hdl.Value" title="amaranth.hdl.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a> class represents
@@ -471,7 +471,7 @@ assignable.</p>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.cast">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cast</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.cast" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cast</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.cast" title="Link to this definition"></a></dt>
 <dd><p>Cast <code class="code highlight py python docutils literal highlight-python"><span class="n">obj</span></code> to an Amaranth value.</p>
 <p>Many <a class="reference internal" href="guide.html#lang-valuelike"><span class="std std-ref">value-like</span></a> objects can be cast to a value:</p>
 <ul class="simple">
@@ -495,7 +495,7 @@ is a shape that can represent every member of the enumeration;</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.shape">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shape</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.shape" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shape</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.shape" title="Link to this definition"></a></dt>
 <dd><p>Shape of <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -506,7 +506,7 @@ is a shape that can represent every member of the enumeration;</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.as_unsigned">
-<span class="sig-name descname"><span class="pre">as_unsigned</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.as_unsigned" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">as_unsigned</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.as_unsigned" title="Link to this definition"></a></dt>
 <dd><p>Reinterpretation as an unsigned value.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -517,7 +517,7 @@ is a shape that can represent every member of the enumeration;</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.as_signed">
-<span class="sig-name descname"><span class="pre">as_signed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.as_signed" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">as_signed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.as_signed" title="Link to this definition"></a></dt>
 <dd><p>Reinterpretation as a signed value.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -531,7 +531,7 @@ is a shape that can represent every member of the enumeration;</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__bool__">
-<span class="sig-name descname"><span class="pre">__bool__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__bool__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__bool__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__bool__" title="Link to this definition"></a></dt>
 <dd><p>Forbidden conversion to boolean.</p>
 <p>Python uses this operator for its built-in semantics, e.g. <code class="code highlight py python docutils literal highlight-python"><span class="k">if</span></code>, and requires it to
 return a <a class="reference internal" href="#amaranth.hdl.Value.bool" title="amaranth.hdl.Value.bool"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>. Since this is not possible for Amaranth values, this operator
@@ -545,7 +545,7 @@ always raises an exception.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.bool">
-<span class="sig-name descname"><span class="pre">bool</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.bool" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">bool</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.bool" title="Link to this definition"></a></dt>
 <dd><p>Conversion to boolean.</p>
 <p>Returns the same value as <a class="reference internal" href="#amaranth.hdl.Value.any" title="amaranth.hdl.Value.any"><code class="xref py py-meth docutils literal notranslate"><span class="pre">any()</span></code></a>, but should be used where <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span></code> is semantically
 a number.</p>
@@ -558,7 +558,7 @@ a number.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__pos__">
-<span class="sig-name descname"><span class="pre">__pos__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__pos__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__pos__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__pos__" title="Link to this definition"></a></dt>
 <dd><p>Unary position, <code class="code highlight py python docutils literal highlight-python"><span class="o">+</span><span class="bp">self</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -572,7 +572,7 @@ a number.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__neg__">
-<span class="sig-name descname"><span class="pre">__neg__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__neg__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__neg__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__neg__" title="Link to this definition"></a></dt>
 <dd><p>Unary negation, <code class="code highlight py python docutils literal highlight-python"><span class="o">-</span><span class="bp">self</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -583,7 +583,7 @@ a number.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__add__">
-<span class="sig-name descname"><span class="pre">__add__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__add__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__add__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__add__" title="Link to this definition"></a></dt>
 <dd><p>Addition, <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span> <span class="o">+</span> <span class="n">other</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -600,14 +600,14 @@ a number.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__radd__">
-<span class="sig-name descname"><span class="pre">__radd__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__radd__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__radd__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__radd__" title="Link to this definition"></a></dt>
 <dd><p>Addition, <code class="code highlight py python docutils literal highlight-python"><span class="n">other</span> <span class="o">+</span> <span class="bp">self</span></code> (reflected).</p>
 <p>Like <a class="reference internal" href="#amaranth.hdl.Value.__add__" title="amaranth.hdl.Value.__add__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__add__()</span></code></a>, with operands swapped.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__sub__">
-<span class="sig-name descname"><span class="pre">__sub__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__sub__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__sub__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__sub__" title="Link to this definition"></a></dt>
 <dd><p>Subtraction, <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span> <span class="o">-</span> <span class="n">other</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -627,14 +627,14 @@ a number.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__rsub__">
-<span class="sig-name descname"><span class="pre">__rsub__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__rsub__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__rsub__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__rsub__" title="Link to this definition"></a></dt>
 <dd><p>Subtraction, <code class="code highlight py python docutils literal highlight-python"><span class="n">other</span> <span class="o">-</span> <span class="bp">self</span></code> (reflected).</p>
 <p>Like <a class="reference internal" href="#amaranth.hdl.Value.__sub__" title="amaranth.hdl.Value.__sub__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__sub__()</span></code></a>, with operands swapped.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__mul__">
-<span class="sig-name descname"><span class="pre">__mul__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__mul__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__mul__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__mul__" title="Link to this definition"></a></dt>
 <dd><p>Multiplication, <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span> <span class="o">*</span> <span class="n">other</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -649,14 +649,14 @@ a number.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__rmul__">
-<span class="sig-name descname"><span class="pre">__rmul__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__rmul__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__rmul__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__rmul__" title="Link to this definition"></a></dt>
 <dd><p>Multiplication, <code class="code highlight py python docutils literal highlight-python"><span class="n">other</span> <span class="o">*</span> <span class="bp">self</span></code> (reflected).</p>
 <p>Like <a class="reference internal" href="#amaranth.hdl.Value.__mul__" title="amaranth.hdl.Value.__mul__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__mul__()</span></code></a>, with operands swapped.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__floordiv__">
-<span class="sig-name descname"><span class="pre">__floordiv__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__floordiv__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__floordiv__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__floordiv__" title="Link to this definition"></a></dt>
 <dd><p>Flooring division, <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span> <span class="o">//</span> <span class="n">other</span></code>.</p>
 <p>If <code class="code highlight py python docutils literal highlight-python"><span class="n">other</span></code> is zero, the result of this operation is zero.</p>
 <dl class="field-list simple">
@@ -674,7 +674,7 @@ a number.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__rfloordiv__">
-<span class="sig-name descname"><span class="pre">__rfloordiv__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__rfloordiv__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__rfloordiv__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__rfloordiv__" title="Link to this definition"></a></dt>
 <dd><p>Flooring division, <code class="code highlight py python docutils literal highlight-python"><span class="n">other</span> <span class="o">//</span> <span class="bp">self</span></code> (reflected).</p>
 <p>If <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span></code> is zero, the result of this operation is zero.</p>
 <p>Like <a class="reference internal" href="#amaranth.hdl.Value.__floordiv__" title="amaranth.hdl.Value.__floordiv__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__floordiv__()</span></code></a>, with operands swapped.</p>
@@ -682,7 +682,7 @@ a number.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__mod__">
-<span class="sig-name descname"><span class="pre">__mod__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__mod__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__mod__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__mod__" title="Link to this definition"></a></dt>
 <dd><p>Flooring modulo or remainder, <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span> <span class="o">%</span> <span class="n">other</span></code>.</p>
 <p>If <code class="code highlight py python docutils literal highlight-python"><span class="n">other</span></code> is zero, the result of this operation is zero.</p>
 <dl class="field-list simple">
@@ -694,14 +694,14 @@ a number.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__rmod__">
-<span class="sig-name descname"><span class="pre">__rmod__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__rmod__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__rmod__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__rmod__" title="Link to this definition"></a></dt>
 <dd><p>Flooring modulo or remainder, <code class="code highlight py python docutils literal highlight-python"><span class="n">other</span> <span class="o">%</span> <span class="bp">self</span></code> (reflected).</p>
 <p>Like <a class="reference internal" href="#amaranth.hdl.Value.__mod__" title="amaranth.hdl.Value.__mod__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__mod__()</span></code></a>, with operands swapped.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__eq__">
-<span class="sig-name descname"><span class="pre">__eq__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__eq__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__eq__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__eq__" title="Link to this definition"></a></dt>
 <dd><p>Equality comparison, <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span> <span class="o">==</span> <span class="n">other</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -712,7 +712,7 @@ a number.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__ne__">
-<span class="sig-name descname"><span class="pre">__ne__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__ne__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__ne__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__ne__" title="Link to this definition"></a></dt>
 <dd><p>Inequality comparison, <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span> <span class="o">!=</span> <span class="n">other</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -723,7 +723,7 @@ a number.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__lt__">
-<span class="sig-name descname"><span class="pre">__lt__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__lt__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__lt__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__lt__" title="Link to this definition"></a></dt>
 <dd><p>Less than comparison, <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span> <span class="o">&lt;</span> <span class="n">other</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -734,7 +734,7 @@ a number.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__le__">
-<span class="sig-name descname"><span class="pre">__le__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__le__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__le__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__le__" title="Link to this definition"></a></dt>
 <dd><p>Less than or equals comparison, <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span> <span class="o">&lt;=</span> <span class="n">other</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -745,7 +745,7 @@ a number.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__gt__">
-<span class="sig-name descname"><span class="pre">__gt__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__gt__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__gt__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__gt__" title="Link to this definition"></a></dt>
 <dd><p>Greater than comparison, <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span> <span class="o">&gt;</span> <span class="n">other</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -756,7 +756,7 @@ a number.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__ge__">
-<span class="sig-name descname"><span class="pre">__ge__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__ge__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__ge__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__ge__" title="Link to this definition"></a></dt>
 <dd><p>Greater than or equals comparison, <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span> <span class="o">&gt;=</span> <span class="n">other</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -767,7 +767,7 @@ a number.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__abs__">
-<span class="sig-name descname"><span class="pre">__abs__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__abs__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__abs__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__abs__" title="Link to this definition"></a></dt>
 <dd><p>Absolute value, <code class="code highlight py python docutils literal highlight-python"><span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -778,7 +778,7 @@ a number.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__invert__">
-<span class="sig-name descname"><span class="pre">__invert__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__invert__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__invert__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__invert__" title="Link to this definition"></a></dt>
 <dd><p>Bitwise NOT, <code class="code highlight py python docutils literal highlight-python"><span class="o">~</span><span class="bp">self</span></code>.</p>
 <p>The shape of the result is the same as the shape of <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span></code>, even for unsigned values.</p>
 <div class="admonition warning">
@@ -800,7 +800,7 @@ been impossible.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__and__">
-<span class="sig-name descname"><span class="pre">__and__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__and__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__and__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__and__" title="Link to this definition"></a></dt>
 <dd><p>Bitwise AND, <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span> <span class="o">&amp;</span> <span class="n">other</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -817,14 +817,14 @@ been impossible.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__rand__">
-<span class="sig-name descname"><span class="pre">__rand__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__rand__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__rand__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__rand__" title="Link to this definition"></a></dt>
 <dd><p>Bitwise AND, <code class="code highlight py python docutils literal highlight-python"><span class="n">other</span> <span class="o">&amp;</span> <span class="bp">self</span></code>.</p>
 <p>Like <a class="reference internal" href="#amaranth.hdl.Value.__and__" title="amaranth.hdl.Value.__and__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__and__()</span></code></a>, with operands swapped.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.all">
-<span class="sig-name descname"><span class="pre">all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.all" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.all" title="Link to this definition"></a></dt>
 <dd><p>Reduction AND; are all bits <code class="code highlight py python docutils literal highlight-python"><span class="mi">1</span></code>?</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -835,7 +835,7 @@ been impossible.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__or__">
-<span class="sig-name descname"><span class="pre">__or__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__or__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__or__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__or__" title="Link to this definition"></a></dt>
 <dd><p>Bitwise OR, <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span> <span class="o">|</span> <span class="n">other</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -852,14 +852,14 @@ been impossible.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__ror__">
-<span class="sig-name descname"><span class="pre">__ror__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__ror__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__ror__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__ror__" title="Link to this definition"></a></dt>
 <dd><p>Bitwise OR, <code class="code highlight py python docutils literal highlight-python"><span class="n">other</span> <span class="o">|</span> <span class="bp">self</span></code>.</p>
 <p>Like <a class="reference internal" href="#amaranth.hdl.Value.__or__" title="amaranth.hdl.Value.__or__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__or__()</span></code></a>, with operands swapped.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.any">
-<span class="sig-name descname"><span class="pre">any</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.any" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">any</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.any" title="Link to this definition"></a></dt>
 <dd><p>Reduction OR; is any bit <code class="code highlight py python docutils literal highlight-python"><span class="mi">1</span></code>?</p>
 <p>Performs the same operation as <a class="reference internal" href="#amaranth.hdl.Value.bool" title="amaranth.hdl.Value.bool"><code class="xref py py-meth docutils literal notranslate"><span class="pre">bool()</span></code></a>, but should be used where <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span></code> is
 semantically a bit sequence.</p>
@@ -872,7 +872,7 @@ semantically a bit sequence.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__xor__">
-<span class="sig-name descname"><span class="pre">__xor__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__xor__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__xor__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__xor__" title="Link to this definition"></a></dt>
 <dd><p>Bitwise XOR, <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span> <span class="o">^</span> <span class="n">other</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -889,14 +889,14 @@ semantically a bit sequence.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__rxor__">
-<span class="sig-name descname"><span class="pre">__rxor__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__rxor__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__rxor__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__rxor__" title="Link to this definition"></a></dt>
 <dd><p>Bitwise XOR, <code class="code highlight py python docutils literal highlight-python"><span class="n">other</span> <span class="o">^</span> <span class="bp">self</span></code>.</p>
 <p>Like <a class="reference internal" href="#amaranth.hdl.Value.__xor__" title="amaranth.hdl.Value.__xor__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__xor__()</span></code></a>, with operands swapped.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.xor">
-<span class="sig-name descname"><span class="pre">xor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.xor" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">xor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.xor" title="Link to this definition"></a></dt>
 <dd><p>Reduction XOR; are an odd amount of bits <code class="code highlight py python docutils literal highlight-python"><span class="mi">1</span></code>?</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -907,7 +907,7 @@ semantically a bit sequence.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__lshift__">
-<span class="sig-name descname"><span class="pre">__lshift__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__lshift__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__lshift__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__lshift__" title="Link to this definition"></a></dt>
 <dd><p>Left shift by variable amount, <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span> <span class="o">&lt;&lt;</span> <span class="n">other</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -925,14 +925,14 @@ semantically a bit sequence.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__rlshift__">
-<span class="sig-name descname"><span class="pre">__rlshift__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__rlshift__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__rlshift__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__rlshift__" title="Link to this definition"></a></dt>
 <dd><p>Left shift by variable amount, <code class="code highlight py python docutils literal highlight-python"><span class="n">other</span> <span class="o">&lt;&lt;</span> <span class="bp">self</span></code>.</p>
 <p>Like <a class="reference internal" href="#amaranth.hdl.Value.__lshift__" title="amaranth.hdl.Value.__lshift__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__lshift__()</span></code></a>, with operands swapped.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.shift_left">
-<span class="sig-name descname"><span class="pre">shift_left</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">amount</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.shift_left" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">shift_left</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">amount</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.shift_left" title="Link to this definition"></a></dt>
 <dd><p>Left shift by constant amount.</p>
 <p>If <code class="code highlight py python docutils literal highlight-python"><span class="n">amount</span> <span class="o">&lt;</span> <span class="mi">0</span></code>, performs the same operation as <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span><span class="o">.</span><span class="n">shift_right</span><span class="p">(</span><span class="o">-</span><span class="n">amount</span><span class="p">)</span></code>.</p>
 <dl class="field-list simple">
@@ -948,7 +948,7 @@ semantically a bit sequence.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.rotate_left">
-<span class="sig-name descname"><span class="pre">rotate_left</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">amount</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.rotate_left" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">rotate_left</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">amount</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.rotate_left" title="Link to this definition"></a></dt>
 <dd><p>Left rotate by constant amount.</p>
 <p>If <code class="code highlight py python docutils literal highlight-python"><span class="n">amount</span> <span class="o">&lt;</span> <span class="mi">0</span></code>, performs the same operation as <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span><span class="o">.</span><span class="n">rotate_right</span><span class="p">(</span><span class="o">-</span><span class="n">amount</span><span class="p">)</span></code>.</p>
 <dl class="field-list simple">
@@ -960,7 +960,7 @@ semantically a bit sequence.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__rshift__">
-<span class="sig-name descname"><span class="pre">__rshift__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__rshift__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__rshift__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__rshift__" title="Link to this definition"></a></dt>
 <dd><p>Right shift by variable amount, <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span> <span class="o">&gt;&gt;</span> <span class="n">other</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -978,14 +978,14 @@ semantically a bit sequence.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__rrshift__">
-<span class="sig-name descname"><span class="pre">__rrshift__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__rrshift__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__rrshift__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__rrshift__" title="Link to this definition"></a></dt>
 <dd><p>Right shift by variable amount, <code class="code highlight py python docutils literal highlight-python"><span class="n">other</span> <span class="o">&gt;&gt;</span> <span class="bp">self</span></code>.</p>
 <p>Like <a class="reference internal" href="#amaranth.hdl.Value.__rshift__" title="amaranth.hdl.Value.__rshift__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__rshift__()</span></code></a>, with operands swapped.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.shift_right">
-<span class="sig-name descname"><span class="pre">shift_right</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">amount</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.shift_right" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">shift_right</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">amount</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.shift_right" title="Link to this definition"></a></dt>
 <dd><p>Right shift by constant amount.</p>
 <p>If <code class="code highlight py python docutils literal highlight-python"><span class="n">amount</span> <span class="o">&lt;</span> <span class="mi">0</span></code>, performs the same operation as <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span><span class="o">.</span><span class="n">shift_left</span><span class="p">(</span><span class="o">-</span><span class="n">amount</span><span class="p">)</span></code>.</p>
 <dl class="field-list simple">
@@ -1001,7 +1001,7 @@ semantically a bit sequence.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.rotate_right">
-<span class="sig-name descname"><span class="pre">rotate_right</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">amount</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.rotate_right" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">rotate_right</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">amount</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.rotate_right" title="Link to this definition"></a></dt>
 <dd><p>Right rotate by constant amount.</p>
 <p>If <code class="code highlight py python docutils literal highlight-python"><span class="n">amount</span> <span class="o">&lt;</span> <span class="mi">0</span></code>, performs the same operation as <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span><span class="o">.</span><span class="n">rotate_left</span><span class="p">(</span><span class="o">-</span><span class="n">amount</span><span class="p">)</span></code>.</p>
 <dl class="field-list simple">
@@ -1013,7 +1013,7 @@ semantically a bit sequence.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__len__">
-<span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__len__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__len__" title="Link to this definition"></a></dt>
 <dd><p>Bit width of <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -1027,7 +1027,7 @@ semantically a bit sequence.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__getitem__">
-<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__getitem__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__getitem__" title="Link to this definition"></a></dt>
 <dd><p>Bit slicing.</p>
 <p>Selects a constant-width, constant-offset part of <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span></code>. All three slicing syntaxes
 (<code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">]</span></code>, <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">j</span><span class="p">]</span></code>, and <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">j</span><span class="p">:</span><span class="n">k</span><span class="p">]</span></code>) as well as negative indices are
@@ -1049,7 +1049,7 @@ the bounds of <code class="code highlight py python docutils literal highlight-p
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__contains__">
-<span class="sig-name descname"><span class="pre">__contains__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__contains__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__contains__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__contains__" title="Link to this definition"></a></dt>
 <dd><p>Forbidden membership test operator.</p>
 <p>Python requires this operator to return a <a class="reference internal" href="#amaranth.hdl.Value.bool" title="amaranth.hdl.Value.bool"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>. Since this is not possible
 for Amaranth values, this operator always raises an exception.</p>
@@ -1063,7 +1063,7 @@ for Amaranth values, this operator always raises an exception.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.bit_select">
-<span class="sig-name descname"><span class="pre">bit_select</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.bit_select" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">bit_select</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.bit_select" title="Link to this definition"></a></dt>
 <dd><p>Part-select with bit granularity.</p>
 <p>Selects a constant width, variable offset part of <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span></code>, where parts with successive
 offsets overlap by <code class="code highlight py python docutils literal highlight-python"><span class="n">width</span> <span class="o">-</span> <span class="mi">1</span></code> bits. Bits above the most significant bit of <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span></code>
@@ -1092,7 +1092,7 @@ this operation is equivalent to <code class="code highlight py python docutils l
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.word_select">
-<span class="sig-name descname"><span class="pre">word_select</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.word_select" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">word_select</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.word_select" title="Link to this definition"></a></dt>
 <dd><p>Part-select with word granularity.</p>
 <p>Selects a constant width, variable offset part of <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span></code>, where parts with successive
 offsets are adjacent but do not overlap. Bits above the most significant bit of <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span></code>
@@ -1121,7 +1121,7 @@ this operation is equivalent to <code class="code highlight py python docutils l
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.replicate">
-<span class="sig-name descname"><span class="pre">replicate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">count</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.replicate" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">replicate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">count</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.replicate" title="Link to this definition"></a></dt>
 <dd><p>Replication.</p>
 <p>Equivalent to <code class="code highlight py python docutils literal highlight-python"><span class="n">Cat</span><span class="p">(</span><span class="bp">self</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">count</span><span class="p">))</span></code>, but not assignable.</p>
 <dl class="field-list simple">
@@ -1136,7 +1136,7 @@ this operation is equivalent to <code class="code highlight py python docutils l
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.matches">
-<span class="sig-name descname"><span class="pre">matches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">patterns</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.matches" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">matches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">patterns</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.matches" title="Link to this definition"></a></dt>
 <dd><p>Pattern matching.</p>
 <p>Matches against a set of patterns, recognizing the same grammar as <code class="code highlight py python docutils literal highlight-python"><span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">Case</span><span class="p">()</span></code>.
 The pattern syntax is described in the <a class="reference internal" href="guide.html#lang-matchop"><span class="std std-ref">language guide</span></a>.</p>
@@ -1153,7 +1153,7 @@ The pattern syntax is described in the <a class="reference internal" href="guide
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.eq">
-<span class="sig-name descname"><span class="pre">eq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_loc_at</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.eq" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">eq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_loc_at</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.eq" title="Link to this definition"></a></dt>
 <dd><p><a class="reference internal" href="guide.html#lang-assigns"><span class="std std-ref">Assignment</span></a>.</p>
 <p>Once it is placed in a domain, an assignment changes the bit pattern of <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span></code> to
 equal <code class="code highlight py python docutils literal highlight-python"><span class="n">value</span></code>. If the bit width of <code class="code highlight py python docutils literal highlight-python"><span class="n">value</span></code> is less than that of <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span></code>,
@@ -1169,7 +1169,7 @@ it is truncated.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__hash__">
-<span class="sig-name descname"><span class="pre">__hash__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#amaranth.hdl.Value.__hash__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__hash__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#amaranth.hdl.Value.__hash__" title="Link to this definition"></a></dt>
 <dd><p>Forbidden hashing.</p>
 <p>Python objects are <a class="reference external" href="https://docs.python.org/3/glossary.html#term-hashable" title="(in Python v3.13)"><span>hashable</span></a> if they provide a <code class="code highlight py python docutils literal highlight-python"><span class="fm">__hash__</span></code> method
 that returns an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> and an <code class="code highlight py python docutils literal highlight-python"><span class="fm">__eq__</span></code> method that returns a <a class="reference internal" href="#amaranth.hdl.Value.bool" title="amaranth.hdl.Value.bool"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>.
@@ -1187,7 +1187,7 @@ from being hashable.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__format__">
-<span class="sig-name descname"><span class="pre">__format__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">format_desc</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__format__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__format__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">format_desc</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.Value.__format__" title="Link to this definition"></a></dt>
 <dd><p>Forbidden formatting.</p>
 <p>Since normal Python formatting (f-strings and <code class="docutils literal notranslate"><span class="pre">str.format</span></code>) must immediately return
 a string, it is unsuitable for formatting Amaranth values. To format a value at simulation
@@ -1199,7 +1199,7 @@ use <code class="docutils literal notranslate"><span class="pre">repr</span></co
 
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.hdl.ValueCastable">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.hdl.</span></span><span class="sig-name descname"><span class="pre">ValueCastable</span></span><a class="headerlink" href="#amaranth.hdl.ValueCastable" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.hdl.</span></span><span class="sig-name descname"><span class="pre">ValueCastable</span></span><a class="headerlink" href="#amaranth.hdl.ValueCastable" title="Link to this definition"></a></dt>
 <dd><p>Interface class for objects that can be cast to a <a class="reference internal" href="#amaranth.hdl.Value" title="amaranth.hdl.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a>.</p>
 <p>Computations in the Amaranth language are described by combining <a class="reference internal" href="guide.html#lang-valuelike"><span class="std std-ref">value-like objects</span></a>. Inheriting a class from <a class="reference internal" href="#amaranth.hdl.ValueCastable" title="amaranth.hdl.ValueCastable"><code class="xref py py-class docutils literal notranslate"><span class="pre">ValueCastable</span></code></a> and implementing
 all of the methods described below adds instances of that class to the list of
@@ -1217,7 +1217,7 @@ it will perform <code class="code highlight py python docutils literal highlight
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.ValueCastable.as_value">
-<span class="sig-name descname"><span class="pre">as_value</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.ValueCastable.as_value" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">as_value</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.ValueCastable.as_value" title="Link to this definition"></a></dt>
 <dd><p>Convert <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span></code> to a <a class="reference internal" href="guide.html#lang-valuelike"><span class="std std-ref">value-like object</span></a>.</p>
 <p>This method is called by the Amaranth language to convert <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span></code> to a concrete
 <a class="reference internal" href="#amaranth.hdl.Value" title="amaranth.hdl.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a>. It will usually return a <a class="reference internal" href="#amaranth.hdl.Value" title="amaranth.hdl.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a> object, but it may also return
@@ -1241,7 +1241,7 @@ exactly the same.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.hdl.ValueCastable.shape">
-<span class="sig-name descname"><span class="pre">shape</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.ValueCastable.shape" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">shape</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.ValueCastable.shape" title="Link to this definition"></a></dt>
 <dd><p>Compute the shape of <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span></code>.</p>
 <p>This method is not called by the Amaranth language itself; whenever it needs to discover
 the shape of a value-castable object, it calls <code class="xref py py-class docutils literal notranslate"><span class="pre">self.as_value().shape()</span></code>. However,
@@ -1272,7 +1272,7 @@ exactly the same.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.hdl.ValueLike">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.hdl.</span></span><span class="sig-name descname"><span class="pre">ValueLike</span></span><a class="headerlink" href="#amaranth.hdl.ValueLike" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.hdl.</span></span><span class="sig-name descname"><span class="pre">ValueLike</span></span><a class="headerlink" href="#amaranth.hdl.ValueLike" title="Link to this definition"></a></dt>
 <dd><p>Abstract class representing all objects that can be cast to a <a class="reference internal" href="#amaranth.hdl.Value" title="amaranth.hdl.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a>.</p>
 <p><code class="code highlight py python docutils literal highlight-python"><span class="nb">issubclass</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ValueLike</span><span class="p">)</span></code> returns <code class="code highlight py python docutils literal highlight-python"><span class="kc">True</span></code> for:</p>
 <ul class="simple">

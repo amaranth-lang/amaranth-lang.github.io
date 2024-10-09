@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Simulator &mdash; Amaranth language &amp; toolchain 0.6.0.dev68 documentation</title>
+  <title>Simulator &mdash; Amaranth language &amp; toolchain 0.6.0.dev69 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/platformpicker.css" />
@@ -17,9 +17,9 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=8cd79b05"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/documentation_options.js?v=f25acf92"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="_static/platformpicker.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -41,7 +41,7 @@
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.6.0.dev68
+                0.6.0.dev69
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -118,10 +118,10 @@
            <div itemprop="articleBody">
              
   <section id="module-amaranth.sim">
-<span id="simulator"></span><h1>Simulator<a class="headerlink" href="#module-amaranth.sim" title="Permalink to this heading"></a></h1>
+<span id="simulator"></span><h1>Simulator<a class="headerlink" href="#module-amaranth.sim" title="Link to this heading"></a></h1>
 <p>The <a class="reference internal" href="#module-amaranth.sim" title="amaranth.sim"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.sim</span></code></a> module, also known as the simulator, makes it possible to evaluate a design’s functionality in a virtual environment before it is implemented in hardware.</p>
 <section id="simulating-circuits">
-<h2>Simulating circuits<a class="headerlink" href="#simulating-circuits" title="Permalink to this heading"></a></h2>
+<h2>Simulating circuits<a class="headerlink" href="#simulating-circuits" title="Link to this heading"></a></h2>
 <p>The following examples simulate one of the two designs below: synchronous counter running in the <code class="docutils literal notranslate"><span class="pre">sync</span></code> clock domain, and combinational adder. They assume familiarity with the <a class="reference internal" href="guide.html"><span class="doc">language guide</span></a>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">amaranth.lib</span> <span class="kn">import</span> <span class="n">wiring</span>
 <span class="kn">from</span> <span class="nn">amaranth.lib.wiring</span> <span class="kn">import</span> <span class="n">In</span><span class="p">,</span> <span class="n">Out</span>
@@ -148,7 +148,7 @@
 </pre></div>
 </div>
 <section id="running-a-simulation">
-<h3>Running a simulation<a class="headerlink" href="#running-a-simulation" title="Permalink to this heading"></a></h3>
+<h3>Running a simulation<a class="headerlink" href="#running-a-simulation" title="Link to this heading"></a></h3>
 <p>Simulating a design always requires the three basic steps: constructing the <abbr title="Design Under Test">DUT</abbr>, constructing a <a class="reference internal" href="#amaranth.sim.Simulator" title="amaranth.sim.Simulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Simulator</span></code></a> for it, and running the simulation with the <a class="reference internal" href="#amaranth.sim.Simulator.run" title="amaranth.sim.Simulator.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Simulator.run()</span></code></a> or <a class="reference internal" href="#amaranth.sim.Simulator.run_until" title="amaranth.sim.Simulator.run_until"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Simulator.run_until()</span></code></a> method:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">amaranth.sim</span> <span class="kn">import</span> <span class="n">Simulator</span><span class="p">,</span> <span class="n">Period</span>
 
@@ -183,7 +183,7 @@
 </div>
 </section>
 <section id="testing-synchronous-circuits">
-<h3>Testing synchronous circuits<a class="headerlink" href="#testing-synchronous-circuits" title="Permalink to this heading"></a></h3>
+<h3>Testing synchronous circuits<a class="headerlink" href="#testing-synchronous-circuits" title="Link to this heading"></a></h3>
 <p>To verify that the DUT works as intended during a simulation, known values are provided as the inputs, and the outputs are compared with the expected results.</p>
 <p>This is done by adding a different type of stimulus to the simulator, a <em>testbench</em>: an <code class="code highlight py python docutils literal highlight-python"><span class="k">async</span></code> Python function that runs concurrently with the DUT and can manipulate the signals used in the simulation. A testbench is added using the <a class="reference internal" href="#amaranth.sim.Simulator.add_testbench" title="amaranth.sim.Simulator.add_testbench"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Simulator.add_testbench()</span></code></a> method, and receives a <a class="reference internal" href="#amaranth.sim.SimulatorContext" title="amaranth.sim.SimulatorContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimulatorContext</span></code></a> object through which it can interact with the simulator: inspect the value of signals using the <a class="reference internal" href="#amaranth.sim.SimulatorContext.get" title="amaranth.sim.SimulatorContext.get"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ctx.get()</span></code></a> method, change the value of signals using the <a class="reference internal" href="#amaranth.sim.SimulatorContext.set" title="amaranth.sim.SimulatorContext.set"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ctx.set()</span></code></a> method, or wait for an active edge of a <a class="reference internal" href="guide.html#lang-clockdomains"><span class="std std-ref">clock domain</span></a> using the <a class="reference internal" href="#amaranth.sim.SimulatorContext.tick" title="amaranth.sim.SimulatorContext.tick"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ctx.tick()</span></code></a> method.</p>
 <p>The following example simulates a counter and verifies that it can be stopped using its <code class="code highlight py python docutils literal highlight-python"><span class="n">en</span></code> input:</p>
@@ -207,7 +207,7 @@
 <p>Since this circuit is synchronous, and the <a class="reference internal" href="#amaranth.sim.SimulatorContext.tick" title="amaranth.sim.SimulatorContext.tick"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ctx.tick()</span></code></a> method waits until after the circuit has reacted to the clock edge, the change to the <code class="code highlight py python docutils literal highlight-python"><span class="n">en</span></code> input affects the behavior of the circuit on the next clock cycle after the change:</p>
 <img src="_images/simulator/example2.svg" class="wavedrom wavedrom-signal" alt="{'head': {'tock': 0}, 'signal': [{'name': 'clk', 'wave': 'lp..............'}, {'name': 'rst', 'wave': 'l...............'}, {'name': 'en', 'wave': 'h....0....1.....'}, {'name': 'count', 'wave': '======.....=====', 'data': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10']}], 'config': {'skin': 'default'}}"></section>
 <section id="testing-combinational-circuits">
-<h3>Testing combinational circuits<a class="headerlink" href="#testing-combinational-circuits" title="Permalink to this heading"></a></h3>
+<h3>Testing combinational circuits<a class="headerlink" href="#testing-combinational-circuits" title="Link to this heading"></a></h3>
 <p>A testbench that tests a combinational circuit advances simulation time using the <a class="reference internal" href="#amaranth.sim.SimulatorContext.delay" title="amaranth.sim.SimulatorContext.delay"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ctx.delay()</span></code></a> method instead of the <a class="reference internal" href="#amaranth.sim.SimulatorContext.tick" title="amaranth.sim.SimulatorContext.tick"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ctx.tick()</span></code></a> method, since the simulation does not contain a clock in this case. The <a class="reference internal" href="#amaranth.sim.Simulator.run" title="amaranth.sim.Simulator.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Simulator.run()</span></code></a> method stops the simulation and returns once all testbenches finish executing.</p>
 <p>The following example simulates an adder:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dut</span> <span class="o">=</span> <span class="n">Adder</span><span class="p">()</span>
@@ -235,7 +235,7 @@
 <img src="_images/simulator/example3.svg" class="wavedrom wavedrom-signal" alt="{'signal': [{'name': 'a', 'wave': '===.', 'data': [0, 2, 1717]}, {'name': 'b', 'wave': '===.', 'data': [0, 2, 420]}, {'name': 'o', 'wave': '===.', 'data': [0, 4, 2137]}], 'config': {'skin': 'default'}}"></section>
 </section>
 <section id="replacing-circuits-with-code">
-<h2>Replacing circuits with code<a class="headerlink" href="#replacing-circuits-with-code" title="Permalink to this heading"></a></h2>
+<h2>Replacing circuits with code<a class="headerlink" href="#replacing-circuits-with-code" title="Link to this heading"></a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This section describes an advanced technique that is not commonly used. If you are first learning how to use the simulator, you can skip it.</p>
@@ -248,7 +248,7 @@
 </ul>
 <p>A process communicates with the rest of the design in the same way an elaboratable would: through <code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code>s.</p>
 <section id="replacing-synchronous-circuits">
-<h3>Replacing synchronous circuits<a class="headerlink" href="#replacing-synchronous-circuits" title="Permalink to this heading"></a></h3>
+<h3>Replacing synchronous circuits<a class="headerlink" href="#replacing-synchronous-circuits" title="Link to this heading"></a></h3>
 <p>Processes cannot inspect values of signals using the <a class="reference internal" href="#amaranth.sim.SimulatorContext.get" title="amaranth.sim.SimulatorContext.get"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ctx.get()</span></code></a> method. Instead, values of signals in a synchronous process are sampled at each active edge of the clock domain (or, for domains with asynchronous reset, at the assertion of the reset signal) using the <a class="reference internal" href="#amaranth.sim.SimulatorContext.tick" title="amaranth.sim.SimulatorContext.tick"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ctx.tick()</span></code></a> method.</p>
 <p>The following code replaces the <code class="code highlight py python docutils literal highlight-python"><span class="n">Counter</span></code> elaboratable with the equivalent Python code in a process, and uses a testbench to verify its correct operation:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">Module</span><span class="p">()</span>
@@ -284,7 +284,7 @@
 <p>Unless it is instructed otherwise, the <a class="reference internal" href="#amaranth.sim.Simulator.write_vcd" title="amaranth.sim.Simulator.write_vcd"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Simulator.write_vcd()</span></code></a> method only captures values of signals that appear in the circuit provided to the simulator when it is created. The <code class="code highlight py python docutils literal highlight-python"><span class="n">en</span></code> and <code class="code highlight py python docutils literal highlight-python"><span class="n">count</span></code> signals do not, and are added explicitly using the <code class="code highlight py python docutils literal highlight-python"><span class="n">traces</span></code> argument so that they will appear in the VCD file.</p>
 </section>
 <section id="replacing-combinational-circuits">
-<h3>Replacing combinational circuits<a class="headerlink" href="#replacing-combinational-circuits" title="Permalink to this heading"></a></h3>
+<h3>Replacing combinational circuits<a class="headerlink" href="#replacing-combinational-circuits" title="Link to this heading"></a></h3>
 <p>Values of signals in a combinational process are sampled anytime they change using the <a class="reference internal" href="#amaranth.sim.SimulatorContext.changed" title="amaranth.sim.SimulatorContext.changed"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ctx.changed()</span></code></a> method.</p>
 <p>The following code replaces the <code class="code highlight py python docutils literal highlight-python"><span class="n">Adder</span></code> elaboratable with the equivalent Python code in a process, and uses a testbench to verify its correct operation:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">Module</span><span class="p">()</span>
@@ -319,10 +319,10 @@
 </section>
 </section>
 <section id="reference">
-<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this heading"></a></h2>
+<h2>Reference<a class="headerlink" href="#reference" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.sim.Simulator">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.sim.</span></span><span class="sig-name descname"><span class="pre">Simulator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">toplevel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.Simulator" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.sim.</span></span><span class="sig-name descname"><span class="pre">Simulator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">toplevel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.Simulator" title="Link to this definition"></a></dt>
 <dd><p>Simulator for Amaranth designs.</p>
 <p>The simulator accepts a <em>top-level design</em> (an <a class="reference internal" href="guide.html#lang-elaboration"><span class="std std-ref">elaboratable</span></a>),
 <em>processes</em> that replace circuits with behavioral code, <em>clocks</em> that drive clock domains, and
@@ -367,7 +367,7 @@ simulating a large design.</p>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.sim.Simulator.add_clock">
-<span class="sig-name descname"><span class="pre">add_clock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">period</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sync'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">if_exists</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.Simulator.add_clock" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">add_clock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">period</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sync'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">if_exists</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.Simulator.add_clock" title="Link to this definition"></a></dt>
 <dd><p>Add a clock to the simulation.</p>
 <p>Adds a stimulus that toggles the clock signal of <code class="code highlight py python docutils literal highlight-python"><span class="n">domain</span></code> at a 50% duty cycle.</p>
 <p>The driven clock signal will toggle every half-<code class="code highlight py python docutils literal highlight-python"><span class="n">period</span></code> seconds starting at <code class="code highlight py python docutils literal highlight-python"><span class="n">phase</span></code>
@@ -391,7 +391,7 @@ the clock domain with that name is retrieved from the <code class="code highligh
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.sim.Simulator.add_testbench">
-<span class="sig-name descname"><span class="pre">add_testbench</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">constructor</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">background</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.Simulator.add_testbench" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">add_testbench</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">constructor</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">background</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.Simulator.add_testbench" title="Link to this definition"></a></dt>
 <dd><p>Add a testbench to the simulation.</p>
 <p>Adds a testbench that runs concurrently with the <code class="code highlight py python docutils literal highlight-python"><span class="n">toplevel</span></code> elaboratable and is able to
 manipulate its inputs, outputs, and state.</p>
@@ -425,7 +425,7 @@ a coordinated way, they may rely on this execution order for correctness.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.sim.Simulator.add_process">
-<span class="sig-name descname"><span class="pre">add_process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">process</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.Simulator.add_process" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">add_process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">process</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.Simulator.add_process" title="Link to this definition"></a></dt>
 <dd><p>Add a process to the simulation.</p>
 <p>Adds a process that is evaluated as a part of the <code class="code highlight py python docutils literal highlight-python"><span class="n">toplevel</span></code> elaboratable and is able to
 replace circuits with Python code.</p>
@@ -466,7 +466,7 @@ simplifying debugging.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.sim.Simulator.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.Simulator.run" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.Simulator.run" title="Link to this definition"></a></dt>
 <dd><p>Run the simulation indefinitely.</p>
 <p>This method advances the simulation while any critical testbenches or processes continue
 executing. It is equivalent to:</p>
@@ -478,7 +478,7 @@ executing. It is equivalent to:</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.sim.Simulator.run_until">
-<span class="sig-name descname"><span class="pre">run_until</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deadline</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.Simulator.run_until" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">run_until</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deadline</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.Simulator.run_until" title="Link to this definition"></a></dt>
 <dd><p>Run the simulation until a specific point in time.</p>
 <p>This method advances the simulation until the simulation time reaches <code class="code highlight py python docutils literal highlight-python"><span class="n">deadline</span></code>,
 without regard for whether there are critical testbenches or processes executing.</p>
@@ -486,7 +486,7 @@ without regard for whether there are critical testbenches or processes executing
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.sim.Simulator.advance">
-<span class="sig-name descname"><span class="pre">advance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.Simulator.advance" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">advance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.Simulator.advance" title="Link to this definition"></a></dt>
 <dd><p>Advance the simulation.</p>
 <p>This method advances the simulation by one time step. After this method completes, all of
 the events scheduled for the current point in time will have taken effect, and the current
@@ -500,7 +500,7 @@ are executed as necessary.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.sim.Simulator.write_vcd">
-<span class="sig-name descname"><span class="pre">write_vcd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vcd_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gtkw_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">traces</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.Simulator.write_vcd" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">write_vcd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vcd_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gtkw_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">traces</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.Simulator.write_vcd" title="Link to this definition"></a></dt>
 <dd><p>Capture waveforms to a file.</p>
 <p>This context manager captures waveforms for each signal and memory that is referenced from
 <code class="code highlight py python docutils literal highlight-python"><span class="n">toplevel</span></code>, as well as any additional signals or memories specified in <code class="code highlight py python docutils literal highlight-python"><span class="n">traces</span></code>,
@@ -531,7 +531,7 @@ or a filename. If a file object is provided, it is closed when exiting the conte
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.sim.Simulator.reset">
-<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.Simulator.reset" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.Simulator.reset" title="Link to this definition"></a></dt>
 <dd><p>Reset the simulation.</p>
 <p>This method reverts the simulation to its initial state:</p>
 <ul class="simple">
@@ -545,7 +545,7 @@ or a filename. If a file object is provided, it is closed when exiting the conte
 
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.sim.SimulatorContext">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.sim.</span></span><span class="sig-name descname"><span class="pre">SimulatorContext</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">...</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.SimulatorContext" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.sim.</span></span><span class="sig-name descname"><span class="pre">SimulatorContext</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">...</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.SimulatorContext" title="Link to this definition"></a></dt>
 <dd><p>Simulator context.</p>
 <p>Simulator processes and testbenches are <code class="code highlight py python docutils literal highlight-python"><span class="k">async</span></code> Python functions that interact with
 the simulation using the only argument they receive: the <em>context</em>. Using a context, it is
@@ -562,7 +562,7 @@ before the call returns.</p>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.sim.SimulatorContext.get">
-<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.SimulatorContext.get" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.SimulatorContext.get" title="Link to this definition"></a></dt>
 <dd><p>Sample the value of an expression.</p>
 <p>The behavior of this method depends on the type of <code class="code highlight py python docutils literal highlight-python"><span class="n">expr</span></code>:</p>
 <ul class="simple">
@@ -582,7 +582,7 @@ a <a class="reference internal" href="reference.html#amaranth.hdl.Shape" title="
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.sim.SimulatorContext.set">
-<span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.SimulatorContext.set" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.SimulatorContext.set" title="Link to this definition"></a></dt>
 <dd><p>Update the value of an expression.</p>
 <p>The behavior of this method depends on the type of <code class="code highlight py python docutils literal highlight-python"><span class="n">expr</span></code>:</p>
 <ul class="simple">
@@ -600,7 +600,7 @@ propagates through the simulated circuits.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.sim.SimulatorContext.critical">
-<span class="sig-name descname"><span class="pre">critical</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.SimulatorContext.critical" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">critical</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.SimulatorContext.critical" title="Link to this definition"></a></dt>
 <dd><p>Context manager that temporarily makes the caller critical.</p>
 <p>Testbenches and processes may be <em>background</em> or <em>critical</em>, where critical ones prevent
 <a class="reference internal" href="#amaranth.sim.Simulator.run" title="amaranth.sim.Simulator.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Simulator.run()</span></code></a> from finishing. Processes are always created background, while
@@ -629,7 +629,7 @@ the operation itself using this context manager, for example:</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.sim.SimulatorContext.tick">
-<span class="sig-name descname"><span class="pre">tick</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sync'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.SimulatorContext.tick" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">tick</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sync'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.SimulatorContext.tick" title="Link to this definition"></a></dt>
 <dd><p>Wait until an active clock edge or an asynchronous reset occurs.</p>
 <p>This method returns a <a class="reference internal" href="#amaranth.sim.TickTrigger" title="amaranth.sim.TickTrigger"><code class="xref py py-class docutils literal notranslate"><span class="pre">TickTrigger</span></code></a> object that, when awaited, pauses the execution
 of the calling process or testbench until the active edge of the clock, or the asynchronous
@@ -657,7 +657,7 @@ the <a class="reference internal" href="guide.html#lang-elaboration"><span class
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.sim.SimulatorContext.delay">
-<span class="sig-name descname"><span class="pre">delay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interval</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.SimulatorContext.delay" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">delay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interval</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.SimulatorContext.delay" title="Link to this definition"></a></dt>
 <dd><p>Wait until a time interval has elapsed.</p>
 <p>This method returns a <a class="reference internal" href="#amaranth.sim.TriggerCombination" title="amaranth.sim.TriggerCombination"><code class="xref py py-class docutils literal notranslate"><span class="pre">TriggerCombination</span></code></a> object that, when awaited, pauses
 the execution of the calling process or testbench by <code class="code highlight py python docutils literal highlight-python"><span class="n">interval</span></code> seconds. The returned
@@ -683,7 +683,7 @@ difficult to understand and simulations hard to reason about.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.sim.SimulatorContext.changed">
-<span class="sig-name descname"><span class="pre">changed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">signals</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.SimulatorContext.changed" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">changed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">signals</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.SimulatorContext.changed" title="Link to this definition"></a></dt>
 <dd><p>Asynchronously wait until one of the signals change.</p>
 <p>This method returns a <a class="reference internal" href="#amaranth.sim.TriggerCombination" title="amaranth.sim.TriggerCombination"><code class="xref py py-class docutils literal notranslate"><span class="pre">TriggerCombination</span></code></a> object that, when awaited, pauses
 the execution of the calling process or testbench until any of the <code class="code highlight py python docutils literal highlight-python"><span class="n">signals</span></code> change.
@@ -708,7 +708,7 @@ encounter a glitch.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.sim.SimulatorContext.edge">
-<span class="sig-name descname"><span class="pre">edge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polarity</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.SimulatorContext.edge" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">edge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polarity</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.SimulatorContext.edge" title="Link to this definition"></a></dt>
 <dd><p>Asynchronously wait until a low-to-high or high-to-low transition of a signal occurs.</p>
 <p>This method returns a <a class="reference internal" href="#amaranth.sim.TriggerCombination" title="amaranth.sim.TriggerCombination"><code class="xref py py-class docutils literal notranslate"><span class="pre">TriggerCombination</span></code></a> object that, when awaited, pauses
 the execution of the calling process or testbench until the value of <code class="code highlight py python docutils literal highlight-python"><span class="n">signal</span></code>
@@ -737,21 +737,21 @@ Whenever a suitable clock domain is available, use
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.sim.SimulatorContext.posedge">
-<span class="sig-name descname"><span class="pre">posedge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.SimulatorContext.posedge" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">posedge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.SimulatorContext.posedge" title="Link to this definition"></a></dt>
 <dd><p>Asynchronously wait until a signal is asserted.</p>
 <p>Equivalent to <a class="reference internal" href="#amaranth.sim.SimulatorContext.edge" title="amaranth.sim.SimulatorContext.edge"><code class="xref py py-meth docutils literal notranslate"><span class="pre">edge(signal,</span> <span class="pre">1)</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.sim.SimulatorContext.negedge">
-<span class="sig-name descname"><span class="pre">negedge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.SimulatorContext.negedge" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">negedge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.SimulatorContext.negedge" title="Link to this definition"></a></dt>
 <dd><p>Asynchronously wait until a signal is deasserted.</p>
 <p>Equivalent to <a class="reference internal" href="#amaranth.sim.SimulatorContext.edge" title="amaranth.sim.SimulatorContext.edge"><code class="xref py py-meth docutils literal notranslate"><span class="pre">edge(signal,</span> <span class="pre">0)</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.sim.SimulatorContext.elapsed_time">
-<span class="sig-name descname"><span class="pre">elapsed_time</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.SimulatorContext.elapsed_time" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">elapsed_time</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.SimulatorContext.elapsed_time" title="Link to this definition"></a></dt>
 <dd><p>Return the currently elapsed simulation time.</p>
 </dd></dl>
 
@@ -759,20 +759,20 @@ Whenever a suitable clock domain is available, use
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="amaranth.sim.BrokenTrigger">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.sim.</span></span><span class="sig-name descname"><span class="pre">BrokenTrigger</span></span><a class="headerlink" href="#amaranth.sim.BrokenTrigger" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.sim.</span></span><span class="sig-name descname"><span class="pre">BrokenTrigger</span></span><a class="headerlink" href="#amaranth.sim.BrokenTrigger" title="Link to this definition"></a></dt>
 <dd><p>Exception raised when a trigger that is repeatedly awaited using an <code class="code highlight py python docutils literal highlight-python"><span class="k">async</span> <span class="k">for</span></code> loop has
 a matching event occur while the body of the <code class="code highlight py python docutils literal highlight-python"><span class="k">async</span> <span class="k">for</span></code> loop is still executing.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="amaranth.sim.DomainReset">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.sim.</span></span><span class="sig-name descname"><span class="pre">DomainReset</span></span><a class="headerlink" href="#amaranth.sim.DomainReset" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.sim.</span></span><span class="sig-name descname"><span class="pre">DomainReset</span></span><a class="headerlink" href="#amaranth.sim.DomainReset" title="Link to this definition"></a></dt>
 <dd><p>Exception raised when a tick trigger is repeatedly awaited, and its domain has been reset.</p>
 </dd></dl>
 
-<span class="target" id="sim-tick-trigger"></span><dl class="py class">
+<dl class="py class" id="sim-tick-trigger">
 <dt class="sig sig-object py" id="amaranth.sim.TickTrigger">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.sim.</span></span><span class="sig-name descname"><span class="pre">TickTrigger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">...</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.TickTrigger" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.sim.</span></span><span class="sig-name descname"><span class="pre">TickTrigger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">...</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.TickTrigger" title="Link to this definition"></a></dt>
 <dd><p>A trigger that wakes up the caller when the active edge of a clock domain occurs or the domain
 is asynchronously reset.</p>
 <p>A <a class="reference internal" href="#amaranth.sim.TickTrigger" title="amaranth.sim.TickTrigger"><code class="xref py py-class docutils literal notranslate"><span class="pre">TickTrigger</span></code></a> is an immutable object that stores a reference to a clock domain and
@@ -822,7 +822,7 @@ building blocks, should handle both cases.</p>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.sim.TickTrigger.sample">
-<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">exprs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.TickTrigger.sample" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">exprs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.TickTrigger.sample" title="Link to this definition"></a></dt>
 <dd><p>Sample expressions when this trigger is activated.</p>
 <p>This method returns a new <a class="reference internal" href="#amaranth.sim.TickTrigger" title="amaranth.sim.TickTrigger"><code class="xref py py-class docutils literal notranslate"><span class="pre">TickTrigger</span></code></a> object. When awaited, this object returns,
 in addition to the values that would be otherwise returned by <code class="code highlight py python docutils literal highlight-python"><span class="k">await</span> <span class="n">trigger</span></code>,
@@ -860,7 +860,7 @@ checking if it holds, and then removing it from the list of sampled values:</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.sim.TickTrigger.until">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">until</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">condition</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.TickTrigger.until" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">until</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">condition</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.TickTrigger.until" title="Link to this definition"></a></dt>
 <dd><p>Repeat this trigger until a condition is met.</p>
 <p>This method awaits this trigger at least once, and returns a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a> of the values
 that are <a class="reference internal" href="#amaranth.sim.TickTrigger.sample" title="amaranth.sim.TickTrigger.sample"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sample()</span></code></a>d when <code class="code highlight py python docutils literal highlight-python"><span class="n">condition</span></code> evaluates to a non-zero value. Values
@@ -889,7 +889,7 @@ while awaiting <code class="code highlight py python docutils literal highlight-
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.sim.TickTrigger.repeat">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">repeat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">count</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.TickTrigger.repeat" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">repeat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">count</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.TickTrigger.repeat" title="Link to this definition"></a></dt>
 <dd><p>Repeat this trigger a specific number of times.</p>
 <p>This method awaits this trigger at least once, and returns a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a> of the values
 that are <a class="reference internal" href="#amaranth.sim.TickTrigger.sample" title="amaranth.sim.TickTrigger.sample"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sample()</span></code></a>d during the last repeat. Values sampled during previous repeats
@@ -918,7 +918,7 @@ while awaiting <code class="code highlight py python docutils literal highlight-
 
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.sim.TriggerCombination">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.sim.</span></span><span class="sig-name descname"><span class="pre">TriggerCombination</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">...</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.TriggerCombination" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.sim.</span></span><span class="sig-name descname"><span class="pre">TriggerCombination</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">...</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.TriggerCombination" title="Link to this definition"></a></dt>
 <dd><p>A list of triggers, the activation of any of which will wake up the caller.</p>
 <p>A <a class="reference internal" href="#amaranth.sim.TriggerCombination" title="amaranth.sim.TriggerCombination"><code class="xref py py-class docutils literal notranslate"><span class="pre">TriggerCombination</span></code></a> is an immutable object that stores a list of triggers and
 expressions to sample. The trigger combination wakes up the caller when any of these triggers
@@ -960,7 +960,7 @@ of the missed event.</p></li>
 </ol>
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.sim.TriggerCombination.sample">
-<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">exprs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.TriggerCombination.sample" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">exprs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.TriggerCombination.sample" title="Link to this definition"></a></dt>
 <dd><p>Sample signals when a trigger from this combination is activated.</p>
 <p>This method returns a new <a class="reference internal" href="#amaranth.sim.TriggerCombination" title="amaranth.sim.TriggerCombination"><code class="xref py py-class docutils literal notranslate"><span class="pre">TriggerCombination</span></code></a> object. When awaited, this object
 returns, in addition to the values that would be returned by <code class="code highlight py python docutils literal highlight-python"><span class="k">await</span> <span class="n">trigger</span></code>, the values
@@ -989,7 +989,7 @@ the documentation for <a class="reference internal" href="#amaranth.sim.TickTrig
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.sim.TriggerCombination.delay">
-<span class="sig-name descname"><span class="pre">delay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interval</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.TriggerCombination.delay" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">delay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interval</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.TriggerCombination.delay" title="Link to this definition"></a></dt>
 <dd><p>Add a delay trigger to the list of triggers.</p>
 <p>This method returns a new <a class="reference internal" href="#amaranth.sim.TriggerCombination" title="amaranth.sim.TriggerCombination"><code class="xref py py-class docutils literal notranslate"><span class="pre">TriggerCombination</span></code></a> object. When awaited, this object
 also waits for the same trigger as <a class="reference internal" href="#amaranth.sim.SimulatorContext.delay" title="amaranth.sim.SimulatorContext.delay"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SimulatorContext.delay()</span></code></a>, and returns,
@@ -999,7 +999,7 @@ returned by <a class="reference internal" href="#amaranth.sim.SimulatorContext.d
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.sim.TriggerCombination.changed">
-<span class="sig-name descname"><span class="pre">changed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">signals</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.TriggerCombination.changed" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">changed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">signals</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.TriggerCombination.changed" title="Link to this definition"></a></dt>
 <dd><p>Add a signal change trigger to the list of triggers.</p>
 <p>This method returns a new <a class="reference internal" href="#amaranth.sim.TriggerCombination" title="amaranth.sim.TriggerCombination"><code class="xref py py-class docutils literal notranslate"><span class="pre">TriggerCombination</span></code></a> object. When awaited, this object
 also waits for the same trigger as <a class="reference internal" href="#amaranth.sim.SimulatorContext.changed" title="amaranth.sim.SimulatorContext.changed"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SimulatorContext.changed()</span></code></a>, and returns,
@@ -1009,7 +1009,7 @@ returned by <a class="reference internal" href="#amaranth.sim.SimulatorContext.c
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.sim.TriggerCombination.edge">
-<span class="sig-name descname"><span class="pre">edge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polarity</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.TriggerCombination.edge" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">edge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polarity</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.TriggerCombination.edge" title="Link to this definition"></a></dt>
 <dd><p>Add a low-to-high or high-to-low transition trigger to the list of triggers.</p>
 <p>This method returns a new <a class="reference internal" href="#amaranth.sim.TriggerCombination" title="amaranth.sim.TriggerCombination"><code class="xref py py-class docutils literal notranslate"><span class="pre">TriggerCombination</span></code></a> object. When awaited, this object
 also waits for the same trigger as <a class="reference internal" href="#amaranth.sim.SimulatorContext.edge" title="amaranth.sim.SimulatorContext.edge"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SimulatorContext.edge()</span></code></a>, and returns,
@@ -1019,14 +1019,14 @@ returned by <a class="reference internal" href="#amaranth.sim.SimulatorContext.e
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.sim.TriggerCombination.posedge">
-<span class="sig-name descname"><span class="pre">posedge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.TriggerCombination.posedge" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">posedge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.TriggerCombination.posedge" title="Link to this definition"></a></dt>
 <dd><p>Add a low-to-high transition trigger to the list of triggers.</p>
 <p>Equivalent to <a class="reference internal" href="#amaranth.sim.TriggerCombination.edge" title="amaranth.sim.TriggerCombination.edge"><code class="xref py py-meth docutils literal notranslate"><span class="pre">edge(signal,</span> <span class="pre">1)</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="amaranth.sim.TriggerCombination.negedge">
-<span class="sig-name descname"><span class="pre">negedge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.TriggerCombination.negedge" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">negedge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.TriggerCombination.negedge" title="Link to this definition"></a></dt>
 <dd><p>Add a high-to-low transition trigger to the list of triggers.</p>
 <p>Equivalent to <a class="reference internal" href="#amaranth.sim.TriggerCombination.edge" title="amaranth.sim.TriggerCombination.edge"><code class="xref py py-meth docutils literal notranslate"><span class="pre">edge(signal,</span> <span class="pre">0)</span></code></a>.</p>
 </dd></dl>

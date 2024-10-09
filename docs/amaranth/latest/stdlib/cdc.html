@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Clock domain crossing &mdash; Amaranth language &amp; toolchain 0.6.0.dev68 documentation</title>
+  <title>Clock domain crossing &mdash; Amaranth language &amp; toolchain 0.6.0.dev69 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
@@ -17,9 +17,9 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=8cd79b05"></script>
-        <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/documentation_options.js?v=f25acf92"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/platformpicker.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -41,7 +41,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.6.0.dev68
+                0.6.0.dev69
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -115,11 +115,11 @@
            <div itemprop="articleBody">
              
   <section id="module-amaranth.lib.cdc">
-<span id="clock-domain-crossing"></span><h1>Clock domain crossing<a class="headerlink" href="#module-amaranth.lib.cdc" title="Permalink to this heading"></a></h1>
+<span id="clock-domain-crossing"></span><h1>Clock domain crossing<a class="headerlink" href="#module-amaranth.lib.cdc" title="Link to this heading"></a></h1>
 <p>The <a class="reference internal" href="#module-amaranth.lib.cdc" title="amaranth.lib.cdc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.cdc</span></code></a> module provides building blocks for transferring data between clock domains.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.lib.cdc.FFSynchronizer">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.cdc.</span></span><span class="sig-name descname"><span class="pre">FFSynchronizer</span></span><a class="headerlink" href="#amaranth.lib.cdc.FFSynchronizer" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.cdc.</span></span><span class="sig-name descname"><span class="pre">FFSynchronizer</span></span><a class="headerlink" href="#amaranth.lib.cdc.FFSynchronizer" title="Link to this definition"></a></dt>
 <dd><p>Resynchronise a signal to a different clock domain.</p>
 <p>Consists of a chain of flip-flops. Eliminates metastabilities at the output, but provides
 no other guarantee as to the safe domain-crossing of a signal.</p>
@@ -163,7 +163,7 @@ its reset value until <code class="docutils literal notranslate"><span class="pr
 
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.lib.cdc.AsyncFFSynchronizer">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.cdc.</span></span><span class="sig-name descname"><span class="pre">AsyncFFSynchronizer</span></span><a class="headerlink" href="#amaranth.lib.cdc.AsyncFFSynchronizer" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.cdc.</span></span><span class="sig-name descname"><span class="pre">AsyncFFSynchronizer</span></span><a class="headerlink" href="#amaranth.lib.cdc.AsyncFFSynchronizer" title="Link to this definition"></a></dt>
 <dd><p>Synchronize deassertion of an asynchronous signal.</p>
 <p>The signal driven by the <a class="reference internal" href="#amaranth.lib.cdc.AsyncFFSynchronizer" title="amaranth.lib.cdc.AsyncFFSynchronizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncFFSynchronizer</span></code></a> is asserted asynchronously and deasserted
 synchronously, eliminating metastability during deassertion.</p>
@@ -189,7 +189,7 @@ If specified and the platform does not support it, elaboration will fail.</p></l
 
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.lib.cdc.ResetSynchronizer">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.cdc.</span></span><span class="sig-name descname"><span class="pre">ResetSynchronizer</span></span><a class="headerlink" href="#amaranth.lib.cdc.ResetSynchronizer" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.cdc.</span></span><span class="sig-name descname"><span class="pre">ResetSynchronizer</span></span><a class="headerlink" href="#amaranth.lib.cdc.ResetSynchronizer" title="Link to this definition"></a></dt>
 <dd><p>Synchronize deassertion of a clock domain reset.</p>
 <p>The reset of the clock domain driven by the <a class="reference internal" href="#amaranth.lib.cdc.ResetSynchronizer" title="amaranth.lib.cdc.ResetSynchronizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResetSynchronizer</span></code></a> is asserted
 asynchronously and deasserted synchronously, eliminating metastability during deassertion.</p>
@@ -217,7 +217,7 @@ If specified and the platform does not support it, elaboration will fail.</p></l
 
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.lib.cdc.PulseSynchronizer">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.cdc.</span></span><span class="sig-name descname"><span class="pre">PulseSynchronizer</span></span><a class="headerlink" href="#amaranth.lib.cdc.PulseSynchronizer" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.cdc.</span></span><span class="sig-name descname"><span class="pre">PulseSynchronizer</span></span><a class="headerlink" href="#amaranth.lib.cdc.PulseSynchronizer" title="Link to this definition"></a></dt>
 <dd><p>A one-clock pulse on the input produces a one-clock pulse on the output.</p>
 <p>If the output clock is faster than the input clock, then the input may be safely asserted at
 100% duty cycle. Otherwise, if the clock ratio is <code class="docutils literal notranslate"><span class="pre">n</span></code>:1, the input may be asserted at most

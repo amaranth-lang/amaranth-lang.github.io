@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Installation &mdash; Amaranth language &amp; toolchain 0.6.0.dev68 documentation</title>
+  <title>Installation &mdash; Amaranth language &amp; toolchain 0.6.0.dev69 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/platformpicker.css" />
@@ -17,9 +17,9 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=8cd79b05"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/documentation_options.js?v=f25acf92"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="_static/platformpicker.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -41,7 +41,7 @@
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.6.0.dev68
+                0.6.0.dev69
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -108,20 +108,20 @@
            <div itemprop="articleBody">
              
   <section id="installation">
-<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h1>
+<h1>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h1>
 <section id="in-browser-playground">
-<span id="install-playground"></span><h2>In-browser playground<a class="headerlink" href="#in-browser-playground" title="Permalink to this heading"></a></h2>
+<span id="install-playground"></span><h2>In-browser playground<a class="headerlink" href="#in-browser-playground" title="Link to this heading"></a></h2>
 <p>You can try Amaranth out without installing anything by visiting the <a class="reference external" href="https://amaranth-lang.org/play/">Amaranth Playground</a>. The playground webpage contains a <a class="reference external" href="https://pyodide.org/en/stable/">fully functional Python interpreter</a> and an Amaranth toolchain that can simulate a design, display waveforms, and generate Verilog code. It works on all modern browsers that support <a class="reference external" href="https://webassembly.org/">WebAssembly</a>, including Firefox, Chrome, and Edge.</p>
 </section>
 <section id="system-requirements">
-<span id="install-sysreqs"></span><h2>System requirements<a class="headerlink" href="#system-requirements" title="Permalink to this heading"></a></h2>
-<p>Amaranth HDL requires Python 3.8; it works on <a class="reference external" href="https://www.python.org/">CPython</a> 3.8 (or newer), and works faster on <a class="reference external" href="https://www.pypy.org/">PyPy3.8</a> 7.3.7 (or newer). Installation requires <a class="reference external" href="https://pip.pypa.io/en/stable/">pip</a> 23.0 (or newer).</p>
+<span id="install-sysreqs"></span><h2>System requirements<a class="headerlink" href="#system-requirements" title="Link to this heading"></a></h2>
+<p>Amaranth HDL requires Python 3.9; it works on <a class="reference external" href="https://www.python.org/">CPython</a> 3.9 (or newer), and works faster on <a class="reference external" href="https://www.pypy.org/">PyPy3.9</a> 7.3.7 (or newer). Installation requires <a class="reference external" href="https://pip.pypa.io/en/stable/">pip</a> 23.0 (or newer).</p>
 <p>For most workflows, Amaranth requires <a class="reference external" href="https://yosyshq.net/yosys/">Yosys</a> 0.40 (or newer). A <a class="reference external" href="https://pypi.org/project/amaranth-yosys/">compatible version of Yosys</a> is distributed via <a class="reference external" href="https://pypi.org/">PyPI</a> for most popular platforms, so it is usually not necessary to install Yosys separately.</p>
 <p>Simulating Amaranth code requires no additional software. However, a waveform viewer like <a class="reference external" href="https://surfer-project.org/">Surfer</a> or <a class="reference external" href="https://gtkwave.sourceforge.net/">GTKWave</a> is invaluable for debugging. As an alternative, the <a class="reference external" href="https://amaranth-lang.org/play/">Amaranth Playground</a> can be used to display waveforms for simple designs.</p>
 <p>Synthesizing, placing and routing an Amaranth design for an FPGA requires the FPGA family specific toolchain. The open source iCE40, ECP5, MachXO2/3, Nexus, and Gowin toolchains are distributed via <a class="reference external" href="https://pypi.org/">PyPI</a> for most popular platforms by the <a class="reference external" href="https://yowasp.org/">YoWASP</a> project.</p>
 </section>
 <section id="installing-prerequisites">
-<span id="install-deps"></span><h2>Installing prerequisites<a class="headerlink" href="#installing-prerequisites" title="Permalink to this heading"></a></h2>
+<span id="install-deps"></span><h2>Installing prerequisites<a class="headerlink" href="#installing-prerequisites" title="Link to this heading"></a></h2>
 <div class="platform-picker docutils container">
 <div class="platform-choice platform--windows platform-noaltname docutils container">
 <p class="platform-title">Windows</p>
@@ -171,10 +171,10 @@
 </div>
 </section>
 <section id="installing-amaranth">
-<span id="install"></span><h2>Installing Amaranth<a class="headerlink" href="#installing-amaranth" title="Permalink to this heading"></a></h2>
+<span id="install"></span><h2>Installing Amaranth<a class="headerlink" href="#installing-amaranth" title="Link to this heading"></a></h2>
 <p>The latest release of Amaranth should work well for most applications. A development snapshot—any commit from the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch of Amaranth—should be similarly reliable, but is likely to include experimental API changes that will be in flux until the next release. With that in mind, development snapshots can be used to try out new functionality or to avoid bugs fixed since the last release.</p>
 <section id="latest-release">
-<span id="install-release"></span><h3>Latest release<a class="headerlink" href="#latest-release" title="Permalink to this heading"></a></h3>
+<span id="install-release"></span><h3>Latest release<a class="headerlink" href="#latest-release" title="Link to this heading"></a></h3>
 <div class="platform-picker docutils container">
 <div class="platform-choice platform--windows platform-noaltname docutils container">
 <p class="platform-title">Windows</p>
@@ -204,7 +204,7 @@
 </div>
 </section>
 <section id="development-snapshot">
-<span id="install-snapshot"></span><h3>Development snapshot<a class="headerlink" href="#development-snapshot" title="Permalink to this heading"></a></h3>
+<span id="install-snapshot"></span><h3>Development snapshot<a class="headerlink" href="#development-snapshot" title="Link to this heading"></a></h3>
 <div class="platform-picker docutils container">
 <div class="platform-choice platform--windows platform-noaltname docutils container">
 <p class="platform-title">Windows</p>
@@ -234,7 +234,7 @@
 </div>
 </section>
 <section id="editable-development-snapshot">
-<span id="install-develop"></span><h3>Editable development snapshot<a class="headerlink" href="#editable-development-snapshot" title="Permalink to this heading"></a></h3>
+<span id="install-develop"></span><h3>Editable development snapshot<a class="headerlink" href="#editable-development-snapshot" title="Link to this heading"></a></h3>
 <div class="platform-picker docutils container">
 <div class="platform-choice platform--windows platform-noaltname docutils container">
 <p class="platform-title">Windows</p>
@@ -289,7 +289,7 @@
 </section>
 </section>
 <section id="installing-board-definitions">
-<h2>Installing board definitions<a class="headerlink" href="#installing-board-definitions" title="Permalink to this heading"></a></h2>
+<h2>Installing board definitions<a class="headerlink" href="#installing-board-definitions" title="Link to this heading"></a></h2>
 <div class="admonition-todo admonition" id="id1">
 <p class="admonition-title">Todo</p>
 <p>Explain how to install <a class="reference external" href="https://github.com/amaranth-lang/amaranth-boards">https://github.com/amaranth-lang/amaranth-boards</a>.</p>

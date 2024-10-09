@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Data streams &mdash; Amaranth language &amp; toolchain 0.6.0.dev68 documentation</title>
+  <title>Data streams &mdash; Amaranth language &amp; toolchain 0.6.0.dev69 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
@@ -17,9 +17,9 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=8cd79b05"></script>
-        <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/documentation_options.js?v=f25acf92"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/platformpicker.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -41,7 +41,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.6.0.dev68
+                0.6.0.dev69
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -115,10 +115,10 @@
            <div itemprop="articleBody">
              
   <section id="module-amaranth.lib.stream">
-<span id="data-streams"></span><h1>Data streams<a class="headerlink" href="#module-amaranth.lib.stream" title="Permalink to this heading"></a></h1>
+<span id="data-streams"></span><h1>Data streams<a class="headerlink" href="#module-amaranth.lib.stream" title="Link to this heading"></a></h1>
 <p>The <a class="reference internal" href="#module-amaranth.lib.stream" title="amaranth.lib.stream"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.stream</span></code></a> module provides a mechanism for unidirectional exchange of arbitrary data between modules.</p>
 <section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
 <p>One of the most common flow control mechanisms is <em>ready/valid handshaking</em>, where a <em>producer</em> pushes data to a <em>consumer</em> whenever it becomes available, and the consumer signals to the producer whether it can accept more data. In Amaranth, this mechanism is implemented using an <a class="reference internal" href="wiring.html#wiring"><span class="std std-ref">interface</span></a> with three members:</p>
 <ul class="simple">
 <li><p><code class="code highlight py python docutils literal highlight-python"><span class="n">payload</span></code> (driven by the producer), containing the data;</p></li>
@@ -128,7 +128,7 @@
 <p>This module provides such an interface, <a class="reference internal" href="#amaranth.lib.stream.Interface" title="amaranth.lib.stream.Interface"><code class="xref py py-class docutils literal notranslate"><span class="pre">stream.Interface</span></code></a>, and defines the exact rules governing the flow of data through it.</p>
 </section>
 <section id="data-transfer-rules">
-<span id="stream-rules"></span><h2>Data transfer rules<a class="headerlink" href="#data-transfer-rules" title="Permalink to this heading"></a></h2>
+<span id="stream-rules"></span><h2>Data transfer rules<a class="headerlink" href="#data-transfer-rules" title="Link to this heading"></a></h2>
 <p>The producer and the consumer must be synchronized: they must belong to the same <a class="reference internal" href="../guide.html#lang-clockdomains"><span class="std std-ref">clock domain</span></a>, and any <a class="reference internal" href="../guide.html#lang-controlinserter"><span class="std std-ref">control flow modifiers</span></a> must be applied to both, in the same order.</p>
 <p>Data flows through a stream according to the following four rules:</p>
 <ol class="arabic simple">
@@ -142,7 +142,7 @@
 <p>These rules ensure that producers and consumers that are developed independently can be safely used together, without unduly restricting the application-specific conditions that determine assertion of <code class="code highlight py python docutils literal highlight-python"><span class="n">valid</span></code> and <code class="code highlight py python docutils literal highlight-python"><span class="n">ready</span></code>.</p>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
 <p>The following examples demonstrate the use of streams for a data processing pipeline that receives serial data input from an external device, transforms it by negating the 2’s complement value, and transmits it to another external device whenever requested. Similar pipelines, albeit more complex, are widely used in <abbr title="digital signal processing">DSP</abbr> applications.</p>
 <p>The use of a unified data transfer mechanism enables uniform testing of individual units, and makes it possible to add a queue to the pipeline using only two additional connections.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">amaranth.lib</span> <span class="kn">import</span> <span class="n">stream</span><span class="p">,</span> <span class="n">wiring</span>
@@ -170,7 +170,7 @@
 <p>“Minimal streams” as defined in <a class="reference external" href="https://amaranth-lang.org/rfcs/0061-minimal-streams.html">RFC 61</a> do not provide built-in helper functions for testing pending further work on the clock domain system. They will be provided in a later release. For the time being, you can copy the helper functions above to test your designs that use streams.</p>
 </div>
 <section id="serial-receiver">
-<h3>Serial receiver<a class="headerlink" href="#serial-receiver" title="Permalink to this heading"></a></h3>
+<h3>Serial receiver<a class="headerlink" href="#serial-receiver" title="Link to this heading"></a></h3>
 <p>The serial receiver captures the serial output of an external device and converts it to a stream of words. While the <code class="docutils literal notranslate"><span class="pre">ssel</span></code> signal is high, each low-to-high transition on the <code class="docutils literal notranslate"><span class="pre">sclk</span></code> input captures the value of the <code class="docutils literal notranslate"><span class="pre">sdat</span></code> signal; eight consecutive captured bits are assembled into a word (<abbr title="most significant bit">MSB</abbr> first) and pushed into the pipeline for processing. If the <code class="docutils literal notranslate"><span class="pre">ssel</span></code> signal is low, no data transmission occurs and the transmitter and the receiver are instead synchronized with each other.</p>
 <p>In this example, the external device does not provide a way to pause data transmission. If the pipeline isn’t ready to accept the next payload, it is necessary to discard data at some point; here, it is done in the serial receiver.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SerialReceiver</span><span class="p">(</span><span class="n">wiring</span><span class="o">.</span><span class="n">Component</span><span class="p">):</span>
@@ -244,7 +244,7 @@
 <p>The serial protocol recognized by the receiver is illustrated with the following diagram (corresponding to <code class="docutils literal notranslate"><span class="pre">stream_serial_receiver.vcd</span></code>):</p>
 <img src="_images/stream/serial_receiver.svg" class="wavedrom wavedrom-signal" alt="{'signal': [{'name': 'clk', 'wave': 'lpppppppppppppppppppp'}, {}, ['serial', {'name': 'ssel', 'wave': '01................0..'}, {'name': 'sclk', 'wave': '0..101010101010101...'}, {'name': 'sdat', 'wave': '0.=.=.=.=.=.=.=.=....', 'data': ['1', '0', '1', '0', '0', '0', '0', '1']}], {}, ['stream', {'name': 'payload', 'wave': '=..................=.', 'data': ['00', 'A7']}, {'name': 'valid', 'wave': '0..................10'}, {'name': 'ready', 'wave': '1...................0'}]], 'config': {'skin': 'default'}}"></section>
 <section id="serial-transmitter">
-<h3>Serial transmitter<a class="headerlink" href="#serial-transmitter" title="Permalink to this heading"></a></h3>
+<h3>Serial transmitter<a class="headerlink" href="#serial-transmitter" title="Link to this heading"></a></h3>
 <p>The serial transmitter accepts a stream of words and provides it to the serial input of an external device whenever requested. Its serial interface is the same as that of the serial receiver, with the exception that the <code class="docutils literal notranslate"><span class="pre">sclk</span></code> and <code class="docutils literal notranslate"><span class="pre">sdat</span></code> signals are outputs. The <code class="docutils literal notranslate"><span class="pre">ssel</span></code> signal remains an input; the external device uses it for flow control.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SerialTransmitter</span><span class="p">(</span><span class="n">wiring</span><span class="o">.</span><span class="n">Component</span><span class="p">):</span>
     <span class="n">ssel</span><span class="p">:</span> <span class="n">In</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -305,7 +305,7 @@
 </div>
 </section>
 <section id="value-negator">
-<h3>Value negator<a class="headerlink" href="#value-negator" title="Permalink to this heading"></a></h3>
+<h3>Value negator<a class="headerlink" href="#value-negator" title="Link to this heading"></a></h3>
 <p>The value negator accepts a stream of words, negates the 2’s complement value of these words, and provides the result as a stream of words again. In a practical <abbr>DSP</abbr> application, this unit could be replaced with, for example, a <abbr title="finite impulse response">FIR</abbr> filter.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ValueNegator</span><span class="p">(</span><span class="n">wiring</span><span class="o">.</span><span class="n">Component</span><span class="p">):</span>
     <span class="n">i_stream</span><span class="p">:</span> <span class="n">In</span><span class="p">(</span><span class="n">stream</span><span class="o">.</span><span class="n">Signature</span><span class="p">(</span><span class="n">signed</span><span class="p">(</span><span class="mi">8</span><span class="p">)))</span>
@@ -345,7 +345,7 @@
 </div>
 </section>
 <section id="complete-pipeline">
-<h3>Complete pipeline<a class="headerlink" href="#complete-pipeline" title="Permalink to this heading"></a></h3>
+<h3>Complete pipeline<a class="headerlink" href="#complete-pipeline" title="Link to this heading"></a></h3>
 <p>The complete pipeline consists of a serial receiver, a value negator, a FIFO queue, and a serial transmitter connected in series. Without queueing, any momentary mismatch between the rate at which the serial data is produced and consumed would result in data loss. A FIFO queue from the <a class="reference internal" href="fifo.html#module-amaranth.lib.fifo" title="amaranth.lib.fifo"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lib.fifo</span></code></a> standard library module is used to avoid this problem.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">amaranth.lib.fifo</span> <span class="kn">import</span> <span class="n">SyncFIFOBuffered</span>
 
@@ -435,11 +435,11 @@
 </section>
 </section>
 <section id="reference">
-<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this heading"></a></h2>
+<h2>Reference<a class="headerlink" href="#reference" title="Link to this heading"></a></h2>
 <p>Components that communicate using streams must not only use a <a class="reference internal" href="#amaranth.lib.stream.Interface" title="amaranth.lib.stream.Interface"><code class="xref py py-class docutils literal notranslate"><span class="pre">stream.Interface</span></code></a>, but also follow the <a class="reference internal" href="#stream-rules"><span class="std std-ref">data transfer rules</span></a>.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.lib.stream.Signature">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.stream.</span></span><span class="sig-name descname"><span class="pre">Signature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload_shape</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">payload_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">always_valid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">always_ready</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.stream.Signature" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.stream.</span></span><span class="sig-name descname"><span class="pre">Signature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload_shape</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">payload_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">always_valid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">always_ready</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.stream.Signature" title="Link to this definition"></a></dt>
 <dd><p>Signature of a unidirectional data stream.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -469,7 +469,7 @@ support for backpressure).</p></li>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="amaranth.lib.stream.Interface">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.stream.</span></span><span class="sig-name descname"><span class="pre">Interface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signature</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_loc_at</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.stream.Interface" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.stream.</span></span><span class="sig-name descname"><span class="pre">Interface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signature</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_loc_at</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.stream.Interface" title="Link to this definition"></a></dt>
 <dd><p>A unidirectional data stream.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
@@ -478,7 +478,7 @@ support for backpressure).</p></li>
 </dl>
 <dl class="py property">
 <dt class="sig sig-object py" id="amaranth.lib.stream.Interface.p">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">p</span></span><a class="headerlink" href="#amaranth.lib.stream.Interface.p" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">p</span></span><a class="headerlink" href="#amaranth.lib.stream.Interface.p" title="Link to this definition"></a></dt>
 <dd><p>Shortcut for <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span><span class="o">.</span><span class="n">payload</span></code>.</p>
 <p>This shortcut reduces repetition when manipulating the payload, for example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="p">[</span>
