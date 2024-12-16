@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Memory arrays &mdash; Amaranth language &amp; toolchain 0.5.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=d131d90a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c3dca1ed"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/platformpicker.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Input/output buffers" href="io.html" />
+    <link rel="prev" title="Data streams" href="stream.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../cover.html" class="icon icon-home">
+            Amaranth language & toolchain
+              <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.5.4
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Language &amp; toolchain</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../start.html">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide.html">Language guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference.html">Language reference</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../stdlib.html">Standard library</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="enum.html">Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data.html">Data structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wiring.html">Interfaces and connections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="meta.html">Interface metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stream.html">Data streams</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Memory arrays</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#memory-description">Memory description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#memory-component">Memory component</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#memory-ports">Memory ports</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="io.html">Input/output buffers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cdc.html">Clock domain crossing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="coding.html">Code conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fifo.html">First-in first-out queues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="crc.html">Cyclic redundancy checks</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../simulator.html">Simulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../platform.html">Platform integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../changes.html">Changelog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib.html">Contributing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="https://amaranth-lang.org/docs/amaranth-stdio/latest/">Standard I/O components</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://amaranth-lang.org/docs/amaranth-soc/latest/">System on Chip toolkit</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../cover.html">Amaranth language & toolchain</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../cover.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Language &amp; toolchain</a></li>
+          <li class="breadcrumb-item"><a href="../stdlib.html">Standard library</a></li>
+      <li class="breadcrumb-item active">Memory arrays</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/stdlib/memory.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-amaranth.lib.memory">
+<span id="memory-arrays"></span><h1>Memory arrays<a class="headerlink" href="#module-amaranth.lib.memory" title="Permalink to this heading"></a></h1>
+<p>The <a class="reference internal" href="#module-amaranth.lib.memory" title="amaranth.lib.memory"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.memory</span></code></a> module provides a way to efficiently store data organized as an array of identically shaped rows, which may be addressed (read and/or written) one at a time. This organization is well suited for an efficient implementation in hardware.</p>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<p>A memory <a class="reference internal" href="wiring.html#wiring"><span class="std std-ref">component</span></a> is accessed through read and write <em>memory ports</em>, which are <a class="reference internal" href="wiring.html#wiring"><span class="std std-ref">interface objects</span></a> with address, data, and enable ports. The address input selects the memory row to be accessed, the enable input determines whether an access will be made, and the data output (for read ports) or data input (for write ports) transfers data between the memory row and the rest of the design. Read ports can be synchronous (where the memory row access is triggered by the <a class="reference internal" href="../guide.html#lang-sync"><span class="std std-ref">active edge</span></a> of a clock) or asynchronous (where the memory row is accessed continuously); write ports are always synchronous.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Unfortunately, the terminology related to memories has an ambiguity: a “port” could refer to either an <em>interface port</em> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code> objects created by the <a class="reference internal" href="wiring.html#module-amaranth.lib.wiring" title="amaranth.lib.wiring"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.wiring</span></code></a> module) or to a <em>memory port</em> (<a class="reference internal" href="#amaranth.lib.memory.ReadPort" title="amaranth.lib.memory.ReadPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReadPort</span></code></a> or <a class="reference internal" href="#amaranth.lib.memory.WritePort" title="amaranth.lib.memory.WritePort"><code class="xref py py-class docutils literal notranslate"><span class="pre">WritePort</span></code></a> object created by <a class="reference internal" href="#amaranth.lib.memory.Memory" title="amaranth.lib.memory.Memory"><code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.lib.memory.Memory</span></code></a>).</p>
+<p>Amaranth documentation always uses the term “memory port” when referring to the latter.</p>
+</div>
+<p>To use a memory, first create a <a class="reference internal" href="#amaranth.lib.memory.Memory" title="amaranth.lib.memory.Memory"><code class="xref py py-class docutils literal notranslate"><span class="pre">Memory</span></code></a> object, providing a shape, depth (the number of rows), and initial contents. Then, request as many memory ports as the number of concurrent accesses you need to perform by using the <a class="reference internal" href="#amaranth.lib.memory.Memory.read_port" title="amaranth.lib.memory.Memory.read_port"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Memory.read_port()</span></code></a> and <a class="reference internal" href="#amaranth.lib.memory.Memory.write_port" title="amaranth.lib.memory.Memory.write_port"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Memory.write_port()</span></code></a> methods.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>While <a class="reference internal" href="#amaranth.lib.memory.Memory" title="amaranth.lib.memory.Memory"><code class="xref py py-class docutils literal notranslate"><span class="pre">Memory</span></code></a> will provide virtually any memory configuration on request and all will simulate correctly, only a subset of configurations can implemented in hardware efficiently or <cite>at all</cite>. Exactly what any given hardware platform supports is specific to both the device and the toolchain used.</p>
+<p>However, the following two configurations are well-supported on most platforms:</p>
+<ol class="arabic simple">
+<li><p>Zero or one write ports and any amount of read ports. Almost all devices include one or two read ports in a hardware memory block, but the toolchain will replicate memory blocks as needed to meet the requested amount of read ports, using more resources.</p></li>
+<li><p>Two write ports and any amount of read ports whose address input always matches that of the either write port. Most devices include two combined read/write ports in a hardware memory block (known as “true dual-port”, or “TDP”, block RAM), and the toolchain will replicate memory blocks to meet the requested amount of read ports. However, some devices include one read-only and one write-only port in a hardware memory block (known as “simple dual-port”, or “SDP”, block RAM), making this configuration unavailable. Also, the combined (synchronous) read/write port of a TDP block RAM usually does not have independent read enable and write enable inputs; in this configuration, the read enable input should usually be left in the (default if not driven) asserted state.</p></li>
+</ol>
+<p>Most devices include hardware primitives that can efficiently implement memories with asynchronous read ports (known as “LUT RAM”, “distributed RAM”, or “DRAM”; not to be confused with “dynamic RAM”, also abbreviated as “DRAM”). On devices without these hardware primitives, memories with asynchronous read ports are implemented using logic resources, which are consumed at an extremely high rate. Synchronous read ports should be always preferred over asynchronous ones.</p>
+<p>Additionally, some memory configurations (that seem like they should be supported by the device and the toolchain) may fail to be recognized, or may use much more resources than they should. This can happen due to device and/or toolchain errata (including defects in Amaranth). Unfortunately, such issues can only be handled on a case-by-case basis; in general, simpler memory configurations are better and more widely supported.</p>
+</div>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<p>First, import the <a class="reference internal" href="#amaranth.lib.memory.Memory" title="amaranth.lib.memory.Memory"><code class="xref py py-class docutils literal notranslate"><span class="pre">Memory</span></code></a> class.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">amaranth.lib.memory</span> <span class="kn">import</span> <span class="n">Memory</span>
+</pre></div>
+</div>
+<section id="read-only-memory">
+<h3>Read-only memory<a class="headerlink" href="#read-only-memory" title="Permalink to this heading"></a></h3>
+<p>In the following example, a read-only memory is used to output a fixed message in a loop:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">message</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;Hello world</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="n">m</span><span class="o">.</span><span class="n">submodules</span><span class="o">.</span><span class="n">memory</span> <span class="o">=</span> <span class="n">memory</span> <span class="o">=</span> \
+    <span class="n">Memory</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">unsigned</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span> <span class="n">depth</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">message</span><span class="p">),</span> <span class="n">init</span><span class="o">=</span><span class="n">message</span><span class="p">)</span>
+
+<span class="n">rd_port</span> <span class="o">=</span> <span class="n">memory</span><span class="o">.</span><span class="n">read_port</span><span class="p">(</span><span class="n">domain</span><span class="o">=</span><span class="s2">&quot;comb&quot;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">If</span><span class="p">(</span><span class="n">rd_port</span><span class="o">.</span><span class="n">addr</span> <span class="o">==</span> <span class="n">memory</span><span class="o">.</span><span class="n">depth</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">rd_port</span><span class="o">.</span><span class="n">addr</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">Else</span><span class="p">():</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">rd_port</span><span class="o">.</span><span class="n">addr</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">rd_port</span><span class="o">.</span><span class="n">addr</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">character</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="n">character</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">rd_port</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In this example, the memory read port is asynchronous, and a change of the address input (labelled <cite>a</cite> on the diagram below) results in an immediate change of the data output (labelled <cite>d</cite>).</p>
+<img src="_images/memory/example_hello.svg" class="wavedrom wavedrom-signal" alt="{'signal': [{'name': 'clk', 'wave': '0P............'}, {'name': 'rd_port.addr', 'wave': '==============', 'data': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 0, 1], 'node': '.a'}, {'name': 'rd_port.data', 'wave': '==============', 'data': ['H', 'e', 'l', 'l', 'o', ' ', 'w', 'o', 'r', 'l', 'd', '\\n', 'H', 'e'], 'node': '.d'}], 'edge': ['a-|d'], 'config': {'skin': 'default'}}"></section>
+<section id="first-in-first-out-queue">
+<h3>First-in, first-out queue<a class="headerlink" href="#first-in-first-out-queue" title="Permalink to this heading"></a></h3>
+<p>In a more complex example, a power-of-2 sized writable memory is used to implement a first-in, first-out queue:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">push</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">()</span>
+<span class="n">pop</span>  <span class="o">=</span> <span class="n">Signal</span><span class="p">()</span>
+
+<span class="n">m</span><span class="o">.</span><span class="n">submodules</span><span class="o">.</span><span class="n">memory</span> <span class="o">=</span> <span class="n">memory</span> <span class="o">=</span> \
+    <span class="n">Memory</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">unsigned</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span> <span class="n">depth</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="p">[])</span>
+
+<span class="n">wr_port</span> <span class="o">=</span> <span class="n">memory</span><span class="o">.</span><span class="n">write_port</span><span class="p">()</span>
+<span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="n">wr_port</span><span class="o">.</span><span class="n">en</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">push</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">If</span><span class="p">(</span><span class="n">push</span><span class="p">):</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">wr_port</span><span class="o">.</span><span class="n">addr</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">wr_port</span><span class="o">.</span><span class="n">addr</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">rd_port</span> <span class="o">=</span> <span class="n">memory</span><span class="o">.</span><span class="n">read_port</span><span class="p">(</span><span class="n">transparent_for</span><span class="o">=</span><span class="p">(</span><span class="n">wr_port</span><span class="p">,))</span>
+<span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="n">rd_port</span><span class="o">.</span><span class="n">en</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">pop</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">If</span><span class="p">(</span><span class="n">pop</span><span class="p">):</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">rd_port</span><span class="o">.</span><span class="n">addr</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">rd_port</span><span class="o">.</span><span class="n">addr</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Data can be shifted in via `wr_port.data` and out via `rd_port.data`.</span>
+<span class="c1"># This example assumes that empty queue will be never popped from.</span>
+</pre></div>
+</div>
+<p>In this example, the memory read and write ports are synchronous. A write operation (labelled <cite>x</cite>, <cite>w</cite>) updates the addressed row 0 on the next clock cycle, and a read operation (labelled <cite>y</cite>, <cite>r</cite>) retrieves the contents of the same addressed row 0 on the next clock cycle as well.</p>
+<p>However, the memory read port is also configured to be <em>transparent</em> relative to the memory write port. This means that if a write and a read operation (labelled <cite>t</cite>, <cite>u</cite> respectively) access the same row with address 3, the new contents will be read out, reducing the minimum push-to-pop latency to one cycle, down from two cycles that would be required without the use of transparency.</p>
+<img src="_images/memory/example_fifo.svg" class="wavedrom wavedrom-signal" alt="{'signal': [{'name': 'clk', 'wave': 'P........'}, {'name': 'push', 'wave': '01..0.10.', 'node': '.x'}, {'name': 'wr_port.addr', 'wave': '=.===..=.', 'data': ['0', '1', '2', '3', '4', '5']}, {'name': 'wr_port.data', 'wave': '====..=..', 'data': ['00', 'AA', 'BB', 'CC', 'DD'], 'node': '.w....t'}, {'name': 'memory[0]', 'wave': '=.=......', 'data': ['00', 'AA'], 'node': '..G'}, {'name': 'memory[3]', 'wave': '=......=.', 'data': ['00', 'DD'], 'node': '.......H'}, {'name': 'pop', 'wave': '0..1...0.', 'node': '...y'}, {'name': 'rd_port.addr', 'wave': '=...====.', 'data': ['0', '1', '2', '3', '4', '5']}, {'name': 'rd_port.data', 'wave': '=...====.', 'data': ['00', 'AA', 'BB', 'CC', 'DD'], 'node': '....r..u'}], 'edge': ['x-~&gt;G', 'w-&gt;G', 'y-~&gt;r', 't-&gt;H', 't-&gt;u'], 'config': {'skin': 'default'}}"></section>
+<section id="simulation">
+<h3>Simulation<a class="headerlink" href="#simulation" title="Permalink to this heading"></a></h3>
+<p>There are two ways to interact with a memory array in a simulator: requesting a read and/or write port that is used only in a testbench, or directly reading and writing memory contents. In most cases, directly accessing memory contents using <a class="reference internal" href="#amaranth.hdl.MemoryData.__getitem__" title="amaranth.hdl.MemoryData.__getitem__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">MemoryData.__getitem__</span></code></a> is more convenient.</p>
+<p>For example, this <a class="reference internal" href="../simulator.html"><span class="doc">testbench</span></a> will clear the least significant bit of every memory row:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">testbench</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">len</span><span class="p">(</span><span class="n">memory</span><span class="o">.</span><span class="n">data</span><span class="p">):</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">memory</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">memory</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">index</span><span class="p">])</span> <span class="o">&amp;</span> <span class="o">~</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="memory-description">
+<h2>Memory description<a class="headerlink" href="#memory-description" title="Permalink to this heading"></a></h2>
+<dl class="py exception">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.hdl.</span></span><span class="sig-name descname"><span class="pre">AlreadyElaborated</span></span></dt>
+<dd><p>Exception raised when an elaboratable is being modified after elaboration.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="amaranth.hdl.MemoryData">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.hdl.</span></span><span class="sig-name descname"><span class="pre">MemoryData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_loc_at</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.MemoryData" title="Permalink to this definition"></a></dt>
+<dd><p>Abstract description of a memory array.</p>
+<p>A <a class="reference internal" href="#amaranth.hdl.MemoryData" title="amaranth.hdl.MemoryData"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryData</span></code></a> object describes the geometry (shape and depth) and the initial contents
+of a memory array, without specifying the way in which it is accessed. It is conceptually
+similar to an array of <code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code>s.</p>
+<p>The <code class="code highlight py python docutils literal highlight-python"><span class="n">init</span></code> parameter and assignment to the <code class="code highlight py python docutils literal highlight-python"><span class="n">init</span></code> attribute have the same effect, with
+<a class="reference internal" href="#amaranth.hdl.MemoryData.Init" title="amaranth.hdl.MemoryData.Init"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryData.Init</span></code></a> converting elements of the iterable to match <code class="code highlight py python docutils literal highlight-python"><span class="n">shape</span></code> and using
+a default value for rows that are not explicitly initialized.</p>
+<p>Changing the initial contents of a <a class="reference internal" href="#amaranth.hdl.MemoryData" title="amaranth.hdl.MemoryData"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryData</span></code></a> is only possible until it is used to
+elaborate a memory; afterwards, attempting to do so will raise the <code class="xref py py-class docutils literal notranslate"><span class="pre">AlreadyElaborated</span></code>
+exception.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Uninitialized memories (including ASIC memories and some FPGA memories) are
+<a class="reference external" href="https://github.com/amaranth-lang/amaranth/issues/270">not yet supported</a>, and
+the <code class="code highlight py python docutils literal highlight-python"><span class="n">init</span></code> parameter must be always provided, if only as <code class="code highlight py python docutils literal highlight-python"><span class="n">init</span><span class="o">=</span><span class="p">[]</span></code>.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>shape</strong> (<a class="reference internal" href="../guide.html#lang-shapelike"><span class="std std-ref">shape-like</span></a> object) – Shape of each memory row.</p></li>
+<li><p><strong>depth</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Number of memory rows.</p></li>
+<li><p><strong>init</strong> (<em>iterable</em><em> of </em><em>initial values</em>) – Initial values for memory rows.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="amaranth.hdl.MemoryData.Init">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">...</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.MemoryData.Init" title="Permalink to this definition"></a></dt>
+<dd><p>Memory initialization data.</p>
+<p>This is a special container used only for initial contents of memories. It is similar
+to <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>, but does not support inserting or deleting elements; its length is always
+the same as the depth of the memory it belongs to.</p>
+<p>If <code class="code highlight py python docutils literal highlight-python"><span class="n">shape</span></code> is a <a class="reference internal" href="../guide.html#lang-shapecustom"><span class="std std-ref">custom shape-castable object</span></a>, then:</p>
+<ul class="simple">
+<li><p>Each element must be convertible to <code class="code highlight py python docutils literal highlight-python"><span class="n">shape</span></code> via <a class="reference internal" href="../reference.html#amaranth.hdl.ShapeCastable.const" title="amaranth.hdl.ShapeCastable.const"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ShapeCastable.const()</span></code></a>, and</p></li>
+<li><p>Elements that are not explicitly initialized default to <code class="code highlight py python docutils literal highlight-python"><span class="n">shape</span><span class="o">.</span><span class="n">const</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span></code>.</p></li>
+</ul>
+<p>Otherwise (when <code class="code highlight py python docutils literal highlight-python"><span class="n">shape</span></code> is a <a class="reference internal" href="../reference.html#amaranth.hdl.Shape" title="amaranth.hdl.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code></a>):</p>
+<ul class="simple">
+<li><p>Each element must be an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, and</p></li>
+<li><p>Elements that are not explicitly initialized default to <code class="code highlight py python docutils literal highlight-python"><span class="mi">0</span></code>.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="amaranth.hdl.MemoryData.__getitem__">
+<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.MemoryData.__getitem__" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve a memory row for simulation.</p>
+<p>A <a class="reference internal" href="#amaranth.hdl.MemoryData" title="amaranth.hdl.MemoryData"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryData</span></code></a> object can be indexed with an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> to construct a special
+value that can be used to read and write the selected memory row in a simulation testbench,
+without having to create a memory port.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Even in a simulation, the value returned by this function cannot be used in a module;
+it can only be used with <code class="code highlight py python docutils literal highlight-python"><span class="n">sim</span><span class="o">.</span><span class="n">get</span><span class="p">()</span></code> and <code class="code highlight py python docutils literal highlight-python"><span class="n">sim</span><span class="o">.</span><span class="n">set</span><span class="p">()</span></code>.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../reference.html#amaranth.hdl.Value" title="amaranth.hdl.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a>, <a class="reference internal" href="../guide.html#lang-assignable"><span class="std std-ref">assignable</span></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="memory-component">
+<h2>Memory component<a class="headerlink" href="#memory-component" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="amaranth.lib.memory.Memory">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.memory.</span></span><span class="sig-name descname"><span class="pre">Memory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_loc_at</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.memory.Memory" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.memory.</span></span><span class="sig-name descname"><span class="pre">Memory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_loc_at</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Addressable array of rows.</p>
+<p>This <a class="reference internal" href="wiring.html#wiring"><span class="std std-ref">component</span></a> is used to construct a memory array by first specifying its
+dimensions and initial contents using the <a class="reference internal" href="#amaranth.hdl.MemoryData" title="amaranth.hdl.MemoryData"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryData</span></code></a> object and
+the <code class="code highlight py python docutils literal highlight-python"><span class="n">data</span></code> parameter (or by providing <code class="code highlight py python docutils literal highlight-python"><span class="n">shape</span></code>, <code class="code highlight py python docutils literal highlight-python"><span class="n">depth</span></code>, and <code class="code highlight py python docutils literal highlight-python"><span class="n">init</span></code> parameters
+directly instead) and then adding memory ports using the <a class="reference internal" href="#amaranth.lib.memory.Memory.read_port" title="amaranth.lib.memory.Memory.read_port"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read_port()</span></code></a> and
+<a class="reference internal" href="#amaranth.lib.memory.Memory.write_port" title="amaranth.lib.memory.Memory.write_port"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write_port()</span></code></a> methods. Because it is mutable, it should be created and used locally within
+the <a class="reference internal" href="../guide.html#lang-elaboration"><span class="std std-ref">elaborate</span></a> method.</p>
+<p>Adding ports or changing initial contents of a <a class="reference internal" href="#amaranth.lib.memory.Memory" title="amaranth.lib.memory.Memory"><code class="xref py py-class docutils literal notranslate"><span class="pre">Memory</span></code></a> is only possible until it is
+elaborated; afterwards, attempting to do so will raise the
+<code class="xref py py-class docutils literal notranslate"><span class="pre">AlreadyElaborated</span></code> exception.</p>
+<p class="rubric">Platform overrides</p>
+<p>Define the <code class="code highlight py python docutils literal highlight-python"><span class="n">get_memory</span><span class="p">()</span></code> platform method to override the implementation of
+<a class="reference internal" href="#amaranth.lib.memory.Memory" title="amaranth.lib.memory.Memory"><code class="xref py py-class docutils literal notranslate"><span class="pre">Memory</span></code></a>, e.g. to instantiate library cells directly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<a class="reference internal" href="#amaranth.hdl.MemoryData" title="amaranth.hdl.MemoryData"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryData</span></code></a>) – Representation of memory geometry and contents.</p></li>
+<li><p><strong>shape</strong> (<a class="reference internal" href="../guide.html#lang-shapelike"><span class="std std-ref">shape-like</span></a> object) – Shape of each memory row.</p></li>
+<li><p><strong>depth</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Number of memory rows.</p></li>
+<li><p><strong>init</strong> (<em>iterable</em><em> of </em><em>initial values</em>) – Initial values for memory rows.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="amaranth.lib.memory.Memory.read_port">
+<span class="sig-name descname"><span class="pre">read_port</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sync'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transparent_for</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_loc_at</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.memory.Memory.read_port" title="Permalink to this definition"></a></dt>
+<dd><p>Request a read port.</p>
+<p>If <code class="code highlight py python docutils literal highlight-python"><span class="n">domain</span></code> is <code class="code highlight py python docutils literal highlight-python"><span class="s2">&quot;comb&quot;</span></code>, the created read port is asynchronous and always enabled
+(with its enable input is tied to <code class="code highlight py python docutils literal highlight-python"><span class="n">Const</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></code>), and its data output always reflects
+the contents of the selected row. Otherwise, the created read port is synchronous,
+and its data output is updated with the contents of the selected row at each
+<a class="reference internal" href="../guide.html#lang-sync"><span class="std std-ref">active edge</span></a> of <code class="code highlight py python docutils literal highlight-python"><span class="n">domain</span></code> where the enable input is asserted.</p>
+<p>The <code class="code highlight py python docutils literal highlight-python"><span class="n">transparent_for</span></code> parameter specifies the <em>transparency set</em> of this port: zero or
+more <a class="reference internal" href="#amaranth.lib.memory.WritePort" title="amaranth.lib.memory.WritePort"><code class="xref py py-class docutils literal notranslate"><span class="pre">WritePort</span></code></a>s, all of which must belong to the same memory and clock domain.
+If another port writes to a memory row at the same time as this port reads from the same
+memory row, and that write port is a part of the transparency set, then this port retrieves
+the new contents of the row; otherwise, this port retrieves the old contents of the row.</p>
+<p>If another write port belonging to a different clock domain updates a memory row that this
+port is reading at the same time, the behavior is undefined.</p>
+<p>The signature of the returned port is
+<code class="code highlight py python docutils literal highlight-python"><span class="n">ReadPort</span><span class="o">.</span><span class="n">Signature</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">addr_width</span><span class="o">=</span><span class="n">ceil_log2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">depth</span><span class="p">))</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#amaranth.lib.memory.ReadPort" title="amaranth.lib.memory.ReadPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReadPort</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="amaranth.lib.memory.Memory.write_port">
+<span class="sig-name descname"><span class="pre">write_port</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sync'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">granularity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_loc_at</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.memory.Memory.write_port" title="Permalink to this definition"></a></dt>
+<dd><p>Request a write port.</p>
+<p>The created write port is synchronous, updating the contents of the selected row at each
+<a class="reference internal" href="../guide.html#lang-sync"><span class="std std-ref">active edge</span></a> of <code class="code highlight py python docutils literal highlight-python"><span class="n">domain</span></code> where the enable input is asserted.</p>
+<p>Specifying a <em>granularity</em> when <code class="code highlight py python docutils literal highlight-python"><span class="n">shape</span></code> is <a class="reference internal" href="../reference.html#amaranth.hdl.unsigned" title="amaranth.hdl.unsigned"><code class="xref py py-func docutils literal notranslate"><span class="pre">unsigned(width)</span></code></a> or
+<a class="reference internal" href="data.html#amaranth.lib.data.ArrayLayout" title="amaranth.lib.data.ArrayLayout"><code class="xref py py-class docutils literal notranslate"><span class="pre">data.ArrayLayout(_,</span> <span class="pre">width)</span></code></a> makes it possible to partially
+update a memory row. In this case, <code class="code highlight py python docutils literal highlight-python"><span class="n">granularity</span></code> must be an integer that evenly divides
+<code class="code highlight py python docutils literal highlight-python"><span class="n">width</span></code>, and the memory row is split into <code class="code highlight py python docutils literal highlight-python"><span class="n">width</span> <span class="o">//</span> <span class="n">granularity</span></code> equally sized
+parts, each of which is updated if the corresponding bit of the enable input is asserted.</p>
+<p>The signature of the new port is
+<code class="code highlight py python docutils literal highlight-python"><span class="n">WritePort</span><span class="o">.</span><span class="n">Signature</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">addr_width</span><span class="o">=</span><span class="n">ceil_log2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">depth</span><span class="p">),</span> <span class="n">granularity</span><span class="o">=</span><span class="n">granularity</span><span class="p">)</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#amaranth.lib.memory.WritePort" title="amaranth.lib.memory.WritePort"><code class="xref py py-class docutils literal notranslate"><span class="pre">WritePort</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="amaranth.lib.memory.Memory.read_ports">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_ports</span></span><a class="headerlink" href="#amaranth.lib.memory.Memory.read_ports" title="Permalink to this definition"></a></dt>
+<dd><p>All read ports defined so far.</p>
+<p>This property is provided for the <code class="code highlight py python docutils literal highlight-python"><span class="n">platform</span><span class="o">.</span><span class="n">get_memory</span><span class="p">()</span></code> override.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="amaranth.lib.memory.Memory.write_ports">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">write_ports</span></span><a class="headerlink" href="#amaranth.lib.memory.Memory.write_ports" title="Permalink to this definition"></a></dt>
+<dd><p>All write ports defined so far.</p>
+<p>This property is provided for the <code class="code highlight py python docutils literal highlight-python"><span class="n">platform</span><span class="o">.</span><span class="n">get_memory</span><span class="p">()</span></code> override.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="memory-ports">
+<h2>Memory ports<a class="headerlink" href="#memory-ports" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="amaranth.lib.memory.ReadPort">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.memory.</span></span><span class="sig-name descname"><span class="pre">ReadPort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">...</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.memory.ReadPort" title="Permalink to this definition"></a></dt>
+<dd><p>A read memory port.</p>
+<p>Memory read ports, which are <a class="reference internal" href="wiring.html#wiring"><span class="std std-ref">interface objects</span></a>, can be constructed by calling
+<a class="reference internal" href="#amaranth.lib.memory.Memory.read_port" title="amaranth.lib.memory.Memory.read_port"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Memory.read_port()</span></code></a> or via <a class="reference internal" href="wiring.html#amaranth.lib.wiring.Signature.create" title="amaranth.lib.wiring.Signature.create"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ReadPort.Signature.create()</span></code></a>.</p>
+<p>An asynchronous (<code class="code highlight py python docutils literal highlight-python"><span class="s2">&quot;comb&quot;</span></code> domain) memory read port is always enabled. The <code class="code highlight py python docutils literal highlight-python"><span class="n">en</span></code> input of
+such a port is tied to <code class="code highlight py python docutils literal highlight-python"><span class="n">Const</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>signature</strong> (<a class="reference internal" href="#amaranth.lib.memory.ReadPort.Signature" title="amaranth.lib.memory.ReadPort.Signature"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReadPort.Signature</span></code></a>) – Signature of this memory port.</p></li>
+<li><p><strong>memory</strong> (<a class="reference internal" href="#amaranth.lib.memory.Memory" title="amaranth.lib.memory.Memory"><code class="xref py py-class docutils literal notranslate"><span class="pre">Memory</span></code></a> or <code class="code highlight py python docutils literal highlight-python"><span class="kc">None</span></code>) – Memory associated with this memory port.</p></li>
+<li><p><strong>domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of this memory port’s clock domain. For asynchronous ports, <code class="code highlight py python docutils literal highlight-python"><span class="s2">&quot;comb&quot;</span></code>.</p></li>
+<li><p><strong>transparent_for</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a> of <a class="reference internal" href="#amaranth.lib.memory.WritePort" title="amaranth.lib.memory.WritePort"><code class="xref py py-class docutils literal notranslate"><span class="pre">WritePort</span></code></a>) – Transparency set of this memory port.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="amaranth.lib.memory.ReadPort.Signature">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Signature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">addr_width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.memory.ReadPort.Signature" title="Permalink to this definition"></a></dt>
+<dd><p>Signature of a memory read port.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>addr_width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Width of the address port.</p></li>
+<li><p><strong>shape</strong> (<a class="reference internal" href="../guide.html#lang-shapelike"><span class="std std-ref">shape-like</span></a> object) – Shape of the data port.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Members<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>en</strong> (<code class="code highlight py python docutils literal highlight-python"><span class="n">In</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></code>) – Enable input.</p></li>
+<li><p><strong>addr</strong> (<code class="code highlight py python docutils literal highlight-python"><span class="n">In</span><span class="p">(</span><span class="n">addr_width</span><span class="p">)</span></code>) – Address input.</p></li>
+<li><p><strong>data</strong> (<code class="code highlight py python docutils literal highlight-python"><span class="n">Out</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span></code>) – Data output.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="amaranth.lib.memory.WritePort">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.memory.</span></span><span class="sig-name descname"><span class="pre">WritePort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">...</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.memory.WritePort" title="Permalink to this definition"></a></dt>
+<dd><p>A write memory port.</p>
+<p>Memory write ports, which are <a class="reference internal" href="wiring.html#wiring"><span class="std std-ref">interface objects</span></a>, can be constructed by calling
+<a class="reference internal" href="#amaranth.lib.memory.Memory.write_port" title="amaranth.lib.memory.Memory.write_port"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Memory.write_port()</span></code></a> or via <a class="reference internal" href="wiring.html#amaranth.lib.wiring.Signature.create" title="amaranth.lib.wiring.Signature.create"><code class="xref py py-meth docutils literal notranslate"><span class="pre">WritePort.Signature.create()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>signature</strong> (<a class="reference internal" href="#amaranth.lib.memory.WritePort.Signature" title="amaranth.lib.memory.WritePort.Signature"><code class="xref py py-class docutils literal notranslate"><span class="pre">WritePort.Signature</span></code></a>) – Signature of this memory port.</p></li>
+<li><p><strong>memory</strong> (<a class="reference internal" href="#amaranth.lib.memory.Memory" title="amaranth.lib.memory.Memory"><code class="xref py py-class docutils literal notranslate"><span class="pre">Memory</span></code></a> or <code class="code highlight py python docutils literal highlight-python"><span class="kc">None</span></code>) – Memory associated with this memory port.</p></li>
+<li><p><strong>domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of this memory port’s clock domain. Never <code class="code highlight py python docutils literal highlight-python"><span class="s2">&quot;comb&quot;</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="amaranth.lib.memory.WritePort.Signature">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Signature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">addr_width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">granularity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.memory.WritePort.Signature" title="Permalink to this definition"></a></dt>
+<dd><p>Signature of a memory write port.</p>
+<p>Width of the enable input is determined as follows:</p>
+<ul class="simple">
+<li><p>If <code class="code highlight py python docutils literal highlight-python"><span class="n">granularity</span></code> is <code class="code highlight py python docutils literal highlight-python"><span class="kc">None</span></code>,
+then <code class="code highlight py python docutils literal highlight-python"><span class="n">en_width</span> <span class="o">==</span> <span class="mi">1</span></code>.</p></li>
+<li><p>If <code class="code highlight py python docutils literal highlight-python"><span class="n">shape</span></code> is <a class="reference internal" href="../reference.html#amaranth.hdl.unsigned" title="amaranth.hdl.unsigned"><code class="xref py py-func docutils literal notranslate"><span class="pre">unsigned(data_width)</span></code></a>,
+then <code class="code highlight py python docutils literal highlight-python"><span class="n">en_width</span> <span class="o">==</span> <span class="n">data_width</span> <span class="o">//</span> <span class="n">granularity</span></code>.</p></li>
+<li><p>If <code class="code highlight py python docutils literal highlight-python"><span class="n">shape</span></code> is <a class="reference internal" href="data.html#amaranth.lib.data.ArrayLayout" title="amaranth.lib.data.ArrayLayout"><code class="xref py py-class docutils literal notranslate"><span class="pre">data.ArrayLayout(_,</span> <span class="pre">elem_count)</span></code></a>,
+then <code class="code highlight py python docutils literal highlight-python"><span class="n">en_width</span> <span class="o">==</span> <span class="n">elem_count</span> <span class="o">//</span> <span class="n">granularity</span></code>.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>addr_width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Width of the address port.</p></li>
+<li><p><strong>shape</strong> (<a class="reference internal" href="../guide.html#lang-shapelike"><span class="std std-ref">shape-like</span></a> object) – Shape of the data port.</p></li>
+<li><p><strong>granularity</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> or <code class="code highlight py python docutils literal highlight-python"><span class="kc">None</span></code>) – Granularity of memory access.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Members<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>en</strong> (<code class="code highlight py python docutils literal highlight-python"><span class="n">In</span><span class="p">(</span><span class="n">en_width</span><span class="p">)</span></code>) – Enable input.</p></li>
+<li><p><strong>addr</strong> (<code class="code highlight py python docutils literal highlight-python"><span class="n">In</span><span class="p">(</span><span class="n">addr_width</span><span class="p">)</span></code>) – Address input.</p></li>
+<li><p><strong>data</strong> (<code class="code highlight py python docutils literal highlight-python"><span class="n">In</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span></code>) – Data input.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="stream.html" class="btn btn-neutral float-left" title="Data streams" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="io.html" class="btn btn-neutral float-right" title="Input/output buffers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020—2024, Amaranth project contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
