@@ -4,8 +4,8 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Data structures &mdash; Amaranth language &amp; toolchain 0.6.0.dev72 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+  <title>Data structures &mdash; Amaranth language &amp; toolchain 0.6.0.dev73 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=d131d90a" />
@@ -17,7 +17,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=82fea6b3"></script>
+        <script src="../_static/documentation_options.js?v=268622aa"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/platformpicker.js"></script>
@@ -41,7 +41,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.6.0.dev72
+                0.6.0.dev73
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -130,7 +130,7 @@
 <li><p>Data classes <a class="reference internal" href="#amaranth.lib.data.Struct" title="amaranth.lib.data.Struct"><code class="xref py py-class docutils literal notranslate"><span class="pre">Struct</span></code></a> and <a class="reference internal" href="#amaranth.lib.data.Union" title="amaranth.lib.data.Union"><code class="xref py py-class docutils literal notranslate"><span class="pre">Union</span></code></a>. These classes are data views with a layout that is defined using Python <a class="reference external" href="https://docs.python.org/3/glossary.html#term-variable-annotation" title="(in Python v3.13)"><span class="xref std std-term">variable annotations</span></a> (also known as type annotations).</p></li>
 </ol>
 <p>To use this module, add the following imports to the beginning of the file:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">amaranth.lib</span> <span class="kn">import</span> <span class="n">data</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">amaranth.lib</span><span class="w"> </span><span class="kn">import</span> <span class="n">data</span>
 </pre></div>
 </div>
 </section>
@@ -146,7 +146,7 @@
 </pre></div>
 </div>
 <p>While this implementation works, it is repetitive, error-prone, hard to read, and laborous to change; all because the color components are referenced using bit offsets. To improve it, the structure can be described with a <a class="reference internal" href="#amaranth.lib.data.Layout" title="amaranth.lib.data.Layout"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layout</span></code></a> so that the components can be referenced by name:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">amaranth.lib</span> <span class="kn">import</span> <span class="n">data</span><span class="p">,</span> <span class="n">enum</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">amaranth.lib</span><span class="w"> </span><span class="kn">import</span> <span class="n">data</span><span class="p">,</span> <span class="n">enum</span>
 
 <span class="n">rgb565_layout</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">StructLayout</span><span class="p">({</span>
     <span class="s2">&quot;red&quot;</span><span class="p">:</span>   <span class="mi">5</span><span class="p">,</span>
@@ -192,7 +192,7 @@
 <h3>Defining layouts<a class="headerlink" href="#defining-layouts" title="Link to this heading"></a></h3>
 <p>Data layouts can be defined in a few different ways depending on the use case.</p>
 <p>In case the data format is defined using a family of layouts instead of a single specific one, a function can be used:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rgb_layout</span><span class="p">(</span><span class="n">r_bits</span><span class="p">,</span> <span class="n">g_bits</span><span class="p">,</span> <span class="n">b_bits</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">rgb_layout</span><span class="p">(</span><span class="n">r_bits</span><span class="p">,</span> <span class="n">g_bits</span><span class="p">,</span> <span class="n">b_bits</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">StructLayout</span><span class="p">({</span>
         <span class="s2">&quot;red&quot;</span><span class="p">:</span>   <span class="n">unsigned</span><span class="p">(</span><span class="n">r_bits</span><span class="p">),</span>
         <span class="s2">&quot;green&quot;</span><span class="p">:</span> <span class="n">unsigned</span><span class="p">(</span><span class="n">g_bits</span><span class="p">),</span>
@@ -204,19 +204,19 @@
 </pre></div>
 </div>
 <p>In case the data has related operations or transformations, <a class="reference internal" href="#amaranth.lib.data.View" title="amaranth.lib.data.View"><code class="xref py py-class docutils literal notranslate"><span class="pre">View</span></code></a> can be subclassed to define methods implementing them:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">RGBLayout</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">StructLayout</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r_bits</span><span class="p">,</span> <span class="n">g_bits</span><span class="p">,</span> <span class="n">b_bits</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">RGBLayout</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">StructLayout</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r_bits</span><span class="p">,</span> <span class="n">g_bits</span><span class="p">,</span> <span class="n">b_bits</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">({</span>
             <span class="s2">&quot;red&quot;</span><span class="p">:</span>   <span class="n">unsigned</span><span class="p">(</span><span class="n">r_bits</span><span class="p">),</span>
             <span class="s2">&quot;green&quot;</span><span class="p">:</span> <span class="n">unsigned</span><span class="p">(</span><span class="n">g_bits</span><span class="p">),</span>
             <span class="s2">&quot;blue&quot;</span><span class="p">:</span>  <span class="n">unsigned</span><span class="p">(</span><span class="n">b_bits</span><span class="p">)</span>
         <span class="p">})</span>
 
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">RGBView</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 
-<span class="k">class</span> <span class="nc">RGBView</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">View</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">brightness</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">RGBView</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">View</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">brightness</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">red</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">green</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">blue</span><span class="p">)[</span><span class="o">-</span><span class="mi">8</span><span class="p">:]</span>
 </pre></div>
 </div>
@@ -229,12 +229,12 @@
 </pre></div>
 </div>
 <p>In case the data format is static, <a class="reference internal" href="#amaranth.lib.data.Struct" title="amaranth.lib.data.Struct"><code class="xref py py-class docutils literal notranslate"><span class="pre">Struct</span></code></a> (or <a class="reference internal" href="#amaranth.lib.data.Union" title="amaranth.lib.data.Union"><code class="xref py py-class docutils literal notranslate"><span class="pre">Union</span></code></a>) can be subclassed instead of <a class="reference internal" href="#amaranth.lib.data.View" title="amaranth.lib.data.View"><code class="xref py py-class docutils literal notranslate"><span class="pre">View</span></code></a>, to reduce the amount of boilerplate needed:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">IEEE754Single</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">Struct</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">IEEE754Single</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">Struct</span><span class="p">):</span>
     <span class="n">fraction</span><span class="p">:</span> <span class="mi">23</span>
     <span class="n">exponent</span><span class="p">:</span>  <span class="mi">8</span> <span class="o">=</span> <span class="mh">0x7f</span>
     <span class="n">sign</span><span class="p">:</span>      <span class="mi">1</span>
 
-    <span class="k">def</span> <span class="nf">is_subnormal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_subnormal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">exponent</span> <span class="o">==</span> <span class="mi">0</span>
 </pre></div>
 </div>
@@ -243,8 +243,8 @@
 <h3>Discriminated unions<a class="headerlink" href="#discriminated-unions" title="Link to this heading"></a></h3>
 <p>This module provides a <a class="reference internal" href="#amaranth.lib.data.UnionLayout" title="amaranth.lib.data.UnionLayout"><code class="xref py py-class docutils literal notranslate"><span class="pre">UnionLayout</span></code></a>, which is rarely needed by itself, but is very useful in combination with a <em>discriminant</em>: a enumeration indicating which field of the union contains valid data.</p>
 <p>For example, consider a module that can direct another module to perform one of a few operations, each of which requires its own parameters. The two modules could communicate through a channel with a layout like this:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Command</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">Struct</span><span class="p">):</span>
-    <span class="k">class</span> <span class="nc">Kind</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Command</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">Struct</span><span class="p">):</span>
+    <span class="k">class</span><span class="w"> </span><span class="nc">Kind</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
         <span class="n">SET_ADDR</span>  <span class="o">=</span> <span class="mi">0</span>
         <span class="n">SEND_DATA</span> <span class="o">=</span> <span class="mi">1</span>
 
@@ -894,12 +894,12 @@ in the order in which they appear in the source code, to construct a <a class="r
 The values assigned to such annotations are used to populate the initial value of the signal
 created by the view. Any other annotations are kept as-is.</p>
 <p>As an example, a structure for <a class="reference external" href="https://en.wikipedia.org/wiki/Single-precision_floating-point_format">IEEE 754 single-precision floating-point format</a> can be defined as:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">IEEE754Single</span><span class="p">(</span><span class="n">Struct</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">IEEE754Single</span><span class="p">(</span><span class="n">Struct</span><span class="p">):</span>
     <span class="n">fraction</span><span class="p">:</span> <span class="mi">23</span>
     <span class="n">exponent</span><span class="p">:</span>  <span class="mi">8</span> <span class="o">=</span> <span class="mh">0x7f</span>
     <span class="n">sign</span><span class="p">:</span>      <span class="mi">1</span>
 
-    <span class="k">def</span> <span class="nf">is_subnormal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_subnormal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">exponent</span> <span class="o">==</span> <span class="mi">0</span>
 </pre></div>
 </div>
@@ -939,16 +939,16 @@ are that:</p>
 <li><p>A layout can be defined exactly once in the inheritance hierarchy.</p></li>
 </ul>
 <p>Behavior can be shared through inheritance:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">HasChecksum</span><span class="p">(</span><span class="n">Struct</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">checksum</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">HasChecksum</span><span class="p">(</span><span class="n">Struct</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">checksum</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">bits</span> <span class="o">=</span> <span class="n">Value</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">bits</span><span class="p">[</span><span class="n">n</span><span class="p">:</span><span class="n">n</span><span class="o">+</span><span class="mi">8</span><span class="p">]</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">bits</span><span class="p">),</span> <span class="mi">8</span><span class="p">))</span>
 
-<span class="k">class</span> <span class="nc">BareHeader</span><span class="p">(</span><span class="n">HasChecksum</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">BareHeader</span><span class="p">(</span><span class="n">HasChecksum</span><span class="p">):</span>
     <span class="n">address</span><span class="p">:</span> <span class="mi">16</span>
     <span class="n">length</span><span class="p">:</span>   <span class="mi">8</span>
 
-<span class="k">class</span> <span class="nc">HeaderWithParam</span><span class="p">(</span><span class="n">HasChecksum</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">HeaderWithParam</span><span class="p">(</span><span class="n">HasChecksum</span><span class="p">):</span>
     <span class="n">address</span><span class="p">:</span> <span class="mi">16</span>
     <span class="n">length</span><span class="p">:</span>   <span class="mi">8</span>
     <span class="n">param</span><span class="p">:</span>    <span class="mi">8</span>
@@ -976,7 +976,7 @@ is a <a class="reference internal" href="#amaranth.lib.data.UnionLayout" title="
 <p>A <a class="reference internal" href="#amaranth.lib.data.Union" title="amaranth.lib.data.Union"><code class="xref py py-class docutils literal notranslate"><span class="pre">Union</span></code></a> can have only one field with a specified initial value. If an initial value is
 explicitly provided during instantiation, it overrides the initial value specified with
 an annotation:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">VarInt</span><span class="p">(</span><span class="n">Union</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">VarInt</span><span class="p">(</span><span class="n">Union</span><span class="p">):</span>
     <span class="n">int8</span><span class="p">:</span>  <span class="mi">8</span>
     <span class="n">int16</span><span class="p">:</span> <span class="mi">16</span> <span class="o">=</span> <span class="mh">0x100</span>
 </pre></div>
@@ -1003,7 +1003,7 @@ an annotation:</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2020—2024, Amaranth project contributors.</p>
+    <p>&#169; Copyright 2020—2025, Amaranth project contributors.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

@@ -4,8 +4,8 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Memory arrays &mdash; Amaranth language &amp; toolchain 0.6.0.dev72 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+  <title>Memory arrays &mdash; Amaranth language &amp; toolchain 0.6.0.dev73 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=d131d90a" />
@@ -17,7 +17,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=82fea6b3"></script>
+        <script src="../_static/documentation_options.js?v=268622aa"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/platformpicker.js"></script>
@@ -41,7 +41,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.6.0.dev72
+                0.6.0.dev73
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -142,7 +142,7 @@
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
 <p>First, import the <a class="reference internal" href="#amaranth.lib.memory.Memory" title="amaranth.lib.memory.Memory"><code class="xref py py-class docutils literal notranslate"><span class="pre">Memory</span></code></a> class.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">amaranth.lib.memory</span> <span class="kn">import</span> <span class="n">Memory</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">amaranth.lib.memory</span><span class="w"> </span><span class="kn">import</span> <span class="n">Memory</span>
 </pre></div>
 </div>
 <section id="read-only-memory">
@@ -194,7 +194,7 @@
 <h3>Simulation<a class="headerlink" href="#simulation" title="Link to this heading"></a></h3>
 <p>There are two ways to interact with a memory array in a simulator: requesting a read and/or write port that is used only in a testbench, or directly reading and writing memory contents. In most cases, directly accessing memory contents using <a class="reference internal" href="#amaranth.hdl.MemoryData.__getitem__" title="amaranth.hdl.MemoryData.__getitem__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">MemoryData.__getitem__</span></code></a> is more convenient.</p>
 <p>For example, this <a class="reference internal" href="../simulator.html"><span class="doc">testbench</span></a> will clear the least significant bit of every memory row:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">testbench</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">testbench</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">len</span><span class="p">(</span><span class="n">memory</span><span class="o">.</span><span class="n">data</span><span class="p">):</span>
         <span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">memory</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">memory</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">index</span><span class="p">])</span> <span class="o">&amp;</span> <span class="o">~</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
@@ -478,7 +478,7 @@ then <code class="code highlight py python docutils literal highlight-python"><s
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2020—2024, Amaranth project contributors.</p>
+    <p>&#169; Copyright 2020—2025, Amaranth project contributors.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

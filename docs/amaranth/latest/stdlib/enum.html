@@ -4,8 +4,8 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Enumerations &mdash; Amaranth language &amp; toolchain 0.6.0.dev72 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+  <title>Enumerations &mdash; Amaranth language &amp; toolchain 0.6.0.dev73 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=d131d90a" />
@@ -17,7 +17,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=82fea6b3"></script>
+        <script src="../_static/documentation_options.js?v=268622aa"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/platformpicker.js"></script>
@@ -41,7 +41,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.6.0.dev72
+                0.6.0.dev73
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -117,9 +117,9 @@
 <span id="enumerations"></span><h1>Enumerations<a class="headerlink" href="#module-amaranth.lib.enum" title="Link to this heading"></a></h1>
 <p>The <a class="reference internal" href="#module-amaranth.lib.enum" title="amaranth.lib.enum"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.enum</span></code></a> module is a drop-in replacement for the standard <a class="reference external" href="https://docs.python.org/3/library/enum.html#module-enum" title="(in Python v3.13)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">enum</span></code></a> module that provides extended <a class="reference internal" href="#amaranth.lib.enum.Enum" title="amaranth.lib.enum.Enum"><code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></a>, <a class="reference internal" href="#amaranth.lib.enum.IntEnum" title="amaranth.lib.enum.IntEnum"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></a>, <a class="reference internal" href="#amaranth.lib.enum.Flag" title="amaranth.lib.enum.Flag"><code class="xref py py-class docutils literal notranslate"><span class="pre">Flag</span></code></a>, and <a class="reference internal" href="#amaranth.lib.enum.IntFlag" title="amaranth.lib.enum.IntFlag"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntFlag</span></code></a> classes with the ability to specify a shape explicitly.</p>
 <p>A shape can be specified for an enumeration with the <code class="docutils literal notranslate"><span class="pre">shape=</span></code> keyword argument:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">amaranth.lib</span> <span class="kn">import</span> <span class="n">enum</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">amaranth.lib</span><span class="w"> </span><span class="kn">import</span> <span class="n">enum</span>
 
-<span class="k">class</span> <span class="nc">Funct</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Funct</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
     <span class="n">ADD</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">SUB</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">MUL</span> <span class="o">=</span> <span class="mi">2</span>
@@ -132,11 +132,11 @@
 </pre></div>
 </div>
 <p>Any <a class="reference internal" href="../guide.html#lang-constcasting"><span class="std std-ref">constant-castable</span></a> expression can be used as the value of a member:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Op</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Op</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="n">REG</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">IMM</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="k">class</span> <span class="nc">Instr</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Instr</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
     <span class="n">ADD</span>  <span class="o">=</span> <span class="n">Cat</span><span class="p">(</span><span class="n">Funct</span><span class="o">.</span><span class="n">ADD</span><span class="p">,</span> <span class="n">Op</span><span class="o">.</span><span class="n">REG</span><span class="p">)</span>
     <span class="n">ADDI</span> <span class="o">=</span> <span class="n">Cat</span><span class="p">(</span><span class="n">Funct</span><span class="o">.</span><span class="n">ADD</span><span class="p">,</span> <span class="n">Op</span><span class="o">.</span><span class="n">IMM</span><span class="p">)</span>
     <span class="n">SUB</span>  <span class="o">=</span> <span class="n">Cat</span><span class="p">(</span><span class="n">Funct</span><span class="o">.</span><span class="n">SUB</span><span class="p">,</span> <span class="n">Op</span><span class="o">.</span><span class="n">REG</span><span class="p">)</span>
@@ -149,9 +149,9 @@
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">shape=</span></code> argument is optional. If not specified, classes from this module behave exactly the same as classes from the standard <a class="reference external" href="https://docs.python.org/3/library/enum.html#module-enum" title="(in Python v3.13)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">enum</span></code></a> module, and likewise, this module re-exports everything exported by the standard <a class="reference external" href="https://docs.python.org/3/library/enum.html#module-enum" title="(in Python v3.13)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">enum</span></code></a> module.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">amaranth.lib.enum</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">amaranth.lib.enum</span>
 
-<span class="k">class</span> <span class="nc">NormalEnum</span><span class="p">(</span><span class="n">amaranth</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">NormalEnum</span><span class="p">(</span><span class="n">amaranth</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
     <span class="n">SPAM</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">HAM</span>  <span class="o">=</span> <span class="mi">1</span>
 </pre></div>
@@ -172,7 +172,7 @@
 </pre></div>
 </div>
 <p>Like the standard Python <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></a> and <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a> classes, the Amaranth <a class="reference internal" href="#amaranth.lib.enum.IntEnum" title="amaranth.lib.enum.IntEnum"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></a> and <a class="reference internal" href="#amaranth.lib.enum.IntFlag" title="amaranth.lib.enum.IntFlag"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntFlag</span></code></a> classes are loosely typed and will not be subject to wrapping in view classes:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TransparentEnum</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntEnum</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">unsigned</span><span class="p">(</span><span class="mi">4</span><span class="p">)):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">TransparentEnum</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntEnum</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">unsigned</span><span class="p">(</span><span class="mi">4</span><span class="p">)):</span>
     <span class="n">FOO</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">BAR</span> <span class="o">=</span> <span class="mi">1</span>
 </pre></div>
@@ -183,11 +183,11 @@
 </pre></div>
 </div>
 <p>It is also possible to define a custom view class for a given enum:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">InstrView</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">EnumView</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">has_immediate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">InstrView</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">EnumView</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">has_immediate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span> <span class="o">==</span> <span class="n">Instr</span><span class="o">.</span><span class="n">ADDI</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="bp">self</span> <span class="o">==</span> <span class="n">Instr</span><span class="o">.</span><span class="n">SUBI</span><span class="p">)</span>
 
-<span class="k">class</span> <span class="nc">Instr</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">view_class</span><span class="o">=</span><span class="n">InstrView</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Instr</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">view_class</span><span class="o">=</span><span class="n">InstrView</span><span class="p">):</span>
     <span class="n">ADD</span>  <span class="o">=</span> <span class="n">Cat</span><span class="p">(</span><span class="n">Funct</span><span class="o">.</span><span class="n">ADD</span><span class="p">,</span> <span class="n">Op</span><span class="o">.</span><span class="n">REG</span><span class="p">)</span>
     <span class="n">ADDI</span> <span class="o">=</span> <span class="n">Cat</span><span class="p">(</span><span class="n">Funct</span><span class="o">.</span><span class="n">ADD</span><span class="p">,</span> <span class="n">Op</span><span class="o">.</span><span class="n">IMM</span><span class="p">)</span>
     <span class="n">SUB</span>  <span class="o">=</span> <span class="n">Cat</span><span class="p">(</span><span class="n">Funct</span><span class="o">.</span><span class="n">SUB</span><span class="p">,</span> <span class="n">Op</span><span class="o">.</span><span class="n">REG</span><span class="p">)</span>
@@ -477,7 +477,7 @@ a plain value of the underlying enum type.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2020—2024, Amaranth project contributors.</p>
+    <p>&#169; Copyright 2020—2025, Amaranth project contributors.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

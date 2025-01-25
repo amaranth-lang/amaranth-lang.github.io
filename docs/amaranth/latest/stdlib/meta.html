@@ -4,8 +4,8 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Interface metadata &mdash; Amaranth language &amp; toolchain 0.6.0.dev72 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+  <title>Interface metadata &mdash; Amaranth language &amp; toolchain 0.6.0.dev73 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=d131d90a" />
@@ -17,7 +17,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=82fea6b3"></script>
+        <script src="../_static/documentation_options.js?v=268622aa"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/platformpicker.js"></script>
@@ -41,7 +41,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.6.0.dev72
+                0.6.0.dev73
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -121,12 +121,12 @@
 <h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
 <p>Many Amaranth designs stay entirely within the Amaranth ecosystem, using the facilities it provides to define, test, and build hardware. In this case, the design is available for exploration using Python code, and metadata is not necessary. However, if an Amaranth design needs to fit into an existing ecosystem, or, conversely, to integrate components developed for another ecosystem, metadata can be used to exchange structured information about the design.</p>
 <p>Consider a simple <a class="reference internal" href="wiring.html#wiring"><span class="std std-ref">component</span></a>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Adder</span><span class="p">(</span><span class="n">wiring</span><span class="o">.</span><span class="n">Component</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Adder</span><span class="p">(</span><span class="n">wiring</span><span class="o">.</span><span class="n">Component</span><span class="p">):</span>
     <span class="n">a</span><span class="p">:</span> <span class="n">In</span><span class="p">(</span><span class="n">unsigned</span><span class="p">(</span><span class="mi">32</span><span class="p">))</span>
     <span class="n">b</span><span class="p">:</span> <span class="n">In</span><span class="p">(</span><span class="n">unsigned</span><span class="p">(</span><span class="mi">32</span><span class="p">))</span>
     <span class="n">o</span><span class="p">:</span> <span class="n">Out</span><span class="p">(</span><span class="n">unsigned</span><span class="p">(</span><span class="mi">33</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">elaborate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">elaborate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
         <span class="n">m</span> <span class="o">=</span> <span class="n">Module</span><span class="p">()</span>
         <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">o</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">m</span>
@@ -179,7 +179,7 @@
 <section id="defining-annotations">
 <h2>Defining annotations<a class="headerlink" href="#defining-annotations" title="Link to this heading"></a></h2>
 <p>Consider a simple control and status register (CSR) bus that provides the memory layout of the accessible registers via an annotation:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">CSRLayoutAnnotation</span><span class="p">(</span><span class="n">meta</span><span class="o">.</span><span class="n">Annotation</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">CSRLayoutAnnotation</span><span class="p">(</span><span class="n">meta</span><span class="o">.</span><span class="n">Annotation</span><span class="p">):</span>
     <span class="n">schema</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">&quot;$schema&quot;</span><span class="p">:</span> <span class="s2">&quot;https://json-schema.org/draft/2020-12/schema&quot;</span><span class="p">,</span>
         <span class="s2">&quot;$id&quot;</span><span class="p">:</span> <span class="s2">&quot;https://amaranth-lang.org/schema/example/0/csr-layout.json&quot;</span><span class="p">,</span>
@@ -200,14 +200,14 @@
         <span class="p">],</span>
     <span class="p">}</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">origin</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">origin</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_origin</span> <span class="o">=</span> <span class="n">origin</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">origin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">origin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_origin</span>
 
-    <span class="k">def</span> <span class="nf">as_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">as_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">instance</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;registers&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">origin</span><span class="o">.</span><span class="n">registers</span><span class="p">,</span>
         <span class="p">}</span>
@@ -216,8 +216,8 @@
         <span class="k">return</span> <span class="n">instance</span>
 
 
-<span class="k">class</span> <span class="nc">CSRSignature</span><span class="p">(</span><span class="n">wiring</span><span class="o">.</span><span class="n">Signature</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CSRSignature</span><span class="p">(</span><span class="n">wiring</span><span class="o">.</span><span class="n">Signature</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">({</span>
             <span class="s2">&quot;addr&quot;</span><span class="p">:</span>     <span class="n">Out</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span>
             <span class="s2">&quot;w_en&quot;</span><span class="p">:</span>     <span class="n">Out</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
@@ -226,7 +226,7 @@
             <span class="s2">&quot;r_data&quot;</span><span class="p">:</span>   <span class="n">In</span><span class="p">(</span><span class="mi">32</span><span class="p">),</span>
         <span class="p">})</span>
 
-    <span class="k">def</span> <span class="nf">annotations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="o">/</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">annotations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="o">/</span><span class="p">):</span>
         <span class="c1"># Unfortunately `super()` cannot be used in `wiring.Signature` subclasses;</span>
         <span class="c1"># instead, use a direct call to a superclass method. In this case that is</span>
         <span class="c1"># `wiring.Signature` itself, but in a more complex class hierarchy it could</span>
@@ -235,10 +235,10 @@
 </pre></div>
 </div>
 <p>A component that embeds a few CSR registers would define their addresses:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyPeripheral</span><span class="p">(</span><span class="n">wiring</span><span class="o">.</span><span class="n">Component</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MyPeripheral</span><span class="p">(</span><span class="n">wiring</span><span class="o">.</span><span class="n">Component</span><span class="p">):</span>
     <span class="n">csr_bus</span><span class="p">:</span> <span class="n">In</span><span class="p">(</span><span class="n">CSRSignature</span><span class="p">())</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">csr_bus</span><span class="o">.</span><span class="n">registers</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;control&quot;</span><span class="p">:</span> <span class="mh">0x0000</span><span class="p">,</span>
@@ -441,7 +441,7 @@ or retrieved from an external source.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2020—2024, Amaranth project contributors.</p>
+    <p>&#169; Copyright 2020—2025, Amaranth project contributors.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

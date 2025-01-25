@@ -4,8 +4,8 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Input/output buffers &mdash; Amaranth language &amp; toolchain 0.6.0.dev72 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+  <title>Input/output buffers &mdash; Amaranth language &amp; toolchain 0.6.0.dev73 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=d131d90a" />
@@ -17,7 +17,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=82fea6b3"></script>
+        <script src="../_static/documentation_options.js?v=268622aa"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/platformpicker.js"></script>
@@ -41,7 +41,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.6.0.dev72
+                0.6.0.dev73
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -134,16 +134,16 @@
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
 <p>All of the following examples assume that one of the built-in FPGA platforms is used.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">amaranth.sim</span> <span class="kn">import</span> <span class="n">Simulator</span><span class="p">,</span> <span class="n">Period</span>
-<span class="kn">from</span> <span class="nn">amaranth.lib</span> <span class="kn">import</span> <span class="n">io</span><span class="p">,</span> <span class="n">wiring</span><span class="p">,</span> <span class="n">stream</span>
-<span class="kn">from</span> <span class="nn">amaranth.lib.wiring</span> <span class="kn">import</span> <span class="n">In</span><span class="p">,</span> <span class="n">Out</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">amaranth.sim</span><span class="w"> </span><span class="kn">import</span> <span class="n">Simulator</span><span class="p">,</span> <span class="n">Period</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">amaranth.lib</span><span class="w"> </span><span class="kn">import</span> <span class="n">io</span><span class="p">,</span> <span class="n">wiring</span><span class="p">,</span> <span class="n">stream</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">amaranth.lib.wiring</span><span class="w"> </span><span class="kn">import</span> <span class="n">In</span><span class="p">,</span> <span class="n">Out</span>
 </pre></div>
 </div>
 <section id="led-output">
 <h3>LED output<a class="headerlink" href="#led-output" title="Link to this heading"></a></h3>
 <p>In this example, a library I/O port for a LED is requested from the platform and driven to blink the LED:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Toplevel</span><span class="p">(</span><span class="n">Elaboratable</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">elaborate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Toplevel</span><span class="p">(</span><span class="n">Elaboratable</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">elaborate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
         <span class="n">m</span> <span class="o">=</span> <span class="n">Module</span><span class="p">()</span>
 
         <span class="n">delay</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span>
@@ -164,8 +164,8 @@
 <section id="clock-input">
 <h3>Clock input<a class="headerlink" href="#clock-input" title="Link to this heading"></a></h3>
 <p>In this example, a clock domain is created and driven from an external clock source:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Toplevel</span><span class="p">(</span><span class="n">Elaboratable</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">elaborate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Toplevel</span><span class="p">(</span><span class="n">Elaboratable</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">elaborate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
         <span class="n">m</span> <span class="o">=</span> <span class="n">Module</span><span class="p">()</span>
 
         <span class="n">m</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">sync</span> <span class="o">=</span> <span class="n">cd_sync</span> <span class="o">=</span> <span class="n">ClockDomain</span><span class="p">()</span>
@@ -182,8 +182,8 @@
 <section id="bidirectional-bus">
 <h3>Bidirectional bus<a class="headerlink" href="#bidirectional-bus" title="Link to this heading"></a></h3>
 <p>This example implements a peripheral for a clocked parallel bus. This peripheral can store and recall one byte of data. The data is stored with a write enable pulse, and recalled with a read enable pulse:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Toplevel</span><span class="p">(</span><span class="n">Elaboratable</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">elaborate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Toplevel</span><span class="p">(</span><span class="n">Elaboratable</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">elaborate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
         <span class="n">m</span> <span class="o">=</span> <span class="n">Module</span><span class="p">()</span>
 
         <span class="n">m</span><span class="o">.</span><span class="n">submodules</span><span class="o">.</span><span class="n">bus_d</span> <span class="o">=</span> <span class="n">bus_d</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">FFBuffer</span><span class="p">(</span><span class="s2">&quot;io&quot;</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s2">&quot;d&quot;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">))</span>
@@ -206,10 +206,10 @@
 <section id="clock-forwarding">
 <h3>Clock forwarding<a class="headerlink" href="#clock-forwarding" title="Link to this heading"></a></h3>
 <p>In this example of a <a class="reference external" href="https://en.wikipedia.org/wiki/Source-synchronous">source-synchronous interface</a>, a clock signal is generated with the same phase as the DDR data signals associated with it:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SourceSynchronousOutput</span><span class="p">(</span><span class="n">wiring</span><span class="o">.</span><span class="n">Component</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SourceSynchronousOutput</span><span class="p">(</span><span class="n">wiring</span><span class="o">.</span><span class="n">Component</span><span class="p">):</span>
     <span class="n">dout</span><span class="p">:</span> <span class="n">In</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">elaborate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">elaborate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
         <span class="n">m</span> <span class="o">=</span> <span class="n">Module</span><span class="p">()</span>
 
         <span class="n">m</span><span class="o">.</span><span class="n">submodules</span><span class="o">.</span><span class="n">bus_dclk</span> <span class="o">=</span> <span class="n">bus_dclk</span> <span class="o">=</span> \
@@ -237,16 +237,16 @@
 <p>The Amaranth simulator, <a class="reference internal" href="../simulator.html#module-amaranth.sim" title="amaranth.sim"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.sim</span></code></a>, cannot simulate <a class="reference internal" href="../guide.html#lang-iovalues"><span class="std std-ref">core I/O values</span></a> or <a class="reference internal" href="../guide.html#lang-iobufferinstance"><span class="std std-ref">I/O buffer instances</span></a> as it only operates on unidirectionally driven two-state wires. This module provides a simulation-only library I/O port, <a class="reference internal" href="#amaranth.lib.io.SimulationPort" title="amaranth.lib.io.SimulationPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimulationPort</span></code></a>, so that components that use library I/O buffers can be tested.</p>
 <p>A component that is designed for testing should accept the library I/O ports it will drive as constructor parameters rather than requesting them from the platform directly. Synthesizable designs will instantiate the component with a <a class="reference internal" href="#amaranth.lib.io.SingleEndedPort" title="amaranth.lib.io.SingleEndedPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleEndedPort</span></code></a>, <a class="reference internal" href="#amaranth.lib.io.DifferentialPort" title="amaranth.lib.io.DifferentialPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">DifferentialPort</span></code></a>, or a platform-specific library I/O port, while tests will instantiate the component with a <a class="reference internal" href="#amaranth.lib.io.SimulationPort" title="amaranth.lib.io.SimulationPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimulationPort</span></code></a>. Tests are able to inject inputs into the component using <code class="code highlight py python docutils literal highlight-python"><span class="n">sim_port</span><span class="o">.</span><span class="n">i</span></code>, capture the outputs of the component via <code class="code highlight py python docutils literal highlight-python"><span class="n">sim_port</span><span class="o">.</span><span class="n">o</span></code>, and ensure that the component is driving the outputs at the appropriate times using <code class="code highlight py python docutils literal highlight-python"><span class="n">sim_port</span><span class="o">.</span><span class="n">oe</span></code>.</p>
 <p>For example, consider a simple serializer that accepts a stream of multi-bit data words and outputs them bit by bit. It can be tested as follows:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">OutputSerializer</span><span class="p">(</span><span class="n">wiring</span><span class="o">.</span><span class="n">Component</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">OutputSerializer</span><span class="p">(</span><span class="n">wiring</span><span class="o">.</span><span class="n">Component</span><span class="p">):</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">In</span><span class="p">(</span><span class="n">stream</span><span class="o">.</span><span class="n">Signature</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dclk_port</span><span class="p">,</span> <span class="n">dout_port</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dclk_port</span><span class="p">,</span> <span class="n">dout_port</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dclk_port</span> <span class="o">=</span> <span class="n">dclk_port</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dout_port</span> <span class="o">=</span> <span class="n">dout_port</span>
 
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">elaborate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">elaborate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
         <span class="n">m</span> <span class="o">=</span> <span class="n">Module</span><span class="p">()</span>
 
         <span class="n">m</span><span class="o">.</span><span class="n">submodules</span><span class="o">.</span><span class="n">dclk</span> <span class="o">=</span> <span class="n">dclk</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">Buffer</span><span class="p">(</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dclk_port</span><span class="p">)</span>
@@ -264,19 +264,19 @@
 
         <span class="k">return</span> <span class="n">m</span>
 
-<span class="k">def</span> <span class="nf">test_output_serializer</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_output_serializer</span><span class="p">():</span>
     <span class="n">dclk_port</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">SimulationPort</span><span class="p">(</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">dout_port</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">SimulationPort</span><span class="p">(</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
     <span class="n">dut</span> <span class="o">=</span> <span class="n">OutputSerializer</span><span class="p">(</span><span class="n">dclk_port</span><span class="p">,</span> <span class="n">dout_port</span><span class="p">)</span>
 
-    <span class="k">async</span> <span class="k">def</span> <span class="nf">testbench_write_data</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">testbench_write_data</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
         <span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">payload</span><span class="p">,</span> <span class="mh">0xA1</span><span class="p">)</span>
         <span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">valid</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
         <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">tick</span><span class="p">()</span><span class="o">.</span><span class="n">until</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">ready</span><span class="p">)</span>
         <span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">valid</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
-    <span class="k">async</span> <span class="k">def</span> <span class="nf">testbench_sample_output</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">testbench_sample_output</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">bit</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]:</span>
             <span class="n">_</span><span class="p">,</span> <span class="n">dout_value</span> <span class="o">=</span> <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">posedge</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">dclk_port</span><span class="o">.</span><span class="n">o</span><span class="p">)</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">dout_port</span><span class="o">.</span><span class="n">o</span><span class="p">)</span>
             <span class="k">assert</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">dout_port</span><span class="o">.</span><span class="n">oe</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;DUT is not driving the data output&quot;</span>
@@ -714,7 +714,7 @@ Defaults to <code class="code highlight py python docutils literal highlight-pyt
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2020—2024, Amaranth project contributors.</p>
+    <p>&#169; Copyright 2020—2025, Amaranth project contributors.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
