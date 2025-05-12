@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Getting started &mdash; Amaranth language &amp; toolchain 0.5.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/platformpicker.css" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=d131d90a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=67a425f4"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/platformpicker.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Tutorial" href="tutorial.html" />
+    <link rel="prev" title="Installation" href="install.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="cover.html" class="icon icon-home">
+            Amaranth language & toolchain
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.5.5
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Language &amp; toolchain</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Getting started</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#a-counter">A counter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#implementing-a-counter">Implementing a counter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#testing-a-counter">Testing a counter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#converting-a-counter">Converting a counter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#a-blinking-led">A blinking LED</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide.html">Language guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Language reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stdlib.html">Standard library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simulator.html">Simulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="platform.html">Platform integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changes.html">Changelog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contrib.html">Contributing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="https://amaranth-lang.org/docs/amaranth-stdio/latest/">Standard I/O components</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://amaranth-lang.org/docs/amaranth-soc/latest/">System on Chip toolkit</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="cover.html">Amaranth language & toolchain</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="cover.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Language &amp; toolchain</a></li>
+      <li class="breadcrumb-item active">Getting started</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/start.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="getting-started">
+<h1>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this heading"></a></h1>
+<p>This section demonstrates the basic Amaranth workflow to provide a cursory overview of the language and the toolchain. See the <a class="reference internal" href="tutorial.html"><span class="doc">tutorial</span></a> for a step-by-step introduction to the language, and the <a class="reference internal" href="guide.html"><span class="doc">language guide</span></a> for a detailed explanation of every language construct.</p>
+<section id="a-counter">
+<h2>A counter<a class="headerlink" href="#a-counter" title="Permalink to this heading"></a></h2>
+<p>As a first example, consider a counter with a fixed limit, enable, and overflow. The code for this example is shown below. <a class="reference download internal" download="" href="_downloads/9916e1f0618daa91d3860f1bdac16820/up_counter.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span></code></a> and run it:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>python3<span class="w"> </span>up_counter.py
+</pre></div>
+</div>
+<section id="implementing-a-counter">
+<h3>Implementing a counter<a class="headerlink" href="#implementing-a-counter" title="Permalink to this heading"></a></h3>
+<p>A 16-bit up counter with enable input, overflow output, and a limit fixed at design time can be implemented in Amaranth as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span><span class="w"> </span><span class="nn">amaranth</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="linenos"> 2</span><span class="kn">from</span><span class="w"> </span><span class="nn">amaranth.lib</span><span class="w"> </span><span class="kn">import</span> <span class="n">wiring</span>
+<span class="linenos"> 3</span><span class="kn">from</span><span class="w"> </span><span class="nn">amaranth.lib.wiring</span><span class="w"> </span><span class="kn">import</span> <span class="n">In</span><span class="p">,</span> <span class="n">Out</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="k">class</span><span class="w"> </span><span class="nc">UpCounter</span><span class="p">(</span><span class="n">wiring</span><span class="o">.</span><span class="n">Component</span><span class="p">):</span>
+<span class="linenos"> 7</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos"> 8</span><span class="sd">    A 16-bit up counter with a fixed limit.</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="sd">    Parameters</span>
+<span class="linenos">11</span><span class="sd">    ----------</span>
+<span class="linenos">12</span><span class="sd">    limit : int</span>
+<span class="linenos">13</span><span class="sd">        The value at which the counter overflows.</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="sd">    Attributes</span>
+<span class="linenos">16</span><span class="sd">    ----------</span>
+<span class="linenos">17</span><span class="sd">    en : Signal, in</span>
+<span class="linenos">18</span><span class="sd">        The counter is incremented if ``en`` is asserted, and retains</span>
+<span class="linenos">19</span><span class="sd">        its value otherwise.</span>
+<span class="linenos">20</span><span class="sd">    ovf : Signal, out</span>
+<span class="linenos">21</span><span class="sd">        ``ovf`` is asserted when the counter reaches its limit.</span>
+<span class="linenos">22</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos">23</span>
+<span class="linenos">24</span>    <span class="n">en</span><span class="p">:</span> <span class="n">In</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos">25</span>    <span class="n">ovf</span><span class="p">:</span> <span class="n">Out</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">limit</span><span class="p">):</span>
+<span class="linenos">28</span>        <span class="bp">self</span><span class="o">.</span><span class="n">limit</span> <span class="o">=</span> <span class="n">limit</span>
+<span class="linenos">29</span>        <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+<span class="linenos">30</span>
+<span class="linenos">31</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+<span class="linenos">32</span>
+<span class="linenos">33</span>    <span class="k">def</span><span class="w"> </span><span class="nf">elaborate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
+<span class="linenos">34</span>        <span class="n">m</span> <span class="o">=</span> <span class="n">Module</span><span class="p">()</span>
+<span class="linenos">35</span>
+<span class="linenos">36</span>        <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ovf</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">limit</span><span class="p">)</span>
+<span class="linenos">37</span>
+<span class="linenos">38</span>        <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">If</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">en</span><span class="p">):</span>
+<span class="linenos">39</span>            <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">If</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ovf</span><span class="p">):</span>
+<span class="linenos">40</span>                <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="linenos">41</span>            <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">Else</span><span class="p">():</span>
+<span class="linenos">42</span>                <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">43</span>
+<span class="linenos">44</span>        <span class="k">return</span> <span class="n">m</span>
+</pre></div>
+</div>
+<p>The reusable building block of Amaranth designs is a <code class="docutils literal notranslate"><span class="pre">Component</span></code>: a Python class declares its interface (<code class="docutils literal notranslate"><span class="pre">en</span></code> and <code class="docutils literal notranslate"><span class="pre">ovf</span></code>, in this case) and implements the <code class="docutils literal notranslate"><span class="pre">elaborate</span></code> method that defines its behavior.</p>
+<p>Most <code class="docutils literal notranslate"><span class="pre">elaborate</span></code> implementations use a <code class="docutils literal notranslate"><span class="pre">Module</span></code> helper to describe combinational (<code class="docutils literal notranslate"><span class="pre">m.d.comb</span></code>) and synchronous (<code class="docutils literal notranslate"><span class="pre">m.d.sync</span></code>) logic controlled with conditional syntax (<code class="docutils literal notranslate"><span class="pre">m.If</span></code>, <code class="docutils literal notranslate"><span class="pre">m.Elif</span></code>, <code class="docutils literal notranslate"><span class="pre">m.Else</span></code>) similar to Python’s. They can also instantiate vendor-defined black boxes or modules written in other HDLs.</p>
+</section>
+<section id="testing-a-counter">
+<h3>Testing a counter<a class="headerlink" href="#testing-a-counter" title="Permalink to this heading"></a></h3>
+<p>To verify its functionality, the counter can be simulated for a small amount of time, with a test bench driving it and checking a few simple conditions:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">46</span><span class="kn">from</span><span class="w"> </span><span class="nn">amaranth.sim</span><span class="w"> </span><span class="kn">import</span> <span class="n">Simulator</span>
+<span class="linenos">47</span>
+<span class="linenos">48</span>
+<span class="linenos">49</span><span class="n">dut</span> <span class="o">=</span> <span class="n">UpCounter</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
+<span class="linenos">50</span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">bench</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
+<span class="linenos">51</span>    <span class="c1"># Disabled counter should not overflow.</span>
+<span class="linenos">52</span>    <span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">en</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos">53</span>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">):</span>
+<span class="linenos">54</span>        <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">tick</span><span class="p">()</span>
+<span class="linenos">55</span>        <span class="k">assert</span> <span class="ow">not</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">ovf</span><span class="p">)</span>
+<span class="linenos">56</span>
+<span class="linenos">57</span>    <span class="c1"># Once enabled, the counter should overflow in 25 cycles.</span>
+<span class="linenos">58</span>    <span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">en</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">59</span>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">24</span><span class="p">):</span>
+<span class="linenos">60</span>        <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">tick</span><span class="p">()</span>
+<span class="linenos">61</span>        <span class="k">assert</span> <span class="ow">not</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">ovf</span><span class="p">)</span>
+<span class="linenos">62</span>    <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">tick</span><span class="p">()</span>
+<span class="linenos">63</span>    <span class="k">assert</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">ovf</span><span class="p">)</span>
+<span class="linenos">64</span>
+<span class="linenos">65</span>    <span class="c1"># The overflow should clear in one cycle.</span>
+<span class="linenos">66</span>    <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">tick</span><span class="p">()</span>
+<span class="linenos">67</span>    <span class="k">assert</span> <span class="ow">not</span> <span class="n">ctx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">ovf</span><span class="p">)</span>
+<span class="linenos">68</span>
+<span class="linenos">69</span>
+<span class="linenos">70</span><span class="n">sim</span> <span class="o">=</span> <span class="n">Simulator</span><span class="p">(</span><span class="n">dut</span><span class="p">)</span>
+<span class="linenos">71</span><span class="n">sim</span><span class="o">.</span><span class="n">add_clock</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">)</span> <span class="c1"># 1 MHz</span>
+<span class="linenos">72</span><span class="n">sim</span><span class="o">.</span><span class="n">add_testbench</span><span class="p">(</span><span class="n">bench</span><span class="p">)</span>
+<span class="linenos">73</span><span class="k">with</span> <span class="n">sim</span><span class="o">.</span><span class="n">write_vcd</span><span class="p">(</span><span class="s2">&quot;up_counter.vcd&quot;</span><span class="p">):</span>
+<span class="linenos">74</span>    <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The testbench is implemented as a Python <code class="code highlight py python docutils literal highlight-python"><span class="k">async</span></code> function that is simulated concurrently with the counter itself. The testbench can inspect the simulated signals using <code class="code highlight py python docutils literal highlight-python"><span class="n">ctx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sig</span><span class="p">)</span></code>, update them using <code class="code highlight py python docutils literal highlight-python"><span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span></code>, and advance the simulation by one clock cycle with <code class="code highlight py python docutils literal highlight-python"><span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">tick</span><span class="p">()</span></code>. See the <a class="reference internal" href="simulator.html"><span class="doc">simulator documentation</span></a> for details.</p>
+<p>When run, the testbench finishes successfully, since all of the assertions hold, and produces a VCD file with waveforms recorded for every <code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code> as well as the clock of the <code class="docutils literal notranslate"><span class="pre">sync</span></code> domain:</p>
+<img src="_images/start/up_counter.svg" class="wavedrom wavedrom-signal" alt="{'signal': [{'name': 'clk', 'wave': 'p..........'}, {'name': 'count', 'wave': '===========', 'data': ['17', '18', '19', '20', '21', '22', '23', '24', '25', '0', '1']}, {'name': 'en', 'wave': '1..........'}, {'name': 'ovf', 'wave': '0.......10.'}], 'head': {'tock': 48}, 'config': {'skin': 'default'}}"></section>
+<section id="converting-a-counter">
+<h3>Converting a counter<a class="headerlink" href="#converting-a-counter" title="Permalink to this heading"></a></h3>
+<p>Although some Amaranth workflows do not include Verilog at all, it is still the de facto standard for HDL interoperability. Any Amaranth design can be converted to synthesizable Verilog using the corresponding backend:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">76</span><span class="kn">from</span><span class="w"> </span><span class="nn">amaranth.back</span><span class="w"> </span><span class="kn">import</span> <span class="n">verilog</span>
+<span class="linenos">77</span>
+<span class="linenos">78</span>
+<span class="linenos">79</span><span class="n">top</span> <span class="o">=</span> <span class="n">UpCounter</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
+<span class="linenos">80</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;up_counter.v&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="linenos">81</span>    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">verilog</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">top</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The signals that will be connected to the ports of the top-level Verilog module should be specified explicitly. The rising edge clock and synchronous reset signals of the <code class="docutils literal notranslate"><span class="pre">sync</span></code> domain are added automatically; if necessary, the control signals can be configured explicitly. The result is the following Verilog code (lightly edited for clarity):</p>
+<div class="highlight-verilog notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">generator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Amaranth&quot;</span><span class="w"> </span><span class="o">*</span><span class="p">)</span>
+<span class="linenos"> 2</span><span class="k">module</span><span class="w"> </span><span class="n">top</span><span class="p">(</span><span class="n">ovf</span><span class="p">,</span><span class="w"> </span><span class="n">clk</span><span class="p">,</span><span class="w"> </span><span class="n">rst</span><span class="p">,</span><span class="w"> </span><span class="n">en</span><span class="p">);</span>
+<span class="linenos"> 3</span><span class="w">  </span><span class="kt">reg</span><span class="w"> </span><span class="n">\$auto$verilog_backend.cc:2255:dump_module$1</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="linenos"> 4</span><span class="w">  </span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;up_counter.py:36&quot;</span><span class="w"> </span><span class="o">*</span><span class="p">)</span>
+<span class="linenos"> 5</span><span class="w">  </span><span class="kt">wire</span><span class="w"> </span><span class="n">\$1</span><span class="w"> </span><span class="p">;</span>
+<span class="linenos"> 6</span><span class="w">  </span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;up_counter.py:42&quot;</span><span class="w"> </span><span class="o">*</span><span class="p">)</span>
+<span class="linenos"> 7</span><span class="w">  </span><span class="kt">wire</span><span class="w"> </span><span class="p">[</span><span class="mh">16</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">\$3</span><span class="w"> </span><span class="p">;</span>
+<span class="linenos"> 8</span><span class="w">  </span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;up_counter.py:42&quot;</span><span class="w"> </span><span class="o">*</span><span class="p">)</span>
+<span class="linenos"> 9</span><span class="w">  </span><span class="kt">wire</span><span class="w"> </span><span class="p">[</span><span class="mh">16</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">\$4</span><span class="w"> </span><span class="p">;</span>
+<span class="linenos">10</span><span class="w">  </span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&lt;site-packages&gt;/amaranth/hdl/ir.py:509&quot;</span><span class="w"> </span><span class="o">*</span><span class="p">)</span>
+<span class="linenos">11</span><span class="w">  </span><span class="k">input</span><span class="w"> </span><span class="n">clk</span><span class="p">;</span>
+<span class="linenos">12</span><span class="w">  </span><span class="kt">wire</span><span class="w"> </span><span class="n">clk</span><span class="p">;</span>
+<span class="linenos">13</span><span class="w">  </span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;up_counter.py:29&quot;</span><span class="w"> </span><span class="o">*</span><span class="p">)</span>
+<span class="linenos">14</span><span class="w">  </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="mh">15</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">16&#39;h0000</span><span class="p">;</span>
+<span class="linenos">15</span><span class="w">  </span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;up_counter.py:29&quot;</span><span class="w"> </span><span class="o">*</span><span class="p">)</span>
+<span class="linenos">16</span><span class="w">  </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="mh">15</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">\count$next</span><span class="w"> </span><span class="p">;</span>
+<span class="linenos">17</span><span class="w">  </span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&lt;site-packages&gt;/amaranth/lib/wiring.py:1647&quot;</span><span class="w"> </span><span class="o">*</span><span class="p">)</span>
+<span class="linenos">18</span><span class="w">  </span><span class="k">input</span><span class="w"> </span><span class="n">en</span><span class="p">;</span>
+<span class="linenos">19</span><span class="w">  </span><span class="kt">wire</span><span class="w"> </span><span class="n">en</span><span class="p">;</span>
+<span class="linenos">20</span><span class="w">  </span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&lt;site-packages&gt;/amaranth/lib/wiring.py:1647&quot;</span><span class="w"> </span><span class="o">*</span><span class="p">)</span>
+<span class="linenos">21</span><span class="w">  </span><span class="k">output</span><span class="w"> </span><span class="n">ovf</span><span class="p">;</span>
+<span class="linenos">22</span><span class="w">  </span><span class="kt">wire</span><span class="w"> </span><span class="n">ovf</span><span class="p">;</span>
+<span class="linenos">23</span><span class="w">  </span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&lt;site-packages&gt;/amaranth/hdl/ir.py:509&quot;</span><span class="w"> </span><span class="o">*</span><span class="p">)</span>
+<span class="linenos">24</span><span class="w">  </span><span class="k">input</span><span class="w"> </span><span class="n">rst</span><span class="p">;</span>
+<span class="linenos">25</span><span class="w">  </span><span class="kt">wire</span><span class="w"> </span><span class="n">rst</span><span class="p">;</span>
+<span class="linenos">26</span><span class="w">  </span><span class="k">assign</span><span class="w"> </span><span class="n">\$1</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;up_counter.py:36&quot;</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="mh">5&#39;h19</span><span class="p">;</span>
+<span class="linenos">27</span><span class="w">  </span><span class="k">assign</span><span class="w"> </span><span class="n">\$4</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;up_counter.py:42&quot;</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="mh">1&#39;h1</span><span class="p">;</span>
+<span class="linenos">28</span><span class="w">  </span><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="p">)</span>
+<span class="linenos">29</span><span class="w">    </span><span class="n">count</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">\count$next</span><span class="w"> </span><span class="p">;</span>
+<span class="linenos">30</span><span class="w">  </span><span class="k">always</span><span class="w"> </span><span class="p">@</span><span class="o">*</span><span class="w"> </span><span class="k">begin</span>
+<span class="linenos">31</span><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">\$auto$verilog_backend.cc:2255:dump_module$1</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">begin</span><span class="w"> </span><span class="k">end</span>
+<span class="linenos">32</span><span class="w">    </span><span class="n">\count$next</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">count</span><span class="p">;</span>
+<span class="linenos">33</span><span class="w">    </span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;up_counter.py:38&quot;</span><span class="w"> </span><span class="o">*</span><span class="p">)</span>
+<span class="linenos">34</span><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">en</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="linenos">35</span><span class="w">      </span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">full_case</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">32</span><span class="mi">&#39;d1</span><span class="w"> </span><span class="o">*</span><span class="p">)</span>
+<span class="linenos">36</span><span class="w">      </span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;up_counter.py:39&quot;</span><span class="w"> </span><span class="o">*</span><span class="p">)</span>
+<span class="linenos">37</span><span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ovf</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="linenos">38</span><span class="w">        </span><span class="n">\count$next</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mh">16&#39;h0000</span><span class="p">;</span>
+<span class="linenos">39</span><span class="w">      </span><span class="k">end</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">begin</span>
+<span class="linenos">40</span><span class="w">        </span><span class="n">\count$next</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">\$4</span><span class="w"> </span><span class="p">[</span><span class="mh">15</span><span class="o">:</span><span class="mh">0</span><span class="p">];</span>
+<span class="linenos">41</span><span class="w">      </span><span class="k">end</span>
+<span class="linenos">42</span><span class="w">    </span><span class="k">end</span>
+<span class="linenos">43</span><span class="w">    </span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&lt;site-packages&gt;/amaranth/hdl/xfrm.py:534&quot;</span><span class="w"> </span><span class="o">*</span><span class="p">)</span>
+<span class="linenos">44</span><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rst</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="linenos">45</span><span class="w">      </span><span class="n">\count$next</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mh">16&#39;h0000</span><span class="p">;</span>
+<span class="linenos">46</span><span class="w">    </span><span class="k">end</span>
+<span class="linenos">47</span><span class="w">  </span><span class="k">end</span>
+<span class="linenos">48</span><span class="w">  </span><span class="k">assign</span><span class="w"> </span><span class="n">\$3</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">\$4</span><span class="w"> </span><span class="p">;</span>
+<span class="linenos">49</span><span class="w">  </span><span class="k">assign</span><span class="w"> </span><span class="n">ovf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">\$1</span><span class="w"> </span><span class="p">;</span>
+<span class="linenos">50</span><span class="k">endmodule</span>
+</pre></div>
+</div>
+<p>To aid debugging, the generated Verilog code has the same general structure as the Amaranth source code (although more verbose), and contains extensive source location information.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Unfortunately, at the moment none of the supported toolchains will use the source location information in diagnostic messages.</p>
+</div>
+</section>
+</section>
+<section id="a-blinking-led">
+<h2>A blinking LED<a class="headerlink" href="#a-blinking-led" title="Permalink to this heading"></a></h2>
+<p>Although Amaranth works well as a standalone HDL, it also includes a build system that integrates with FPGA toolchains, and many board definition files for common developer boards that include pinouts and programming adapter invocations. The following code will blink a LED with a frequency of 1 Hz on any board that has a LED and an oscillator:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span><span class="w"> </span><span class="nn">amaranth</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="k">class</span><span class="w"> </span><span class="nc">LEDBlinker</span><span class="p">(</span><span class="n">Elaboratable</span><span class="p">):</span>
+<span class="linenos"> 5</span>    <span class="k">def</span><span class="w"> </span><span class="nf">elaborate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
+<span class="linenos"> 6</span>        <span class="n">m</span> <span class="o">=</span> <span class="n">Module</span><span class="p">()</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span>        <span class="n">led</span> <span class="o">=</span> <span class="n">platform</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s2">&quot;led&quot;</span><span class="p">)</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span>        <span class="n">half_freq</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">platform</span><span class="o">.</span><span class="n">default_clk_frequency</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
+<span class="linenos">11</span>        <span class="n">timer</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">half_freq</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>        <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">If</span><span class="p">(</span><span class="n">timer</span> <span class="o">==</span> <span class="n">half_freq</span><span class="p">):</span>
+<span class="linenos">14</span>            <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">led</span><span class="o">.</span><span class="n">o</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="o">~</span><span class="n">led</span><span class="o">.</span><span class="n">o</span><span class="p">)</span>
+<span class="linenos">15</span>            <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">timer</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="linenos">16</span>        <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">Else</span><span class="p">():</span>
+<span class="linenos">17</span>            <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">timer</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">timer</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span>        <span class="k">return</span> <span class="n">m</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">LEDBlinker</span></code> module will use the first LED available on the board, and derive the clock divisor from the oscillator frequency specified in the clock constraint. It can be used, for example, with the <a class="reference external" href="https://www.latticesemi.com/icestick">Lattice iCEStick evaluation board</a>, one of the many boards already supported by Amaranth:</p>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>Link to the installation instructions for the FOSS iCE40 toolchain, probably as a part of board documentation.</p>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">21</span><span class="kn">from</span><span class="w"> </span><span class="nn">amaranth_boards.icestick</span><span class="w"> </span><span class="kn">import</span> <span class="n">ICEStickPlatform</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span>
+<span class="linenos">24</span><span class="n">ICEStickPlatform</span><span class="p">()</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">LEDBlinker</span><span class="p">(),</span> <span class="n">do_program</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>With only a single line of code, the design is synthesized, placed, routed, and programmed to the on-board Flash memory. Although not all applications will use the Amaranth build system, the designs that choose it can benefit from the “turnkey” built-in workflows; if necessary, the built-in workflows can be customized to include user-specified options, commands, and files.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The ability to check with minimal effort whether the entire toolchain functions correctly is so important that it is built into every board definition file. To use it with the iCEStick board, run:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>amaranth_boards.icestick
+</pre></div>
+</div>
+<p>This command will build and program a test bitstream similar to the example above.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="install.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tutorial.html" class="btn btn-neutral float-right" title="Tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020—2025, Amaranth project contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
