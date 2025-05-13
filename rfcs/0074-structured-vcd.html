@@ -1,0 +1,400 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>0074-structured-vcd - The Amaranth RFC Book</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="theme/img-color-scheme.css">
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="0001-aggregate-data-structures.html">0001-aggregate-data-structures</a></li><li class="chapter-item expanded "><a href="0002-interfaces.html">0002-interfaces</a></li><li class="chapter-item expanded "><a href="0003-enumeration-shapes.html">0003-enumeration-shapes</a></li><li class="chapter-item expanded "><a href="0004-const-castable-exprs.html">0004-const-castable-exprs</a></li><li class="chapter-item expanded "><a href="0005-remove-const-normalize.html">0005-remove-const-normalize</a></li><li class="chapter-item expanded "><a href="0006-stdlib-crc.html">0006-stdlib-crc</a></li><li class="chapter-item expanded "><a href="0008-aggregate-extensibility.html">0008-aggregate-extensibility</a></li><li class="chapter-item expanded "><a href="0009-const-init-shape-castable.html">0009-const-init-shape-castable</a></li><li class="chapter-item expanded "><a href="0010-move-repl-to-value.html">0010-move-repl-to-value</a></li><li class="chapter-item expanded "><a href="0015-lifting-shape-castables.html">0015-lifting-shape-castables</a></li><li class="chapter-item expanded "><a href="0016-soc-csr-regs.html">0016-soc-csr-regs</a></li><li class="chapter-item expanded "><a href="0017-remove-log2-int.html">0017-remove-log2-int</a></li><li class="chapter-item expanded "><a href="0018-reorganize-vendor-platforms.html">0018-reorganize-vendor-platforms</a></li><li class="chapter-item expanded "><a href="0019-remove-scheduler.html">0019-remove-scheduler</a></li><li class="chapter-item expanded "><a href="0020-deprecate-non-fwft-fifos.html">0020-deprecate-non-fwft-fifos</a></li><li class="chapter-item expanded "><a href="0021-patch-releases.html">0021-patch-releases</a></li><li class="chapter-item expanded "><a href="0022-valuecastable-shape.html">0022-valuecastable-shape</a></li><li class="chapter-item expanded "><a href="0027-simulator-testbenches.html">0027-simulator-testbenches</a></li><li class="chapter-item expanded "><a href="0028-override-value-operators.html">0028-override-value-operators</a></li><li class="chapter-item expanded "><a href="0030-component-metadata.html">0030-component-metadata</a></li><li class="chapter-item expanded "><a href="0031-enumeration-type-safety.html">0031-enumeration-type-safety</a></li><li class="chapter-item expanded "><a href="0034-interface-rename.html">0034-interface-rename</a></li><li class="chapter-item expanded "><a href="0035-shapelike-valuelike.html">0035-shapelike-valuelike</a></li><li class="chapter-item expanded "><a href="0036-async-testbench-functions.html">0036-async-testbench-functions</a></li><li class="chapter-item expanded "><a href="0037-make-signature-immutable.html">0037-make-signature-immutable</a></li><li class="chapter-item expanded "><a href="0038-component-signature-immutability.html">0038-component-signature-immutability</a></li><li class="chapter-item expanded "><a href="0039-empty-case.html">0039-empty-case</a></li><li class="chapter-item expanded "><a href="0040-arbitrary-memory-shape.html">0040-arbitrary-memory-shape</a></li><li class="chapter-item expanded "><a href="0042-const-from-shape-castable.html">0042-const-from-shape-castable</a></li><li class="chapter-item expanded "><a href="0043-rename-reset-to-init.html">0043-rename-reset-to-init</a></li><li class="chapter-item expanded "><a href="0045-lib-memory.html">0045-lib-memory</a></li><li class="chapter-item expanded "><a href="0046-shape-range-1.html">0046-shape-range-1</a></li><li class="chapter-item expanded "><a href="0049-soc-gpio-peripheral.html">0049-soc-gpio-peripheral</a></li><li class="chapter-item expanded "><a href="0050-print.html">0050-print</a></li><li class="chapter-item expanded "><a href="0051-const-from-bits.html">0051-const-from-bits</a></li><li class="chapter-item expanded "><a href="0052-choice.html">0052-choice</a></li><li class="chapter-item expanded "><a href="0053-ioport.html">0053-ioport</a></li><li class="chapter-item expanded "><a href="0054-read-port-init.html">0054-read-port-init</a></li><li class="chapter-item expanded "><a href="0055-lib-io.html">0055-lib-io</a></li><li class="chapter-item expanded "><a href="0056-mem-wide.html">0056-mem-wide</a></li><li class="chapter-item expanded "><a href="0057-single-field-shortcut.html">0057-single-field-shortcut</a></li><li class="chapter-item expanded "><a href="0058-valuecastable-format.html">0058-valuecastable-format</a></li><li class="chapter-item expanded "><a href="0059-no-domain-upwards-propagation.html">0059-no-domain-upwards-propagation</a></li><li class="chapter-item expanded "><a href="0061-minimal-streams.html">0061-minimal-streams</a></li><li class="chapter-item expanded "><a href="0062-memory-data.html">0062-memory-data</a></li><li class="chapter-item expanded "><a href="0063-remove-lib-coding.html">0063-remove-lib-coding</a></li><li class="chapter-item expanded "><a href="0065-format-struct-enum.html">0065-format-struct-enum</a></li><li class="chapter-item expanded "><a href="0066-simulation-time.html">0066-simulation-time</a></li><li class="chapter-item expanded "><a href="0069-simulation-port.html">0069-simulation-port</a></li><li class="chapter-item expanded "><a href="0070-soc-memory-map-names.html">0070-soc-memory-map-names</a></li><li class="chapter-item expanded "><a href="0071-enumview-matches.html">0071-enumview-matches</a></li><li class="chapter-item expanded "><a href="0073-stricter-connections.html">0073-stricter-connections</a></li><li class="chapter-item expanded "><a href="0074-structured-vcd.html" class="active">0074-structured-vcd</a></li><li class="chapter-item expanded "><a href="0076-amaranth-boards-versioning-policy.html">0076-amaranth-boards-versioning-policy</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Amaranth RFC Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/amaranth-lang/rfcs" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <ul>
+<li>Start Date: 2025-05-12</li>
+<li>RFC PR: <a href="https://github.com/amaranth-lang/rfcs/pull/0074">amaranth-lang/rfcs#0074</a></li>
+<li>Amaranth Issue: <a href="https://github.com/amaranth-lang/amaranth/issues/1599">amaranth-lang/amaranth#1599</a></li>
+</ul>
+<h1 id="structured-vcd-output"><a class="header" href="#structured-vcd-output">Structured VCD Output</a></h1>
+<h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
+<p>When generating VCD files, use the <code>scope</code> keyword to distinguish aggregate signals.</p>
+<h2 id="motivation"><a class="header" href="#motivation">Motivation</a></h2>
+<p>These changes are intended to make it easier for waveform viewers to recover information about aggregate signals from VCD files.
+This is partially motivated by an issue with VCD parsing that occurs in Surfer (see <a href="https://github.com/ekiwi/wellen/issues/36">ekiwi/wellen#36</a>).
+Ideally, this leads to a better user experience when inspecting simulated Amaranth designs with a waveform viewer.</p>
+<h2 id="guide-level-explanation"><a class="header" href="#guide-level-explanation">Guide-level explanation</a></h2>
+<p>This RFC describes changes to the way Amaranth generates a VCD file.
+When reading a VCD file, waveform viewers like <a href="https://surfer-project.org/">Surfer</a> and <a href="https://gtkwave.sourceforge.net/">GTKWave</a> support use of the <code>scope</code> keyword for organizing variables into groups.
+Currently, when writing a VCD file, Amaranth uses the <code>module</code> scope to distinguish between signals belonging to different modules.
+For instance:</p>
+<pre><code>$scope module top $end          # top
+  $var wire 1 &lt;id&gt; clk $end     # top.clk
+  $var wire 1 &lt;id&gt; rst $end     # top.rst
+  $var wire 32 &lt;id&gt; in $end     # top.in
+  $var wire 32 &lt;id&gt; out $end    # top.out
+  $scope module submodule $end  # top.submodule
+    $var wire 1 &lt;id&gt; clk $end   # top.submodule.clk
+    $var wire 1 &lt;id&gt; rst $end   # top.submodule.rst
+    $var wire 5 &lt;id&gt; in $end    # top.submodule.in
+    $var wire 5 &lt;id&gt; out $end   # top.submodule.out
+  $upscope $end
+$upscope $end
+</code></pre>
+<p>However, it does <em>not</em> attempt to use scopes for organizing the members of aggregate signals with array-like or struct-like datatypes.
+Instead, when creating VCD variables for aggregate signals, members are distinguished only by appending to the name of the parent signal.
+For instance, a signal <code>top.submodule.my_array</code> with the type <code>ArrayLayout(unsigned(32), 4)</code> is currently represented as:</p>
+<pre><code>$scope module top $end                    # top
+  ...
+  $scope module submodule $end            # top.submodule
+    ...
+    $var wire 128 &lt;id&gt; my_array $end      # top.submodule.my_array
+    $var wire 32 &lt;id&gt; my_array[0] $end    # top.submodule.my_array[0]
+    $var wire 32 &lt;id&gt; my_array[1] $end    # top.submodule.my_array[1]
+    $var wire 32 &lt;id&gt; my_array[2] $end    # top.submodule.my_array[2]
+    $var wire 32 &lt;id&gt; my_array[3] $end    # top.submodule.my_array[3]
+  $upscope $end
+$upscope $end
+</code></pre>
+<p>This is not sufficient for explicitly conveying the relationship between aggregate signals and their members to a waveform viewer.
+In this case, <code>my_array</code> does not explicitly <em>contain</em> its members, and waveform viewers may only <em>infer</em> this relationship by attempting to recover it from the names.</p>
+<p>This RFC proposes the use of <code>scope vhdl_array</code> and <code>scope vhdl_record</code> to pass information about these relationships to a waveform viewer.
+After this change, the VCD output above would become:</p>
+<pre><code>$scope module top $end                    # top
+  ...
+  $scope module submodule $end            # top.submodule
+    ...
+    $comment Flattened representation of 'my_array' $end
+    $var wire 128 &lt;id&gt; my_array $end      # top.submodule.my_array
+
+    $comment Hierarchical representation of 'my_array' members $end
+    $scope vhdl_array my_array $end       # top.submodule.my_array
+      $var wire 32 &lt;id&gt; 0 $end            # top.submodule.my_array.0
+      $var wire 32 &lt;id&gt; 1 $end            # top.submodule.my_array.1
+      $var wire 32 &lt;id&gt; 2 $end            # top.submodule.my_array.2
+      $var wire 32 &lt;id&gt; 3 $end            # top.submodule.my_array.3
+    $upscope $end
+
+  $upscope $end
+$upscope $end
+</code></pre>
+<p>These images demonstrate the difference in GTKWave output:</p>
+<figure>
+  <img align="center" src="./0074-structured-vcd/gtkwave_pre_rfc.png" alt="a screenshot of array-like signals in GTKWave (current behavior)">
+  <figcaption><i>Figure 1. A screenshot of array-like signals in GTKWave (current behavior)</i></figcaption>
+</figure>
+<figure>
+<img align="center" src="./0074-structured-vcd/gtkwave_post_rfc.png" alt="a screenshot of array-like signals in GTKWave (proposed behavior)">
+  <figcaption><i>Figure 2. A screenshot of array-like signals in GTKWave (proposed behavior)</i></figcaption>
+</figure>
+<p>... and the difference in Surfer output:</p>
+<figure>
+  <img align="center" src="./0074-structured-vcd/surfer_pre_rfc.png" alt="a screenshot of array-like signals in Surfer (current behavior)">
+  <figcaption><i>Figure 3. A screenshot of array-like signals in Surfer (current behavior)</i></figcaption>
+</figure>
+<figure>
+<img align="center" src="./0074-structured-vcd/surfer_post_rfc.png" alt="a screenshot of array-like signals in Surfer (proposed behavior)">
+  <figcaption><i>Figure 4. A screenshot of array-like signals in Surfer (proposed behavior)</i></figcaption>
+</figure>
+<h2 id="reference-level-explanation"><a class="header" href="#reference-level-explanation">Reference-level explanation</a></h2>
+<p>Currently, Amaranth represents aggregate signals in the VCD by appending the names of elements/members to the name of the signal.
+When simulator output is written to a VCD file, we intend that signals with aggregate datatypes are explicitly given their own scope and split into multiple VCD variables.</p>
+<h3 id="changes-to-vcd-writing"><a class="header" href="#changes-to-vcd-writing">Changes to VCD Writing</a></h3>
+<p>We propose the following conventions:</p>
+<ul>
+<li>The <code>module</code> scope defines a group of signals belonging to the same <code>Module</code></li>
+<li>The <code>vhdl_array</code> scope defines a group of signals belonging to an array (such as a signal with <code>ArrayLayout</code>)</li>
+<li>The <code>vhdl_record</code> scope defines a structured group of signals (such as a signal with <code>StructLayout</code>, <code>UnionLayout</code>, or <code>FlexibleLayout</code>)</li>
+</ul>
+<p>After these changes, this functionality will be enabled by default in the VCD writer.
+These changes will <strong>not</strong> be backported to Amaranth 0.5.x.
+Some users may require compatibility with output that is closer to the actual VCD specification.
+In this case, users that need the pre-RFC behavior are expected to either:</p>
+<ul>
+<li>Opt-out on a case-by-case basis by passing arguments to <code>write_vcd()</code> (ie. <code>pure=True</code>)</li>
+<li>Opt-out globally by setting an environment variable (ie. <code>AMARANTH_PURE_VCD=1</code>)</li>
+</ul>
+<h3 id="changes-to-pyvcd"><a class="header" href="#changes-to-pyvcd">Changes to <code>pyvcd</code></a></h3>
+<p>The VCD writer in Amaranth depends on <code>pyvcd</code>, which represents VCD scopes with a <code>ScopeType</code> enum.
+<code>vhdl_record</code> and <code>vhdl_array</code> variants are required to implement this RFC.</p>
+<h3 id="changes-to-amaranth-playground"><a class="header" href="#changes-to-amaranth-playground">Changes to Amaranth Playground</a></h3>
+<p>The Amaranth Playground has a waveform viewer that depends on the <a href="https://github.com/Nic30/d3-wave"><code>d3-wave</code></a> library.
+<code>d3-wave</code> has an exported/extensible <code>RowRendererBits</code> class that can be used to implement renderers for particular datatypes.
+Custom renderers for aggregate datatypes are required for rendering grouped signals in the Amaranth Playground.</p>
+<h3 id="expected-vcd-output-array-like"><a class="header" href="#expected-vcd-output-array-like">Expected VCD Output: Array-like</a></h3>
+<pre><code class="language-python">from amaranth import *
+from amaranth.lib.data import *
+
+foo = Signal(ArrayLayout(unsigned(32), 4))
+</code></pre>
+<p>For <code>ArrayLayout</code>, each element in the array should become a VCD variable whose name is integer array index.
+In this case, the signal <code>foo</code> is split into <code>foo.0</code>, <code>foo.1</code>, <code>foo.2</code>, and <code>foo.3</code>:</p>
+<pre><code>$scope vhdl_array foo $end
+  $var wire 32 &lt;id&gt; 0 $end
+  $var wire 32 &lt;id&gt; 1 $end
+  $var wire 32 &lt;id&gt; 2 $end
+  $var wire 32 &lt;id&gt; 3 $end
+$upscope $end
+</code></pre>
+<h3 id="expected-vcd-output-struct-like"><a class="header" href="#expected-vcd-output-struct-like">Expected VCD Output: Struct-like</a></h3>
+<pre><code class="language-python">from amaranth import *
+from amaranth.lib.data import *
+
+foo = Signal(StructLayout({
+  &quot;a&quot;: unsigned(1),
+  &quot;b&quot;: unsigned(4),
+  &quot;c&quot;: unsigned(32),
+}))
+</code></pre>
+<p>For <code>StructLayout</code>, each member should become a VCD variable with the member name.
+In this case, the signal <code>bar</code> is split into <code>bar.a</code>, <code>bar.b</code>, and <code>bar.c</code>:</p>
+<pre><code>$scope vhdl_record bar $end
+  $var wire 1 id a $end
+  $var wire 4 id b $end
+  $var wire 32 id c $end
+$upscope $end
+</code></pre>
+<h3 id="expected-vcd-output-nested-aggregates"><a class="header" href="#expected-vcd-output-nested-aggregates">Expected VCD Output: Nested Aggregates</a></h3>
+<pre><code class="language-python">from amaranth import *
+from amaranth.lib.data import *
+
+class MyStruct(Struct):
+    a: unsigned(1)
+    b: unsigned(4)
+    c: ArrayLayout(unsigned(32), 4),
+
+# A struct-like signal
+foo = Signal(MyStruct)
+
+</code></pre>
+<p>For signals with nested aggregate types, the scopes are nested in the same way that <code>scope module</code> is already used for nested modules.
+In this case, the signal <code>foo</code> is split like this:</p>
+<pre><code>$scope vhdl_record bar $end
+  $var wire 1 id a $end
+  $var wire 4 id b $end
+  $scope vhdl_array c $end
+    $var wire 32 id 0 $end
+    $var wire 32 id 1 $end
+    $var wire 32 id 2 $end
+    $var wire 32 id 3 $end
+  $upscope $end
+$upscope $end
+</code></pre>
+<h2 id="drawbacks"><a class="header" href="#drawbacks">Drawbacks</a></h2>
+<ul>
+<li>
+<p>VCD is not a particularly efficient format, and this adds even more bytes to generated VCD files.</p>
+</li>
+<li>
+<p>This breaks any existing compatibility with waveform viewers that do not handle the <code>vhdl_record</code> and <code>vhdl_array</code> scope types.
+Since these are not part of the VCD specification, some waveform viewers may fail to handle this.</p>
+</li>
+</ul>
+<h2 id="rationale-and-alternatives"><a class="header" href="#rationale-and-alternatives">Rationale and alternatives</a></h2>
+<ul>
+<li>The choice of <code>scope vhdl_array</code> and <code>scope vhdl_record</code> are suggested due to known compatibility with Surfer and GTKWave.
+However, note that these are not part of the VCD specification (which is somewhat old and under-defined).</li>
+</ul>
+<h3 id="alternatives"><a class="header" href="#alternatives">Alternatives</a></h3>
+<ul>
+<li>Expose an environment variable (or a parameter in <code>write_vcd()</code>) allowing users to opt-in/opt-out of structured VCD output</li>
+<li>Include support for a different waveform format that has better-defined support for variables with composite datatypes.</li>
+</ul>
+<h2 id="prior-art"><a class="header" href="#prior-art">Prior art</a></h2>
+<ul>
+<li>As far as I can tell, use of the <code>vhdl_record</code> and <code>vhdl_array</code> scope types comes from the <a href="https://github.com/ghdl/ghdl">ghdl/ghdl</a> simulator.</li>
+<li><a href="https://github.com/verilator/verilator">verilator/verilator</a> makes no attempt to use these scope types</li>
+<li><a href="https://github.com/steveicarus/iverilog">steveicarus/iverilog</a> makes no attempt to use these scopes types</li>
+</ul>
+<h2 id="unresolved-questions"><a class="header" href="#unresolved-questions">Unresolved questions</a></h2>
+<p>None.</p>
+<h2 id="future-possibilities"><a class="header" href="#future-possibilities">Future possibilities</a></h2>
+<p>Since this adds more overhead to VCD output, it's worth mentioning that VCD may be unsuitable for testing very large designs.
+This RFC can also serve as a stepping stone for supporting alternative waveform formats in the future.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="0073-stricter-connections.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="0076-amaranth-boards-versioning-policy.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="0073-stricter-connections.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="0076-amaranth-boards-versioning-policy.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
