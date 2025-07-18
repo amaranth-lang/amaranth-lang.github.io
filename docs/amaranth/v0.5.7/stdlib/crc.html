@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cyclic redundancy checks &mdash; Amaranth language &amp; toolchain 0.5.7 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=d131d90a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=f4242b87"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/platformpicker.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Algorithm catalog" href="crc/catalog.html" />
+    <link rel="prev" title="First-in first-out queues" href="fifo.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../cover.html" class="icon icon-home">
+            Amaranth language & toolchain
+              <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.5.7
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Language &amp; toolchain</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../start.html">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide.html">Language guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference.html">Language reference</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../stdlib.html">Standard library</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="enum.html">Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data.html">Data structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wiring.html">Interfaces and connections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="meta.html">Interface metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stream.html">Data streams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="memory.html">Memory arrays</a></li>
+<li class="toctree-l3"><a class="reference internal" href="io.html">Input/output buffers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cdc.html">Clock domain crossing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="coding.html">Code conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fifo.html">First-in first-out queues</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Cyclic redundancy checks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#algorithms-and-parameters">Algorithms and parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#crc-computation">CRC computation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#predefined-algorithms">Predefined algorithms</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../simulator.html">Simulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../platform.html">Platform integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../changes.html">Changelog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib.html">Contributing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="https://amaranth-lang.org/docs/amaranth-stdio/latest/">Standard I/O components</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://amaranth-lang.org/docs/amaranth-soc/latest/">System on Chip toolkit</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../cover.html">Amaranth language & toolchain</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../cover.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Language &amp; toolchain</a></li>
+          <li class="breadcrumb-item"><a href="../stdlib.html">Standard library</a></li>
+      <li class="breadcrumb-item active">Cyclic redundancy checks</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/stdlib/crc.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-amaranth.lib.crc">
+<span id="cyclic-redundancy-checks"></span><h1>Cyclic redundancy checks<a class="headerlink" href="#module-amaranth.lib.crc" title="Permalink to this heading"></a></h1>
+<p>The <a class="reference internal" href="#module-amaranth.lib.crc" title="amaranth.lib.crc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.crc</span></code></a> module provides facilities for computing cyclic redundancy checks (CRCs)
+in software and in hardware.</p>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<p>The essentials of a CRC computation are specified with an <a class="reference internal" href="#amaranth.lib.crc.Algorithm" title="amaranth.lib.crc.Algorithm"><code class="xref py py-class docutils literal notranslate"><span class="pre">Algorithm</span></code></a> object, which defines
+CRC width, polynomial, initial value, input/output reflection, and output XOR. Many commonly used
+CRC algorithms are available in the <a class="reference internal" href="crc/catalog.html#module-amaranth.lib.crc.catalog" title="amaranth.lib.crc.catalog"><code class="xref py py-mod docutils literal notranslate"><span class="pre">catalog</span></code></a> module, while most other
+CRC designs can be accommodated by manually constructing an <a class="reference internal" href="#amaranth.lib.crc.Algorithm" title="amaranth.lib.crc.Algorithm"><code class="xref py py-class docutils literal notranslate"><span class="pre">Algorithm</span></code></a>.</p>
+<p>An <a class="reference internal" href="#amaranth.lib.crc.Algorithm" title="amaranth.lib.crc.Algorithm"><code class="xref py py-class docutils literal notranslate"><span class="pre">Algorithm</span></code></a> is specialized for a particular data width to obtain <a class="reference internal" href="#amaranth.lib.crc.Parameters" title="amaranth.lib.crc.Parameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">Parameters</span></code></a>,
+which fully define a CRC computation. <a class="reference internal" href="#amaranth.lib.crc.Parameters.compute" title="amaranth.lib.crc.Parameters.compute"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Parameters.compute()</span></code></a> computes a CRC in software, while
+<a class="reference internal" href="#amaranth.lib.crc.Parameters.create" title="amaranth.lib.crc.Parameters.create"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Parameters.create()</span></code></a> creates a <a class="reference internal" href="#amaranth.lib.crc.Processor" title="amaranth.lib.crc.Processor"><code class="xref py py-class docutils literal notranslate"><span class="pre">Processor</span></code></a> that computes a CRC in hardware.</p>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">amaranth.lib.crc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Algorithm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">amaranth.lib.crc.catalog</span><span class="w"> </span><span class="kn">import</span> <span class="n">CRC16_CCITT</span><span class="p">,</span> <span class="n">CRC16_USB</span>
+
+
+<span class="c1"># Compute a CRC in hardware using the predefined CRC16-CCITT algorithm and a data word</span>
+<span class="c1"># width of 8 bits (in other words, computing it over bytes).</span>
+<span class="n">m</span><span class="o">.</span><span class="n">submodules</span><span class="o">.</span><span class="n">crc16_ccitt</span> <span class="o">=</span> <span class="n">crc16_ccitt</span> <span class="o">=</span> <span class="n">CRC16_CCITT</span><span class="p">()</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+
+<span class="c1"># Compute a CRC in hardware using the predefined CRC16-USB algorithm and a data word</span>
+<span class="c1"># width of 32 bits.</span>
+<span class="n">m</span><span class="o">.</span><span class="n">submodules</span><span class="o">.</span><span class="n">crc16_usb</span> <span class="o">=</span> <span class="n">crc16_usb</span> <span class="o">=</span> <span class="n">CRC16_USB</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+
+<span class="c1"># Compute a CRC in software using a custom CRC algorithm and explicitly specified data word</span>
+<span class="c1"># width.</span>
+<span class="n">algo</span> <span class="o">=</span> <span class="n">Algorithm</span><span class="p">(</span><span class="n">crc_width</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">polynomial</span><span class="o">=</span><span class="mh">0x1021</span><span class="p">,</span> <span class="n">initial_crc</span><span class="o">=</span><span class="mh">0xffff</span><span class="p">,</span>
+    <span class="n">reflect_input</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">reflect_output</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">xor_output</span><span class="o">=</span><span class="mh">0x0000</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">algo</span><span class="p">(</span><span class="n">data_width</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;123456789&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mh">0x29b1</span>
+</pre></div>
+</div>
+</section>
+<section id="algorithms-and-parameters">
+<h2>Algorithms and parameters<a class="headerlink" href="#algorithms-and-parameters" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="amaranth.lib.crc.Algorithm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.crc.</span></span><span class="sig-name descname"><span class="pre">Algorithm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crc_width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polynomial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_crc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reflect_input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reflect_output</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xor_output</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.crc.Algorithm" title="Permalink to this definition"></a></dt>
+<dd><p>Essential parameters for cyclic redundancy check computation.</p>
+<p>The parameter set is based on the Williams model from <a class="reference external" href="http://www.ross.net/crc/download/crc_v3.txt">“A Painless Guide to CRC Error Detection
+Algorithms”</a>.</p>
+<p>For a reference of standard CRC parameter sets, refer to:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://reveng.sourceforge.io/crc-catalogue/all.htm">reveng</a>’s catalogue, which uses an identical parameterisation;</p></li>
+<li><p><a class="reference external" href="https://crcmod.sourceforge.net/crcmod.predefined.html">crcmod</a>’s list of predefined functions, but remove the leading ‘1’ from the polynominal,
+XOR the “Init-value” with “XOR-out” to obtain <code class="code highlight py python docutils literal highlight-python"><span class="n">initial_crc</span></code>, and where “Reversed” is
+<code class="code highlight py python docutils literal highlight-python"><span class="kc">True</span></code>, set both <code class="code highlight py python docutils literal highlight-python"><span class="n">reflect_input</span></code> and <code class="code highlight py python docutils literal highlight-python"><span class="n">reflect_output</span></code> to <code class="code highlight py python docutils literal highlight-python"><span class="kc">True</span></code>;</p></li>
+<li><p><a class="reference external" href="https://users.ece.cmu.edu/~koopman/crc/">CRC Zoo</a>, which contains only polynomials; use the “explicit +1” form of polynomial but
+remove the leading ‘1’.</p></li>
+</ul>
+<p>Many commonly used CRC algorithms are available in the <a class="reference internal" href="crc/catalog.html#module-amaranth.lib.crc.catalog" title="amaranth.lib.crc.catalog"><code class="xref py py-mod docutils literal notranslate"><span class="pre">catalog</span></code></a>
+module, which includes all entries in the <a class="reference external" href="https://reveng.sourceforge.io/crc-catalogue/all.htm">reveng catalogue</a>.</p>
+<p>The essential parameters on their own cannot be used to perform CRC computation, and must be
+combined with a specific data word width. This can be done using <code class="code highlight py python docutils literal highlight-python"><span class="n">algo</span><span class="p">(</span><span class="n">data_width</span><span class="p">)</span></code>, which
+returns a <a class="reference internal" href="#amaranth.lib.crc.Parameters" title="amaranth.lib.crc.Parameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">Parameters</span></code></a> object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>crc_width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Bit width of CRC word. Also known as “width” in the Williams model.</p></li>
+<li><p><strong>polynomial</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – CRC polynomial to use, <code class="code highlight py python docutils literal highlight-python"><span class="n">crc_width</span></code> bits long, without the implicit <code class="code highlight py python docutils literal highlight-python"><span class="n">x</span> <span class="o">**</span> <span class="n">crc_width</span></code>
+term. Polynomial is always specified with the highest order terms in the most significant
+bit positions; use <code class="code highlight py python docutils literal highlight-python"><span class="n">reflect_input</span></code> and <code class="code highlight py python docutils literal highlight-python"><span class="n">reflect_output</span></code> to perform a least
+significant bit first computation.</p></li>
+<li><p><strong>initial_crc</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Initial value of CRC register at reset. Most significant bit always corresponds to
+the highest order term in the CRC register.</p></li>
+<li><p><strong>reflect_input</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – If <code class="code highlight py python docutils literal highlight-python"><span class="kc">True</span></code>, the input data words are bit-reflected, so that they are processed least
+significant bit first.</p></li>
+<li><p><strong>reflect_output</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – If <code class="code highlight py python docutils literal highlight-python"><span class="kc">True</span></code>, the output CRC is bit-reflected, so that the least-significant bit of
+the output is the highest-order bit of the CRC register. Note that this reflection is
+performed over the entire CRC register; for transmission you may want to treat the output
+as a little-endian multi-word value, so for example the reflected 16-bit output <code class="code highlight py python docutils literal highlight-python"><span class="mh">0x4E4C</span></code>
+would be transmitted as the two octets <code class="code highlight py python docutils literal highlight-python"><span class="mh">0x4C</span><span class="p">,</span> <span class="mh">0x4E</span></code>, each transmitted least significant
+bit first.</p></li>
+<li><p><strong>xor_output</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – The output CRC will be the CRC register XOR’d with this value, applied after any output
+bit-reflection.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="amaranth.lib.crc.Algorithm.__call__">
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.crc.Algorithm.__call__" title="Permalink to this definition"></a></dt>
+<dd><p>Combine these essential parameters with a data word width to form complete parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="code highlight py python docutils literal highlight-python"><span class="n">Parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_width</span><span class="p">)</span></code></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#amaranth.lib.crc.Parameters" title="amaranth.lib.crc.Parameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">Parameters</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="amaranth.lib.crc.Parameters">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.crc.</span></span><span class="sig-name descname"><span class="pre">Parameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.crc.Parameters" title="Permalink to this definition"></a></dt>
+<dd><p>Complete parameters for cyclic redundancy check computation.</p>
+<p>Contains the essential <a class="reference internal" href="#amaranth.lib.crc.Algorithm" title="amaranth.lib.crc.Algorithm"><code class="xref py py-class docutils literal notranslate"><span class="pre">Algorithm</span></code></a> parameters, plus the data word width.</p>
+<p>A <a class="reference internal" href="#amaranth.lib.crc.Parameters" title="amaranth.lib.crc.Parameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">Parameters</span></code></a> object can be used to directly compute CRCs using
+the <a class="reference internal" href="#amaranth.lib.crc.Parameters.compute" title="amaranth.lib.crc.Parameters.compute"><code class="xref py py-meth docutils literal notranslate"><span class="pre">compute()</span></code></a> method, or to construct a hardware module using
+the <a class="reference internal" href="#amaranth.lib.crc.Parameters.create" title="amaranth.lib.crc.Parameters.create"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create()</span></code></a> method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>algorithm</strong> (<a class="reference internal" href="#amaranth.lib.crc.Algorithm" title="amaranth.lib.crc.Algorithm"><code class="xref py py-class docutils literal notranslate"><span class="pre">Algorithm</span></code></a>) – CRC algorithm to use. Specifies the CRC width, polynomial, initial value, whether to
+reflect the input or output words, and any output XOR.</p></li>
+<li><p><strong>data_width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Bit width of data words.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="amaranth.lib.crc.Parameters.residue">
+<span class="sig-name descname"><span class="pre">residue</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.crc.Parameters.residue" title="Permalink to this definition"></a></dt>
+<dd><p>Obtain the residual value left in the CRC register after processing a valid trailing CRC.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="amaranth.lib.crc.Parameters.compute">
+<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.crc.Parameters.compute" title="Permalink to this definition"></a></dt>
+<dd><p>Compute the CRC of all data words in <code class="code highlight py python docutils literal highlight-python"><span class="n">data</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (iterable of <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Data words, each of which is <code class="code highlight py python docutils literal highlight-python"><span class="n">data_width</span></code> bits wide.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="amaranth.lib.crc.Parameters.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.crc.Parameters.create" title="Permalink to this definition"></a></dt>
+<dd><p>Create a hardware CRC generator with these parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="code highlight py python docutils literal highlight-python"><span class="n">Processor</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#amaranth.lib.crc.Processor" title="amaranth.lib.crc.Processor"><code class="xref py py-class docutils literal notranslate"><span class="pre">Processor</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="crc-computation">
+<h2>CRC computation<a class="headerlink" href="#crc-computation" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="amaranth.lib.crc.Processor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.crc.</span></span><span class="sig-name descname"><span class="pre">Processor</span></span><a class="headerlink" href="#amaranth.lib.crc.Processor" title="Permalink to this definition"></a></dt>
+<dd><p>Hardware cyclic redundancy check generator.</p>
+<p>This module generates CRCs from an input data stream, which can be used to validate an existing
+CRC or generate a new CRC. It is configured by the <a class="reference internal" href="#amaranth.lib.crc.Parameters" title="amaranth.lib.crc.Parameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">Parameters</span></code></a> class, which can handle
+most types of CRCs.</p>
+<p>The CRC value is updated on any clock cycle where <code class="code highlight py python docutils literal highlight-python"><span class="n">valid</span></code> is asserted, with the updated
+value available on the <code class="code highlight py python docutils literal highlight-python"><span class="n">crc</span></code> output on the subsequent clock cycle. The latency is therefore
+one clock cycle, and the throughput is one data word per clock cycle.</p>
+<p>The CRC is reset to its initial value whenever <code class="code highlight py python docutils literal highlight-python"><span class="n">start</span></code> is asserted. <code class="code highlight py python docutils literal highlight-python"><span class="n">start</span></code> and
+<code class="code highlight py python docutils literal highlight-python"><span class="n">valid</span></code> may be asserted on the same clock cycle, in which case a new CRC computation is
+started with the current value of <cite>data</cite>.</p>
+<p>When <code class="code highlight py python docutils literal highlight-python"><span class="n">data_width</span></code> is 1, a classic bit-serial CRC is implemented for the given polynomial
+in a Galois-type shift register. For larger values of <code class="code highlight py python docutils literal highlight-python"><span class="n">data_width</span></code>, a similar architecture
+computes every new bit of the CRC in parallel.</p>
+<p>The <code class="code highlight py python docutils literal highlight-python"><span class="n">match_detected</span></code> output may be used to validate data with a trailing CRC (also known as
+a codeword in coding theory). If the most recently processed data word(s) form the valid CRC of
+all the previous data words since <code class="code highlight py python docutils literal highlight-python"><span class="n">start</span></code> was asserted, the CRC register will always take on
+a fixed value known as the <a class="reference internal" href="#amaranth.lib.crc.Parameters.residue" title="amaranth.lib.crc.Parameters.residue"><code class="xref py py-meth docutils literal notranslate"><span class="pre">residue</span></code></a>. The <code class="code highlight py python docutils literal highlight-python"><span class="n">match_detected</span></code> output
+indicates whether the CRC register currently contains this residue.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>parameters</strong> (<a class="reference internal" href="#amaranth.lib.crc.Parameters" title="amaranth.lib.crc.Parameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">Parameters</span></code></a>) – Parameters used for computation.</p>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>start</strong> (<em>Signal(), in</em>) – Assert to indicate the start of a CRC computation, re-initialising the CRC register to
+the initial value. May be asserted simultaneously with <code class="code highlight py python docutils literal highlight-python"><span class="n">valid</span></code> or by itself.</p></li>
+<li><p><strong>data</strong> (<em>Signal(data_width), in</em>) – Data word to add to CRC when <code class="code highlight py python docutils literal highlight-python"><span class="n">valid</span></code> is asserted.</p></li>
+<li><p><strong>valid</strong> (<em>Signal(), in</em>) – Assert when <code class="code highlight py python docutils literal highlight-python"><span class="n">data</span></code> is valid to add the data word to the CRC.</p></li>
+<li><p><strong>crc</strong> (<em>Signal(crc_width), out</em>) – Registered CRC output value, updated one clock cycle after <code class="code highlight py python docutils literal highlight-python"><span class="n">valid</span></code> becomes asserted.</p></li>
+<li><p><strong>match_detected</strong> (<em>Signal(), out</em>) – Asserted if the current CRC value indicates a valid codeword has been received.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="predefined-algorithms">
+<h2>Predefined algorithms<a class="headerlink" href="#predefined-algorithms" title="Permalink to this heading"></a></h2>
+<p>The following predefined CRC algorithms are available:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="crc/catalog.html">Algorithm catalog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC3_GSM"><code class="docutils literal notranslate"><span class="pre">CRC3_GSM</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC3_ROHC"><code class="docutils literal notranslate"><span class="pre">CRC3_ROHC</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC4_G_704"><code class="docutils literal notranslate"><span class="pre">CRC4_G_704</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC4_ITU"><code class="docutils literal notranslate"><span class="pre">CRC4_ITU</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC4_INTERLAKEN"><code class="docutils literal notranslate"><span class="pre">CRC4_INTERLAKEN</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC5_EPC_C1G2"><code class="docutils literal notranslate"><span class="pre">CRC5_EPC_C1G2</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC5_EPC"><code class="docutils literal notranslate"><span class="pre">CRC5_EPC</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC5_G_704"><code class="docutils literal notranslate"><span class="pre">CRC5_G_704</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC5_ITU"><code class="docutils literal notranslate"><span class="pre">CRC5_ITU</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC5_USB"><code class="docutils literal notranslate"><span class="pre">CRC5_USB</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC6_CDMA2000_A"><code class="docutils literal notranslate"><span class="pre">CRC6_CDMA2000_A</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC6_CDMA2000_B"><code class="docutils literal notranslate"><span class="pre">CRC6_CDMA2000_B</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC6_DARC"><code class="docutils literal notranslate"><span class="pre">CRC6_DARC</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC6_G_704"><code class="docutils literal notranslate"><span class="pre">CRC6_G_704</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC6_ITU"><code class="docutils literal notranslate"><span class="pre">CRC6_ITU</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC6_GSM"><code class="docutils literal notranslate"><span class="pre">CRC6_GSM</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC7_MMC"><code class="docutils literal notranslate"><span class="pre">CRC7_MMC</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC7_ROHC"><code class="docutils literal notranslate"><span class="pre">CRC7_ROHC</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC7_UMTS"><code class="docutils literal notranslate"><span class="pre">CRC7_UMTS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC8_AUTOSAR"><code class="docutils literal notranslate"><span class="pre">CRC8_AUTOSAR</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC8_BLUETOOTH"><code class="docutils literal notranslate"><span class="pre">CRC8_BLUETOOTH</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC8_CDMA2000"><code class="docutils literal notranslate"><span class="pre">CRC8_CDMA2000</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC8_DARC"><code class="docutils literal notranslate"><span class="pre">CRC8_DARC</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC8_DVB_S2"><code class="docutils literal notranslate"><span class="pre">CRC8_DVB_S2</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC8_GSM_A"><code class="docutils literal notranslate"><span class="pre">CRC8_GSM_A</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC8_GSM_B"><code class="docutils literal notranslate"><span class="pre">CRC8_GSM_B</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC8_HITAG"><code class="docutils literal notranslate"><span class="pre">CRC8_HITAG</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC8_I_432_1"><code class="docutils literal notranslate"><span class="pre">CRC8_I_432_1</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC8_ITU"><code class="docutils literal notranslate"><span class="pre">CRC8_ITU</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC8_I_CODE"><code class="docutils literal notranslate"><span class="pre">CRC8_I_CODE</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC8_LTE"><code class="docutils literal notranslate"><span class="pre">CRC8_LTE</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC8_MAXIM_DOW"><code class="docutils literal notranslate"><span class="pre">CRC8_MAXIM_DOW</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC8_MAXIM"><code class="docutils literal notranslate"><span class="pre">CRC8_MAXIM</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC8_MIFARE_MAD"><code class="docutils literal notranslate"><span class="pre">CRC8_MIFARE_MAD</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC8_NRSC_5"><code class="docutils literal notranslate"><span class="pre">CRC8_NRSC_5</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC8_OPENSAFETY"><code class="docutils literal notranslate"><span class="pre">CRC8_OPENSAFETY</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC8_ROHC"><code class="docutils literal notranslate"><span class="pre">CRC8_ROHC</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC8_SAE_J1850"><code class="docutils literal notranslate"><span class="pre">CRC8_SAE_J1850</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC8_SMBUS"><code class="docutils literal notranslate"><span class="pre">CRC8_SMBUS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC8_TECH_3250"><code class="docutils literal notranslate"><span class="pre">CRC8_TECH_3250</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC8_AES"><code class="docutils literal notranslate"><span class="pre">CRC8_AES</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC8_ETU"><code class="docutils literal notranslate"><span class="pre">CRC8_ETU</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC8_WCDMA"><code class="docutils literal notranslate"><span class="pre">CRC8_WCDMA</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC10_ATM"><code class="docutils literal notranslate"><span class="pre">CRC10_ATM</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC10_I_610"><code class="docutils literal notranslate"><span class="pre">CRC10_I_610</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC10_CDMA2000"><code class="docutils literal notranslate"><span class="pre">CRC10_CDMA2000</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC10_GSM"><code class="docutils literal notranslate"><span class="pre">CRC10_GSM</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC11_FLEXRAY"><code class="docutils literal notranslate"><span class="pre">CRC11_FLEXRAY</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC11_UMTS"><code class="docutils literal notranslate"><span class="pre">CRC11_UMTS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC12_CDMA2000"><code class="docutils literal notranslate"><span class="pre">CRC12_CDMA2000</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC12_DECT"><code class="docutils literal notranslate"><span class="pre">CRC12_DECT</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC12_GSM"><code class="docutils literal notranslate"><span class="pre">CRC12_GSM</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC12_UMTS"><code class="docutils literal notranslate"><span class="pre">CRC12_UMTS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC12_3GPP"><code class="docutils literal notranslate"><span class="pre">CRC12_3GPP</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC13_BBC"><code class="docutils literal notranslate"><span class="pre">CRC13_BBC</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC14_DARC"><code class="docutils literal notranslate"><span class="pre">CRC14_DARC</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC14_GSM"><code class="docutils literal notranslate"><span class="pre">CRC14_GSM</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC15_CAN"><code class="docutils literal notranslate"><span class="pre">CRC15_CAN</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC15_MPT1327"><code class="docutils literal notranslate"><span class="pre">CRC15_MPT1327</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_ARC"><code class="docutils literal notranslate"><span class="pre">CRC16_ARC</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_IBM"><code class="docutils literal notranslate"><span class="pre">CRC16_IBM</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_CDMA2000"><code class="docutils literal notranslate"><span class="pre">CRC16_CDMA2000</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_CMS"><code class="docutils literal notranslate"><span class="pre">CRC16_CMS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_DDS_110"><code class="docutils literal notranslate"><span class="pre">CRC16_DDS_110</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_DECT_R"><code class="docutils literal notranslate"><span class="pre">CRC16_DECT_R</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_DECT_X"><code class="docutils literal notranslate"><span class="pre">CRC16_DECT_X</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_DNP"><code class="docutils literal notranslate"><span class="pre">CRC16_DNP</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_EN_13757"><code class="docutils literal notranslate"><span class="pre">CRC16_EN_13757</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_GENIBUS"><code class="docutils literal notranslate"><span class="pre">CRC16_GENIBUS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_DARC"><code class="docutils literal notranslate"><span class="pre">CRC16_DARC</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_EPC"><code class="docutils literal notranslate"><span class="pre">CRC16_EPC</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_EPC_C1G2"><code class="docutils literal notranslate"><span class="pre">CRC16_EPC_C1G2</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_I_CODE"><code class="docutils literal notranslate"><span class="pre">CRC16_I_CODE</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_GSM"><code class="docutils literal notranslate"><span class="pre">CRC16_GSM</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_IBM_3740"><code class="docutils literal notranslate"><span class="pre">CRC16_IBM_3740</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_AUTOSAR"><code class="docutils literal notranslate"><span class="pre">CRC16_AUTOSAR</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_CCITT_FALSE"><code class="docutils literal notranslate"><span class="pre">CRC16_CCITT_FALSE</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_IBM_SDLC"><code class="docutils literal notranslate"><span class="pre">CRC16_IBM_SDLC</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_ISO_HDLC"><code class="docutils literal notranslate"><span class="pre">CRC16_ISO_HDLC</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_ISO_IEC_14443_3_B"><code class="docutils literal notranslate"><span class="pre">CRC16_ISO_IEC_14443_3_B</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_X25"><code class="docutils literal notranslate"><span class="pre">CRC16_X25</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_ISO_IEC_14443_3_A"><code class="docutils literal notranslate"><span class="pre">CRC16_ISO_IEC_14443_3_A</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_KERMIT"><code class="docutils literal notranslate"><span class="pre">CRC16_KERMIT</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_BLUETOOTH"><code class="docutils literal notranslate"><span class="pre">CRC16_BLUETOOTH</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_CCITT"><code class="docutils literal notranslate"><span class="pre">CRC16_CCITT</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_CCITT_TRUE"><code class="docutils literal notranslate"><span class="pre">CRC16_CCITT_TRUE</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_V_41_LSB"><code class="docutils literal notranslate"><span class="pre">CRC16_V_41_LSB</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_LJ1200"><code class="docutils literal notranslate"><span class="pre">CRC16_LJ1200</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_M17"><code class="docutils literal notranslate"><span class="pre">CRC16_M17</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_MAXIM_DOW"><code class="docutils literal notranslate"><span class="pre">CRC16_MAXIM_DOW</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_MAXIM"><code class="docutils literal notranslate"><span class="pre">CRC16_MAXIM</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_MCRF4XX"><code class="docutils literal notranslate"><span class="pre">CRC16_MCRF4XX</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_MODBUS"><code class="docutils literal notranslate"><span class="pre">CRC16_MODBUS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_NRSC_5"><code class="docutils literal notranslate"><span class="pre">CRC16_NRSC_5</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_OPENSAFETY_A"><code class="docutils literal notranslate"><span class="pre">CRC16_OPENSAFETY_A</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_OPENSAFETY_B"><code class="docutils literal notranslate"><span class="pre">CRC16_OPENSAFETY_B</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_PROFIBUS"><code class="docutils literal notranslate"><span class="pre">CRC16_PROFIBUS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_IEC_61158_2"><code class="docutils literal notranslate"><span class="pre">CRC16_IEC_61158_2</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_RIELLO"><code class="docutils literal notranslate"><span class="pre">CRC16_RIELLO</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_SPI_FUJITSU"><code class="docutils literal notranslate"><span class="pre">CRC16_SPI_FUJITSU</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_AUG_CCITT"><code class="docutils literal notranslate"><span class="pre">CRC16_AUG_CCITT</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_T10_DIF"><code class="docutils literal notranslate"><span class="pre">CRC16_T10_DIF</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_TELEDISK"><code class="docutils literal notranslate"><span class="pre">CRC16_TELEDISK</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_TMS37157"><code class="docutils literal notranslate"><span class="pre">CRC16_TMS37157</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_UMTS"><code class="docutils literal notranslate"><span class="pre">CRC16_UMTS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_BUYPASS"><code class="docutils literal notranslate"><span class="pre">CRC16_BUYPASS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_VERIFONE"><code class="docutils literal notranslate"><span class="pre">CRC16_VERIFONE</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_USB"><code class="docutils literal notranslate"><span class="pre">CRC16_USB</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_XMODEM"><code class="docutils literal notranslate"><span class="pre">CRC16_XMODEM</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_ACORN"><code class="docutils literal notranslate"><span class="pre">CRC16_ACORN</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_LTE"><code class="docutils literal notranslate"><span class="pre">CRC16_LTE</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_V_41_MSB"><code class="docutils literal notranslate"><span class="pre">CRC16_V_41_MSB</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC16_ZMODEM"><code class="docutils literal notranslate"><span class="pre">CRC16_ZMODEM</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC17_CAN_FD"><code class="docutils literal notranslate"><span class="pre">CRC17_CAN_FD</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC21_CAN_FD"><code class="docutils literal notranslate"><span class="pre">CRC21_CAN_FD</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC24_BLE"><code class="docutils literal notranslate"><span class="pre">CRC24_BLE</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC24_FLEXRAY_A"><code class="docutils literal notranslate"><span class="pre">CRC24_FLEXRAY_A</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC24_FLEXRAY_B"><code class="docutils literal notranslate"><span class="pre">CRC24_FLEXRAY_B</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC24_INTERLAKEN"><code class="docutils literal notranslate"><span class="pre">CRC24_INTERLAKEN</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC24_LTE_A"><code class="docutils literal notranslate"><span class="pre">CRC24_LTE_A</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC24_LTE_B"><code class="docutils literal notranslate"><span class="pre">CRC24_LTE_B</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC24_OPENPGP"><code class="docutils literal notranslate"><span class="pre">CRC24_OPENPGP</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC24_OS_9"><code class="docutils literal notranslate"><span class="pre">CRC24_OS_9</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC30_CDMA"><code class="docutils literal notranslate"><span class="pre">CRC30_CDMA</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC31_PHILIPS"><code class="docutils literal notranslate"><span class="pre">CRC31_PHILIPS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC32_AIXM"><code class="docutils literal notranslate"><span class="pre">CRC32_AIXM</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC32_AUTOSAR"><code class="docutils literal notranslate"><span class="pre">CRC32_AUTOSAR</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC32_BASE91_D"><code class="docutils literal notranslate"><span class="pre">CRC32_BASE91_D</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC32_BZIP2"><code class="docutils literal notranslate"><span class="pre">CRC32_BZIP2</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC32_AAL5"><code class="docutils literal notranslate"><span class="pre">CRC32_AAL5</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC32_DECT_B"><code class="docutils literal notranslate"><span class="pre">CRC32_DECT_B</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC32_CD_ROM_EDC"><code class="docutils literal notranslate"><span class="pre">CRC32_CD_ROM_EDC</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC32_CKSUM"><code class="docutils literal notranslate"><span class="pre">CRC32_CKSUM</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC32_POSIX"><code class="docutils literal notranslate"><span class="pre">CRC32_POSIX</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC32_ISCSI"><code class="docutils literal notranslate"><span class="pre">CRC32_ISCSI</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC32_BASE91_C"><code class="docutils literal notranslate"><span class="pre">CRC32_BASE91_C</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC32_CASTAGNOLI"><code class="docutils literal notranslate"><span class="pre">CRC32_CASTAGNOLI</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC32_INTERLAKEN"><code class="docutils literal notranslate"><span class="pre">CRC32_INTERLAKEN</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC32_ISO_HDLC"><code class="docutils literal notranslate"><span class="pre">CRC32_ISO_HDLC</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC32_ADCCP"><code class="docutils literal notranslate"><span class="pre">CRC32_ADCCP</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC32_V_42"><code class="docutils literal notranslate"><span class="pre">CRC32_V_42</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC32_XZ"><code class="docutils literal notranslate"><span class="pre">CRC32_XZ</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC32_PKZIP"><code class="docutils literal notranslate"><span class="pre">CRC32_PKZIP</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC32_ETHERNET"><code class="docutils literal notranslate"><span class="pre">CRC32_ETHERNET</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC32_JAMCRC"><code class="docutils literal notranslate"><span class="pre">CRC32_JAMCRC</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC32_MEF"><code class="docutils literal notranslate"><span class="pre">CRC32_MEF</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC32_MPEG_2"><code class="docutils literal notranslate"><span class="pre">CRC32_MPEG_2</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC32_XFER"><code class="docutils literal notranslate"><span class="pre">CRC32_XFER</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC40_GSM"><code class="docutils literal notranslate"><span class="pre">CRC40_GSM</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC64_ECMA_182"><code class="docutils literal notranslate"><span class="pre">CRC64_ECMA_182</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC64_GO_ISO"><code class="docutils literal notranslate"><span class="pre">CRC64_GO_ISO</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC64_MS"><code class="docutils literal notranslate"><span class="pre">CRC64_MS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC64_REDIS"><code class="docutils literal notranslate"><span class="pre">CRC64_REDIS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC64_WE"><code class="docutils literal notranslate"><span class="pre">CRC64_WE</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC64_XZ"><code class="docutils literal notranslate"><span class="pre">CRC64_XZ</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC64_ECMA"><code class="docutils literal notranslate"><span class="pre">CRC64_ECMA</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crc/catalog.html#amaranth.lib.crc.catalog.CRC82_DARC"><code class="docutils literal notranslate"><span class="pre">CRC82_DARC</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="fifo.html" class="btn btn-neutral float-left" title="First-in first-out queues" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="crc/catalog.html" class="btn btn-neutral float-right" title="Algorithm catalog" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020—2025, Amaranth project contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
