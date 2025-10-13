@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Simulator &mdash; Amaranth language &amp; toolchain 0.6.0.dev101 documentation</title>
+  <title>Simulator &mdash; Amaranth language &amp; toolchain 0.6.0.dev102 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/platformpicker.css" />
@@ -17,7 +17,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=bbbdcbcb"></script>
+        <script src="_static/documentation_options.js?v=8c4541a1"></script>
         <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="_static/platformpicker.js"></script>
@@ -41,7 +41,7 @@
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.6.0.dev101
+                0.6.0.dev102
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -375,15 +375,15 @@ seconds after the beginning of the simulation; if not specified, <code class="co
 half-<code class="code highlight py python docutils literal highlight-python"><span class="n">period</span></code> to avoid coinciding the first active edge with the beginning of
 the simulation.</p>
 <p>The clock domain to drive is selected by the <code class="code highlight py python docutils literal highlight-python"><span class="n">domain</span></code> argument, which may be
-a <code class="xref py py-class docutils literal notranslate"><span class="pre">ClockDomain</span></code> object or a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>. If it is a string,
+a <code class="xref py py-class docutils literal notranslate"><span class="pre">ClockDomain</span></code> object or a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>. If it is a string,
 the clock domain with that name is retrieved from the <code class="code highlight py python docutils literal highlight-python"><span class="n">toplevel</span></code> elaboratable.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#NameError" title="(in Python v3.13)"><strong>NameError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">domain</span></code> is a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, the <code class="code highlight py python docutils literal highlight-python"><span class="n">toplevel</span></code> elaboratable does not have
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#NameError" title="(in Python v3.14)"><strong>NameError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">domain</span></code> is a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, the <code class="code highlight py python docutils literal highlight-python"><span class="n">toplevel</span></code> elaboratable does not have
     a clock domain with that name, and <code class="code highlight py python docutils literal highlight-python"><span class="n">if_exists</span></code> is <code class="code highlight py python docutils literal highlight-python"><span class="kc">False</span></code>.</p></li>
 <li><p><strong>DriverConflict</strong> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">domain</span></code> already has a clock driving it.</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.13)"><strong>RuntimeError</strong></a> – If the simulation has been advanced since its creation or last reset.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.14)"><strong>RuntimeError</strong></a> – If the simulation has been advanced since its creation or last reset.</p></li>
 </ul>
 </dd>
 </dl>
@@ -418,7 +418,7 @@ which they were added. If two testbenches share state, or must manipulate the de
 a coordinated way, they may rely on this execution order for correctness.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.13)"><strong>RuntimeError</strong></a> – If the simulation has been advanced since its creation or last reset.</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.14)"><strong>RuntimeError</strong></a> – If the simulation has been advanced since its creation or last reset.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -459,7 +459,7 @@ simplifying debugging.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.13)"><strong>RuntimeError</strong></a> – If the simulation has been advanced since its creation or last reset.</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.14)"><strong>RuntimeError</strong></a> – If the simulation has been advanced since its creation or last reset.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -511,20 +511,20 @@ a GTKWave save file displaying <code class="code highlight py python docutils li
     <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>The <code class="code highlight py python docutils literal highlight-python"><span class="n">vcd_file</span></code> and <code class="code highlight py python docutils literal highlight-python"><span class="n">gtkw_file</span></code> arguments accept either a <a class="reference external" href="https://docs.python.org/3/glossary.html#term-file-object" title="(in Python v3.13)"><span>file object</span></a>
+<p>The <code class="code highlight py python docutils literal highlight-python"><span class="n">vcd_file</span></code> and <code class="code highlight py python docutils literal highlight-python"><span class="n">gtkw_file</span></code> arguments accept either a <a class="reference external" href="https://docs.python.org/3/glossary.html#term-file-object" title="(in Python v3.14)"><span>file object</span></a>
 or a filename. If a file object is provided, it is closed when exiting the context manager
 (once the simulation completes or encounters an error).</p>
 <p>The <code class="code highlight py python docutils literal highlight-python"><span class="n">traces</span></code> argument accepts a <em>trace specification</em>, which can be one of:</p>
 <ul class="simple">
 <li><p>A <a class="reference internal" href="reference.html#amaranth.hdl.ValueLike" title="amaranth.hdl.ValueLike"><code class="xref py py-class docutils literal notranslate"><span class="pre">ValueLike</span></code></a> object, such as a <code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code>;</p></li>
 <li><p>A <a class="reference internal" href="stdlib/memory.html#amaranth.hdl.MemoryData" title="amaranth.hdl.MemoryData"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryData</span></code></a> object or an individual row retrieved from one;</p></li>
-<li><p>A <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> containing trace specifications;</p></li>
-<li><p>A <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> associating <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> names to trace specifications;</p></li>
+<li><p>A <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> containing trace specifications;</p></li>
+<li><p>A <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> associating <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> names to trace specifications;</p></li>
 <li><p>An <a class="reference internal" href="stdlib/wiring.html#wiring"><span class="std std-ref">interface object</span></a>.</p></li>
 </ul>
 <dl class="field-list simple">
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.13)"><strong>TypeError</strong></a> – If a trace specification refers to a signal with a private name.</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.14)"><strong>TypeError</strong></a> – If a trace specification refers to a signal with a private name.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -570,12 +570,12 @@ before the call returns.</p>
 its numeric value is converted to a higher-level representation using
 <a class="reference internal" href="reference.html#amaranth.hdl.ShapeCastable.from_bits" title="amaranth.hdl.ShapeCastable.from_bits"><code class="xref py py-meth docutils literal notranslate"><span class="pre">from_bits()</span></code></a> and then returned.</p></li>
 <li><p>If it is a <a class="reference internal" href="reference.html#amaranth.hdl.Value" title="amaranth.hdl.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a> or a <a class="reference internal" href="reference.html#amaranth.hdl.ValueCastable" title="amaranth.hdl.ValueCastable"><code class="xref py py-class docutils literal notranslate"><span class="pre">ValueCastable</span></code></a> whose shape is
-a <a class="reference internal" href="reference.html#amaranth.hdl.Shape" title="amaranth.hdl.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code></a>, the numeric value is returned as an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>.</p></li>
+a <a class="reference internal" href="reference.html#amaranth.hdl.Shape" title="amaranth.hdl.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code></a>, the numeric value is returned as an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>.</p></li>
 </ul>
 <p>This method is only available in testbenches.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.13)"><strong>TypeError</strong></a> – If the caller is a process.</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.14)"><strong>TypeError</strong></a> – If the caller is a process.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -636,19 +636,19 @@ of the calling process or testbench until the active edge of the clock, or the a
 reset (if applicable), occurs. The returned object may be used to repeatedly wait for one
 of these events until a condition is satisfied or a specific number of times. See
 the <a class="reference internal" href="#sim-tick-trigger"><span class="std std-ref">tick trigger reference</span></a> for more details.</p>
-<p>The <code class="code highlight py python docutils literal highlight-python"><span class="n">domain</span></code> may be either a <code class="xref py py-class docutils literal notranslate"><span class="pre">ClockDomain</span></code> or a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>. If it is
-a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, a clock domain with this name is looked up in
+<p>The <code class="code highlight py python docutils literal highlight-python"><span class="n">domain</span></code> may be either a <code class="xref py py-class docutils literal notranslate"><span class="pre">ClockDomain</span></code> or a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>. If it is
+a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, a clock domain with this name is looked up in
 the <a class="reference internal" href="guide.html#lang-elaboration"><span class="std std-ref">elaboratable</span></a> <code class="code highlight py python docutils literal highlight-python"><span class="n">context</span></code>, or in <code class="code highlight py python docutils literal highlight-python"><span class="n">toplevel</span></code> if
 <code class="code highlight py python docutils literal highlight-python"><span class="n">context</span></code> is not provided.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><strong>ValueError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">domain</span></code> is <code class="code highlight py python docutils literal highlight-python"><span class="s2">&quot;comb&quot;</span></code>.</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><strong>ValueError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">domain</span></code> is a <code class="xref py py-class docutils literal notranslate"><span class="pre">ClockDomain</span></code> and <code class="code highlight py python docutils literal highlight-python"><span class="n">context</span></code> is provided and not
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">domain</span></code> is <code class="code highlight py python docutils literal highlight-python"><span class="s2">&quot;comb&quot;</span></code>.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">domain</span></code> is a <code class="xref py py-class docutils literal notranslate"><span class="pre">ClockDomain</span></code> and <code class="code highlight py python docutils literal highlight-python"><span class="n">context</span></code> is provided and not
     <code class="code highlight py python docutils literal highlight-python"><span class="kc">None</span></code>.</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><strong>ValueError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">context</span></code> is an elaboratable that is not a direct or indirect submodule of
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">context</span></code> is an elaboratable that is not a direct or indirect submodule of
     <code class="code highlight py python docutils literal highlight-python"><span class="n">toplevel</span></code>.</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#NameError" title="(in Python v3.13)"><strong>NameError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">domain</span></code> is a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, but there is no clock domain with this name in
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#NameError" title="(in Python v3.14)"><strong>NameError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">domain</span></code> is a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, but there is no clock domain with this name in
     <code class="code highlight py python docutils literal highlight-python"><span class="n">context</span></code> or <code class="code highlight py python docutils literal highlight-python"><span class="n">toplevel</span></code>.</p></li>
 </ul>
 </dd>
@@ -676,7 +676,7 @@ difficult to understand and simulations hard to reason about.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><strong>ValueError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">delay</span></code> is negative.</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">delay</span></code> is negative.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -726,10 +726,10 @@ Whenever a suitable clock domain is available, use
 <dl class="field-list simple">
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.13)"><strong>TypeError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">signal</span></code> is neither a single-bit <code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code> nor a single-bit slice of
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.14)"><strong>TypeError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">signal</span></code> is neither a single-bit <code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code> nor a single-bit slice of
     a <code class="xref py py-class docutils literal notranslate"><span class="pre">Signal</span></code>.</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.13)"><strong>TypeError</strong></a> – If the shape of <code class="code highlight py python docutils literal highlight-python"><span class="n">signal</span></code> is a <code class="xref py py-class docutils literal notranslate"><span class="pre">ShapeCastable</span></code>.</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><strong>ValueError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">polarity</span></code> is neither 0 nor 1.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.14)"><strong>TypeError</strong></a> – If the shape of <code class="code highlight py python docutils literal highlight-python"><span class="n">signal</span></code> is a <code class="xref py py-class docutils literal notranslate"><span class="pre">ShapeCastable</span></code>.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">polarity</span></code> is neither 0 nor 1.</p></li>
 </ul>
 </dd>
 </dl>
@@ -787,14 +787,14 @@ calls <code class="code highlight py python docutils literal highlight-python"><
 </pre></div>
 </div>
 <p>To repeatedly wait for a tick trigger to be activated (a <em>multi-shot</em> wait), a process or
-testbench <a class="reference external" href="https://docs.python.org/3/glossary.html#term-asynchronous-iterable" title="(in Python v3.13)"><span class="xref std std-term">asynchronously iterates</span></a> the tick trigger,
+testbench <a class="reference external" href="https://docs.python.org/3/glossary.html#term-asynchronous-iterable" title="(in Python v3.14)"><span class="xref std std-term">asynchronously iterates</span></a> the tick trigger,
 usually using the <code class="code highlight py python docutils literal highlight-python"><span class="k">async</span> <span class="k">for</span></code> loop:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">testbench</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
     <span class="k">async</span> <span class="k">for</span> <span class="n">clk_hit</span><span class="p">,</span> <span class="n">rst_active</span><span class="p">,</span> <span class="n">a_value</span><span class="p">,</span> <span class="n">b_value</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">tick</span><span class="p">()</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">dut</span><span class="o">.</span><span class="n">b</span><span class="p">):</span>
         <span class="o">...</span>
 </pre></div>
 </div>
-<p>Both one-shot and multi-shot waits return the same <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>
+<p>Both one-shot and multi-shot waits return the same <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>
 <code class="code highlight py python docutils literal highlight-python"><span class="p">(</span><span class="n">clk_hit</span><span class="p">,</span> <span class="n">rst_active</span><span class="p">,</span> <span class="o">*</span><span class="n">values</span><span class="p">)</span></code> of return values:</p>
 <ol class="arabic simple">
 <li><p><code class="code highlight py python docutils literal highlight-python"><span class="n">clk_hit</span></code> is <code class="code highlight py python docutils literal highlight-python"><span class="kc">True</span></code> if there was an active clock edge at the moment the wait has
@@ -862,7 +862,7 @@ checking if it holds, and then removing it from the list of sampled values:</p>
 <dt class="sig sig-object py" id="amaranth.sim.TickTrigger.until">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">until</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">condition</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.TickTrigger.until" title="Link to this definition"></a></dt>
 <dd><p>Repeat this trigger until a condition is met.</p>
-<p>This method awaits this trigger at least once, and returns a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a> of the values
+<p>This method awaits this trigger at least once, and returns a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a> of the values
 that are <a class="reference internal" href="#amaranth.sim.TickTrigger.sample" title="amaranth.sim.TickTrigger.sample"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sample()</span></code></a>d when <code class="code highlight py python docutils literal highlight-python"><span class="n">condition</span></code> evaluates to a non-zero value. Values
 sampled during previous repeats are discarded.</p>
 <p>Awaiting a <code class="code highlight py python docutils literal highlight-python"><span class="n">trigger</span></code> returns values indicating the state of the clock and reset signals,
@@ -880,7 +880,7 @@ while awaiting <code class="code highlight py python docutils literal highlight-
 <dl class="field-list simple">
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.13)"><strong>TypeError</strong></a> – If the shape of <code class="code highlight py python docutils literal highlight-python"><span class="n">condition</span></code> is a <code class="xref py py-class docutils literal notranslate"><span class="pre">ShapeCastable</span></code>.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.14)"><strong>TypeError</strong></a> – If the shape of <code class="code highlight py python docutils literal highlight-python"><span class="n">condition</span></code> is a <code class="xref py py-class docutils literal notranslate"><span class="pre">ShapeCastable</span></code>.</p></li>
 <li><p><a class="reference internal" href="#amaranth.sim.DomainReset" title="amaranth.sim.DomainReset"><strong>DomainReset</strong></a> – If the clock domain has been synchronously or asynchronously reset during the wait.</p></li>
 </ul>
 </dd>
@@ -891,7 +891,7 @@ while awaiting <code class="code highlight py python docutils literal highlight-
 <dt class="sig sig-object py" id="amaranth.sim.TickTrigger.repeat">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">repeat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">count</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.sim.TickTrigger.repeat" title="Link to this definition"></a></dt>
 <dd><p>Repeat this trigger a specific number of times.</p>
-<p>This method awaits this trigger at least once, and returns a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a> of the values
+<p>This method awaits this trigger at least once, and returns a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a> of the values
 that are <a class="reference internal" href="#amaranth.sim.TickTrigger.sample" title="amaranth.sim.TickTrigger.sample"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sample()</span></code></a>d during the last repeat. Values sampled during previous repeats
 are discarded.</p>
 <p>Awaiting a <code class="code highlight py python docutils literal highlight-python"><span class="n">trigger</span></code> returns values indicating the state of the clock and reset signals,
@@ -907,7 +907,7 @@ while awaiting <code class="code highlight py python docutils literal highlight-
 <dl class="field-list simple">
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><strong>ValueError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">count</span></code> is less than 1.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">count</span></code> is less than 1.</p></li>
 <li><p><a class="reference internal" href="#amaranth.sim.DomainReset" title="amaranth.sim.DomainReset"><strong>DomainReset</strong></a> – If the clock domain has been synchronously or asynchronously reset during the wait.</p></li>
 </ul>
 </dd>
@@ -937,14 +937,14 @@ testbench calls <code class="code highlight py python docutils literal highlight
 </pre></div>
 </div>
 <p>To repeatedly wait for a trigger combination to be activated (a <em>multi-shot</em> wait), a process
-or testbench <a class="reference external" href="https://docs.python.org/3/glossary.html#term-asynchronous-iterable" title="(in Python v3.13)"><span class="xref std std-term">asynchronously iterates</span></a> the trigger
+or testbench <a class="reference external" href="https://docs.python.org/3/glossary.html#term-asynchronous-iterable" title="(in Python v3.14)"><span class="xref std std-term">asynchronously iterates</span></a> the trigger
 combination, usually using the <code class="code highlight py python docutils literal highlight-python"><span class="k">async</span> <span class="k">for</span></code> loop:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">testbench</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
     <span class="k">async</span> <span class="k">for</span> <span class="n">a_value</span><span class="p">,</span> <span class="n">b_value</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">changed</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">dut</span><span class="o">.</span><span class="n">b</span><span class="p">):</span>
         <span class="o">...</span>
 </pre></div>
 </div>
-<p>Both one-shot and multi-shot waits return the same <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a> of return values, the elements
+<p>Both one-shot and multi-shot waits return the same <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a> of return values, the elements
 of which are determined by the triggers and sampled expressions that have been added to
 the trigger combination, in the order in which they were added. For a detailed description of
 the return values, refer to <a class="reference internal" href="#amaranth.sim.SimulatorContext.delay" title="amaranth.sim.SimulatorContext.delay"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SimulatorContext.delay()</span></code></a>, <a class="reference internal" href="#amaranth.sim.SimulatorContext.changed" title="amaranth.sim.SimulatorContext.changed"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SimulatorContext.changed()</span></code></a>,

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Language reference &mdash; Amaranth language &amp; toolchain 0.6.0.dev101 documentation</title>
+  <title>Language reference &mdash; Amaranth language &amp; toolchain 0.6.0.dev102 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/platformpicker.css" />
@@ -17,7 +17,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=bbbdcbcb"></script>
+        <script src="_static/documentation_options.js?v=8c4541a1"></script>
         <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="_static/platformpicker.js"></script>
@@ -41,7 +41,7 @@
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.6.0.dev101
+                0.6.0.dev102
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -200,9 +200,9 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – The number of bits in the representation of a value. This includes the sign bit for signed
+<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – The number of bits in the representation of a value. This includes the sign bit for signed
 values. Cannot be zero if the value is signed.</p></li>
-<li><p><strong>signed</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – Whether the value is signed. Signed values use the
+<li><p><strong>signed</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – Whether the value is signed. Signed values use the
 <a class="reference external" href="https://en.wikipedia.org/wiki/Two's_complement">two’s complement</a> representation.</p></li>
 </ul>
 </dd>
@@ -214,11 +214,11 @@ values. Cannot be zero if the value is signed.</p></li>
 <p>Many <a class="reference internal" href="guide.html#lang-shapelike"><span class="std std-ref">shape-like</span></a> objects can be cast to a shape:</p>
 <ul class="simple">
 <li><p>a <a class="reference internal" href="#amaranth.hdl.Shape" title="amaranth.hdl.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code></a>, where the result is itself;</p></li>
-<li><p>an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, where the result is <a class="reference internal" href="#amaranth.hdl.unsigned" title="amaranth.hdl.unsigned"><code class="xref py py-func docutils literal notranslate"><span class="pre">unsigned(obj)</span></code></a>;</p></li>
-<li><p>a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">range</span></code></a>, where the result has minimal width required to represent all elements
+<li><p>an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, where the result is <a class="reference internal" href="#amaranth.hdl.unsigned" title="amaranth.hdl.unsigned"><code class="xref py py-func docutils literal notranslate"><span class="pre">unsigned(obj)</span></code></a>;</p></li>
+<li><p>a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">range</span></code></a>, where the result has minimal width required to represent all elements
 of the range, and is signed if any element of the range is signed;</p></li>
-<li><p>an <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a> whose members are all <a class="reference internal" href="guide.html#lang-constcasting"><span class="std std-ref">constant-castable</span></a>
-or <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></a>, where the result is wide enough to represent any member of
+<li><p>an <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a> whose members are all <a class="reference internal" href="guide.html#lang-constcasting"><span class="std std-ref">constant-castable</span></a>
+or <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></a>, where the result is wide enough to represent any member of
 the enumeration, and is signed if any member of the enumeration is signed;</p></li>
 <li><p>a <a class="reference internal" href="#amaranth.hdl.ShapeCastable" title="amaranth.hdl.ShapeCastable"><code class="xref py py-class docutils literal notranslate"><span class="pre">ShapeCastable</span></code></a> object, where the result is obtained by repeatedly calling
 <a class="reference internal" href="#amaranth.hdl.ShapeCastable.as_shape" title="amaranth.hdl.ShapeCastable.as_shape"><code class="xref py py-meth docutils literal notranslate"><span class="pre">obj.as_shape()</span></code></a>.</p></li>
@@ -226,8 +226,8 @@ the enumeration, and is signed if any member of the enumeration is signed;</p></
 <dl class="field-list simple">
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.13)"><strong>TypeError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">obj</span></code> cannot be converted to a <a class="reference internal" href="#amaranth.hdl.Shape" title="amaranth.hdl.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code></a>.</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RecursionError" title="(in Python v3.13)"><strong>RecursionError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">obj</span></code> is a <a class="reference internal" href="#amaranth.hdl.ShapeCastable" title="amaranth.hdl.ShapeCastable"><code class="xref py py-class docutils literal notranslate"><span class="pre">ShapeCastable</span></code></a> object that casts to itself.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.14)"><strong>TypeError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">obj</span></code> cannot be converted to a <a class="reference internal" href="#amaranth.hdl.Shape" title="amaranth.hdl.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code></a>.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RecursionError" title="(in Python v3.14)"><strong>RecursionError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">obj</span></code> is a <a class="reference internal" href="#amaranth.hdl.ShapeCastable" title="amaranth.hdl.ShapeCastable"><code class="xref py py-class docutils literal notranslate"><span class="pre">ShapeCastable</span></code></a> object that casts to itself.</p></li>
 </ul>
 </dd>
 </dl>
@@ -295,7 +295,7 @@ exactly the same.</p>
 <dd class="field-odd"><p>Any other object recognized by <a class="reference internal" href="#amaranth.hdl.Shape.cast" title="amaranth.hdl.Shape.cast"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Shape.cast()</span></code></a>.</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.13)"><strong>Exception</strong></a> – When the conversion cannot be done. This exception must be propagated by callers
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.14)"><strong>Exception</strong></a> – When the conversion cannot be done. This exception must be propagated by callers
     (except when checking whether an object is shape-castable or not), either directly
     or as a cause of another exception.</p>
 </dd>
@@ -321,9 +321,9 @@ the result will usually be an instance of the return type of <a class="reference
 <dd class="field-odd"><p>A <a class="reference internal" href="guide.html#lang-valuelike"><span class="std std-ref">value-like object</span></a> that is <a class="reference internal" href="guide.html#lang-constcasting"><span class="std std-ref">constant-castable</span></a>.</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.13)"><strong>Exception</strong></a> – When the conversion cannot be done. This exception must be propagated by callers,
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.14)"><strong>Exception</strong></a> – When the conversion cannot be done. This exception must be propagated by callers,
     either directly or as a cause of another exception. While not constrained here,
-    usually the exception class will be <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.13)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>.</p>
+    usually the exception class will be <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.14)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -332,7 +332,7 @@ the result will usually be an instance of the return type of <a class="reference
 <dt class="sig sig-object py" id="amaranth.hdl.ShapeCastable.from_bits">
 <span class="sig-name descname"><span class="pre">from_bits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.hdl.ShapeCastable.from_bits" title="Link to this definition"></a></dt>
 <dd><p>Lift a bit pattern to a higher-level representation.</p>
-<p>This method is called by the Amaranth language to lift <code class="code highlight py python docutils literal highlight-python"><span class="n">raw</span></code>, which is an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>,
+<p>This method is called by the Amaranth language to lift <code class="code highlight py python docutils literal highlight-python"><span class="n">raw</span></code>, which is an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>,
 to a higher-level representation, which may be any object accepted by <a class="reference internal" href="#amaranth.hdl.ShapeCastable.const" title="amaranth.hdl.ShapeCastable.const"><code class="xref py py-meth docutils literal notranslate"><span class="pre">const()</span></code></a>.
 Most importantly, the simulator calls this method when the value of a shape-castable
 object is retrieved.</p>
@@ -350,9 +350,9 @@ constrained here, these objects should have the same type whenever feasible.</p>
 <dd class="field-odd"><p>unspecified type</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.13)"><strong>Exception</strong></a> – When the bit pattern isn’t valid. This exception must be propagated by callers,
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.14)"><strong>Exception</strong></a> – When the bit pattern isn’t valid. This exception must be propagated by callers,
     either directly or as a cause of another exception. While not constrained here,
-    usually the exception class will be <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>.</p>
+    usually the exception class will be <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -412,8 +412,8 @@ is called, and the format specifier is replaced with the result.</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#amaranth.hdl.Shape" title="amaranth.hdl.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code></a>;</p></li>
 <li><p><a class="reference internal" href="#amaranth.hdl.ShapeCastable" title="amaranth.hdl.ShapeCastable"><code class="xref py py-class docutils literal notranslate"><span class="pre">ShapeCastable</span></code></a> and its subclasses;</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> and its subclasses;</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">range</span></code></a> and its subclasses;</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> and its subclasses;</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">range</span></code></a> and its subclasses;</p></li>
 <li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.EnumMeta</span></code> and its subclasses;</p></li>
 <li><p><a class="reference internal" href="#amaranth.hdl.ShapeLike" title="amaranth.hdl.ShapeLike"><code class="xref py py-class docutils literal notranslate"><span class="pre">ShapeLike</span></code></a> itself.</p></li>
 </ul>
@@ -421,9 +421,9 @@ is called, and the format specifier is replaced with the result.</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#amaranth.hdl.Shape" title="amaranth.hdl.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">Shape</span></code></a> instances;</p></li>
 <li><p><a class="reference internal" href="#amaranth.hdl.ShapeCastable" title="amaranth.hdl.ShapeCastable"><code class="xref py py-class docutils literal notranslate"><span class="pre">ShapeCastable</span></code></a> instances;</p></li>
-<li><p>non-negative <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> values;</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">range</span></code></a> instances;</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a> subclasses where all values are <a class="reference internal" href="guide.html#lang-valuelike"><span class="std std-ref">value-like objects</span></a>.</p></li>
+<li><p>non-negative <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> values;</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#range" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">range</span></code></a> instances;</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a> subclasses where all values are <a class="reference internal" href="guide.html#lang-valuelike"><span class="std std-ref">value-like objects</span></a>.</p></li>
 </ul>
 <p>This class cannot be instantiated or subclassed. It can only be used for checking types of
 objects.</p>
@@ -444,7 +444,7 @@ the result of an arithmetic, logical, or bit container operation.</p>
 <p>Operations on this class interpret this bit pattern either as an integer, which can be signed
 or unsigned depending on the value’s <a class="reference internal" href="#amaranth.hdl.Value.shape" title="amaranth.hdl.Value.shape"><code class="xref py py-meth docutils literal notranslate"><span class="pre">shape()</span></code></a>, or as a bit container. In either case,
 the semantics of operations that implement Python’s syntax, like <code class="code highlight py python docutils literal highlight-python"><span class="o">+</span></code> (also known as
-<a class="reference internal" href="#amaranth.hdl.Value.__add__" title="amaranth.hdl.Value.__add__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__add__()</span></code></a>), are identical to the corresponding operation on a Python <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> (or on
+<a class="reference internal" href="#amaranth.hdl.Value.__add__" title="amaranth.hdl.Value.__add__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__add__()</span></code></a>), are identical to the corresponding operation on a Python <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> (or on
 a Python sequence container). The bitwise inversion <code class="code highlight py python docutils literal highlight-python"><span class="o">~</span></code> (also known as <a class="reference internal" href="#amaranth.hdl.Value.__invert__" title="amaranth.hdl.Value.__invert__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__invert__()</span></code></a>)
 is the sole exception to this rule.</p>
 <p>Data that is not conveniently representable by a single integer or a bit container can be
@@ -453,7 +453,7 @@ domain-specific operations. It is possible to extend Amaranth in third-party cod
 value-castable objects, and the Amaranth standard library provides several built-in ones:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="stdlib/enum.html#module-amaranth.lib.enum" title="amaranth.lib.enum"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.enum</span></code></a> classes are a drop-in replacement for the standard Python
-<a class="reference external" href="https://docs.python.org/3/library/enum.html#module-enum" title="(in Python v3.13)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">enum</span></code></a> classes that can be defined with an Amaranth shape;</p></li>
+<a class="reference external" href="https://docs.python.org/3/library/enum.html#module-enum" title="(in Python v3.14)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">enum</span></code></a> classes that can be defined with an Amaranth shape;</p></li>
 <li><p><a class="reference internal" href="stdlib/data.html#module-amaranth.lib.data" title="amaranth.lib.data"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.data</span></code></a> classes allow defining complex data structures such as structures
 and unions.</p></li>
 </ul>
@@ -476,8 +476,8 @@ assignable.</p>
 <p>Many <a class="reference internal" href="guide.html#lang-valuelike"><span class="std std-ref">value-like</span></a> objects can be cast to a value:</p>
 <ul class="simple">
 <li><p>a <a class="reference internal" href="#amaranth.hdl.Value" title="amaranth.hdl.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a> instance, where the result is itself;</p></li>
-<li><p>a <a class="reference internal" href="#amaranth.hdl.Value.bool" title="amaranth.hdl.Value.bool"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> instance, where the result is <code class="code highlight py python docutils literal highlight-python"><span class="n">Const</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span></code>;</p></li>
-<li><p>an <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></a> instance, or a <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a> instance whose members are
+<li><p>a <a class="reference internal" href="#amaranth.hdl.Value.bool" title="amaranth.hdl.Value.bool"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> instance, where the result is <code class="code highlight py python docutils literal highlight-python"><span class="n">Const</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span></code>;</p></li>
+<li><p>an <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></a> instance, or a <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a> instance whose members are
 all integers, where the result is a <code class="xref py py-class docutils literal notranslate"><span class="pre">Const(obj,</span> <span class="pre">enum_shape)</span></code> where <code class="code highlight py python docutils literal highlight-python"><span class="n">enum_shape</span></code>
 is a shape that can represent every member of the enumeration;</p></li>
 <li><p>a <a class="reference internal" href="#amaranth.hdl.ValueCastable" title="amaranth.hdl.ValueCastable"><code class="xref py py-class docutils literal notranslate"><span class="pre">ValueCastable</span></code></a> instance, where the result is obtained by repeatedly calling
@@ -486,8 +486,8 @@ is a shape that can represent every member of the enumeration;</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.13)"><strong>TypeError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">obj</span></code> cannot be converted to a <a class="reference internal" href="#amaranth.hdl.Value" title="amaranth.hdl.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a>.</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RecursionError" title="(in Python v3.13)"><strong>RecursionError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">obj</span></code> is a <a class="reference internal" href="#amaranth.hdl.ValueCastable" title="amaranth.hdl.ValueCastable"><code class="xref py py-class docutils literal notranslate"><span class="pre">ValueCastable</span></code></a> object that casts to itself.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.14)"><strong>TypeError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">obj</span></code> cannot be converted to a <a class="reference internal" href="#amaranth.hdl.Value" title="amaranth.hdl.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a>.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RecursionError" title="(in Python v3.14)"><strong>RecursionError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">obj</span></code> is a <a class="reference internal" href="#amaranth.hdl.ValueCastable" title="amaranth.hdl.ValueCastable"><code class="xref py py-class docutils literal notranslate"><span class="pre">ValueCastable</span></code></a> object that casts to itself.</p></li>
 </ul>
 </dd>
 </dl>
@@ -524,7 +524,7 @@ is a shape that can represent every member of the enumeration;</p></li>
 <dd class="field-odd"><p><a class="reference internal" href="#amaranth.hdl.Value" title="amaranth.hdl.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a>, <code class="code highlight py python docutils literal highlight-python"><span class="n">signed</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span></code>, <a class="reference internal" href="guide.html#lang-assignable"><span class="std std-ref">assignable</span></a></p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><strong>ValueError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span></code>.</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span></code>.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -538,7 +538,7 @@ return a <a class="reference internal" href="#amaranth.hdl.Value.bool" title="am
 always raises an exception.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.13)"><strong>TypeError</strong></a> – Always.</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.14)"><strong>TypeError</strong></a> – Always.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -918,7 +918,7 @@ semantically a bit sequence.</p>
 </p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.13)"><strong>TypeError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">other</span></code> is signed.</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.14)"><strong>TypeError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">other</span></code> is signed.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -971,7 +971,7 @@ semantically a bit sequence.</p>
 </p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.13)"><strong>TypeError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">other</span></code> is signed.</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.14)"><strong>TypeError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">other</span></code> is signed.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1020,7 +1020,7 @@ semantically a bit sequence.</p>
 <dd class="field-odd"><p><code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">()</span><span class="o">.</span><span class="n">width</span></code></p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1038,9 +1038,9 @@ the bounds of <code class="code highlight py python docutils literal highlight-p
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><ul class="simple">
-<li><p><a class="reference internal" href="#amaranth.hdl.Value" title="amaranth.hdl.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a>, <code class="code highlight py python docutils literal highlight-python"><span class="n">unsigned</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></code>, <a class="reference internal" href="guide.html#lang-assignable"><span class="std std-ref">assignable</span></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">key</span></code> is an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>.</p></li>
-<li><p><a class="reference internal" href="#amaranth.hdl.Value" title="amaranth.hdl.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a>, <code class="code highlight py python docutils literal highlight-python"><span class="n">unsigned</span><span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span></code>, <a class="reference internal" href="guide.html#lang-assignable"><span class="std std-ref">assignable</span></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">key</span></code> is a slice <code class="code highlight py python docutils literal highlight-python"><span class="n">i</span><span class="p">:</span><span class="n">j</span></code> where <code class="code highlight py python docutils literal highlight-python"><span class="n">i</span></code> and <code class="code highlight py python docutils literal highlight-python"><span class="n">j</span></code> are <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>s.</p></li>
-<li><p><a class="reference internal" href="#amaranth.hdl.Value" title="amaranth.hdl.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a>, <code class="code highlight py python docutils literal highlight-python"><span class="n">unsigned</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="o">*</span><span class="nb">slice</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span><span class="o">.</span><span class="n">indices</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)))))</span></code>, <a class="reference internal" href="guide.html#lang-assignable"><span class="std std-ref">assignable</span></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">key</span></code> is a slice <code class="code highlight py python docutils literal highlight-python"><span class="n">i</span><span class="p">:</span><span class="n">j</span><span class="p">:</span><span class="n">k</span></code> where <code class="code highlight py python docutils literal highlight-python"><span class="n">i</span></code>, <code class="code highlight py python docutils literal highlight-python"><span class="n">j</span></code>, and <code class="code highlight py python docutils literal highlight-python"><span class="n">k</span></code> are <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>s.</p></li>
+<li><p><a class="reference internal" href="#amaranth.hdl.Value" title="amaranth.hdl.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a>, <code class="code highlight py python docutils literal highlight-python"><span class="n">unsigned</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></code>, <a class="reference internal" href="guide.html#lang-assignable"><span class="std std-ref">assignable</span></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">key</span></code> is an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>.</p></li>
+<li><p><a class="reference internal" href="#amaranth.hdl.Value" title="amaranth.hdl.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a>, <code class="code highlight py python docutils literal highlight-python"><span class="n">unsigned</span><span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span></code>, <a class="reference internal" href="guide.html#lang-assignable"><span class="std std-ref">assignable</span></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">key</span></code> is a slice <code class="code highlight py python docutils literal highlight-python"><span class="n">i</span><span class="p">:</span><span class="n">j</span></code> where <code class="code highlight py python docutils literal highlight-python"><span class="n">i</span></code> and <code class="code highlight py python docutils literal highlight-python"><span class="n">j</span></code> are <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>s.</p></li>
+<li><p><a class="reference internal" href="#amaranth.hdl.Value" title="amaranth.hdl.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a>, <code class="code highlight py python docutils literal highlight-python"><span class="n">unsigned</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="o">*</span><span class="nb">slice</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span><span class="o">.</span><span class="n">indices</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)))))</span></code>, <a class="reference internal" href="guide.html#lang-assignable"><span class="std std-ref">assignable</span></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">key</span></code> is a slice <code class="code highlight py python docutils literal highlight-python"><span class="n">i</span><span class="p">:</span><span class="n">j</span><span class="p">:</span><span class="n">k</span></code> where <code class="code highlight py python docutils literal highlight-python"><span class="n">i</span></code>, <code class="code highlight py python docutils literal highlight-python"><span class="n">j</span></code>, and <code class="code highlight py python docutils literal highlight-python"><span class="n">k</span></code> are <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>s.</p></li>
 </ul>
 </p>
 </dd>
@@ -1056,7 +1056,7 @@ for Amaranth values, this operator always raises an exception.</p>
 <p>To check membership in a set of constant integer values, use <a class="reference internal" href="#amaranth.hdl.Value.matches" title="amaranth.hdl.Value.matches"><code class="xref py py-meth docutils literal notranslate"><span class="pre">matches()</span></code></a> instead.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.13)"><strong>TypeError</strong></a> – Always.</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.14)"><strong>TypeError</strong></a> – Always.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1075,7 +1075,7 @@ this operation is equivalent to <code class="code highlight py python docutils l
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>offset</strong> (<a class="reference internal" href="guide.html#lang-valuelike"><span class="std std-ref">value-like</span></a>) – Index of the first selected bit.</p></li>
-<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Amount of bits to select.</p></li>
+<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Amount of bits to select.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -1083,8 +1083,8 @@ this operation is equivalent to <code class="code highlight py python docutils l
 </dd>
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.13)"><strong>TypeError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">offset</span></code> is signed.</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.13)"><strong>TypeError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">width</span></code> is negative.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.14)"><strong>TypeError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">offset</span></code> is signed.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.14)"><strong>TypeError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">width</span></code> is negative.</p></li>
 </ul>
 </dd>
 </dl>
@@ -1104,7 +1104,7 @@ this operation is equivalent to <code class="code highlight py python docutils l
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>offset</strong> (<a class="reference internal" href="guide.html#lang-valuelike"><span class="std std-ref">value-like</span></a>) – Index of the first selected word.</p></li>
-<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Amount of bits to select.</p></li>
+<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Amount of bits to select.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -1112,8 +1112,8 @@ this operation is equivalent to <code class="code highlight py python docutils l
 </dd>
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.13)"><strong>TypeError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">offset</span></code> is signed.</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.13)"><strong>TypeError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">width</span></code> is negative.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.14)"><strong>TypeError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">offset</span></code> is signed.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.14)"><strong>TypeError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">width</span></code> is negative.</p></li>
 </ul>
 </dd>
 </dl>
@@ -1129,7 +1129,7 @@ this operation is equivalent to <code class="code highlight py python docutils l
 <dd class="field-odd"><p><a class="reference internal" href="#amaranth.hdl.Value" title="amaranth.hdl.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a>, <code class="code highlight py python docutils literal highlight-python"><span class="n">unsigned</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">*</span> <span class="n">count</span><span class="p">)</span></code></p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.13)"><strong>TypeError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">count</span></code> is negative.</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.14)"><strong>TypeError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">count</span></code> is negative.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1140,13 +1140,13 @@ this operation is equivalent to <code class="code highlight py python docutils l
 <dd><p>Pattern matching.</p>
 <p>Matches against a set of patterns, recognizing the same grammar as <code class="code highlight py python docutils literal highlight-python"><span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">Case</span><span class="p">()</span></code>.
 The pattern syntax is described in the <a class="reference internal" href="guide.html#lang-matchop"><span class="std std-ref">language guide</span></a>.</p>
-<p>Each of the <code class="code highlight py python docutils literal highlight-python"><span class="n">patterns</span></code> may be a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> or a <a class="reference internal" href="guide.html#lang-constcasting"><span class="std std-ref">constant-castable object</span></a>.</p>
+<p>Each of the <code class="code highlight py python docutils literal highlight-python"><span class="n">patterns</span></code> may be a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> or a <a class="reference internal" href="guide.html#lang-constcasting"><span class="std std-ref">constant-castable object</span></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#amaranth.hdl.Value" title="amaranth.hdl.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a>, <code class="code highlight py python docutils literal highlight-python"><span class="n">unsigned</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></code></p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#SyntaxError" title="(in Python v3.13)"><strong>SyntaxError</strong></a> – If a pattern has invalid syntax.</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#SyntaxError" title="(in Python v3.14)"><strong>SyntaxError</strong></a> – If a pattern has invalid syntax.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1171,11 +1171,11 @@ it is truncated.</p>
 <dt class="sig sig-object py" id="amaranth.hdl.Value.__hash__">
 <span class="sig-name descname"><span class="pre">__hash__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#amaranth.hdl.Value.__hash__" title="Link to this definition"></a></dt>
 <dd><p>Forbidden hashing.</p>
-<p>Python objects are <a class="reference external" href="https://docs.python.org/3/glossary.html#term-hashable" title="(in Python v3.13)"><span>hashable</span></a> if they provide a <code class="code highlight py python docutils literal highlight-python"><span class="fm">__hash__</span></code> method
-that returns an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> and an <code class="code highlight py python docutils literal highlight-python"><span class="fm">__eq__</span></code> method that returns a <a class="reference internal" href="#amaranth.hdl.Value.bool" title="amaranth.hdl.Value.bool"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>.
+<p>Python objects are <a class="reference external" href="https://docs.python.org/3/glossary.html#term-hashable" title="(in Python v3.14)"><span>hashable</span></a> if they provide a <code class="code highlight py python docutils literal highlight-python"><span class="fm">__hash__</span></code> method
+that returns an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> and an <code class="code highlight py python docutils literal highlight-python"><span class="fm">__eq__</span></code> method that returns a <a class="reference internal" href="#amaranth.hdl.Value.bool" title="amaranth.hdl.Value.bool"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>.
 Amaranth values define <a class="reference internal" href="#amaranth.hdl.Value.__eq__" title="amaranth.hdl.Value.__eq__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__eq__()</span></code></a> to return a <a class="reference internal" href="#amaranth.hdl.Value" title="amaranth.hdl.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a>, which precludes them
 from being hashable.</p>
-<p>To use a <a class="reference internal" href="#amaranth.hdl.Value" title="amaranth.hdl.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a> as a key in a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>, use the following pattern:</p>
+<p>To use a <a class="reference internal" href="#amaranth.hdl.Value" title="amaranth.hdl.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a> as a key in a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>, use the following pattern:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">value</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">()</span>
 <span class="n">assoc</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="n">assoc</span><span class="p">[</span><span class="nb">id</span><span class="p">(</span><span class="n">value</span><span class="p">)]</span> <span class="o">=</span> <span class="n">value</span><span class="p">,</span> <span class="s2">&quot;a signal&quot;</span>
@@ -1230,7 +1230,7 @@ exactly the same.</p>
 <dd class="field-odd"><p>Any other object recognized by <a class="reference internal" href="#amaranth.hdl.Value.cast" title="amaranth.hdl.Value.cast"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Value.cast()</span></code></a>.</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.13)"><strong>Exception</strong></a> – When the conversion cannot be done. This exception must be propagated by callers,
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.14)"><strong>Exception</strong></a> – When the conversion cannot be done. This exception must be propagated by callers,
     either directly or as a cause of another exception.
     
     It is recommended that, in cases where this method raises an exception,
@@ -1259,7 +1259,7 @@ exactly the same.</p>
 <dd class="field-odd"><p>A <a class="reference internal" href="guide.html#lang-shapelike"><span class="std std-ref">shape-like</span></a> object.</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.13)"><strong>Exception</strong></a> – When the conversion cannot be done. This exception must be propagated by callers,
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.14)"><strong>Exception</strong></a> – When the conversion cannot be done. This exception must be propagated by callers,
     either directly or as a cause of another exception.
     
     It is recommended that, in cases where this method raises an exception,
@@ -1278,8 +1278,8 @@ exactly the same.</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#amaranth.hdl.Value" title="amaranth.hdl.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a>;</p></li>
 <li><p><a class="reference internal" href="#amaranth.hdl.ValueCastable" title="amaranth.hdl.ValueCastable"><code class="xref py py-class docutils literal notranslate"><span class="pre">ValueCastable</span></code></a> and its subclasses;</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> and its subclasses (including <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>);</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a> subclasses where all values are <a class="reference internal" href="guide.html#lang-valuelike"><span class="std std-ref">value-like</span></a>;</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> and its subclasses (including <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>);</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a> subclasses where all values are <a class="reference internal" href="guide.html#lang-valuelike"><span class="std std-ref">value-like</span></a>;</p></li>
 <li><p><a class="reference internal" href="#amaranth.hdl.ValueLike" title="amaranth.hdl.ValueLike"><code class="xref py py-class docutils literal notranslate"><span class="pre">ValueLike</span></code></a> itself.</p></li>
 </ul>
 <p><code class="code highlight py python docutils literal highlight-python"><span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">ValueLike</span><span class="p">)</span></code> returns the same value as
