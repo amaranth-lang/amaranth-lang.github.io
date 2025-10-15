@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data streams &mdash; Amaranth language &amp; toolchain 0.5.8 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=d131d90a" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=1c3e8845"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/platformpicker.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Memory arrays" href="memory.html" />
+    <link rel="prev" title="Interface metadata" href="meta.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../cover.html" class="icon icon-home">
+            Amaranth language & toolchain
+              <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.5.8
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Language &amp; toolchain</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../start.html">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide.html">Language guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference.html">Language reference</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../stdlib.html">Standard library</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="enum.html">Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data.html">Data structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wiring.html">Interfaces and connections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="meta.html">Interface metadata</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Data streams</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#data-transfer-rules">Data transfer rules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reference">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="memory.html">Memory arrays</a></li>
+<li class="toctree-l3"><a class="reference internal" href="io.html">Input/output buffers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cdc.html">Clock domain crossing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="coding.html">Code conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fifo.html">First-in first-out queues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="crc.html">Cyclic redundancy checks</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../simulator.html">Simulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../platform.html">Platform integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../changes.html">Changelog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib.html">Contributing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="https://amaranth-lang.org/docs/amaranth-stdio/latest/">Standard I/O components</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://amaranth-lang.org/docs/amaranth-soc/latest/">System on Chip toolkit</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../cover.html">Amaranth language & toolchain</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../cover.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Language &amp; toolchain</a></li>
+          <li class="breadcrumb-item"><a href="../stdlib.html">Standard library</a></li>
+      <li class="breadcrumb-item active">Data streams</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/stdlib/stream.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-amaranth.lib.stream">
+<span id="data-streams"></span><h1>Data streams<a class="headerlink" href="#module-amaranth.lib.stream" title="Permalink to this heading"></a></h1>
+<p>The <a class="reference internal" href="#module-amaranth.lib.stream" title="amaranth.lib.stream"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.stream</span></code></a> module provides a mechanism for unidirectional exchange of arbitrary data between modules.</p>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<p>One of the most common flow control mechanisms is <em>ready/valid handshaking</em>, where a <em>producer</em> pushes data to a <em>consumer</em> whenever it becomes available, and the consumer signals to the producer whether it can accept more data. In Amaranth, this mechanism is implemented using an <a class="reference internal" href="wiring.html#wiring"><span class="std std-ref">interface</span></a> with three members:</p>
+<ul class="simple">
+<li><p><code class="code highlight py python docutils literal highlight-python"><span class="n">payload</span></code> (driven by the producer), containing the data;</p></li>
+<li><p><code class="code highlight py python docutils literal highlight-python"><span class="n">valid</span></code> (driven by the producer), indicating that data is currently available in <code class="code highlight py python docutils literal highlight-python"><span class="n">payload</span></code>;</p></li>
+<li><p><code class="code highlight py python docutils literal highlight-python"><span class="n">ready</span></code> (driven by the consumer), indicating that data is accepted if available.</p></li>
+</ul>
+<p>This module provides such an interface, <a class="reference internal" href="#amaranth.lib.stream.Interface" title="amaranth.lib.stream.Interface"><code class="xref py py-class docutils literal notranslate"><span class="pre">stream.Interface</span></code></a>, and defines the exact rules governing the flow of data through it.</p>
+</section>
+<section id="data-transfer-rules">
+<span id="stream-rules"></span><h2>Data transfer rules<a class="headerlink" href="#data-transfer-rules" title="Permalink to this heading"></a></h2>
+<p>The producer and the consumer must be synchronized: they must belong to the same <a class="reference internal" href="../guide.html#lang-clockdomains"><span class="std std-ref">clock domain</span></a>, and any <a class="reference internal" href="../guide.html#lang-controlinserter"><span class="std std-ref">control flow modifiers</span></a> must be applied to both, in the same order.</p>
+<p>Data flows through a stream according to the following four rules:</p>
+<ol class="arabic simple">
+<li><p>On each cycle where both <code class="code highlight py python docutils literal highlight-python"><span class="n">valid</span></code> and <code class="code highlight py python docutils literal highlight-python"><span class="n">ready</span></code> are asserted, a transfer is performed: the contents of <code class="docutils literal notranslate"><span class="pre">payload</span></code> are conveyed from the producer to the consumer.</p></li>
+<li><p>Once the producer asserts <code class="code highlight py python docutils literal highlight-python"><span class="n">valid</span></code>, it must not deassert <code class="code highlight py python docutils literal highlight-python"><span class="n">valid</span></code> or change the contents of <code class="docutils literal notranslate"><span class="pre">payload</span></code> until a transfer is performed.</p></li>
+<li><p>The producer must not wait for <code class="code highlight py python docutils literal highlight-python"><span class="n">ready</span></code> to be asserted before asserting <code class="code highlight py python docutils literal highlight-python"><span class="n">valid</span></code>: any form of feedback from <code class="code highlight py python docutils literal highlight-python"><span class="n">ready</span></code> that causes <code class="code highlight py python docutils literal highlight-python"><span class="n">valid</span></code> to become asserted is prohibited.</p></li>
+<li><p>The consumer may assert or deassert <code class="code highlight py python docutils literal highlight-python"><span class="n">ready</span></code> at any time, including via combinational feedback from <code class="code highlight py python docutils literal highlight-python"><span class="n">valid</span></code>.</p></li>
+</ol>
+<p>Some producers and consumers may be designed without support for backpressure. Such producers must tie <code class="code highlight py python docutils literal highlight-python"><span class="n">ready</span></code> to <code class="code highlight py python docutils literal highlight-python"><span class="n">Const</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></code> by specifying <code class="code highlight py python docutils literal highlight-python"><span class="n">always_ready</span><span class="o">=</span><span class="kc">True</span></code> when constructing a stream, and consumers may (but are not required to) do the same. Similarly, some producers and consumers may be designed such that a payload is provided or must be provided on each cycle. Such consumers must tie <code class="code highlight py python docutils literal highlight-python"><span class="n">valid</span></code> to <code class="code highlight py python docutils literal highlight-python"><span class="n">Const</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></code> by specifying <code class="code highlight py python docutils literal highlight-python"><span class="n">always_valid</span><span class="o">=</span><span class="kc">True</span></code> when constructing a stream, and producers may (but are not required to) do the same.</p>
+<p>If these control signals are tied to <code class="code highlight py python docutils literal highlight-python"><span class="n">Const</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></code>, then the <a class="reference internal" href="wiring.html#amaranth.lib.wiring.connect" title="amaranth.lib.wiring.connect"><code class="xref py py-func docutils literal notranslate"><span class="pre">wiring.connect</span></code></a> function ensures that only compatible streams are connected together. For example, if the producer does not support backpressure (<code class="code highlight py python docutils literal highlight-python"><span class="n">ready</span></code> tied to <code class="code highlight py python docutils literal highlight-python"><span class="n">Const</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></code>), it can only be connected to consumers that do not require backpressure. However, consumers that do not require backpressure can be connected to producers with or without support for backpressure. The <code class="code highlight py python docutils literal highlight-python"><span class="n">valid</span></code> control signal is treated similarly.</p>
+<p>These rules ensure that producers and consumers that are developed independently can be safely used together, without unduly restricting the application-specific conditions that determine assertion of <code class="code highlight py python docutils literal highlight-python"><span class="n">valid</span></code> and <code class="code highlight py python docutils literal highlight-python"><span class="n">ready</span></code>.</p>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<p>The following examples demonstrate the use of streams for a data processing pipeline that receives serial data input from an external device, transforms it by negating the 2’s complement value, and transmits it to another external device whenever requested. Similar pipelines, albeit more complex, are widely used in <abbr title="digital signal processing">DSP</abbr> applications.</p>
+<p>The use of a unified data transfer mechanism enables uniform testing of individual units, and makes it possible to add a queue to the pipeline using only two additional connections.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">amaranth.lib</span><span class="w"> </span><span class="kn">import</span> <span class="n">stream</span><span class="p">,</span> <span class="n">wiring</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">amaranth.lib.wiring</span><span class="w"> </span><span class="kn">import</span> <span class="n">In</span><span class="p">,</span> <span class="n">Out</span>
+</pre></div>
+</div>
+<p>The pipeline is tested using the <a class="reference internal" href="../simulator.html"><span class="doc">built-in simulator</span></a> and the two helper functions defined below:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">amaranth.sim</span><span class="w"> </span><span class="kn">import</span> <span class="n">Simulator</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">stream_get</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">stream</span><span class="p">):</span>
+    <span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">stream</span><span class="o">.</span><span class="n">ready</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">payload</span><span class="p">,</span> <span class="o">=</span> <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">tick</span><span class="p">()</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">stream</span><span class="o">.</span><span class="n">payload</span><span class="p">)</span><span class="o">.</span><span class="n">until</span><span class="p">(</span><span class="n">stream</span><span class="o">.</span><span class="n">valid</span><span class="p">)</span>
+    <span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">stream</span><span class="o">.</span><span class="n">ready</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">payload</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">stream_put</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">stream</span><span class="p">,</span> <span class="n">payload</span><span class="p">):</span>
+    <span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">stream</span><span class="o">.</span><span class="n">valid</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">stream</span><span class="o">.</span><span class="n">payload</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">tick</span><span class="p">()</span><span class="o">.</span><span class="n">until</span><span class="p">(</span><span class="n">stream</span><span class="o">.</span><span class="n">ready</span><span class="p">)</span>
+    <span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">stream</span><span class="o">.</span><span class="n">valid</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>“Minimal streams” as defined in <a class="reference external" href="https://amaranth-lang.org/rfcs/0061-minimal-streams.html">RFC 61</a> do not provide built-in helper functions for testing pending further work on the clock domain system. They will be provided in a later release. For the time being, you can copy the helper functions above to test your designs that use streams.</p>
+</div>
+<section id="serial-receiver">
+<h3>Serial receiver<a class="headerlink" href="#serial-receiver" title="Permalink to this heading"></a></h3>
+<p>The serial receiver captures the serial output of an external device and converts it to a stream of words. While the <code class="docutils literal notranslate"><span class="pre">ssel</span></code> signal is high, each low-to-high transition on the <code class="docutils literal notranslate"><span class="pre">sclk</span></code> input captures the value of the <code class="docutils literal notranslate"><span class="pre">sdat</span></code> signal; eight consecutive captured bits are assembled into a word (<abbr title="most significant bit">MSB</abbr> first) and pushed into the pipeline for processing. If the <code class="docutils literal notranslate"><span class="pre">ssel</span></code> signal is low, no data transmission occurs and the transmitter and the receiver are instead synchronized with each other.</p>
+<p>In this example, the external device does not provide a way to pause data transmission. If the pipeline isn’t ready to accept the next payload, it is necessary to discard data at some point; here, it is done in the serial receiver.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SerialReceiver</span><span class="p">(</span><span class="n">wiring</span><span class="o">.</span><span class="n">Component</span><span class="p">):</span>
+    <span class="n">ssel</span><span class="p">:</span> <span class="n">In</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">sclk</span><span class="p">:</span> <span class="n">In</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">sdat</span><span class="p">:</span> <span class="n">In</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">stream</span><span class="p">:</span> <span class="n">Out</span><span class="p">(</span><span class="n">stream</span><span class="o">.</span><span class="n">Signature</span><span class="p">(</span><span class="n">signed</span><span class="p">(</span><span class="mi">8</span><span class="p">)))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">elaborate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">Module</span><span class="p">()</span>
+
+        <span class="c1"># Detect edges on the `sclk` input:</span>
+        <span class="n">sclk_reg</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">()</span>
+        <span class="n">sclk_edge</span> <span class="o">=</span> <span class="o">~</span><span class="n">sclk_reg</span> <span class="o">&amp;</span> <span class="bp">self</span><span class="o">.</span><span class="n">sclk</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">sclk_reg</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sclk</span><span class="p">)</span>
+
+        <span class="c1"># Capture `sdat` and bits into payloads:</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+        <span class="n">done</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">()</span>
+        <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">If</span><span class="p">(</span><span class="o">~</span><span class="bp">self</span><span class="o">.</span><span class="n">ssel</span><span class="p">):</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">count</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">Elif</span><span class="p">(</span><span class="n">sclk_edge</span><span class="p">):</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">count</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">data</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">Cat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sdat</span><span class="p">,</span> <span class="n">data</span><span class="p">))</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">done</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">count</span> <span class="o">==</span> <span class="mi">7</span><span class="p">)</span>
+
+        <span class="c1"># Push assembled payloads into the pipeline:</span>
+        <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">If</span><span class="p">(</span><span class="n">done</span> <span class="o">&amp;</span> <span class="p">(</span><span class="o">~</span><span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">valid</span> <span class="o">|</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">ready</span><span class="p">)):</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">payload</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">valid</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">done</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">Elif</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">ready</span><span class="p">):</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">valid</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="c1"># Payload is discarded if `done &amp; self.stream.valid &amp; ~self.stream.ready`.</span>
+
+        <span class="k">return</span> <span class="n">m</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_serial_receiver</span><span class="p">():</span>
+    <span class="n">dut</span> <span class="o">=</span> <span class="n">SerialReceiver</span><span class="p">()</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">testbench_input</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
+        <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">tick</span><span class="p">()</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">ssel</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">tick</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">bit</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]:</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">sdat</span><span class="p">,</span> <span class="n">bit</span><span class="p">)</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">sclk</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">tick</span><span class="p">()</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">sclk</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">tick</span><span class="p">()</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">ssel</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">tick</span><span class="p">()</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">testbench_output</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
+        <span class="n">expected_word</span> <span class="o">=</span> <span class="mb">0b10100111</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="k">await</span> <span class="n">stream_get</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">dut</span><span class="o">.</span><span class="n">stream</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="p">(</span><span class="n">payload</span> <span class="o">&amp;</span> <span class="mh">0xff</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">expected_word</span> <span class="o">&amp;</span> <span class="mh">0xff</span><span class="p">),</span> \
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">payload</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xff</span><span class="si">:</span><span class="s2">08b</span><span class="si">}</span><span class="s2"> != </span><span class="si">{</span><span class="n">expected_word</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xff</span><span class="si">:</span><span class="s2">08b</span><span class="si">}</span><span class="s2"> (expected)&quot;</span>
+
+    <span class="n">sim</span> <span class="o">=</span> <span class="n">Simulator</span><span class="p">(</span><span class="n">dut</span><span class="p">)</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">add_clock</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">)</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">add_testbench</span><span class="p">(</span><span class="n">testbench_input</span><span class="p">)</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">add_testbench</span><span class="p">(</span><span class="n">testbench_output</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">sim</span><span class="o">.</span><span class="n">write_vcd</span><span class="p">(</span><span class="s2">&quot;stream_serial_receiver.vcd&quot;</span><span class="p">):</span>
+        <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The serial protocol recognized by the receiver is illustrated with the following diagram (corresponding to <code class="docutils literal notranslate"><span class="pre">stream_serial_receiver.vcd</span></code>):</p>
+<img src="_images/stream/serial_receiver.svg" class="wavedrom wavedrom-signal" alt="{'signal': [{'name': 'clk', 'wave': 'lpppppppppppppppppppp'}, {}, ['serial', {'name': 'ssel', 'wave': '01................0..'}, {'name': 'sclk', 'wave': '0..101010101010101...'}, {'name': 'sdat', 'wave': '0.=.=.=.=.=.=.=.=....', 'data': ['1', '0', '1', '0', '0', '0', '0', '1']}], {}, ['stream', {'name': 'payload', 'wave': '=..................=.', 'data': ['00', 'A7']}, {'name': 'valid', 'wave': '0..................10'}, {'name': 'ready', 'wave': '1...................0'}]], 'config': {'skin': 'default'}}"></section>
+<section id="serial-transmitter">
+<h3>Serial transmitter<a class="headerlink" href="#serial-transmitter" title="Permalink to this heading"></a></h3>
+<p>The serial transmitter accepts a stream of words and provides it to the serial input of an external device whenever requested. Its serial interface is the same as that of the serial receiver, with the exception that the <code class="docutils literal notranslate"><span class="pre">sclk</span></code> and <code class="docutils literal notranslate"><span class="pre">sdat</span></code> signals are outputs. The <code class="docutils literal notranslate"><span class="pre">ssel</span></code> signal remains an input; the external device uses it for flow control.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SerialTransmitter</span><span class="p">(</span><span class="n">wiring</span><span class="o">.</span><span class="n">Component</span><span class="p">):</span>
+    <span class="n">ssel</span><span class="p">:</span> <span class="n">In</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">sclk</span><span class="p">:</span> <span class="n">Out</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">sdat</span><span class="p">:</span> <span class="n">Out</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">stream</span><span class="p">:</span> <span class="n">In</span><span class="p">(</span><span class="n">stream</span><span class="o">.</span><span class="n">Signature</span><span class="p">(</span><span class="n">signed</span><span class="p">(</span><span class="mi">8</span><span class="p">)))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">elaborate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">Module</span><span class="p">()</span>
+
+        <span class="n">count</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">))</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">If</span><span class="p">(</span><span class="o">~</span><span class="bp">self</span><span class="o">.</span><span class="n">ssel</span><span class="p">):</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">count</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sclk</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">Elif</span><span class="p">(</span><span class="n">count</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">ready</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sclk</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="o">~</span><span class="bp">self</span><span class="o">.</span><span class="n">sclk</span><span class="p">)</span>
+            <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">If</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sclk</span><span class="p">):</span>
+                <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">data</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">Cat</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">data</span><span class="p">))</span>
+                <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sdat</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">Else</span><span class="p">():</span>
+                <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">count</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">count</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">Else</span><span class="p">():</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">ready</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">If</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">valid</span><span class="p">):</span>
+                <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">count</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+                <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">data</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">payload</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">m</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_serial_transmitter</span><span class="p">():</span>
+    <span class="n">dut</span> <span class="o">=</span> <span class="n">SerialTransmitter</span><span class="p">()</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">testbench_input</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
+        <span class="k">await</span> <span class="n">stream_put</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">dut</span><span class="o">.</span><span class="n">stream</span><span class="p">,</span> <span class="mb">0b10100111</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">testbench_output</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
+        <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">tick</span><span class="p">()</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">ssel</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">expected_bit</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]):</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">sdat</span> <span class="o">=</span> <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">posedge</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">sclk</span><span class="p">)</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">sdat</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="n">sdat</span> <span class="o">==</span> <span class="n">expected_bit</span><span class="p">,</span> \
+                <span class="sa">f</span><span class="s2">&quot;bit </span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">sdat</span><span class="si">}</span><span class="s2"> != </span><span class="si">{</span><span class="n">expected_bit</span><span class="si">}</span><span class="s2"> (expected)&quot;</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">ssel</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">tick</span><span class="p">()</span>
+
+    <span class="n">sim</span> <span class="o">=</span> <span class="n">Simulator</span><span class="p">(</span><span class="n">dut</span><span class="p">)</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">add_clock</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">)</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">add_testbench</span><span class="p">(</span><span class="n">testbench_input</span><span class="p">)</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">add_testbench</span><span class="p">(</span><span class="n">testbench_output</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">sim</span><span class="o">.</span><span class="n">write_vcd</span><span class="p">(</span><span class="s2">&quot;stream_serial_transmitter.vcd&quot;</span><span class="p">):</span>
+        <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="value-negator">
+<h3>Value negator<a class="headerlink" href="#value-negator" title="Permalink to this heading"></a></h3>
+<p>The value negator accepts a stream of words, negates the 2’s complement value of these words, and provides the result as a stream of words again. In a practical <abbr>DSP</abbr> application, this unit could be replaced with, for example, a <abbr title="finite impulse response">FIR</abbr> filter.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ValueNegator</span><span class="p">(</span><span class="n">wiring</span><span class="o">.</span><span class="n">Component</span><span class="p">):</span>
+    <span class="n">i_stream</span><span class="p">:</span> <span class="n">In</span><span class="p">(</span><span class="n">stream</span><span class="o">.</span><span class="n">Signature</span><span class="p">(</span><span class="n">signed</span><span class="p">(</span><span class="mi">8</span><span class="p">)))</span>
+    <span class="n">o_stream</span><span class="p">:</span> <span class="n">Out</span><span class="p">(</span><span class="n">stream</span><span class="o">.</span><span class="n">Signature</span><span class="p">(</span><span class="n">signed</span><span class="p">(</span><span class="mi">8</span><span class="p">)))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">elaborate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">Module</span><span class="p">()</span>
+
+        <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">If</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">i_stream</span><span class="o">.</span><span class="n">valid</span> <span class="o">&amp;</span> <span class="p">(</span><span class="o">~</span><span class="bp">self</span><span class="o">.</span><span class="n">o_stream</span><span class="o">.</span><span class="n">valid</span> <span class="o">|</span> <span class="bp">self</span><span class="o">.</span><span class="n">o_stream</span><span class="o">.</span><span class="n">ready</span><span class="p">)):</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">i_stream</span><span class="o">.</span><span class="n">ready</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">o_stream</span><span class="o">.</span><span class="n">payload</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">i_stream</span><span class="o">.</span><span class="n">payload</span><span class="p">)</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">o_stream</span><span class="o">.</span><span class="n">valid</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">Elif</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">o_stream</span><span class="o">.</span><span class="n">ready</span><span class="p">):</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">o_stream</span><span class="o">.</span><span class="n">valid</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">m</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_value_negator</span><span class="p">():</span>
+    <span class="n">dut</span> <span class="o">=</span> <span class="n">ValueNegator</span><span class="p">()</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">testbench_input</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
+        <span class="k">await</span> <span class="n">stream_put</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">dut</span><span class="o">.</span><span class="n">i_stream</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">stream_put</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">dut</span><span class="o">.</span><span class="n">i_stream</span><span class="p">,</span> <span class="mi">17</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">testbench_output</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="k">await</span> <span class="n">stream_get</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">dut</span><span class="o">.</span><span class="n">o_stream</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">assert</span> <span class="k">await</span> <span class="n">stream_get</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">dut</span><span class="o">.</span><span class="n">o_stream</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">17</span>
+
+    <span class="n">sim</span> <span class="o">=</span> <span class="n">Simulator</span><span class="p">(</span><span class="n">dut</span><span class="p">)</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">add_clock</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">)</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">add_testbench</span><span class="p">(</span><span class="n">testbench_input</span><span class="p">)</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">add_testbench</span><span class="p">(</span><span class="n">testbench_output</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">sim</span><span class="o">.</span><span class="n">write_vcd</span><span class="p">(</span><span class="s2">&quot;stream_value_negator.vcd&quot;</span><span class="p">):</span>
+        <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="complete-pipeline">
+<h3>Complete pipeline<a class="headerlink" href="#complete-pipeline" title="Permalink to this heading"></a></h3>
+<p>The complete pipeline consists of a serial receiver, a value negator, a FIFO queue, and a serial transmitter connected in series. Without queueing, any momentary mismatch between the rate at which the serial data is produced and consumed would result in data loss. A FIFO queue from the <a class="reference internal" href="fifo.html#module-amaranth.lib.fifo" title="amaranth.lib.fifo"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lib.fifo</span></code></a> standard library module is used to avoid this problem.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">amaranth.lib.fifo</span><span class="w"> </span><span class="kn">import</span> <span class="n">SyncFIFOBuffered</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ExamplePipeline</span><span class="p">(</span><span class="n">wiring</span><span class="o">.</span><span class="n">Component</span><span class="p">):</span>
+    <span class="n">i_ssel</span><span class="p">:</span> <span class="n">In</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">i_sclk</span><span class="p">:</span> <span class="n">In</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">i_sdat</span><span class="p">:</span> <span class="n">In</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">o_ssel</span><span class="p">:</span> <span class="n">In</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">o_sclk</span><span class="p">:</span> <span class="n">Out</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">o_sdat</span><span class="p">:</span> <span class="n">Out</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">elaborate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">platform</span><span class="p">):</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">Module</span><span class="p">()</span>
+
+        <span class="c1"># Create and connect serial receiver:</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">submodules</span><span class="o">.</span><span class="n">receiver</span> <span class="o">=</span> <span class="n">receiver</span> <span class="o">=</span> <span class="n">SerialReceiver</span><span class="p">()</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="p">[</span>
+            <span class="n">receiver</span><span class="o">.</span><span class="n">ssel</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">i_ssel</span><span class="p">),</span>
+            <span class="n">receiver</span><span class="o">.</span><span class="n">sclk</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">i_sclk</span><span class="p">),</span>
+            <span class="n">receiver</span><span class="o">.</span><span class="n">sdat</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">i_sdat</span><span class="p">),</span>
+        <span class="p">]</span>
+
+        <span class="c1"># Create and connect value negator:</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">submodules</span><span class="o">.</span><span class="n">negator</span> <span class="o">=</span> <span class="n">negator</span> <span class="o">=</span> <span class="n">ValueNegator</span><span class="p">()</span>
+        <span class="n">wiring</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">receiver</span><span class="o">=</span><span class="n">receiver</span><span class="o">.</span><span class="n">stream</span><span class="p">,</span> <span class="n">negator</span><span class="o">=</span><span class="n">negator</span><span class="o">.</span><span class="n">i_stream</span><span class="p">)</span>
+
+        <span class="c1"># Create and connect FIFO queue:</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">submodules</span><span class="o">.</span><span class="n">queue</span> <span class="o">=</span> <span class="n">queue</span> <span class="o">=</span> <span class="n">SyncFIFOBuffered</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+        <span class="n">wiring</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">negator</span><span class="o">=</span><span class="n">negator</span><span class="o">.</span><span class="n">o_stream</span><span class="p">,</span> <span class="n">queue</span><span class="o">=</span><span class="n">queue</span><span class="o">.</span><span class="n">w_stream</span><span class="p">)</span>
+
+        <span class="c1"># Create and connect serial transmitter:</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">submodules</span><span class="o">.</span><span class="n">transmitter</span> <span class="o">=</span> <span class="n">transmitter</span> <span class="o">=</span> <span class="n">SerialTransmitter</span><span class="p">()</span>
+        <span class="n">wiring</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">queue</span><span class="o">=</span><span class="n">queue</span><span class="o">.</span><span class="n">r_stream</span><span class="p">,</span> <span class="n">transmitter</span><span class="o">=</span><span class="n">transmitter</span><span class="o">.</span><span class="n">stream</span><span class="p">)</span>
+
+        <span class="c1"># Connect outputs:</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="p">[</span>
+            <span class="n">transmitter</span><span class="o">.</span><span class="n">ssel</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">o_ssel</span><span class="p">),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">o_sclk</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">transmitter</span><span class="o">.</span><span class="n">sclk</span><span class="p">),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">o_sdat</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">transmitter</span><span class="o">.</span><span class="n">sdat</span><span class="p">),</span>
+        <span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">m</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_example_pipeline</span><span class="p">():</span>
+    <span class="n">dut</span> <span class="o">=</span> <span class="n">ExamplePipeline</span><span class="p">()</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">testbench_input</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">17</span><span class="p">]:</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">i_ssel</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">bit</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)):</span>
+                <span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">i_sclk</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">i_sdat</span><span class="p">,</span> <span class="nb">bool</span><span class="p">(</span><span class="n">value</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">bit</span><span class="p">)))</span>
+                <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">tick</span><span class="p">()</span>
+                <span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">i_sclk</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">tick</span><span class="p">()</span>
+            <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">tick</span><span class="p">()</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">i_ssel</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">i_sclk</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">tick</span><span class="p">()</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">testbench_output</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
+        <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">tick</span><span class="p">()</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">o_ssel</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">expected_value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">17</span><span class="p">]):</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+                <span class="n">_</span><span class="p">,</span> <span class="n">sdat</span> <span class="o">=</span> <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">posedge</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">o_sclk</span><span class="p">)</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">o_sdat</span><span class="p">)</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="p">(</span><span class="n">value</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="n">sdat</span>
+            <span class="k">assert</span> <span class="n">value</span> <span class="o">==</span> <span class="p">(</span><span class="n">expected_value</span> <span class="o">&amp;</span> <span class="mh">0xff</span><span class="p">),</span> \
+                <span class="sa">f</span><span class="s2">&quot;word </span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s2">08b</span><span class="si">}</span><span class="s2"> != </span><span class="si">{</span><span class="n">expected_value</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xff</span><span class="si">:</span><span class="s2">08b</span><span class="si">}</span><span class="s2"> (expected)&quot;</span>
+        <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">tick</span><span class="p">()</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">o_ssel</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">sim</span> <span class="o">=</span> <span class="n">Simulator</span><span class="p">(</span><span class="n">dut</span><span class="p">)</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">add_clock</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">)</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">add_testbench</span><span class="p">(</span><span class="n">testbench_input</span><span class="p">)</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">add_testbench</span><span class="p">(</span><span class="n">testbench_output</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">sim</span><span class="o">.</span><span class="n">write_vcd</span><span class="p">(</span><span class="s2">&quot;stream_example_pipeline.vcd&quot;</span><span class="p">):</span>
+        <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This data processing pipeline overlaps reception and transmission of serial data, with only a few cycles of latency between the completion of reception and the beginning of transmission of the processed data:</p>
+<img alt="../_images/stream_pipeline.png" src="../_images/stream_pipeline.png" />
+<p>Implementing such an efficient pipeline can be difficult without the use of appropriate abstractions. The use of streams allows the designer to focus on the data processing and simplifies testing by ensuring that the interaction of the individual units is standard and well-defined.</p>
+</section>
+</section>
+<section id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this heading"></a></h2>
+<p>Components that communicate using streams must not only use a <a class="reference internal" href="#amaranth.lib.stream.Interface" title="amaranth.lib.stream.Interface"><code class="xref py py-class docutils literal notranslate"><span class="pre">stream.Interface</span></code></a>, but also follow the <a class="reference internal" href="#stream-rules"><span class="std std-ref">data transfer rules</span></a>.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="amaranth.lib.stream.Signature">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.stream.</span></span><span class="sig-name descname"><span class="pre">Signature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload_shape</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">payload_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">always_valid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">always_ready</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.stream.Signature" title="Permalink to this definition"></a></dt>
+<dd><p>Signature of a unidirectional data stream.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>“Minimal streams” as defined in <a class="reference external" href="https://amaranth-lang.org/rfcs/0061-minimal-streams.html">RFC 61</a> lack support for complex payloads, such as
+multiple lanes or packetization, as well as introspection of the payload. This limitation
+will be lifted in a later release.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>payload_shape</strong> (<a class="reference internal" href="../reference.html#amaranth.hdl.ShapeLike" title="amaranth.hdl.ShapeLike"><code class="xref py py-class docutils literal notranslate"><span class="pre">ShapeLike</span></code></a>) – Shape of the payload member.</p></li>
+<li><p><strong>payload_init</strong> (<a class="reference internal" href="../guide.html#lang-constcasting"><span class="std std-ref">constant-castable</span></a> object) – Initial value of the payload member.</p></li>
+<li><p><strong>always_valid</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Whether the stream has a payload available each cycle.</p></li>
+<li><p><strong>always_ready</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Whether the stream has its payload accepted whenever it is available (i.e. whether it lacks
+support for backpressure).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Members<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>payload</strong> (<code class="code highlight py python docutils literal highlight-python"><span class="n">Out</span><span class="p">(</span><span class="n">payload_shape</span><span class="p">)</span></code>) – Payload.</p></li>
+<li><p><strong>valid</strong> (<code class="code highlight py python docutils literal highlight-python"><span class="n">Out</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></code>) – Whether a payload is available. If the stream is <code class="code highlight py python docutils literal highlight-python"><span class="n">always_valid</span></code>, <code class="code highlight py python docutils literal highlight-python"><span class="n">Const</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></code>.</p></li>
+<li><p><strong>ready</strong> (<code class="code highlight py python docutils literal highlight-python"><span class="n">In</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></code>) – Whether a payload is accepted. If the stream is <code class="code highlight py python docutils literal highlight-python"><span class="n">always_ready</span></code>, <code class="code highlight py python docutils literal highlight-python"><span class="n">Const</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="amaranth.lib.stream.Interface">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">amaranth.lib.stream.</span></span><span class="sig-name descname"><span class="pre">Interface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signature</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_loc_at</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.stream.Interface" title="Permalink to this definition"></a></dt>
+<dd><p>A unidirectional data stream.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>signature</strong> (<a class="reference internal" href="#amaranth.lib.stream.Signature" title="amaranth.lib.stream.Signature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Signature</span></code></a>) – Signature of this data stream.</p>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="amaranth.lib.stream.Interface.p">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">p</span></span><a class="headerlink" href="#amaranth.lib.stream.Interface.p" title="Permalink to this definition"></a></dt>
+<dd><p>Shortcut for <code class="code highlight py python docutils literal highlight-python"><span class="bp">self</span><span class="o">.</span><span class="n">payload</span></code>.</p>
+<p>This shortcut reduces repetition when manipulating the payload, for example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">comb</span> <span class="o">+=</span> <span class="p">[</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">o_stream</span><span class="o">.</span><span class="n">p</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">i_stream</span><span class="o">.</span><span class="n">p</span><span class="o">.</span><span class="n">first</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">i_stream</span><span class="o">.</span><span class="n">p</span><span class="o">.</span><span class="n">second</span><span class="p">),</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">o_stream</span><span class="o">.</span><span class="n">valid</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">i_stream</span><span class="o">.</span><span class="n">valid</span><span class="p">),</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">i_stream</span><span class="o">.</span><span class="n">ready</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">o_stream</span><span class="o">.</span><span class="n">ready</span><span class="p">),</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="meta.html" class="btn btn-neutral float-left" title="Interface metadata" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="memory.html" class="btn btn-neutral float-right" title="Memory arrays" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020—2025, Amaranth project contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
