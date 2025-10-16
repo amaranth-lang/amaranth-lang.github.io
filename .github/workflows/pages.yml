@@ -1,0 +1,18 @@
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+name: Pages
+jobs:
+  pages:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out content
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - name: Upload pages to Grebedoc
+      run: |
+        set -o pipefail
+        tar c * | zstd -T0 -1 | curl https://amaranth-lang.org/ -X PUT -H "Authorization: Pages ${{ secrets.GREBEDOC_TOKEN }}" -H "Content-Type: application/x-tar+zstd" -T -
