@@ -1,0 +1,74 @@
+[
+  {
+    "name": "0.6.0.dev0",
+    "root_url": "/docs/amaranth/v0.6.0.dev0/"
+  },
+  {
+    "name": "0.5.8",
+    "root_url": "/docs/amaranth/v0.5.8/"
+  },
+  {
+    "name": "0.5.7",
+    "root_url": "/docs/amaranth/v0.5.7/"
+  },
+  {
+    "name": "0.5.6",
+    "root_url": "/docs/amaranth/v0.5.6/"
+  },
+  {
+    "name": "0.5.5",
+    "root_url": "/docs/amaranth/v0.5.5/"
+  },
+  {
+    "name": "0.5.4",
+    "root_url": "/docs/amaranth/v0.5.4/"
+  },
+  {
+    "name": "0.5.3",
+    "root_url": "/docs/amaranth/v0.5.3/"
+  },
+  {
+    "name": "0.5.2",
+    "root_url": "/docs/amaranth/v0.5.2/"
+  },
+  {
+    "name": "0.5.1",
+    "root_url": "/docs/amaranth/v0.5.1/"
+  },
+  {
+    "name": "0.5.0",
+    "root_url": "/docs/amaranth/v0.5.0/"
+  },
+  {
+    "name": "0.5.0.dev0",
+    "root_url": "/docs/amaranth/v0.5.0.dev0/"
+  },
+  {
+    "name": "0.4.5",
+    "root_url": "/docs/amaranth/v0.4.5/"
+  },
+  {
+    "name": "0.4.4",
+    "root_url": "/docs/amaranth/v0.4.4/"
+  },
+  {
+    "name": "0.4.3",
+    "root_url": "/docs/amaranth/v0.4.3/"
+  },
+  {
+    "name": "0.4.2",
+    "root_url": "/docs/amaranth/v0.4.2/"
+  },
+  {
+    "name": "0.4.1",
+    "root_url": "/docs/amaranth/v0.4.1/"
+  },
+  {
+    "name": "0.4.0",
+    "root_url": "/docs/amaranth/v0.4.0/"
+  },
+  {
+    "name": "0.3",
+    "root_url": "/docs/amaranth/v0.3/"
+  }
+]
