@@ -1,5 +1,9 @@
 [
   {
+    "name": "0.6.0.dev111",
+    "root_url": "/docs/amaranth/latest/"
+  },
+  {
     "name": "0.5.8",
     "root_url": "/docs/amaranth/v0.5.8/"
   },
