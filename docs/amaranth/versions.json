@@ -1,9 +1,5 @@
 [
   {
-    "name": "0.6.0.dev0",
-    "root_url": "/docs/amaranth/v0.6.0.dev0/"
-  },
-  {
     "name": "0.5.8",
     "root_url": "/docs/amaranth/v0.5.8/"
   },
@@ -38,10 +34,6 @@
   {
     "name": "0.5.0",
     "root_url": "/docs/amaranth/v0.5.0/"
-  },
-  {
-    "name": "0.5.0.dev0",
-    "root_url": "/docs/amaranth/v0.5.0.dev0/"
   },
   {
     "name": "0.4.5",
