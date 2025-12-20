@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Changelog &mdash; Amaranth language &amp; toolchain 0.6.0.dev111 documentation</title>
+  <title>Changelog &mdash; Amaranth language &amp; toolchain 0.6.0.dev113 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/platformpicker.css" />
@@ -17,7 +17,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=df721b8f"></script>
+        <script src="_static/documentation_options.js?v=4cf215fc"></script>
         <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="_static/platformpicker.js"></script>
@@ -42,7 +42,7 @@
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.6.0.dev111
+                0.6.0.dev113
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -229,6 +229,7 @@
 <li><p>Changed: <code class="xref py py-meth docutils literal notranslate"><span class="pre">ResourceManager.add_clock_constraint</span></code> now accepts a <code class="xref py py-class docutils literal notranslate"><span class="pre">Period</span></code> for <code class="code highlight py python docutils literal highlight-python"><span class="n">period</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0066-simulation-time.html">RFC 66</a>)</p></li>
 <li><p>Changed: <code class="xref py py-class docutils literal notranslate"><span class="pre">Clock</span></code> now accepts a <code class="xref py py-class docutils literal notranslate"><span class="pre">Period</span></code> for <code class="code highlight py python docutils literal highlight-python"><span class="n">period</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0066-simulation-time.html">RFC 66</a>)</p></li>
 <li><p>Changed: <code class="xref py py-attr docutils literal notranslate"><span class="pre">Clock.period</span></code> now returns a <code class="xref py py-class docutils literal notranslate"><span class="pre">Period</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0066-simulation-time.html">RFC 66</a>)</p></li>
+<li><p>Changed: Anonymous sub-<code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code>s/sub-<code class="xref py py-class docutils literal notranslate"><span class="pre">Fragment</span></code>s are now assigned a name like <code class="docutils literal notranslate"><span class="pre">&lt;type_name&gt;$&lt;number&gt;</span></code> based on their type (outermost <code class="xref py py-class docutils literal notranslate"><span class="pre">Elaboratable</span></code>, <code class="xref py py-attr docutils literal notranslate"><span class="pre">Instance.type</span></code>, falling back to <code class="docutils literal notranslate"><span class="pre">U$&lt;number&gt;</span></code>)</p></li>
 <li><p>Deprecated: Passing a <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> of seconds or hertz to any of the methods/arguments now accepting a <code class="xref py py-class docutils literal notranslate"><span class="pre">Period</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0066-simulation-time.html">RFC 66</a>)</p></li>
 <li><p>Deprecated: Passing <code class="code highlight py python docutils literal highlight-python"><span class="n">frequency</span><span class="o">=</span></code> to <code class="xref py py-meth docutils literal notranslate"><span class="pre">ResourceManager.add_clock_constraint</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0066-simulation-time.html">RFC 66</a>)</p></li>
 <li><p>Deprecated: Passing <code class="code highlight py python docutils literal highlight-python"><span class="n">frequency</span><span class="o">=</span></code> to <code class="xref py py-class docutils literal notranslate"><span class="pre">Clock</span></code>. (<a class="reference external" href="https://amaranth-lang.org/rfcs/0066-simulation-time.html">RFC 66</a>)</p></li>
