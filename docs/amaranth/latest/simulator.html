@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Simulator &mdash; Amaranth language &amp; toolchain 0.6.0.dev114 documentation</title>
+  <title>Simulator &mdash; Amaranth language &amp; toolchain 0.6.0.dev117 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/platformpicker.css" />
@@ -17,7 +17,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=877b8531"></script>
+        <script src="_static/documentation_options.js?v=b0830f5b"></script>
         <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="_static/platformpicker.js"></script>
@@ -42,7 +42,7 @@
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.6.0.dev114
+                0.6.0.dev117
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -417,6 +417,13 @@ using the <a class="reference internal" href="#amaranth.sim.SimulatorContext.cri
 <p>At each point in time, all of the non-waiting testbenches are executed in the order in
 which they were added. If two testbenches share state, or must manipulate the design in
 a coordinated way, they may rely on this execution order for correctness.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>On Python 3.12 and earlier, async generators (<code class="code highlight py python docutils literal highlight-python"><span class="k">async</span></code> functions that also
+<code class="code highlight py python docutils literal highlight-python"><span class="k">yield</span></code>) are not cleaned up reliably when the simulator exits. To make sure context
+managers or <code class="code highlight py python docutils literal highlight-python"><span class="k">finally</span></code> blocks inside async generators run properly, use Python 3.13
+or later. See <a class="reference external" href="https://peps.python.org/pep-0525/#finalization">PEP-525</a> for more information on async generator finalization.</p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.14)"><strong>RuntimeError</strong></a> – If the simulation has been advanced since its creation or last reset.</p>
@@ -457,6 +464,13 @@ a particular order of execution for correctness.</p>
 if it is not intended to be a part of a circuit), with access to it synchronized using
 <code class="code highlight py python docutils literal highlight-python"><span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">tick</span><span class="p">()</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="o">...</span><span class="p">)</span></code>. Such state is visible in a waveform viewer,
 simplifying debugging.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>On Python 3.12 and earlier, async generators (<code class="code highlight py python docutils literal highlight-python"><span class="k">async</span></code> functions that also
+<code class="code highlight py python docutils literal highlight-python"><span class="k">yield</span></code>) are not cleaned up reliably when the simulator exits. To make sure context
+managers or <code class="code highlight py python docutils literal highlight-python"><span class="k">finally</span></code> blocks inside async generators run properly, use Python 3.13
+or later. See <a class="reference external" href="https://peps.python.org/pep-0525/#finalization">PEP-525</a> for more information on async generator finalization.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
