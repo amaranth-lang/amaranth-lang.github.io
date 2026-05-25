@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Interfaces and connections &mdash; Amaranth language &amp; toolchain 0.6.0.dev131 documentation</title>
+  <title>Interfaces and connections &mdash; Amaranth language &amp; toolchain 0.6.0.dev132 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
@@ -18,7 +18,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=16edbb07"></script>
+        <script src="../_static/documentation_options.js?v=2115316d"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/platformpicker.js"></script>
@@ -43,7 +43,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.6.0.dev131
+                0.6.0.dev132
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -220,7 +220,7 @@
 <span class="go">Signature({&#39;en&#39;: In(1), &#39;count&#39;: Out(16), &#39;limit&#39;: In(16), &#39;overflow&#39;: Out(1)})</span>
 </pre></div>
 </div>
-<p>Instances of the <code class="xref py py-class docutils literal notranslate"><span class="pre">ComponentCounter</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">GenericCounter</span></code> class are two examples of <em>interface objects</em>. An interface object is a Python object of any type whose a <code class="code highlight py python docutils literal highlight-python"><span class="n">signature</span></code> attribute contains a <a class="reference internal" href="#amaranth.lib.wiring.Signature" title="amaranth.lib.wiring.Signature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Signature</span></code></a> with which the interface object is compliant (as determined by the <a class="reference internal" href="#amaranth.lib.wiring.Signature.is_compliant" title="amaranth.lib.wiring.Signature.is_compliant"><code class="xref py py-meth docutils literal notranslate"><span class="pre">is_compliant</span></code></a> method of the signature).</p>
+<p>Instances of the <code class="xref py py-class docutils literal notranslate"><span class="pre">ComponentCounter</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">GenericCounter</span></code> class are two examples of <em>interface objects</em>. An interface object is a Python object of any type whose <code class="code highlight py python docutils literal highlight-python"><span class="n">signature</span></code> attribute contains a <a class="reference internal" href="#amaranth.lib.wiring.Signature" title="amaranth.lib.wiring.Signature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Signature</span></code></a> with which the interface object is compliant (as determined by the <a class="reference internal" href="#amaranth.lib.wiring.Signature.is_compliant" title="amaranth.lib.wiring.Signature.is_compliant"><code class="xref py py-meth docutils literal notranslate"><span class="pre">is_compliant</span></code></a> method of the signature).</p>
 <p>The next section introduces the concepts of directionality and connection, and discusses interface objects in more detail.</p>
 </section>
 <section id="reusable-interfaces">
