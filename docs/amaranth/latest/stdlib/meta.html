@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Interface metadata &mdash; Amaranth language &amp; toolchain 0.6.0.dev135 documentation</title>
+  <title>Interface metadata &mdash; Amaranth language &amp; toolchain 0.6.0.dev136 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
@@ -18,7 +18,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=ea9ca1a0"></script>
+        <script src="../_static/documentation_options.js?v=dd642bca"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/platformpicker.js"></script>
@@ -43,7 +43,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.6.0.dev135
+                0.6.0.dev136
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -140,34 +140,34 @@
 <span class="go">&lt;amaranth.lib.wiring.ComponentMetadata for ...Adder object at ...&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">adder</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">as_json</span><span class="p">()</span> 
 <span class="go">{</span>
-<span class="go">    &#39;interface&#39;: {</span>
-<span class="go">        &#39;members&#39;: {</span>
-<span class="go">            &#39;a&#39;: {</span>
-<span class="go">                &#39;type&#39;: &#39;port&#39;,</span>
-<span class="go">                &#39;name&#39;: &#39;a&#39;,</span>
-<span class="go">                &#39;dir&#39;: &#39;in&#39;,</span>
-<span class="go">                &#39;width&#39;: 32,</span>
-<span class="go">                &#39;signed&#39;: False,</span>
-<span class="go">                &#39;init&#39;: &#39;0&#39;</span>
+<span class="go">    'interface': {</span>
+<span class="go">        'members': {</span>
+<span class="go">            'a': {</span>
+<span class="go">                'type': 'port',</span>
+<span class="go">                'name': 'a',</span>
+<span class="go">                'dir': 'in',</span>
+<span class="go">                'width': 32,</span>
+<span class="go">                'signed': False,</span>
+<span class="go">                'init': '0'</span>
 <span class="go">            },</span>
-<span class="go">            &#39;b&#39;: {</span>
-<span class="go">                &#39;type&#39;: &#39;port&#39;,</span>
-<span class="go">                &#39;name&#39;: &#39;b&#39;,</span>
-<span class="go">                &#39;dir&#39;: &#39;in&#39;,</span>
-<span class="go">                &#39;width&#39;: 32,</span>
-<span class="go">                &#39;signed&#39;: False,</span>
-<span class="go">                &#39;init&#39;: &#39;0&#39;</span>
+<span class="go">            'b': {</span>
+<span class="go">                'type': 'port',</span>
+<span class="go">                'name': 'b',</span>
+<span class="go">                'dir': 'in',</span>
+<span class="go">                'width': 32,</span>
+<span class="go">                'signed': False,</span>
+<span class="go">                'init': '0'</span>
 <span class="go">            },</span>
-<span class="go">            &#39;o&#39;: {</span>
-<span class="go">                &#39;type&#39;: &#39;port&#39;,</span>
-<span class="go">                &#39;name&#39;: &#39;o&#39;,</span>
-<span class="go">                &#39;dir&#39;: &#39;out&#39;,</span>
-<span class="go">                &#39;width&#39;: 33,</span>
-<span class="go">                &#39;signed&#39;: False,</span>
-<span class="go">                &#39;init&#39;: &#39;0&#39;</span>
+<span class="go">            'o': {</span>
+<span class="go">                'type': 'port',</span>
+<span class="go">                'name': 'o',</span>
+<span class="go">                'dir': 'out',</span>
+<span class="go">                'width': 33,</span>
+<span class="go">                'signed': False,</span>
+<span class="go">                'init': '0'</span>
 <span class="go">            }</span>
 <span class="go">        },</span>
-<span class="go">        &#39;annotations&#39;: {}</span>
+<span class="go">        'annotations': {}</span>
 <span class="go">    }</span>
 <span class="go">}</span>
 </pre></div>
@@ -183,22 +183,22 @@
 <p>Consider a simple control and status register (CSR) bus that provides the memory layout of the accessible registers via an annotation:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">CSRLayoutAnnotation</span><span class="p">(</span><span class="n">meta</span><span class="o">.</span><span class="n">Annotation</span><span class="p">):</span>
     <span class="n">schema</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;$schema&quot;</span><span class="p">:</span> <span class="s2">&quot;https://json-schema.org/draft/2020-12/schema&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;$id&quot;</span><span class="p">:</span> <span class="s2">&quot;https://amaranth-lang.org/schema/example/0/csr-layout.json&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;registers&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;patternProperties&quot;</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="s2">&quot;^.+$&quot;</span><span class="p">:</span> <span class="p">{</span>
-                        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;integer&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;minimum&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"$schema"</span><span class="p">:</span> <span class="s2">"https://json-schema.org/draft/2020-12/schema"</span><span class="p">,</span>
+        <span class="s2">"$id"</span><span class="p">:</span> <span class="s2">"https://amaranth-lang.org/schema/example/0/csr-layout.json"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"object"</span><span class="p">,</span>
+        <span class="s2">"properties"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"registers"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"object"</span><span class="p">,</span>
+                <span class="s2">"patternProperties"</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">"^.+$"</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"integer"</span><span class="p">,</span>
+                        <span class="s2">"minimum"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
                     <span class="p">},</span>
                 <span class="p">},</span>
             <span class="p">},</span>
         <span class="p">},</span>
-        <span class="s2">&quot;requiredProperties&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">&quot;registers&quot;</span><span class="p">,</span>
+        <span class="s2">"requiredProperties"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">"registers"</span><span class="p">,</span>
         <span class="p">],</span>
     <span class="p">}</span>
 
@@ -211,7 +211,7 @@
 
     <span class="k">def</span><span class="w"> </span><span class="nf">as_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">instance</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;registers&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">origin</span><span class="o">.</span><span class="n">registers</span><span class="p">,</span>
+            <span class="s2">"registers"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">origin</span><span class="o">.</span><span class="n">registers</span><span class="p">,</span>
         <span class="p">}</span>
         <span class="c1"># Validating the value returned by `as_json()` ensures its conformance.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">instance</span><span class="p">)</span>
@@ -221,11 +221,11 @@
 <span class="k">class</span><span class="w"> </span><span class="nc">CSRSignature</span><span class="p">(</span><span class="n">wiring</span><span class="o">.</span><span class="n">Signature</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">({</span>
-            <span class="s2">&quot;addr&quot;</span><span class="p">:</span>     <span class="n">Out</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span>
-            <span class="s2">&quot;w_en&quot;</span><span class="p">:</span>     <span class="n">Out</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
-            <span class="s2">&quot;w_data&quot;</span><span class="p">:</span>   <span class="n">Out</span><span class="p">(</span><span class="mi">32</span><span class="p">),</span>
-            <span class="s2">&quot;r_en&quot;</span><span class="p">:</span>     <span class="n">Out</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
-            <span class="s2">&quot;r_data&quot;</span><span class="p">:</span>   <span class="n">In</span><span class="p">(</span><span class="mi">32</span><span class="p">),</span>
+            <span class="s2">"addr"</span><span class="p">:</span>     <span class="n">Out</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span>
+            <span class="s2">"w_en"</span><span class="p">:</span>     <span class="n">Out</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+            <span class="s2">"w_data"</span><span class="p">:</span>   <span class="n">Out</span><span class="p">(</span><span class="mi">32</span><span class="p">),</span>
+            <span class="s2">"r_en"</span><span class="p">:</span>     <span class="n">Out</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+            <span class="s2">"r_data"</span><span class="p">:</span>   <span class="n">In</span><span class="p">(</span><span class="mi">32</span><span class="p">),</span>
         <span class="p">})</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">annotations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="o">/</span><span class="p">):</span>
@@ -243,73 +243,73 @@
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">csr_bus</span><span class="o">.</span><span class="n">registers</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;control&quot;</span><span class="p">:</span> <span class="mh">0x0000</span><span class="p">,</span>
-            <span class="s2">&quot;status&quot;</span><span class="p">:</span>  <span class="mh">0x0004</span><span class="p">,</span>
-            <span class="s2">&quot;data&quot;</span><span class="p">:</span>    <span class="mh">0x0008</span><span class="p">,</span>
+            <span class="s2">"control"</span><span class="p">:</span> <span class="mh">0x0000</span><span class="p">,</span>
+            <span class="s2">"status"</span><span class="p">:</span>  <span class="mh">0x0004</span><span class="p">,</span>
+            <span class="s2">"data"</span><span class="p">:</span>    <span class="mh">0x0008</span><span class="p">,</span>
         <span class="p">}</span>
 </pre></div>
 </div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">peripheral</span> <span class="o">=</span> <span class="n">MyPeripheral</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">peripheral</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">as_json</span><span class="p">()</span> 
 <span class="go">{</span>
-<span class="go">    &#39;interface&#39;: {</span>
-<span class="go">        &#39;members&#39;: {</span>
-<span class="go">            &#39;csr_bus&#39;: {</span>
-<span class="go">                &#39;type&#39;: &#39;interface&#39;,</span>
-<span class="go">                &#39;members&#39;: {</span>
-<span class="go">                    &#39;addr&#39;: {</span>
-<span class="go">                        &#39;type&#39;: &#39;port&#39;,</span>
-<span class="go">                        &#39;name&#39;: &#39;csr_bus__addr&#39;,</span>
-<span class="go">                        &#39;dir&#39;: &#39;in&#39;,</span>
-<span class="go">                        &#39;width&#39;: 16,</span>
-<span class="go">                        &#39;signed&#39;: False,</span>
-<span class="go">                        &#39;init&#39;: &#39;0&#39;</span>
+<span class="go">    'interface': {</span>
+<span class="go">        'members': {</span>
+<span class="go">            'csr_bus': {</span>
+<span class="go">                'type': 'interface',</span>
+<span class="go">                'members': {</span>
+<span class="go">                    'addr': {</span>
+<span class="go">                        'type': 'port',</span>
+<span class="go">                        'name': 'csr_bus__addr',</span>
+<span class="go">                        'dir': 'in',</span>
+<span class="go">                        'width': 16,</span>
+<span class="go">                        'signed': False,</span>
+<span class="go">                        'init': '0'</span>
 <span class="go">                    },</span>
-<span class="go">                    &#39;w_en&#39;: {</span>
-<span class="go">                        &#39;type&#39;: &#39;port&#39;,</span>
-<span class="go">                        &#39;name&#39;: &#39;csr_bus__w_en&#39;,</span>
-<span class="go">                        &#39;dir&#39;: &#39;in&#39;,</span>
-<span class="go">                        &#39;width&#39;: 1,</span>
-<span class="go">                        &#39;signed&#39;: False,</span>
-<span class="go">                        &#39;init&#39;: &#39;0&#39;</span>
+<span class="go">                    'w_en': {</span>
+<span class="go">                        'type': 'port',</span>
+<span class="go">                        'name': 'csr_bus__w_en',</span>
+<span class="go">                        'dir': 'in',</span>
+<span class="go">                        'width': 1,</span>
+<span class="go">                        'signed': False,</span>
+<span class="go">                        'init': '0'</span>
 <span class="go">                    },</span>
-<span class="go">                    &#39;w_data&#39;: {</span>
-<span class="go">                        &#39;type&#39;: &#39;port&#39;,</span>
-<span class="go">                        &#39;name&#39;: &#39;csr_bus__w_data&#39;,</span>
-<span class="go">                        &#39;dir&#39;: &#39;in&#39;,</span>
-<span class="go">                        &#39;width&#39;: 32,</span>
-<span class="go">                        &#39;signed&#39;: False,</span>
-<span class="go">                        &#39;init&#39;: &#39;0&#39;</span>
+<span class="go">                    'w_data': {</span>
+<span class="go">                        'type': 'port',</span>
+<span class="go">                        'name': 'csr_bus__w_data',</span>
+<span class="go">                        'dir': 'in',</span>
+<span class="go">                        'width': 32,</span>
+<span class="go">                        'signed': False,</span>
+<span class="go">                        'init': '0'</span>
 <span class="go">                    },</span>
-<span class="go">                    &#39;r_en&#39;: {</span>
-<span class="go">                        &#39;type&#39;: &#39;port&#39;,</span>
-<span class="go">                        &#39;name&#39;: &#39;csr_bus__r_en&#39;,</span>
-<span class="go">                        &#39;dir&#39;: &#39;in&#39;,</span>
-<span class="go">                        &#39;width&#39;: 1,</span>
-<span class="go">                        &#39;signed&#39;: False,</span>
-<span class="go">                        &#39;init&#39;: &#39;0&#39;</span>
+<span class="go">                    'r_en': {</span>
+<span class="go">                        'type': 'port',</span>
+<span class="go">                        'name': 'csr_bus__r_en',</span>
+<span class="go">                        'dir': 'in',</span>
+<span class="go">                        'width': 1,</span>
+<span class="go">                        'signed': False,</span>
+<span class="go">                        'init': '0'</span>
 <span class="go">                    },</span>
-<span class="go">                    &#39;r_data&#39;: {</span>
-<span class="go">                        &#39;type&#39;: &#39;port&#39;,</span>
-<span class="go">                        &#39;name&#39;: &#39;csr_bus__r_data&#39;,</span>
-<span class="go">                        &#39;dir&#39;: &#39;out&#39;,</span>
-<span class="go">                        &#39;width&#39;: 32,</span>
-<span class="go">                        &#39;signed&#39;: False,</span>
-<span class="go">                        &#39;init&#39;: &#39;0&#39;</span>
+<span class="go">                    'r_data': {</span>
+<span class="go">                        'type': 'port',</span>
+<span class="go">                        'name': 'csr_bus__r_data',</span>
+<span class="go">                        'dir': 'out',</span>
+<span class="go">                        'width': 32,</span>
+<span class="go">                        'signed': False,</span>
+<span class="go">                        'init': '0'</span>
 <span class="go">                    },</span>
 <span class="go">                },</span>
-<span class="go">                &#39;annotations&#39;: {</span>
-<span class="go">                    &#39;https://amaranth-lang.org/schema/example/0/csr-layout.json&#39;: {</span>
-<span class="go">                        &#39;registers&#39;: {</span>
-<span class="go">                            &#39;control&#39;: 0,</span>
-<span class="go">                            &#39;status&#39;:  4,</span>
-<span class="go">                            &#39;data&#39;:    8</span>
+<span class="go">                'annotations': {</span>
+<span class="go">                    'https://amaranth-lang.org/schema/example/0/csr-layout.json': {</span>
+<span class="go">                        'registers': {</span>
+<span class="go">                            'control': 0,</span>
+<span class="go">                            'status':  4,</span>
+<span class="go">                            'data':    8</span>
 <span class="go">                        }</span>
 <span class="go">                    }</span>
 <span class="go">                }</span>
 <span class="go">            }</span>
 <span class="go">        },</span>
-<span class="go">        &#39;annotations&#39;: {}</span>
+<span class="go">        'annotations': {}</span>
 <span class="go">    }</span>
 <span class="go">}</span>
 </pre></div>

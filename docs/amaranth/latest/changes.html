@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Changelog &mdash; Amaranth language &amp; toolchain 0.6.0.dev135 documentation</title>
+  <title>Changelog &mdash; Amaranth language &amp; toolchain 0.6.0.dev136 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/platformpicker.css" />
@@ -18,7 +18,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=ea9ca1a0"></script>
+        <script src="_static/documentation_options.js?v=dd642bca"></script>
         <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="_static/platformpicker.js"></script>
@@ -43,7 +43,7 @@
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.6.0.dev135
+                0.6.0.dev136
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -313,7 +313,7 @@
 <section id="id6">
 <h3>Platform integration changes<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>Added: <code class="xref py py-meth docutils literal notranslate"><span class="pre">Platform.request()</span></code> accepts <code class="code highlight py python docutils literal highlight-python"><span class="nb">dir</span><span class="o">=</span><span class="s2">&quot;-&quot;</span></code> for resources with subsignals.</p></li>
+<li><p>Added: <code class="xref py py-meth docutils literal notranslate"><span class="pre">Platform.request()</span></code> accepts <code class="code highlight py python docutils literal highlight-python"><span class="nb">dir</span><span class="o">=</span><span class="s2">"-"</span></code> for resources with subsignals.</p></li>
 </ul>
 </section>
 </section>
@@ -350,7 +350,7 @@
 <li><p>Replace imports of <code class="code highlight py python docutils literal highlight-python"><span class="n">amaranth</span><span class="o">.</span><span class="n">asserts</span><span class="o">.</span><span class="n">Assert</span></code>, <code class="code highlight py python docutils literal highlight-python"><span class="n">Assume</span></code>, and <code class="code highlight py python docutils literal highlight-python"><span class="n">Cover</span></code> with imports from <code class="code highlight py python docutils literal highlight-python"><span class="n">amaranth</span><span class="o">.</span><span class="n">hdl</span></code>.</p></li>
 <li><p>Remove uses of <code class="code highlight py python docutils literal highlight-python"><span class="n">name</span><span class="o">=</span></code> keyword argument of <code class="code highlight py python docutils literal highlight-python"><span class="n">Assert</span></code>, <code class="code highlight py python docutils literal highlight-python"><span class="n">Assume</span></code>, and <code class="code highlight py python docutils literal highlight-python"><span class="n">Cover</span></code>; a message can be used instead.</p></li>
 <li><p>Replace uses of <code class="code highlight py python docutils literal highlight-python"><span class="n">amaranth</span><span class="o">.</span><span class="n">hdl</span><span class="o">.</span><span class="n">Memory</span></code> with <a class="reference internal" href="stdlib/memory.html#amaranth.lib.memory.Memory" title="amaranth.lib.memory.Memory"><code class="xref py py-class docutils literal notranslate"><span class="pre">amaranth.lib.memory.Memory</span></code></a>.</p></li>
-<li><p>Update uses of <code class="code highlight py python docutils literal highlight-python"><span class="n">platform</span><span class="o">.</span><span class="n">request</span></code> to pass <code class="code highlight py python docutils literal highlight-python"><span class="nb">dir</span><span class="o">=</span><span class="s2">&quot;-&quot;</span></code> and use <a class="reference internal" href="stdlib/io.html#module-amaranth.lib.io" title="amaranth.lib.io"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.io</span></code></a> buffers.</p></li>
+<li><p>Update uses of <code class="code highlight py python docutils literal highlight-python"><span class="n">platform</span><span class="o">.</span><span class="n">request</span></code> to pass <code class="code highlight py python docutils literal highlight-python"><span class="nb">dir</span><span class="o">=</span><span class="s2">"-"</span></code> and use <a class="reference internal" href="stdlib/io.html#module-amaranth.lib.io" title="amaranth.lib.io"><code class="xref py py-mod docutils literal notranslate"><span class="pre">amaranth.lib.io</span></code></a> buffers.</p></li>
 <li><p>Remove uses of <code class="code highlight py python docutils literal highlight-python"><span class="n">amaranth</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">coding</span><span class="o">.*</span></code> by inlining or copying the implementation of the modules.</p></li>
 <li><p>Convert uses of <code class="code highlight py python docutils literal highlight-python"><span class="n">Simulator</span><span class="o">.</span><span class="n">add_sync_process</span></code> used as testbenches to <a class="reference internal" href="simulator.html#amaranth.sim.Simulator.add_testbench" title="amaranth.sim.Simulator.add_testbench"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Simulator.add_testbench</span></code></a>.</p></li>
 <li><p>Convert other uses of <code class="code highlight py python docutils literal highlight-python"><span class="n">Simulator</span><span class="o">.</span><span class="n">add_sync_process</span></code> to <a class="reference internal" href="simulator.html#amaranth.sim.Simulator.add_process" title="amaranth.sim.Simulator.add_process"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Simulator.add_process</span></code></a>.</p></li>

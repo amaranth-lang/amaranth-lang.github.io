@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Memory arrays &mdash; Amaranth language &amp; toolchain 0.6.0.dev135 documentation</title>
+  <title>Memory arrays &mdash; Amaranth language &amp; toolchain 0.6.0.dev136 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
@@ -18,7 +18,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=ea9ca1a0"></script>
+        <script src="../_static/documentation_options.js?v=dd642bca"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/platformpicker.js"></script>
@@ -43,7 +43,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.6.0.dev135
+                0.6.0.dev136
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -150,11 +150,11 @@
 <section id="read-only-memory">
 <h3>Read-only memory<a class="headerlink" href="#read-only-memory" title="Link to this heading"></a></h3>
 <p>In the following example, a read-only memory is used to output a fixed message in a loop:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">message</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;Hello world</span><span class="se">\n</span><span class="s2">&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">message</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">"Hello world</span><span class="se">\n</span><span class="s2">"</span>
 <span class="n">m</span><span class="o">.</span><span class="n">submodules</span><span class="o">.</span><span class="n">memory</span> <span class="o">=</span> <span class="n">memory</span> <span class="o">=</span> \
     <span class="n">Memory</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">unsigned</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span> <span class="n">depth</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">message</span><span class="p">),</span> <span class="n">init</span><span class="o">=</span><span class="n">message</span><span class="p">)</span>
 
-<span class="n">rd_port</span> <span class="o">=</span> <span class="n">memory</span><span class="o">.</span><span class="n">read_port</span><span class="p">(</span><span class="n">domain</span><span class="o">=</span><span class="s2">&quot;comb&quot;</span><span class="p">)</span>
+<span class="n">rd_port</span> <span class="o">=</span> <span class="n">memory</span><span class="o">.</span><span class="n">read_port</span><span class="p">(</span><span class="n">domain</span><span class="o">=</span><span class="s2">"comb"</span><span class="p">)</span>
 <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">If</span><span class="p">(</span><span class="n">rd_port</span><span class="o">.</span><span class="n">addr</span> <span class="o">==</span> <span class="n">memory</span><span class="o">.</span><span class="n">depth</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
     <span class="n">m</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">sync</span> <span class="o">+=</span> <span class="n">rd_port</span><span class="o">.</span><span class="n">addr</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="k">with</span> <span class="n">m</span><span class="o">.</span><span class="n">Else</span><span class="p">():</span>
@@ -317,7 +317,7 @@ elaborated; afterwards, attempting to do so will raise the
 <dt class="sig sig-object py" id="amaranth.lib.memory.Memory.read_port">
 <span class="sig-name descname"><span class="pre">read_port</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sync'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transparent_for</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_loc_at</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#amaranth.lib.memory.Memory.read_port" title="Link to this definition"></a></dt>
 <dd><p>Request a read port.</p>
-<p>If <code class="code highlight py python docutils literal highlight-python"><span class="n">domain</span></code> is <code class="code highlight py python docutils literal highlight-python"><span class="s2">&quot;comb&quot;</span></code>, the created read port is asynchronous and always enabled
+<p>If <code class="code highlight py python docutils literal highlight-python"><span class="n">domain</span></code> is <code class="code highlight py python docutils literal highlight-python"><span class="s2">"comb"</span></code>, the created read port is asynchronous and always enabled
 (with its enable input is tied to <code class="code highlight py python docutils literal highlight-python"><span class="n">Const</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></code>), and its data output always reflects
 the contents of the selected row. Otherwise, the created read port is synchronous,
 and its data output is updated with the contents of the selected row at each
@@ -383,14 +383,14 @@ parts, each of which is updated if the corresponding bit of the enable input is 
 <dd><p>A read memory port.</p>
 <p>Memory read ports, which are <a class="reference internal" href="wiring.html#wiring"><span class="std std-ref">interface objects</span></a>, can be constructed by calling
 <a class="reference internal" href="#amaranth.lib.memory.Memory.read_port" title="amaranth.lib.memory.Memory.read_port"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Memory.read_port()</span></code></a> or via <a class="reference internal" href="wiring.html#amaranth.lib.wiring.Signature.create" title="amaranth.lib.wiring.Signature.create"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ReadPort.Signature.create()</span></code></a>.</p>
-<p>An asynchronous (<code class="code highlight py python docutils literal highlight-python"><span class="s2">&quot;comb&quot;</span></code> domain) memory read port is always enabled. The <code class="code highlight py python docutils literal highlight-python"><span class="n">en</span></code> input of
+<p>An asynchronous (<code class="code highlight py python docutils literal highlight-python"><span class="s2">"comb"</span></code> domain) memory read port is always enabled. The <code class="code highlight py python docutils literal highlight-python"><span class="n">en</span></code> input of
 such a port is tied to <code class="code highlight py python docutils literal highlight-python"><span class="n">Const</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>signature</strong> (<a class="reference internal" href="#amaranth.lib.memory.ReadPort.Signature" title="amaranth.lib.memory.ReadPort.Signature"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReadPort.Signature</span></code></a>) – Signature of this memory port.</p></li>
 <li><p><strong>memory</strong> (<a class="reference internal" href="#amaranth.lib.memory.Memory" title="amaranth.lib.memory.Memory"><code class="xref py py-class docutils literal notranslate"><span class="pre">Memory</span></code></a> or <code class="code highlight py python docutils literal highlight-python"><span class="kc">None</span></code>) – Memory associated with this memory port.</p></li>
-<li><p><strong>domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of this memory port’s clock domain. For asynchronous ports, <code class="code highlight py python docutils literal highlight-python"><span class="s2">&quot;comb&quot;</span></code>.</p></li>
+<li><p><strong>domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of this memory port’s clock domain. For asynchronous ports, <code class="code highlight py python docutils literal highlight-python"><span class="s2">"comb"</span></code>.</p></li>
 <li><p><strong>transparent_for</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a> of <a class="reference internal" href="#amaranth.lib.memory.WritePort" title="amaranth.lib.memory.WritePort"><code class="xref py py-class docutils literal notranslate"><span class="pre">WritePort</span></code></a>) – Transparency set of this memory port.</p></li>
 </ul>
 </dd>
@@ -429,7 +429,7 @@ such a port is tied to <code class="code highlight py python docutils literal hi
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>signature</strong> (<a class="reference internal" href="#amaranth.lib.memory.WritePort.Signature" title="amaranth.lib.memory.WritePort.Signature"><code class="xref py py-class docutils literal notranslate"><span class="pre">WritePort.Signature</span></code></a>) – Signature of this memory port.</p></li>
 <li><p><strong>memory</strong> (<a class="reference internal" href="#amaranth.lib.memory.Memory" title="amaranth.lib.memory.Memory"><code class="xref py py-class docutils literal notranslate"><span class="pre">Memory</span></code></a> or <code class="code highlight py python docutils literal highlight-python"><span class="kc">None</span></code>) – Memory associated with this memory port.</p></li>
-<li><p><strong>domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of this memory port’s clock domain. Never <code class="code highlight py python docutils literal highlight-python"><span class="s2">&quot;comb&quot;</span></code>.</p></li>
+<li><p><strong>domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of this memory port’s clock domain. Never <code class="code highlight py python docutils literal highlight-python"><span class="s2">"comb"</span></code>.</p></li>
 </ul>
 </dd>
 </dl>

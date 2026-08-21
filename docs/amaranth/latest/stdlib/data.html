@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Data structures &mdash; Amaranth language &amp; toolchain 0.6.0.dev135 documentation</title>
+  <title>Data structures &mdash; Amaranth language &amp; toolchain 0.6.0.dev136 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
@@ -18,7 +18,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=ea9ca1a0"></script>
+        <script src="../_static/documentation_options.js?v=dd642bca"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/platformpicker.js"></script>
@@ -43,7 +43,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.6.0.dev135
+                0.6.0.dev136
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -151,9 +151,9 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">amaranth.lib</span><span class="w"> </span><span class="kn">import</span> <span class="n">data</span><span class="p">,</span> <span class="n">enum</span>
 
 <span class="n">rgb565_layout</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">StructLayout</span><span class="p">({</span>
-    <span class="s2">&quot;red&quot;</span><span class="p">:</span>   <span class="mi">5</span><span class="p">,</span>
-    <span class="s2">&quot;green&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
-    <span class="s2">&quot;blue&quot;</span><span class="p">:</span>  <span class="mi">5</span>
+    <span class="s2">"red"</span><span class="p">:</span>   <span class="mi">5</span><span class="p">,</span>
+    <span class="s2">"green"</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+    <span class="s2">"blue"</span><span class="p">:</span>  <span class="mi">5</span>
 <span class="p">})</span>
 
 <span class="n">i_color</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="n">rgb565_layout</span><span class="p">)</span>
@@ -172,8 +172,8 @@
 <p>Layouts are composable: a <a class="reference internal" href="#amaranth.lib.data.Layout" title="amaranth.lib.data.Layout"><code class="xref py py-class docutils literal notranslate"><span class="pre">Layout</span></code></a> is a <a class="reference internal" href="../guide.html#lang-shapes"><span class="std std-ref">shape</span></a> and can be used as a part of another layout. In this case, an attribute access through a view returns a view as well.</p>
 <p>For example, consider a module that processes RGB pixels in groups of up to four at a time, provided by another module, and accumulates their average intensity:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">input_layout</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">StructLayout</span><span class="p">({</span>
-    <span class="s2">&quot;pixels&quot;</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">ArrayLayout</span><span class="p">(</span><span class="n">rgb565_layout</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
-    <span class="s2">&quot;valid&quot;</span><span class="p">:</span>  <span class="mi">4</span>
+    <span class="s2">"pixels"</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">ArrayLayout</span><span class="p">(</span><span class="n">rgb565_layout</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+    <span class="s2">"valid"</span><span class="p">:</span>  <span class="mi">4</span>
 <span class="p">})</span>
 
 <span class="n">i_stream</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="n">input_layout</span><span class="p">)</span>
@@ -196,9 +196,9 @@
 <p>In case the data format is defined using a family of layouts instead of a single specific one, a function can be used:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">rgb_layout</span><span class="p">(</span><span class="n">r_bits</span><span class="p">,</span> <span class="n">g_bits</span><span class="p">,</span> <span class="n">b_bits</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">StructLayout</span><span class="p">({</span>
-        <span class="s2">&quot;red&quot;</span><span class="p">:</span>   <span class="n">unsigned</span><span class="p">(</span><span class="n">r_bits</span><span class="p">),</span>
-        <span class="s2">&quot;green&quot;</span><span class="p">:</span> <span class="n">unsigned</span><span class="p">(</span><span class="n">g_bits</span><span class="p">),</span>
-        <span class="s2">&quot;blue&quot;</span><span class="p">:</span>  <span class="n">unsigned</span><span class="p">(</span><span class="n">b_bits</span><span class="p">)</span>
+        <span class="s2">"red"</span><span class="p">:</span>   <span class="n">unsigned</span><span class="p">(</span><span class="n">r_bits</span><span class="p">),</span>
+        <span class="s2">"green"</span><span class="p">:</span> <span class="n">unsigned</span><span class="p">(</span><span class="n">g_bits</span><span class="p">),</span>
+        <span class="s2">"blue"</span><span class="p">:</span>  <span class="n">unsigned</span><span class="p">(</span><span class="n">b_bits</span><span class="p">)</span>
     <span class="p">})</span>
 
 <span class="n">rgb565_layout</span> <span class="o">=</span> <span class="n">rgb_layout</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
@@ -209,9 +209,9 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">RGBLayout</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">StructLayout</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r_bits</span><span class="p">,</span> <span class="n">g_bits</span><span class="p">,</span> <span class="n">b_bits</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">({</span>
-            <span class="s2">&quot;red&quot;</span><span class="p">:</span>   <span class="n">unsigned</span><span class="p">(</span><span class="n">r_bits</span><span class="p">),</span>
-            <span class="s2">&quot;green&quot;</span><span class="p">:</span> <span class="n">unsigned</span><span class="p">(</span><span class="n">g_bits</span><span class="p">),</span>
-            <span class="s2">&quot;blue&quot;</span><span class="p">:</span>  <span class="n">unsigned</span><span class="p">(</span><span class="n">b_bits</span><span class="p">)</span>
+            <span class="s2">"red"</span><span class="p">:</span>   <span class="n">unsigned</span><span class="p">(</span><span class="n">r_bits</span><span class="p">),</span>
+            <span class="s2">"green"</span><span class="p">:</span> <span class="n">unsigned</span><span class="p">(</span><span class="n">g_bits</span><span class="p">),</span>
+            <span class="s2">"blue"</span><span class="p">:</span>  <span class="n">unsigned</span><span class="p">(</span><span class="n">b_bits</span><span class="p">)</span>
         <span class="p">})</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
@@ -253,11 +253,11 @@
     <span class="n">valid</span>  <span class="p">:</span> <span class="mi">1</span>
     <span class="n">kind</span>   <span class="p">:</span> <span class="n">Kind</span>
     <span class="n">params</span> <span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">UnionLayout</span><span class="p">({</span>
-        <span class="s2">&quot;set_addr&quot;</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">StructLayout</span><span class="p">({</span>
-            <span class="s2">&quot;addr&quot;</span><span class="p">:</span> <span class="n">unsigned</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>
+        <span class="s2">"set_addr"</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">StructLayout</span><span class="p">({</span>
+            <span class="s2">"addr"</span><span class="p">:</span> <span class="n">unsigned</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>
         <span class="p">}),</span>
-        <span class="s2">&quot;send_data&quot;</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">StructLayout</span><span class="p">({</span>
-            <span class="s2">&quot;byte&quot;</span><span class="p">:</span> <span class="n">unsigned</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+        <span class="s2">"send_data"</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">StructLayout</span><span class="p">({</span>
+            <span class="s2">"byte"</span><span class="p">:</span> <span class="n">unsigned</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
         <span class="p">})</span>
     <span class="p">})</span>
 </pre></div>
@@ -487,9 +487,9 @@ a structure layout is the sum of the sizes of its members.</p>
 <p>For example, the following layout of a 16-bit value:</p>
 <img src="_images/data/struct_layout.svg" class="wavedrom wavedrom-reg" alt="{'reg': [{'name': '.first', 'bits': 3}, {'name': '.second', 'bits': 7}, {'name': '.third', 'bits': 6}], 'config': {'lanes': 1, 'compact': True, 'vflip': True, 'hspace': 650}}"><p>can be described with:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">StructLayout</span><span class="p">({</span>
-    <span class="s2">&quot;first&quot;</span><span class="p">:</span>  <span class="mi">3</span><span class="p">,</span>
-    <span class="s2">&quot;second&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
-    <span class="s2">&quot;third&quot;</span><span class="p">:</span>  <span class="mi">6</span>
+    <span class="s2">"first"</span><span class="p">:</span>  <span class="mi">3</span><span class="p">,</span>
+    <span class="s2">"second"</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+    <span class="s2">"third"</span><span class="p">:</span>  <span class="mi">6</span>
 <span class="p">})</span>
 </pre></div>
 </div>
@@ -530,9 +530,9 @@ of the largest of its members.</p>
 <p>For example, the following layout of a 7-bit value:</p>
 <img src="_images/data/union_layout.svg" class="wavedrom wavedrom-reg" alt="{'reg': [{'name': '.third', 'bits': 6}, {'name': '', 'bits': 1, 'type': 1}, {'name': '.second', 'bits': 7}, {'name': '.first', 'bits': 3}, {'name': '', 'bits': 4, 'type': 1}], 'config': {'lanes': 3, 'compact': True, 'vflip': True, 'hspace': 289.4375}}"><p>can be described with:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">UnionLayout</span><span class="p">({</span>
-    <span class="s2">&quot;first&quot;</span><span class="p">:</span>  <span class="mi">3</span><span class="p">,</span>
-    <span class="s2">&quot;second&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
-    <span class="s2">&quot;third&quot;</span><span class="p">:</span>  <span class="mi">6</span>
+    <span class="s2">"first"</span><span class="p">:</span>  <span class="mi">3</span><span class="p">,</span>
+    <span class="s2">"second"</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+    <span class="s2">"third"</span><span class="p">:</span>  <span class="mi">6</span>
 <span class="p">})</span>
 </pre></div>
 </div>
@@ -614,9 +614,9 @@ from an external data file rather than defined in Python code.</p>
 <p>For example, the following layout of a 16-bit value:</p>
 <img src="_images/data/flexible_layout.svg" class="wavedrom wavedrom-reg" alt="{'reg': [{'name': '', 'bits': 14, 'type': 1}, {'name': '[0]', 'bits': 1}, {'name': '', 'bits': 1, 'type': 1}, {'name': '', 'bits': 10, 'type': 1}, {'name': '.third', 'bits': 6}, {'name': '.second', 'bits': 7}, {'name': '', 'bits': 9, 'type': 1}, {'name': '', 'bits': 1, 'type': 1}, {'name': '.first', 'bits': 3}, {'name': '', 'bits': 12, 'type': 1}], 'config': {'lanes': 4, 'compact': True, 'vflip': True, 'hspace': 650}}"><p>can be described with:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">FlexibleLayout</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="p">{</span>
-    <span class="s2">&quot;first&quot;</span><span class="p">:</span>  <span class="n">data</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">unsigned</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="mi">1</span><span class="p">),</span>
-    <span class="s2">&quot;second&quot;</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">unsigned</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="mi">0</span><span class="p">),</span>
-    <span class="s2">&quot;third&quot;</span><span class="p">:</span>  <span class="n">data</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">unsigned</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="s2">"first"</span><span class="p">:</span>  <span class="n">data</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">unsigned</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="s2">"second"</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">unsigned</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="s2">"third"</span><span class="p">:</span>  <span class="n">data</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">unsigned</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span> <span class="mi">10</span><span class="p">),</span>
     <span class="mi">0</span><span class="p">:</span>        <span class="n">data</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">unsigned</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="mi">14</span><span class="p">)</span>
 <span class="p">})</span>
 </pre></div>
@@ -907,7 +907,7 @@ created by the view. Any other annotations are kept as-is.</p>
 </div>
 <p>The <code class="code highlight py python docutils literal highlight-python"><span class="n">IEEE754Single</span></code> class itself can be used where a <a class="reference internal" href="../guide.html#lang-shapes"><span class="std std-ref">shape</span></a> is expected:</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IEEE754Single</span><span class="o">.</span><span class="n">as_shape</span><span class="p">()</span>
-<span class="go">StructLayout({&#39;fraction&#39;: 23, &#39;exponent&#39;: 8, &#39;sign&#39;: 1})</span>
+<span class="go">StructLayout({'fraction': 23, 'exponent': 8, 'sign': 1})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Signal</span><span class="p">(</span><span class="n">IEEE754Single</span><span class="p">)</span><span class="o">.</span><span class="n">as_value</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span><span class="p">()</span><span class="o">.</span><span class="n">width</span>
 <span class="go">32</span>
 </pre></div>
@@ -922,16 +922,16 @@ created by the view. Any other annotations are kept as-is.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">flt</span><span class="o">.</span><span class="n">fraction</span>
 <span class="go">(slice (sig flt) 0:23)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">flt</span><span class="o">.</span><span class="n">is_subnormal</span><span class="p">()</span>
-<span class="go">(== (slice (sig flt) 23:31) (const 1&#39;d0))</span>
+<span class="go">(== (slice (sig flt) 23:31) (const 1'd0))</span>
 </pre></div>
 </div>
 <p>The initial values for individual fields can be overridden during instantiation:</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">hex</span><span class="p">(</span><span class="n">Signal</span><span class="p">(</span><span class="n">IEEE754Single</span><span class="p">)</span><span class="o">.</span><span class="n">as_value</span><span class="p">()</span><span class="o">.</span><span class="n">init</span><span class="p">)</span>
-<span class="go">&#39;0x3f800000&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">hex</span><span class="p">(</span><span class="n">Signal</span><span class="p">(</span><span class="n">IEEE754Single</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;sign&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span><span class="o">.</span><span class="n">as_value</span><span class="p">()</span><span class="o">.</span><span class="n">init</span><span class="p">)</span>
-<span class="go">&#39;0xbf800000&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">hex</span><span class="p">(</span><span class="n">Signal</span><span class="p">(</span><span class="n">IEEE754Single</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;exponent&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">})</span><span class="o">.</span><span class="n">as_value</span><span class="p">()</span><span class="o">.</span><span class="n">init</span><span class="p">)</span>
-<span class="go">&#39;0x0&#39;</span>
+<span class="go">'0x3f800000'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">hex</span><span class="p">(</span><span class="n">Signal</span><span class="p">(</span><span class="n">IEEE754Single</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="p">{</span><span class="s1">'sign'</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span><span class="o">.</span><span class="n">as_value</span><span class="p">()</span><span class="o">.</span><span class="n">init</span><span class="p">)</span>
+<span class="go">'0xbf800000'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">hex</span><span class="p">(</span><span class="n">Signal</span><span class="p">(</span><span class="n">IEEE754Single</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="p">{</span><span class="s1">'exponent'</span><span class="p">:</span> <span class="mi">0</span><span class="p">})</span><span class="o">.</span><span class="n">as_value</span><span class="p">()</span><span class="o">.</span><span class="n">init</span><span class="p">)</span>
+<span class="go">'0x0'</span>
 </pre></div>
 </div>
 <p>Classes inheriting from <a class="reference internal" href="#amaranth.lib.data.Struct" title="amaranth.lib.data.Struct"><code class="xref py py-class docutils literal notranslate"><span class="pre">Struct</span></code></a> can be used as base classes. The only restrictions
@@ -959,11 +959,11 @@ are that:</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">HasChecksum</span><span class="o">.</span><span class="n">as_shape</span><span class="p">()</span>
 <span class="gt">Traceback (most recent call last):</span>
 <span class="w">  </span><span class="c">...</span>
-<span class="gr">TypeError</span>: <span class="n">Aggregate class &#39;HasChecksum&#39; does not have a defined shape</span>
+<span class="gr">TypeError</span>: <span class="n">Aggregate class 'HasChecksum' does not have a defined shape</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bare</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="n">BareHeader</span><span class="p">);</span> <span class="n">bare</span><span class="o">.</span><span class="n">checksum</span><span class="p">()</span>
-<span class="go">(+ (+ (+ (const 1&#39;d0) (slice (sig bare) 0:8)) (slice (sig bare) 8:16)) (slice (sig bare) 16:24))</span>
+<span class="go">(+ (+ (+ (const 1'd0) (slice (sig bare) 0:8)) (slice (sig bare) 8:16)) (slice (sig bare) 16:24))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">param</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="n">HeaderWithParam</span><span class="p">);</span> <span class="n">param</span><span class="o">.</span><span class="n">checksum</span><span class="p">()</span>
-<span class="go">(+ (+ (+ (+ (const 1&#39;d0) (slice (sig param) 0:8)) (slice (sig param) 8:16)) (slice (sig param) 16:24)) (slice (sig param) 24:32))</span>
+<span class="go">(+ (+ (+ (+ (const 1'd0) (slice (sig param) 0:8)) (slice (sig param) 8:16)) (slice (sig param) 16:24)) (slice (sig param) 24:32))</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -985,7 +985,7 @@ an annotation:</p>
 </div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Signal</span><span class="p">(</span><span class="n">VarInt</span><span class="p">)</span><span class="o">.</span><span class="n">as_value</span><span class="p">()</span><span class="o">.</span><span class="n">init</span>
 <span class="go">256</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Signal</span><span class="p">(</span><span class="n">VarInt</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;int8&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">})</span><span class="o">.</span><span class="n">as_value</span><span class="p">()</span><span class="o">.</span><span class="n">init</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Signal</span><span class="p">(</span><span class="n">VarInt</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="p">{</span><span class="s1">'int8'</span><span class="p">:</span> <span class="mi">10</span><span class="p">})</span><span class="o">.</span><span class="n">as_value</span><span class="p">()</span><span class="o">.</span><span class="n">init</span>
 <span class="go">10</span>
 </pre></div>
 </div>

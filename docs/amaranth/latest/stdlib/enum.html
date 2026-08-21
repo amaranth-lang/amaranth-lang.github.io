@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Enumerations &mdash; Amaranth language &amp; toolchain 0.6.0.dev135 documentation</title>
+  <title>Enumerations &mdash; Amaranth language &amp; toolchain 0.6.0.dev136 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
@@ -18,7 +18,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=ea9ca1a0"></script>
+        <script src="../_static/documentation_options.js?v=dd642bca"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/platformpicker.js"></script>
@@ -43,7 +43,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.6.0.dev135
+                0.6.0.dev136
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -130,7 +130,7 @@
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Shape</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">Funct</span><span class="p">)</span>
 <span class="go">unsigned(4)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Value</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">Funct</span><span class="o">.</span><span class="n">ADD</span><span class="p">)</span>
-<span class="go">(const 4&#39;d0)</span>
+<span class="go">(const 4'd0)</span>
 </pre></div>
 </div>
 <p>Any <a class="reference internal" href="../guide.html#lang-constcasting"><span class="std std-ref">constant-castable</span></a> expression can be used as the value of a member:</p>
@@ -163,14 +163,14 @@
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="n">Funct</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="n">Op</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-<span class="go">&lt;class &#39;amaranth.lib.enum.EnumView&#39;&gt;</span>
+<span class="go">&lt;class 'amaranth.lib.enum.EnumView'&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span>
 <span class="gt">Traceback (most recent call last):</span>
-  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+  File <span class="nb">"&lt;stdin&gt;"</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
 <span class="gr">TypeError</span>: <span class="n">an EnumView can only be compared to value or other EnumView of the same enum type</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">Funct</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
-<span class="go">&lt;class &#39;amaranth.lib.enum.EnumView&#39;&gt;</span>
+<span class="go">&lt;class 'amaranth.lib.enum.EnumView'&gt;</span>
 </pre></div>
 </div>
 <p>Like the standard Python <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></a> and <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntFlag" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a> classes, the Amaranth <a class="reference internal" href="#amaranth.lib.enum.IntEnum" title="amaranth.lib.enum.IntEnum"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></a> and <a class="reference internal" href="#amaranth.lib.enum.IntFlag" title="amaranth.lib.enum.IntFlag"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntFlag</span></code></a> classes are loosely typed and will not be subject to wrapping in view classes:</p>
@@ -198,9 +198,9 @@
 </div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="n">Instr</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-<span class="go">&lt;class &#39;InstrView&#39;&gt;</span>
+<span class="go">&lt;class 'InstrView'&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">has_immediate</span><span class="p">()</span>
-<span class="go">(| (== (sig a) (const 5&#39;d16)) (== (sig a) (const 5&#39;d17)))</span>
+<span class="go">(| (== (sig a) (const 5'd16)) (== (sig a) (const 5'd17)))</span>
 </pre></div>
 </div>
 <section id="metaclass">

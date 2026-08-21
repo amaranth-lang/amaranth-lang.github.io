@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Data streams &mdash; Amaranth language &amp; toolchain 0.6.0.dev135 documentation</title>
+  <title>Data streams &mdash; Amaranth language &amp; toolchain 0.6.0.dev136 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
@@ -18,7 +18,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=ea9ca1a0"></script>
+        <script src="../_static/documentation_options.js?v=dd642bca"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/platformpicker.js"></script>
@@ -43,7 +43,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.6.0.dev135
+                0.6.0.dev136
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -233,13 +233,13 @@
         <span class="n">expected_word</span> <span class="o">=</span> <span class="mb">0b10100111</span>
         <span class="n">payload</span> <span class="o">=</span> <span class="k">await</span> <span class="n">stream_get</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">dut</span><span class="o">.</span><span class="n">stream</span><span class="p">)</span>
         <span class="k">assert</span> <span class="p">(</span><span class="n">payload</span> <span class="o">&amp;</span> <span class="mh">0xff</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">expected_word</span> <span class="o">&amp;</span> <span class="mh">0xff</span><span class="p">),</span> \
-            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">payload</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xff</span><span class="si">:</span><span class="s2">08b</span><span class="si">}</span><span class="s2"> != </span><span class="si">{</span><span class="n">expected_word</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xff</span><span class="si">:</span><span class="s2">08b</span><span class="si">}</span><span class="s2"> (expected)&quot;</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">payload</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xff</span><span class="si">:</span><span class="s2">08b</span><span class="si">}</span><span class="s2"> != </span><span class="si">{</span><span class="n">expected_word</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xff</span><span class="si">:</span><span class="s2">08b</span><span class="si">}</span><span class="s2"> (expected)"</span>
 
     <span class="n">sim</span> <span class="o">=</span> <span class="n">Simulator</span><span class="p">(</span><span class="n">dut</span><span class="p">)</span>
     <span class="n">sim</span><span class="o">.</span><span class="n">add_clock</span><span class="p">(</span><span class="n">Period</span><span class="p">(</span><span class="n">MHz</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
     <span class="n">sim</span><span class="o">.</span><span class="n">add_testbench</span><span class="p">(</span><span class="n">testbench_input</span><span class="p">)</span>
     <span class="n">sim</span><span class="o">.</span><span class="n">add_testbench</span><span class="p">(</span><span class="n">testbench_output</span><span class="p">)</span>
-    <span class="k">with</span> <span class="n">sim</span><span class="o">.</span><span class="n">write_vcd</span><span class="p">(</span><span class="s2">&quot;stream_serial_receiver.vcd&quot;</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">sim</span><span class="o">.</span><span class="n">write_vcd</span><span class="p">(</span><span class="s2">"stream_serial_receiver.vcd"</span><span class="p">):</span>
         <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -293,7 +293,7 @@
         <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">expected_bit</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]):</span>
             <span class="n">_</span><span class="p">,</span> <span class="n">sdat</span> <span class="o">=</span> <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">posedge</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">sclk</span><span class="p">)</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">sdat</span><span class="p">)</span>
             <span class="k">assert</span> <span class="n">sdat</span> <span class="o">==</span> <span class="n">expected_bit</span><span class="p">,</span> \
-                <span class="sa">f</span><span class="s2">&quot;bit </span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">sdat</span><span class="si">}</span><span class="s2"> != </span><span class="si">{</span><span class="n">expected_bit</span><span class="si">}</span><span class="s2"> (expected)&quot;</span>
+                <span class="sa">f</span><span class="s2">"bit </span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">sdat</span><span class="si">}</span><span class="s2"> != </span><span class="si">{</span><span class="n">expected_bit</span><span class="si">}</span><span class="s2"> (expected)"</span>
         <span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">ssel</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">tick</span><span class="p">()</span>
 
@@ -301,7 +301,7 @@
     <span class="n">sim</span><span class="o">.</span><span class="n">add_clock</span><span class="p">(</span><span class="n">Period</span><span class="p">(</span><span class="n">MHz</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
     <span class="n">sim</span><span class="o">.</span><span class="n">add_testbench</span><span class="p">(</span><span class="n">testbench_input</span><span class="p">)</span>
     <span class="n">sim</span><span class="o">.</span><span class="n">add_testbench</span><span class="p">(</span><span class="n">testbench_output</span><span class="p">)</span>
-    <span class="k">with</span> <span class="n">sim</span><span class="o">.</span><span class="n">write_vcd</span><span class="p">(</span><span class="s2">&quot;stream_serial_transmitter.vcd&quot;</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">sim</span><span class="o">.</span><span class="n">write_vcd</span><span class="p">(</span><span class="s2">"stream_serial_transmitter.vcd"</span><span class="p">):</span>
         <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -341,7 +341,7 @@
     <span class="n">sim</span><span class="o">.</span><span class="n">add_clock</span><span class="p">(</span><span class="n">Period</span><span class="p">(</span><span class="n">MHz</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
     <span class="n">sim</span><span class="o">.</span><span class="n">add_testbench</span><span class="p">(</span><span class="n">testbench_input</span><span class="p">)</span>
     <span class="n">sim</span><span class="o">.</span><span class="n">add_testbench</span><span class="p">(</span><span class="n">testbench_output</span><span class="p">)</span>
-    <span class="k">with</span> <span class="n">sim</span><span class="o">.</span><span class="n">write_vcd</span><span class="p">(</span><span class="s2">&quot;stream_value_negator.vcd&quot;</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">sim</span><span class="o">.</span><span class="n">write_vcd</span><span class="p">(</span><span class="s2">"stream_value_negator.vcd"</span><span class="p">):</span>
         <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -419,7 +419,7 @@
                 <span class="n">_</span><span class="p">,</span> <span class="n">sdat</span> <span class="o">=</span> <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">posedge</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">o_sclk</span><span class="p">)</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">o_sdat</span><span class="p">)</span>
                 <span class="n">value</span> <span class="o">=</span> <span class="p">(</span><span class="n">value</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="n">sdat</span>
             <span class="k">assert</span> <span class="n">value</span> <span class="o">==</span> <span class="p">(</span><span class="n">expected_value</span> <span class="o">&amp;</span> <span class="mh">0xff</span><span class="p">),</span> \
-                <span class="sa">f</span><span class="s2">&quot;word </span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s2">08b</span><span class="si">}</span><span class="s2"> != </span><span class="si">{</span><span class="n">expected_value</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xff</span><span class="si">:</span><span class="s2">08b</span><span class="si">}</span><span class="s2"> (expected)&quot;</span>
+                <span class="sa">f</span><span class="s2">"word </span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s2">08b</span><span class="si">}</span><span class="s2"> != </span><span class="si">{</span><span class="n">expected_value</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xff</span><span class="si">:</span><span class="s2">08b</span><span class="si">}</span><span class="s2"> (expected)"</span>
         <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">tick</span><span class="p">()</span>
         <span class="n">ctx</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">o_ssel</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
@@ -427,7 +427,7 @@
     <span class="n">sim</span><span class="o">.</span><span class="n">add_clock</span><span class="p">(</span><span class="n">Period</span><span class="p">(</span><span class="n">MHz</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
     <span class="n">sim</span><span class="o">.</span><span class="n">add_testbench</span><span class="p">(</span><span class="n">testbench_input</span><span class="p">)</span>
     <span class="n">sim</span><span class="o">.</span><span class="n">add_testbench</span><span class="p">(</span><span class="n">testbench_output</span><span class="p">)</span>
-    <span class="k">with</span> <span class="n">sim</span><span class="o">.</span><span class="n">write_vcd</span><span class="p">(</span><span class="s2">&quot;stream_example_pipeline.vcd&quot;</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">sim</span><span class="o">.</span><span class="n">write_vcd</span><span class="p">(</span><span class="s2">"stream_example_pipeline.vcd"</span><span class="p">):</span>
         <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 </div>

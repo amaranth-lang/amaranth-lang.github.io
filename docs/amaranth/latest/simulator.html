@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Simulator &mdash; Amaranth language &amp; toolchain 0.6.0.dev135 documentation</title>
+  <title>Simulator &mdash; Amaranth language &amp; toolchain 0.6.0.dev136 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/platformpicker.css" />
@@ -18,7 +18,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=ea9ca1a0"></script>
+        <script src="_static/documentation_options.js?v=dd642bca"></script>
         <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="_static/platformpicker.js"></script>
@@ -43,7 +43,7 @@
               <img src="_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.6.0.dev135
+                0.6.0.dev136
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -169,7 +169,7 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dut</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
 <span class="n">sim</span> <span class="o">=</span> <span class="n">Simulator</span><span class="p">(</span><span class="n">dut</span><span class="p">)</span>
 <span class="n">sim</span><span class="o">.</span><span class="n">add_clock</span><span class="p">(</span><span class="n">Period</span><span class="p">(</span><span class="n">MHz</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span> <span class="c1"># 1 µs period, or 1 MHz</span>
-<span class="k">with</span> <span class="n">sim</span><span class="o">.</span><span class="n">write_vcd</span><span class="p">(</span><span class="s2">&quot;example1.vcd&quot;</span><span class="p">):</span>
+<span class="k">with</span> <span class="n">sim</span><span class="o">.</span><span class="n">write_vcd</span><span class="p">(</span><span class="s2">"example1.vcd"</span><span class="p">):</span>
     <span class="n">sim</span><span class="o">.</span><span class="n">run_until</span><span class="p">(</span><span class="n">Period</span><span class="p">(</span><span class="n">MHz</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">15</span><span class="p">)</span> <span class="c1"># 15 periods of the clock</span>
 </pre></div>
 </div>
@@ -179,7 +179,7 @@
     <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 <span class="k">except</span><span class="p">:</span>
     <span class="n">sim</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
-    <span class="k">with</span> <span class="n">sim</span><span class="o">.</span><span class="n">write_vcd</span><span class="p">(</span><span class="s2">&quot;example1_error.vcd&quot;</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">sim</span><span class="o">.</span><span class="n">write_vcd</span><span class="p">(</span><span class="s2">"example1_error.vcd"</span><span class="p">):</span>
         <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -202,7 +202,7 @@
 <span class="n">sim</span> <span class="o">=</span> <span class="n">Simulator</span><span class="p">(</span><span class="n">dut</span><span class="p">)</span>
 <span class="n">sim</span><span class="o">.</span><span class="n">add_clock</span><span class="p">(</span><span class="n">Period</span><span class="p">(</span><span class="n">MHz</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
 <span class="n">sim</span><span class="o">.</span><span class="n">add_testbench</span><span class="p">(</span><span class="n">testbench_example2</span><span class="p">)</span> <span class="c1"># add the testbench; run_until() calls the function</span>
-<span class="k">with</span> <span class="n">sim</span><span class="o">.</span><span class="n">write_vcd</span><span class="p">(</span><span class="s2">&quot;example2.vcd&quot;</span><span class="p">):</span>
+<span class="k">with</span> <span class="n">sim</span><span class="o">.</span><span class="n">write_vcd</span><span class="p">(</span><span class="s2">"example2.vcd"</span><span class="p">):</span>
     <span class="n">sim</span><span class="o">.</span><span class="n">run_until</span><span class="p">(</span><span class="n">Period</span><span class="p">(</span><span class="n">MHz</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">15</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -229,7 +229,7 @@
 
 <span class="n">sim</span> <span class="o">=</span> <span class="n">Simulator</span><span class="p">(</span><span class="n">dut</span><span class="p">)</span>
 <span class="n">sim</span><span class="o">.</span><span class="n">add_testbench</span><span class="p">(</span><span class="n">testbench_example3</span><span class="p">)</span>
-<span class="k">with</span> <span class="n">sim</span><span class="o">.</span><span class="n">write_vcd</span><span class="p">(</span><span class="s2">&quot;example3.vcd&quot;</span><span class="p">):</span>
+<span class="k">with</span> <span class="n">sim</span><span class="o">.</span><span class="n">write_vcd</span><span class="p">(</span><span class="s2">"example3.vcd"</span><span class="p">):</span>
     <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -279,7 +279,7 @@
 <span class="n">sim</span><span class="o">.</span><span class="n">add_clock</span><span class="p">(</span><span class="n">Period</span><span class="p">(</span><span class="n">MHz</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
 <span class="n">sim</span><span class="o">.</span><span class="n">add_process</span><span class="p">(</span><span class="n">process_example4</span><span class="p">)</span>
 <span class="n">sim</span><span class="o">.</span><span class="n">add_testbench</span><span class="p">(</span><span class="n">testbench_example4</span><span class="p">)</span>
-<span class="k">with</span> <span class="n">sim</span><span class="o">.</span><span class="n">write_vcd</span><span class="p">(</span><span class="s2">&quot;example4.vcd&quot;</span><span class="p">,</span> <span class="n">traces</span><span class="o">=</span><span class="p">(</span><span class="n">cd_sync</span><span class="o">.</span><span class="n">clk</span><span class="p">,</span> <span class="n">cd_sync</span><span class="o">.</span><span class="n">rst</span><span class="p">,</span> <span class="n">en</span><span class="p">,</span> <span class="n">count</span><span class="p">)):</span>
+<span class="k">with</span> <span class="n">sim</span><span class="o">.</span><span class="n">write_vcd</span><span class="p">(</span><span class="s2">"example4.vcd"</span><span class="p">,</span> <span class="n">traces</span><span class="o">=</span><span class="p">(</span><span class="n">cd_sync</span><span class="o">.</span><span class="n">clk</span><span class="p">,</span> <span class="n">cd_sync</span><span class="o">.</span><span class="n">rst</span><span class="p">,</span> <span class="n">en</span><span class="p">,</span> <span class="n">count</span><span class="p">)):</span>
     <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -314,7 +314,7 @@
 <span class="n">sim</span> <span class="o">=</span> <span class="n">Simulator</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
 <span class="n">sim</span><span class="o">.</span><span class="n">add_process</span><span class="p">(</span><span class="n">process_example5</span><span class="p">)</span>
 <span class="n">sim</span><span class="o">.</span><span class="n">add_testbench</span><span class="p">(</span><span class="n">testbench_example5</span><span class="p">)</span>
-<span class="k">with</span> <span class="n">sim</span><span class="o">.</span><span class="n">write_vcd</span><span class="p">(</span><span class="s2">&quot;example5.vcd&quot;</span><span class="p">,</span> <span class="n">traces</span><span class="o">=</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">o</span><span class="p">]):</span>
+<span class="k">with</span> <span class="n">sim</span><span class="o">.</span><span class="n">write_vcd</span><span class="p">(</span><span class="s2">"example5.vcd"</span><span class="p">,</span> <span class="n">traces</span><span class="o">=</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">o</span><span class="p">]):</span>
     <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -338,14 +338,14 @@
 </li>
 <li><p>Processes, clocks, and testbenches are added as necessary:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span><span class="o">.</span><span class="n">add_clock</span><span class="p">(</span><span class="n">Period</span><span class="p">(</span><span class="n">MHz</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
-<span class="n">sim</span><span class="o">.</span><span class="n">add_clock</span><span class="p">(</span><span class="n">Period</span><span class="p">(</span><span class="n">MHz</span><span class="o">=</span><span class="mi">10</span><span class="p">),</span> <span class="n">domain</span><span class="o">=</span><span class="s2">&quot;fast&quot;</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">add_clock</span><span class="p">(</span><span class="n">Period</span><span class="p">(</span><span class="n">MHz</span><span class="o">=</span><span class="mi">10</span><span class="p">),</span> <span class="n">domain</span><span class="o">=</span><span class="s2">"fast"</span><span class="p">)</span>
 <span class="n">sim</span><span class="o">.</span><span class="n">add_process</span><span class="p">(</span><span class="n">process_instr_decoder</span><span class="p">)</span>
 <span class="n">sim</span><span class="o">.</span><span class="n">add_testbench</span><span class="p">(</span><span class="n">testbench_cpu_execute</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
 <li><p>The simulation is run:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">sim</span><span class="o">.</span><span class="n">write_vcd</span><span class="p">(</span><span class="s2">&quot;waveform.vcd&quot;</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">sim</span><span class="o">.</span><span class="n">write_vcd</span><span class="p">(</span><span class="s2">"waveform.vcd"</span><span class="p">):</span>
     <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -523,7 +523,7 @@ are executed as necessary.</p>
 and saves them to <code class="code highlight py python docutils literal highlight-python"><span class="n">vcd_file</span></code>. If <code class="code highlight py python docutils literal highlight-python"><span class="n">gtkw_file</span></code> is provided, it is populated with
 a GTKWave save file displaying <code class="code highlight py python docutils literal highlight-python"><span class="n">traces</span></code> when opened.</p>
 <p>Use this context manager to wrap a call to <a class="reference internal" href="#amaranth.sim.Simulator.run" title="amaranth.sim.Simulator.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a> or <a class="reference internal" href="#amaranth.sim.Simulator.run_until" title="amaranth.sim.Simulator.run_until"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run_until()</span></code></a>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">sim</span><span class="o">.</span><span class="n">write_vcd</span><span class="p">(</span><span class="s2">&quot;simulation.vcd&quot;</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">sim</span><span class="o">.</span><span class="n">write_vcd</span><span class="p">(</span><span class="s2">"simulation.vcd"</span><span class="p">):</span>
     <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -659,7 +659,7 @@ the <a class="reference internal" href="guide.html#lang-elaboration"><span class
 <dl class="field-list simple">
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">domain</span></code> is <code class="code highlight py python docutils literal highlight-python"><span class="s2">&quot;comb&quot;</span></code>.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">domain</span></code> is <code class="code highlight py python docutils literal highlight-python"><span class="s2">"comb"</span></code>.</p></li>
 <li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">domain</span></code> is a <code class="xref py py-class docutils literal notranslate"><span class="pre">ClockDomain</span></code> and <code class="code highlight py python docutils literal highlight-python"><span class="n">context</span></code> is provided and not
     <code class="code highlight py python docutils literal highlight-python"><span class="kc">None</span></code>.</p></li>
 <li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If <code class="code highlight py python docutils literal highlight-python"><span class="n">context</span></code> is an elaboratable that is not a direct or indirect submodule of
