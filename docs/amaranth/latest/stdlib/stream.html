@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Data streams &mdash; Amaranth language &amp; toolchain 0.6.0.dev137 documentation</title>
+  <title>Data streams &mdash; Amaranth language &amp; toolchain 0.6.0.dev138 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/platformpicker.css" />
@@ -18,7 +18,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=791cafd3"></script>
+        <script src="../_static/documentation_options.js?v=91060c11"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/platformpicker.js"></script>
@@ -43,7 +43,7 @@
               <img src="../_static/logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.6.0.dev137
+                0.6.0.dev138
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -244,7 +244,7 @@
 </pre></div>
 </div>
 <p>The serial protocol recognized by the receiver is illustrated with the following diagram (corresponding to <code class="docutils literal notranslate"><span class="pre">stream_serial_receiver.vcd</span></code>):</p>
-<img src="_images/stream/serial_receiver.svg" class="wavedrom wavedrom-signal" alt="{'signal': [{'name': 'clk', 'wave': 'lpppppppppppppppppppp'}, {}, ['serial', {'name': 'ssel', 'wave': '01................0..'}, {'name': 'sclk', 'wave': '0..101010101010101...'}, {'name': 'sdat', 'wave': '0.=.=.=.=.=.=.=.=....', 'data': ['1', '0', '1', '0', '0', '0', '0', '1']}], {}, ['stream', {'name': 'payload', 'wave': '=..................=.', 'data': ['00', 'A7']}, {'name': 'valid', 'wave': '0..................10'}, {'name': 'ready', 'wave': '1...................0'}]], 'config': {'skin': 'default'}}"></section>
+<img src="_images/stream/serial_receiver.svg" class="wavedrom wavedrom-signal" alt="{'signal': [{'name': 'clk', 'wave': 'lpppppppppppppppppppp'}, {}, ['serial', {'name': 'ssel', 'wave': '01................0..'}, {'name': 'sclk', 'wave': '0..101010101010101...'}, {'name': 'sdat', 'wave': '0.=.=.=.=.=.=.=.=....', 'data': ['1', '0', '1', '0', '0', '1', '1', '1']}], {}, ['stream', {'name': 'payload', 'wave': '=..................=.', 'data': ['00', 'A7']}, {'name': 'valid', 'wave': '0..................10'}, {'name': 'ready', 'wave': '1...................0'}]], 'config': {'skin': 'default'}}"></section>
 <section id="serial-transmitter">
 <h3>Serial transmitter<a class="headerlink" href="#serial-transmitter" title="Link to this heading"></a></h3>
 <p>The serial transmitter accepts a stream of words and provides it to the serial input of an external device whenever requested. Its serial interface is the same as that of the serial receiver, with the exception that the <code class="docutils literal notranslate"><span class="pre">sclk</span></code> and <code class="docutils literal notranslate"><span class="pre">sdat</span></code> signals are outputs. The <code class="docutils literal notranslate"><span class="pre">ssel</span></code> signal remains an input; the external device uses it for flow control.</p>
